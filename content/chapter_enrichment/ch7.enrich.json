@@ -1,0 +1,237 @@
+{
+  "pack_id": "ch7",
+  "version": "1.0.0",
+  "confusion_pairs": [
+    {
+      "id": "cp-symm-vs-asymm",
+      "title": "Symmetric vs Asymmetric crypto",
+      "a": {
+        "term": "Symmetric",
+        "definition": "Same shared secret key encrypts and decrypts; very fast for bulk data."
+      },
+      "b": {
+        "term": "Asymmetric",
+        "definition": "Public/private key pair; encrypt with public, decrypt with private; enables signatures and key exchange."
+      },
+      "bullets": [
+        "Speed: symmetric is fast; asymmetric is slower.",
+        "Keys: symmetric uses 1 shared secret; asymmetric uses key pairs.",
+        "Use-cases: symmetric for data at rest/in transit; asymmetric for key exchange and signatures.",
+        "Typical combo: asymmetric establishes a session key; symmetric encrypts the session."
+      ]
+    },
+    {
+      "id": "cp-hash-vs-encryption",
+      "title": "Hashing vs Encryption",
+      "a": {
+        "term": "Hashing",
+        "definition": "One-way transformation used for integrity; not reversible (in normal operation)."
+      },
+      "b": {
+        "term": "Encryption",
+        "definition": "Two-way transformation used for confidentiality; reversible with the right key."
+      },
+      "bullets": [
+        "Goal: hash = integrity; encryption = confidentiality.",
+        "Reversibility: hash is one-way; encryption is reversible with a key.",
+        "Outputs: hash produces a fixed-length digest; encryption output varies by algorithm/mode/IV.",
+        "Examples: SHA-256 (hash), AES (encryption)."
+      ]
+    },
+    {
+      "id": "cp-hmac-vs-signature",
+      "title": "HMAC vs Digital signature",
+      "a": {
+        "term": "HMAC",
+        "definition": "Integrity+authenticity using a shared secret; both sides must share the same key."
+      },
+      "b": {
+        "term": "Digital signature",
+        "definition": "Integrity+authenticity+non-repudiation using a private key; anyone can verify with the public key."
+      },
+      "bullets": [
+        "Key type: HMAC uses shared secret; signature uses private/public keys.",
+        "Non-repudiation: signatures provide it; HMAC generally does not.",
+        "Verification: HMAC verifiers must know the secret; signature verifiers do not.",
+        "Typical usage: API message integrity (HMAC) vs signed documents/certificates (signatures)."
+      ]
+    },
+    {
+      "id": "cp-dh-vs-rsa",
+      "title": "Diffie-Hellman key exchange vs RSA encryption",
+      "a": {
+        "term": "Diffie-Hellman (DH/ECDH)",
+        "definition": "Protocol to agree on a shared secret over an insecure channel; not itself 'bulk encryption'."
+      },
+      "b": {
+        "term": "RSA",
+        "definition": "Asymmetric algorithm used for encryption and signatures (depending on scheme); historically used to transport keys."
+      },
+      "bullets": [
+        "Purpose: DH/ECDH = agree a shared key; RSA = encrypt/sign (depending on usage).",
+        "PFS: ephemeral DH enables perfect forward secrecy; RSA key-transport does not.",
+        "Typical modern TLS: ECDHE + AES/GCM.",
+        "Exam trap: DH is about key agreement, not data encryption."
+      ]
+    },
+    {
+      "id": "cp-crl-vs-ocsp",
+      "title": "CRL vs OCSP (revocation checking)",
+      "a": {
+        "term": "CRL",
+        "definition": "Certificate Revocation List: a published list of revoked certificates (can be large, periodically updated)."
+      },
+      "b": {
+        "term": "OCSP",
+        "definition": "Online Certificate Status Protocol: query a responder for the status of a specific cert (more real-time)."
+      },
+      "bullets": [
+        "Granularity: CRL = list download; OCSP = per-certificate status query.",
+        "Freshness: CRL may be stale until next publish; OCSP can be near real-time.",
+        "Performance: CRL can be heavy; OCSP adds network dependency/latency.",
+        "Variant: OCSP stapling attaches the OCSP response to the TLS handshake."
+      ]
+    },
+    {
+      "id": "cp-stego-vs-obfuscation",
+      "title": "Steganography vs Obfuscation",
+      "a": {
+        "term": "Steganography",
+        "definition": "Hides the existence of data (e.g., secret text inside an image/audio)."
+      },
+      "b": {
+        "term": "Obfuscation",
+        "definition": "Makes data/code harder to understand, but it’s still visible."
+      },
+      "bullets": [
+        "Goal: stego hides that a message exists; obfuscation hides meaning/logic.",
+        "Detectability: stego aims for invisibility; obfuscation is visible but confusing.",
+        "Examples: message in image pixels (stego) vs packed/encoded script (obfuscation).",
+        "Threat: both used by malware to evade analysis."
+      ]
+    },
+    {
+      "id": "cp-pin-vs-chain",
+      "title": "Certificate pinning vs Chain of trust",
+      "a": {
+        "term": "Certificate pinning",
+        "definition": "Client trusts only specific certificate(s)/public keys for a service to reduce MITM risk."
+      },
+      "b": {
+        "term": "Chain of trust",
+        "definition": "Validation from leaf certificate up to a trusted root CA via intermediates."
+      },
+      "bullets": [
+        "Pinning restricts acceptable certs/keys; chain-of-trust accepts any valid chain to a trusted root.",
+        "Pinning reduces CA compromise impact but increases operational risk (rotations can break clients).",
+        "Chain-of-trust is the default PKI model on the web.",
+        "Exam angle: pinning is a mitigation for MITM; chain is the verification mechanism."
+      ]
+    },
+    {
+      "id": "cp-key-escrow-vs-split",
+      "title": "Key escrow vs Split knowledge",
+      "a": {
+        "term": "Key escrow",
+        "definition": "A trusted third party stores encryption keys so data can be recovered (with policy)."
+      },
+      "b": {
+        "term": "Split knowledge",
+        "definition": "No single person has the full key; multiple parts are required to reconstruct it."
+      },
+      "bullets": [
+        "Escrow is about recoverability; split knowledge is about limiting insider risk.",
+        "Escrow introduces trust/target risk; split knowledge reduces single-point compromise.",
+        "Often paired with dual control: two people required to use/recover keys.",
+        "Exam trap: escrow ≠ 'more secure' by default; it’s a trade-off."
+      ]
+    }
+  ],
+  "tag_rules": {
+    "crypto.symmetric": {
+      "rule": "If the question is about encrypting lots of data fast, think symmetric (AES).",
+      "micro_example": "Encrypting a laptop drive or a VPN tunnel payload uses AES with a shared session key.",
+      "confusion_pair_id": "cp-symm-vs-asymm"
+    },
+    "crypto.asymmetric": {
+      "rule": "If you see public/private keys, signatures, or key exchange, think asymmetric.",
+      "micro_example": "A server signs a certificate using its private key; clients verify using the public key.",
+      "confusion_pair_id": "cp-symm-vs-asymm"
+    },
+    "hashing.basics": {
+      "rule": "Hashing is for integrity; encryption is for confidentiality.",
+      "micro_example": "Store SHA-256(password+salt) for verification—don’t encrypt passwords for storage.",
+      "confusion_pair_id": "cp-hash-vs-encryption"
+    },
+    "hashing.hmac": {
+      "rule": "HMAC proves integrity + authenticity using a shared secret; no non-repudiation.",
+      "micro_example": "An API request includes HMAC(body, secret) so the server knows it wasn’t modified.",
+      "confusion_pair_id": "cp-hmac-vs-signature"
+    },
+    "digital_signatures": {
+      "rule": "Sign with private key, verify with public key—this supports non-repudiation.",
+      "micro_example": "A software vendor signs an update; endpoints verify before installing.",
+      "confusion_pair_id": "cp-hmac-vs-signature"
+    },
+    "crypto.key_exchange": {
+      "rule": "DH/ECDH is for agreeing a shared key, not for encrypting bulk data directly.",
+      "micro_example": "TLS uses ECDHE to derive a session key, then AES-GCM encrypts the session.",
+      "confusion_pair_id": "cp-dh-vs-rsa"
+    },
+    "crypto.pfs": {
+      "rule": "Perfect Forward Secrecy comes from ephemeral session keys (e.g., ECDHE).",
+      "micro_example": "Even if the server’s cert key leaks later, past sessions remain safe with ECDHE.",
+      "confusion_pair_id": "cp-dh-vs-rsa"
+    },
+    "pki.chain_of_trust": {
+      "rule": "Trust is validated from leaf → intermediate → root CA; any broken link breaks trust.",
+      "micro_example": "If the intermediate cert is missing/invalid, browsers warn even if the leaf looks fine.",
+      "confusion_pair_id": "cp-pin-vs-chain"
+    },
+    "cert_pinning": {
+      "rule": "Pinning restricts which cert/public key is accepted for a service; rotation must be planned.",
+      "micro_example": "A banking app pins the bank’s public key to reduce MITM risk on hostile networks.",
+      "confusion_pair_id": "cp-pin-vs-chain"
+    },
+    "pki.revocation.crl": {
+      "rule": "CRL is a list-based revocation check; it can be bulky and not perfectly fresh.",
+      "micro_example": "A device downloads a CRL weekly to reject revoked client certificates.",
+      "confusion_pair_id": "cp-crl-vs-ocsp"
+    },
+    "pki.revocation.ocsp": {
+      "rule": "OCSP is a per-certificate revocation status query (more real-time than CRL).",
+      "micro_example": "A browser queries OCSP responder to confirm the server cert isn’t revoked.",
+      "confusion_pair_id": "cp-crl-vs-ocsp"
+    },
+    "pki.revocation.stapling": {
+      "rule": "OCSP stapling reduces client network calls by ‘stapling’ OCSP response into TLS handshake.",
+      "micro_example": "The server includes a fresh OCSP response; client doesn’t need to contact OCSP directly.",
+      "confusion_pair_id": "cp-crl-vs-ocsp"
+    },
+    "steganography": {
+      "rule": "Stego hides the existence of data; look for “hidden in image/audio” clues.",
+      "micro_example": "Attackers hide C2 instructions inside a PNG shared on social media.",
+      "confusion_pair_id": "cp-stego-vs-obfuscation"
+    },
+    "obfuscation": {
+      "rule": "Obfuscation makes code/data hard to read but still visible; common in malware scripts.",
+      "micro_example": "PowerShell payload uses base64 + string junk to slow analysis.",
+      "confusion_pair_id": "cp-stego-vs-obfuscation"
+    },
+    "key_management.key_escrow": {
+      "rule": "Key escrow is recoverability; it’s a policy trade-off and a high-value target.",
+      "micro_example": "Org stores BitLocker recovery keys in a managed escrow so IT can recover laptops.",
+      "confusion_pair_id": "cp-key-escrow-vs-split"
+    },
+    "key_management.split_knowledge": {
+      "rule": "Split knowledge ensures no single person can reconstruct the full key alone.",
+      "micro_example": "Two admins each hold half the HSM unlock material; both are required to proceed.",
+      "confusion_pair_id": "cp-key-escrow-vs-split"
+    },
+    "crypto.attacks.downgrade": {
+      "rule": "Downgrade attacks force weaker crypto/protocols; defense is disabling weak suites and enforcing modern versions.",
+      "micro_example": "Server disables old TLS versions so clients can’t be pushed into weak cipher suites.",
+      "confusion_pair_id": "none"
+    }
+  }
+}

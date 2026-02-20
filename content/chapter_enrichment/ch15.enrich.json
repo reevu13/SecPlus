@@ -1,0 +1,493 @@
+{
+  "pack_id": "ch15",
+  "version": "1.0.0",
+  "confusion_pairs": [
+    {
+      "id": "cp15.legal_hold_vs_chain_of_custody",
+      "title": "Legal hold vs Chain of custody",
+      "a": {
+        "term": "Legal hold",
+        "definition": "A directive/process to preserve relevant data so it isn’t altered or deleted during an investigation or lawsuit."
+      },
+      "b": {
+        "term": "Chain of custody",
+        "definition": "A documented history of evidence handling (who had it, when, where, and what was done) to prove integrity and admissibility."
+      },
+      "bullets": [
+        "Legal hold is about stopping deletion/changes; chain of custody is about proving controlled handling.",
+        "Legal hold applies broadly to data sources; chain of custody tracks specific evidence items/c hooking copies.",
+        "You can have a legal hold without moving evidence; you can’t have strong evidentiary integrity without chain-of-custody records."
+      ]
+    },
+    {
+      "id": "cp15.spoliation_vs_secure_delete",
+      "title": "Spoliation vs Secure delete",
+      "a": {
+        "term": "Spoliation",
+        "definition": "Destruction/alteration of evidence that should have been preserved (can be accidental or intentional)."
+      },
+      "b": {
+        "term": "Secure delete",
+        "definition": "A deliberate process to render data unrecoverable (sanitization), appropriate only when you’re allowed to destroy data."
+      },
+      "bullets": [
+        "Spoliation is a legal/forensic failure; secure delete is a valid control when destruction is authorized.",
+        "During an investigation, secure delete is usually the wrong move (it can look like cover‑up).",
+        "If a legal hold exists, deleting data—securely or not—can be spoliation."
+      ]
+    },
+    {
+      "id": "cp15.checksum_vs_hash",
+      "title": "Checksum vs Cryptographic hash",
+      "a": {
+        "term": "Checksum",
+        "definition": "An error-detection value meant to catch accidental corruption (not designed to resist tampering)."
+      },
+      "b": {
+        "term": "Cryptographic hash",
+        "definition": "A one-way digest designed to make tampering detectable (collision resistance matters)."
+      },
+      "bullets": [
+        "Checksums catch accidents; hashes are used to detect malicious alteration.",
+        "For evidence integrity, you want cryptographic hashes (and documentation), not just checksums.",
+        "A checksum can be recomputed by an attacker; a strong hash still can be recomputed, but tampering leaves a mismatch if you have a trusted baseline."
+      ]
+    },
+    {
+      "id": "cp15.logical_vs_bitstream",
+      "title": "Logical acquisition vs Bit-by-bit (forensic) image",
+      "a": {
+        "term": "Logical acquisition",
+        "definition": "Collecting files/data visible to the OS (selected folders, logical volumes, exports)."
+      },
+      "b": {
+        "term": "Bit-by-bit image",
+        "definition": "A forensic disk image capturing every sector (including deleted space and slack) for maximum recovery."
+      },
+      "bullets": [
+        "Logical is faster and smaller; bitstream is slower but preserves more artifacts.",
+        "Bit-by-bit can recover deleted data and file system metadata; logical often cannot.",
+        "If you might need recovery/timeline detail, prefer bit-by-bit—when legally/operationally possible."
+      ]
+    },
+    {
+      "id": "cp15.write_blocker_vs_usb_blocker",
+      "title": "Write blocker vs USB data blocker",
+      "a": {
+        "term": "Write blocker",
+        "definition": "Forensic hardware/software that prevents writes to evidence media while allowing reads."
+      },
+      "b": {
+        "term": "USB data blocker",
+        "definition": "A consumer/field tool that blocks USB data pins (often allowing only charging) to reduce ‘juice jacking’ risk."
+      },
+      "bullets": [
+        "Write blockers protect evidence integrity; USB data blockers protect phones from hostile USB ports.",
+        "Write blockers are for imaging drives; USB data blockers are for charging in untrusted places.",
+        "Using the wrong one can either contaminate evidence (no write block) or fail to stop USB attacks (no data block)."
+      ]
+    },
+    {
+      "id": "cp15.volatility_memory_vs_disk",
+      "title": "Volatile memory vs Disk artifacts",
+      "a": {
+        "term": "Volatile memory (RAM)",
+        "definition": "Short-lived state (processes, keys, network sessions) lost on power-off."
+      },
+      "b": {
+        "term": "Disk artifacts",
+        "definition": "Persistent data (files, registry hives, logs) that remains after reboot."
+      },
+      "bullets": [
+        "If you power off too early, you lose RAM-only evidence (keys, connections).",
+        "Disk gives depth and history; RAM gives ‘what’s happening right now.’",
+        "Order of volatility tells you what to grab first when you can’t capture everything."
+      ]
+    },
+    {
+      "id": "cp15.tap_vs_span",
+      "title": "Network TAP vs SPAN/mirror port",
+      "a": {
+        "term": "Network TAP",
+        "definition": "A physical device that copies traffic with high fidelity for capture/monitoring."
+      },
+      "b": {
+        "term": "SPAN/mirror port",
+        "definition": "A switch feature that mirrors traffic to a port (can drop packets under load / may miss errors)."
+      },
+      "bullets": [
+        "TAPs are generally more reliable for forensics; SPAN is easier/cheaper but less perfect.",
+        "Under high throughput, SPAN can drop mirrored traffic; TAPs are built to copy traffic reliably.",
+        "Choose SPAN when you need ‘good enough fast’; choose TAP when accuracy matters."
+      ]
+    },
+    {
+      "id": "cp15.jurisdiction_venue_nexus",
+      "title": "Jurisdiction vs Venue vs Nexus",
+      "a": {
+        "term": "Jurisdiction",
+        "definition": "Which authority/court has legal power over the matter (who can hear the case)."
+      },
+      "b": {
+        "term": "Venue/Nexus",
+        "definition": "Venue is the proper location for a case; nexus is the ‘connection’ that makes a location/authority relevant."
+      },
+      "bullets": [
+        "Jurisdiction = power; venue = place; nexus = the tie that justifies applying rules there.",
+        "Cloud data location and customer location can create competing jurisdiction/venue issues.",
+        "Contracts often specify venue; laws determine jurisdiction (you can’t contract your way out of all jurisdiction)."
+      ]
+    },
+    {
+      "id": "cp15.quick_format_vs_secure_delete",
+      "title": "Quick format vs Secure delete",
+      "a": {
+        "term": "Quick format",
+        "definition": "Rebuilds file system structures without overwriting most data; much is recoverable."
+      },
+      "b": {
+        "term": "Secure delete",
+        "definition": "Attempts to overwrite/erase so recovery is impractical (varies by storage tech)."
+      },
+      "bullets": [
+        "Quick format is mostly ‘remove pointers’; secure delete is ‘destroy the data.’",
+        "Forensics can often recover after quick format; secure delete aims to prevent that.",
+        "On SSDs, wear leveling complicates overwriting; secure delete may require crypto-erase or vendor tools."
+      ]
+    },
+    {
+      "id": "cp15.slack_vs_deleted",
+      "title": "Slack space vs Deleted files",
+      "a": {
+        "term": "Slack space",
+        "definition": "Unused bytes in allocated clusters/blocks that may contain remnants of older data."
+      },
+      "b": {
+        "term": "Deleted file remnants",
+        "definition": "Data that persists after deletion until overwritten, often in unallocated space or partially overwritten areas."
+      },
+      "bullets": [
+        "Slack space can leak fragments even when files still exist.",
+        "Deleted remnants depend on overwrite patterns; partial overwrites can leave recoverable fragments.",
+        "Bit-by-bit imaging is what preserves these subtle areas for later analysis."
+      ]
+    }
+  ],
+  "tag_rules": {
+    "forensics.overview.definition": {
+      "rule": "Digital forensics = preserve, collect, analyze, and report evidence without changing it.",
+      "micro_example": "Image a suspect drive read-only, hash it, analyze the copy, and document every step.",
+      "confusion_pair_id": "none"
+    },
+    "forensics.process.documentation": {
+      "rule": "If it isn’t documented, it didn’t happen (in court).",
+      "micro_example": "Record who collected the laptop, time/date, serial, hash values, and every transfer.",
+      "confusion_pair_id": "none"
+    },
+    "forensics.process.timelines": {
+      "rule": "Timelines correlate events across sources; time drift is your enemy.",
+      "micro_example": "Align log timestamps to UTC and correlate login events with file creation times.",
+      "confusion_pair_id": "none"
+    },
+    "forensics.human_factor.interviews": {
+      "rule": "Interview early, document carefully, and don’t contaminate testimony with leading questions.",
+      "micro_example": "Ask 'What happened next?' not 'Did you click the link at 10:05?'",
+      "confusion_pair_id": "none"
+    },
+    "forensics.legal_hold": {
+      "rule": "Legal hold stops deletion/changes of potentially relevant data.",
+      "micro_example": "Disable mailbox auto-deletion for a custodian once litigation is anticipated.",
+      "confusion_pair_id": "cp15.legal_hold_vs_chain_of_custody"
+    },
+    "forensics.spoliation": {
+      "rule": "Spoliation is destroying/altering evidence you were expected to preserve—bad news legally.",
+      "micro_example": "A sysadmin 'cleans logs' after an incident and the case collapses (or sanctions follow).",
+      "confusion_pair_id": "cp15.spoliation_vs_secure_delete"
+    },
+    "forensics.ediscovery.edrm": {
+      "rule": "EDRM is the end-to-end lifecycle for eDiscovery: from governance to presentation.",
+      "micro_example": "Use EDRM stages to plan: preserve, collect, process, review, produce.",
+      "confusion_pair_id": "none"
+    },
+    "forensics.ediscovery.stages.information_governance": {
+      "rule": "Governance = policies that make data findable and defensible.",
+      "micro_example": "Retention + classification policies reduce chaos during discovery.",
+      "confusion_pair_id": "none"
+    },
+    "forensics.ediscovery.stages.identification": {
+      "rule": "Identify what data sources and custodians matter.",
+      "micro_example": "List mailboxes, laptops, cloud drives, chats, and owners.",
+      "confusion_pair_id": "none"
+    },
+    "forensics.ediscovery.stages.preservation": {
+      "rule": "Preserve data to prevent change or deletion.",
+      "micro_example": "Place legal holds and freeze relevant systems/snapshots.",
+      "confusion_pair_id": "none"
+    },
+    "forensics.ediscovery.stages.collection": {
+      "rule": "Collect defensible copies of relevant data.",
+      "micro_example": "Export mailboxes, image drives, capture logs with hashes.",
+      "confusion_pair_id": "none"
+    },
+    "forensics.ediscovery.stages.processing": {
+      "rule": "Process = normalize, de-dup, index, and prep for review.",
+      "micro_example": "Decompress archives and de-duplicate email threads.",
+      "confusion_pair_id": "none"
+    },
+    "forensics.ediscovery.stages.review": {
+      "rule": "Review = humans/tools decide relevance/privilege.",
+      "micro_example": "Flag attorney-client privileged documents before production.",
+      "confusion_pair_id": "none"
+    },
+    "forensics.ediscovery.stages.analysis": {
+      "rule": "Analysis = extract meaning and patterns from evidence.",
+      "micro_example": "Build a timeline showing exfil before account disable.",
+      "confusion_pair_id": "none"
+    },
+    "forensics.ediscovery.stages.production": {
+      "rule": "Produce = deliver data in required format to opposing party/court.",
+      "micro_example": "Export in load-file format with metadata preserved.",
+      "confusion_pair_id": "none"
+    },
+    "forensics.ediscovery.stages.presentation": {
+      "rule": "Present = explain findings clearly (and defensibly).",
+      "micro_example": "Use exhibits + narrative backed by hashes and logs.",
+      "confusion_pair_id": "none"
+    },
+    "forensics.chain_of_custody": {
+      "rule": "Chain of custody proves evidence integrity: who handled it, when, where, and how.",
+      "micro_example": "Evidence bag sealed, logged transfer to lab, imaging performed, hashes recorded.",
+      "confusion_pair_id": "cp15.legal_hold_vs_chain_of_custody"
+    },
+    "forensics.admissibility.criteria": {
+      "rule": "Admissible evidence must be relevant, authentic, reliable, and collected legally.",
+      "micro_example": "If you can’t explain how the evidence was preserved and verified, it’s vulnerable in court.",
+      "confusion_pair_id": "none"
+    },
+    "forensics.nonrepudiation.provenance": {
+      "rule": "Provenance is the story of origin; nonrepudiation makes denial hard with strong proof.",
+      "micro_example": "Signed audit logs + preserved metadata show who did what and when.",
+      "confusion_pair_id": "none"
+    },
+    "forensics.acquisition.order_of_volatility": {
+      "rule": "Order of volatility: capture the most fragile evidence first (CPU → RAM → disk → backups).",
+      "micro_example": "Grab RAM before rebooting a compromised server.",
+      "confusion_pair_id": "cp15.volatility_memory_vs_disk"
+    },
+    "forensics.acquisition.cpu_cache_registers": {
+      "rule": "CPU cache/registers are ultra-volatile—gone instantly when power/state changes.",
+      "micro_example": "If you can’t do live response immediately, accept you’ll lose this layer.",
+      "confusion_pair_id": "cp15.volatility_memory_vs_disk"
+    },
+    "forensics.acquisition.ephemeral_state": {
+      "rule": "Ephemeral state (running processes, network sessions, keys) disappears fast—capture live when possible.",
+      "micro_example": "List processes, network connections, and loaded modules before pulling the plug.",
+      "confusion_pair_id": "cp15.volatility_memory_vs_disk"
+    },
+    "forensics.acquisition.ram": {
+      "rule": "RAM capture can reveal active malware, decrypted content, and crypto keys.",
+      "micro_example": "Memory dump shows an injected process and C2 IPs not present on disk.",
+      "confusion_pair_id": "cp15.volatility_memory_vs_disk"
+    },
+    "forensics.acquisition.swap_pagefile": {
+      "rule": "Swap/pagefile can contain fragments of RAM data written to disk.",
+      "micro_example": "Password fragments or chat snippets may appear in pagefile.sys.",
+      "confusion_pair_id": "cp15.volatility_memory_vs_disk"
+    },
+    "forensics.acquisition.disk_image.bit_by_bit": {
+      "rule": "Bit-by-bit imaging preserves everything, including slack and deleted space.",
+      "micro_example": "Create a forensic image (E01/raw), hash it, analyze the image—not the original disk.",
+      "confusion_pair_id": "cp15.logical_vs_bitstream"
+    },
+    "forensics.acquisition.os.windows_registry": {
+      "rule": "Windows Registry hives are gold: persistence, installed software, user activity clues.",
+      "micro_example": "Registry shows a suspicious Run key entry pointing to malware.",
+      "confusion_pair_id": "none"
+    },
+    "forensics.acquisition.mobile_iot": {
+      "rule": "Mobile/IoT acquisition needs platform-aware methods (locks, encryption, cloud sync).",
+      "micro_example": "A locked phone may require logical extraction via MDM/backup or cloud data acquisition.",
+      "confusion_pair_id": "none"
+    },
+    "forensics.acquisition.firmware": {
+      "rule": "Firmware forensics targets code below the OS (BIOS/UEFI/device firmware) where stealthy implants live.",
+      "micro_example": "Validate firmware versions/hashes against vendor baselines after suspicious persistence.",
+      "confusion_pair_id": "none"
+    },
+    "forensics.acquisition.vm_snapshot": {
+      "rule": "VM snapshots capture disk + (sometimes) memory state—great for fast preservation.",
+      "micro_example": "Snapshot a compromised VM before containment to preserve evidence.",
+      "confusion_pair_id": "none"
+    },
+    "forensics.acquisition.containers": {
+      "rule": "Container forensics means capturing images, layers, runtime config, and orchestration logs.",
+      "micro_example": "Preserve container image digest and Kubernetes audit logs for a crypto-miner incident.",
+      "confusion_pair_id": "none"
+    },
+    "forensics.acquisition.network.pcap": {
+      "rule": "PCAP is raw network evidence—useful for reconstructing sessions and spotting exfil.",
+      "micro_example": "PCAP shows DNS tunneling or unusual TLS SNI patterns to new domains.",
+      "confusion_pair_id": "none"
+    },
+    "forensics.acquisition.network.taps_span": {
+      "rule": "TAP/SPAN are capture methods; TAP is typically more reliable, SPAN is easier.",
+      "micro_example": "Use a TAP on high-throughput links when packet loss would ruin analysis.",
+      "confusion_pair_id": "cp15.tap_vs_span"
+    },
+    "forensics.acquisition.logs.secondary_sources": {
+      "rule": "Secondary sources (logs) can corroborate events but can be incomplete or tampered—validate.",
+      "micro_example": "Correlate SIEM logs with endpoint logs; note gaps and retention limits.",
+      "confusion_pair_id": "none"
+    },
+    "usb.data_blocker": {
+      "rule": "USB data blockers reduce 'juice jacking' by blocking data pins on untrusted chargers.",
+      "micro_example": "Use a data blocker in airports; don’t confuse it with a forensic write blocker.",
+      "confusion_pair_id": "cp15.write_blocker_vs_usb_blocker"
+    },
+    "forensics.tools.dd": {
+      "rule": "dd is a low-level imaging tool—powerful but easy to misuse.",
+      "micro_example": "Use dd to create a raw image, then hash and mount the copy read-only.",
+      "confusion_pair_id": "none"
+    },
+    "forensics.tools.ftk_imager": {
+      "rule": "FTK Imager creates forensic images and previews evidence with hashing.",
+      "micro_example": "Acquire an E01 image and verify hashes match the source.",
+      "confusion_pair_id": "none"
+    },
+    "forensics.tools.winhex": {
+      "rule": "WinHex is a hex-level disk/file editor and forensics tool—great for deep inspection.",
+      "micro_example": "Inspect file headers/footers to spot disguised file types.",
+      "confusion_pair_id": "none"
+    },
+    "forensics.tools.autopsy": {
+      "rule": "Autopsy is a forensic analysis platform for timelines, artifacts, and file system analysis.",
+      "micro_example": "Build a timeline of browser history + file activity for an incident.",
+      "confusion_pair_id": "none"
+    },
+    "forensics.tools.wireshark": {
+      "rule": "Wireshark analyzes packet captures (PCAP) to reconstruct traffic.",
+      "micro_example": "Filter for DNS queries or suspicious TLS handshakes in a capture.",
+      "confusion_pair_id": "none"
+    },
+    "forensics.integrity.hashing.md5": {
+      "rule": "MD5 is fast but weak against collisions—OK for integrity checks, not for modern security decisions.",
+      "micro_example": "Use MD5+SHA-256 for evidence integrity if policy demands; avoid MD5 for signing/auth.",
+      "confusion_pair_id": "cp15.checksum_vs_hash"
+    },
+    "forensics.integrity.hashing.sha1": {
+      "rule": "SHA‑1 is weaker than modern hashes; prefer SHA‑256+ for robust integrity.",
+      "micro_example": "Hash an image with SHA‑256 to defend against tampering claims.",
+      "confusion_pair_id": "cp15.checksum_vs_hash"
+    },
+    "forensics.integrity.validation.hash_compare": {
+      "rule": "Integrity validation = hash before/after; any mismatch means evidence changed or capture failed.",
+      "micro_example": "Hash the source drive and the acquired image—store and compare values.",
+      "confusion_pair_id": "none"
+    },
+    "forensics.integrity.checksum_vs_hash": {
+      "rule": "Checksums catch accidents; cryptographic hashes are for tamper detection and evidentiary integrity.",
+      "micro_example": "Use SHA‑256 for evidence integrity; don’t rely on a simple CRC for court.",
+      "confusion_pair_id": "cp15.checksum_vs_hash"
+    },
+    "forensics.preservation.write_blocker": {
+      "rule": "Use a write blocker to prevent evidence contamination during acquisition.",
+      "micro_example": "Image a suspect drive through a write blocker; never mount it read-write.",
+      "confusion_pair_id": "cp15.write_blocker_vs_usb_blocker"
+    },
+    "forensics.preservation.evidence_storage": {
+      "rule": "Evidence storage must be controlled: secure, access-logged, and environmentally safe.",
+      "micro_example": "Store drives in sealed, labeled bags in a locked cabinet with access logs.",
+      "confusion_pair_id": "none"
+    },
+    "forensics.preservation.legal_hold_tools": {
+      "rule": "Legal-hold tools help freeze data across systems (mail, cloud drives, chats) defensibly.",
+      "micro_example": "Place holds in M365/Google Workspace to prevent deletion of relevant mailboxes.",
+      "confusion_pair_id": "cp15.legal_hold_vs_chain_of_custody"
+    },
+    "forensics.preservation.cloud_limitations": {
+      "rule": "Cloud forensics is limited by what the provider exposes—plan for gaps.",
+      "micro_example": "You may not get hypervisor logs; rely on provider audit logs and contract rights.",
+      "confusion_pair_id": "none"
+    },
+    "cloud.contracts.right_to_audit": {
+      "rule": "Right to audit clauses define what evidence/access you can demand from providers.",
+      "micro_example": "Contract allows requesting specific logs and audit reports during an incident.",
+      "confusion_pair_id": "none"
+    },
+    "cloud.contracts.breach_notification": {
+      "rule": "Breach-notification terms define timing and content of provider disclosures—critical for response.",
+      "micro_example": "Provider must notify within X hours and share indicators and affected services.",
+      "confusion_pair_id": "none"
+    },
+    "cloud.regulatory.jurisdiction": {
+      "rule": "Jurisdiction = which authority’s laws/courts apply.",
+      "micro_example": "Data stored in one country but accessed by users in another can create dual obligations.",
+      "confusion_pair_id": "cp15.jurisdiction_venue_nexus"
+    },
+    "cloud.regulatory.venue": {
+      "rule": "Venue = where the legal action is heard (the proper location).",
+      "micro_example": "Contract may specify venue in a particular state/country for disputes.",
+      "confusion_pair_id": "cp15.jurisdiction_venue_nexus"
+    },
+    "cloud.regulatory.nexus": {
+      "rule": "Nexus = the connection that makes a jurisdiction relevant (customers, processing, infrastructure).",
+      "micro_example": "Having employees or processing personal data in a region can create regulatory nexus.",
+      "confusion_pair_id": "cp15.jurisdiction_venue_nexus"
+    },
+    "forensics.data_recovery.deleted_files": {
+      "rule": "Deletion usually removes pointers, not the data—until overwritten.",
+      "micro_example": "A deleted doc may be recoverable if the sectors weren’t reused.",
+      "confusion_pair_id": "cp15.slack_vs_deleted"
+    },
+    "forensics.data_recovery.quick_format": {
+      "rule": "Quick format often leaves most data intact—recovery is commonly possible.",
+      "micro_example": "A quick-formatted drive can still yield files with carving tools.",
+      "confusion_pair_id": "cp15.quick_format_vs_secure_delete"
+    },
+    "forensics.data_recovery.slack_space": {
+      "rule": "Slack space can contain remnants of older data—small leaks with big impact.",
+      "micro_example": "A cluster’s unused bytes may still hold a fragment of a prior document.",
+      "confusion_pair_id": "cp15.slack_vs_deleted"
+    },
+    "forensics.data_recovery.partial_overwrite": {
+      "rule": "Partial overwrite can leave readable fragments—don’t assume ‘some overwrite’ means ‘gone.’",
+      "micro_example": "A log file partially overwritten can still reveal prior entries.",
+      "confusion_pair_id": "cp15.slack_vs_deleted"
+    },
+    "forensics.data_recovery.secure_delete": {
+      "rule": "Secure delete aims to make recovery impractical—but storage tech matters (SSD ≠ HDD).",
+      "micro_example": "On SSDs, prefer crypto-erase/vendor sanitize rather than naive overwrites.",
+      "confusion_pair_id": "cp15.spoliation_vs_secure_delete"
+    },
+    "forensics.storage.ssd_wear_leveling": {
+      "rule": "SSD wear leveling remaps writes, so overwriting ‘the same sector’ isn’t guaranteed.",
+      "micro_example": "An overwrite tool may miss old blocks; use SSD sanitize/crypto-erase when needed.",
+      "confusion_pair_id": "cp15.quick_format_vs_secure_delete"
+    },
+    "forensics.storage.full_disk_encryption": {
+      "rule": "Full-disk encryption protects data at rest—without the key, disk artifacts are unreadable.",
+      "micro_example": "If the laptop is powered off and encrypted, RAM capture might have been your last chance for keys.",
+      "confusion_pair_id": "none"
+    },
+    "forensics.reporting.components": {
+      "rule": "A good report: scope, methods, tools, evidence, findings, timelines, limitations, and conclusions.",
+      "micro_example": "Include hashes, acquisition steps, key artifacts, and clear conclusions tied to evidence.",
+      "confusion_pair_id": "none"
+    },
+    "forensics.reporting.repeatability": {
+      "rule": "Repeatability means another examiner can reproduce your results using your notes.",
+      "micro_example": "Document tool versions, filters, and steps so the timeline can be rebuilt.",
+      "confusion_pair_id": "none"
+    },
+    "forensics.intel.forensics_role": {
+      "rule": "Forensics supports incident response by turning artifacts into a defensible narrative.",
+      "micro_example": "Use artifacts to answer: what happened, when, how, and what data was touched.",
+      "confusion_pair_id": "none"
+    },
+    "forensics.counterintel": {
+      "rule": "Counterintelligence in a forensics context means spotting deception, anti-forensics, and misdirection.",
+      "micro_example": "Attackers plant fake timestamps or decoy files—validate with multiple sources.",
+      "confusion_pair_id": "none"
+    }
+  }
+}

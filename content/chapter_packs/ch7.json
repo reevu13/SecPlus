@@ -1,0 +1,2667 @@
+{
+  "schema_version": "secplus_game_pack_v1",
+  "pack_id": "ch7",
+  "exam": {
+    "vendor": "CompTIA",
+    "name": "Security+",
+    "code": "SY0-701",
+    "max_exam_minutes": 90
+  },
+  "chapter": {
+    "number": 7,
+    "title": "Cryptography and PKI",
+    "page_range_in_user_pdf": "296-359"
+  },
+  "design_intent": {
+    "mode": [
+      "campaign",
+      "roguelike_practice"
+    ],
+    "pvp_optional": true,
+    "default_pvp_enabled": false,
+    "player_goal": "Master cryptography fundamentals, hashing/signatures, PKI/cert validation, and common crypto pitfalls for SY0-701."
+  },
+  "progression": {
+    "xp_rules": {
+      "base_xp_per_correct": 10,
+      "mistake_penalty_xp": 0,
+      "streak_bonus_per_5": 15,
+      "time_bonus_threshold_seconds": 30,
+      "time_bonus_xp": 5
+    },
+    "mastery_model": {
+      "scale": "0-100",
+      "tags_drive_mastery": true,
+      "update": "Mastery += 8 on first correct; +4 on repeat correct; -6 on wrong (floor 0)."
+    },
+    "unlock_rules": [
+      {
+        "when": "complete ch7-m1",
+        "unlock": "ch7-m2"
+      },
+      {
+        "when": "complete ch7-m2",
+        "unlock": "ch7-m3"
+      },
+      {
+        "when": "complete ch7-m3",
+        "unlock": "boss_7"
+      }
+    ]
+  },
+  "tags": {
+    "concepts": [
+      "crypto.goals",
+      "crypto.symmetric",
+      "crypto.asymmetric",
+      "crypto.aes",
+      "crypto.des_3des",
+      "crypto.key_exchange",
+      "crypto.pfs",
+      "hashing.basics",
+      "hashing.sha_family",
+      "hashing.md5",
+      "hashing.hmac",
+      "digital_signatures",
+      "steganography",
+      "obfuscation",
+      "key_management.basics",
+      "key_management.key_escrow",
+      "key_management.split_knowledge",
+      "pki.overview",
+      "pki.ca_ra",
+      "pki.csr_x509",
+      "pki.chain_of_trust",
+      "pki.dv_ev",
+      "pki.revocation.crl",
+      "pki.revocation.ocsp",
+      "pki.revocation.stapling",
+      "cert_pinning",
+      "crypto.attacks.collision",
+      "crypto.attacks.birthday",
+      "crypto.attacks.downgrade",
+      "tor_dark_web",
+      "blockchain"
+    ],
+    "difficulty_scale": {
+      "1": "Recall",
+      "2": "Understand",
+      "3": "Apply",
+      "4": "Analyze",
+      "5": "Synthesize"
+    }
+  },
+  "trap_list": [
+    {
+      "id": "trap-ch7-01",
+      "name": "Encrypt vs Hash vs Sign",
+      "misconception": "Encrypt hides content (confidentiality), hash detects changes (integrity), signature proves origin (auth/non-repudiation).",
+      "fix": "Clarify this distinction before answering: Encrypt hides content (confidentiality), hash detects changes (integrity), signature proves origin (auth/non-repudiation).",
+      "drill_question_ids": [
+        "ch7-q01",
+        "ch7-q02",
+        "ch7-q03"
+      ]
+    },
+    {
+      "id": "trap-ch7-02",
+      "name": "HMAC vs Signature",
+      "misconception": "HMAC uses a shared secret (either side can create it); signatures use private/public keys (only signer can create).",
+      "fix": "Clarify this distinction before answering: HMAC uses a shared secret (either side can create it); signatures use private/public keys (only signer can create).",
+      "drill_question_ids": [
+        "ch7-q02",
+        "ch7-q03",
+        "ch7-q13"
+      ]
+    },
+    {
+      "id": "trap-ch7-03",
+      "name": "Symmetric for Bulk Data",
+      "misconception": "Use AES (symmetric) for data; use asymmetric mainly for key exchange and signatures.",
+      "fix": "Clarify this distinction before answering: Use AES (symmetric) for data; use asymmetric mainly for key exchange and signatures.",
+      "drill_question_ids": [
+        "ch7-q04",
+        "ch7-q05",
+        "ch7-q06"
+      ]
+    },
+    {
+      "id": "trap-ch7-04",
+      "name": "PFS Isn’t “TLS = Safe”",
+      "misconception": "PFS specifically means past sessions stay safe if long-term keys leak; typically needs ephemeral key exchange.",
+      "fix": "Clarify this distinction before answering: PFS specifically means past sessions stay safe if long-term keys leak; typically needs ephemeral key exchange.",
+      "drill_question_ids": [
+        "ch7-q08",
+        "ch7-q37",
+        "ch7-q38"
+      ]
+    },
+    {
+      "id": "trap-ch7-05",
+      "name": "Password Hashing Needs Stretching",
+      "misconception": "Plain fast hashes (even SHA-256) are unsafe for passwords; use salt + slow stretching (bcrypt/scrypt/Argon2/PBKDF2).",
+      "fix": "Clarify this distinction before answering: Plain fast hashes (even SHA-256) are unsafe for passwords; use salt + slow stretching (bcrypt/scrypt/Argon2/PBKDF2).",
+      "drill_question_ids": [
+        "ch7-q14",
+        "ch7-q15",
+        "ch7-q16"
+      ]
+    },
+    {
+      "id": "trap-ch7-06",
+      "name": "Salt vs Pepper",
+      "misconception": "Salt is unique per password and stored with the hash; pepper is a secret stored separately.",
+      "fix": "Clarify this distinction before answering: Salt is unique per password and stored with the hash; pepper is a secret stored separately.",
+      "drill_question_ids": [
+        "ch7-q16",
+        "ch7-q17",
+        "ch7-q49"
+      ]
+    },
+    {
+      "id": "trap-ch7-07",
+      "name": "CRL vs OCSP vs Stapling",
+      "misconception": "CRL is a periodically downloaded list; OCSP is an online status query; stapling is how the server delivers OCSP proof.",
+      "fix": "Clarify this distinction before answering: CRL is a periodically downloaded list; OCSP is an online status query; stapling is how the server delivers OCSP proof.",
+      "drill_question_ids": [
+        "ch7-q26",
+        "ch7-q27",
+        "ch7-q28"
+      ]
+    },
+    {
+      "id": "trap-ch7-08",
+      "name": "Self-signed Trust",
+      "misconception": "Self-signed certs won’t be trusted externally unless the root is installed; internal CA is different from “random self-signed.”",
+      "fix": "Clarify this distinction before answering: Self-signed certs won’t be trusted externally unless the root is installed; internal CA is different from “random self-signed.”",
+      "drill_question_ids": [
+        "ch7-q24",
+        "ch7-q25",
+        "ch7-q31"
+      ]
+    },
+    {
+      "id": "trap-ch7-09",
+      "name": "Downgrade Paths",
+      "misconception": "Keeping legacy ciphers for compatibility can let attackers force weaker crypto; disable deprecated options.",
+      "fix": "Clarify this distinction before answering: Keeping legacy ciphers for compatibility can let attackers force weaker crypto; disable deprecated options.",
+      "drill_question_ids": [
+        "ch7-q09",
+        "ch7-q33",
+        "ch7-q34"
+      ]
+    },
+    {
+      "id": "trap-ch7-10",
+      "name": "Stego vs Obfuscation vs Encryption",
+      "misconception": "Stego hides existence, obfuscation hides understanding, encryption hides content. Only encryption provides confidentiality.",
+      "fix": "Clarify this distinction before answering: Stego hides existence, obfuscation hides understanding, encryption hides content. Only encryption provides confidentiality.",
+      "drill_question_ids": [
+        "ch7-q07",
+        "ch7-q35",
+        "ch7-q36"
+      ]
+    },
+    {
+      "id": "trap-ch7-11",
+      "name": "Certificate Pinning Tradeoff",
+      "misconception": "Pinning reduces CA-related MITM risk but can break clients on key rotation if you don’t design updates properly.",
+      "fix": "Clarify this distinction before answering: Pinning reduces CA-related MITM risk but can break clients on key rotation if you don’t design updates properly.",
+      "drill_question_ids": [
+        "ch7-q30",
+        "ch7-q31",
+        "ch7-q44"
+      ]
+    },
+    {
+      "id": "trap-ch7-12",
+      "name": "Entropy Is a Security Control",
+      "misconception": "Bad randomness undermines keys, nonces, IVs—often the real cause of ‘crypto’ failures.",
+      "fix": "Clarify this distinction before answering: Bad randomness undermines keys, nonces, IVs—often the real cause of ‘crypto’ failures.",
+      "drill_question_ids": [
+        "ch7-q20",
+        "ch7-q49",
+        "ch7-q50"
+      ]
+    }
+  ],
+  "missions": [
+    {
+      "id": "ch7-m1",
+      "name": "Goals, Ciphers, and Stealthy Tricks",
+      "goal": "Pick the right tool: encryption vs hashing vs HMAC vs signatures; then recognize stego/obfuscation and legacy cipher risks.",
+      "mechanics": {
+        "mode": "campaign",
+        "minigame": "learn_quiz",
+        "recommended_time_min": 24,
+        "rules": {
+          "hints_per_question": 1,
+          "show_explanations": true
+        },
+        "coaching_tips": [
+          "Say the goal out loud: confidentiality, integrity, authenticity, non-repudiation.",
+          "If it’s bulk data → symmetric (AES). If it’s identity/signing/key exchange → asymmetric/PKI.",
+          "Steganography hides existence; encryption hides meaning."
+        ]
+      },
+      "question_ids": [
+        "ch7-q01",
+        "ch7-q02",
+        "ch7-q03",
+        "ch7-q04",
+        "ch7-q05",
+        "ch7-q06",
+        "ch7-q07",
+        "ch7-q08",
+        "ch7-q09",
+        "ch7-q33",
+        "ch7-q34",
+        "ch7-q35"
+      ],
+      "rewards": {
+        "xp": 160,
+        "unlock": "ch7-m2",
+        "loot": [
+          "badge_ch7_m1"
+        ]
+      }
+    },
+    {
+      "id": "ch7-m2",
+      "name": "Hashing, Passwords, and Key Handling",
+      "goal": "Avoid the exam-killers: collisions vs birthday, password storage, escrow/split knowledge, and entropy.",
+      "mechanics": {
+        "mode": "campaign",
+        "minigame": "learn_quiz",
+        "recommended_time_min": 26,
+        "rules": {
+          "hints_per_question": 1,
+          "show_explanations": true
+        },
+        "coaching_tips": [
+          "Passwords aren’t 'just hashes'—they need salts + stretching.",
+          "Collision/birthday are hash properties; downgrade is about negotiating weaker crypto.",
+          "Key governance controls (escrow/split knowledge/HSM) matter as much as algorithms."
+        ]
+      },
+      "question_ids": [
+        "ch7-q10",
+        "ch7-q11",
+        "ch7-q12",
+        "ch7-q13",
+        "ch7-q14",
+        "ch7-q15",
+        "ch7-q16",
+        "ch7-q17",
+        "ch7-q18",
+        "ch7-q19",
+        "ch7-q20",
+        "ch7-q49"
+      ],
+      "rewards": {
+        "xp": 170,
+        "unlock": "ch7-m3",
+        "loot": [
+          "badge_ch7_m2"
+        ]
+      }
+    },
+    {
+      "id": "ch7-m3",
+      "name": "PKI: Trust, Revocation, and Reality",
+      "goal": "Understand CA/CSR/X.509/chain-of-trust and choose the correct revocation strategy (CRL vs OCSP vs stapling).",
+      "mechanics": {
+        "mode": "campaign",
+        "minigame": "learn_quiz",
+        "recommended_time_min": 28,
+        "rules": {
+          "hints_per_question": 1,
+          "show_explanations": true
+        },
+        "coaching_tips": [
+          "PKI is lifecycle management (issue/renew/revoke) plus trust distribution.",
+          "OCSP is online status; CRL is a list; stapling reduces privacy/perf cost.",
+          "Pinning is a special-case trust strategy—powerful but brittle if unmanaged."
+        ]
+      },
+      "question_ids": [
+        "ch7-q21",
+        "ch7-q22",
+        "ch7-q23",
+        "ch7-q24",
+        "ch7-q25",
+        "ch7-q26",
+        "ch7-q27",
+        "ch7-q28",
+        "ch7-q29",
+        "ch7-q30",
+        "ch7-q31",
+        "ch7-q32"
+      ],
+      "rewards": {
+        "xp": 180,
+        "unlock": "boss_7",
+        "loot": [
+          "badge_ch7_m3"
+        ]
+      }
+    }
+  ],
+  "boss": {
+    "id": "boss_7",
+    "name": "The Trust Chain Meltdown",
+    "mechanics": {
+      "format": "timed_synthesis",
+      "lives": 2,
+      "time_limit_seconds_total": 720,
+      "total_questions": 10
+    },
+    "question_ids": [
+      "ch7-q41",
+      "ch7-q42",
+      "ch7-q43",
+      "ch7-q44",
+      "ch7-q45",
+      "ch7-q46",
+      "ch7-q47",
+      "ch7-q50",
+      "ch7-q51",
+      "ch7-q52"
+    ],
+    "rewards": {
+      "xp": 240,
+      "loot": [
+        "boss_trophy_ch7"
+      ]
+    },
+    "premise": "A timed incident response drill: pick the right crypto primitive, diagnose certificate issues, and avoid classic implementation pitfalls."
+  },
+  "roguelike": {
+    "runset_id": "roguelike_runset_ch7",
+    "run_minutes_target": 18,
+    "structure": {
+      "acts": 3,
+      "encounters_per_act": 4,
+      "rest_sites_per_act": 1,
+      "boss_per_run": "boss_7_variant"
+    },
+    "cards": {
+      "threat_cards": [
+        {
+          "id": "threat_mitm_wifi",
+          "name": "Coffee‑Shop MITM",
+          "tags": [
+            "pki.chain_of_trust",
+            "cert_pinning",
+            "pki.revocation.ocsp"
+          ]
+        },
+        {
+          "id": "threat_legacy_cipher",
+          "name": "Legacy Cipher Negotiation",
+          "tags": [
+            "crypto.attacks.downgrade",
+            "crypto.des_3des",
+            "crypto.aes"
+          ]
+        },
+        {
+          "id": "threat_hash_tamper",
+          "name": "Hash‑Collision Tampering",
+          "tags": [
+            "crypto.attacks.collision",
+            "hashing.md5",
+            "hashing.sha_family"
+          ]
+        },
+        {
+          "id": "threat_key_loss",
+          "name": "Lost Keys, Lost Data",
+          "tags": [
+            "key_management.key_escrow",
+            "key_management.split_knowledge",
+            "key_management.basics"
+          ]
+        },
+        {
+          "id": "threat_darkweb_drop",
+          "name": "Dark‑Web Dropbox",
+          "tags": [
+            "tor_dark_web",
+            "steganography",
+            "obfuscation"
+          ]
+        },
+        {
+          "id": "threat_ledger_fraud",
+          "name": "Ledger Confusion",
+          "tags": [
+            "blockchain",
+            "hashing.basics",
+            "crypto.goals"
+          ]
+        }
+      ],
+      "constraint_cards": [
+        {
+          "id": "constraint_perf",
+          "name": "Performance Budget",
+          "effect": "Prefer fast primitives for bulk data; avoid asymmetric for large payloads."
+        },
+        {
+          "id": "constraint_compliance",
+          "name": "Compliance Heat",
+          "effect": "At least one encounter focuses on deprecated algorithms and modern replacements."
+        }
+      ],
+      "control_cards": [
+        {
+          "id": "control_tls_hardening",
+          "name": "TLS Hardening",
+          "tags": [
+            "crypto.pfs",
+            "crypto.attacks.downgrade",
+            "pki.revocation.stapling"
+          ]
+        },
+        {
+          "id": "control_key_ceremony",
+          "name": "Key Ceremony",
+          "tags": [
+            "key_management.split_knowledge",
+            "key_management.key_escrow"
+          ]
+        },
+        {
+          "id": "control_pki_hygiene",
+          "name": "PKI Hygiene",
+          "tags": [
+            "pki.ca_ra",
+            "pki.csr_x509",
+            "pki.revocation.ocsp"
+          ]
+        }
+      ]
+    },
+    "question_pool_ids": "use_all_questions_in_pack"
+  },
+  "pvp": {
+    "enabled": false,
+    "modes": [
+      {
+        "id": "duel_quickfire",
+        "name": "Quickfire Duel",
+        "description": "Both players answer the same 10 questions. Faster correct answers generate a 5s time tax on the opponent's next question.",
+        "rules": {
+          "questions": 10,
+          "time_per_question_seconds": 35,
+          "attack_on_correct_under_seconds": 20,
+          "time_tax_seconds": 5
+        }
+      }
+    ],
+    "fairness": {
+      "matchmaking": "match by mastery band (+/- 10 mastery points)",
+      "anti_cheat": "server timestamps + random question order"
+    }
+  },
+  "question_bank": [
+    {
+      "id": "ch7-q01",
+      "type": "mcq",
+      "stem": "Which security objective is MOST directly provided by encrypting data?",
+      "options": {
+        "A": "Integrity",
+        "B": "Confidentiality",
+        "C": "Non-repudiation",
+        "D": "Availability"
+      },
+      "answer": "B",
+      "explanation": "Encryption’s core job is confidentiality. Integrity is typically provided by hashes/MACs; non‑repudiation by digital signatures.",
+      "tags": [
+        "crypto.goals"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 35,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Encryption’s core job is confidentiality.",
+      "misconceptionTags": [
+        "crypto.goals_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q02",
+      "type": "mcq",
+      "stem": "You need to detect tampering and also authenticate that the message came from someone who shares a secret with you. Which mechanism fits BEST?",
+      "options": {
+        "A": "SHA-256 hash",
+        "B": "HMAC",
+        "C": "Digital signature",
+        "D": "Steganography"
+      },
+      "answer": "B",
+      "explanation": "HMAC is a keyed message authentication code: it detects modification (integrity) and proves the sender knew the shared key (authentication).",
+      "tags": [
+        "hashing.hmac",
+        "crypto.goals"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "3.1"
+      ],
+      "rationaleCorrect": "HMAC is a keyed message authentication code: it detects modification (integrity) and proves the sender knew the shared key (authentication).",
+      "misconceptionTags": [
+        "hashing.hmac_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q03",
+      "type": "mcq",
+      "stem": "A vendor wants proof they cannot later deny signing an agreement. What provides this MOST directly?",
+      "options": {
+        "A": "HMAC",
+        "B": "AES encryption",
+        "C": "Digital signature",
+        "D": "Password hashing"
+      },
+      "answer": "C",
+      "explanation": "Digital signatures support non‑repudiation because only the signer has the private key needed to create the signature.",
+      "tags": [
+        "digital_signatures",
+        "crypto.goals"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "3.1"
+      ],
+      "rationaleCorrect": "Digital signatures support non‑repudiation because only the signer has the private key needed to create the signature.",
+      "misconceptionTags": [
+        "digital_signatures_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q04",
+      "type": "mcq",
+      "stem": "Which control BEST protects sensitive files stored on a stolen laptop’s drive?",
+      "options": {
+        "A": "TLS certificate pinning",
+        "B": "Full-disk encryption (AES)",
+        "C": "OCSP stapling",
+        "D": "HMAC on files"
+      },
+      "answer": "B",
+      "explanation": "This is data at rest. Full‑disk/file encryption protects confidentiality if the device is stolen.",
+      "tags": [
+        "crypto.aes",
+        "crypto.symmetric",
+        "key_management.basics"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "This is data at rest. It aligns with the intended control outcome and avoids the common trap choices in this question.",
+      "misconceptionTags": [
+        "crypto.aes_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q05",
+      "type": "mcq",
+      "stem": "A web browser connects to a site using TLS. Which crypto approach is MOST typical for protecting the bulk data?",
+      "options": {
+        "A": "Asymmetric crypto for all data",
+        "B": "Hybrid: asymmetric handshake + symmetric session encryption",
+        "C": "Hashing only",
+        "D": "Steganography"
+      },
+      "answer": "B",
+      "explanation": "TLS commonly uses asymmetric crypto to establish a session key, then symmetric encryption (e.g., AES) for the bulk traffic.",
+      "tags": [
+        "crypto.key_exchange",
+        "crypto.symmetric",
+        "crypto.aes"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "TLS commonly uses asymmetric crypto to establish a session key, then symmetric encryption (e.g., AES) for the bulk traffic.",
+      "misconceptionTags": [
+        "crypto.key_exchange_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q06",
+      "type": "mcq",
+      "stem": "Why is symmetric encryption commonly used for bulk data protection?",
+      "options": {
+        "A": "It provides non-repudiation by default",
+        "B": "It is faster than asymmetric encryption",
+        "C": "It does not require keys",
+        "D": "It automatically validates certificates"
+      },
+      "answer": "B",
+      "explanation": "Symmetric algorithms are computationally efficient and suited for encrypting large amounts of data.",
+      "tags": [
+        "crypto.symmetric"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Symmetric algorithms are computationally efficient and suited for encrypting large amounts of data.",
+      "misconceptionTags": [
+        "crypto.symmetric_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q07",
+      "type": "mcq",
+      "stem": "Which technique is MOST associated with creating a shared secret without sending the secret itself over the network?",
+      "options": {
+        "A": "Diffie-Hellman",
+        "B": "MD5",
+        "C": "DES",
+        "D": "CRL"
+      },
+      "answer": "A",
+      "explanation": "Diffie‑Hellman is a key agreement method: both sides derive the same shared secret without transmitting it directly.",
+      "tags": [
+        "crypto.key_exchange"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "3.1"
+      ],
+      "rationaleCorrect": "Diffie‑Hellman is a key agreement method: both sides derive the same shared secret without transmitting it directly.",
+      "misconceptionTags": [
+        "crypto.key_exchange_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q08",
+      "type": "mcq",
+      "stem": "Which statement BEST describes Perfect Forward Secrecy (PFS)?",
+      "options": {
+        "A": "Past sessions remain secure even if the server’s long-term private key is later compromised",
+        "B": "The certificate chain cannot be broken",
+        "C": "Passwords are stored with salts",
+        "D": "All encryption uses the same key forever"
+      },
+      "answer": "A",
+      "explanation": "PFS is achieved with ephemeral session keys (often via ephemeral DH). Compromise of a long‑term key doesn’t decrypt recorded past sessions.",
+      "tags": [
+        "crypto.pfs",
+        "crypto.key_exchange"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "3.1"
+      ],
+      "rationaleCorrect": "PFS is achieved with ephemeral session keys (often via ephemeral DH).",
+      "misconceptionTags": [
+        "crypto.pfs_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q09",
+      "type": "mcq",
+      "stem": "Kerckhoffs’s principle is MOST accurately summarized as:",
+      "options": {
+        "A": "Hide the algorithm; publish the key",
+        "B": "Security should rely on secret algorithms",
+        "C": "Assume the attacker knows the system; keep only the key secret",
+        "D": "Use the longest key available, always"
+      },
+      "answer": "C",
+      "explanation": "Modern crypto assumes algorithms are public; security depends on key secrecy and sound implementations, not obscurity.",
+      "tags": [
+        "key_management.basics",
+        "crypto.attacks.downgrade"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "4.2"
+      ],
+      "rationaleCorrect": "Modern crypto assumes algorithms are public; security depends on key secrecy and sound implementations, not obscurity.",
+      "misconceptionTags": [
+        "key_management.basics_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q10",
+      "type": "mcq",
+      "stem": "Two different files produce the same SHA-256 value. This indicates a:",
+      "options": {
+        "A": "Collision",
+        "B": "Rainbow table",
+        "C": "Nonce reuse",
+        "D": "Perfect forward secrecy"
+      },
+      "answer": "A",
+      "explanation": "A collision occurs when two distinct inputs produce the same hash output. Good hashes make collisions infeasible.",
+      "tags": [
+        "crypto.attacks.collision",
+        "hashing.basics",
+        "hashing.sha_family"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "3.1"
+      ],
+      "rationaleCorrect": "A collision occurs when two distinct inputs produce the same hash output.",
+      "misconceptionTags": [
+        "crypto.attacks.collision_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q11",
+      "type": "mcq",
+      "stem": "An attacker uses math to find two inputs with the same hash faster than brute force. This is MOST commonly called a:",
+      "options": {
+        "A": "Downgrade attack",
+        "B": "Birthday attack",
+        "C": "Replay attack",
+        "D": "Typosquatting"
+      },
+      "answer": "B",
+      "explanation": "Birthday-style attacks exploit the birthday bound: collisions appear with about √N work for an N‑sized hash space.",
+      "tags": [
+        "crypto.attacks.birthday",
+        "hashing.basics"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "2.2"
+      ],
+      "rationaleCorrect": "Birthday-style attacks exploit the birthday bound: collisions appear with about √N work for an N‑sized hash space.",
+      "misconceptionTags": [
+        "crypto.attacks.birthday_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q12",
+      "type": "mcq",
+      "stem": "A company stores user passwords as plain SHA-256 hashes. What is the BIGGEST weakness of this approach?",
+      "options": {
+        "A": "SHA-256 is reversible",
+        "B": "It is fast, enabling large-scale password guessing attacks",
+        "C": "It prevents the use of salts",
+        "D": "It requires a certificate chain"
+      },
+      "answer": "B",
+      "explanation": "Fast hashes are bad for passwords. Attackers can guess extremely predicting quickly. Password storage should use unique salts + slow key stretching.",
+      "tags": [
+        "hashing.basics",
+        "hashing.sha_family"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "3.1"
+      ],
+      "rationaleCorrect": "Fast hashes are bad for passwords. It aligns with the intended control outcome and avoids the common trap choices in this question.",
+      "misconceptionTags": [
+        "hashing.basics_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q13",
+      "type": "mcq",
+      "stem": "What is the PRIMARY purpose of adding a unique salt to each password before hashing?",
+      "options": {
+        "A": "Make the hash reversible for account recovery",
+        "B": "Prevent identical passwords from producing identical hashes and defeat rainbow tables",
+        "C": "Increase network throughput during login",
+        "D": "Provide non-repudiation"
+      },
+      "answer": "B",
+      "explanation": "Salts make each user’s hash unique even for the same password, defeating precomputed rainbow tables and reducing bulk cracking efficiency.",
+      "tags": [
+        "hashing.basics"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "1.6"
+      ],
+      "rationaleCorrect": "Salts make each user’s hash unique even for the same password, defeating precomputed rainbow tables and reducing bulk cracking efficiency.",
+      "misconceptionTags": [
+        "hashing.basics_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q14",
+      "type": "mcq",
+      "stem": "Which technique is MOST associated with slowing down brute-force password cracking?",
+      "options": {
+        "A": "Steganography",
+        "B": "Key stretching (bcrypt/scrypt/Argon2/PBKDF2)",
+        "C": "Certificate pinning",
+        "D": "OCSP"
+      },
+      "answer": "B",
+      "explanation": "Key stretching makes each guess expensive, increasing attacker cost dramatically.",
+      "tags": [
+        "hashing.basics",
+        "key_management.basics"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "5.2"
+      ],
+      "rationaleCorrect": "Key stretching makes each guess expensive, increasing attacker cost dramatically.",
+      "misconceptionTags": [
+        "hashing.basics_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q15",
+      "type": "mcq",
+      "stem": "A developer adds a secret value stored outside the password database to each password before hashing. This secret value is MOST like:",
+      "options": {
+        "A": "Salt",
+        "B": "Pepper",
+        "C": "IV",
+        "D": "CSR"
+      },
+      "answer": "B",
+      "explanation": "A pepper is a secret, shared value stored separately from the database. It can help if the hash database is stolen.",
+      "tags": [
+        "hashing.basics",
+        "key_management.basics"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "5.2"
+      ],
+      "rationaleCorrect": "A pepper is a secret, shared value stored separately from the database.",
+      "misconceptionTags": [
+        "hashing.basics_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q16",
+      "type": "mcq",
+      "stem": "Which BEST describes key escrow?",
+      "options": {
+        "A": "A process where two parties derive a secret without sending it",
+        "B": "A third party stores a copy of a key so data can be decrypted later",
+        "C": "A method of pinning a certificate in a mobile app",
+        "D": "A hash function used for passwords"
+      },
+      "answer": "B",
+      "explanation": "Key escrow can enable lawful access/recovery but increases risk because compromise of the escrowed key exposes protected data.",
+      "tags": [
+        "key_management.key_escrow",
+        "key_management.basics"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "Key escrow can enable lawful access/recovery but increases risk because compromise of the escrowed key exposes protected data.",
+      "misconceptionTags": [
+        "key_management.key_escrow_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q17",
+      "type": "mcq",
+      "stem": "Which key management practice requires multiple individuals to cooperate to reconstruct or use a sensitive key?",
+      "options": {
+        "A": "Split knowledge",
+        "B": "OCSP stapling",
+        "C": "Cipher suite negotiation",
+        "D": "Certificate chaining"
+      },
+      "answer": "A",
+      "explanation": "Split knowledge (often paired with dual control) prevents one person from having full key access, reducing insider risk.",
+      "tags": [
+        "key_management.split_knowledge"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "5.2"
+      ],
+      "rationaleCorrect": "Split knowledge (often paired with dual control) prevents one person from having full key access, reducing insider risk.",
+      "misconceptionTags": [
+        "key_management.split_knowledge_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q18",
+      "type": "mcq",
+      "stem": "Which statement BEST distinguishes HMAC from a digital signature in terms of non-repudiation?",
+      "options": {
+        "A": "HMAC provides non-repudiation; signatures do not",
+        "B": "Signatures can provide non-repudiation; HMAC generally cannot because both parties share the key",
+        "C": "Both always provide non-repudiation",
+        "D": "Neither can be verified"
+      },
+      "answer": "B",
+      "explanation": "With HMAC, either party can compute it (shared secret), so you can’t prove which one created it. Signatures tie to a private key held by one entity.",
+      "tags": [
+        "hashing.hmac",
+        "digital_signatures",
+        "crypto.goals"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "With HMAC, either party can compute it (shared secret), so you can’t prove which one created it.",
+      "misconceptionTags": [
+        "hashing.hmac_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q19",
+      "type": "mcq",
+      "stem": "Which control BEST matches “keep private keys inside secure hardware; perform crypto operations inside the device”?",
+      "options": {
+        "A": "HSM",
+        "B": "CRL",
+        "C": "Wildcard certificate",
+        "D": "Steganography"
+      },
+      "answer": "A",
+      "explanation": "HSMs protect key material and perform cryptographic operations securely, reducing key-exfiltration risk.",
+      "tags": [
+        "key_management.basics"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "4.7"
+      ],
+      "rationaleCorrect": "HSMs protect key material and perform cryptographic operations securely, reducing key-exfiltration risk.",
+      "misconceptionTags": [
+        "key_management.basics_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q20",
+      "type": "mcq",
+      "stem": "Which statement BEST describes why weak randomness/entropy can break cryptography?",
+      "options": {
+        "A": "Crypto works fine with predictable keys",
+        "B": "Predictable keys/nonces/IVs can enable attackers to recover plaintext or keys",
+        "C": "Entropy only affects availability",
+        "D": "Entropy only matters for password salts"
+      },
+      "answer": "B",
+      "explanation": "Even strong algorithms fail if keys/nonces are predictable. Secure key generation and good entropy are critical.",
+      "tags": [
+        "key_management.basics",
+        "crypto.attacks.downgrade"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "5.2"
+      ],
+      "rationaleCorrect": "Even strong algorithms fail if keys/nonces are predictable.",
+      "misconceptionTags": [
+        "key_management.basics_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q21",
+      "type": "mcq",
+      "stem": "In a Public Key Infrastructure (PKI), what does a Certificate Authority (CA) primarily do?",
+      "options": {
+        "A": "Encrypt all web traffic with AES",
+        "B": "Issue certificates that bind a public key to an identity",
+        "C": "Maintain firewall rules",
+        "D": "Store user passwords"
+      },
+      "answer": "B",
+      "explanation": "A CA signs certificates to assert “this public key belongs to this identity,” enabling trust at scale.",
+      "tags": [
+        "pki.overview",
+        "pki.ca_ra"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 50,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "A CA signs certificates to assert “this public key belongs to this identity,” enabling trust at scale.",
+      "misconceptionTags": [
+        "pki.overview_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q22",
+      "type": "mcq",
+      "stem": "What is a Certificate Signing Request (CSR) MOST accurately?",
+      "options": {
+        "A": "A list of revoked certificates",
+        "B": "A request containing identity info and a public key sent to a CA for certificate issuance",
+        "C": "A private key backup stored in escrow",
+        "D": "A symmetric session key used in TLS"
+      },
+      "answer": "B",
+      "explanation": "A CSR includes the applicant’s public key and identifying information; the CA validates and issues a signed certificate.",
+      "tags": [
+        "pki.csr_x509"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "4.3"
+      ],
+      "rationaleCorrect": "A CSR includes the applicant’s public key and identifying information; the CA validates and issues a signed certificate.",
+      "misconceptionTags": [
+        "pki.csr_x509_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q23",
+      "type": "mcq",
+      "stem": "Which best describes a certificate chain of trust?",
+      "options": {
+        "A": "A password hashing method using salts",
+        "B": "A sequence of signatures from an end-entity cert up to a trusted root CA",
+        "C": "A list of cipher suites supported by a server",
+        "D": "A method for hiding data in images"
+      },
+      "answer": "B",
+      "explanation": "Clients trust a root CA and validate signatures through intermediates to the end‑entity certificate presented by a server/user.",
+      "tags": [
+        "pki.chain_of_trust",
+        "pki.overview"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Clients trust a root CA and validate signatures through intermediates to the end‑entity certificate presented by a server/user.",
+      "misconceptionTags": [
+        "pki.chain_of_trust_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q24",
+      "type": "mcq",
+      "stem": "A browser warns: “certificate revoked.” Which mechanism could the browser have used to learn this status in near real time?",
+      "options": {
+        "A": "OCSP",
+        "B": "AES-GCM",
+        "C": "Salt",
+        "D": "Steganography"
+      },
+      "answer": "A",
+      "explanation": "Online Certificate Status Protocol (OCSP) provides online certificate status (good/revoked/unknown).",
+      "tags": [
+        "pki.revocation.ocsp"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "3.1"
+      ],
+      "rationaleCorrect": "Online Certificate Status Protocol (OCSP) provides online certificate status (good/revoked/unknown).",
+      "misconceptionTags": [
+        "pki.revocation.ocsp_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q25",
+      "type": "mcq",
+      "stem": "What is the PRIMARY difference between a CRL and OCSP?",
+      "options": {
+        "A": "CRL provides confidentiality; OCSP provides integrity",
+        "B": "CRL is a downloaded list; OCSP is an online status query",
+        "C": "CRL uses AES; OCSP uses RSA",
+        "D": "CRL is for passwords; OCSP is for TLS"
+      },
+      "answer": "B",
+      "explanation": "A CRL is a periodically published list of revoked certificates; OCSP queries status online (often per cert).",
+      "tags": [
+        "pki.revocation.crl",
+        "pki.revocation.ocsp"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "3.1"
+      ],
+      "rationaleCorrect": "A CRL is a periodically published list of revoked certificates; OCSP queries status online (often per cert).",
+      "misconceptionTags": [
+        "pki.revocation.crl_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q26",
+      "type": "mcq",
+      "stem": "What is OCSP stapling?",
+      "options": {
+        "A": "A way to hide a message inside a picture",
+        "B": "A method where the server includes a recent OCSP response during the TLS handshake",
+        "C": "A password hashing algorithm",
+        "D": "A technique to encrypt symmetric keys with RSA"
+      },
+      "answer": "B",
+      "explanation": "Stapling reduces client‑to‑CA lookups, improving privacy and performance while still providing revocation proof.",
+      "tags": [
+        "pki.revocation.stapling",
+        "pki.revocation.ocsp"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "Stapling reduces client‑to‑CA lookups, improving privacy and performance while still providing revocation proof.",
+      "misconceptionTags": [
+        "pki.revocation.stapling_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q27",
+      "type": "mcq",
+      "stem": "A mobile app is configured to accept ONLY a specific server public key, even if a different CA-issued certificate appears. This is called:",
+      "options": {
+        "A": "Certificate pinning",
+        "B": "OCSP",
+        "C": "Split knowledge",
+        "D": "Key stretching"
+      },
+      "answer": "A",
+      "explanation": "Pinning reduces reliance on the broader CA ecosystem but must be managed carefully because key rotation can break clients.",
+      "tags": [
+        "cert_pinning",
+        "pki.chain_of_trust"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "3.1"
+      ],
+      "rationaleCorrect": "Pinning reduces reliance on the broader CA ecosystem but must be managed carefully because key rotation can break clients.",
+      "misconceptionTags": [
+        "cert_pinning_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q28",
+      "type": "mcq",
+      "stem": "A self-signed certificate is MOST likely to cause what problem for external users?",
+      "options": {
+        "A": "It makes AES slower",
+        "B": "Browsers will not trust it because it doesn’t chain to a trusted root CA",
+        "C": "It disables hashing",
+        "D": "It prevents OCSP checks"
+      },
+      "answer": "B",
+      "explanation": "Self-signed certs don’t chain to a trusted CA by default. Clients must explicitly trust the issuing root (often used internally/test).",
+      "tags": [
+        "pki.chain_of_trust",
+        "pki.csr_x509"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "3.1"
+      ],
+      "rationaleCorrect": "Self-signed certs don’t chain to a trusted CA by default.",
+      "misconceptionTags": [
+        "pki.chain_of_trust_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q29",
+      "type": "mcq",
+      "stem": "Which validation level generally provides the HIGHEST assurance about the organization behind a certificate?",
+      "options": {
+        "A": "Domain Validation (DV)",
+        "B": "Extended Validation (EV)",
+        "C": "Self-signed",
+        "D": "No validation"
+      },
+      "answer": "B",
+      "explanation": "EV involves stronger identity vetting than DV (which typically only validates domain control).",
+      "tags": [
+        "pki.dv_ev"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "EV involves stronger identity vetting than DV (which typically only validates domain control).",
+      "misconceptionTags": [
+        "pki.dv_ev_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q30",
+      "type": "mcq",
+      "stem": "Which statement is TRUE about digital signatures?",
+      "options": {
+        "A": "They primarily provide confidentiality",
+        "B": "They can be created by anyone who has the signer’s public key",
+        "C": "They provide integrity and can support non-repudiation",
+        "D": "They eliminate the need for hashing"
+      },
+      "answer": "C",
+      "explanation": "A digital signature provides integrity and authentication; because it’s created with a private key, it can support non‑repudiation.",
+      "tags": [
+        "digital_signatures",
+        "crypto.goals"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "3.1"
+      ],
+      "rationaleCorrect": "A digital signature provides integrity and authentication; because it’s created with a private key, it can support non‑repudiation.",
+      "misconceptionTags": [
+        "digital_signatures_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q31",
+      "type": "mcq",
+      "stem": "Which description BEST matches the high-level flow of a digital signature?",
+      "options": {
+        "A": "Encrypt the message with the signer’s private key",
+        "B": "Hash the message, then sign (encrypt) the hash with the private key",
+        "C": "Encrypt the message with AES, then hash it",
+        "D": "Send the private key to the verifier"
+      },
+      "answer": "B",
+      "explanation": "Signatures typically sign a hash of the message (for efficiency and integrity) with the signer’s private key.",
+      "tags": [
+        "digital_signatures",
+        "hashing.basics"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "3.1"
+      ],
+      "rationaleCorrect": "Signatures typically sign a hash of the message (for efficiency and integrity) with the signer’s private key.",
+      "misconceptionTags": [
+        "digital_signatures_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q32",
+      "type": "mcq",
+      "stem": "An attacker forces a TLS connection to negotiate a weaker, older cipher suite even though both endpoints support stronger options. This is a:",
+      "options": {
+        "A": "Collision attack",
+        "B": "Downgrade attack",
+        "C": "Birthday attack",
+        "D": "Replay attack"
+      },
+      "answer": "B",
+      "explanation": "Downgrade attacks exploit compatibility paths. Mitigation includes disabling legacy ciphers and enforcing modern configurations.",
+      "tags": [
+        "crypto.attacks.downgrade"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "2.2"
+      ],
+      "rationaleCorrect": "Downgrade attacks exploit compatibility paths.",
+      "misconceptionTags": [
+        "crypto.attacks.downgrade_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q33",
+      "type": "mcq",
+      "stem": "Which of the following is a modern symmetric block cipher commonly used for encryption?",
+      "options": {
+        "A": "AES",
+        "B": "RSA",
+        "C": "ECC",
+        "D": "OCSP"
+      },
+      "answer": "A",
+      "explanation": "AES is a widely used symmetric block cipher for bulk encryption.",
+      "tags": [
+        "crypto.aes",
+        "crypto.symmetric"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "3.1"
+      ],
+      "rationaleCorrect": "AES is a widely used symmetric block cipher for bulk encryption.",
+      "misconceptionTags": [
+        "crypto.aes_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q34",
+      "type": "mcq",
+      "stem": "Which legacy symmetric cipher is MOST associated with being deprecated due to weaker security and compliance concerns?",
+      "options": {
+        "A": "AES",
+        "B": "3DES",
+        "C": "SHA-256",
+        "D": "ECC"
+      },
+      "answer": "B",
+      "explanation": "3DES is considered legacy and is being phased out in many contexts; modern designs typically prefer AES.",
+      "tags": [
+        "crypto.des_3des"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "5.4"
+      ],
+      "rationaleCorrect": "3DES is considered legacy and is being phased out in many contexts; modern designs typically prefer AES.",
+      "misconceptionTags": [
+        "crypto.des_3des_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q35",
+      "type": "mcq",
+      "stem": "Which statement BEST describes steganography?",
+      "options": {
+        "A": "Hiding the existence of a message inside another medium",
+        "B": "Making a message unreadable using a secret key",
+        "C": "Detecting tampering using a hash",
+        "D": "Proving a message origin using a signature"
+      },
+      "answer": "A",
+      "explanation": "Steganography hides the presence of data (e.g., hiding a message inside an image). Encryption hides content but not existence.",
+      "tags": [
+        "steganography"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Steganography hides the presence of data (e.g., hiding a message inside an image).",
+      "misconceptionTags": [
+        "steganography_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q36",
+      "type": "mcq",
+      "stem": "Which statement BEST describes obfuscation?",
+      "options": {
+        "A": "Reversible scrambling with a symmetric key",
+        "B": "One-way integrity check",
+        "C": "Making code/data harder to understand without providing true secrecy",
+        "D": "Binding a public key to an identity"
+      },
+      "answer": "C",
+      "explanation": "Obfuscation complicates analysis (e.g., of code) but is not a substitute for encryption.",
+      "tags": [
+        "obfuscation"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Obfuscation complicates analysis (e.g., of code) but is not a substitute for encryption.",
+      "misconceptionTags": [
+        "obfuscation_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q37",
+      "type": "mcq",
+      "stem": "Which option BEST describes Tor in a security context?",
+      "options": {
+        "A": "A symmetric cipher for disk encryption",
+        "B": "An anonymity network using onion routing",
+        "C": "A certificate validation protocol",
+        "D": "A password hashing algorithm"
+      },
+      "answer": "B",
+      "explanation": "Tor routes traffic through multiple relays to provide anonymity (often discussed with dark web access).",
+      "tags": [
+        "tor_dark_web"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Tor routes traffic through multiple relays to provide anonymity (often discussed with dark web access).",
+      "misconceptionTags": [
+        "tor_dark_web_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q38",
+      "type": "mcq",
+      "stem": "Which statement BEST describes blockchain at a high level?",
+      "options": {
+        "A": "A CA that issues certificates",
+        "B": "A distributed append-only ledger that uses hashes to make tampering evident",
+        "C": "A symmetric cipher suite used by TLS",
+        "D": "A method of hiding data in audio files"
+      },
+      "answer": "B",
+      "explanation": "Blockchains are distributed ledgers; hashing and linking blocks makes tampering detectable (though details vary by implementation).",
+      "tags": [
+        "blockchain",
+        "hashing.basics"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Blockchains are distributed ledgers; hashing and linking blocks makes tampering detectable (though details vary by implementation).",
+      "misconceptionTags": [
+        "blockchain_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q39",
+      "type": "mcq",
+      "stem": "Why is asymmetric cryptography rarely used to encrypt large files directly?",
+      "options": {
+        "A": "It cannot provide confidentiality",
+        "B": "It is computationally expensive compared to symmetric crypto",
+        "C": "It requires no keys",
+        "D": "It cannot be used with certificates"
+      },
+      "answer": "B",
+      "explanation": "Asymmetric crypto is slower; it’s typically used for key exchange and signatures, while symmetric crypto handles bulk data.",
+      "tags": [
+        "crypto.asymmetric",
+        "crypto.symmetric"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Asymmetric crypto is slower; it’s typically used for key exchange and signatures, while symmetric crypto handles bulk data.",
+      "misconceptionTags": [
+        "crypto.asymmetric_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q40",
+      "type": "mcq",
+      "stem": "Which item is MOST associated with elliptic curve public-key cryptography?",
+      "options": {
+        "A": "ECC",
+        "B": "AES",
+        "C": "3DES",
+        "D": "SHA-256"
+      },
+      "answer": "A",
+      "explanation": "ECC is an asymmetric crypto family using elliptic curves, often providing strong security with smaller key sizes than RSA.",
+      "tags": [
+        "crypto.asymmetric"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "ECC is an asymmetric crypto family using elliptic curves, often providing strong security with smaller key sizes than RSA.",
+      "misconceptionTags": [
+        "crypto.asymmetric_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q41",
+      "type": "multi_select",
+      "stem": "Which of the following are common uses of asymmetric cryptography? (Select ALL that apply.)",
+      "options": {
+        "A": "Bulk disk encryption of terabytes of data",
+        "B": "Digital signatures",
+        "C": "Key exchange / establishing a session key",
+        "D": "Certificates and PKI trust",
+        "E": "Password storage via salts"
+      },
+      "answers": [
+        "B",
+        "C",
+        "D"
+      ],
+      "explanation": "Asymmetric crypto is commonly used for signatures, key exchange, and PKI/certificates. Bulk encryption is typically symmetric; password storage uses hashing/stretching.",
+      "tags": [
+        "crypto.asymmetric",
+        "digital_signatures",
+        "pki.overview"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 90,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Asymmetric crypto is commonly used for signatures, key exchange, and PKI/certificates.",
+      "misconceptionTags": [
+        "crypto.asymmetric_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "E": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q42",
+      "type": "multi_select",
+      "stem": "Which items are certificate revocation / status checking mechanisms? (Select ALL that apply.)",
+      "options": {
+        "A": "CRL",
+        "B": "OCSP",
+        "C": "OCSP stapling",
+        "D": "AES-GCM",
+        "E": "Diffie-Hellman"
+      },
+      "answers": [
+        "A",
+        "B",
+        "C"
+      ],
+      "explanation": "CRL and OCSP are revocation/status mechanisms; stapling is an OCSP delivery optimization. AES-GCM is encryption; DH is key exchange.",
+      "tags": [
+        "pki.revocation.crl",
+        "pki.revocation.ocsp",
+        "pki.revocation.stapling"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 85,
+      "objectiveIds": [
+        "3.1"
+      ],
+      "rationaleCorrect": "CRL and OCSP are revocation/status mechanisms; stapling is an OCSP delivery optimization.",
+      "misconceptionTags": [
+        "pki.revocation.crl_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "E": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q43",
+      "type": "multi_select",
+      "stem": "Which practices improve password storage security? (Select ALL that apply.)",
+      "options": {
+        "A": "Per-user random salts",
+        "B": "Key stretching (bcrypt/scrypt/Argon2/PBKDF2)",
+        "C": "Store plaintext passwords for recovery",
+        "D": "Optional secret pepper stored separately",
+        "E": "Use a fast hash with no salt"
+      },
+      "answers": [
+        "A",
+        "B",
+        "D"
+      ],
+      "explanation": "Good password storage uses unique salts and slow, adaptive hashing/key stretching. A pepper can help if stored separately. Plaintext or fast unsalted hashes are unsafe.",
+      "tags": [
+        "hashing.basics",
+        "key_management.basics"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 90,
+      "objectiveIds": [
+        "5.6"
+      ],
+      "rationaleCorrect": "Good password storage uses unique salts and slow, adaptive hashing/key stretching.",
+      "misconceptionTags": [
+        "hashing.basics_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "E": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q44",
+      "type": "matching",
+      "stem": "Match each item to its BEST category.",
+      "left": [
+        "AES",
+        "RSA/ECC",
+        "SHA-256",
+        "HMAC",
+        "3DES"
+      ],
+      "right": [
+        "Symmetric encryption (modern)",
+        "Asymmetric encryption",
+        "Hash function",
+        "Keyed integrity/authentication (MAC)",
+        "Symmetric encryption (legacy)"
+      ],
+      "pairs": {
+        "AES": "Symmetric encryption (modern)",
+        "RSA/ECC": "Asymmetric encryption",
+        "SHA-256": "Hash function",
+        "HMAC": "Keyed integrity/authentication (MAC)",
+        "3DES": "Symmetric encryption (legacy)"
+      },
+      "explanation": "AES is modern symmetric; RSA/ECC are asymmetric; SHA-256 is hashing; HMAC is a keyed MAC; 3DES is legacy symmetric encryption.",
+      "tags": [
+        "crypto.aes",
+        "crypto.des_3des",
+        "crypto.asymmetric",
+        "hashing.sha_family",
+        "hashing.hmac"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 105,
+      "objectiveIds": [
+        "3.1"
+      ],
+      "rationaleCorrect": "AES is modern symmetric; RSA/ECC are asymmetric; SHA-256 is hashing; HMAC is a keyed MAC; 3DES is legacy symmetric encryption.",
+      "misconceptionTags": [
+        "crypto.aes_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch7-q45",
+      "type": "matching",
+      "stem": "Match the concept to the BEST description.",
+      "left": [
+        "CRL",
+        "OCSP",
+        "OCSP stapling",
+        "Certificate pinning"
+      ],
+      "right": [
+        "Periodic revocation list",
+        "Online status query",
+        "Server-provided revocation proof in handshake",
+        "Trust a specific cert/key rather than any CA chain"
+      ],
+      "pairs": {
+        "CRL": "Periodic revocation list",
+        "OCSP": "Online status query",
+        "OCSP stapling": "Server-provided revocation proof in handshake",
+        "Certificate pinning": "Trust a specific cert/key rather than any CA chain"
+      },
+      "explanation": "CRLs are lists; OCSP is a query; stapling carries an OCSP response; pinning hard-binds trust to a specific key/cert.",
+      "tags": [
+        "pki.revocation.crl",
+        "pki.revocation.ocsp",
+        "pki.revocation.stapling",
+        "cert_pinning"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 115,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "CRLs are lists; OCSP is a query; stapling carries an OCSP response; pinning hard-binds trust to a specific key/cert.",
+      "misconceptionTags": [
+        "pki.revocation.crl_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch7-q46",
+      "type": "multi_select",
+      "stem": "Which choices are examples of symmetric encryption algorithms? (Select ALL that apply.)",
+      "options": {
+        "A": "AES",
+        "B": "3DES",
+        "C": "RSA",
+        "D": "ECC",
+        "E": "DES"
+      },
+      "answers": [
+        "A",
+        "B",
+        "E"
+      ],
+      "explanation": "AES, DES, and 3DES are symmetric ciphers. RSA and ECC are asymmetric.",
+      "tags": [
+        "crypto.symmetric",
+        "crypto.aes",
+        "crypto.des_3des"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "3.1"
+      ],
+      "rationaleCorrect": "AES, DES, and 3DES are symmetric ciphers.",
+      "misconceptionTags": [
+        "crypto.symmetric_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "E": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      }
+    },
+    {
+      "id": "ch7-q47",
+      "type": "mcq",
+      "stem": "A company runs devices that cannot reach the internet. Which revocation method is MOST practical for those devices to check certificate status?",
+      "options": {
+        "A": "OCSP",
+        "B": "CRL",
+        "C": "Certificate pinning",
+        "D": "Diffie-Hellman"
+      },
+      "answer": "B",
+      "explanation": "Offline systems can download and cache a CRL periodically. OCSP requires online queries.",
+      "tags": [
+        "pki.revocation.crl"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "3.1"
+      ],
+      "rationaleCorrect": "Offline systems can download and cache a CRL periodically.",
+      "misconceptionTags": [
+        "pki.revocation.crl_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q48",
+      "type": "mcq",
+      "stem": "Which statement BEST describes a hash function like SHA-256?",
+      "options": {
+        "A": "It uses a private key to encrypt data",
+        "B": "It produces a fixed-length digest and is designed to be one-way",
+        "C": "It hides messages inside images",
+        "D": "It validates certificate chains"
+      },
+      "answer": "B",
+      "explanation": "Hashes produce fixed-length digests and are designed to be one-way and collision-resistant for integrity checking.",
+      "tags": [
+        "hashing.basics",
+        "hashing.sha_family"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Hashes produce fixed-length digests and are designed to be one-way and collision-resistant for integrity checking.",
+      "misconceptionTags": [
+        "hashing.basics_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q49",
+      "type": "mcq",
+      "stem": "Which statement about MD5 is MOST accurate in modern security practice?",
+      "options": {
+        "A": "MD5 is preferred for password hashing because it is fast",
+        "B": "MD5 is considered broken for collision resistance and should be avoided for security uses",
+        "C": "MD5 provides non-repudiation",
+        "D": "MD5 is an asymmetric cipher"
+      },
+      "answer": "B",
+      "explanation": "MD5 has well-known collision weaknesses and is not recommended for security-sensitive integrity/signature contexts.",
+      "tags": [
+        "hashing.md5",
+        "crypto.attacks.collision"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "MD5 has well-known collision weaknesses and is not recommended for security-sensitive integrity/signature contexts.",
+      "misconceptionTags": [
+        "hashing.md5_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q50",
+      "type": "mcq",
+      "stem": "Which benefit is MOST associated with using certificate pinning in an app?",
+      "options": {
+        "A": "It eliminates the need for encryption",
+        "B": "It reduces risk from compromised or mis-issued CA certificates for that endpoint",
+        "C": "It replaces revocation checking globally",
+        "D": "It makes passwords reversible"
+      },
+      "answer": "B",
+      "explanation": "Pinning constrains trust to a specific cert/key for that app’s server endpoint, reducing dependence on the full CA ecosystem.",
+      "tags": [
+        "cert_pinning",
+        "pki.chain_of_trust"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Pinning constrains trust to a specific cert/key for that app’s server endpoint, reducing dependence on the full CA ecosystem.",
+      "misconceptionTags": [
+        "cert_pinning_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q51",
+      "type": "mcq",
+      "stem": "Which statement BEST captures the difference between encryption and steganography?",
+      "options": {
+        "A": "Encryption hides content; steganography hides existence",
+        "B": "Encryption proves identity; steganography proves integrity",
+        "C": "Encryption is one-way; steganography is two-way",
+        "D": "Encryption is only for passwords"
+      },
+      "answer": "A",
+      "explanation": "Encryption makes content unreadable without a key. Steganography hides the presence of the message inside another medium.",
+      "tags": [
+        "steganography",
+        "crypto.goals"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "Encryption makes content unreadable without a key.",
+      "misconceptionTags": [
+        "steganography_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch7-q52",
+      "type": "mcq",
+      "stem": "Which scenario BEST fits using HMAC (rather than a digital signature) for message integrity?",
+      "options": {
+        "A": "Public software update signing where anyone can verify authenticity",
+        "B": "Internal API calls between two services that already share a secret key",
+        "C": "Legal contracts requiring non-repudiation",
+        "D": "Certificate issuance by a CA"
+      },
+      "answer": "B",
+      "explanation": "HMAC is great when both parties share a secret and want integrity/authentication. Signatures are better when many verifiers exist or non-repudiation is needed.",
+      "tags": [
+        "hashing.hmac",
+        "crypto.goals"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "3.1"
+      ],
+      "rationaleCorrect": "HMAC is great when both parties share a secret and want integrity/authentication.",
+      "misconceptionTags": [
+        "hashing.hmac_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "type": "mcq",
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "rationaleCorrect": "Symmetric ciphers are computationally efficient for high-volume encryption workloads.",
+      "rationaleIncorrect": {
+        "B": "Asymmetric operations are slower and typically used for key exchange/signing.",
+        "C": "Hashing checks integrity but cannot decrypt to recover plaintext.",
+        "D": "Tokenization can help data handling but does not replace bulk encryption controls.",
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "asymmetric_for_bulk_data",
+        "hashing_as_encryption"
+      ],
+      "id": "ch7_obj14_q01",
+      "stem": "Which cryptographic approach is generally best for encrypting large data volumes at rest?",
+      "explanation": "Symmetric encryption is efficient for bulk data and is commonly used for storage encryption.",
+      "tags": [
+        "crypto",
+        "encryption_at_rest",
+        "symmetric"
+      ],
+      "objectiveIds": [
+        "1.4"
+      ],
+      "options": {
+        "A": "Symmetric encryption with strong key management",
+        "B": "Asymmetric encryption for every block operation",
+        "C": "Hashing with no key",
+        "D": "Tokenization without any encryption"
+      },
+      "answer": "A"
+    },
+    {
+      "type": "mcq",
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "rationaleCorrect": "Public key methods solve trust establishment and key agreement before fast symmetric encryption begins.",
+      "rationaleIncorrect": {
+        "A": "Compression is not a cryptographic objective.",
+        "B": "Hashing is separate from key exchange and identity validation.",
+        "D": "Transport designs typically combine asymmetric and symmetric primitives.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "crypto_role_confusion",
+        "asymmetric_everywhere"
+      ],
+      "id": "ch7_obj14_q02",
+      "stem": "What is the primary use of asymmetric cryptography in most secure transport designs?",
+      "explanation": "Asymmetric cryptography is commonly used for key exchange and authentication, then symmetric keys handle session data.",
+      "tags": [
+        "crypto",
+        "asymmetric",
+        "key_exchange"
+      ],
+      "objectiveIds": [
+        "1.4"
+      ],
+      "options": {
+        "A": "Compressing payloads before transmission",
+        "B": "Generating one-way password hashes",
+        "C": "Exchanging keys and validating identity",
+        "D": "Replacing all symmetric operations permanently"
+      },
+      "answer": "C"
+    },
+    {
+      "type": "multi_select",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "Signatures prove who signed and whether signed data changed after signing.",
+      "rationaleIncorrect": {
+        "A": "Correct: signature verification ties content to signer identity.",
+        "B": "Correct: content change invalidates the signature.",
+        "C": "Confidentiality requires encryption, not signing alone.",
+        "D": "Availability is a resiliency property, not a signature guarantee."
+      },
+      "misconceptionTags": [
+        "signature_equals_encryption",
+        "cia_misalignment"
+      ],
+      "id": "ch7_obj14_q03",
+      "stem": "Digital signatures primarily provide which guarantees? (Choose TWO.)",
+      "explanation": "Digital signatures provide origin authentication and integrity; confidentiality requires encryption.",
+      "tags": [
+        "digital_signature",
+        "integrity",
+        "authentication"
+      ],
+      "objectiveIds": [
+        "1.4"
+      ],
+      "options": {
+        "A": "Message authenticity",
+        "B": "Message integrity",
+        "C": "Automatic confidentiality",
+        "D": "Guaranteed availability"
+      },
+      "answers": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "type": "scenario_mcq",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "Encrypting with the recipient public key ensures only the recipient private key can recover the content.",
+      "rationaleIncorrect": {
+        "A": "Private-key encryption in this context resembles signing and does not preserve confidentiality.",
+        "C": "Hashing alone does not hide file contents.",
+        "D": "Sending plaintext violates confidentiality requirements.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "public_private_key_direction",
+        "hashing_as_confidentiality"
+      ],
+      "id": "ch7_obj14_q04",
+      "stem": "A partner needs to send your team a confidential file for the first time over email. What should they use first?",
+      "explanation": "For first-time secure exchange, the sender encrypts with the recipient public key so only the recipient private key can decrypt.",
+      "tags": [
+        "public_key",
+        "confidentiality",
+        "secure_exchange"
+      ],
+      "objectiveIds": [
+        "1.4"
+      ],
+      "options": {
+        "A": "Encrypt with the sender private key",
+        "B": "Encrypt with the recipient public key",
+        "C": "Hash the file and send plaintext",
+        "D": "Send plaintext and rotate passwords later"
+      },
+      "answer": "B"
+    },
+    {
+      "type": "scenario_mcq",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "HMAC lets teams detect unauthorized modifications with cryptographic assurance.",
+      "rationaleIncorrect": {
+        "B": "Compression does not provide cryptographic integrity guarantees.",
+        "C": "Removing integrity checks increases undetected tampering risk.",
+        "D": "Endpoint malware controls do not replace data-layer integrity validation.",
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "integrity_control_omission",
+        "endpoint_only_security"
+      ],
+      "id": "ch7_obj14_q05",
+      "stem": "A database team wants to quickly detect unauthorized changes to stored records without exposing raw data. Which option is best?",
+      "explanation": "A keyed hash (HMAC) supports integrity verification and tamper detection for stored data workflows.",
+      "tags": [
+        "hmac",
+        "integrity",
+        "tamper_detection"
+      ],
+      "objectiveIds": [
+        "1.4"
+      ],
+      "options": {
+        "A": "Use HMAC checks over record sets",
+        "B": "Use lossy compression",
+        "C": "Disable checksums for performance",
+        "D": "Only rely on endpoint antivirus"
+      },
+      "answer": "A"
+    },
+    {
+      "type": "scenario_mcq",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "Certificate validation failures can signal active risk and require verification before data entry.",
+      "rationaleIncorrect": {
+        "A": "Visual branding cannot prove transport authenticity.",
+        "B": "One-time bypass still exposes credentials and sensitive data.",
+        "D": "Disabling checks undermines transport security everywhere.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "cert_warning_ignore",
+        "visual_trust_bias"
+      ],
+      "id": "ch7_obj14_q06",
+      "stem": "An employee sees a TLS certificate warning for the payroll site and is tempted to continue. What is the best response?",
+      "explanation": "Certificate warnings may indicate impersonation or interception; verify certificate trust before proceeding.",
+      "tags": [
+        "tls",
+        "certificate_validation",
+        "mitm"
+      ],
+      "objectiveIds": [
+        "1.4"
+      ],
+      "options": {
+        "A": "Proceed if the page logo looks correct",
+        "B": "Bypass warning once and continue",
+        "C": "Stop and validate certificate trust path through approved channels",
+        "D": "Disable browser certificate checks globally"
+      },
+      "answer": "C"
+    },
+    {
+      "type": "matching",
+      "difficulty": 3,
+      "estimated_seconds": 90,
+      "rationaleCorrect": "Mapping primitives to proper goals prevents misconfiguration and weak cryptographic architecture.",
+      "rationaleIncorrect": {
+        "AES": "AES is optimized for symmetric encryption, not public key exchange.",
+        "RSA/ECC": "Public key algorithms are for trust bootstrap and signatures, not bulk throughput.",
+        "SHA-256": "Hashes provide integrity evidence, not reversible confidentiality.",
+        "Digital signature": "Signatures prove origin/integrity but do not conceal plaintext."
+      },
+      "misconceptionTags": [
+        "single_primitive_misuse",
+        "crypto_goal_blur"
+      ],
+      "id": "ch7_obj14_q07",
+      "stem": "Match each cryptographic component to the most appropriate use.",
+      "explanation": "Strong designs use different primitives for different goals instead of one primitive everywhere.",
+      "tags": [
+        "crypto_primitive_selection",
+        "fundamentals"
+      ],
+      "objectiveIds": [
+        "1.4"
+      ],
+      "left": [
+        "AES",
+        "RSA/ECC",
+        "SHA-256",
+        "Digital signature"
+      ],
+      "right": [
+        "Bulk data encryption",
+        "Key exchange and identity",
+        "Integrity digest",
+        "Origin and integrity proof"
+      ],
+      "pairs": {
+        "AES": "Bulk data encryption",
+        "RSA/ECC": "Key exchange and identity",
+        "SHA-256": "Integrity digest",
+        "Digital signature": "Origin and integrity proof"
+      }
+    },
+    {
+      "type": "mcq",
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "rationaleCorrect": "Unique salts force attackers to crack each hash instance individually.",
+      "rationaleIncorrect": {
+        "A": "Password hashes should remain one-way and not support reversal.",
+        "B": "Algorithm secrecy is not the security property salts provide.",
+        "D": "MFA addresses authentication assurance, not hash uniqueness.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "salt_purpose_confusion",
+        "hash_reversibility_myth"
+      ],
+      "id": "ch7_obj14_q08",
+      "stem": "Why are salts added before password hashing?",
+      "explanation": "Salts make identical passwords hash differently and reduce effectiveness of precomputed attacks.",
+      "tags": [
+        "password_hashing",
+        "salt",
+        "crypto_hygiene"
+      ],
+      "objectiveIds": [
+        "1.4"
+      ],
+      "options": {
+        "A": "To make hashes reversible for support teams",
+        "B": "To hide the hash algorithm from attackers",
+        "C": "To prevent identical passwords from producing identical hashes",
+        "D": "To replace the need for MFA"
+      },
+      "answer": "C"
+    },
+    {
+      "type": "multi_select",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "Protected key storage and lifecycle rotation are central to sustainable cryptographic control.",
+      "rationaleIncorrect": {
+        "A": "Co-locating unprotected keys defeats at-rest encryption value.",
+        "B": "Correct: controlled key storage reduces key theft risk.",
+        "C": "Correct: rotation limits blast radius and supports governance.",
+        "D": "Logging is needed for auditability and misuse detection."
+      },
+      "misconceptionTags": [
+        "key_storage_oversight",
+        "rotation_resistance"
+      ],
+      "id": "ch7_obj14_q09",
+      "stem": "Which controls strengthen encryption at rest deployments? (Choose TWO.)",
+      "explanation": "At-rest encryption is strongest when keys are protected and rotated with clear ownership.",
+      "tags": [
+        "encryption_at_rest",
+        "key_management",
+        "crypto_operations"
+      ],
+      "objectiveIds": [
+        "1.4"
+      ],
+      "options": {
+        "A": "Store encryption keys in the same plaintext file as ciphertext",
+        "B": "Use a managed key store or HSM with access controls",
+        "C": "Rotate keys based on policy and risk",
+        "D": "Disable access logging for key usage"
+      },
+      "answers": [
+        "B",
+        "C"
+      ]
+    },
+    {
+      "type": "mcq",
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "rationaleCorrect": "Ephemeral key exchange decouples past session keys from long-term key exposure.",
+      "rationaleIncorrect": {
+        "A": "Static keys create large compromise blast radius.",
+        "C": "Pinning helps trust decisions but does not by itself provide past-session confidentiality.",
+        "D": "Renegotiation settings do not replace forward secrecy benefits.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "tls_feature_confusion",
+        "key_compromise_impact"
+      ],
+      "id": "ch7_obj14_q10",
+      "stem": "Which TLS property best limits damage if a long-term private key is compromised later?",
+      "explanation": "Forward secrecy uses ephemeral session keys so past sessions stay protected even after key compromise.",
+      "tags": [
+        "tls",
+        "forward_secrecy",
+        "session_keys"
+      ],
+      "objectiveIds": [
+        "1.4"
+      ],
+      "options": {
+        "A": "Static pre-shared keys for all sessions",
+        "B": "Forward secrecy with ephemeral key exchange",
+        "C": "Certificate pinning alone",
+        "D": "Disabling session renegotiation"
+      },
+      "answer": "B"
+    },
+    {
+      "type": "scenario_mcq",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "Segmentation with explicit allow rules is an architectural control that limits blast radius and unauthorized paths.",
+      "rationaleIncorrect": {
+        "A": "Flat trust between subnets preserves broad lateral movement paths.",
+        "C": "Removing logs reduces detection and response capability.",
+        "D": "Shared admin credentials weaken accountability and increase abuse risk.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "flat_network_assumption",
+        "monitoring_without_prevention"
+      ],
+      "id": "ch7_obj31_scn01",
+      "stem": "A new internal API currently accepts traffic from any subnet. Security asks for the fastest architecture change that reduces lateral movement risk without rewriting the app. What is the best option?",
+      "explanation": "Placing the API behind a segmented application tier with explicit allow rules reduces east-west movement and enforces trust boundaries.",
+      "tags": [
+        "secure_architecture",
+        "segmentation",
+        "lateral_movement"
+      ],
+      "objectiveIds": [
+        "3.1"
+      ],
+      "options": {
+        "A": "Expose the API directly to all internal VLANs and monitor weekly",
+        "B": "Move the API into a segmented tier with least-privilege ACLs",
+        "C": "Disable logging to improve API throughput",
+        "D": "Use shared administrator credentials for all API operators"
+      },
+      "answer": "B"
+    },
+    {
+      "type": "scenario_mcq",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "A segregated management path with controlled entry and auditability is a core secure architecture pattern.",
+      "rationaleIncorrect": {
+        "A": "Mixing admin and user planes increases attack surface and credential exposure.",
+        "C": "Shared access removes attribution and accountability.",
+        "D": "Unrestricted remote admin sources violate least exposure design.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "admin_plane_mixing",
+        "shared_admin_identity"
+      ],
+      "id": "ch7_obj31_scn02",
+      "stem": "Your team is designing remote admin access for production systems. Which architecture provides the strongest control boundary?",
+      "explanation": "A dedicated management plane with a hardened bastion and MFA separates administrative traffic from user traffic and strengthens control points.",
+      "tags": [
+        "secure_architecture",
+        "management_plane",
+        "bastion_host"
+      ],
+      "objectiveIds": [
+        "3.1"
+      ],
+      "options": {
+        "A": "Allow direct admin access from any workstation over the user VLAN",
+        "B": "Require a dedicated bastion in a management network with MFA and session logging",
+        "C": "Use one shared VPN account for all administrators",
+        "D": "Permit RDP from vendor networks with no source restrictions"
+      },
+      "answer": "B"
+    },
+    {
+      "type": "scenario_mcq",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "Tier separation with least-privilege rules is a high-impact architecture control for reducing cross-tier compromise.",
+      "rationaleIncorrect": {
+        "A": "Endpoint controls alone do not replace network trust boundaries.",
+        "C": "Removing encryption increases interception and tampering risk.",
+        "D": "Broad database reachability violates least privilege and increases exposure.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "single_tier_convenience",
+        "boundary_control_avoidance"
+      ],
+      "id": "ch7_obj31_scn03",
+      "stem": "A web tier and database tier are currently on the same subnet. During review, leadership asks for one architecture change with the biggest security gain. What should you recommend first?",
+      "explanation": "Separating presentation and data tiers with tightly scoped firewall rules creates enforceable security boundaries and reduces direct attack paths.",
+      "tags": [
+        "secure_architecture",
+        "tiering",
+        "network_boundaries"
+      ],
+      "objectiveIds": [
+        "3.1"
+      ],
+      "options": {
+        "A": "Keep both tiers together and rely only on host antivirus",
+        "B": "Split web and database tiers into separate segments with strict inbound rules",
+        "C": "Disable TLS internally to simplify troubleshooting",
+        "D": "Allow database access from all user subnets for flexibility"
+      },
+      "answer": "B"
+    }
+  ]
+}

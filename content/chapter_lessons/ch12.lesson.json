@@ -1,0 +1,3723 @@
+{
+  "pack_id": "ch12",
+  "version": "1.0.0",
+  "modules": [
+    {
+      "id": "ch12.m01",
+      "title": "Network security mindset (attack surface, zones, layers)",
+      "tag_ids": [
+        "network.attack_surface",
+        "network.security_zones",
+        "network.connectivity",
+        "network.device_placement",
+        "network.segmentation"
+      ],
+      "pages": [
+        {
+          "id": "ch12.m01.p01",
+          "title": "What network security is really doing",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Network security isn’t “a firewall.” It’s **engineering the flow of trust**:\n- Reduce the places an attacker can touch (**attack surface**).\n- Split your environment into **zones** with different trust levels.\n- Control and observe the traffic between zones (deny by default, log the rest).\n\nA good design assumes breaches happen. Your goal is to **limit blast radius** and keep detecting."
+            },
+            {
+              "type": "explain",
+              "text": "**Defense-in-depth** = multiple independent layers.  \nThink: *segmentation + strong auth + secure protocols + monitoring + hardening*.\nOne control failing shouldn’t equal “game over.”"
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "What does 'attack surface' refer to?",
+              "options": [
+                "Only internet-facing IPs",
+                "All potential entry/exit points an attacker could use",
+                "Only open TCP ports",
+                "Only known vulnerabilities in apps"
+              ],
+              "correct_index": 1,
+              "explanation": "Attack surface is the total set of exposed ways to get in/out (services, interfaces, users, paths). Don’t shrink it to just ports or internet exposure.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which design goal best matches 'limit blast radius'?",
+              "options": [
+                "More bandwidth",
+                "More VLANs with no controls",
+                "Segmentation + controlled inter-zone traffic",
+                "Use only one strong firewall at the edge"
+              ],
+              "correct_index": 2,
+              "explanation": "Blast radius is reduced by compartmentalizing and tightly controlling traffic between compartments—not by relying on a single perimeter device.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch12.m01.p02",
+          "title": "OSI layers as a security lens",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "The OSI model is a **debugging and control-placement map**:\n- **L2 (Data Link)**: VLANs, switching behavior, CAM table, STP protections.\n- **L3 (Network)**: routing, IPsec, ACLs on routers, network firewalls.\n- **L4 (Transport)**: ports/protocols (TCP/UDP), stateful inspection.\n- **L7 (Application)**: WAFs, app-aware NGFW rules, content filtering.\n\nPractical rule: *what layer a control can see is what it can enforce.*"
+            },
+            {
+              "type": "explain",
+              "text": "**Inline vs tap/monitor** matters:\n- Inline: can block/modify traffic, but becomes a potential point of failure.\n- Tap/monitor: copies traffic for inspection; safer for availability but can’t stop packets."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "VLAN segmentation is primarily a Layer-2 concept. True or false?",
+              "options": [
+                "True",
+                "False"
+              ],
+              "correct_index": 0,
+              "explanation": "VLAN tagging and broadcast domains live at Layer 2, even if Layer 3 routing controls inter-VLAN flows.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Why must an IPS usually be inline?",
+              "options": [
+                "So it can copy traffic without risk",
+                "So it can block malicious traffic before it reaches targets",
+                "So it can anonymize clients",
+                "So it can rewrite DNS records"
+              ],
+              "correct_index": 1,
+              "explanation": "Prevention requires being in-path; monitoring-only deployments are IDS-style.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "2.2",
+        "2.4",
+        "3.1",
+        "3.3",
+        "3.4",
+        "4.3",
+        "4.4",
+        "4.6",
+        "5.2",
+        "5.3",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch12.m02",
+      "title": "Infrastructure considerations (placement, zones, failure modes)",
+      "tag_ids": [
+        "network.attack_surface",
+        "network.device_placement",
+        "network.security_zones",
+        "network.failure_modes.fail_open",
+        "network.failure_modes.fail_closed",
+        "network.high_availability"
+      ],
+      "pages": [
+        {
+          "id": "ch12.m02.p01",
+          "title": "Infrastructure considerations that shape design",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Infrastructure considerations** show up in every real design review:\n- **Attack surface**: where could an unauthorized user gain access (services, mgmt interfaces, exposed protocols)?\n- **Device placement**: borders, datacenter edges, between VLANs/zones, near crown jewels.\n- **Security zones**: group systems by trust level and required controls.\n- **Connectivity**: redundancy, providers, paths, and what happens when_hooks fail.\n- **Failure modes**: fail-open vs fail-closed — tied to business risk."
+            },
+            {
+              "type": "explain",
+              "text": "**Failure mode mental model**\n- Fail-open: “keep traffic flowing” → availability first, security second.\n- Fail-closed: “block if unsure” → security first, availability second.\n\nNeither is “always correct”; it’s a business decision with security consequences."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A firewall configured to allow traffic if it fails is operating in which mode?",
+              "options": [
+                "Fail-closed",
+                "Fail-open",
+                "Active/active",
+                "Stateful"
+              ],
+              "correct_index": 1,
+              "explanation": "Fail-open lets traffic pass on failure to preserve availability.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which statement best describes security zones?",
+              "options": [
+                "They are identical to VLANs",
+                "They group systems by trust level and control requirements",
+                "They remove the need for monitoring",
+                "They only apply to wireless networks"
+              ],
+              "correct_index": 1,
+              "explanation": "Zones are a trust/policy concept; VLANs are one way to implement them.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch12.m02.p02",
+          "title": "Device attributes: active/passive and inline/tap",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Two device attribute decisions show up constantly:\n\n**Active vs passive**\n- Active: influences traffic (blocks, rewrites, NATs, enforces).\n- Passive: observes/collects (sensors, taps, IDS in monitor mode).\n\n**Inline vs tap/monitor**\n- Inline: traffic flows *through* the device → can prevent, but can fail and cause outage.\n- Tap/monitor: device sees a copy → safer, but can’t stop packets."
+            },
+            {
+              "type": "explain",
+              "text": "Quick exam trap:\n- **IDS** is often passive/tap.\n- **IPS** is usually active/inline.\nReal life: some tools can do both depending on configuration."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which deployment is most appropriate for a passive IDS?",
+              "options": [
+                "Inline between router and switch",
+                "Tap/monitor port (SPAN/TAP)",
+                "Only on the DMZ host",
+                "Inside a VPN tunnel endpoint"
+              ],
+              "correct_index": 1,
+              "explanation": "Passive IDS typically relies on copied traffic via SPAN/TAP. Inline is for prevention.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Fail-closed is most aligned with which security priority?",
+              "options": [
+                "Availability",
+                "Confidentiality and integrity",
+                "Cost savings",
+                "User convenience"
+              ],
+              "correct_index": 1,
+              "explanation": "Fail-closed blocks traffic on failure, reducing exposure but risking downtime.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "2.2",
+        "2.4",
+        "3.1",
+        "3.3",
+        "3.4",
+        "4.3",
+        "4.4",
+        "4.6",
+        "5.2",
+        "5.3",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch12.m03",
+      "title": "Segmentation & isolation (air gaps, VLANs, DMZ, east-west)",
+      "tag_ids": [
+        "network.physical_isolation.air_gap",
+        "network.logical_segmentation.vlan",
+        "network.segmentation",
+        "network.screened_subnet.dmz",
+        "network.traffic.east_west",
+        "network.security_zones"
+      ],
+      "pages": [
+        {
+          "id": "ch12.m03.p01",
+          "title": "Physical isolation and air gaps (and how they fail)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Physical isolation (air-gapped)** means there is no network path for remote access.\nThat’s powerful… but not magical.\n\n**When air gaps fail:** removable media, laptops, techs, contractors, and “temporary connections”\ncan bridge the gap. Stuxnet is the classic reminder: humans and USB drives are networking too."
+            },
+            {
+              "type": "explain",
+              "text": "Practical controls around air gaps:\n- Strict removable media policy (scan, whitelist, logging).\n- Dedicated maintenance workstations.\n- Physical port controls and device control.\n- Monitoring for unexpected connectivity."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "What is the main security benefit of an air gap?",
+              "options": [
+                "Stronger encryption",
+                "Removes remote network attack paths",
+                "Better DDoS resilience",
+                "Stops phishing"
+              ],
+              "correct_index": 1,
+              "explanation": "Air gaps reduce exposure by eliminating connectivity. They don’t replace malware controls or user training.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which is a common way air-gapped environments get compromised?",
+              "options": [
+                "Only via IPv6",
+                "Removable media bridging isolation",
+                "DNSSEC failures",
+                "TLS certificate rotation"
+              ],
+              "correct_index": 1,
+              "explanation": "The weak link is often the human workflow: USB drives, maintenance laptops, or temporary connections.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch12.m03.p02",
+          "title": "Logical segmentation with VLANs and broadcast domains",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Logical segmentation** uses configuration/software rather than separate physical hardware.\nThe bread-and-butter example is **VLANs**:\n- VLANs create separate **broadcast domains** at Layer 2.\n- Devices on the same VLAN behave like they’re on the same physical segment.\n\nWhy it matters: smaller broadcast domains → less noise, fewer “everyone hears everything” moments."
+            },
+            {
+              "type": "explain",
+              "text": "Segmentation isn’t security by itself. You still need **inter-VLAN controls** (routing policy, firewalling, ACLs)\nor attackers just pivot across the router like it’s a hallway."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "What does a VLAN primarily change?",
+              "options": [
+                "Encrypts traffic",
+                "Creates a Layer-2 broadcast boundary",
+                "Adds a new IP subnet automatically",
+                "Prevents routing attacks"
+              ],
+              "correct_index": 1,
+              "explanation": "VLANs segment at Layer 2 into broadcast domains. They don’t inherently encrypt or prevent L3 attacks.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Segmentation without controls between segments primarily increases:",
+              "options": [
+                "Security",
+                "Visibility",
+                "Complexity without much security benefit",
+                "Bandwidth"
+              ],
+              "correct_index": 2,
+              "explanation": "If traffic is freely routed between segments, segmentation becomes mostly organizational, not protective.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch12.m03.p03",
+          "title": "DMZ / screened subnet and east-west traffic",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Screened subnet (DMZ)**: a buffer zone for public-facing services.\nTypical pattern:\n- Internet ↔ Firewall ↔ DMZ services\n- DMZ ↔ (tightly controlled) ↔ Internal network\n\nGoal: compromise the web server, not the database."
+            },
+            {
+              "type": "explain",
+              "text": "**East-west traffic** = lateral movement inside your datacenter/cloud.\nPerimeter controls are mostly “north-south” (in/out).  \nZero Trust pushes security *inside* the environment so east-west isn’t a blind spot."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A DMZ is primarily used to:",
+              "options": [
+                "Remove the need for firewalls",
+                "Host public services while reducing internal exposure",
+                "Encrypt all traffic",
+                "Replace VLANs"
+              ],
+              "correct_index": 1,
+              "explanation": "DMZs reduce risk by placing public services in a less-trusted zone with controlled access to internal networks.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "East-west traffic refers to:",
+              "options": [
+                "Traffic to/from the internet",
+                "Traffic between internal systems",
+                "Only wireless traffic",
+                "Only DNS traffic"
+              ],
+              "correct_index": 1,
+              "explanation": "East-west is lateral internal communications—often where attackers pivot after initial access.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "2.2",
+        "2.4",
+        "3.1",
+        "3.3",
+        "3.4",
+        "4.3",
+        "4.4",
+        "4.6",
+        "5.2",
+        "5.3",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch12.m04",
+      "title": "High availability & monitoring basics",
+      "tag_ids": [
+        "network.high_availability",
+        "monitoring.snmp_traps",
+        "network.failure_modes.fail_open",
+        "network.failure_modes.fail_closed"
+      ],
+      "pages": [
+        {
+          "id": "ch12.m04.p01",
+          "title": "High availability (HA): reduce downtime without creating insecurity",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**High availability (HA)** aims to keep services running despite failures.\nTypical ingredients:\n- Redundancy (links, devices, power)\n- Remove single points of failure\n- Monitoring + fast failover\n\nHA isn’t the same as fail-open/closed, but they interact:\n- Inline device fails? HA reduces the chance you hit the failure mode at all."
+            },
+            {
+              "type": "explain",
+              "text": "Common HA patterns:\n- **Active/active**: multiple nodes serve traffic simultaneously.\n- **Active/passive**: one serves, one stands by (often DR/BC oriented)."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Active/passive HA is most commonly associated with:",
+              "options": [
+                "A device that blocks traffic when it fails",
+                "A standby system that takes over when the active one fails",
+                "DNS cache poisoning",
+                "VLAN trunking"
+              ],
+              "correct_index": 1,
+              "explanation": "Active/passive keeps a secondary system ready to take over when the primary fails.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which statement is MOST accurate?",
+              "options": [
+                "Fail-open is a type of HA",
+                "HA can reduce the impact of inline device failures",
+                "HA eliminates the need for monitoring",
+                "HA makes segmentation unnecessary"
+              ],
+              "correct_index": 1,
+              "explanation": "HA reduces downtime risk, which matters especially for inline controls that could otherwise cause outages.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch12.m04.p02",
+          "title": "Service monitoring as part of availability",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Availability isn’t just “port is open.”\nMonitoring tiers commonly look like:\n1) Port/service responds (basic uptime)\n2) Transaction succeeds (expected response)\n3) Predictive indicators (errors, latency, resource trends)\n\nSNMP is a classic monitoring protocol; devices can send **SNMP traps** to managers when events occur."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "What is an SNMP trap?",
+              "options": [
+                "A firewall rule set",
+                "A message sent from an agent to a manager to report an event",
+                "A DLP policy",
+                "A VPN tunnel"
+              ],
+              "correct_index": 1,
+              "explanation": "SNMP traps are event notifications sent to SNMP managers so they can respond.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Why is transaction monitoring more useful than port monitoring?",
+              "options": [
+                "It is always cheaper",
+                "It can validate the service works, not just that it’s listening",
+                "It prevents DDoS",
+                "It encrypts traffic automatically"
+              ],
+              "correct_index": 1,
+              "explanation": "A port can be open while the app is broken; transactions catch deeper failures.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "2.2",
+        "2.4",
+        "3.1",
+        "3.3",
+        "3.4",
+        "4.3",
+        "4.4",
+        "4.6",
+        "5.2",
+        "5.3",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch12.m05",
+      "title": "Software-defined & cloud-edge models (SDN, SD-WAN, SASE)",
+      "tag_ids": [
+        "network.sdn",
+        "network.sdwan",
+        "network.sase",
+        "network.connectivity",
+        "zero_trust.overview",
+        "vpn.ipsec",
+        "vpn.tls_vpn"
+      ],
+      "pages": [
+        {
+          "id": "ch12.m05.p01",
+          "title": "Software-defined networking (SDN)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**SDN** centralizes network control in software controllers.\nWhy security folks care:\n- Central policy + rapid changes\n- Dynamic zone membership (authorize or quarantine systems quickly)\n- Automated response (when telemetry says “bad,” isolate it)\n\nTradeoff: the controller becomes high-value; protect it hard."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which best describes SDN?",
+              "options": [
+                "A new encryption protocol",
+                "Centralized, software-based control of network configurations",
+                "A type of VPN",
+                "A firewall inspection mode"
+              ],
+              "correct_index": 1,
+              "explanation": "SDN uses controllers and software-driven config to manage network behavior.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "A security advantage of SDN is:",
+              "options": [
+                "It removes need for authentication",
+                "It enables dynamic quarantine/segmentation changes",
+                "It disables east-west traffic",
+                "It forces DNSSEC"
+              ],
+              "correct_index": 1,
+              "explanation": "SDN can rapidly reconfigure zones/flows to isolate risky systems.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch12.m05.p02",
+          "title": "SD-WAN and why it exists",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**SD-WAN** is a software-defined approach to wide-area connectivity.\nIt can combine multiple links/providers and steer traffic based on policy, performance, and cost.\n\nUse case: replace/augment expensive WAN tech (like MPLS) with smarter control over commodity links."
+            },
+            {
+              "type": "explain",
+              "text": "Security angle:\n- You still need encryption + policy controls.\n- Central orchestration is powerful—also a big target."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "SD-WAN is mainly used to:",
+              "options": [
+                "Replace VLANs",
+                "Combine and manage WAN links using software/policy",
+                "Sign DNS responses",
+                "Prevent phishing"
+              ],
+              "correct_index": 1,
+              "explanation": "It’s a WAN design that manages multiple connectivity options with policy-based steering.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch12.m05.p03",
+          "title": "SASE (Secure Access Service Edge) in one picture",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**SASE** = “network access + security as cloud-delivered policy.”\nIt commonly blends:\n- VPN + SD-WAN\n- Cloud security controls (firewalls, CASB, zero trust access)\n\nGoal: consistent access policy for users/devices **wherever they are**, not only on the corporate LAN."
+            },
+            {
+              "type": "explain",
+              "text": "CASB note (cloud access security broker):\n- Acts as a policy enforcement point between users and cloud services.\n- Helps enforce org rules across many SaaS apps."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "SASE is best described as:",
+              "options": [
+                "A hardware firewall placed in a DMZ",
+                "A blend of VPN/SD-WAN with cloud-delivered security controls",
+                "A DNS security extension",
+                "A switch feature for loop protection"
+              ],
+              "correct_index": 1,
+              "explanation": "SASE combines connectivity and security services delivered in a location-independent way.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "A CASB primarily functions as:",
+              "options": [
+                "A DDoS botnet",
+                "A policy enforcement point for cloud service access",
+                "A Layer-2 segmentation method",
+                "A TLS cipher suite"
+              ],
+              "correct_index": 1,
+              "explanation": "CASBs help enforce organizational policies across cloud resources/services.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "2.2",
+        "2.4",
+        "3.1",
+        "3.3",
+        "3.4",
+        "4.3",
+        "4.4",
+        "4.6",
+        "5.2",
+        "5.3",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch12.m06",
+      "title": "Zero Trust deeper dive (planes & components)",
+      "tag_ids": [
+        "zero_trust.overview",
+        "zero_trust.control_plane",
+        "zero_trust.data_plane",
+        "network.traffic.east_west",
+        "network.segmentation"
+      ],
+      "pages": [
+        {
+          "id": "ch12.m06.p01",
+          "title": "Zero Trust: the one sentence",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Zero Trust** says: *never trust, always verify* — even inside the network.\n\nOld model: “inside = trusted.”  \nZero Trust: “inside is just another risk zone.”\n\nThat’s why it targets east-west traffic and system-to-system access, not only the perimeter."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Zero Trust primarily changes which assumption?",
+              "options": [
+                "All internal traffic is trusted",
+                "All traffic must be unencrypted",
+                "VPNs are unnecessary",
+                "DMZs should be removed"
+              ],
+              "correct_index": 0,
+              "explanation": "Zero Trust rejects implicit trust for internal systems; verification is continuous.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch12.m06.p02",
+          "title": "NIST model: subjects, policy engine, policy admin, PEP",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "NIST-style Zero Trust components:\n- **Subjects**: users/services/systems requesting access.\n- **Policy Engine**: decides allow/deny/revoke using rules + signals (identity, threat intel, SIEM, etc.).\n- **Policy Administrator**: acts on the decision (issues tokens/config, triggers enforcement).\n- **Policy Enforcement Point (PEP)**: the gate that enforces access to a resource (often client + gateway)."
+            },
+            {
+              "type": "explain",
+              "text": "Exam vibe: learn which component **decides** vs which **enforces**.\nDecision ≠ enforcement."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which Zero Trust component makes the decision to grant/deny/revoke access?",
+              "options": [
+                "Policy Enforcement Point",
+                "Policy Engine",
+                "Subject",
+                "DMZ"
+              ],
+              "correct_index": 1,
+              "explanation": "Policy Engines make the decision; PEP enforces it.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which component actually enforces access to a resource?",
+              "options": [
+                "Policy Administrator",
+                "Policy Enforcement Point (PEP)",
+                "Threat feed",
+                "VLAN tag"
+              ],
+              "correct_index": 1,
+              "explanation": "PEP is the enforcement gate (often client + gateway).",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch12.m06.p03",
+          "title": "Control plane vs data plane (and what 'adaptive identity' is)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "The Security+ outline emphasizes two planes:\n\n**Control plane** (how decisions are made):\n- **Adaptive identity** (adaptive authentication): context-based checks (location, device posture, risk).\n- Threat scope reduction\n- Policy-driven access control\n- Policy Engine / Administrator\n\n**Data plane** (where access happens):\n- Implicit trust zones (which Zero Trust tries to shrink/avoid)\n- Subject/system communication paths\n- PEP enforcing policy"
+            },
+            {
+              "type": "explain",
+              "text": "Practical heuristic:\n- Control plane asks: “Should you access this *right now*?”\n- Data plane says: “Okay, show me your proof and I’ll enforce it.”"
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Adaptive authentication primarily uses:",
+              "options": [
+                "Only passwords",
+                "Context signals like location, device security posture, and risk",
+                "Only VLAN IDs",
+                "Only DNS reputation"
+              ],
+              "correct_index": 1,
+              "explanation": "Adaptive identity uses context to step up auth or deny based on policy.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which plane is most associated with policy decisions?",
+              "options": [
+                "Data plane",
+                "Control plane"
+              ],
+              "correct_index": 1,
+              "explanation": "Policy decisions occur in the control plane; enforcement occurs in the data plane.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "2.2",
+        "2.4",
+        "3.1",
+        "3.3",
+        "3.4",
+        "4.3",
+        "4.4",
+        "4.6",
+        "5.2",
+        "5.3",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch12.m07",
+      "title": "NAC and 802.1X (who gets on the network)",
+      "tag_ids": [
+        "network.nac",
+        "network.8021x_eap",
+        "network.segmentation",
+        "network.security_zones"
+      ],
+      "pages": [
+        {
+          "id": "ch12.m07.p01",
+          "title": "Network Access Control (NAC): posture before access",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**NAC** controls who/what can join the network and under what conditions.\nCommon NAC checks:\n- Patch level, AV/EDR status\n- OS version, firewall enabled\n- Device posture / configuration\n\nIf a device fails checks, NAC can place it in a **quarantine network** for remediation."
+            },
+            {
+              "type": "explain",
+              "text": "NAC design choices:\n- **Preadmission** vs **postadmission** checks\n- **Agent-based** (more insight/control, more maintenance) vs **agentless** (lighter, less visibility)"
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A NAC quarantine network is used to:",
+              "options": [
+                "Host public web servers",
+                "Isolate noncompliant devices for remediation",
+                "Provide DNSSEC signing",
+                "Load balance traffic"
+              ],
+              "correct_index": 1,
+              "explanation": "Quarantine isolates risky devices while still allowing fixes/updates.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which NAC approach usually provides the most device insight?",
+              "options": [
+                "Agentless",
+                "Agent-based"
+              ],
+              "correct_index": 1,
+              "explanation": "Agents can report deeper posture/config details, but add deployment/maintenance overhead.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch12.m07.p02",
+          "title": "802.1X and EAP: port-based authentication",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**802.1X** is commonly used for **port-based authentication** at access switches.\nRoles:\n- **Supplicant**: the client/device requesting access.\n- **Authenticator**: the switch/AP controlling the port.\n- **Authentication server**: validates identity (often RADIUS).\n\n**EAP** (Extensible Authentication Protocol) carries auth messages between them."
+            },
+            {
+              "type": "explain",
+              "text": "Outcome: if credentials are accepted, the device gets network access—often with policy applied\n(e.g., placed into the right VLAN/zone)."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "In 802.1X, which component is the client requesting access?",
+              "options": [
+                "Authenticator",
+                "Supplicant",
+                "Policy engine",
+                "PEP"
+              ],
+              "correct_index": 1,
+              "explanation": "The supplicant is the endpoint/client initiating access.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "802.1X is most associated with:",
+              "options": [
+                "DNS cache management",
+                "Port-based authentication",
+                "Email signing",
+                "DDoS mitigation"
+              ],
+              "correct_index": 1,
+              "explanation": "802.1X controls access at the switch/AP port level.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "2.2",
+        "2.4",
+        "3.1",
+        "3.3",
+        "3.4",
+        "4.3",
+        "4.4",
+        "4.6",
+        "5.2",
+        "5.3",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch12.m08",
+      "title": "Switch protections (port security, STP/BPDU guard, DHCP snooping)",
+      "tag_ids": [
+        "network.port_security",
+        "network.stp_loop_prevention",
+        "network.dhcp_snooping"
+      ],
+      "pages": [
+        {
+          "id": "ch12.m08.p01",
+          "title": "Port security and CAM table overflow",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Port security** is a switch feature set that restricts what can happen on a port.\n\nWhy it exists: switches map MAC addresses in a CAM table.\nAttack idea: **MAC flooding/CAM table overflow** → switch may fail open into broadcasting,\nmaking traffic visible to ports that shouldn’t see it.\n\nPort security can limit MACs per port, shut down on violations, etc."
+            },
+            {
+              "type": "explain",
+              "text": "Exam-level realism:\n- MAC spoofing is easy.\n- Port security helps, but **802.1X/NAC is stronger** for identity-based access."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "CAM table overflow attacks aim to make a switch:",
+              "options": [
+                "Encrypt frames",
+                "Broadcast traffic more widely",
+                "Disable VLAN tags",
+                "Force DNSSEC validation"
+              ],
+              "correct_index": 1,
+              "explanation": "When the switch can’t map MACs, it may flood/broadcast to find destinations, exposing traffic.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Port security should not be solely relied on because:",
+              "options": [
+                "It requires TLS",
+                "MAC spoofing is easy",
+                "It only works on routers",
+                "It prevents VLANs"
+              ],
+              "correct_index": 1,
+              "explanation": "Attackers can spoof MAC addresses, so stronger auth methods are preferred.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch12.m08.p02",
+          "title": "Loop prevention: STP and BPDU Guard",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Loops can cause **broadcast storms** (traffic amplification) and melt a network.\n\nCore defenses:\n- **STP** (Spanning Tree Protocol): detects loops and blocks ports to break the loop.\n- **BPDU Guard**: protects STP by shutting down ports that should not be sending BPDUs\n  (often user-facing access ports)."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "What does STP primarily help prevent?",
+              "options": [
+                "DNS poisoning",
+                "Network loops and broadcast storms",
+                "Credential replay",
+                "TLS downgrade"
+              ],
+              "correct_index": 1,
+              "explanation": "STP prevents layer-2 loops by blocking redundant paths.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "BPDU Guard is typically enabled on:",
+              "options": [
+                "Inter-switch trunk links",
+                "User/device access ports",
+                "Internet-facing DMZ ports",
+                "VPN tunnels"
+              ],
+              "correct_index": 1,
+              "explanation": "It’s used where BPDUs should not appear (access ports) to stop rogue switch behavior.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch12.m08.p03",
+          "title": "DHCP snooping: stop rogue DHCP",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**DHCP snooping** is a switch feature that blocks DHCP offers from untrusted ports.\nGoal: stop rogue DHCP servers that hand out:\n- attacker-controlled default gateways (traffic interception)\n- malicious DNS servers\n- wrong IP/subnet settings (DoS/confusion)\n\nExtras: can check MAC consistency, block spoofed release/decline messages, etc."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "DHCP snooping primarily prevents:",
+              "options": [
+                "Rogue DHCP servers from assigning addresses",
+                "TLS downgrade attacks",
+                "DNSSEC failures",
+                "SYN floods"
+              ],
+              "correct_index": 0,
+              "explanation": "It blocks DHCP messages from untrusted DHCP servers/ports.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "A common impact of a rogue DHCP server is:",
+              "options": [
+                "Users get stronger encryption",
+                "Clients get a malicious default gateway/DNS",
+                "VLAN tags are removed",
+                "Email gets signed"
+              ],
+              "correct_index": 1,
+              "explanation": "Rogue DHCP can redirect traffic via attacker-controlled gateways or DNS.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "2.2",
+        "2.4",
+        "3.1",
+        "3.3",
+        "3.4",
+        "4.3",
+        "4.4",
+        "4.6",
+        "5.2",
+        "5.3",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch12.m09",
+      "title": "VPNs & tunneling decisions",
+      "tag_ids": [
+        "vpn.ipsec",
+        "vpn.tls_vpn",
+        "vpn.tunnel.full",
+        "vpn.tunnel.split",
+        "network.connectivity"
+      ],
+      "pages": [
+        {
+          "id": "ch12.m09.p01",
+          "title": "VPN basics: IPsec vs TLS/SSL VPNs",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Two major VPN families:\n\n**IPsec VPN**\n- Operates at Layer 3 (protects IP traffic).\n- Uses tunnel or transport mode:\n  - Tunnel: entire packet protected (common for site-to-site).\n  - Transport: payload protected, IP header not protected.\n\n**TLS/SSL VPN**\n- Uses TLS; often portal-based (browser/HTML5) or tunnel-capable.\n- Popular because it may work without a heavy client install (depends on design)."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "IPsec VPNs operate primarily at which layer?",
+              "options": [
+                "Layer 2",
+                "Layer 3",
+                "Layer 7",
+                "Layer 1"
+              ],
+              "correct_index": 1,
+              "explanation": "IPsec protects IP traffic (Layer 3).",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which VPN type commonly supports a browser/portal-based approach?",
+              "options": [
+                "IPsec",
+                "TLS/SSL VPN",
+                "802.1X",
+                "DNSSEC"
+              ],
+              "correct_index": 1,
+              "explanation": "TLS/SSL VPNs often offer portal-based access through a web interface.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch12.m09.p02",
+          "title": "Remote-access vs site-to-site and always-on",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Remote-access VPN**: for traveling/remote workers; usually “on when needed.”\n**Site-to-site VPN**: links networks; often **always-on** and auto-reconnects.\n\nSecurity angle: site-to-site extends your trust boundary. Treat it like an extension cord into your building."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which VPN is most likely to be always-on?",
+              "options": [
+                "Remote-access VPN",
+                "Site-to-site VPN",
+                "Split tunneling",
+                "Full tunneling"
+              ],
+              "correct_index": 1,
+              "explanation": "Site-to-site VPNs often stay connected continuously to link networks.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch12.m09.p03",
+          "title": "Split-tunnel vs full-tunnel: the tradeoff",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Full-tunnel VPN**: all traffic goes through the VPN.\n- Pros: centralized security controls/monitoring; reduces risk on untrusted networks.\n- Cons: bandwidth/latency; heavier load on VPN gateway; may break local services.\n\n**Split-tunnel VPN**: only traffic for certain resources goes through the VPN.\n- Pros: better performance; less load.\n- Cons: risk of “two doors open” (internet + corp) and routing mistakes; harder monitoring."
+            },
+            {
+              "type": "explain",
+              "text": "Practical guideline: if you’re protecting high-risk users/data on hostile networks,\nfull tunnel is usually safer unless you have a strong reason not to."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which is the main risk of split tunneling?",
+              "options": [
+                "Too much encryption",
+                "Device can route both to internet and corporate network simultaneously",
+                "It breaks DNSSEC",
+                "It prevents MFA"
+              ],
+              "correct_index": 1,
+              "explanation": "Split tunneling can allow simultaneous paths, increasing pivot/exfiltration risk.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which choice most increases centralized monitoring and policy enforcement?",
+              "options": [
+                "Split-tunnel",
+                "Full-tunnel"
+              ],
+              "correct_index": 1,
+              "explanation": "Full tunneling routes all traffic through the VPN path, enabling centralized controls.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "2.2",
+        "2.4",
+        "3.1",
+        "3.3",
+        "3.4",
+        "4.3",
+        "4.4",
+        "4.6",
+        "5.2",
+        "5.3",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch12.m10",
+      "title": "Core appliances (jump servers, load balancers, proxies)",
+      "tag_ids": [
+        "appliance.jump_server",
+        "appliance.load_balancer",
+        "appliance.proxy",
+        "management.out_of_band",
+        "network.high_availability",
+        "network.security_zones"
+      ],
+      "pages": [
+        {
+          "id": "ch12.m10.p01",
+          "title": "Appliance models and jump servers",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Appliances can be hardware, VM, virtual appliance, cloud instance, or hybrid.\nSelection factors: throughput, scaling needs, procurement/support, integration.\n\n**Jump server (jump box)**:\n- Hardened, monitored system used to administer systems in more sensitive zones.\n- Usually the *only* allowed admin path into a restricted zone."
+            },
+            {
+              "type": "explain",
+              "text": "Common pattern:\n- Admin workstation → VPN → Jump server → Target systems\n\nThis reduces direct admin exposure and improves monitoring/auditing."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A jump server is primarily used to:",
+              "options": [
+                "Host public web apps",
+                "Provide a controlled administrative access point across zones",
+                "Sign email headers",
+                "Perform DNS caching"
+              ],
+              "correct_index": 1,
+              "explanation": "Jump servers provide secured, monitored administrative access into restricted networks.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Isolating management interfaces onto a dedicated VLAN is an example of:",
+              "options": [
+                "Out-of-band management",
+                "Credential replay",
+                "Port security",
+                "DNS filtering"
+              ],
+              "correct_index": 0,
+              "explanation": "Out-of-band management separates management access from production traffic paths.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch12.m10.p02",
+          "title": "Load balancers and common algorithms",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Load balancers** distribute traffic across servers and help with availability and scaling.\nThey often remove unhealthy servers via health checks.\n\nCommon algorithms:\n- **Round-robin**: cycle through servers\n- **Least connections**: send to server with fewest active sessions\n- **Source IP hashing**: consistent mapping of client to server\n- **Adaptive/agent-based**: uses utilization metrics to steer traffic"
+            },
+            {
+              "type": "explain",
+              "text": "Beware persistence (sticky sessions): can be required for stateful apps,\nbut can also overload a single backend if you’re not careful."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which load-balancing method sends traffic in order through a list of servers?",
+              "options": [
+                "Least connections",
+                "Round-robin",
+                "Adaptive balancing",
+                "BPDU guard"
+              ],
+              "correct_index": 1,
+              "explanation": "Round-robin cycles through backends sequentially.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Health checks in load balancing are used to:",
+              "options": [
+                "Encrypt traffic",
+                "Remove or avoid unhealthy servers",
+                "Assign VLAN tags",
+                "Prevent DNS cache poisoning"
+              ],
+              "correct_index": 1,
+              "explanation": "Health checks help route around failed/unhealthy systems to maintain availability.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch12.m10.p03",
+          "title": "Proxies: forward vs reverse",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Forward proxy** (client-side):\n- Sits between clients and the internet.\n- Can anonymize clients, enforce browsing policy, enable access controls.\n\n**Reverse proxy** (server-side):\n- Sits in front of servers.\n- Can load balance, cache, and hide internal structure."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A reverse proxy is placed between:",
+              "options": [
+                "Clients and their local switch",
+                "Servers and clients",
+                "DNS resolvers and registrars",
+                "VPN tunnels and endpoints"
+              ],
+              "correct_index": 1,
+              "explanation": "Reverse proxies sit in front of servers and handle client requests on their behalf.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which is a typical forward proxy benefit?",
+              "options": [
+                "Improves STP behavior",
+                "Conceals client identity and enforces browsing policy",
+                "Signs DNS records",
+                "Creates VLANs automatically"
+              ],
+              "correct_index": 1,
+              "explanation": "Forward proxies are often used for policy enforcement and anonymization between clients and servers.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "2.2",
+        "2.4",
+        "3.1",
+        "3.3",
+        "3.4",
+        "4.3",
+        "4.4",
+        "4.6",
+        "5.2",
+        "5.3",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch12.m11",
+      "title": "Web filtering, reputation, and DNS filtering",
+      "tag_ids": [
+        "appliance.web_filter",
+        "dns.filtering",
+        "dns.security_dnssec",
+        "attacks.dns"
+      ],
+      "pages": [
+        {
+          "id": "ch12.m11.p01",
+          "title": "Web filters: content policy at the edge",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Web filters** (content filters) allow/deny web access based on:\n- URL scanning, content categorization\n- block rules\n- reputation (domain/IP history)\n\nImplementations:\n- Centralized proxy (network-based)\n- Agent-based filtering on endpoints"
+            },
+            {
+              "type": "explain",
+              "text": "Reputation services are often fed by threat intel and telemetry.  \nThey’re useful, but not perfect: false positives happen, and major services can have mixed signals."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A common function of a web filter is:",
+              "options": [
+                "Signing emails",
+                "URL scanning and content categorization",
+                "MAC address locking",
+                "IKE negotiation"
+              ],
+              "correct_index": 1,
+              "explanation": "Web filters classify and block/allow web access based on policy and reputation.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Reputation-based blocking is best thought of as:",
+              "options": [
+                "Perfect truth",
+                "A probabilistic signal that can have false positives/negatives",
+                "A replacement for segmentation",
+                "A kind of VPN"
+              ],
+              "correct_index": 1,
+              "explanation": "Reputation is a signal—not infallible—so it should be combined with other controls and monitoring.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch12.m11.p02",
+          "title": "DNS security and DNS filtering",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "DNS is foundational… and historically insecure.\n\n**DNSSEC** adds authentication of DNS data (integrity/origin), helping prevent tampering like cache poisoning.\nIt does **not** automatically encrypt DNS traffic.\n\nDNS hardening also includes:\n- blocking/controlling zone transfers\n- enabling DNS logging\n- blocking known malicious domains (DNS filtering)"
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "DNSSEC primarily provides:",
+              "options": [
+                "Encryption of DNS queries",
+                "Authentication/integrity of DNS responses",
+                "Load balancing",
+                "Port-based authentication"
+              ],
+              "correct_index": 1,
+              "explanation": "DNSSEC signs DNS data so clients can validate origin/integrity, but it doesn’t inherently encrypt queries.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "DNS filtering is used to:",
+              "options": [
+                "Create VLANs",
+                "Block lookups to known malicious domains",
+                "Run 802.1X",
+                "Replace SPF"
+              ],
+              "correct_index": 1,
+              "explanation": "DNS filtering blocks or redirects DNS queries for malicious/undesirable domains.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "2.2",
+        "2.4",
+        "3.1",
+        "3.3",
+        "3.4",
+        "4.3",
+        "4.4",
+        "4.6",
+        "5.2",
+        "5.3",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch12.m12",
+      "title": "Email security and TLS/PFS",
+      "tag_ids": [
+        "email.security_spf_dkim_dmarc",
+        "tls.ephemeral_pfs",
+        "network.connectivity"
+      ],
+      "pages": [
+        {
+          "id": "ch12.m12.p01",
+          "title": "Email authentication: SPF, DKIM, DMARC",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Email is a spoofing playground unless you add verification layers:\n\n- **SPF**: domain publishes which mail servers are allowed to send for it (DNS record).\n- **DKIM**: signs email with a key; receiver verifies signature via public key in DNS.\n- **DMARC**: policy + reporting that ties SPF/DKIM results to “what do we do if it fails?”\n\nIn practice: DMARC is often rolled out with policy “none” first to avoid breaking legit mail."
+            },
+            {
+              "type": "explain",
+              "text": "Email security gateways add filtering (phishing, spam, malware), and can enforce inbound/outbound policy."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which technology uses cryptographic signatures to validate email content/origin?",
+              "options": [
+                "SPF",
+                "DKIM",
+                "VLAN",
+                "HSTS"
+              ],
+              "correct_index": 1,
+              "explanation": "DKIM signs messages; SPF is an allowlist of sending servers; DMARC is policy/reporting.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "DMARC is best described as:",
+              "options": [
+                "A secure email retrieval protocol",
+                "A policy and reporting framework for SPF/DKIM results",
+                "A VPN feature",
+                "A DNS encryption tool"
+              ],
+              "correct_index": 1,
+              "explanation": "DMARC tells receivers how to handle failures and provides reporting.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch12.m12.p02",
+          "title": "TLS ephemeral keys and perfect forward secrecy",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "TLS protects lots of modern protocols, not just HTTPS.\n\n**Ephemeral keys** (ephemeral Diffie–Hellman) mean each session gets a fresh, temporary key.\nThis enables **Perfect Forward Secrecy (PFS)**:\n- compromise one key → doesn’t decrypt past sessions or future sessions\n\nPFS is a big deal when you assume attackers record traffic for later decryption attempts."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Perfect Forward Secrecy means:",
+              "options": [
+                "All traffic is unencrypted",
+                "Compromising one session key doesn’t expose past sessions",
+                "DNS responses are signed",
+                "Only IPv6 can be used"
+              ],
+              "correct_index": 1,
+              "explanation": "PFS reduces damage of key compromise by separating session keys over time.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "2.2",
+        "2.4",
+        "3.1",
+        "3.3",
+        "3.4",
+        "4.3",
+        "4.4",
+        "4.6",
+        "5.2",
+        "5.3",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch12.m13",
+      "title": "Data protection & operational monitoring (DLP, FIM, hardening)",
+      "tag_ids": [
+        "appliance.dlp",
+        "monitoring.file_integrity",
+        "management.out_of_band"
+      ],
+      "pages": [
+        {
+          "id": "ch12.m13.p01",
+          "title": "DLP: stop data exfiltration (intentional or accidental)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Data Loss Prevention (DLP)** focuses on preventing sensitive data leaving where it shouldn’t.\nCommon deployment: endpoint agents + controls at choke points (email gateways, web gateways, network borders).\n\nDLP detection methods:\n- Pattern matching (PII, PAN/CC, keywords)\n- Tagging/metadata classification\n\nActions: block, alert, quarantine, force encryption/secure transfer."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A typical DLP response to detected sensitive data exfiltration is to:",
+              "options": [
+                "Increase the VLAN size",
+                "Block or quarantine the transfer and alert",
+                "Disable DNSSEC",
+                "Force split tunneling"
+              ],
+              "correct_index": 1,
+              "explanation": "DLP can block/alert/quarantine and require secure handling for flagged data.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch12.m13.p02",
+          "title": "File integrity monitoring (FIM) and why it can be noisy",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**File Integrity Monitoring (FIM)** detects unauthorized/unexpected changes to files.\nIt’s valuable for:\n- catching web shell drops\n- detecting tampering with config/system files\n- supporting incident response timelines\n\nChallenge: lots of files change legitimately → FIM must be tuned and scoped, or it becomes alert-spam."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A common challenge with FIM is:",
+              "options": [
+                "It only works on routers",
+                "High noise unless tuned/scoped",
+                "It encrypts all traffic",
+                "It blocks DDoS by default"
+              ],
+              "correct_index": 1,
+              "explanation": "FIM can be noisy because legitimate changes happen constantly.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch12.m13.p03",
+          "title": "Hardening network devices and protecting management planes",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Network devices need hardening too (switches/routers/firewalls).\nCommon practices:\n- Follow CIS or vendor benchmarks\n- Disable unused services/ports\n- Patch and manage configs\n- Strong authentication + least privilege\n\n**Protect management access**:\n- dedicated management VLAN (out-of-band)\n- jump server/VPN required for admin access\n- monitor and log admin actions"
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Putting management interfaces on an isolated VLAN is primarily meant to:",
+              "options": [
+                "Make routing faster",
+                "Reduce exposure of management planes to attackers",
+                "Enable DNS poisoning",
+                "Create a DMZ"
+              ],
+              "correct_index": 1,
+              "explanation": "Out-of-band management reduces the chance attackers can reach device management interfaces.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "2.2",
+        "2.4",
+        "3.1",
+        "3.3",
+        "3.4",
+        "4.3",
+        "4.4",
+        "4.6",
+        "5.2",
+        "5.3",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch12.m14",
+      "title": "Security controls: IDS/IPS, firewalls/ACLs, deception",
+      "tag_ids": [
+        "appliance.ids_ips",
+        "firewall.types",
+        "firewall.rules",
+        "network.acl",
+        "deception.honeypot_honeynet",
+        "deception.honeyfile_honeytoken",
+        "network.screened_subnet.dmz",
+        "network.device_placement"
+      ],
+      "pages": [
+        {
+          "id": "ch12.m14.p01",
+          "title": "IDS vs IPS and deployment choices",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**IDS** detects; **IPS** detects and prevents.\n\nDeployment:\n- IDS often uses **tap/SPAN** (monitor copy).\n- IPS is typically **inline** (can block).\n\nSelection factors: throughput, detection rules/updates, custom detections, false positive rate, testing results."
+            },
+            {
+              "type": "explain",
+              "text": "Inline devices may offer fail-open features, but not all failures trigger it.\nPlan for failure modes as part of design."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which statement is MOST accurate?",
+              "options": [
+                "IDS is always inline",
+                "IPS can block traffic and is typically inline",
+                "IPS only monitors",
+                "IDS and IPS are identical"
+              ],
+              "correct_index": 1,
+              "explanation": "IPS is prevention, usually inline. IDS is detection, often passive.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch12.m14.p02",
+          "title": "Firewalls: stateless/stateful, NGFW, UTM, WAF",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Firewall families:\n- **Stateless** (packet filter): evaluates each packet by header fields.\n- **Stateful**: tracks conversations in a state table; can allow a flow once established.\n- **NGFW**: adds deeper inspection/app awareness and often IDS/IPS features.\n- **UTM**: “all-in-one” suite (common for small/mid orgs) with centralized management.\n- **WAF**: specializes in web/app traffic (HTTP, APIs, DB query patterns) to protect web apps."
+            },
+            {
+              "type": "explain",
+              "text": "Screened subnet/DMZ designs often rely on firewalls with multiple interfaces to separate:\nuntrusted ↔ DMZ ↔ internal."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which firewall type is purpose-built to protect web applications and APIs?",
+              "options": [
+                "UTM",
+                "WAF",
+                "Stateless firewall",
+                "BPDU guard"
+              ],
+              "correct_index": 1,
+              "explanation": "WAFs inspect web/application traffic and apply app-layer rules.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Stateful firewalls differ from stateless mainly because they:",
+              "options": [
+                "Encrypt traffic",
+                "Track connection state and flows",
+                "Require VLAN tags",
+                "Sign DNS responses"
+              ],
+              "correct_index": 1,
+              "explanation": "Stateful firewalls maintain a state table to understand conversations.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch12.m14.p03",
+          "title": "Firewall rules, ACLs, and the 'deny by default' habit",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Firewall rules** and **ACLs** are allow/deny statements for traffic or actions.\nKey practice: **deny by default**, permit only what you intend.\n\nACLs exist on routers, switches, firewalls, and other devices.\nEven if vendor syntax differs, the logic is the same: protocol + source + destination + port + action."
+            },
+            {
+              "type": "explain",
+              "text": "Common exam traps:\n- “Allow any → internal” is almost always wrong.\n- Permits should be as narrow as feasible: least privilege for networks."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "ACLs on network devices are primarily used to:",
+              "options": [
+                "Balance load",
+                "Permit or deny traffic/actions based on rules",
+                "Encrypt email",
+                "Provide VPN tunneling"
+              ],
+              "correct_index": 1,
+              "explanation": "ACLs are rule lists that allow/deny network traffic or actions.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "The 'deny by default' approach best supports:",
+              "options": [
+                "Least privilege",
+                "Maximum bandwidth",
+                "DNS caching",
+                "Split tunneling"
+              ],
+              "correct_index": 0,
+              "explanation": "Default-deny means only explicitly permitted traffic is allowed, aligning with least privilege.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch12.m14.p04",
+          "title": "Deception & disruption: honeypots, honeynets, honeyfiles, honeytokens",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Deception tools are “security theater” done right: they waste attacker time and generate signal.\n\n- **Honeypot**: a monitored decoy system that looks vulnerable.\n- **Honeynet**: a network of honeypots for more realism and richer intel.\n- **Honeyfile**: decoy file used for detection (touch it → alert).\n- **Honeytoken**: decoy credential/identifier (use it → alert)."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which deception tool is primarily used for detection by being 'touched'?",
+              "options": [
+                "Honeynet",
+                "Honeyfile",
+                "UTM",
+                "SD-WAN"
+              ],
+              "correct_index": 1,
+              "explanation": "Honeyfiles are decoy files that trigger alerts when accessed.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "A honeynet is best described as:",
+              "options": [
+                "A single decoy server",
+                "A network of decoy systems designed to observe attackers",
+                "A DNS reputation list",
+                "A VPN portal"
+              ],
+              "correct_index": 1,
+              "explanation": "Honeynets are collections of honeypots to increase realism and intelligence collection.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "2.2",
+        "2.4",
+        "3.1",
+        "3.3",
+        "3.4",
+        "4.3",
+        "4.4",
+        "4.6",
+        "5.2",
+        "5.3",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch12.m15",
+      "title": "Secure protocols & common port/protocol replacements",
+      "tag_ids": [
+        "network.connectivity",
+        "tls.ephemeral_pfs",
+        "dns.security_dnssec",
+        "email.security_spf_dkim_dmarc",
+        "monitoring.snmp_traps"
+      ],
+      "pages": [
+        {
+          "id": "ch12.m15.p01",
+          "title": "Secure protocol selection: protocol + port + transport method",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Implementing secure protocols usually involves three decisions:\n- **Protocol selection**: use the secure variant if it exists (HTTPS over HTTP, SSH over Telnet).\n- **Port selection**: secure versions may move ports (80→443), or may use same port with TLS negotiation.\n- **Transport method / versions**: avoid downgrade exposure; use modern versions/ciphers."
+            },
+            {
+              "type": "explain",
+              "text": "Security reality: encryption can reduce visibility for some monitoring tools.\nPlan for telemetry (endpoints, TLS inspection where appropriate, logs)."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Switching from HTTP (80) to HTTPS (443) primarily adds:",
+              "options": [
+                "More bandwidth",
+                "TLS encryption/integrity and server authentication",
+                "DNSSEC signatures",
+                "802.1X support"
+              ],
+              "correct_index": 1,
+              "explanation": "HTTPS wraps HTTP in TLS, protecting confidentiality/integrity and enabling authentication.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch12.m15.p02",
+          "title": "Common insecure → secure replacements (know these cold)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Quick map (study like a spellbook):\n- Telnet → **SSH**\n- HTTP → **HTTPS (TLS)**\n- FTP → **SFTP (SSH)** or **FTPS (TLS)**\n- POP3/IMAP → **POPS/IMAPS**\n- LDAP → **LDAPS**\n- SIP/RTP → **SIPS/SRTP**\n- SNMPv1/v2 → **SNMPv3** (use authPriv for encryption)\n\n\nDNS is weird:\n- **DNSSEC** adds authenticity/integrity, but DNS still often remains unencrypted."
+            }
+          ],
+          "checks": [
+            {
+              "type": "multi_select",
+              "prompt": "Which are secure alternatives to FTP? (Select two.)",
+              "options": [
+                "SFTP",
+                "FTPS",
+                "TFTP",
+                "Telnet"
+              ],
+              "correct_indices": [
+                0,
+                1
+              ],
+              "explanation": "SFTP uses SSH; FTPS uses TLS. TFTP is not secure; Telnet is unrelated and insecure.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "SNMPv3 only encrypts traffic when configured at which security level?",
+              "options": [
+                "noAuthNoPriv",
+                "authNoPriv",
+                "authPriv",
+                "any SNMPv3 mode encrypts"
+              ],
+              "correct_index": 2,
+              "explanation": "Only authPriv provides encryption; SNMPv3 can still be configured insecurely.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "2.2",
+        "2.4",
+        "3.1",
+        "3.3",
+        "3.4",
+        "4.3",
+        "4.4",
+        "4.6",
+        "5.2",
+        "5.3",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch12.m16",
+      "title": "Network attacks and indicators (on-path, DNS, replay, DDoS)",
+      "tag_ids": [
+        "attacks.on_path_ssl_stripping",
+        "attacks.dns",
+        "attacks.credential_replay",
+        "attacks.ddos",
+        "dns.security_dnssec",
+        "dns.filtering"
+      ],
+      "pages": [
+        {
+          "id": "ch12.m16.p01",
+          "title": "On-path attacks and SSL stripping",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**On-path (MitM) attacks** route traffic through an attacker-controlled point.\nIf the attacker can see/alter traffic, they can steal sessions, inject content, or downgrade security.\n\n**SSL stripping** (classic form):\n1) user makes HTTP request\n2) server redirects to HTTPS\n3) attacker interferes and keeps victim on HTTP while talking HTTPS to the server\n\nCountermeasures include HSTS and strict certificate validation expectations."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "SSL stripping primarily aims to:",
+              "options": [
+                "Increase encryption",
+                "Downgrade HTTPS to HTTP so traffic can be read",
+                "Poison DNS cache",
+                "Flood TCP stacks"
+              ],
+              "correct_index": 1,
+              "explanation": "SSL stripping removes TLS protection so the attacker can read/modify traffic.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "A common indicator of an on-path attack is:",
+              "options": [
+                "Changed gateways/routes",
+                "New VLAN tags",
+                "SPF failures only",
+                "SNMP traps always"
+              ],
+              "correct_index": 0,
+              "explanation": "On-path attacks often involve altered routes/gateways or compromised network devices.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch12.m16.p02",
+          "title": "DNS attacks: domain hijacking, cache poisoning, URL redirection",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "DNS attacks let attackers redirect victims without touching the victim’s browser settings:\n- **Domain hijacking**: attacker gains control of domain registration/config.\n- **DNS cache poisoning**: bad DNS records injected into resolver caches.\n- **URL redirection via hosts file**: local override makes DNS irrelevant.\n\n**DNSSEC** helps by validating DNS responses haven’t been tampered with (authenticity/integrity).\nDNS filtering can block known malicious destinations."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which attack changes who controls a domain’s registration/configuration?",
+              "options": [
+                "DNS cache poisoning",
+                "Domain hijacking",
+                "SYN flood",
+                "Credential replay"
+              ],
+              "correct_index": 1,
+              "explanation": "Domain hijacking changes the domain’s authoritative control, redirecting traffic and email.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "DNSSEC most directly helps defend against:",
+              "options": [
+                "Credential replay",
+                "DNS cache poisoning/tampering",
+                "ICMP floods",
+                "Port security violations"
+              ],
+              "correct_index": 1,
+              "explanation": "DNSSEC validates origin/integrity of DNS data, reducing tampering attacks like poisoning.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch12.m16.p03",
+          "title": "Credential replay, malicious code, and DDoS basics",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Credential replay**: attacker captures valid auth artifacts (hash/session) and reuses them.\nModern systems reduce risk with TLS, nonces, session IDs, and short-lived tokens—but replay is still a concern in weak designs.\n\n**Malicious code**: worms/backdoors/etc. can spread or be controlled via networks.\n\n**Network DDoS**:\n- Volume-based (UDP floods, ICMP floods)\n- Protocol-based (SYN floods)\n- **Amplified + reflected** (e.g., spoofed DNS queries causing large replies to victim)"
+            },
+            {
+              "type": "explain",
+              "text": "Practical DDoS prep:\n- Know what your ISP provides (scrubbing, rate limiting)\n- Rate-limit/filters at the edge\n- Detect using flow/IDS/IPS signals and traffic patterns"
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Credential replay attacks typically require the attacker to:",
+              "options": [
+                "Create a new certificate authority",
+                "Capture valid authentication data and resend it",
+                "Modify VLAN tags",
+                "Enable HSTS"
+              ],
+              "correct_index": 1,
+              "explanation": "Replay relies on capturing valid auth artifacts and reusing/delaying them.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Amplified and reflected DDoS attacks often rely on:",
+              "options": [
+                "Protocols where small requests trigger large responses and spoofed source IPs",
+                "Perfect forward secrecy",
+                "802.1X",
+                "S/MIME"
+              ],
+              "correct_index": 0,
+              "explanation": "Amplification uses asymmetry in protocol responses; reflection uses spoofed IPs so a third party hits the victim.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.3",
+                "4.4",
+                "4.6",
+                "5.2",
+                "5.3",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.3",
+            "4.4",
+            "4.6",
+            "5.2",
+            "5.3",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "2.2",
+        "2.4",
+        "3.1",
+        "3.3",
+        "3.4",
+        "4.3",
+        "4.4",
+        "4.6",
+        "5.2",
+        "5.3",
+        "5.7"
+      ]
+    }
+  ],
+  "objectiveIds": [
+    "1.1",
+    "1.5",
+    "2.2",
+    "2.4",
+    "3.1",
+    "3.3",
+    "3.4",
+    "4.3",
+    "4.4",
+    "4.6",
+    "5.2",
+    "5.3",
+    "5.7"
+  ]
+}

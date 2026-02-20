@@ -1,0 +1,2804 @@
+{
+  "schema_version": "secplus_game_pack_v1",
+  "pack_id": "sec701_ch1_pack_v1",
+  "exam": {
+    "vendor": "CompTIA",
+    "name": "Security+",
+    "code": "SY0-701",
+    "max_exam_minutes": 90
+  },
+  "chapter": {
+    "number": 1,
+    "title": "Security Fundamentals: CIA, Controls, Data Protection",
+    "page_range_in_user_pdf": "51-78"
+  },
+  "design_intent": {
+    "mode": [
+      "campaign",
+      "roguelike_practice"
+    ],
+    "pvp_optional": true,
+    "default_pvp_enabled": false,
+    "player_goal": "Master Chapter 1 high-yield exam patterns: CIA/nonrepudiation, control categories vs types, gap analysis, data states, DLP & obfuscation, access restrictions, segmentation vs isolation."
+  },
+  "progression": {
+    "xp_rules": {
+      "base_xp_per_correct": 10,
+      "streak_bonus_per_5": 15,
+      "time_bonus_threshold_seconds": 30,
+      "time_bonus_xp": 5,
+      "mistake_penalty_xp": 0
+    },
+    "mastery_model": {
+      "scale": "0-100",
+      "update": "Mastery += 8 on first correct; +4 on repeat correct; -6 on wrong (floor 0).",
+      "tags_drive_mastery": true
+    },
+    "unlock_rules": [
+      {
+        "unlock": "mission_2",
+        "when": "complete mission_1"
+      },
+      {
+        "unlock": "mission_3",
+        "when": "complete mission_2"
+      },
+      {
+        "unlock": "mission_4",
+        "when": "complete mission_3"
+      },
+      {
+        "unlock": "boss_1",
+        "when": "complete mission_4"
+      }
+    ]
+  },
+  "tags": {
+    "concepts": [
+      "CIA",
+      "CIA_confidentiality",
+      "CIA_integrity",
+      "CIA_availability",
+      "nonrepudiation",
+      "security_controls",
+      "gap_analysis",
+      "control_category_technical",
+      "control_category_operational",
+      "control_category_managerial",
+      "control_category_physical",
+      "control_type_preventive",
+      "control_type_deterrent",
+      "control_type_detective",
+      "control_type_corrective",
+      "control_type_compensating",
+      "control_type_directive",
+      "data_state_at_rest",
+      "data_state_in_transit",
+      "data_state_in_use",
+      "encryption",
+      "dlp",
+      "data_minimization",
+      "hashing",
+      "tokenization",
+      "masking",
+      "deidentification",
+      "access_restrictions_geographic",
+      "access_restrictions_permission",
+      "segmentation",
+      "isolation",
+      "risk_financial",
+      "risk_reputational",
+      "risk_operational",
+      "risk_compliance",
+      "trap_cat_vs_type",
+      "trap_deterrent_vs_preventive",
+      "trap_data_states",
+      "trap_segmentation_vs_isolation",
+      "trap_hashing_as_encryption"
+    ],
+    "difficulty_scale": {
+      "1": "easy recall",
+      "2": "basic apply",
+      "3": "scenario apply",
+      "4": "mixed concept trap",
+      "5": "boss-level synthesis"
+    }
+  },
+  "trap_list": [
+    {
+      "id": "trap_cat_vs_type",
+      "name": "Category vs Type Confusion",
+      "misconception": "Treating 'preventive/detective/...' as categories like 'technical/physical'.",
+      "fix": "Category = mechanism (where/how it acts). Type = intent (what effect).",
+      "drill_question_ids": [
+        "ch1_q006",
+        "ch1_q007",
+        "ch1_q018"
+      ]
+    },
+    {
+      "id": "trap_deterrent_vs_preventive",
+      "name": "Deterrent vs Preventive",
+      "misconception": "Assuming deterrent controls physically stop attacks.",
+      "fix": "Deterrent discourages attempts; preventive blocks/avoids the issue from happening.",
+      "drill_question_ids": [
+        "ch1_q008",
+        "ch1_q009"
+      ]
+    },
+    {
+      "id": "trap_data_states",
+      "name": "Data State Mix-up",
+      "misconception": "Thinking encryption only matters in transit, or ignoring in-use risk.",
+      "fix": "Protect all three states: at rest, in transit, and in use (memory/processing).",
+      "drill_question_ids": [
+        "ch1_q020",
+        "ch1_q021",
+        "ch1_q022"
+      ]
+    },
+    {
+      "id": "trap_segmentation_vs_isolation",
+      "name": "Segmentation vs Isolation",
+      "misconception": "Using the words interchangeably.",
+      "fix": "Segmentation = separate networks with controlled communication. Isolation = cut off from outside networks.",
+      "drill_question_ids": [
+        "ch1_q031",
+        "ch1_q032"
+      ]
+    },
+    {
+      "id": "trap_hashing_as_encryption",
+      "name": "Hashing = Encryption? Nope",
+      "misconception": "Thinking hashing is reversible like encryption.",
+      "fix": "Hashing is one-way; it can still be attacked via guessing/brute force, so use carefully.",
+      "drill_question_ids": [
+        "ch1_q027",
+        "ch1_q028"
+      ]
+    }
+  ],
+  "missions": [
+    {
+      "id": "mission_1",
+      "name": "CIA Calibration",
+      "goal": "Classify incidents and pick the primary objective(s) at risk (Confidentiality, Integrity, Availability, Nonrepudiation).",
+      "mechanics": {
+        "minigame": "fast_classify",
+        "rounds": 3,
+        "questions_per_round": 6,
+        "time_limit_seconds_per_question": 45,
+        "fail_condition": "<70% accuracy"
+      },
+      "question_ids": [
+        "ch1_q001",
+        "ch1_q002",
+        "ch1_q003",
+        "ch1_q004",
+        "ch1_q005",
+        "ch1_q010",
+        "ch1_q011",
+        "ch1_q012",
+        "ch1_q013",
+        "ch1_q014",
+        "ch1_q015",
+        "ch1_q016",
+        "ch1_q017"
+      ],
+      "rewards": {
+        "xp": 120,
+        "loot": [
+          "badge_cia_scout"
+        ],
+        "unlock": "mission_2"
+      }
+    },
+    {
+      "id": "mission_2",
+      "name": "Control Arsenal: Category vs Type",
+      "goal": "Given a control, label its category (technical/operational/managerial/physical) and its type (preventive/deterrent/detective/corrective/compensating/directive).",
+      "mechanics": {
+        "minigame": "dual_label",
+        "combo_bonus": "+3 xp per correct dual-label streak",
+        "questions_per_run": 14,
+        "time_limit_seconds_per_question": 60,
+        "fail_condition": "<65% accuracy"
+      },
+      "question_ids": [
+        "ch1_q006",
+        "ch1_q007",
+        "ch1_q008",
+        "ch1_q009",
+        "ch1_q018",
+        "ch1_q019",
+        "ch1_q023",
+        "ch1_q024",
+        "ch1_q025",
+        "ch1_q026",
+        "ch1_q029",
+        "ch1_q030"
+      ],
+      "rewards": {
+        "xp": 160,
+        "loot": [
+          "card_pack_controls"
+        ],
+        "unlock": "mission_3"
+      }
+    },
+    {
+      "id": "mission_3",
+      "name": "Data States Gauntlet",
+      "goal": "Spot which data state is being attacked (at rest / in transit / in use) and pick a fitting protection approach.",
+      "mechanics": {
+        "minigame": "state_then_shield",
+        "questions_per_run": 12,
+        "time_limit_seconds_per_question": 70,
+        "fail_condition": "<70% accuracy"
+      },
+      "question_ids": [
+        "ch1_q020",
+        "ch1_q021",
+        "ch1_q022",
+        "ch1_q027",
+        "ch1_q028",
+        "ch1_q033",
+        "ch1_q034",
+        "ch1_q035",
+        "ch1_q036"
+      ],
+      "rewards": {
+        "xp": 170,
+        "loot": [
+          "badge_data_guardian"
+        ],
+        "unlock": "mission_4"
+      }
+    },
+    {
+      "id": "mission_4",
+      "name": "Stop the Exfil: DLP + Minimization",
+      "goal": "Defend against data exfiltration using DLP, minimization, obfuscation, and access restrictions.",
+      "mechanics": {
+        "minigame": "heist_defense",
+        "waves": 3,
+        "questions_per_wave": 5,
+        "wave_modifiers": [
+          "unencrypted_outbound",
+          "insider_copy",
+          "geo_anomaly"
+        ],
+        "time_limit_seconds_per_question": 75,
+        "fail_condition": "lose 3 'data' hearts"
+      },
+      "question_ids": [
+        "ch1_q037",
+        "ch1_q038",
+        "ch1_q039",
+        "ch1_q040",
+        "ch1_q041",
+        "ch1_q042",
+        "ch1_q043",
+        "ch1_q044",
+        "ch1_q045",
+        "ch1_q046"
+      ],
+      "rewards": {
+        "xp": 200,
+        "loot": [
+          "card_pack_dlp"
+        ],
+        "unlock": "boss_1"
+      }
+    }
+  ],
+  "boss": {
+    "id": "boss_1",
+    "name": "Boss Fight: The Gap Analysis Hydra",
+    "premise": "You inherit a messy environment: legacy systems, unclear objectives, and a regulator breathing down your neck. Kill the Hydra by finding the gaps and selecting controls that match both category and type.",
+    "mechanics": {
+      "format": "timed_synthesis",
+      "total_questions": 15,
+      "time_limit_seconds_total": 900,
+      "lives": 2,
+      "hydra_heads": [
+        "CIA_head",
+        "Controls_head",
+        "DataProtection_head",
+        "Access_head",
+        "RiskImpact_head"
+      ],
+      "boss_modifiers": [
+        "budget_cut",
+        "legacy_os_exception",
+        "remote_work_surge"
+      ]
+    },
+    "question_ids": [
+      "ch1_q047",
+      "ch1_q048",
+      "ch1_q049",
+      "ch1_q050",
+      "ch1_q051",
+      "ch1_q052",
+      "ch1_q053",
+      "ch1_q054",
+      "ch1_q055",
+      "ch1_q056",
+      "ch1_q057",
+      "ch1_q058",
+      "ch1_q059",
+      "ch1_q060",
+      "ch1_q061"
+    ],
+    "rewards": {
+      "xp": 400,
+      "loot": [
+        "title_ch1_cleared",
+        "unlock_roguelike_runset_ch1"
+      ]
+    }
+  },
+  "roguelike": {
+    "runset_id": "roguelike_runset_ch1",
+    "run_minutes_target": 18,
+    "structure": {
+      "acts": 3,
+      "encounters_per_act": 4,
+      "rest_sites_per_act": 1,
+      "boss_per_run": "boss_1_variant"
+    },
+    "cards": {
+      "threat_cards": [
+        {
+          "id": "threat_eavesdrop",
+          "name": "Eavesdropper",
+          "tags": [
+            "data_state_in_transit",
+            "CIA_confidentiality"
+          ]
+        },
+        {
+          "id": "threat_memory_scrape",
+          "name": "Memory Scraper",
+          "tags": [
+            "data_state_in_use",
+            "CIA_confidentiality"
+          ]
+        },
+        {
+          "id": "threat_db_theft",
+          "name": "Data Store Theft",
+          "tags": [
+            "data_state_at_rest",
+            "CIA_confidentiality"
+          ]
+        },
+        {
+          "id": "threat_ransomware",
+          "name": "Ransomware",
+          "tags": [
+            "CIA_availability",
+            "control_type_corrective"
+          ]
+        },
+        {
+          "id": "threat_policy_drift",
+          "name": "Policy Drift",
+          "tags": [
+            "control_type_directive",
+            "control_category_managerial"
+          ]
+        }
+      ],
+      "constraint_cards": [
+        {
+          "id": "constraint_budget",
+          "name": "Budget Cut",
+          "effect": "Reduce max control picks by 1 this act."
+        },
+        {
+          "id": "constraint_legacy_os",
+          "name": "Legacy OS Exception",
+          "effect": "Force a compensating-control choice encounter."
+        },
+        {
+          "id": "constraint_geo",
+          "name": "Geo-Restricted Workforce",
+          "effect": "Inject one geographic restriction question."
+        }
+      ],
+      "control_cards": [
+        {
+          "id": "control_encryption",
+          "name": "Encryption",
+          "tags": [
+            "control_category_technical",
+            "control_type_preventive",
+            "encryption"
+          ]
+        },
+        {
+          "id": "control_ids",
+          "name": "IDS",
+          "tags": [
+            "control_category_technical",
+            "control_type_detective"
+          ]
+        },
+        {
+          "id": "control_backups",
+          "name": "Backups & Restore Playbook",
+          "tags": [
+            "control_category_operational",
+            "control_type_corrective"
+          ]
+        },
+        {
+          "id": "control_training",
+          "name": "Policy + Training",
+          "tags": [
+            "control_category_managerial",
+            "control_type_directive"
+          ]
+        },
+        {
+          "id": "control_isolation",
+          "name": "Isolated Network Segment",
+          "tags": [
+            "segmentation",
+            "isolation",
+            "control_type_compensating"
+          ]
+        }
+      ]
+    },
+    "question_pool_ids": "use_all_questions_in_pack"
+  },
+  "pvp": {
+    "enabled": false,
+    "modes": [
+      {
+        "id": "duel_quickfire",
+        "name": "Quickfire Duel",
+        "description": "Both players answer the same 10 questions. Faster correct answers generate 'attack packets' that add 5s time tax to the opponent's next question.",
+        "rules": {
+          "questions": 10,
+          "time_per_question_seconds": 35,
+          "attack_on_correct_under_seconds": 20,
+          "time_tax_seconds": 5
+        }
+      }
+    ],
+    "fairness": {
+      "matchmaking": "match by mastery band (+/- 10 mastery points)",
+      "anti_cheat": "server timestamps + random question order"
+    }
+  },
+  "question_bank": [
+    {
+      "id": "ch1_q001",
+      "type": "mcq",
+      "stem": "A customer database is copied by an unauthorized employee and posted online. Which core objective was primarily violated?",
+      "options": {
+        "A": "Integrity",
+        "B": "Confidentiality",
+        "C": "Availability",
+        "D": "Nonrepudiation"
+      },
+      "answer": "B",
+      "explanation": "Unauthorized disclosure of sensitive data is a confidentiality failure.",
+      "tags": [
+        "CIA",
+        "CIA_confidentiality"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "Unauthorized disclosure of sensitive data is a confidentiality failure.",
+      "misconceptionTags": [
+        "cia_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q002",
+      "type": "mcq",
+      "stem": "A malicious insider changes payroll amounts without permission. Which objective is primarily at risk?",
+      "options": {
+        "A": "Integrity",
+        "B": "Availability",
+        "C": "Confidentiality",
+        "D": "Deterrence"
+      },
+      "answer": "A",
+      "explanation": "Unauthorized modification is an integrity problem.",
+      "tags": [
+        "CIA",
+        "CIA_integrity"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "Unauthorized modification is an integrity problem.",
+      "misconceptionTags": [
+        "cia_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q003",
+      "type": "mcq",
+      "stem": "A DDoS attack makes your public website unreachable for hours. Which objective is primarily affected?",
+      "options": {
+        "A": "Confidentiality",
+        "B": "Integrity",
+        "C": "Availability",
+        "D": "Nonrepudiation"
+      },
+      "answer": "C",
+      "explanation": "Service not being reachable is an availability impact.",
+      "tags": [
+        "CIA",
+        "CIA_availability"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "2.2"
+      ],
+      "rationaleCorrect": "Service not being reachable is an availability impact.",
+      "misconceptionTags": [
+        "cia_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q004",
+      "type": "mcq",
+      "stem": "You need proof that a vendor actually sent an approval message and can’t later deny it. Which security property do you need most?",
+      "options": {
+        "A": "Confidentiality",
+        "B": "Nonrepudiation",
+        "C": "Availability",
+        "D": "Integrity"
+      },
+      "answer": "B",
+      "explanation": "Nonrepudiation prevents a party from denying an action; digital signatures are a classic mechanism.",
+      "tags": [
+        "nonrepudiation",
+        "CIA"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Nonrepudiation prevents a party from denying an action; digital signatures are a classic mechanism.",
+      "misconceptionTags": [
+        "nonrepudiation_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q005",
+      "type": "multi_select",
+      "stem": "Which two items are MOST directly related to nonrepudiation? (Choose two.)",
+      "options": {
+        "A": "Digital signature",
+        "B": "Firewall rule",
+        "C": "Hashing a file for integrity checking",
+        "D": "Signed message receipts/logs",
+        "E": "Disk encryption"
+      },
+      "answers": [
+        "A",
+        "D"
+      ],
+      "explanation": "Nonrepudiation is about preventing denial of an action. Digital signatures and verifiable signed receipts/logs help provide that.",
+      "tags": [
+        "nonrepudiation",
+        "CIA"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "2.1"
+      ],
+      "rationaleCorrect": "Nonrepudiation is about preventing denial of an action.",
+      "misconceptionTags": [
+        "nonrepudiation_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "E": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q006",
+      "type": "mcq",
+      "stem": "Which control category focuses on enforcing security in the digital/IT space (e.g., encryption, firewall rules)?",
+      "options": {
+        "A": "Physical",
+        "B": "Technical",
+        "C": "Managerial",
+        "D": "Operational"
+      },
+      "answer": "B",
+      "explanation": "Technical controls operate in the digital space (firewalls, ACLs, encryption).",
+      "tags": [
+        "control_category_technical",
+        "security_controls"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Technical controls operate in the digital space (firewalls, ACLs, encryption).",
+      "misconceptionTags": [
+        "control_category_technical_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q007",
+      "type": "mcq",
+      "stem": "User access reviews and log monitoring are best classified as what control category?",
+      "options": {
+        "A": "Operational",
+        "B": "Managerial",
+        "C": "Technical",
+        "D": "Physical"
+      },
+      "answer": "A",
+      "explanation": "They are security processes for managing tech securely: operational controls.",
+      "tags": [
+        "control_category_operational",
+        "security_controls",
+        "trap_cat_vs_type"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "They are security processes for managing tech securely: operational controls.",
+      "misconceptionTags": [
+        "control_category_operational_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q008",
+      "type": "mcq",
+      "stem": "A fence topped with barbed wire is installed to discourage trespassers. What control TYPE best fits?",
+      "options": {
+        "A": "Detective",
+        "B": "Corrective",
+        "C": "Deterrent",
+        "D": "Directive"
+      },
+      "answer": "C",
+      "explanation": "Deterrent controls try to prevent attempts by discouraging attackers.",
+      "tags": [
+        "control_type_deterrent",
+        "control_category_physical",
+        "trap_deterrent_vs_preventive"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Deterrent controls try to prevent attempts by discouraging attackers.",
+      "misconceptionTags": [
+        "control_type_deterrent_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q009",
+      "type": "mcq",
+      "stem": "Full-disk encryption is primarily what control TYPE?",
+      "options": {
+        "A": "Preventive",
+        "B": "Corrective",
+        "C": "Detective",
+        "D": "Directive"
+      },
+      "answer": "A",
+      "explanation": "It aims to stop disclosure by making stolen data unreadable: preventive.",
+      "tags": [
+        "control_type_preventive",
+        "encryption",
+        "trap_deterrent_vs_preventive"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "It aims to stop disclosure by making stolen data unreadable: preventive.",
+      "misconceptionTags": [
+        "control_type_preventive_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q010",
+      "type": "mcq",
+      "stem": "A system that alerts you when suspicious activity occurs AFTER it happens is which control TYPE?",
+      "options": {
+        "A": "Preventive",
+        "B": "Deterrent",
+        "C": "Detective",
+        "D": "Compensating"
+      },
+      "answer": "C",
+      "explanation": "Detective controls identify events that already occurred.",
+      "tags": [
+        "control_type_detective"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Detective controls identify events that already occurred.",
+      "misconceptionTags": [
+        "control_type_detective_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q011",
+      "type": "mcq",
+      "stem": "Restoring from backups after a ransomware incident is what control TYPE?",
+      "options": {
+        "A": "Preventive",
+        "B": "Corrective",
+        "C": "Directive",
+        "D": "Deterrent"
+      },
+      "answer": "B",
+      "explanation": "Corrective controls remediate issues after they occur; backup restores are the classic example.",
+      "tags": [
+        "control_type_corrective"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Corrective controls remediate issues after they occur; backup restores are the classic example.",
+      "misconceptionTags": [
+        "control_type_corrective_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q012",
+      "type": "mcq",
+      "stem": "Written policies and procedures that tell staff what they must do are what control TYPE?",
+      "options": {
+        "A": "Detective",
+        "B": "Directive",
+        "C": "Compensating",
+        "D": "Preventive"
+      },
+      "answer": "B",
+      "explanation": "Directive controls guide behavior; policies/procedures are directive.",
+      "tags": [
+        "control_type_directive"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Directive controls guide behavior; policies/procedures are directive.",
+      "misconceptionTags": [
+        "control_type_directive_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q013",
+      "type": "mcq",
+      "stem": "Periodic risk assessments and security planning exercises are which control category?",
+      "options": {
+        "A": "Operational",
+        "B": "Managerial",
+        "C": "Technical",
+        "D": "Physical"
+      },
+      "answer": "B",
+      "explanation": "These are risk-focused mechanisms: managerial controls.",
+      "tags": [
+        "control_category_managerial"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "These are risk-focused mechanisms: managerial controls.",
+      "misconceptionTags": [
+        "control_category_managerial_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q014",
+      "type": "mcq",
+      "stem": "Burglar alarms and perimeter lighting are which control category?",
+      "options": {
+        "A": "Technical",
+        "B": "Physical",
+        "C": "Managerial",
+        "D": "Operational"
+      },
+      "answer": "B",
+      "explanation": "They are physical-world controls.",
+      "tags": [
+        "control_category_physical"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "1.5"
+      ],
+      "rationaleCorrect": "They are physical-world controls. It aligns with the intended control outcome and avoids the common trap choices in this question.",
+      "misconceptionTags": [
+        "control_category_physical_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q015",
+      "type": "mcq",
+      "stem": "A control designed as an alternative because you cannot meet a requirement (e.g., legacy OS isolated) is which TYPE?",
+      "options": {
+        "A": "Compensating",
+        "B": "Directive",
+        "C": "Detective",
+        "D": "Deterrent"
+      },
+      "answer": "A",
+      "explanation": "Compensating controls mitigate risk when exceptions are required.",
+      "tags": [
+        "control_type_compensating"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Compensating controls mitigate risk when exceptions are required.",
+      "misconceptionTags": [
+        "control_type_compensating_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q016",
+      "type": "mcq",
+      "stem": "A firewall rule is BEST described as which combination?",
+      "options": {
+        "A": "Operational + Detective",
+        "B": "Technical + Preventive",
+        "C": "Managerial + Directive",
+        "D": "Physical + Deterrent"
+      },
+      "answer": "B",
+      "explanation": "A firewall rule is a digital enforcement mechanism (technical) intended to block unwanted traffic (preventive).",
+      "tags": [
+        "control_category_technical",
+        "control_type_preventive"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "1.5"
+      ],
+      "rationaleCorrect": "A firewall rule is a digital enforcement mechanism (technical) intended to block unwanted traffic (preventive).",
+      "misconceptionTags": [
+        "control_category_technical_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q017",
+      "type": "mcq",
+      "stem": "Biometric door locks on a datacenter are which control category?",
+      "options": {
+        "A": "Physical",
+        "B": "Technical",
+        "C": "Operational",
+        "D": "Managerial"
+      },
+      "answer": "A",
+      "explanation": "They affect physical access, even if they use electronic tech.",
+      "tags": [
+        "control_category_physical"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "1.5"
+      ],
+      "rationaleCorrect": "They affect physical access, even if they use electronic tech.",
+      "misconceptionTags": [
+        "control_category_physical_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q018",
+      "type": "mcq",
+      "stem": "In a gap analysis, what is the cybersecurity professional MOST directly trying to find?",
+      "options": {
+        "A": "New threats for the threat model",
+        "B": "Where existing controls do not meet control objectives",
+        "C": "Which firewall vendor is cheapest",
+        "D": "Which employees need training"
+      },
+      "answer": "B",
+      "explanation": "Gap analysis compares objectives vs implemented controls to find shortfalls (gaps) that become risks.",
+      "tags": [
+        "gap_analysis",
+        "security_controls",
+        "trap_cat_vs_type"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Gap analysis compares objectives vs implemented controls to find shortfalls (gaps) that become risks.",
+      "misconceptionTags": [
+        "gap_analysis_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q019",
+      "type": "mcq",
+      "stem": "When a gap is found during a gap analysis, it should MOST reasonably be treated as:",
+      "options": {
+        "A": "An acceptable condition that needs no action",
+        "B": "A potential risk to remediate as resources permit",
+        "C": "Proof the organization is compliant",
+        "D": "A detective control"
+      },
+      "answer": "B",
+      "explanation": "Identified gaps become potential risks and should be remediated as time/resources allow.",
+      "tags": [
+        "gap_analysis",
+        "risk_operational"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "Identified gaps become potential risks and should be remediated as time/resources allow.",
+      "misconceptionTags": [
+        "gap_analysis_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q020",
+      "type": "mcq",
+      "stem": "Someone on a public Wi-Fi network captures unencrypted customer data moving to your server. Which data state was attacked?",
+      "options": {
+        "A": "Data at rest",
+        "B": "Data in transit",
+        "C": "Data in use",
+        "D": "Data in archive"
+      },
+      "answer": "B",
+      "explanation": "Eavesdropping on network traffic targets data in transit.",
+      "tags": [
+        "data_state_in_transit",
+        "trap_data_states"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Eavesdropping on network traffic targets data in transit.",
+      "misconceptionTags": [
+        "data_state_in_transit_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q021",
+      "type": "mcq",
+      "stem": "A laptop with an unencrypted drive is stolen from an employee’s car. Which data state is primarily at risk?",
+      "options": {
+        "A": "Data at rest",
+        "B": "Data in transit",
+        "C": "Data in use",
+        "D": "Data in cache only"
+      },
+      "answer": "A",
+      "explanation": "Stored data on drives is data at rest; theft can expose it.",
+      "tags": [
+        "data_state_at_rest",
+        "trap_data_states"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Stored data on drives is data at rest; theft can expose it.",
+      "misconceptionTags": [
+        "data_state_at_rest_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q022",
+      "type": "mcq",
+      "stem": "An attacker gains admin on a server and reads sensitive values directly from RAM while an app processes them. Which state is being targeted?",
+      "options": {
+        "A": "Data at rest",
+        "B": "Data in transit",
+        "C": "Data in use",
+        "D": "Data disposal"
+      },
+      "answer": "C",
+      "explanation": "Data in memory during processing is data in use.",
+      "tags": [
+        "data_state_in_use",
+        "trap_data_states"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "Data in memory during processing is data in use.",
+      "misconceptionTags": [
+        "data_state_in_use_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q023",
+      "type": "mcq",
+      "stem": "A DLP solution sitting on the network edge flags outbound emails containing credit card patterns. This is an example of:",
+      "options": {
+        "A": "Host-based DLP",
+        "B": "Network-based DLP",
+        "C": "Disk encryption",
+        "D": "Tokenization"
+      },
+      "answer": "B",
+      "explanation": "Network-level DLP inspects transmissions leaving the network for sensitive patterns.",
+      "tags": [
+        "dlp",
+        "data_state_in_transit"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "Network-level DLP inspects transmissions leaving the network for sensitive patterns.",
+      "misconceptionTags": [
+        "dlp_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q024",
+      "type": "mcq",
+      "stem": "A DLP agent installed on laptops scans files for sensitive information and blocks copying to USB. This is:",
+      "options": {
+        "A": "Network-based DLP",
+        "B": "Host-based DLP",
+        "C": "Geographic restriction",
+        "D": "Isolation"
+      },
+      "answer": "B",
+      "explanation": "Host-level DLP uses agents on endpoints to search for sensitive data and enforce handling rules.",
+      "tags": [
+        "dlp",
+        "data_state_at_rest"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "Host-level DLP uses agents on endpoints to search for sensitive data and enforce handling rules.",
+      "misconceptionTags": [
+        "dlp_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q025",
+      "type": "mcq",
+      "stem": "Which technique is MOST associated with DLP systems identifying sensitive info automatically?",
+      "options": {
+        "A": "Pattern matching and/or digital watermarking",
+        "B": "Role-based access control only",
+        "C": "Air gapping",
+        "D": "Threat hunting"
+      },
+      "answer": "A",
+      "explanation": "DLP detection is commonly pattern matching and/or watermarking.",
+      "tags": [
+        "dlp"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "2.1"
+      ],
+      "rationaleCorrect": "DLP detection is commonly pattern matching and/or watermarking.",
+      "misconceptionTags": [
+        "dlp_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q026",
+      "type": "mcq",
+      "stem": "Which statement BEST describes data minimization?",
+      "options": {
+        "A": "Encrypt everything with AES",
+        "B": "Keep only the sensitive data you truly need",
+        "C": "Hash all data fields",
+        "D": "Store backups offsite"
+      },
+      "answer": "B",
+      "explanation": "Minimization reduces risk by reducing how much sensitive data you keep.",
+      "tags": [
+        "data_minimization"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "Minimization reduces risk by reducing how much sensitive data you keep.",
+      "misconceptionTags": [
+        "data_minimization_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q027",
+      "type": "mcq",
+      "stem": "Replacing a real credit card number with a random substitute token stored in a separate vault is called:",
+      "options": {
+        "A": "Masking",
+        "B": "Tokenization",
+        "C": "Hashing",
+        "D": "Encryption-at-rest"
+      },
+      "answer": "B",
+      "explanation": "Tokenization swaps sensitive values for tokens; the mapping is kept separately.",
+      "tags": [
+        "tokenization",
+        "deidentification",
+        "trap_hashing_as_encryption"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "Tokenization swaps sensitive values for tokens; the mapping is kept separately.",
+      "misconceptionTags": [
+        "tokenization_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q028",
+      "type": "mcq",
+      "stem": "Showing only the last 4 digits of a card number on receipts is an example of:",
+      "options": {
+        "A": "Masking",
+        "B": "Tokenization",
+        "C": "Hashing",
+        "D": "Segmentation"
+      },
+      "answer": "A",
+      "explanation": "Masking hides part of the sensitive field while keeping some visible.",
+      "tags": [
+        "masking",
+        "deidentification"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "Masking hides part of the sensitive field while keeping some visible.",
+      "misconceptionTags": [
+        "masking_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q029",
+      "type": "mcq",
+      "stem": "Which control combination BEST matches 'policies requiring encryption + enforcement of encryption on endpoints'?",
+      "options": {
+        "A": "Managerial+Preventive only",
+        "B": "Directive+Physical only",
+        "C": "Directive + Technical preventive",
+        "D": "Operational+Deterrent"
+      },
+      "answer": "C",
+      "explanation": "Policies are directive; encryption enforcement is technical and preventive.",
+      "tags": [
+        "control_type_directive",
+        "control_category_technical",
+        "control_type_preventive"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "1.5"
+      ],
+      "rationaleCorrect": "Policies are directive; encryption enforcement is technical and preventive.",
+      "misconceptionTags": [
+        "control_type_directive_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q030",
+      "type": "mcq",
+      "stem": "Log monitoring is MOST commonly classified as which pairing?",
+      "options": {
+        "A": "Technical + Preventive",
+        "B": "Operational + Detective",
+        "C": "Physical + Corrective",
+        "D": "Managerial + Compensating"
+      },
+      "answer": "B",
+      "explanation": "Log monitoring is an operational process that detects suspicious events.",
+      "tags": [
+        "control_category_operational",
+        "control_type_detective"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "4.4"
+      ],
+      "rationaleCorrect": "Log monitoring is an operational process that detects suspicious events.",
+      "misconceptionTags": [
+        "control_category_operational_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q031",
+      "type": "mcq",
+      "stem": "Allowing database access only from users located inside Bangladesh is an example of:",
+      "options": {
+        "A": "Permission restriction",
+        "B": "Geographic restriction",
+        "C": "Isolation",
+        "D": "Masking"
+      },
+      "answer": "B",
+      "explanation": "Geographic restrictions limit access by physical location.",
+      "tags": [
+        "access_restrictions_geographic",
+        "trap_segmentation_vs_isolation"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "Geographic restrictions limit access by physical location.",
+      "misconceptionTags": [
+        "access_restrictions_geographic_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q032",
+      "type": "mcq",
+      "stem": "Restricting payroll data access only to HR staff with authorization is an example of:",
+      "options": {
+        "A": "Geographic restriction",
+        "B": "Permission restriction",
+        "C": "Isolation",
+        "D": "Tokenization"
+      },
+      "answer": "B",
+      "explanation": "Permission restrictions limit access based on role/authorization.",
+      "tags": [
+        "access_restrictions_permission"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "Permission restrictions limit access based on role/authorization.",
+      "misconceptionTags": [
+        "access_restrictions_permission_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q033",
+      "type": "mcq",
+      "stem": "Placing sensitive systems on separate networks that can communicate only through strict rules is called:",
+      "options": {
+        "A": "Isolation",
+        "B": "Segmentation",
+        "C": "Masking",
+        "D": "Corrective control"
+      },
+      "answer": "B",
+      "explanation": "Segmentation separates networks but still allows controlled communication.",
+      "tags": [
+        "segmentation",
+        "trap_segmentation_vs_isolation"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "Segmentation separates networks but still allows controlled communication.",
+      "misconceptionTags": [
+        "segmentation_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q034",
+      "type": "mcq",
+      "stem": "Completely cutting a system off from outside networks is best described as:",
+      "options": {
+        "A": "Segmentation",
+        "B": "Isolation",
+        "C": "Geographic restriction",
+        "D": "Directive control"
+      },
+      "answer": "B",
+      "explanation": "Isolation fully cuts off outside network access.",
+      "tags": [
+        "isolation",
+        "trap_segmentation_vs_isolation"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "Isolation fully cuts off outside network access.",
+      "misconceptionTags": [
+        "isolation_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q035",
+      "type": "mcq",
+      "stem": "You must run a legacy OS for a critical app. You place it on a network with no access to other systems. This is primarily an example of:",
+      "options": {
+        "A": "Preventive control",
+        "B": "Compensating control",
+        "C": "Directive control",
+        "D": "Deterrent control"
+      },
+      "answer": "B",
+      "explanation": "Isolation used to offset the risk of an exception is a compensating strategy.",
+      "tags": [
+        "control_type_compensating",
+        "isolation"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "Isolation used to offset the risk of an exception is a compensating strategy.",
+      "misconceptionTags": [
+        "control_type_compensating_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q036",
+      "type": "mcq",
+      "stem": "Which of the following MOST directly reduces breach impact by reducing stored sensitive data volume?",
+      "options": {
+        "A": "Data minimization",
+        "B": "Network DLP",
+        "C": "IDS",
+        "D": "Perimeter lighting"
+      },
+      "answer": "A",
+      "explanation": "Keeping less sensitive data reduces what can be stolen.",
+      "tags": [
+        "data_minimization"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "Keeping less sensitive data reduces what can be stolen.",
+      "misconceptionTags": [
+        "data_minimization_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q037",
+      "type": "mcq",
+      "stem": "After a breach, the company spends money on incident response and customer notifications. This is primarily what kind of impact?",
+      "options": {
+        "A": "Direct financial impact",
+        "B": "Only reputational impact",
+        "C": "Only operational impact",
+        "D": "Only compliance impact"
+      },
+      "answer": "A",
+      "explanation": "Immediate response and notification costs are direct financial impacts.",
+      "tags": [
+        "risk_financial"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "Immediate response and notification costs are direct financial impacts.",
+      "misconceptionTags": [
+        "risk_financial_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q038",
+      "type": "mcq",
+      "stem": "Losing customers over months because the breach hurt trust is best classified as:",
+      "options": {
+        "A": "Operational damage only",
+        "B": "Reputational damage leading to long-term financial impact",
+        "C": "Only compliance damage",
+        "D": "Only integrity damage"
+      },
+      "answer": "B",
+      "explanation": "Reputational harm often drives longer-term financial losses.",
+      "tags": [
+        "risk_reputational",
+        "risk_financial"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Reputational harm often drives longer-term financial losses.",
+      "misconceptionTags": [
+        "risk_reputational_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q039",
+      "type": "mcq",
+      "stem": "A breach results in regulatory fines for violating a healthcare privacy law (e.g., HIPAA). This is an example of:",
+      "options": {
+        "A": "Operational risk",
+        "B": "Compliance risk",
+        "C": "Deterrent control",
+        "D": "Nonrepudiation"
+      },
+      "answer": "B",
+      "explanation": "Regulatory sanctions/fines are compliance risk consequences.",
+      "tags": [
+        "risk_compliance"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Regulatory sanctions/fines are compliance risk consequences.",
+      "misconceptionTags": [
+        "risk_compliance_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q040",
+      "type": "mcq",
+      "stem": "Which statement is MOST accurate about risk categories in real incidents?",
+      "options": {
+        "A": "Every risk fits into exactly one category",
+        "B": "Risks often cross categories (financial + reputational + compliance, etc.)",
+        "C": "Only technical risks matter",
+        "D": "Compliance risk never overlaps with financial"
+      },
+      "answer": "B",
+      "explanation": "Real incidents commonly have cross-category impacts.",
+      "tags": [
+        "risk_financial",
+        "risk_reputational",
+        "risk_compliance",
+        "risk_operational"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Real incidents commonly have cross-category impacts.",
+      "misconceptionTags": [
+        "risk_financial_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q041",
+      "type": "scenario_mcq",
+      "stem": "Your company suspects staff are emailing unencrypted customer PII outside the organization. You want to block the outbound messages at the gateway.",
+      "options": {
+        "A": "Network DLP inspecting outbound content",
+        "B": "Physical fence around the office",
+        "C": "Corrective control: restore backups",
+        "D": "Masking: show last 4 digits in emails"
+      },
+      "answer": "A",
+      "explanation": "You want to stop exfiltration in transit at the network boundary: network-level DLP fits.",
+      "tags": [
+        "dlp",
+        "data_state_in_transit"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "1.5"
+      ],
+      "rationaleCorrect": "You want to stop exfiltration in transit at the network boundary: network-level DLP fits.",
+      "misconceptionTags": [
+        "dlp_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q042",
+      "type": "scenario_mcq",
+      "stem": "A developer proposes storing full SSNs forever “just in case.” You want the single best risk-reduction move.",
+      "options": {
+        "A": "Add more IDS sensors",
+        "B": "Data minimization (stop collecting/retaining unnecessary SSNs)",
+        "C": "Perimeter lighting",
+        "D": "Deterrent warning signs"
+      },
+      "answer": "B",
+      "explanation": "Keeping unnecessary sensitive data increases the blast radius. Minimization is the cleanest win.",
+      "tags": [
+        "data_minimization"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "Keeping unnecessary sensitive data increases the blast radius.",
+      "misconceptionTags": [
+        "data_minimization_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q043",
+      "type": "scenario_mcq",
+      "stem": "A finance database must be accessible only to a small internal team, and you also want to reduce exposure from other network segments.",
+      "options": {
+        "A": "Segmentation + permission restrictions",
+        "B": "Isolation only",
+        "C": "Deterrent controls only",
+        "D": "Corrective controls only"
+      },
+      "answer": "A",
+      "explanation": "Permission restrictions control who; segmentation controls where/from which network.",
+      "tags": [
+        "segmentation",
+        "access_restrictions_permission"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Permission restrictions control who; segmentation controls where/from which network.",
+      "misconceptionTags": [
+        "segmentation_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q044",
+      "type": "scenario_mcq",
+      "stem": "A team wants to enforce 'only allow logins from EU locations' for a SaaS admin panel.",
+      "options": {
+        "A": "Permission restriction",
+        "B": "Geographic restriction",
+        "C": "Tokenization",
+        "D": "Corrective control"
+      },
+      "answer": "B",
+      "explanation": "This is location-based access restriction.",
+      "tags": [
+        "access_restrictions_geographic"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "This is location-based access restriction.",
+      "misconceptionTags": [
+        "access_restrictions_geographic_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q045",
+      "type": "scenario_mcq",
+      "stem": "A SOC team deploys IDS sensors and sets up alerting and daily log review. The best classification is:",
+      "options": {
+        "A": "Technical + Detective, plus Operational activities",
+        "B": "Physical + Preventive",
+        "C": "Managerial + Corrective",
+        "D": "Directive + Compensating"
+      },
+      "answer": "A",
+      "explanation": "IDS is a technical detective control; log review is an operational process.",
+      "tags": [
+        "control_category_technical",
+        "control_type_detective",
+        "control_category_operational"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "1.5"
+      ],
+      "rationaleCorrect": "IDS is a technical detective control; log review is an operational process.",
+      "misconceptionTags": [
+        "control_category_technical_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q046",
+      "type": "scenario_mcq",
+      "stem": "You discover the organization’s 'encrypt laptops' objective exists, but there’s no enforcement and many laptops remain unencrypted. What is this situation in the language of the chapter?",
+      "options": {
+        "A": "A gap discovered during gap analysis",
+        "B": "A compensating control",
+        "C": "A deterrent control",
+        "D": "Nonrepudiation"
+      },
+      "answer": "A",
+      "explanation": "Objective exists, controls don’t meet it → a gap.",
+      "tags": [
+        "gap_analysis",
+        "encryption"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Objective exists, controls don’t meet it → a gap.",
+      "misconceptionTags": [
+        "gap_analysis_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q047",
+      "type": "scenario_mcq",
+      "stem": "A hospital stores patient records on shared network drives. Staff sometimes email records to personal accounts. Regulators require protection. What is the strongest first 'gap analysis' move?",
+      "options": {
+        "A": "Buy a new firewall vendor",
+        "B": "Define control objectives for confidentiality/integrity/availability and compare existing controls to them",
+        "C": "Turn off email",
+        "D": "Hire more developers"
+      },
+      "answer": "B",
+      "explanation": "Gap analysis starts by reviewing objectives, then evaluating controls against those objectives.",
+      "tags": [
+        "gap_analysis",
+        "CIA",
+        "risk_compliance"
+      ],
+      "difficulty": 5,
+      "estimated_seconds": 90,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Gap analysis starts by reviewing objectives, then evaluating controls against those objectives.",
+      "misconceptionTags": [
+        "gap_analysis_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q048",
+      "type": "scenario_mcq",
+      "stem": "You can’t patch a legacy radiology machine OS for 6 months. Which compensating control best fits the chapter’s example logic?",
+      "options": {
+        "A": "Move it to an isolated network with minimal/no access to other systems",
+        "B": "Post warning signs near the machine",
+        "C": "Increase perimeter lighting",
+        "D": "Disable backups"
+      },
+      "answer": "A",
+      "explanation": "Isolation to offset the risk of an exception is a classic compensating approach.",
+      "tags": [
+        "control_type_compensating",
+        "isolation"
+      ],
+      "difficulty": 5,
+      "estimated_seconds": 85,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "Isolation to offset the risk of an exception is a classic compensating approach.",
+      "misconceptionTags": [
+        "control_type_compensating_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q049",
+      "type": "mcq",
+      "stem": "Which pairing is MOST accurate for 'periodic risk assessments'?",
+      "options": {
+        "A": "Technical + Preventive",
+        "B": "Operational + Corrective",
+        "C": "Managerial + Directive",
+        "D": "Managerial (category) + can produce Directive policy outcomes"
+      },
+      "answer": "D",
+      "explanation": "Risk assessments are managerial category; they often drive directive policies. Don’t confuse category vs type.",
+      "tags": [
+        "control_category_managerial",
+        "trap_cat_vs_type"
+      ],
+      "difficulty": 5,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "Risk assessments are managerial category; they often drive directive policies.",
+      "misconceptionTags": [
+        "control_category_managerial_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      }
+    },
+    {
+      "id": "ch1_q050",
+      "type": "multi_select",
+      "stem": "You want to reduce the chance of PII leaving the network AND reduce the damage if a database is stolen. Which TWO controls best map to those goals? (Choose two.)",
+      "options": {
+        "A": "Network DLP",
+        "B": "Data minimization",
+        "C": "Perimeter lighting",
+        "D": "Deterrent guard dogs",
+        "E": "Burglar alarm"
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "DLP blocks/flags exfiltration; minimization reduces stored sensitive data and therefore blast radius.",
+      "tags": [
+        "dlp",
+        "data_minimization"
+      ],
+      "difficulty": 5,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "DLP blocks/flags exfiltration; minimization reduces stored sensitive data and therefore blast radius.",
+      "misconceptionTags": [
+        "dlp_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "E": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q051",
+      "type": "scenario_mcq",
+      "stem": "An attacker captures traffic between two microservices inside your cloud network. The traffic is unencrypted. Which data state and first defense are most relevant?",
+      "options": {
+        "A": "At rest + masking",
+        "B": "In transit + encryption",
+        "C": "In use + tokenization",
+        "D": "At rest + backups"
+      },
+      "answer": "B",
+      "explanation": "It’s data in transit; encryption is the primary protective control.",
+      "tags": [
+        "data_state_in_transit",
+        "encryption"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "It’s data in transit; encryption is the primary protective control.",
+      "misconceptionTags": [
+        "data_state_in_transit_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q052",
+      "type": "scenario_mcq",
+      "stem": "A compromise allowed an attacker to read application memory and steal API tokens during processing. Which data state is this, and what should you stop ignoring?",
+      "options": {
+        "A": "At rest; disk encryption",
+        "B": "In transit; TLS",
+        "C": "In use; protect data during processing activities",
+        "D": "Archived; data shredding"
+      },
+      "answer": "C",
+      "explanation": "This is data in use; data can be vulnerable during processing in memory.",
+      "tags": [
+        "data_state_in_use"
+      ],
+      "difficulty": 5,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "This is data in use; data can be vulnerable during processing in memory.",
+      "misconceptionTags": [
+        "data_state_in_use_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q053",
+      "type": "mcq",
+      "stem": "A control that 'identifies security events that have already occurred' is by definition:",
+      "options": {
+        "A": "Preventive",
+        "B": "Detective",
+        "C": "Corrective",
+        "D": "Directive"
+      },
+      "answer": "B",
+      "explanation": "That is the definition of detective controls.",
+      "tags": [
+        "control_type_detective"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "That is the definition of detective controls.",
+      "misconceptionTags": [
+        "control_type_detective_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q054",
+      "type": "mcq",
+      "stem": "Policies and procedures that guide user behavior are primarily which control TYPE?",
+      "options": {
+        "A": "Directive",
+        "B": "Detective",
+        "C": "Corrective",
+        "D": "Compensating"
+      },
+      "answer": "A",
+      "explanation": "Policies and procedures are directive controls.",
+      "tags": [
+        "control_type_directive"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Policies and procedures are directive controls.",
+      "misconceptionTags": [
+        "control_type_directive_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q055",
+      "type": "scenario_mcq",
+      "stem": "A new rule states: 'Only finance staff may access the payment database, and only from the corporate network segment.' Which pairing best matches?",
+      "options": {
+        "A": "Geographic restriction + DLP",
+        "B": "Permission restriction + segmentation",
+        "C": "Masking + directive control",
+        "D": "Deterrent + corrective"
+      },
+      "answer": "B",
+      "explanation": "Role/authorization → permission restriction. Network separation rules → segmentation.",
+      "tags": [
+        "access_restrictions_permission",
+        "segmentation"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "Role/authorization → permission restriction.",
+      "misconceptionTags": [
+        "access_restrictions_permission_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q056",
+      "type": "scenario_mcq",
+      "stem": "A breach triggers incident response costs, lost customers, and regulatory fines. What’s the best way to label this?",
+      "options": {
+        "A": "Only reputational risk",
+        "B": "Only financial risk",
+        "C": "Cross-category risk (financial + reputational + compliance)",
+        "D": "Only operational risk"
+      },
+      "answer": "C",
+      "explanation": "Incidents often cause cross-category impacts.",
+      "tags": [
+        "risk_financial",
+        "risk_reputational",
+        "risk_compliance"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Incidents often cause cross-category impacts.",
+      "misconceptionTags": [
+        "risk_financial_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q057",
+      "type": "matching",
+      "stem": "Match each control to the MOST appropriate category (mechanism of action).",
+      "left": [
+        "Firewall rules",
+        "Perimeter lighting",
+        "Log monitoring process",
+        "Periodic risk assessment"
+      ],
+      "right": [
+        "Technical",
+        "Physical",
+        "Operational",
+        "Managerial"
+      ],
+      "pairs": {
+        "Firewall rules": "Technical",
+        "Perimeter lighting": "Physical",
+        "Log monitoring process": "Operational",
+        "Periodic risk assessment": "Managerial"
+      },
+      "explanation": "Categories are about how/where the control acts: digital space, physical world, processes, or risk-management mechanics.",
+      "tags": [
+        "security_controls"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 85,
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "Categories are about how/where the control acts: digital space, physical world, processes, or risk-management mechanics.",
+      "misconceptionTags": [
+        "security_controls_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch1_q058",
+      "type": "matching",
+      "stem": "Match each control example to the MOST appropriate control TYPE (intent).",
+      "left": [
+        "IDS alerting",
+        "Backup restore after ransomware",
+        "Security policy document",
+        "Barbed wire fence"
+      ],
+      "right": [
+        "Detective",
+        "Corrective",
+        "Directive",
+        "Deterrent"
+      ],
+      "pairs": {
+        "IDS alerting": "Detective",
+        "Backup restore after ransomware": "Corrective",
+        "Security policy document": "Directive",
+        "Barbed wire fence": "Deterrent"
+      },
+      "explanation": "Type is the intended effect: detect, correct, direct, deter (or prevent/compensate).",
+      "tags": [
+        "security_controls"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 90,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Type is the intended effect: detect, correct, direct, deter (or prevent/compensate).",
+      "misconceptionTags": [
+        "security_controls_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch1_q059",
+      "type": "ordering",
+      "stem": "Put these steps in the most reasonable order for a basic gap analysis cycle.",
+      "items": [
+        "Identify or review control objectives",
+        "Examine existing controls designed to achieve objectives",
+        "Identify gaps where controls do not meet objectives",
+        "Treat gaps as risks and plan remediation"
+      ],
+      "correct_order": [
+        "Identify or review control objectives",
+        "Examine existing controls designed to achieve objectives",
+        "Identify gaps where controls do not meet objectives",
+        "Treat gaps as risks and plan remediation"
+      ],
+      "explanation": "Gap analysis is objectives → controls → gaps → remediation planning.",
+      "tags": [
+        "gap_analysis"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Gap analysis is objectives → controls → gaps → remediation planning.",
+      "misconceptionTags": [
+        "gap_analysis_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch1_q060",
+      "type": "scenario_mcq",
+      "stem": "You suspect unencrypted sensitive data is leaving via outbound web uploads. Which combination is strongest and MOST aligned with the chapter?",
+      "options": {
+        "A": "Network DLP + encryption policy/enforcement",
+        "B": "Perimeter lighting + guard dogs",
+        "C": "Risk assessment only",
+        "D": "Backup restore only"
+      },
+      "answer": "A",
+      "explanation": "Network DLP watches for sensitive transmissions; encryption helps ensure protection; combined, they reduce exposure.",
+      "tags": [
+        "dlp",
+        "encryption",
+        "control_type_directive",
+        "control_type_preventive"
+      ],
+      "difficulty": 5,
+      "estimated_seconds": 90,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "Network DLP watches for sensitive transmissions; encryption helps ensure protection; combined, they reduce exposure.",
+      "misconceptionTags": [
+        "dlp_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch1_q061",
+      "type": "scenario_mcq",
+      "stem": "Which statement is the cleanest exam-friendly distinction between segmentation and isolation?",
+      "options": {
+        "A": "Segmentation blocks all communication; isolation allows limited communication",
+        "B": "Segmentation allows controlled communication; isolation cuts communication with outside networks",
+        "C": "They are the same thing",
+        "D": "Isolation is only geographic restrictions"
+      },
+      "answer": "B",
+      "explanation": "Segmentation separates networks with strict rules; isolation fully cuts off outside access.",
+      "tags": [
+        "segmentation",
+        "isolation"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "Segmentation separates networks with strict rules; isolation fully cuts off outside access.",
+      "misconceptionTags": [
+        "segmentation_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "type": "mcq",
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "rationaleCorrect": "Confidentiality focuses on preventing unauthorized disclosure, and integrity focuses on preventing unauthorized alteration.",
+      "rationaleIncorrect": {
+        "A": "Uptime is availability, not confidentiality, and encryption is only one control among many.",
+        "C": "Passwords help, but CIA concepts are broader than credential strength.",
+        "D": "The definitions are reversed and patching is an operational activity.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "cia_mixup",
+        "availability_vs_confidentiality"
+      ],
+      "id": "ch1_obj12_q01",
+      "stem": "Which statement best captures the difference between confidentiality and integrity?",
+      "explanation": "Confidentiality limits who can access data, while integrity protects data from unauthorized changes.",
+      "tags": [
+        "cia",
+        "fundamentals",
+        "confidentiality",
+        "integrity"
+      ],
+      "objectiveIds": [
+        "1.2"
+      ],
+      "options": {
+        "A": "Confidentiality guarantees uptime; integrity guarantees encryption.",
+        "B": "Confidentiality controls disclosure; integrity controls unauthorized modification.",
+        "C": "Confidentiality and integrity are both only about password strength.",
+        "D": "Integrity controls disclosure; confidentiality controls system patching."
+      },
+      "answer": "B"
+    },
+    {
+      "type": "mcq",
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "rationaleCorrect": "A digital signature binds approval to an individual key owner, providing strong proof of origin.",
+      "rationaleIncorrect": {
+        "A": "Shared identities remove accountability and weaken nonrepudiation.",
+        "C": "A hash alone shows integrity but does not prove who approved.",
+        "D": "Encryption protects confidentiality but does not prove who performed the action.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "integrity_vs_nonrepudiation",
+        "shared_identity_risk"
+      ],
+      "id": "ch1_obj12_q02",
+      "stem": "Which mechanism most directly supports nonrepudiation for an approved change request?",
+      "explanation": "Nonrepudiation relies on proof tied to a specific signer, commonly through digital signatures.",
+      "tags": [
+        "nonrepudiation",
+        "digital_signature",
+        "fundamentals"
+      ],
+      "objectiveIds": [
+        "1.2"
+      ],
+      "options": {
+        "A": "Shared admin account with a long password",
+        "B": "Digitally signed approval using a unique private key",
+        "C": "Hash value stored without signer identity",
+        "D": "Encrypted email sent from a team mailbox"
+      },
+      "answer": "B"
+    },
+    {
+      "type": "multi_select",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "Removing unnecessary services and protocols shrinks exposure and reduces exploitable paths.",
+      "rationaleIncorrect": {
+        "A": "Correct because disabled services cannot be attacked remotely.",
+        "B": "Adding unnecessary software increases complexity and attack surface.",
+        "C": "Correct because legacy protocols often introduce avoidable risk.",
+        "D": "On-demand local admin without controls violates least privilege and least functionality."
+      },
+      "misconceptionTags": [
+        "hardening_vs_convenience",
+        "least_privilege_confusion"
+      ],
+      "id": "ch1_obj12_q03",
+      "stem": "Which actions best reflect least functionality? (Choose TWO.)",
+      "explanation": "Least functionality reduces attack surface by disabling unnecessary services and features.",
+      "tags": [
+        "least_functionality",
+        "hardening",
+        "attack_surface"
+      ],
+      "objectiveIds": [
+        "1.2"
+      ],
+      "options": {
+        "A": "Disable unused services on servers",
+        "B": "Install every optional management agent by default",
+        "C": "Remove legacy protocols that are not required",
+        "D": "Allow users to enable local admin rights when needed"
+      },
+      "answers": [
+        "A",
+        "C"
+      ]
+    },
+    {
+      "type": "scenario_mcq",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "When multiple people use one admin account, actions cannot be reliably tied to a single actor.",
+      "rationaleIncorrect": {
+        "B": "Data minimization concerns collection scope, not account attribution.",
+        "C": "Tokenization is a data protection method, not identity attribution.",
+        "D": "Segmentation is network architecture, not account accountability.",
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "shared_admin_normalized",
+        "identity_attribution_gap"
+      ],
+      "id": "ch1_obj12_q04",
+      "stem": "A help desk team uses one shared administrator account to reset credentials quickly. Which principle is most directly weakened?",
+      "explanation": "Shared privileged accounts remove individual accountability and weaken core security fundamentals.",
+      "tags": [
+        "accountability",
+        "shared_accounts",
+        "fundamentals"
+      ],
+      "objectiveIds": [
+        "1.2"
+      ],
+      "options": {
+        "A": "Nonrepudiation and accountability",
+        "B": "Data minimization",
+        "C": "Tokenization",
+        "D": "Physical segmentation"
+      },
+      "answer": "A"
+    },
+    {
+      "type": "scenario_mcq",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "Dual authorization limits unilateral risky changes, and integrity monitoring quickly detects tampering.",
+      "rationaleIncorrect": {
+        "A": "Single shared privilege increases undetected misuse risk.",
+        "C": "Disabling logs removes forensic and control evidence.",
+        "D": "Backup encryption is useful but does not prevent or detect live data corruption.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "integrity_monitoring_gap",
+        "single_admin_dependency"
+      ],
+      "id": "ch1_obj12_q05",
+      "stem": "During an outage review, leadership asks why one bad database script corrupted records without detection. Which control combination best addresses this?",
+      "explanation": "Combining change control with integrity checks and separation of duties reduces single-actor failure impact.",
+      "tags": [
+        "integrity",
+        "change_control",
+        "separation_of_duties"
+      ],
+      "objectiveIds": [
+        "1.2"
+      ],
+      "options": {
+        "A": "Use one DBA account for all emergency changes",
+        "B": "Require dual authorization and integrity monitoring on critical tables",
+        "C": "Disable logs to improve performance",
+        "D": "Encrypt backups weekly"
+      },
+      "answer": "B"
+    },
+    {
+      "type": "scenario_mcq",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "A hash lets you detect changes, but it does not hide the original content.",
+      "rationaleIncorrect": {
+        "A": "Hashes are one-way summaries, but the original file may still be readable.",
+        "B": "Hashing and encryption have different security goals.",
+        "D": "Logs support accountability, not data secrecy.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "hashing_as_encryption",
+        "integrity_vs_confidentiality"
+      ],
+      "id": "ch1_obj12_q06",
+      "stem": "An engineer says, “We hashed the file, so it is confidential.” What is the best correction?",
+      "explanation": "Hashing validates integrity, while confidentiality is achieved through encryption and access control.",
+      "tags": [
+        "hashing",
+        "encryption",
+        "cia"
+      ],
+      "objectiveIds": [
+        "1.2"
+      ],
+      "options": {
+        "A": "Correct; hashing hides data from all viewers.",
+        "B": "Partly correct; hashing and encryption are equivalent for confidentiality.",
+        "C": "Incorrect; hashing supports integrity, not confidentiality.",
+        "D": "Incorrect; confidentiality is provided only by logging."
+      },
+      "answer": "C"
+    },
+    {
+      "type": "matching",
+      "difficulty": 3,
+      "estimated_seconds": 90,
+      "rationaleCorrect": "Each term maps to a unique protection outcome, reducing design and troubleshooting confusion.",
+      "rationaleIncorrect": {
+        "Confidentiality": "Confidentiality is about disclosure control, not uptime or change tracking.",
+        "Integrity": "Integrity is about trustworthy data state, not user identity alone.",
+        "Availability": "Availability is about service continuity and timely access.",
+        "Nonrepudiation": "Nonrepudiation is about proof of action origin."
+      },
+      "misconceptionTags": [
+        "cia_concept_blur",
+        "nonrepudiation_misuse"
+      ],
+      "id": "ch1_obj12_q07",
+      "stem": "Match each foundational concept to its best description.",
+      "explanation": "Security fundamentals are easier to apply when each concept has a distinct role.",
+      "tags": [
+        "cia",
+        "nonrepudiation",
+        "fundamentals"
+      ],
+      "objectiveIds": [
+        "1.2"
+      ],
+      "left": [
+        "Confidentiality",
+        "Integrity",
+        "Availability",
+        "Nonrepudiation"
+      ],
+      "right": [
+        "Data is accessible when needed",
+        "Sender cannot deny performing an action",
+        "Data is not altered without authorization",
+        "Data is disclosed only to authorized entities"
+      ],
+      "pairs": {
+        "Confidentiality": "Data is disclosed only to authorized entities",
+        "Integrity": "Data is not altered without authorization",
+        "Availability": "Data is accessible when needed",
+        "Nonrepudiation": "Sender cannot deny performing an action"
+      }
+    },
+    {
+      "type": "mcq",
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "rationaleCorrect": "Layered controls reduce single points of failure and improve detection plus recovery.",
+      "rationaleIncorrect": {
+        "A": "Single-control strategies create fragile security posture.",
+        "C": "Logging remains critical for monitoring and response.",
+        "D": "Modern environments require layered controls across users, workloads, and data.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "single_control_overconfidence",
+        "perimeter_only_thinking"
+      ],
+      "id": "ch1_obj12_q08",
+      "stem": "Which statement best describes defense in depth?",
+      "explanation": "Defense in depth uses layered controls so that one control failure does not immediately expose assets.",
+      "tags": [
+        "defense_in_depth",
+        "fundamentals",
+        "control_layers"
+      ],
+      "objectiveIds": [
+        "1.2"
+      ],
+      "options": {
+        "A": "Rely on one strong control to reduce complexity",
+        "B": "Use overlapping preventive, detective, and corrective controls",
+        "C": "Disable logging once encryption is enabled",
+        "D": "Only protect perimeter devices"
+      },
+      "answer": "B"
+    },
+    {
+      "type": "multi_select",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "Secure defaults prioritize least exposure and explicit enablement of risky features.",
+      "rationaleIncorrect": {
+        "A": "Default-enabling broad remote access violates secure baseline principles.",
+        "B": "Correct because rotating seeded credentials removes predictable defaults.",
+        "C": "Correct because closed ports reduce attack surface immediately.",
+        "D": "Anonymous access by default introduces unnecessary risk."
+      },
+      "misconceptionTags": [
+        "secure_default_confusion",
+        "convenience_over_security"
+      ],
+      "id": "ch1_obj12_q09",
+      "stem": "Which practices support secure defaults? (Choose TWO.)",
+      "explanation": "Secure defaults minimize exposure before any custom tuning occurs.",
+      "tags": [
+        "secure_defaults",
+        "hardening",
+        "fundamentals"
+      ],
+      "objectiveIds": [
+        "1.2"
+      ],
+      "options": {
+        "A": "Ship with all remote administration features enabled",
+        "B": "Require password change on first use for seeded accounts",
+        "C": "Disable unused network ports by default",
+        "D": "Allow anonymous read access until onboarding is complete"
+      },
+      "answers": [
+        "B",
+        "C"
+      ]
+    },
+    {
+      "type": "mcq",
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "rationaleCorrect": "Unique identities plus durable logs create traceable evidence for each action.",
+      "rationaleIncorrect": {
+        "A": "Shared credentials prevent reliable attribution.",
+        "C": "Reduced logging weakens monitoring and investigations.",
+        "D": "Unmanaged privileged execution bypasses accountability controls.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "audit_trail_underestimation",
+        "shared_identity_risk"
+      ],
+      "id": "ch1_obj12_q10",
+      "stem": "Which design choice most directly improves accountability in routine operations?",
+      "explanation": "Strong accountability uses unique identities and immutable logs to tie actions to individuals.",
+      "tags": [
+        "accountability",
+        "logging",
+        "identity"
+      ],
+      "objectiveIds": [
+        "1.2"
+      ],
+      "options": {
+        "A": "Use role-shared admin credentials to simplify handoffs",
+        "B": "Use unique user IDs and central immutable audit logs",
+        "C": "Disable verbose logs to reduce storage costs",
+        "D": "Allow unmanaged scripts to run as local system"
+      },
+      "answer": "B"
+    }
+  ]
+}

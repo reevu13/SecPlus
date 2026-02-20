@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "secplus.chapter_enrichment.schema.json",
+  "title": "SecPlus Chapter Enrichment",
+  "type": "object",
+  "required": ["pack_id", "version", "confusion_pairs", "tag_rules"],
+  "properties": {
+    "pack_id": { "type": "string" },
+    "version": { "type": "string" },
+    "confusion_pairs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "a", "b", "bullets"],
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "a": {
+            "type": "object",
+            "required": ["term", "definition"],
+            "properties": {
+              "term": { "type": "string" },
+              "definition": { "type": "string" }
+            },
+            "additionalProperties": false
+          },
+          "b": {
+            "type": "object",
+            "required": ["term", "definition"],
+            "properties": {
+              "term": { "type": "string" },
+              "definition": { "type": "string" }
+            },
+            "additionalProperties": false
+          },
+          "bullets": { "type": "array", "items": { "type": "string" } }
+        },
+        "additionalProperties": false
+      }
+    },
+    "tag_rules": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["rule", "micro_example", "confusion_pair_id"],
+        "properties": {
+          "rule": { "type": "string" },
+          "micro_example": { "type": "string" },
+          "confusion_pair_id": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

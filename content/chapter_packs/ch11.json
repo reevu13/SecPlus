@@ -1,0 +1,2902 @@
+{
+  "schema_version": "secplus_game_pack_v1",
+  "pack_id": "ch11",
+  "exam": {
+    "vendor": "CompTIA",
+    "name": "CompTIA Security+",
+    "code": "SY0-701",
+    "max_exam_minutes": 90
+  },
+  "chapter": {
+    "number": 11,
+    "title": "Endpoint Security",
+    "page_range_in_user_pdf": "499-552"
+  },
+  "design_intent": {
+    "mode": [
+      "campaign",
+      "roguelike_practice"
+    ],
+    "pvp_optional": true,
+    "default_pvp_enabled": false,
+    "player_goal": "Master Endpoint Security for SY0-701 using campaign and roguelike runs."
+  },
+  "tags": {
+    "concepts": [
+      "1.4",
+      "2.3",
+      "2.3",
+      "3.1",
+      "4.1",
+      "4.2",
+      "4.4",
+      "4.5",
+      "os_vulnerabilities",
+      "attack_footprint",
+      "insecure_defaults",
+      "configuration",
+      "misconfiguration",
+      "hardware_vulnerabilities",
+      "firmware",
+      "eol",
+      "legacy_hardware",
+      "compensating_controls",
+      "uefi",
+      "secure_boot",
+      "measured_boot",
+      "trusted_boot",
+      "hardware_root_of_trust",
+      "tpm",
+      "remote_attestation",
+      "binding",
+      "sealing",
+      "puf",
+      "secure_enclave",
+      "hsm",
+      "kms",
+      "key_management",
+      "antimalware",
+      "signature_detection",
+      "heuristic_detection",
+      "polymorphism",
+      "packing_obfuscation",
+      "sandboxing",
+      "allow_list",
+      "block_list",
+      "edr",
+      "xdr",
+      "ioc",
+      "anomaly_detection",
+      "dlp",
+      "host_firewall",
+      "hips",
+      "hids",
+      "network_defense",
+      "hardening",
+      "secure_baseline",
+      "cis_benchmarks",
+      "patching",
+      "patch_management",
+      "configuration_enforcement",
+      "group_policy",
+      "security_compliance_toolkit",
+      "selinux",
+      "mac",
+      "embedded_systems",
+      "rtos",
+      "ics_scada",
+      "plc",
+      "rtu",
+      "iot_security",
+      "asset_inventory",
+      "enumeration",
+      "decommissioning",
+      "sanitization",
+      "degaussing",
+      "data_remanence",
+      "wear_leveling",
+      "secure_erase",
+      "full_disk_encryption",
+      "crypto_erase",
+      "physical_destruction",
+      "certificate_of_destruction"
+    ],
+    "difficulty_scale": {
+      "1": "easy recall",
+      "2": "basic apply",
+      "3": "scenario apply",
+      "4": "mixed concept trap",
+      "5": "boss-level synthesis"
+    }
+  },
+  "trap_list": [
+    {
+      "id": "trap_secure_vs_measured_boot",
+      "name": "Secure Boot vs Measured Boot",
+      "misconception": "Thinking both mechanisms block untrusted boot components.",
+      "fix": "Secure Boot validates signatures and can block; Measured Boot records hashes for attestation and policy decisions after measurement.",
+      "drill_question_ids": [
+        "ch11-q10",
+        "ch11-q11",
+        "ch11-q12"
+      ]
+    },
+    {
+      "id": "trap_edr_vs_xdr",
+      "name": "EDR vs XDR",
+      "misconception": "Believing XDR is just a rebrand of EDR.",
+      "fix": "EDR focuses on endpoints + correlated logs; XDR broadens telemetry/analytics across the tech stack (cloud/email/platforms) for cross-domain detection and response.",
+      "drill_question_ids": [
+        "ch11-q29",
+        "ch11-q31",
+        "ch11-q30"
+      ]
+    },
+    {
+      "id": "trap_allow_vs_block_list",
+      "name": "Allow List vs Block List",
+      "misconception": "Assuming block lists provide the same security as allow lists.",
+      "fix": "Allow lists default-deny (only approved runs); block lists default-allow (deny known-bad) and can miss new/unknown threats.",
+      "drill_question_ids": [
+        "ch11-q27",
+        "ch11-q28"
+      ]
+    },
+    {
+      "id": "trap_hips_vs_hids",
+      "name": "HIPS vs HIDS",
+      "misconception": "Thinking both systems actively stop attacks.",
+      "fix": "HIDS detects and alerts; HIPS can block/prevent suspicious traffic/actions before the host processes them.",
+      "drill_question_ids": [
+        "ch11-q35",
+        "ch11-q36"
+      ]
+    },
+    {
+      "id": "trap_tpm_vs_hsm_vs_kms",
+      "name": "TPM vs HSM vs KMS",
+      "misconception": "Treating all key-related tech as interchangeable.",
+      "fix": "TPM anchors platform trust on a device; HSM is a dedicated key device for many systems (often certified); KMS is typically a centralized (often cloud) service for keys/secrets.",
+      "drill_question_ids": [
+        "ch11-q18",
+        "ch11-q19",
+        "ch11-q20",
+        "ch11-q14"
+      ]
+    },
+    {
+      "id": "trap_ssd_wipe_vs_crypto_erase",
+      "name": "SSD Wiping vs Crypto Erase",
+      "misconception": "Assuming overwrite wipes are always enough on SSDs.",
+      "fix": "SSD wear-leveling can leave remnants; use Secure Erase/vendor tools, or encrypt for life and destroy the key (crypto erase) when retiring.",
+      "drill_question_ids": [
+        "ch11-q57",
+        "ch11-q58",
+        "ch11-q59"
+      ]
+    }
+  ],
+  "missions": [
+    {
+      "id": "ch11-m1",
+      "name": "Mission 1: Boot, Trust, and Lifecycle Risks",
+      "mechanics": {
+        "format": "quiz_run",
+        "total_questions": 12,
+        "time_limit_seconds_total": 900,
+        "lives": 3,
+        "hint_tokens": 1,
+        "minigame": "learn_quiz"
+      },
+      "question_ids": [
+        "ch11-q01",
+        "ch11-q02",
+        "ch11-q04",
+        "ch11-q06",
+        "ch11-q08",
+        "ch11-q09",
+        "ch11-q10",
+        "ch11-q11",
+        "ch11-q12",
+        "ch11-q13",
+        "ch11-q14",
+        "ch11-q15"
+      ],
+      "rewards": {
+        "xp": 220,
+        "loot": [
+          "badge_ch11_boot_chain",
+          "unlock_ch11_m2"
+        ],
+        "unlock": "ch11-m2"
+      },
+      "goal": "Spot endpoint risk from insecure defaults, lifecycle states, and hardware-level threats. Then lock the boot chain to known-good trust anchors."
+    },
+    {
+      "id": "ch11-m2",
+      "name": "Mission 2: Endpoint Defense Stack",
+      "mechanics": {
+        "format": "quiz_run",
+        "total_questions": 14,
+        "time_limit_seconds_total": 1050,
+        "lives": 3,
+        "hint_tokens": 1,
+        "minigame": "learn_quiz"
+      },
+      "question_ids": [
+        "ch11-q21",
+        "ch11-q22",
+        "ch11-q23",
+        "ch11-q24",
+        "ch11-q26",
+        "ch11-q27",
+        "ch11-q28",
+        "ch11-q29",
+        "ch11-q30",
+        "ch11-q31",
+        "ch11-q32",
+        "ch11-q33",
+        "ch11-q34",
+        "ch11-q35"
+      ],
+      "rewards": {
+        "xp": 260,
+        "loot": [
+          "badge_ch11_endpoint_defense",
+          "unlock_ch11_m3"
+        ],
+        "unlock": "ch11-m3"
+      },
+      "goal": "Build the layered endpoint defense stack: antimalware detection, allowlists, EDR/XDR visibility, DLP, and host-level controls."
+    },
+    {
+      "id": "ch11-m3",
+      "name": "Mission 3: Hardening at Scale",
+      "mechanics": {
+        "format": "quiz_run",
+        "total_questions": 14,
+        "time_limit_seconds_total": 1100,
+        "lives": 3,
+        "hint_tokens": 1,
+        "minigame": "learn_quiz"
+      },
+      "question_ids": [
+        "ch11-q37",
+        "ch11-q38",
+        "ch11-q39",
+        "ch11-q40",
+        "ch11-q41",
+        "ch11-q42",
+        "ch11-q43",
+        "ch11-q44",
+        "ch11-q45",
+        "ch11-q46",
+        "ch11-q16",
+        "ch11-q18",
+        "ch11-q19",
+        "ch11-q20"
+      ],
+      "rewards": {
+        "xp": 280,
+        "loot": [
+          "badge_ch11_hardening",
+          "unlock_ch11_boss"
+        ],
+        "unlock": "boss_11"
+      },
+      "goal": "Turn 'secure' from a vibe into a repeatable process: baselines, patch management, configuration enforcement, and OS policy controls."
+    }
+  ],
+  "boss": {
+    "id": "boss_11",
+    "name": "Boss Fight: Weird Endpoints & Data Retirement",
+    "premise": "Survive the endpoints you can't patch easily (ICS/IoT/RTOS) and safely retire what you can't keep.",
+    "mechanics": {
+      "format": "timed_synthesis",
+      "total_questions": 12,
+      "time_limit_seconds_total": 900,
+      "lives": 2
+    },
+    "question_ids": [
+      "ch11-q47",
+      "ch11-q48",
+      "ch11-q49",
+      "ch11-q50",
+      "ch11-q51",
+      "ch11-q55",
+      "ch11-q56",
+      "ch11-q57",
+      "ch11-q58",
+      "ch11-q59",
+      "ch11-q60",
+      "ch11-q61"
+    ],
+    "rewards": {
+      "xp": 360,
+      "loot": [
+        "title_ch11_cleared",
+        "unlock_roguelike_runset_ch11"
+      ]
+    }
+  },
+  "roguelike": {
+    "runset_id": "ch11_runset",
+    "run_minutes_target": 40,
+    "structure": {
+      "acts": 3,
+      "encounters_per_act": 3,
+      "rest_sites_per_act": 1,
+      "boss_per_run": "1"
+    },
+    "cards": {
+      "threat_cards": [
+        {
+          "id": "threat-firmware",
+          "name": "Firmware Ghost",
+          "tags": [
+            "firmware",
+            "secure_boot",
+            "measured_boot"
+          ]
+        },
+        {
+          "id": "threat-eos",
+          "name": "Support Cliff",
+          "tags": [
+            "eol",
+            "legacy_hardware",
+            "compensating_controls"
+          ]
+        },
+        {
+          "id": "threat-iot",
+          "name": "IoT Swarm",
+          "tags": [
+            "iot_security",
+            "embedded_systems",
+            "rtos"
+          ]
+        },
+        {
+          "id": "threat-data-leak",
+          "name": "Quiet Exfil",
+          "tags": [
+            "dlp",
+            "allow_list",
+            "block_list"
+          ]
+        }
+      ],
+      "constraint_cards": [
+        {
+          "id": "constraint-no-hints",
+          "name": "No Hints",
+          "effect": "Disable hints; require a 1-sentence justification for full points."
+        },
+        {
+          "id": "constraint-fast",
+          "name": "Time Pressure",
+          "effect": "Reduce per-question time budget by 20%."
+        }
+      ],
+      "control_cards": [
+        {
+          "id": "control-edr",
+          "name": "EDR Telemetry",
+          "tags": [
+            "edr",
+            "xdr",
+            "ioc"
+          ]
+        },
+        {
+          "id": "control-baseline",
+          "name": "Secure Baseline",
+          "tags": [
+            "secure_baseline",
+            "patch_management",
+            "configuration_enforcement"
+          ]
+        },
+        {
+          "id": "control-cryptoerase",
+          "name": "Crypto Erase",
+          "tags": [
+            "sanitization",
+            "crypto_erase",
+            "secure_erase"
+          ]
+        }
+      ]
+    },
+    "question_pool_ids": "use_all_questions_in_pack"
+  },
+  "progression": {
+    "xp_rules": {
+      "base_xp_per_correct": 10,
+      "streak_bonus_per_5": 15,
+      "time_bonus_threshold_seconds": 30,
+      "time_bonus_xp": 5,
+      "mistake_penalty_xp": 0
+    },
+    "mastery_model": {
+      "scale": "0-100",
+      "update": "Mastery += 8 on first correct; +4 on repeat correct; -6 on wrong (floor 0).",
+      "tags_drive_mastery": true
+    },
+    "unlock_rules": [
+      {
+        "unlock": "ch11-m2",
+        "when": "complete ch11-m1"
+      },
+      {
+        "unlock": "ch11-m3",
+        "when": "complete ch11-m2"
+      },
+      {
+        "unlock": "boss_11",
+        "when": "complete ch11-m3"
+      }
+    ]
+  },
+  "question_bank": [
+    {
+      "id": "ch11-q01",
+      "type": "mcq",
+      "stem": "In endpoint security, what does minimizing the system's 'attack footprint' primarily mean?",
+      "options": {
+        "A": "Removing unnecessary exposed services and features",
+        "B": "Buying newer hardware",
+        "C": "Increasing CPU and RAM capacity",
+        "D": "Using longer passwords only"
+      },
+      "answer": "A",
+      "explanation": "Reducing the attack footprint means reducing what is exposed and targetable—services, open ports, and features that attackers can reach. Patching helps, but minimizing exposure reduces what can be exploited in the first place.",
+      "tags": [
+        "2.3",
+        "os_vulnerabilities",
+        "attack_footprint",
+        "hardening"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Reducing the attack footprint means reducing what is exposed and targetable—services, open ports, and features that attackers can reach.",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q02",
+      "type": "mcq",
+      "stem": "A router ships with admin/admin credentials and remote management enabled. Which vulnerability category BEST fits this?",
+      "options": {
+        "A": "Misconfiguration",
+        "B": "Insecure defaults",
+        "C": "Firmware vulnerability",
+        "D": "Legacy hardware"
+      },
+      "answer": "B",
+      "explanation": "Insecure defaults are vendor-supplied settings like default passwords or unsafe features enabled by default. Misconfiguration is typically an admin mistake after deployment.",
+      "tags": [
+        "2.3",
+        "insecure_defaults",
+        "os_vulnerabilities"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Insecure defaults are vendor-supplied settings like default passwords or unsafe features enabled by default.",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q03",
+      "type": "mcq",
+      "stem": "An admin intentionally changes a server setting to allow weak TLS ciphers to support an old client. What is this BEST described as?",
+      "options": {
+        "A": "Misconfiguration",
+        "B": "Insecure default",
+        "C": "Configuration introducing a vulnerability",
+        "D": "End-of-life hardware"
+      },
+      "answer": "C",
+      "explanation": "This is an intentional configuration choice that introduces risk. Misconfiguration is an error; a configuration can be deliberate yet insecure.",
+      "tags": [
+        "2.3",
+        "configuration",
+        "os_vulnerabilities",
+        "hardening"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "This is an intentional configuration choice that introduces risk.",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q04",
+      "type": "mcq",
+      "stem": "A technician accidentally disables automatic updates on a fleet of laptops. What is this BEST classified as?",
+      "options": {
+        "A": "Misconfiguration",
+        "B": "Insecure default",
+        "C": "Firmware attack",
+        "D": "Legacy system"
+      },
+      "answer": "A",
+      "explanation": "Misconfiguration is human error—an incorrect setting made by mistake. Turning off updates increases exposure to known vulnerabilities.",
+      "tags": [
+        "2.3",
+        "misconfiguration",
+        "patching"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Misconfiguration is human error—an incorrect setting made by mistake.",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q05",
+      "type": "matching",
+      "stem": "Match the term to the BEST description.",
+      "left": [
+        "Insecure defaults",
+        "Configuration",
+        "Misconfiguration"
+      ],
+      "right": [
+        "Vendor-shipped unsafe settings (e.g., default password)",
+        "Intentional setting that may introduce risk",
+        "Accidental error in settings or setup"
+      ],
+      "pairs": {
+        "Insecure defaults": "Vendor-shipped unsafe settings (e.g., default password)",
+        "Configuration": "Intentional setting that may introduce risk",
+        "Misconfiguration": "Accidental error in settings or setup"
+      },
+      "explanation": "Defaults come from the vendor, configurations are intentional changes, and misconfigurations are mistakes. The exam likes to test these distinctions.",
+      "tags": [
+        "2.3",
+        "insecure_defaults",
+        "configuration",
+        "misconfiguration"
+      ],
+      "estimated_seconds": 80,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Defaults come from the vendor, configurations are intentional changes, and misconfigurations are mistakes.",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch11-q06",
+      "type": "mcq",
+      "stem": "Why is malicious firmware particularly difficult to remediate compared to typical OS malware?",
+      "options": {
+        "A": "Firmware malware only affects Macs",
+        "B": "Reinstalling the OS does not remove firmware-level compromises",
+        "C": "Firmware cannot be updated on any device",
+        "D": "Firmware malware only spreads via email"
+      },
+      "answer": "B",
+      "explanation": "Firmware is embedded software tightly tied to hardware. If firmware is compromised, wiping or reinstalling the OS may not remove it because the malicious code persists below the OS.",
+      "tags": [
+        "2.3",
+        "hardware_vulnerabilities",
+        "firmware"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Firmware is embedded software tightly tied to hardware.",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q07",
+      "type": "multi_select",
+      "stem": "Which are common paths a firmware attack might use? (Choose TWO.)",
+      "options": {
+        "A": "Malicious firmware update that looks legitimate",
+        "B": "User downloads a 'driver update' that replaces firmware",
+        "C": "A weak Wi‑Fi password automatically modifies firmware",
+        "D": "A secure boot signature database prevents all firmware attacks"
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "Firmware attacks commonly arrive via executable/firmware updates (legit-looking but malicious) or via malicious downloads that overwrite firmware. Security controls can reduce risk but don't make firmware attacks impossible.",
+      "tags": [
+        "2.3",
+        "firmware",
+        "hardware_vulnerabilities"
+      ],
+      "estimated_seconds": 65,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Firmware attacks commonly arrive via executable/firmware updates (legit-looking but malicious) or via malicious downloads that overwrite firmware.",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q08",
+      "type": "matching",
+      "stem": "Match each life-cycle term to the BEST meaning.",
+      "left": [
+        "End of sales",
+        "End of life",
+        "End of support"
+      ],
+      "right": [
+        "Last date the vendor sells the model",
+        "No longer sold but still supported (should be on retirement path)",
+        "Last date for vendor support/updates"
+      ],
+      "pairs": {
+        "End of sales": "Last date the vendor sells the model",
+        "End of life": "No longer sold but still supported (should be on retirement path)",
+        "End of support": "Last date for vendor support/updates"
+      },
+      "explanation": "Vendors use different wording, but a common model is: end of sales (stop selling), end of life (stop selling but still supported), end of support (no more fixes/updates).",
+      "tags": [
+        "2.3",
+        "eol",
+        "legacy_hardware",
+        "hardware_vulnerabilities"
+      ],
+      "estimated_seconds": 80,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Vendors use different wording, but a common model is: end of sales (stop selling), end of life (stop selling but still supported), end of support (no more fixes/updates).",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch11-q09",
+      "type": "mcq",
+      "stem": "A device is past 'end of support' from the vendor. Which mitigation is MOST appropriate?",
+      "options": {
+        "A": "Keep using it; unsupported systems are safe if behind NAT",
+        "B": "Apply compensating controls and plan retirement/replacement",
+        "C": "Disable logging to improve performance",
+        "D": "Enable WEP for compatibility"
+      },
+      "answer": "B",
+      "explanation": "End-of-support systems won't receive security fixes. You typically use compensating controls (segmentation, isolation, extra monitoring) while moving toward retirement/replacement.",
+      "tags": [
+        "2.3",
+        "eol",
+        "compensating_controls",
+        "hardening"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "End-of-support systems won't receive security fixes.",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q10",
+      "type": "mcq",
+      "stem": "UEFI Secure Boot primarily ensures that the system boots using only what?",
+      "options": {
+        "A": "Software signed by a trusted source in the signature database",
+        "B": "Any bootloader with the correct filename",
+        "C": "Only open-source operating systems",
+        "D": "Only encrypted drives"
+      },
+      "answer": "A",
+      "explanation": "Secure Boot checks signatures against a trusted signature database to ensure only trusted boot components load.",
+      "tags": [
+        "2.3",
+        "uefi",
+        "secure_boot",
+        "trusted_boot"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Secure Boot checks signatures against a trusted signature database to ensure only trusted boot components load.",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q11",
+      "type": "mcq",
+      "stem": "Measured boot differs from Secure Boot because measured boot primarily:",
+      "options": {
+        "A": "Blocks untrusted components before booting",
+        "B": "Hashes boot components and stores measurements for later validation",
+        "C": "Requires a smart card to boot",
+        "D": "Only works on servers"
+      },
+      "answer": "B",
+      "explanation": "Measured boot records measurements (hashes) of boot components and stores them (often in a TPM). These can be validated remotely via attestation; it does not necessarily block boot based on a signature list.",
+      "tags": [
+        "2.3",
+        "measured_boot",
+        "tpm",
+        "remote_attestation",
+        "uefi"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Measured boot records measurements (hashes) of boot components and stores them (often in a TPM).",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q12",
+      "type": "mcq",
+      "stem": "In measured boot, what is the 'boot attestation' process used for?",
+      "options": {
+        "A": "Encrypting the disk using BitLocker",
+        "B": "Comparing boot-state measurements against known good states to decide access/quarantine",
+        "C": "Resetting the BIOS password",
+        "D": "Automatically patching firmware"
+      },
+      "answer": "B",
+      "explanation": "Boot attestation uses measured boot logs (often stored in a TPM) to compare the system state to known-good states and then enable access control or quarantine decisions.",
+      "tags": [
+        "4.1",
+        "measured_boot",
+        "remote_attestation",
+        "tpm"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "Boot attestation uses measured boot logs (often stored in a TPM) to compare the system state to known-good states and then enable access control or quarantine decisions.",
+      "misconceptionTags": [
+        "4.1_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q13",
+      "type": "mcq",
+      "stem": "What BEST describes a hardware root of trust?",
+      "options": {
+        "A": "A user password stored on disk",
+        "B": "A hardware component storing cryptographic keys that the system inherently trusts for secure boot/integrity",
+        "C": "A root certificate used only for HTTPS",
+        "D": "A cloud backup of the bootloader"
+      },
+      "answer": "B",
+      "explanation": "A hardware root of trust is a trusted hardware anchor that holds keys and enables trustworthy verification of boot and platform integrity.",
+      "tags": [
+        "1.4",
+        "hardware_root_of_trust",
+        "tpm",
+        "secure_boot"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "1.4"
+      ],
+      "rationaleCorrect": "A hardware root of trust is a trusted hardware anchor that holds keys and enables trustworthy verification of boot and platform integrity.",
+      "misconceptionTags": [
+        "1.4_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q14",
+      "type": "matching",
+      "stem": "Match each TPM-related function to the BEST description.",
+      "left": [
+        "Remote attestation",
+        "Binding",
+        "Sealing"
+      ],
+      "right": [
+        "Verify hardware/software configuration",
+        "Encrypt data",
+        "Encrypt data AND require a specific TPM state before decryption"
+      ],
+      "pairs": {
+        "Remote attestation": "Verify hardware/software configuration",
+        "Binding": "Encrypt data",
+        "Sealing": "Encrypt data AND require a specific TPM state before decryption"
+      },
+      "explanation": "TPMs support attestation (verify state), binding (encrypt), and sealing (encrypt with state requirements).",
+      "tags": [
+        "1.4",
+        "tpm",
+        "remote_attestation",
+        "binding",
+        "sealing"
+      ],
+      "estimated_seconds": 80,
+      "difficulty": 3,
+      "objectiveIds": [
+        "1.4"
+      ],
+      "rationaleCorrect": "TPMs support attestation (verify state), binding (encrypt), and sealing (encrypt with state requirements).",
+      "misconceptionTags": [
+        "1.4_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch11-q15",
+      "type": "mcq",
+      "stem": "A physically unclonable function (PUF) is BEST described as:",
+      "options": {
+        "A": "A serial number that can be edited in firmware",
+        "B": "A unique hardware fingerprint derived from manufacturing variations",
+        "C": "A password stored in a TPM",
+        "D": "A method for degaussing tapes"
+      },
+      "answer": "B",
+      "explanation": "A PUF leverages unique, hard-to-replicate physical characteristics created during manufacturing, providing a unique identifier or digital fingerprint for a device.",
+      "tags": [
+        "1.4",
+        "puf",
+        "hardware_root_of_trust"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "1.4"
+      ],
+      "rationaleCorrect": "A PUF leverages unique, hard-to-replicate physical characteristics created during manufacturing, providing a unique identifier or digital fingerprint for a device.",
+      "misconceptionTags": [
+        "1.4_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q16",
+      "type": "mcq",
+      "stem": "Which statement BEST describes a secure enclave / secure element?",
+      "options": {
+        "A": "A cloud service that stores encryption keys",
+        "B": "A dedicated hardware area that isolates cryptographic key management from the main CPU",
+        "C": "A TPM used only for disk encryption",
+        "D": "A software-only key vault on the OS"
+      },
+      "answer": "B",
+      "explanation": "Secure enclaves are hardware-isolated components that handle keys and sensitive operations, reducing exposure even if the main OS is compromised.",
+      "tags": [
+        "1.4",
+        "secure_enclave",
+        "key_management"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "1.4"
+      ],
+      "rationaleCorrect": "Secure enclaves are hardware-isolated components that handle keys and sensitive operations, reducing exposure even if the main OS is compromised.",
+      "misconceptionTags": [
+        "1.4_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q17",
+      "type": "multi_select",
+      "stem": "Which are examples of secure enclave / secure element technologies mentioned in modern devices? (Choose TWO.)",
+      "options": {
+        "A": "Apple Secure Enclave",
+        "B": "Google Titan M",
+        "C": "Windows Registry",
+        "D": "Telnet"
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "Secure enclaves/secure elements include Apple Secure Enclave and Google Titan M (others include Samsung TrustZone/Knox).",
+      "tags": [
+        "1.4",
+        "secure_enclave"
+      ],
+      "estimated_seconds": 65,
+      "difficulty": 3,
+      "objectiveIds": [
+        "1.4"
+      ],
+      "rationaleCorrect": "Secure enclaves/secure elements include Apple Secure Enclave and Google Titan M (others include Samsung TrustZone/Knox).",
+      "misconceptionTags": [
+        "1.4_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q18",
+      "type": "mcq",
+      "stem": "A company needs an external device to create, store, and manage cryptographic keys for multiple systems and offload crypto operations. What is the BEST fit?",
+      "options": {
+        "A": "TPM",
+        "B": "Hardware security module (HSM)",
+        "C": "Measured boot",
+        "D": "Sandbox"
+      },
+      "answer": "B",
+      "explanation": "HSMs are dedicated devices (or plug-in cards) used to create/store/manage keys and perform cryptographic operations, commonly in high-security environments.",
+      "tags": [
+        "1.4",
+        "hsm",
+        "key_management"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "1.4"
+      ],
+      "rationaleCorrect": "HSMs are dedicated devices (or plug-in cards) used to create/store/manage keys and perform cryptographic operations, commonly in high-security environments.",
+      "misconceptionTags": [
+        "1.4_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q19",
+      "type": "mcq",
+      "stem": "A cloud provider offers a managed service to centrally store and manage secrets/keys for workloads. What is this MOST commonly called?",
+      "options": {
+        "A": "KMS (Key Management Service/System)",
+        "B": "HIPS",
+        "C": "Degaussing",
+        "D": "Secure boot"
+      },
+      "answer": "A",
+      "explanation": "A KMS provides centralized management of keys and secrets, often as a cloud service.",
+      "tags": [
+        "1.4",
+        "kms",
+        "key_management"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "1.4"
+      ],
+      "rationaleCorrect": "A KMS provides centralized management of keys and secrets, often as a cloud service.",
+      "misconceptionTags": [
+        "1.4_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q20",
+      "type": "multi_select",
+      "stem": "Which statements correctly match the technology to its typical role? (Choose TWO.)",
+      "options": {
+        "A": "TPM: system security and platform integrity anchoring",
+        "B": "HSM: central key device for multiple systems; often certified (FIPS/Common Criteria)",
+        "C": "KMS: a malware analysis sandbox",
+        "D": "Secure enclave: network firewall appliance"
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "TPMs are typically used for platform/system trust and integrity. HSMs are used to create/store/manage keys (often for many systems) and may be certified (e.g., FIPS 140). A KMS is a key/secrets management service, and a secure enclave is an on-device isolated key manager.",
+      "tags": [
+        "1.4",
+        "tpm",
+        "hsm",
+        "kms",
+        "secure_enclave",
+        "key_management"
+      ],
+      "estimated_seconds": 65,
+      "difficulty": 3,
+      "objectiveIds": [
+        "1.4"
+      ],
+      "rationaleCorrect": "TPMs are typically used for platform/system trust and integrity.",
+      "misconceptionTags": [
+        "1.4_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q21",
+      "type": "mcq",
+      "stem": "Signature-based antimalware detection primarily works by:",
+      "options": {
+        "A": "Watching user behavior only",
+        "B": "Matching hashes/patterns of known malicious code",
+        "C": "Running every file in production",
+        "D": "Blocking all executable files"
+      },
+      "answer": "B",
+      "explanation": "Signature detection compares files/components to known malicious signatures (hashes/patterns). It's fast but struggles when malware changes frequently.",
+      "tags": [
+        "2.3",
+        "antimalware",
+        "signature_detection"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Signature detection compares files/components to known malicious signatures (hashes/patterns).",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q22",
+      "type": "mcq",
+      "stem": "Which malware technique most directly reduces the effectiveness of signature-based detection by changing its appearance each time?",
+      "options": {
+        "A": "Polymorphism",
+        "B": "Salting",
+        "C": "Tokenization",
+        "D": "Degaussing"
+      },
+      "answer": "A",
+      "explanation": "Polymorphic malware mutates on each install/execution, making static signatures less reliable. Attackers also use packing and encryption to evade signatures.",
+      "tags": [
+        "2.3",
+        "polymorphism",
+        "signature_detection",
+        "packing_obfuscation",
+        "antimalware"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Polymorphic malware mutates on each install/execution, making static signatures less reliable.",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q23",
+      "type": "mcq",
+      "stem": "Heuristic (behavior-based) detection is BEST described as antimalware that:",
+      "options": {
+        "A": "Only matches known hashes",
+        "B": "Looks for suspicious actions and compares them to profiles of unwanted behavior",
+        "C": "Requires an internet connection for every scan",
+        "D": "Only detects ransomware"
+      },
+      "answer": "B",
+      "explanation": "Heuristic detection focuses on what a program does (behaviors) rather than only what it looks like (signatures).",
+      "tags": [
+        "2.3",
+        "antimalware",
+        "heuristic_detection"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Heuristic detection focuses on what a program does (behaviors) rather than only what it looks like (signatures).",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q24",
+      "type": "mcq",
+      "stem": "Why do many antimalware products use sandboxing?",
+      "options": {
+        "A": "To permanently delete all suspicious files",
+        "B": "To isolate and run untrusted code and observe actions for analysis",
+        "C": "To speed up the CPU",
+        "D": "To encrypt the TPM"
+      },
+      "answer": "B",
+      "explanation": "A sandbox is an isolated environment where potentially dangerous code can be executed safely so its behavior can be observed and analyzed.",
+      "tags": [
+        "2.3",
+        "sandboxing",
+        "antimalware"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "A sandbox is an isolated environment where potentially dangerous code can be executed safely so its behavior can be observed and analyzed.",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q25",
+      "type": "mcq",
+      "stem": "Which open-source automated malware analysis sandbox is commonly referenced in security training?",
+      "options": {
+        "A": "Cuckoo Sandbox",
+        "B": "Wireshark",
+        "C": "Nmap",
+        "D": "pfSense"
+      },
+      "answer": "A",
+      "explanation": "Cuckoo Sandbox is a well-known automated malware analysis sandbox used for dynamic analysis.",
+      "tags": [
+        "2.3",
+        "sandboxing",
+        "antimalware"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Cuckoo Sandbox is a well-known automated malware analysis sandbox used for dynamic analysis.",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q26",
+      "type": "multi_select",
+      "stem": "Which are common malware detection approaches mentioned for modern endpoint tools? (Choose THREE.)",
+      "options": {
+        "A": "Signature-based detection",
+        "B": "Heuristic/behavior-based detection",
+        "C": "AI/ML-based detection",
+        "D": "Degaussing",
+        "E": "Physical shredding"
+      },
+      "answers": [
+        "A",
+        "B",
+        "C"
+      ],
+      "explanation": "Common detection approaches include signatures, heuristic/behavior methods, and increasingly AI/ML. Degaussing and shredding are media sanitization techniques, not malware detection.",
+      "tags": [
+        "2.3",
+        "antimalware",
+        "signature_detection",
+        "heuristic_detection"
+      ],
+      "estimated_seconds": 65,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Common detection approaches include signatures, heuristic/behavior methods, and increasingly AI/ML.",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "E": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q27",
+      "type": "mcq",
+      "stem": "An application allow list (allowlist) security control primarily does what?",
+      "options": {
+        "A": "Allows only approved applications to run",
+        "B": "Allows only approved USB devices to be plugged in",
+        "C": "Encrypts all files automatically",
+        "D": "Removes admin accounts"
+      },
+      "answer": "A",
+      "explanation": "Allow lists permit only explicitly approved software to execute, reducing exposure to unknown or unauthorized applications.",
+      "tags": [
+        "2.3",
+        "allow_list",
+        "hardening"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Allow lists permit only explicitly approved software to execute, reducing exposure to unknown or unauthorized applications.",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q28",
+      "type": "mcq",
+      "stem": "Which is the BEST description of a block list (deny list)?",
+      "options": {
+        "A": "Only approved items are allowed",
+        "B": "Known-bad items are denied while everything else is allowed",
+        "C": "It requires a TPM chip",
+        "D": "It is a type of encryption"
+      },
+      "answer": "B",
+      "explanation": "Block/deny lists stop known-bad items but allow unknowns by default, which can be riskier in high-threat environments than allow lists.",
+      "tags": [
+        "2.3",
+        "block_list",
+        "hardening"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Block/deny lists stop known-bad items but allow unknowns by default, which can be riskier in high-threat environments than allow lists.",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q29",
+      "type": "mcq",
+      "stem": "Endpoint Detection and Response (EDR) tools generally combine endpoint agents with which additional capabilities?",
+      "options": {
+        "A": "Only password policies",
+        "B": "Network monitoring and log analysis to collect/correlate events",
+        "C": "Physical drive shredders",
+        "D": "WEP encryption"
+      },
+      "answer": "B",
+      "explanation": "EDR combines endpoint monitoring (agents) with collection/correlation/analysis of logs and events to support detection and investigation.",
+      "tags": [
+        "4.2",
+        "edr",
+        "anomaly_detection",
+        "ioc"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "4.2"
+      ],
+      "rationaleCorrect": "EDR combines endpoint monitoring (agents) with collection/correlation/analysis of logs and events to support detection and investigation.",
+      "misconceptionTags": [
+        "4.2_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q30",
+      "type": "mcq",
+      "stem": "What is a key benefit of EDR compared to traditional antivirus?",
+      "options": {
+        "A": "It eliminates the need for patching",
+        "B": "It supports investigation via searching/exploring collected security data and detecting anomalies/IoCs",
+        "C": "It prevents all phishing",
+        "D": "It replaces encryption"
+      },
+      "answer": "B",
+      "explanation": "EDR systems support investigation by providing searchable, correlated event data and detection of anomalies and indicators of compromise.",
+      "tags": [
+        "4.2",
+        "edr",
+        "ioc",
+        "anomaly_detection"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "4.2"
+      ],
+      "rationaleCorrect": "EDR systems support investigation by providing searchable, correlated event data and detection of anomalies and indicators of compromise.",
+      "misconceptionTags": [
+        "4.2_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q31",
+      "type": "mcq",
+      "stem": "Extended Detection and Response (XDR) is BEST described as:",
+      "options": {
+        "A": "EDR limited to laptops only",
+        "B": "A broader approach that ingests logs/events across the tech stack (cloud, email, platforms) beyond endpoints",
+        "C": "A physical firewall",
+        "D": "A disk-wipe utility"
+      },
+      "answer": "B",
+      "explanation": "XDR expands visibility beyond endpoints to include more of an organization's technology stack, using analytics to detect and respond across sources like cloud services, email, and security platforms.",
+      "tags": [
+        "4.2",
+        "xdr",
+        "edr"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "4.2"
+      ],
+      "rationaleCorrect": "XDR expands visibility beyond endpoints to include more of an organization's technology stack, using analytics to detect and respond across sources like cloud services, email, and security platforms.",
+      "misconceptionTags": [
+        "4.2_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q32",
+      "type": "mcq",
+      "stem": "Data Loss Prevention (DLP) tools are primarily intended to:",
+      "options": {
+        "A": "Detect firmware rootkits",
+        "B": "Prevent sensitive data from leaving the organization (theft or accidental exposure)",
+        "C": "Increase wireless signal strength",
+        "D": "Replace MFA"
+      },
+      "answer": "B",
+      "explanation": "DLP focuses on preventing exfiltration or unintended exposure of sensitive data through channels like email, web uploads, endpoints, and removable media.",
+      "tags": [
+        "2.3",
+        "dlp"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "DLP focuses on preventing exfiltration or unintended exposure of sensitive data through channels like email, web uploads, endpoints, and removable media.",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q33",
+      "type": "multi_select",
+      "stem": "Which scenarios are good use-cases for DLP? (Choose TWO.)",
+      "options": {
+        "A": "Blocking outbound emails that contain customer SSNs",
+        "B": "Preventing copy of classified files to USB drives",
+        "C": "Measuring boot hashes in TPM",
+        "D": "Replacing legacy PLC firmware automatically"
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "DLP is used to reduce data leakage through email, uploads, or removable media. TPM boot measurements and PLC firmware updates are different controls.",
+      "tags": [
+        "2.3",
+        "dlp",
+        "hardening"
+      ],
+      "estimated_seconds": 65,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "DLP is used to reduce data leakage through email, uploads, or removable media.",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q34",
+      "type": "mcq",
+      "stem": "A host-based firewall is MOST likely to filter traffic based on:",
+      "options": {
+        "A": "User mood",
+        "B": "Applications/services, ports, and protocols on the endpoint",
+        "C": "Disk sector patterns",
+        "D": "Smart card certificates only"
+      },
+      "answer": "B",
+      "explanation": "Host firewalls commonly block/allow by app/service/port/protocol on the endpoint. They often provide less deep inspection than dedicated network security appliances.",
+      "tags": [
+        "2.3",
+        "host_firewall",
+        "network_defense"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Host firewalls commonly block/allow by app/service/port/protocol on the endpoint.",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q35",
+      "type": "mcq",
+      "stem": "A host-based intrusion prevention system (HIPS) differs from a host-based intrusion detection system (HIDS) because HIPS typically:",
+      "options": {
+        "A": "Only logs events",
+        "B": "Analyzes and can block traffic/actions before the host processes them",
+        "C": "Only scans for signatures weekly",
+        "D": "Works only on IoT devices"
+      },
+      "answer": "B",
+      "explanation": "HIPS is preventive—analyzes and blocks suspicious activity before it reaches services/apps. HIDS is detective—alerts/logs suspicious activity.",
+      "tags": [
+        "2.3",
+        "hips",
+        "hids",
+        "network_defense"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "HIPS is preventive—analyzes and blocks suspicious activity before it reaches services/apps.",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q36",
+      "type": "mcq",
+      "stem": "You need deeper insight and automated blocking of suspicious inbound traffic to a workstation than a simple host firewall provides. What should you add?",
+      "options": {
+        "A": "HIPS",
+        "B": "Data remanence",
+        "C": "End of sales",
+        "D": "Decommissioning"
+      },
+      "answer": "A",
+      "explanation": "A host firewall often blocks/permits by ports/apps; a HIPS can inspect and block malicious traffic and behaviors before they reach the host services/applications.",
+      "tags": [
+        "2.3",
+        "hips",
+        "host_firewall",
+        "network_defense"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "A host firewall often blocks/permits by ports/apps; a HIPS can inspect and block malicious traffic and behaviors before they reach the host services/applications.",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q37",
+      "type": "multi_select",
+      "stem": "Which are common endpoint hardening techniques? (Choose THREE.)",
+      "options": {
+        "A": "Changing default passwords",
+        "B": "Removing unnecessary software",
+        "C": "Disabling unused ports/protocols/services",
+        "D": "Enabling Telnet for remote admin",
+        "E": "Turning off logging"
+      },
+      "answers": [
+        "A",
+        "B",
+        "C"
+      ],
+      "explanation": "Hardening reduces exposure: remove unnecessary components, change insecure defaults, disable unneeded services/ports/protocols, and add protective controls like encryption and endpoint protection.",
+      "tags": [
+        "2.3",
+        "hardening",
+        "insecure_defaults"
+      ],
+      "estimated_seconds": 65,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Hardening reduces exposure: remove unnecessary components, change insecure defaults, disable unneeded services/ports/protocols, and add protective controls like encryption and endpoint protection.",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "E": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q38",
+      "type": "mcq",
+      "stem": "A secure baseline lifecycle commonly includes which three phases?",
+      "options": {
+        "A": "Establish, Deploy, Maintain",
+        "B": "Buy, Break, Blame",
+        "C": "Scan, Exploit, Exfiltrate",
+        "D": "Encrypt, Hash, Sign"
+      },
+      "answer": "A",
+      "explanation": "Baselines are established (often from a standard like CIS), deployed (via tools or manually), and maintained (enforced and updated as needs change).",
+      "tags": [
+        "4.1",
+        "secure_baseline",
+        "cis_benchmarks"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "Baselines are established (often from a standard like CIS), deployed (via tools or manually), and maintained (enforced and updated as needs change).",
+      "misconceptionTags": [
+        "4.1_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q39",
+      "type": "mcq",
+      "stem": "Which resource is commonly used as a starting point for secure configuration baselines for endpoints?",
+      "options": {
+        "A": "CIS Benchmarks",
+        "B": "WEP whitepaper",
+        "C": "FTP RFCs only",
+        "D": "MD5 collision demos"
+      },
+      "answer": "A",
+      "explanation": "Organizations often use an industry standard baseline like CIS Benchmarks and then tailor it to their environment.",
+      "tags": [
+        "4.1",
+        "secure_baseline",
+        "cis_benchmarks"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "Organizations often use an industry standard baseline like CIS Benchmarks and then tailor it to their environment.",
+      "misconceptionTags": [
+        "4.1_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q40",
+      "type": "mcq",
+      "stem": "Why is 'patch management' more than simply applying patches immediately?",
+      "options": {
+        "A": "Because patching is never useful",
+        "B": "Because patches can introduce issues; patching needs planning, testing, and controlled rollout",
+        "C": "Because patching only applies to firmware",
+        "D": "Because antivirus replaces patching"
+      },
+      "answer": "B",
+      "explanation": "Patching reduces known vulnerabilities, but patch management adds control: testing, scheduling, rollback plans, and coordinated deployment to manage patch risk.",
+      "tags": [
+        "2.3",
+        "patching",
+        "patch_management"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Patching reduces known vulnerabilities, but patch management adds control: testing, scheduling, rollback plans, and coordinated deployment to manage patch risk.",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q41",
+      "type": "mcq",
+      "stem": "Which mitigation technique most directly reduces the window of exposure to known software vulnerabilities?",
+      "options": {
+        "A": "Enumeration",
+        "B": "Timely patching",
+        "C": "Decommissioning",
+        "D": "Degaussing"
+      },
+      "answer": "B",
+      "explanation": "Patching removes known vulnerabilities; the quicker you patch, the smaller the exploitation window. Patch management ensures that patching is safe and controlled.",
+      "tags": [
+        "2.3",
+        "patching"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Patching removes known vulnerabilities; the quicker you patch, the smaller the exploitation window.",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q42",
+      "type": "mcq",
+      "stem": "Configuration enforcement in an enterprise is BEST described as:",
+      "options": {
+        "A": "Letting each user customize security settings freely",
+        "B": "Using centralized tools/policies to apply and enforce desired configurations at scale",
+        "C": "Deleting all logs weekly",
+        "D": "Replacing endpoints with servers"
+      },
+      "answer": "B",
+      "explanation": "Configuration enforcement uses management tooling (policies, baselines, MDM/GPO, etc.) to ensure systems stay aligned with required settings.",
+      "tags": [
+        "2.3",
+        "configuration_enforcement",
+        "secure_baseline"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Configuration enforcement uses management tooling (policies, baselines, MDM/GPO, etc.) to ensure systems stay aligned with required settings.",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q43",
+      "type": "mcq",
+      "stem": "Group Policy Objects (GPOs) are primarily used to:",
+      "options": {
+        "A": "Physically shred drives",
+        "B": "Apply and manage security settings centrally (often via Active Directory)",
+        "C": "Replace secure boot",
+        "D": "Perform vulnerability scanning only"
+      },
+      "answer": "B",
+      "explanation": "GPOs can be applied locally or through Active Directory for large-scale managed enforcement of configuration and security settings.",
+      "tags": [
+        "4.1",
+        "group_policy",
+        "configuration_enforcement"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "GPOs can be applied locally or through Active Directory for large-scale managed enforcement of configuration and security settings.",
+      "misconceptionTags": [
+        "4.1_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q44",
+      "type": "mcq",
+      "stem": "Microsoft's Security Compliance Toolkit (SCT) is used to:",
+      "options": {
+        "A": "Degauss magnetic tapes",
+        "B": "Compare deployed policies to Microsoft security baselines and assist with editing/deployment",
+        "C": "Detect IoCs on endpoints without agents",
+        "D": "Replace antivirus signatures"
+      },
+      "answer": "B",
+      "explanation": "The SCT provides tools and baselines to compare and manage Windows security configurations, including analysis and deployment support.",
+      "tags": [
+        "4.1",
+        "security_compliance_toolkit",
+        "group_policy",
+        "secure_baseline"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "The SCT provides tools and baselines to compare and manage Windows security configurations, including analysis and deployment support.",
+      "misconceptionTags": [
+        "4.1_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q45",
+      "type": "mcq",
+      "stem": "SELinux (Security-Enhanced Linux) primarily provides which control model?",
+      "options": {
+        "A": "Discretionary access control (DAC) only",
+        "B": "Mandatory access control (MAC) enforced via kernel policies",
+        "C": "WEP encryption",
+        "D": "Password hashing"
+      },
+      "answer": "B",
+      "explanation": "SELinux is a kernel security module adding mandatory access control capabilities, enforcing least-privilege policies over users, files, services, and network resources.",
+      "tags": [
+        "4.1",
+        "selinux",
+        "mac",
+        "hardening"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "SELinux is a kernel security module adding mandatory access control capabilities, enforcing least-privilege policies over users, files, services, and network resources.",
+      "misconceptionTags": [
+        "4.1_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q46",
+      "type": "mcq",
+      "stem": "SELinux permissions are typically enforced using labels and policies based on:",
+      "options": {
+        "A": "Username, role, and type/domain",
+        "B": "MAC address and VLAN only",
+        "C": "Disk serial numbers only",
+        "D": "PKI certificate chain only"
+      },
+      "answer": "A",
+      "explanation": "SELinux uses a labeling model (often described by user/role/type or domain) and policies that describe allowed interactions with resources.",
+      "tags": [
+        "4.1",
+        "selinux",
+        "mac"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "SELinux uses a labeling model (often described by user/role/type or domain) and policies that describe allowed interactions with resources.",
+      "misconceptionTags": [
+        "4.1_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q47",
+      "type": "mcq",
+      "stem": "An embedded system is BEST described as:",
+      "options": {
+        "A": "A cloud-only workload",
+        "B": "A computer system built into another device (appliances, cars, industrial machinery)",
+        "C": "A desktop PC used by a developer",
+        "D": "A database server"
+      },
+      "answer": "B",
+      "explanation": "Embedded systems are computers built into other devices; they may run specialized OSs and expose limited interfaces, though some run Linux and have wireless connectivity.",
+      "tags": [
+        "3.1",
+        "embedded_systems"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "3.1"
+      ],
+      "rationaleCorrect": "Embedded systems are computers built into other devices; they may run specialized OSs and expose limited interfaces, though some run Linux and have wireless connectivity.",
+      "misconceptionTags": [
+        "3.1_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q48",
+      "type": "mcq",
+      "stem": "A real-time operating system (RTOS) is MOST appropriate when:",
+      "options": {
+        "A": "You want maximum variability in response time",
+        "B": "You must process incoming data quickly with minimal timing variance (common in industrial/embedded use)",
+        "C": "You only need a GUI",
+        "D": "You want to degauss tapes"
+      },
+      "answer": "B",
+      "explanation": "RTOSs prioritize predictable, timely processing of events/data—important in industrial control and embedded environments where latency/variance matters.",
+      "tags": [
+        "3.1",
+        "rtos",
+        "embedded_systems"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "3.1"
+      ],
+      "rationaleCorrect": "RTOSs prioritize predictable, timely processing of events/data—important in industrial control and embedded environments where latency/variance matters.",
+      "misconceptionTags": [
+        "3.1_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q49",
+      "type": "mcq",
+      "stem": "In a typical SCADA system, which component directly controls industrial devices and collects data from them?",
+      "options": {
+        "A": "PLC (Programmable Logic Controller)",
+        "B": "EDR agent",
+        "C": "KMS",
+        "D": "HSM"
+      },
+      "answer": "A",
+      "explanation": "PLCs control and collect data from industrial devices. RTUs gather data from sensors and forward it to the control/monitoring system.",
+      "tags": [
+        "3.1",
+        "ics_scada",
+        "plc",
+        "rtu"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "3.1"
+      ],
+      "rationaleCorrect": "PLCs control and collect data from industrial devices.",
+      "misconceptionTags": [
+        "3.1_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q50",
+      "type": "mcq",
+      "stem": "Which statement is MOST accurate about securing ICS/SCADA environments?",
+      "options": {
+        "A": "They are usually designed with modern security built in",
+        "B": "Adding security controls may interfere with function; isolation/segmentation is often one of the most effective measures",
+        "C": "They can be patched daily without risk",
+        "D": "They always use the same protocols as web apps"
+      },
+      "answer": "B",
+      "explanation": "ICS/SCADA systems often weren't designed with security in mind, and controls can disrupt operations. Isolation/segmentation and careful design are commonly effective approaches.",
+      "tags": [
+        "3.1",
+        "ics_scada",
+        "hardening",
+        "compensating_controls"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "3.1"
+      ],
+      "rationaleCorrect": "ICS/SCADA systems often weren't designed with security in mind, and controls can disrupt operations.",
+      "misconceptionTags": [
+        "3.1_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q51",
+      "type": "multi_select",
+      "stem": "Which are common IoT security/privacy concerns? (Choose THREE.)",
+      "options": {
+        "A": "Weak default settings and authentication",
+        "B": "Short support lifespans and lack of patching",
+        "C": "Vendor data-handling and data ownership concerns",
+        "D": "Mandatory access control always enabled by default",
+        "E": "Guaranteed encryption for all IoT devices"
+      },
+      "answers": [
+        "A",
+        "B",
+        "C"
+      ],
+      "explanation": "IoT risks often include weak defaults, poor authentication, lack of encryption or insecure storage, short support lifetimes (no updates), and vendor data-handling/privacy issues.",
+      "tags": [
+        "3.1",
+        "iot_security",
+        "embedded_systems",
+        "insecure_defaults",
+        "patching"
+      ],
+      "estimated_seconds": 65,
+      "difficulty": 3,
+      "objectiveIds": [
+        "3.1"
+      ],
+      "rationaleCorrect": "IoT risks often include weak defaults, poor authentication, lack of encryption or insecure storage, short support lifetimes (no updates), and vendor data-handling/privacy issues.",
+      "misconceptionTags": [
+        "3.1_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "E": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q52",
+      "type": "mcq",
+      "stem": "Why are asset inventories important in security operations?",
+      "options": {
+        "A": "They increase Wi‑Fi speed",
+        "B": "Without them it's hard to know what exists, what is missing/compromised, and incidents may go unnoticed",
+        "C": "They automatically patch systems",
+        "D": "They replace EDR"
+      },
+      "answer": "B",
+      "explanation": "If you don't know what you own and where it is, you can't protect it well. Incidents can be missed if compromised or lost assets aren't tracked.",
+      "tags": [
+        "4.4",
+        "asset_inventory",
+        "enumeration"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "4.4"
+      ],
+      "rationaleCorrect": "If you don't know what you own and where it is, you can't protect it well.",
+      "misconceptionTags": [
+        "4.4_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q53",
+      "type": "mcq",
+      "stem": "In the Security+ context, 'enumeration' in asset management is MOST closely related to:",
+      "options": {
+        "A": "Counting encryption keys manually",
+        "B": "Scanning/identifying assets (often via port/vulnerability scans) to find unmanaged systems",
+        "C": "Destroying media",
+        "D": "Signing email with DKIM"
+      },
+      "answer": "B",
+      "explanation": "Enumeration is commonly associated with scanning to identify assets. Some orgs use scans to detect devices not in their inventory.",
+      "tags": [
+        "4.4",
+        "enumeration",
+        "asset_inventory"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "4.4"
+      ],
+      "rationaleCorrect": "Enumeration is commonly associated with scanning to identify assets.",
+      "misconceptionTags": [
+        "4.4_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q54",
+      "type": "mcq",
+      "stem": "Decommissioning a system typically includes which action?",
+      "options": {
+        "A": "Leaving it in inventory for easier audits",
+        "B": "Removing from service and inventory and ensuring no sensitive data remains on the system/media",
+        "C": "Enabling default passwords",
+        "D": "Disabling encryption"
+      },
+      "answer": "B",
+      "explanation": "Decommissioning involves taking the device out of service, updating inventory, and ensuring data is wiped or the media/device is destroyed appropriately.",
+      "tags": [
+        "2.3",
+        "decommissioning",
+        "sanitization"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Decommissioning involves taking the device out of service, updating inventory, and ensuring data is wiped or the media/device is destroyed appropriately.",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q55",
+      "type": "mcq",
+      "stem": "Sanitizing drives/media generally involves which two broad approaches?",
+      "options": {
+        "A": "Compression or encryption",
+        "B": "Wiping the data or destroying the media",
+        "C": "Backups or snapshots",
+        "D": "Allow lists or block lists"
+      },
+      "answer": "B",
+      "explanation": "Sanitization typically means wipe (render data unrecoverable) or destroy the media so recovery is impossible.",
+      "tags": [
+        "2.3",
+        "sanitization",
+        "decommissioning"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Sanitization typically means wipe (render data unrecoverable) or destroy the media so recovery is impossible.",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q56",
+      "type": "mcq",
+      "stem": "A degausser is MOST appropriate for sanitizing which media type?",
+      "options": {
+        "A": "Magnetic tapes and similar magnetic media",
+        "B": "Optical discs only",
+        "C": "Cloud storage buckets",
+        "D": "TPM chips"
+      },
+      "answer": "A",
+      "explanation": "Degaussing uses strong electromagnetic fields to scramble magnetic patterns, making it useful for tapes and other magnetic media.",
+      "tags": [
+        "2.3",
+        "degaussing",
+        "sanitization"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Degaussing uses strong electromagnetic fields to scramble magnetic patterns, making it useful for tapes and other magnetic media.",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q57",
+      "type": "mcq",
+      "stem": "Why can traditional multi-pass wiping be less reliable on SSDs than on magnetic hard drives?",
+      "options": {
+        "A": "SSDs are always encrypted",
+        "B": "Wear-leveling can leave remnant data in locations not directly overwritten by standard wipe tools",
+        "C": "SSDs cannot store sensitive data",
+        "D": "SSDs are degaussed automatically"
+      },
+      "answer": "B",
+      "explanation": "SSD wear-leveling spreads writes across the drive, meaning data remnants may remain in areas not overwritten by simple pass-based wipe utilities.",
+      "tags": [
+        "2.3",
+        "data_remanence",
+        "wear_leveling",
+        "sanitization"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "SSD wear-leveling spreads writes across the drive, meaning data remnants may remain in areas not overwritten by simple pass-based wipe utilities.",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q58",
+      "type": "mcq",
+      "stem": "Which approach is specifically helpful for sanitizing SSDs where wear-leveling may leave remnant data?",
+      "options": {
+        "A": "Using the drive's built-in Secure Erase command or vendor tools",
+        "B": "Turning off the firewall",
+        "C": "Using WEP encryption",
+        "D": "Only deleting files in the OS"
+      },
+      "answer": "A",
+      "explanation": "Tools that invoke the drive's Secure Erase functionality can better address SSD internals than basic overwrite tools.",
+      "tags": [
+        "2.3",
+        "secure_erase",
+        "sanitization"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Tools that invoke the drive's Secure Erase functionality can better address SSD internals than basic overwrite tools.",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q59",
+      "type": "mcq",
+      "stem": "An organization uses full-disk encryption on laptops for their entire life, then discards the encryption key when retiring a drive. This is BEST described as:",
+      "options": {
+        "A": "Degaussing",
+        "B": "Cryptographic erase (crypto erase)",
+        "C": "Firmware patching",
+        "D": "EDR"
+      },
+      "answer": "B",
+      "explanation": "If data is encrypted for the drive's life, destroying/discarding the key makes the data practically unrecoverable for most threat models—this is crypto erase.",
+      "tags": [
+        "2.3",
+        "full_disk_encryption",
+        "crypto_erase",
+        "sanitization"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "If data is encrypted for the drive's life, destroying/discarding the key makes the data practically unrecoverable for most threat models—this is crypto erase.",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q60",
+      "type": "multi_select",
+      "stem": "Which are examples of physical destruction techniques for storage media? (Choose TWO.)",
+      "options": {
+        "A": "Shredding or pulverizing drives",
+        "B": "Incinerating drives",
+        "C": "Running antivirus scans",
+        "D": "Applying Group Policy"
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "Physical destruction methods include shredding, pulverizing, or incinerating drives so data cannot be recovered.",
+      "tags": [
+        "2.3",
+        "physical_destruction",
+        "sanitization",
+        "decommissioning"
+      ],
+      "estimated_seconds": 65,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Physical destruction methods include shredding, pulverizing, or incinerating drives so data cannot be recovered.",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch11-q61",
+      "type": "mcq",
+      "stem": "Certificates of destruction are used to:",
+      "options": {
+        "A": "Prove a patch was installed",
+        "B": "Document that media/assets were properly destroyed and decommissioned",
+        "C": "Authenticate users to Wi‑Fi",
+        "D": "Store passwords reversibly"
+      },
+      "answer": "B",
+      "explanation": "Organizations often require certification to prove assets/media were destroyed and disposed of properly, especially when using third-party vendors.",
+      "tags": [
+        "2.3",
+        "certificate_of_destruction",
+        "decommissioning"
+      ],
+      "estimated_seconds": 55,
+      "difficulty": 3,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Organizations often require certification to prove assets/media were destroyed and disposed of properly, especially when using third-party vendors.",
+      "misconceptionTags": [
+        "2.3_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "type": "mcq",
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "rationaleCorrect": "Asset systems with lifecycle controls provide reliable operational and security context.",
+      "rationaleIncorrect": {
+        "A": "Stale snapshots miss drift and unmanaged assets.",
+        "C": "Informal notes are incomplete and non-auditable.",
+        "D": "Headcount does not map device/service inventory.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "inventory_as_snapshot",
+        "informal_tracking"
+      ],
+      "id": "ch11_obj42_q01",
+      "stem": "Which source should be treated as the authoritative inventory for enterprise security assets?",
+      "explanation": "An authoritative inventory is continuously maintained and tied to ownership/lifecycle processes.",
+      "tags": [
+        "asset_inventory",
+        "asset_management",
+        "governance"
+      ],
+      "objectiveIds": [
+        "4.2"
+      ],
+      "options": {
+        "A": "A one-time spreadsheet exported last year",
+        "B": "A continuously updated asset management system with ownership metadata",
+        "C": "Unofficial team notes in chat",
+        "D": "A monthly headcount report"
+      },
+      "answer": "B"
+    },
+    {
+      "type": "mcq",
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "rationaleCorrect": "Without vendor fixes, vulnerabilities accumulate and compensating controls are harder to sustain.",
+      "rationaleIncorrect": {
+        "A": "Security generally worsens when patch support ends.",
+        "C": "EOS affects support status, not immediate boot behavior.",
+        "D": "Compliance typically becomes more difficult, not exempted.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "eos_underestimation",
+        "support_vs_operation_confusion"
+      ],
+      "id": "ch11_obj42_q02",
+      "stem": "What does end-of-support (EOS) most directly imply for an operating system?",
+      "explanation": "EOS means vendor updates and support are no longer available, increasing risk exposure over time.",
+      "tags": [
+        "asset_lifecycle",
+        "eos",
+        "patching"
+      ],
+      "objectiveIds": [
+        "4.2"
+      ],
+      "options": {
+        "A": "The OS becomes automatically more secure",
+        "B": "Vendor security updates and support cease",
+        "C": "The OS can no longer boot",
+        "D": "The OS is exempt from compliance checks"
+      },
+      "answer": "B"
+    },
+    {
+      "type": "multi_select",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "Owner and classification are core metadata for governance and incident handling.",
+      "rationaleIncorrect": {
+        "A": "Correct: ownership defines who accepts risk and approves changes.",
+        "B": "Correct: classification informs control and response rigor.",
+        "C": "Personal preference data is irrelevant to asset governance.",
+        "D": "Raw reboot counts alone do not establish ownership or sensitivity."
+      },
+      "misconceptionTags": [
+        "inventory_metadata_gap",
+        "asset_context_missing"
+      ],
+      "id": "ch11_obj42_q03",
+      "stem": "Which fields are essential in a security-focused asset record? (Choose TWO.)",
+      "explanation": "Ownership and classification drive accountability, response priority, and control selection.",
+      "tags": [
+        "asset_inventory",
+        "ownership",
+        "classification"
+      ],
+      "objectiveIds": [
+        "4.2"
+      ],
+      "options": {
+        "A": "Business owner",
+        "B": "Data/system classification",
+        "C": "Favorite color of asset custodian",
+        "D": "Number of times device was rebooted last year"
+      },
+      "answers": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "type": "scenario_mcq",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "Containment plus verification prevents unmanaged or rogue devices from persisting in production.",
+      "rationaleIncorrect": {
+        "A": "Antivirus presence does not validate authorization or ownership.",
+        "C": "Privilege escalation worsens risk and bypasses governance.",
+        "D": "Logging is essential during potential unauthorized asset events.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "unknown_asset_tolerance",
+        "containment_delay"
+      ],
+      "id": "ch11_obj42_q04",
+      "stem": "A NAC alert detects an unknown laptop on a production VLAN. What is the best immediate action?",
+      "explanation": "Unknown assets should be contained, identified, and enrolled before production access is granted.",
+      "tags": [
+        "unknown_assets",
+        "nac",
+        "containment"
+      ],
+      "objectiveIds": [
+        "4.2"
+      ],
+      "options": {
+        "A": "Ignore if it has antivirus installed",
+        "B": "Quarantine the asset and trigger inventory/ownership verification workflow",
+        "C": "Add it to a privileged admin group to avoid disruption",
+        "D": "Disable logging to reduce noise"
+      },
+      "answer": "B"
+    },
+    {
+      "type": "scenario_mcq",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "Defined ownership resolves accountability deadlock and enables reliable maintenance decisions.",
+      "rationaleIncorrect": {
+        "B": "Delays increase exposure without solving ownership ambiguity.",
+        "C": "Uncontrolled change introduces operational and compliance risk.",
+        "D": "Network placement does not replace lifecycle governance.",
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "ownership_ambiguity",
+        "patch_accountability_gap"
+      ],
+      "id": "ch11_obj42_q05",
+      "stem": "Patching is repeatedly delayed on a critical server because no team agrees who owns it. What control fixes the root cause?",
+      "explanation": "Clear asset ownership assignment is foundational for lifecycle operations and risk accountability.",
+      "tags": [
+        "asset_ownership",
+        "patch_management",
+        "governance"
+      ],
+      "objectiveIds": [
+        "4.2"
+      ],
+      "options": {
+        "A": "Assign a documented business and technical owner with escalation path",
+        "B": "Delay patching until quarterly audit",
+        "C": "Allow any engineer to patch without change records",
+        "D": "Move the server to a guest network permanently"
+      },
+      "answer": "A"
+    },
+    {
+      "type": "scenario_mcq",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "Policy-driven metadata and automation maintain asset visibility at cloud speed.",
+      "rationaleIncorrect": {
+        "A": "Full bans often fail and encourage shadow processes.",
+        "C": "Manual snapshots are incomplete and quickly stale.",
+        "D": "Cost tooling is useful but not a complete security inventory.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "cloud_inventory_gap",
+        "manual_tracking_limits"
+      ],
+      "id": "ch11_obj42_q06",
+      "stem": "Cloud instances are created ad hoc and frequently abandoned. Security wants better control with minimal friction. What is best?",
+      "explanation": "Mandatory tagging and automated inventory sync improve visibility without blocking velocity.",
+      "tags": [
+        "cloud_assets",
+        "tagging",
+        "inventory_automation"
+      ],
+      "objectiveIds": [
+        "4.2"
+      ],
+      "options": {
+        "A": "Ban all cloud instance creation",
+        "B": "Require tags (owner, environment, data class) and sync to central asset inventory",
+        "C": "Rely on manual monthly screenshots",
+        "D": "Trust cost dashboard alone as inventory source"
+      },
+      "answer": "B"
+    },
+    {
+      "type": "matching",
+      "difficulty": 3,
+      "estimated_seconds": 90,
+      "rationaleCorrect": "Each lifecycle stage has a distinct control objective that prevents downstream security debt.",
+      "rationaleIncorrect": {
+        "Procure": "Ownership and classification should start before deployment.",
+        "Deploy": "Baseline hardening belongs before exposure to production traffic.",
+        "Operate": "Operations require continuous monitoring and maintenance.",
+        "Retire": "Retirement must include sanitization and inventory closure."
+      },
+      "misconceptionTags": [
+        "lifecycle_stage_blur",
+        "retirement_control_gap"
+      ],
+      "id": "ch11_obj42_q07",
+      "stem": "Match each asset lifecycle stage to the best security activity.",
+      "explanation": "Lifecycle-aware controls reduce orphaned assets, stale access, and disposal leakage.",
+      "tags": [
+        "asset_lifecycle",
+        "security_operations",
+        "governance"
+      ],
+      "objectiveIds": [
+        "4.2"
+      ],
+      "left": [
+        "Procure",
+        "Deploy",
+        "Operate",
+        "Retire"
+      ],
+      "right": [
+        "Assign owner and classification",
+        "Apply hardened baseline before production use",
+        "Monitor drift and patch status",
+        "Sanitize data and update inventory status"
+      ],
+      "pairs": {
+        "Procure": "Assign owner and classification",
+        "Deploy": "Apply hardened baseline before production use",
+        "Operate": "Monitor drift and patch status",
+        "Retire": "Sanitize data and update inventory status"
+      }
+    },
+    {
+      "type": "mcq",
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "rationaleCorrect": "Drift points to change-control gaps and potential risk accumulation.",
+      "rationaleIncorrect": {
+        "A": "Decommission status requires explicit retirement records, not drift alone.",
+        "C": "Drift is a configuration signal, not direct theft evidence.",
+        "D": "Drift often increases patch and hardening needs.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "drift_ignored",
+        "configuration_governance_gap"
+      ],
+      "id": "ch11_obj42_q08",
+      "stem": "Security baseline drift primarily indicates what asset-management concern?",
+      "explanation": "Drift suggests unmanaged change or missing configuration governance over assets.",
+      "tags": [
+        "baseline_drift",
+        "asset_governance",
+        "configuration_management"
+      ],
+      "objectiveIds": [
+        "4.2"
+      ],
+      "options": {
+        "A": "The asset is definitely decommissioned",
+        "B": "The asset may be outside approved configuration control",
+        "C": "The asset is physically stolen",
+        "D": "The asset no longer needs patching"
+      },
+      "answer": "B"
+    },
+    {
+      "type": "multi_select",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "Secure disposal and accurate records close lifecycle risk properly.",
+      "rationaleIncorrect": {
+        "A": "Correct: sanitization prevents residual data exposure.",
+        "B": "Stale active records create false assurance and incident confusion.",
+        "C": "Correct: inventory state must match actual asset disposition.",
+        "D": "Credential reuse increases compromise risk."
+      },
+      "misconceptionTags": [
+        "retirement_shortcuts",
+        "inventory_status_drift"
+      ],
+      "id": "ch11_obj42_q09",
+      "stem": "Which actions are required when retiring a storage asset? (Choose TWO.)",
+      "explanation": "Retirement should include secure data handling and inventory closure to prevent ghost assets.",
+      "tags": [
+        "asset_retirement",
+        "sanitization",
+        "inventory_updates"
+      ],
+      "objectiveIds": [
+        "4.2"
+      ],
+      "options": {
+        "A": "Perform approved data sanitization or destruction",
+        "B": "Keep asset active in inventory for convenience",
+        "C": "Update inventory status and ownership records to retired",
+        "D": "Reuse old admin credentials on replacement device"
+      },
+      "answers": [
+        "A",
+        "C"
+      ]
+    },
+    {
+      "type": "mcq",
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "rationaleCorrect": "Unmanaged assets frequently miss baseline, monitoring, and governance requirements.",
+      "rationaleIncorrect": {
+        "A": "Cost outcomes vary and do not imply security adequacy.",
+        "B": "Untracked assets generally degrade audit and compliance posture.",
+        "D": "Inheritance is not guaranteed without enrollment in managed processes.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "shadow_it_underestimated",
+        "management_bypass"
+      ],
+      "id": "ch11_obj42_q10",
+      "stem": "What is a primary security risk of unmanaged shadow IT assets?",
+      "explanation": "Shadow assets bypass standard controls, creating blind spots in monitoring, patching, and incident response.",
+      "tags": [
+        "shadow_it",
+        "asset_visibility",
+        "risk_management"
+      ],
+      "objectiveIds": [
+        "4.2"
+      ],
+      "options": {
+        "A": "They always reduce operational costs",
+        "B": "They improve audit quality by default",
+        "C": "They can operate without required security controls and oversight",
+        "D": "They automatically inherit enterprise hardening baselines"
+      },
+      "answer": "C"
+    }
+  ],
+  "pvp": {
+    "enabled": false,
+    "modes": [
+      {
+        "id": "seeded_run",
+        "name": "Seeded Run",
+        "description": "Players share a seed and race the same run asynchronously.",
+        "rules": {
+          "seed_shared": true,
+          "hints": false,
+          "scoring": "accuracy_time"
+        }
+      }
+    ],
+    "fairness": {
+      "matchmaking": "same_seed",
+      "anti_cheat": "local_timing_and_seed_replay"
+    }
+  }
+}

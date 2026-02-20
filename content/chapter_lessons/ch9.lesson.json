@@ -1,0 +1,1910 @@
+{
+  "pack_id": "ch9",
+  "version": "1.0.0",
+  "modules": [
+    {
+      "id": "ch9-m01",
+      "title": "Resilience vs Availability: what you’re really buying",
+      "tag_ids": [
+        "availability.resilience",
+        "availability.high_availability"
+      ],
+      "pages": [
+        {
+          "id": "ch9-m01-p01",
+          "title": "Resilience: keep operating when reality punches the building",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Resilience is your system’s ability to **keep functioning** or **recover quickly** when bad things happen (failures, disasters, attacks, mistakes)."
+            },
+            {
+              "type": "explain",
+              "text": "Availability is the outcome users feel: “Is it up and usable right now?” Resilience is how you *protect* availability over time."
+            },
+            {
+              "type": "explain",
+              "text": "A practical mental model: **prevent** what you can, **absorb** what you can’t, and **recover** fast."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which phrase best matches 'resilience' in security architecture?",
+              "options": [
+                "Ability to recover and continue operations after disruption",
+                "Encrypting all data at rest",
+                "Using only a single vendor for simplicity",
+                "Blocking every possible threat permanently"
+              ],
+              "correct_index": 0,
+              "explanation": "Resilience is about withstanding disruption and recovering/continuing operations.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "3.3",
+                "3.4",
+                "4.6",
+                "4.7",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "3.3",
+            "3.4",
+            "4.6",
+            "4.7",
+            "5.3"
+          ]
+        },
+        {
+          "id": "ch9-m01-p02",
+          "title": "Design trade-offs: cost, responsiveness, and reality",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Resilience design always involves trade-offs: **cost**, **complexity**, **ease of recovery**, and **responsiveness**."
+            },
+            {
+              "type": "explain",
+              "text": "A classic failure mode is a **single point of failure (SPoF)**: one component dies and the whole service faceplants."
+            },
+            {
+              "type": "explain",
+              "text": "Security+ expects you to connect resilience decisions to business needs: what must stay up, what can be down, and for how long."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A 'single point of failure' is best described as:",
+              "options": [
+                "A control that is too expensive to maintain",
+                "One component whose failure can stop the entire service",
+                "A server that has too many users",
+                "A backup stored offsite"
+              ],
+              "correct_index": 1,
+              "explanation": "A single point of failure is any element whose failure disrupts or stops the system.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "3.3",
+                "3.4",
+                "4.6",
+                "4.7",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "3.3",
+            "3.4",
+            "4.6",
+            "4.7",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "1.6",
+        "3.3",
+        "3.4",
+        "4.6",
+        "4.7",
+        "5.3"
+      ]
+    },
+    {
+      "id": "ch9-m02",
+      "title": "Architecture choices: multi-cloud and platform diversity",
+      "tag_ids": [
+        "architecture.multicloud",
+        "architecture.platform_diversity"
+      ],
+      "pages": [
+        {
+          "id": "ch9-m02-p01",
+          "title": "Multi-cloud: resilience through not putting all eggs in one basket",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Multi-cloud** spreads critical workloads across multiple cloud providers (or provider regions) so one provider outage doesn’t take you down."
+            },
+            {
+              "type": "explain",
+              "text": "Upside: reduces vendor-specific outages and some provider risk. Downside: higher complexity (skills, tooling, integration)."
+            },
+            {
+              "type": "explain",
+              "text": "Good exam instinct: multi-cloud is often a **resilience** strategy, not a security magic spell."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Multi-cloud is primarily used to improve:",
+              "options": [
+                "Geographic tax advantages",
+                "Resilience against provider-specific outages",
+                "Password strength",
+                "Port scanning accuracy"
+              ],
+              "correct_index": 1,
+              "explanation": "Multi-cloud is mainly a resilience/availability tactic to reduce dependency on one provider.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "3.3",
+                "3.4",
+                "4.6",
+                "4.7",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "3.3",
+            "3.4",
+            "4.6",
+            "4.7",
+            "5.3"
+          ]
+        },
+        {
+          "id": "ch9-m02-p02",
+          "title": "Platform diversity: harder to break everything at once (but harder to manage)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Platform diversity** means using different vendors/solutions so a single exploit or failure doesn’t wipe out the entire environment."
+            },
+            {
+              "type": "explain",
+              "text": "It can reduce systemic risk (one vuln ≠ total outage), but increases operational complexity and human error risk."
+            },
+            {
+              "type": "explain",
+              "text": "Exam takeaway: diversity helps against **common-mode failures**, but you pay for it in training and integration."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A common downside of platform diversity is:",
+              "options": [
+                "Reduced training needs",
+                "Lower integration complexity",
+                "Increased complexity and operational overhead",
+                "Guaranteed elimination of vulnerabilities"
+              ],
+              "correct_index": 2,
+              "explanation": "Diversity typically increases complexity, which can raise cost and the chance of human error.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "3.3",
+                "3.4",
+                "4.6",
+                "4.7",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "3.3",
+            "3.4",
+            "4.6",
+            "4.7",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "1.6",
+        "3.3",
+        "3.4",
+        "4.6",
+        "4.7",
+        "5.3"
+      ]
+    },
+    {
+      "id": "ch9-m03",
+      "title": "High availability: load balancing vs clustering (don’t mix these up)",
+      "tag_ids": [
+        "availability.high_availability",
+        "ha.load_balancing",
+        "ha.clustering",
+        "ha.single_point_of_failure"
+      ],
+      "pages": [
+        {
+          "id": "ch9-m03-p01",
+          "title": "Load balancing: split client load across multiple systems",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Load balancing** distributes client requests across multiple servers using rules/health checks."
+            },
+            {
+              "type": "explain",
+              "text": "Why it matters: handles changing load, supports rolling upgrades, and reduces user impact if one node fails."
+            },
+            {
+              "type": "explain",
+              "text": "Exam clue: load balancing is often about **scaling** and **traffic distribution**."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Load balancing primarily provides:",
+              "options": [
+                "Disk encryption",
+                "Traffic distribution across servers based on rules/health",
+                "A permanent backup of all files",
+                "Physical access control"
+              ],
+              "correct_index": 1,
+              "explanation": "A load balancer routes requests across multiple servers based on rules and health checks.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "3.3",
+                "3.4",
+                "4.6",
+                "4.7",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "3.3",
+            "3.4",
+            "4.6",
+            "4.7",
+            "5.3"
+          ]
+        },
+        {
+          "id": "ch9-m03-p02",
+          "title": "Clustering: members know each other and work as a unit",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Clustering** ties systems together so they act like one service (shared state or coordinated failover)."
+            },
+            {
+              "type": "explain",
+              "text": "Clusters can provide redundancy and failover, and in some designs also increase capacity."
+            },
+            {
+              "type": "explain",
+              "text": "Exam clue: clustering is about **coordination** between nodes; load balancing is about **distributing requests**."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "In a cluster, 'all members are aware of all other members' best describes:",
+              "options": [
+                "Elasticity",
+                "Convergence",
+                "Clustering behavior and coordinated failover",
+                "Encryption"
+              ],
+              "correct_index": 2,
+              "explanation": "Clusters coordinate membership/state; nodes are aware of each other for failover/coordination.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "3.3",
+                "3.4",
+                "4.6",
+                "4.7",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "3.3",
+            "3.4",
+            "4.6",
+            "4.7",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "1.6",
+        "3.3",
+        "3.4",
+        "4.6",
+        "4.7",
+        "5.3"
+      ]
+    },
+    {
+      "id": "ch9-m04",
+      "title": "Continuity of operations + scaling + capacity planning",
+      "tag_ids": [
+        "continuity.coop",
+        "scalability.elasticity",
+        "capacity_planning.people_tech_infra"
+      ],
+      "pages": [
+        {
+          "id": "ch9-m04-p01",
+          "title": "Continuity of Operations: keep the business functioning",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Continuity of operations** focuses on keeping critical business functions running during disruptions."
+            },
+            {
+              "type": "explain",
+              "text": "It includes both technical systems and the humans/processes needed to run them."
+            },
+            {
+              "type": "explain",
+              "text": "Practical: a perfect DR site is useless if you don’t have staff access, credentials, or a restoration plan."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Continuity of operations planning must include:",
+              "options": [
+                "Only firewalls and IDS",
+                "Only cloud provider SLAs",
+                "People and processes, not just technology",
+                "Only encryption keys"
+              ],
+              "correct_index": 2,
+              "explanation": "Continuity planning includes people/processes plus technology.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "3.3",
+                "3.4",
+                "4.6",
+                "4.7",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "3.3",
+            "3.4",
+            "4.6",
+            "4.7",
+            "5.3"
+          ]
+        },
+        {
+          "id": "ch9-m04-p02",
+          "title": "Capacity planning: people + technology + infrastructure",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Capacity planning for resilience asks: Do we have enough **people**, **technology**, and **infrastructure** when things go wrong?"
+            },
+            {
+              "type": "explain",
+              "text": "People: staffing, contracts, third parties. Technology: system capacity and scaling. Infrastructure: networks, storage, power."
+            },
+            {
+              "type": "explain",
+              "text": "Exam trigger: “capacity planning” almost always maps to **people / technology / infrastructure**."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "In this chapter, capacity planning is primarily broken into:",
+              "options": [
+                "People, technology, and infrastructure",
+                "Passwords, tokens, and biometrics",
+                "Servers, routers, and cables only",
+                "Patches, policies, and training"
+              ],
+              "correct_index": 0,
+              "explanation": "The chapter frames capacity planning as people, technology, and infrastructure.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "3.3",
+                "3.4",
+                "4.6",
+                "4.7",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "3.3",
+            "3.4",
+            "4.6",
+            "4.7",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "1.6",
+        "3.3",
+        "3.4",
+        "4.6",
+        "4.7",
+        "5.3"
+      ]
+    },
+    {
+      "id": "ch9-m05",
+      "title": "Testing resilience: tabletop vs simulation vs parallel vs failover",
+      "tag_ids": [
+        "testing.exercises",
+        "testing.tabletop",
+        "testing.simulation",
+        "testing.parallel",
+        "testing.failover"
+      ],
+      "pages": [
+        {
+          "id": "ch9-m05-p01",
+          "title": "Tabletop & simulation: test brains before you test production",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Tabletop** exercises are discussion-based walkthroughs of a scenario. Least disruptive."
+            },
+            {
+              "type": "explain",
+              "text": "**Simulation** exercises are more realistic: you simulate conditions and actions (still controlled)."
+            },
+            {
+              "type": "explain",
+              "text": "Exam instinct: when asked “least disruptive,” think **tabletop**."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which testing exercise is typically the least disruptive?",
+              "options": [
+                "Failover",
+                "Parallel processing",
+                "Tabletop",
+                "Live incident in production"
+              ],
+              "correct_index": 2,
+              "explanation": "Tabletop exercises are discussion-based and least disruptive.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "3.3",
+                "3.4",
+                "4.6",
+                "4.7",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "3.3",
+            "3.4",
+            "4.6",
+            "4.7",
+            "5.3"
+          ]
+        },
+        {
+          "id": "ch9-m05-p02",
+          "title": "Parallel processing & failover: test the hard stuff",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Parallel processing** runs workloads on an alternate/hot site in parallel to validate capability (risk of interference if not isolated)."
+            },
+            {
+              "type": "explain",
+              "text": "**Failover** exercises switch to the alternate site/system. Most disruptive but most realistic validation."
+            },
+            {
+              "type": "explain",
+              "text": "Exam instinct: when you need to *prove the whole thing works*, failover is the most complete test."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which exercise best validates full real-world failover capability?",
+              "options": [
+                "Tabletop",
+                "Simulation",
+                "Failover exercise",
+                "Policy review"
+              ],
+              "correct_index": 2,
+              "explanation": "Failover exercises provide the most complete real-world validation.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "3.3",
+                "3.4",
+                "4.6",
+                "4.7",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "3.3",
+            "3.4",
+            "4.6",
+            "4.7",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "1.6",
+        "3.3",
+        "3.4",
+        "4.6",
+        "4.7",
+        "5.3"
+      ]
+    },
+    {
+      "id": "ch9-m06",
+      "title": "Backup fundamentals: full vs incremental vs differential",
+      "tag_ids": [
+        "backups.full_incremental_differential",
+        "backups.incremental",
+        "backups.differential",
+        "backups.frequency"
+      ],
+      "pages": [
+        {
+          "id": "ch9-m06-p01",
+          "title": "Full / incremental / differential",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Full backup** copies everything (biggest time/storage)."
+            },
+            {
+              "type": "explain",
+              "text": "**Incremental** copies changes since the last backup (fast to back up, slower to restore because you need the full + all incrementals)."
+            },
+            {
+              "type": "explain",
+              "text": "**Differential** copies changes since the last full backup (slower to back up over time, faster to restore than incremental)."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A backup that captures changes since the last full backup is:",
+              "options": [
+                "Incremental",
+                "Differential",
+                "Snapshot",
+                "Replication"
+              ],
+              "correct_index": 1,
+              "explanation": "Differential backups capture changes since the last full backup.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "3.3",
+                "3.4",
+                "4.6",
+                "4.7",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "3.3",
+            "3.4",
+            "4.6",
+            "4.7",
+            "5.3"
+          ]
+        },
+        {
+          "id": "ch9-m06-p02",
+          "title": "Backup frequency: it’s about how much loss you can tolerate",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Backup frequency is driven by how much data loss is acceptable between backups (and the speed you can restore)."
+            },
+            {
+              "type": "explain",
+              "text": "Some systems need near-continuous protection (e.g., databases), others can be daily/weekly."
+            },
+            {
+              "type": "explain",
+              "text": "Exam mindset: frequent backups reduce data loss but increase cost and operational overhead."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Increasing backup frequency primarily reduces:",
+              "options": [
+                "The need for encryption",
+                "Potential data loss between backups",
+                "The number of physical controls required",
+                "The chance of phishing"
+              ],
+              "correct_index": 1,
+              "explanation": "More frequent backups reduce how much data can be lost between backup points.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "3.3",
+                "3.4",
+                "4.6",
+                "4.7",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "3.3",
+            "3.4",
+            "4.6",
+            "4.7",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "1.6",
+        "3.3",
+        "3.4",
+        "4.6",
+        "4.7",
+        "5.3"
+      ]
+    },
+    {
+      "id": "ch9-m07",
+      "title": "Snapshots, images, and last-known-good recovery",
+      "tag_ids": [
+        "backups.snapshot",
+        "backups.recovery_process"
+      ],
+      "pages": [
+        {
+          "id": "ch9-m07-p01",
+          "title": "Snapshots: a point-in-time state (great for VMs)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "A **snapshot** captures the full state of a system/device at a specific point in time—commonly used with virtual machines."
+            },
+            {
+              "type": "explain",
+              "text": "Use cases: rollback before a patch, clone systems, restore known-good configuration."
+            },
+            {
+              "type": "explain",
+              "text": "Snapshots are not a long-term backup strategy by themselves; they’re a fast rollback tool."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A snapshot is best described as:",
+              "options": [
+                "A copy of changes since last backup",
+                "A point-in-time capture of system state",
+                "A method for encrypting backup media",
+                "A physical access control"
+              ],
+              "correct_index": 1,
+              "explanation": "Snapshots capture system state at a specific time (often for VMs).",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "3.3",
+                "3.4",
+                "4.6",
+                "4.7",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "3.3",
+            "3.4",
+            "4.6",
+            "4.7",
+            "5.3"
+          ]
+        },
+        {
+          "id": "ch9-m07-p02",
+          "title": "Images and live boot media: when you can’t trust the OS",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "System **images** can capture a complete system for cloning or nonpersistent deployments (gold master images)."
+            },
+            {
+              "type": "explain",
+              "text": "If the OS is compromised or broken, **live boot media** lets you boot a known-good OS to inspect/repair/mount disks safely."
+            },
+            {
+              "type": "explain",
+              "text": "Exam cue: “can’t trust the system” → consider live boot media."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "If a system is compromised and you can’t trust the installed OS, a useful tool is:",
+              "options": [
+                "A stronger password policy",
+                "Live boot media",
+                "Differential backup only",
+                "A visitor log"
+              ],
+              "correct_index": 1,
+              "explanation": "Live boot media boots a trusted OS from removable media to inspect/repair a system.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "3.3",
+                "3.4",
+                "4.6",
+                "4.7",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "3.3",
+            "3.4",
+            "4.6",
+            "4.7",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "1.6",
+        "3.3",
+        "3.4",
+        "4.6",
+        "4.7",
+        "5.3"
+      ]
+    },
+    {
+      "id": "ch9-m08",
+      "title": "Replication vs journaling: keeping data consistent across sites",
+      "tag_ids": [
+        "backups.replication.sync_async",
+        "backups.replication.synchronous",
+        "backups.replication.asynchronous",
+        "backups.journaling"
+      ],
+      "pages": [
+        {
+          "id": "ch9-m08-p01",
+          "title": "Replication: synchronous vs asynchronous",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Replication** copies live data to another location as changes occur (not periodic like most backups)."
+            },
+            {
+              "type": "explain",
+              "text": "**Synchronous replication** writes to both sites before confirming—lower data loss, potentially higher latency."
+            },
+            {
+              "type": "explain",
+              "text": "**Asynchronous replication** confirms locally first, then ships changes—better performance, some potential data loss window."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which replication method usually has the lowest data-loss window but may increase latency?",
+              "options": [
+                "Asynchronous replication",
+                "Synchronous replication",
+                "Incremental backup",
+                "Differential backup"
+              ],
+              "correct_index": 1,
+              "explanation": "Synchronous replication confirms writes at both sites before completing the operation.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "3.3",
+                "3.4",
+                "4.6",
+                "4.7",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "3.3",
+            "3.4",
+            "4.6",
+            "4.7",
+            "5.3"
+          ]
+        },
+        {
+          "id": "ch9-m08-p02",
+          "title": "Journaling: point-in-time recovery via change records",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Journaling** records changes/transactions so you can replay them to reach a specific point in time."
+            },
+            {
+              "type": "explain",
+              "text": "It’s powerful for databases and transactional systems, but recovery can take longer because the journal must be replayed."
+            },
+            {
+              "type": "explain",
+              "text": "Also: a journal must be protected and backed up—if it’s only on the source system, a single failure can still lose it."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A key downside of journaling is that recovery can be slower because:",
+              "options": [
+                "It requires manual password resets",
+                "The journal must be replayed and applied",
+                "It can’t be used offsite",
+                "It prevents encryption"
+              ],
+              "correct_index": 1,
+              "explanation": "Journaling can slow recovery because you must replay transactions to rebuild state.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "3.3",
+                "3.4",
+                "4.6",
+                "4.7",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "3.3",
+            "3.4",
+            "4.6",
+            "4.7",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "1.6",
+        "3.3",
+        "3.4",
+        "4.6",
+        "4.7",
+        "5.3"
+      ]
+    },
+    {
+      "id": "ch9-m09",
+      "title": "Backup locations & storage tiers: onsite/offsite, online/nearline/offline",
+      "tag_ids": [
+        "backups.onsite_offsite",
+        "backups.offsite_storage",
+        "backups.storage_tiers",
+        "backups.nearline"
+      ],
+      "pages": [
+        {
+          "id": "ch9-m09-p01",
+          "title": "Onsite vs offsite: disasters don’t respect your server room",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Onsite** backups are fast to restore but can be lost in the same disaster as the primary site."
+            },
+            {
+              "type": "explain",
+              "text": "**Offsite** backups protect against site-level disasters—ideally far enough away to avoid the same regional event."
+            },
+            {
+              "type": "explain",
+              "text": "Exam hint: offsite storage should also be secure in transit and at rest (encryption + custody)."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Why are offsite backups often preferred?",
+              "options": [
+                "They eliminate the need for recovery planning",
+                "They protect against site-level disasters affecting primary storage",
+                "They remove the need for encryption",
+                "They guarantee zero downtime"
+              ],
+              "correct_index": 1,
+              "explanation": "Offsite backups reduce the risk of losing both production and backup to the same disaster.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "3.3",
+                "3.4",
+                "4.6",
+                "4.7",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "3.3",
+            "3.4",
+            "4.6",
+            "4.7",
+            "5.3"
+          ]
+        },
+        {
+          "id": "ch9-m09-p02",
+          "title": "Storage tiers: online vs nearline vs offline",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Online** backups are immediately available (fastest restore, higher exposure if attackers reach them)."
+            },
+            {
+              "type": "explain",
+              "text": "**Nearline** backups require retrieval steps but are still relatively accessible."
+            },
+            {
+              "type": "explain",
+              "text": "**Offline** (air-gapped/removed media) is slowest but can be strong against ransomware."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which tier usually has the slowest retrieval but strongest separation from online attacks?",
+              "options": [
+                "Online",
+                "Nearline",
+                "Offline",
+                "Synchronous"
+              ],
+              "correct_index": 2,
+              "explanation": "Offline storage is slower to retrieve but can reduce exposure to online attacks.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "3.3",
+                "3.4",
+                "4.6",
+                "4.7",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "3.3",
+            "3.4",
+            "4.6",
+            "4.7",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "1.6",
+        "3.3",
+        "3.4",
+        "4.6",
+        "4.7",
+        "5.3"
+      ]
+    },
+    {
+      "id": "ch9-m10",
+      "title": "Backup security: encryption and key survival",
+      "tag_ids": [
+        "backups.encryption"
+      ],
+      "pages": [
+        {
+          "id": "ch9-m10-p01",
+          "title": "Encrypt backups at rest and in transit",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Backups should be encrypted **at rest** (stored encrypted) and **in transit** (protected during transfer)."
+            },
+            {
+              "type": "explain",
+              "text": "The painful truth: if you can’t recover the keys, you can’t recover the backups. Key access during disasters is critical."
+            },
+            {
+              "type": "explain",
+              "text": "Treat backups as high-value data: access control + separation of duties + monitoring."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A backup that is encrypted at rest is useless if:",
+              "options": [
+                "It is stored offsite",
+                "The encryption keys cannot be recovered",
+                "It is taken daily",
+                "It uses incremental method"
+              ],
+              "correct_index": 1,
+              "explanation": "Without keys, encrypted backups cannot be restored.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "3.3",
+                "3.4",
+                "4.6",
+                "4.7",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "3.3",
+            "3.4",
+            "4.6",
+            "4.7",
+            "5.3"
+          ]
+        },
+        {
+          "id": "ch9-m10-p02",
+          "title": "Third-party/cloud backups: new trust model, new controls",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Cloud/third-party backups add risks: bandwidth limits, restore time, provider access controls, and shared responsibility."
+            },
+            {
+              "type": "explain",
+              "text": "Common mitigations: separate accounts, stronger IAM, encryption, and clear restoration testing."
+            },
+            {
+              "type": "explain",
+              "text": "Exam cue: “third-party backup” → think of **new security models** and **encryption/identity controls**."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A common added consideration for third‑party/cloud backups is:",
+              "options": [
+                "Bandwidth and restoration time constraints",
+                "They remove all need for access control",
+                "They cannot be encrypted",
+                "They eliminate ransomware risk automatically"
+              ],
+              "correct_index": 0,
+              "explanation": "Cloud backups introduce bandwidth/restore-time realities and require strong security controls.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "3.3",
+                "3.4",
+                "4.6",
+                "4.7",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "3.3",
+            "3.4",
+            "4.6",
+            "4.7",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "1.6",
+        "3.3",
+        "3.4",
+        "4.6",
+        "4.7",
+        "5.3"
+      ]
+    },
+    {
+      "id": "ch9-m11",
+      "title": "Power resilience: UPS and generators",
+      "tag_ids": [
+        "power.ups_generator",
+        "availability.resilience"
+      ],
+      "pages": [
+        {
+          "id": "ch9-m11-p01",
+          "title": "UPS: short-term power to survive the gap",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "A **UPS** (uninterruptible power supply) provides immediate short-term power during outages and protects against spikes/sags."
+            },
+            {
+              "type": "explain",
+              "text": "It buys time for safe shutdown or for a generator to start—without it, sudden power loss can corrupt systems."
+            },
+            {
+              "type": "explain",
+              "text": "Exam mindset: UPS = immediate + short duration; generator = longer duration."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A UPS primarily provides:",
+              "options": [
+                "Long-term power for weeks",
+                "Immediate short-term power during an outage",
+                "A physical barrier against vehicles",
+                "Offsite data replication"
+              ],
+              "correct_index": 1,
+              "explanation": "A UPS provides immediate short-term power and power conditioning.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "3.3",
+                "3.4",
+                "4.6",
+                "4.7",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "3.3",
+            "3.4",
+            "4.6",
+            "4.7",
+            "5.3"
+          ]
+        },
+        {
+          "id": "ch9-m11-p02",
+          "title": "Generators: longer-term continuity",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Generators provide longer-term backup power, but they need fuel, maintenance, and testing."
+            },
+            {
+              "type": "explain",
+              "text": "Resilience planning includes power consumption and compute needs—power is not just a facilities problem."
+            },
+            {
+              "type": "explain",
+              "text": "Exam cue: resilience considerations include **power** and **compute** along with cost and recovery."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "For longer-term backup power during extended outages, the best fit is usually:",
+              "options": [
+                "A UPS alone",
+                "A generator",
+                "A proximity badge",
+                "A differential backup"
+              ],
+              "correct_index": 1,
+              "explanation": "Generators provide longer-term backup power; UPS is short-term bridging/conditioning.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "3.3",
+                "3.4",
+                "4.6",
+                "4.7",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "3.3",
+            "3.4",
+            "4.6",
+            "4.7",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "1.6",
+        "3.3",
+        "3.4",
+        "4.6",
+        "4.7",
+        "5.3"
+      ]
+    },
+    {
+      "id": "ch9-m12",
+      "title": "Disaster recovery sites: hot vs warm vs cold + geographic dispersion",
+      "tag_ids": [
+        "site.hot_warm_cold",
+        "site.geographic_dispersion",
+        "recovery.site_selection",
+        "site.selection",
+        "site.warm_site"
+      ],
+      "pages": [
+        {
+          "id": "ch9-m12-p01",
+          "title": "Hot, warm, cold sites (cost vs readiness)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Hot site**: fully ready with systems and data—fastest recovery, highest cost."
+            },
+            {
+              "type": "explain",
+              "text": "**Warm site**: some systems in place, data not current—balanced cost and recovery time."
+            },
+            {
+              "type": "explain",
+              "text": "**Cold site**: space/power/network, but no systems/data—cheapest, slowest to restore."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which site type is typically the least expensive but slowest to restore?",
+              "options": [
+                "Hot site",
+                "Warm site",
+                "Cold site",
+                "Parallel site"
+              ],
+              "correct_index": 2,
+              "explanation": "Cold sites have space/power/connectivity but require significant deployment effort.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "3.3",
+                "3.4",
+                "4.6",
+                "4.7",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "3.3",
+            "3.4",
+            "4.6",
+            "4.7",
+            "5.3"
+          ]
+        },
+        {
+          "id": "ch9-m12-p02",
+          "title": "Geographic dispersion: don’t put DR next door",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Geographic dispersion places backup sites far enough away to avoid the same disaster event (weather, power grid, regional impacts)."
+            },
+            {
+              "type": "explain",
+              "text": "Cloud teaches a similar lesson: availability zones/regions can fail, so multi-region design matters even in cloud."
+            },
+            {
+              "type": "explain",
+              "text": "Exam cue: distance often exists to avoid a single event hitting both locations."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Placing a redundant datacenter 90+ miles away mainly supports:",
+              "options": [
+                "Geographic dispersion",
+                "Lower CPU usage",
+                "Password rotation",
+                "RFID protection"
+              ],
+              "correct_index": 0,
+              "explanation": "Distance is used to reduce the chance that one disaster affects both sites.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "3.3",
+                "3.4",
+                "4.6",
+                "4.7",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "3.3",
+            "3.4",
+            "4.6",
+            "4.7",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "1.6",
+        "3.3",
+        "3.4",
+        "4.6",
+        "4.7",
+        "5.3"
+      ]
+    },
+    {
+      "id": "ch9-m13",
+      "title": "Site security plan: defense in depth for the physical world",
+      "tag_ids": [
+        "physical.layers.defense_in_depth",
+        "physical.deterrence_delay",
+        "physical.detect",
+        "physical.response",
+        "physical.prevent"
+      ],
+      "pages": [
+        {
+          "id": "ch9-m13-p01",
+          "title": "Physical defense in depth: layers work together",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Physical security is layered like technical security: outer perimeter → building access → internal zones → high-value areas."
+            },
+            {
+              "type": "explain",
+              "text": "Think in terms of **deterrence**, **delay**, **detection**, and **response**. You want attackers to be seen and slowed."
+            },
+            {
+              "type": "explain",
+              "text": "Site security plans vary by location because threats vary by geography and business activity."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "In physical security, “deterrence, delay, detection, response” describes:",
+              "options": [
+                "Only encryption mechanisms",
+                "A layered physical security approach",
+                "A backup algorithm",
+                "A password policy"
+              ],
+              "correct_index": 1,
+              "explanation": "Those terms describe key goals of layered physical security controls.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "3.3",
+                "3.4",
+                "4.6",
+                "4.7",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "3.3",
+            "3.4",
+            "4.6",
+            "4.7",
+            "5.3"
+          ]
+        },
+        {
+          "id": "ch9-m13-p02",
+          "title": "Security through obscurity: helpful, but not a substitute",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "In the physical world, being less noticeable can reduce casual targeting (e.g., unmarked call centers)."
+            },
+            {
+              "type": "explain",
+              "text": "But hiding is not a complete control; you still need real security measures (access control, monitoring, policies)."
+            },
+            {
+              "type": "explain",
+              "text": "Exam instinct: obscurity may reduce attention, but it does not replace proper controls."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "“Security through obscurity” is best described as:",
+              "options": [
+                "A complete replacement for access control",
+                "Hiding resources to reduce attention, but not sufficient alone",
+                "A form of disk encryption",
+                "A type of IDS sensor"
+              ],
+              "correct_index": 1,
+              "explanation": "Obscurity can help but is not a reliable standalone control.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "3.3",
+                "3.4",
+                "4.6",
+                "4.7",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "3.3",
+            "3.4",
+            "4.6",
+            "4.7",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "1.6",
+        "3.3",
+        "3.4",
+        "4.6",
+        "4.7",
+        "5.3"
+      ]
+    },
+    {
+      "id": "ch9-m14",
+      "title": "Physical controls: fencing, bollards, lighting, and badges",
+      "tag_ids": [
+        "physical.controls.bollards",
+        "physical.controls.access_badges",
+        "physical.controls.video_surveillance",
+        "physical.controls.sensors",
+        "physical.controls.security_guards",
+        "physical.controls.cost_tradeoff",
+        "physical.attacks.rfid_cloning"
+      ],
+      "pages": [
+        {
+          "id": "ch9-m14-p01",
+          "title": "Fencing & bollards: perimeter control",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Fencing** defines boundaries and can slow or channel movement (often paired with cameras and lighting)."
+            },
+            {
+              "type": "explain",
+              "text": "**Bollards** are posts/obstacles that prevent vehicle access—useful against accidents and vehicle-based attacks."
+            },
+            {
+              "type": "explain",
+              "text": "Exam cue: bollards = vehicle barrier; fences = perimeter boundary."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Bollards are primarily used to:",
+              "options": [
+                "Encrypt physical media",
+                "Prevent vehicle access to an area",
+                "Detect infrared radiation",
+                "Provide load balancing"
+              ],
+              "correct_index": 1,
+              "explanation": "Bollards are physical barriers designed to stop vehicles.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "3.3",
+                "3.4",
+                "4.6",
+                "4.7",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "3.3",
+            "3.4",
+            "4.6",
+            "4.7",
+            "5.3"
+          ]
+        },
+        {
+          "id": "ch9-m14-p02",
+          "title": "Lighting and access badges: visibility + identity",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Good **lighting** discourages intruders and supports cameras/guards by reducing dark areas."
+            },
+            {
+              "type": "explain",
+              "text": "**Access badges** can be magnetic stripe or RFID/proximity, often with photos/role info."
+            },
+            {
+              "type": "explain",
+              "text": "Badges are a target: attackers may steal, copy, or **clone RFID** to bypass controls—monitor for unusual access patterns."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A key risk with RFID-based access badges is:",
+              "options": [
+                "They can’t be used with proximity readers",
+                "RFID cloning can duplicate badge identifiers",
+                "They prevent visitor logging",
+                "They require hot sites"
+              ],
+              "correct_index": 1,
+              "explanation": "RFID cloning can copy tag/card identifiers, especially if RFID is the only identifier used.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "3.3",
+                "3.4",
+                "4.6",
+                "4.7",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "3.3",
+            "3.4",
+            "4.6",
+            "4.7",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "1.6",
+        "3.3",
+        "3.4",
+        "4.6",
+        "4.7",
+        "5.3"
+      ]
+    },
+    {
+      "id": "ch9-m15",
+      "title": "Physical access control + monitoring: mantraps, guards, cameras, sensors, attacks",
+      "tag_ids": [
+        "physical.controls.access_control_vestibule",
+        "physical.controls.security_guards",
+        "physical.controls.video_surveillance",
+        "physical.controls.cameras.motion_detection",
+        "physical.controls.sensors.infrared",
+        "physical.controls.sensors.pressure",
+        "physical.controls.sensors.microwave",
+        "physical.controls.sensors.ultrasonic",
+        "physical.attacks.brute_force",
+        "physical.attacks.rfid_cloning",
+        "physical.attacks.environmental",
+        "physical.anti_tailgating",
+        "physical.controls.safe",
+        "physical.controls.ids_alarms"
+      ],
+      "pages": [
+        {
+          "id": "ch9-m15-p01",
+          "title": "Mantraps + guards + visitor logs: stop piggybacking and enforce policy",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Access control vestibules** (mantraps) use two doors to limit entry and prevent piggybacking/tailgating."
+            },
+            {
+              "type": "explain",
+              "text": "**Security guards** add human decision-making: validate identity, escort visitors, monitor alarms/cameras."
+            },
+            {
+              "type": "explain",
+              "text": "Visitor logs support accountability—but remember: humans can be socially engineered, so training + procedures matter."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "An access control vestibule (mantrap) is primarily intended to prevent:",
+              "options": [
+                "Malware execution",
+                "Piggybacking/tailgating through controlled entry",
+                "Disk failure",
+                "RF interference in cables"
+              ],
+              "correct_index": 1,
+              "explanation": "Mantraps control entry so one person enters at a time, reducing piggybacking risk.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "3.3",
+                "3.4",
+                "4.6",
+                "4.7",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "3.3",
+            "3.4",
+            "4.6",
+            "4.7",
+            "5.3"
+          ]
+        },
+        {
+          "id": "ch9-m15-p02",
+          "title": "Cameras, sensors, and physical attacks",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Video surveillance** can include motion detection buffers and object detection (watching specific areas/objects)."
+            },
+            {
+              "type": "explain",
+              "text": "Sensors you must know: **infrared** (heat changes), **pressure** (movement/weight), **microwave** (field change), **ultrasonic** (sound)."
+            },
+            {
+              "type": "explain",
+              "text": "Physical attacks to know: **brute force** (break/cut), **RFID cloning**, and **environmental** (HVAC/sprinklers). Pair detection (alarms/IDS) with response procedures."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which sensor type is commonly inexpensive and detects changes in heat/infrared radiation?",
+              "options": [
+                "Pressure",
+                "Infrared",
+                "Microwave",
+                "Ultrasonic"
+              ],
+              "correct_index": 1,
+              "explanation": "Infrared sensors look for changes in heat/infrared radiation and are common in controlled indoor spaces.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "3.3",
+                "3.4",
+                "4.6",
+                "4.7",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "3.3",
+            "3.4",
+            "4.6",
+            "4.7",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "1.6",
+        "3.3",
+        "3.4",
+        "4.6",
+        "4.7",
+        "5.3"
+      ]
+    }
+  ],
+  "objectiveIds": [
+    "1.1",
+    "1.5",
+    "1.6",
+    "3.3",
+    "3.4",
+    "4.6",
+    "4.7",
+    "5.3"
+  ]
+}

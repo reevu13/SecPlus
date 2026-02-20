@@ -1,0 +1,1662 @@
+{
+  "pack_id": "ch4",
+  "version": "1.0.0",
+  "modules": [
+    {
+      "id": "ch4-m01",
+      "title": "What social engineering is (and why it works)",
+      "tag_ids": [
+        "se_urgency",
+        "se_trust",
+        "phishing"
+      ],
+      "pages": [
+        {
+          "id": "ch4-m01-p01",
+          "title": "Definition",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Social engineering means manipulating people (not machines) to make them do something they normally wouldn’t—share info, click links, approve payments, etc. It works because humans react under pressure and often trust appearances."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which chapter topic is the main focus of \"Definition\"?",
+              "options": [
+                "What social engineering is (and why it works)",
+                "Network segmentation controls",
+                "Disaster recovery logistics",
+                "Physical lock maintenance"
+              ],
+              "correct_index": 0,
+              "explanation": "This page belongs to the module \"What social engineering is (and why it works)\".",
+              "objectiveIds": [
+                "1.1",
+                "1.2",
+                "1.3",
+                "1.4",
+                "2.1",
+                "2.2",
+                "2.3",
+                "2.4",
+                "3.3",
+                "4.4",
+                "4.6",
+                "4.8",
+                "5.6"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.3",
+            "4.4",
+            "4.6",
+            "4.8",
+            "5.6"
+          ]
+        },
+        {
+          "id": "ch4-m01-p02",
+          "title": "Mental model",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Attacker goal:** trigger a fast emotional reaction.\n\n**Your job:** slow the process down.\n\nRule: if someone tries to make you act *fast*, treat it as hostile until verified."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which chapter topic is the main focus of \"Mental model\"?",
+              "options": [
+                "What social engineering is (and why it works)",
+                "Network segmentation controls",
+                "Disaster recovery logistics",
+                "Physical lock maintenance"
+              ],
+              "correct_index": 0,
+              "explanation": "This page belongs to the module \"What social engineering is (and why it works)\".",
+              "objectiveIds": [
+                "1.1",
+                "1.2",
+                "1.3",
+                "1.4",
+                "2.1",
+                "2.2",
+                "2.3",
+                "2.4",
+                "3.3",
+                "4.4",
+                "4.6",
+                "4.8",
+                "5.6"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.3",
+            "4.4",
+            "4.6",
+            "4.8",
+            "5.6"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.1",
+        "2.2",
+        "2.3",
+        "2.4",
+        "3.3",
+        "4.4",
+        "4.6",
+        "4.8",
+        "5.6"
+      ]
+    },
+    {
+      "id": "ch4-m02",
+      "title": "The 7 social engineering principles",
+      "tag_ids": [
+        "se_authority",
+        "se_intimidation",
+        "se_social_proof",
+        "se_scarcity",
+        "se_familiarity",
+        "se_trust",
+        "se_urgency"
+      ],
+      "pages": [
+        {
+          "id": "ch4-m02-p01",
+          "title": "The principles list",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Most common principles:\n\n- **Authority**: “I’m your manager / government / IT admin.”\n- **Intimidation**: threats, bullying, fear.\n- **Consensus (social proof)**: “Everyone already did it.”\n- **Scarcity**: “Last chance / limited supply.”\n- **Familiarity**: you like the person/brand.\n- **Trust**: attacker builds relationship/credibility.\n- **Urgency**: “Do it NOW or bad things happen.”"
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which chapter topic is the main focus of \"The principles list\"?",
+              "options": [
+                "The 7 social engineering principles",
+                "Network segmentation controls",
+                "Disaster recovery logistics",
+                "Physical lock maintenance"
+              ],
+              "correct_index": 0,
+              "explanation": "This page belongs to the module \"The 7 social engineering principles\".",
+              "objectiveIds": [
+                "1.1",
+                "1.2",
+                "1.3",
+                "1.4",
+                "2.1",
+                "2.2",
+                "2.3",
+                "2.4",
+                "3.3",
+                "4.4",
+                "4.6",
+                "4.8",
+                "5.6"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.3",
+            "4.4",
+            "4.6",
+            "4.8",
+            "5.6"
+          ]
+        },
+        {
+          "id": "ch4-m02-p02",
+          "title": "Reality: attacks mix principles",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Real attacks combine multiple principles (authority + urgency + intimidation is a classic combo).\n\n**Defense trick:** isolate one claim at a time and verify via a trusted channel (call back using official number, check ticket system, etc.)."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which chapter topic is the main focus of \"Reality: attacks mix principles\"?",
+              "options": [
+                "The 7 social engineering principles",
+                "Network segmentation controls",
+                "Disaster recovery logistics",
+                "Physical lock maintenance"
+              ],
+              "correct_index": 0,
+              "explanation": "This page belongs to the module \"The 7 social engineering principles\".",
+              "objectiveIds": [
+                "1.1",
+                "1.2",
+                "1.3",
+                "1.4",
+                "2.1",
+                "2.2",
+                "2.3",
+                "2.4",
+                "3.3",
+                "4.4",
+                "4.6",
+                "4.8",
+                "5.6"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.3",
+            "4.4",
+            "4.6",
+            "4.8",
+            "5.6"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.1",
+        "2.2",
+        "2.3",
+        "2.4",
+        "3.3",
+        "4.4",
+        "4.6",
+        "4.8",
+        "5.6"
+      ]
+    },
+    {
+      "id": "ch4-m03",
+      "title": "Phishing family: phishing, smishing, vishing",
+      "tag_ids": [
+        "phishing",
+        "smishing",
+        "vishing"
+      ],
+      "pages": [
+        {
+          "id": "ch4-m03-p01",
+          "title": "Phishing basics",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Phishing** = fraudulent acquisition of information (often credentials) usually via email.\n\nVariants:\n- **Smishing**: phishing via SMS text messages.\n- **Vishing**: phishing via voice/phone/voicemail."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which chapter topic is the main focus of \"Phishing basics\"?",
+              "options": [
+                "Phishing family: phishing, smishing, vishing",
+                "Network segmentation controls",
+                "Disaster recovery logistics",
+                "Physical lock maintenance"
+              ],
+              "correct_index": 0,
+              "explanation": "This page belongs to the module \"Phishing family: phishing, smishing, vishing\".",
+              "objectiveIds": [
+                "1.1",
+                "1.2",
+                "1.3",
+                "1.4",
+                "2.1",
+                "2.2",
+                "2.3",
+                "2.4",
+                "3.3",
+                "4.4",
+                "4.6",
+                "4.8",
+                "5.6"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.3",
+            "4.4",
+            "4.6",
+            "4.8",
+            "5.6"
+          ]
+        },
+        {
+          "id": "ch4-m03-p02",
+          "title": "Why training matters",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Most effective defense is still **awareness** (recognize patterns, verify requests). Technical defenses exist too: filtering, reputation, pattern matching, etc."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which chapter topic is the main focus of \"Why training matters\"?",
+              "options": [
+                "Phishing family: phishing, smishing, vishing",
+                "Network segmentation controls",
+                "Disaster recovery logistics",
+                "Physical lock maintenance"
+              ],
+              "correct_index": 0,
+              "explanation": "This page belongs to the module \"Phishing family: phishing, smishing, vishing\".",
+              "objectiveIds": [
+                "1.1",
+                "1.2",
+                "1.3",
+                "1.4",
+                "2.1",
+                "2.2",
+                "2.3",
+                "2.4",
+                "3.3",
+                "4.4",
+                "4.6",
+                "4.8",
+                "5.6"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.3",
+            "4.4",
+            "4.6",
+            "4.8",
+            "5.6"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.1",
+        "2.2",
+        "2.3",
+        "2.4",
+        "3.3",
+        "4.4",
+        "4.6",
+        "4.8",
+        "5.6"
+      ]
+    },
+    {
+      "id": "ch4-m04",
+      "title": "Targeted phishing: spear phishing vs whaling",
+      "tag_ids": [
+        "spear_phishing",
+        "whaling",
+        "phishing"
+      ],
+      "pages": [
+        {
+          "id": "ch4-m04-p01",
+          "title": "Spear phishing",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Spear phishing** targets specific individuals or groups in an organization (customized content, context, names)."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which chapter topic is the main focus of \"Spear phishing\"?",
+              "options": [
+                "Targeted phishing: spear phishing vs whaling",
+                "Network segmentation controls",
+                "Disaster recovery logistics",
+                "Physical lock maintenance"
+              ],
+              "correct_index": 0,
+              "explanation": "This page belongs to the module \"Targeted phishing: spear phishing vs whaling\".",
+              "objectiveIds": [
+                "1.1",
+                "1.2",
+                "1.3",
+                "1.4",
+                "2.1",
+                "2.2",
+                "2.3",
+                "2.4",
+                "3.3",
+                "4.4",
+                "4.6",
+                "4.8",
+                "5.6"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.3",
+            "4.4",
+            "4.6",
+            "4.8",
+            "5.6"
+          ]
+        },
+        {
+          "id": "ch4-m04-p02",
+          "title": "Whaling",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Whaling** targets senior executives like CEOs/CFOs (the “big fish”).\n\nExam reflex: CEO/CFO + urgent money transfer = think **whaling** (and often **BEC** too)."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which chapter topic is the main focus of \"Whaling\"?",
+              "options": [
+                "Targeted phishing: spear phishing vs whaling",
+                "Network segmentation controls",
+                "Disaster recovery logistics",
+                "Physical lock maintenance"
+              ],
+              "correct_index": 0,
+              "explanation": "This page belongs to the module \"Targeted phishing: spear phishing vs whaling\".",
+              "objectiveIds": [
+                "1.1",
+                "1.2",
+                "1.3",
+                "1.4",
+                "2.1",
+                "2.2",
+                "2.3",
+                "2.4",
+                "3.3",
+                "4.4",
+                "4.6",
+                "4.8",
+                "5.6"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.3",
+            "4.4",
+            "4.6",
+            "4.8",
+            "5.6"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.1",
+        "2.2",
+        "2.3",
+        "2.4",
+        "3.3",
+        "4.4",
+        "4.6",
+        "4.8",
+        "5.6"
+      ]
+    },
+    {
+      "id": "ch4-m05",
+      "title": "Impersonation, identity fraud, and pretexting",
+      "tag_ids": [
+        "impersonation",
+        "identity_fraud",
+        "pretexting"
+      ],
+      "pages": [
+        {
+          "id": "ch4-m05-p01",
+          "title": "Impersonation vs identity fraud",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Impersonation**: pretending to be someone else (delivery driver, vendor, IT).\n\n**Identity fraud (identity theft)**: using someone else’s identity (typically for financial gain)."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which chapter topic is the main focus of \"Impersonation vs identity fraud\"?",
+              "options": [
+                "Impersonation, identity fraud, and pretexting",
+                "Network segmentation controls",
+                "Disaster recovery logistics",
+                "Physical lock maintenance"
+              ],
+              "correct_index": 0,
+              "explanation": "This page belongs to the module \"Impersonation, identity fraud, and pretexting\".",
+              "objectiveIds": [
+                "1.1",
+                "1.2",
+                "1.3",
+                "1.4",
+                "2.1",
+                "2.2",
+                "2.3",
+                "2.4",
+                "3.3",
+                "4.4",
+                "4.6",
+                "4.8",
+                "5.6"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.3",
+            "4.4",
+            "4.6",
+            "4.8",
+            "5.6"
+          ]
+        },
+        {
+          "id": "ch4-m05-p02",
+          "title": "Pretexting",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Pretexting** = a made-up scenario used to justify why the attacker is contacting you.\n\nDefense: ask verification questions or do a **verification call** using trusted contact info."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which chapter topic is the main focus of \"Pretexting\"?",
+              "options": [
+                "Impersonation, identity fraud, and pretexting",
+                "Network segmentation controls",
+                "Disaster recovery logistics",
+                "Physical lock maintenance"
+              ],
+              "correct_index": 0,
+              "explanation": "This page belongs to the module \"Impersonation, identity fraud, and pretexting\".",
+              "objectiveIds": [
+                "1.1",
+                "1.2",
+                "1.3",
+                "1.4",
+                "2.1",
+                "2.2",
+                "2.3",
+                "2.4",
+                "3.3",
+                "4.4",
+                "4.6",
+                "4.8",
+                "5.6"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.3",
+            "4.4",
+            "4.6",
+            "4.8",
+            "5.6"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.1",
+        "2.2",
+        "2.3",
+        "2.4",
+        "3.3",
+        "4.4",
+        "4.6",
+        "4.8",
+        "5.6"
+      ]
+    },
+    {
+      "id": "ch4-m06",
+      "title": "Business Email Compromise (BEC)",
+      "tag_ids": [
+        "bec",
+        "impersonation",
+        "phishing"
+      ],
+      "pages": [
+        {
+          "id": "ch4-m06-p01",
+          "title": "What BEC is",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**BEC** uses apparently legitimate email addresses to run scams: invoice scams, gift card scams, data theft, account compromise.\n\nHow attackers make it look real:\n- compromised accounts\n- spoofed emails\n- similar/fake domains\n- malware/tools"
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which chapter topic is the main focus of \"What BEC is\"?",
+              "options": [
+                "Business Email Compromise (BEC)",
+                "Network segmentation controls",
+                "Disaster recovery logistics",
+                "Physical lock maintenance"
+              ],
+              "correct_index": 0,
+              "explanation": "This page belongs to the module \"Business Email Compromise (BEC)\".",
+              "objectiveIds": [
+                "1.1",
+                "1.2",
+                "1.3",
+                "1.4",
+                "2.1",
+                "2.2",
+                "2.3",
+                "2.4",
+                "3.3",
+                "4.4",
+                "4.6",
+                "4.8",
+                "5.6"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.3",
+            "4.4",
+            "4.6",
+            "4.8",
+            "5.6"
+          ]
+        },
+        {
+          "id": "ch4-m06-p02",
+          "title": "Mitigations",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Typical mitigations:\n- **MFA**\n- **awareness training**\n- **policies + verification steps** (payment approval workflows, call-backs, dual control)."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which chapter topic is the main focus of \"Mitigations\"?",
+              "options": [
+                "Business Email Compromise (BEC)",
+                "Network segmentation controls",
+                "Disaster recovery logistics",
+                "Physical lock maintenance"
+              ],
+              "correct_index": 0,
+              "explanation": "This page belongs to the module \"Business Email Compromise (BEC)\".",
+              "objectiveIds": [
+                "1.1",
+                "1.2",
+                "1.3",
+                "1.4",
+                "2.1",
+                "2.2",
+                "2.3",
+                "2.4",
+                "3.3",
+                "4.4",
+                "4.6",
+                "4.8",
+                "5.6"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.3",
+            "4.4",
+            "4.6",
+            "4.8",
+            "5.6"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.1",
+        "2.2",
+        "2.3",
+        "2.4",
+        "3.3",
+        "4.4",
+        "4.6",
+        "4.8",
+        "5.6"
+      ]
+    },
+    {
+      "id": "ch4-m07",
+      "title": "Watering hole, brand impersonation, typosquatting, pharming",
+      "tag_ids": [
+        "watering_hole",
+        "brand_impersonation",
+        "typosquatting",
+        "pharming"
+      ],
+      "pages": [
+        {
+          "id": "ch4-m07-p01",
+          "title": "Watering hole attacks",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "A **watering hole** attack compromises a website that targets frequently visit. The attacker poisons the “watering hole” knowing victims will show up."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which chapter topic is the main focus of \"Watering hole attacks\"?",
+              "options": [
+                "Watering hole, brand impersonation, typosquatting, pharming",
+                "Network segmentation controls",
+                "Disaster recovery logistics",
+                "Physical lock maintenance"
+              ],
+              "correct_index": 0,
+              "explanation": "This page belongs to the module \"Watering hole, brand impersonation, typosquatting, pharming\".",
+              "objectiveIds": [
+                "1.1",
+                "1.2",
+                "1.3",
+                "1.4",
+                "2.1",
+                "2.2",
+                "2.3",
+                "2.4",
+                "3.3",
+                "4.4",
+                "4.6",
+                "4.8",
+                "5.6"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.3",
+            "4.4",
+            "4.6",
+            "4.8",
+            "5.6"
+          ]
+        },
+        {
+          "id": "ch4-m07-p02",
+          "title": "Brand impersonation",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Brand impersonation** (brand spoofing) uses emails and templates that look like a real brand (banks/stores) to steal logins, payments, or deliver malware."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which chapter topic is the main focus of \"Brand impersonation\"?",
+              "options": [
+                "Watering hole, brand impersonation, typosquatting, pharming",
+                "Network segmentation controls",
+                "Disaster recovery logistics",
+                "Physical lock maintenance"
+              ],
+              "correct_index": 0,
+              "explanation": "This page belongs to the module \"Watering hole, brand impersonation, typosquatting, pharming\".",
+              "objectiveIds": [
+                "1.1",
+                "1.2",
+                "1.3",
+                "1.4",
+                "2.1",
+                "2.2",
+                "2.3",
+                "2.4",
+                "3.3",
+                "4.4",
+                "4.6",
+                "4.8",
+                "5.6"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.3",
+            "4.4",
+            "4.6",
+            "4.8",
+            "5.6"
+          ]
+        },
+        {
+          "id": "ch4-m07-p03",
+          "title": "Typosquatting vs pharming",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Typosquatting**: victims mistype a URL and land on a lookalike domain.\n\n**Pharming**: attacker changes where a domain resolves (hosts file change or malware changing DNS servers) so you go to the wrong place even if you typed it correctly."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which chapter topic is the main focus of \"Typosquatting vs pharming\"?",
+              "options": [
+                "Watering hole, brand impersonation, typosquatting, pharming",
+                "Network segmentation controls",
+                "Disaster recovery logistics",
+                "Physical lock maintenance"
+              ],
+              "correct_index": 0,
+              "explanation": "This page belongs to the module \"Watering hole, brand impersonation, typosquatting, pharming\".",
+              "objectiveIds": [
+                "1.1",
+                "1.2",
+                "1.3",
+                "1.4",
+                "2.1",
+                "2.2",
+                "2.3",
+                "2.4",
+                "3.3",
+                "4.4",
+                "4.6",
+                "4.8",
+                "5.6"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.3",
+            "4.4",
+            "4.6",
+            "4.8",
+            "5.6"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.1",
+        "2.2",
+        "2.3",
+        "2.4",
+        "3.3",
+        "4.4",
+        "4.6",
+        "4.8",
+        "5.6"
+      ]
+    },
+    {
+      "id": "ch4-m08",
+      "title": "Misinformation, disinformation, and the TRUST model",
+      "tag_ids": [
+        "mdm",
+        "trust_model"
+      ],
+      "pages": [
+        {
+          "id": "ch4-m08-p01",
+          "title": "MDM overview",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Influence campaigns use misinformation/disinformation and social media dynamics to shape reactions.\n\nExam reflex:\n- **Misinformation**: false info shared without intent to harm.\n- **Disinformation**: false info shared intentionally to mislead."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which chapter topic is the main focus of \"MDM overview\"?",
+              "options": [
+                "Misinformation, disinformation, and the TRUST model",
+                "Network segmentation controls",
+                "Disaster recovery logistics",
+                "Physical lock maintenance"
+              ],
+              "correct_index": 0,
+              "explanation": "This page belongs to the module \"Misinformation, disinformation, and the TRUST model\".",
+              "objectiveIds": [
+                "1.1",
+                "1.2",
+                "1.3",
+                "1.4",
+                "2.1",
+                "2.2",
+                "2.3",
+                "2.4",
+                "3.3",
+                "4.4",
+                "4.6",
+                "4.8",
+                "5.6"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.3",
+            "4.4",
+            "4.6",
+            "4.8",
+            "5.6"
+          ]
+        },
+        {
+          "id": "ch4-m08-p02",
+          "title": "TRUST steps",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "CISA’s **TRUST** process:\n1) **Tell** your story\n2) **Ready** your team\n3) **Understand** and assess MDM\n4) **Strategize** response\n5) **Track** outcomes"
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which chapter topic is the main focus of \"TRUST steps\"?",
+              "options": [
+                "Misinformation, disinformation, and the TRUST model",
+                "Network segmentation controls",
+                "Disaster recovery logistics",
+                "Physical lock maintenance"
+              ],
+              "correct_index": 0,
+              "explanation": "This page belongs to the module \"Misinformation, disinformation, and the TRUST model\".",
+              "objectiveIds": [
+                "1.1",
+                "1.2",
+                "1.3",
+                "1.4",
+                "2.1",
+                "2.2",
+                "2.3",
+                "2.4",
+                "3.3",
+                "4.4",
+                "4.6",
+                "4.8",
+                "5.6"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.3",
+            "4.4",
+            "4.6",
+            "4.8",
+            "5.6"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.1",
+        "2.2",
+        "2.3",
+        "2.4",
+        "3.3",
+        "4.4",
+        "4.6",
+        "4.8",
+        "5.6"
+      ]
+    },
+    {
+      "id": "ch4-m09",
+      "title": "Password attacks: brute force vs spraying (exam core)",
+      "tag_ids": [
+        "brute_force",
+        "password_spraying",
+        "online_vs_offline"
+      ],
+      "pages": [
+        {
+          "id": "ch4-m09-p01",
+          "title": "Exam focus",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "SY0-701 focuses on **two password attacks**:\n- **Brute force**\n- **Password spraying**\n\nOther attacks exist (dictionary attacks, rainbow tables) but the exam outline emphasizes those two."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which chapter topic is the main focus of \"Exam focus\"?",
+              "options": [
+                "Password attacks: brute force vs spraying (exam core)",
+                "Network segmentation controls",
+                "Disaster recovery logistics",
+                "Physical lock maintenance"
+              ],
+              "correct_index": 0,
+              "explanation": "This page belongs to the module \"Password attacks: brute force vs spraying (exam core)\".",
+              "objectiveIds": [
+                "1.1",
+                "1.2",
+                "1.3",
+                "1.4",
+                "2.1",
+                "2.2",
+                "2.3",
+                "2.4",
+                "3.3",
+                "4.4",
+                "4.6",
+                "4.8",
+                "5.6"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.3",
+            "4.4",
+            "4.6",
+            "4.8",
+            "5.6"
+          ]
+        },
+        {
+          "id": "ch4-m09-p02",
+          "title": "Brute force vs spraying",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Brute force**: many passwords against one account (or one target).\n\n**Password spraying**: one/few common passwords across many accounts (tries to avoid lockout)."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which chapter topic is the main focus of \"Brute force vs spraying\"?",
+              "options": [
+                "Password attacks: brute force vs spraying (exam core)",
+                "Network segmentation controls",
+                "Disaster recovery logistics",
+                "Physical lock maintenance"
+              ],
+              "correct_index": 0,
+              "explanation": "This page belongs to the module \"Password attacks: brute force vs spraying (exam core)\".",
+              "objectiveIds": [
+                "1.1",
+                "1.2",
+                "1.3",
+                "1.4",
+                "2.1",
+                "2.2",
+                "2.3",
+                "2.4",
+                "3.3",
+                "4.4",
+                "4.6",
+                "4.8",
+                "5.6"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.3",
+            "4.4",
+            "4.6",
+            "4.8",
+            "5.6"
+          ]
+        },
+        {
+          "id": "ch4-m09-p03",
+          "title": "Online vs offline",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Online** = against a live system (defenses like lockouts, MFA, rate limits).\n\n**Offline** = attacker captured password hashes; cracking is faster and stealthier because you’re not hitting the login system."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which chapter topic is the main focus of \"Online vs offline\"?",
+              "options": [
+                "Password attacks: brute force vs spraying (exam core)",
+                "Network segmentation controls",
+                "Disaster recovery logistics",
+                "Physical lock maintenance"
+              ],
+              "correct_index": 0,
+              "explanation": "This page belongs to the module \"Password attacks: brute force vs spraying (exam core)\".",
+              "objectiveIds": [
+                "1.1",
+                "1.2",
+                "1.3",
+                "1.4",
+                "2.1",
+                "2.2",
+                "2.3",
+                "2.4",
+                "3.3",
+                "4.4",
+                "4.6",
+                "4.8",
+                "5.6"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.3",
+            "4.4",
+            "4.6",
+            "4.8",
+            "5.6"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.1",
+        "2.2",
+        "2.3",
+        "2.4",
+        "3.3",
+        "4.4",
+        "4.6",
+        "4.8",
+        "5.6"
+      ]
+    },
+    {
+      "id": "ch4-m10",
+      "title": "Rainbow tables, hashing, and password crackers",
+      "tag_ids": [
+        "rainbow_tables",
+        "hashing_basics",
+        "salts_peppers"
+      ],
+      "pages": [
+        {
+          "id": "ch4-m10-p01",
+          "title": "Hashing in plain language",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "A **hash** is a one-way function: input → unique, repeatable output; you shouldn’t be able to reverse it.\n\nAttackers don’t “reverse” hashes— they **guess** plaintext values and compare hashes."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which chapter topic is the main focus of \"Hashing in plain language\"?",
+              "options": [
+                "Rainbow tables, hashing, and password crackers",
+                "Network segmentation controls",
+                "Disaster recovery logistics",
+                "Physical lock maintenance"
+              ],
+              "correct_index": 0,
+              "explanation": "This page belongs to the module \"Rainbow tables, hashing, and password crackers\".",
+              "objectiveIds": [
+                "1.1",
+                "1.2",
+                "1.3",
+                "1.4",
+                "2.1",
+                "2.2",
+                "2.3",
+                "2.4",
+                "3.3",
+                "4.4",
+                "4.6",
+                "4.8",
+                "5.6"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.3",
+            "4.4",
+            "4.6",
+            "4.8",
+            "5.6"
+          ]
+        },
+        {
+          "id": "ch4-m10-p02",
+          "title": "Rainbow tables",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "**Rainbow tables** are precomputed hash databases. If attackers steal hashed passwords, they can look up hashes (faster than brute force) *if the hashing method matches* (e.g., MD5 table for MD5 hashes)."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which chapter topic is the main focus of \"Rainbow tables\"?",
+              "options": [
+                "Rainbow tables, hashing, and password crackers",
+                "Network segmentation controls",
+                "Disaster recovery logistics",
+                "Physical lock maintenance"
+              ],
+              "correct_index": 0,
+              "explanation": "This page belongs to the module \"Rainbow tables, hashing, and password crackers\".",
+              "objectiveIds": [
+                "1.1",
+                "1.2",
+                "1.3",
+                "1.4",
+                "2.1",
+                "2.2",
+                "2.3",
+                "2.4",
+                "3.3",
+                "4.4",
+                "4.6",
+                "4.8",
+                "5.6"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.3",
+            "4.4",
+            "4.6",
+            "4.8",
+            "5.6"
+          ]
+        },
+        {
+          "id": "ch4-m10-p03",
+          "title": "Password crackers + salts/peppers",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Tools like **John the Ripper** try many guesses (brute force / dictionary) against password stores.\n\n**Salts and peppers** add extra data before hashing so the same password doesn’t always produce the same hash, making rainbow-table lookups much less useful."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which chapter topic is the main focus of \"Password crackers + salts/peppers\"?",
+              "options": [
+                "Rainbow tables, hashing, and password crackers",
+                "Network segmentation controls",
+                "Disaster recovery logistics",
+                "Physical lock maintenance"
+              ],
+              "correct_index": 0,
+              "explanation": "This page belongs to the module \"Rainbow tables, hashing, and password crackers\".",
+              "objectiveIds": [
+                "1.1",
+                "1.2",
+                "1.3",
+                "1.4",
+                "2.1",
+                "2.2",
+                "2.3",
+                "2.4",
+                "3.3",
+                "4.4",
+                "4.6",
+                "4.8",
+                "5.6"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.3",
+            "4.4",
+            "4.6",
+            "4.8",
+            "5.6"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.1",
+        "2.2",
+        "2.3",
+        "2.4",
+        "3.3",
+        "4.4",
+        "4.6",
+        "4.8",
+        "5.6"
+      ]
+    },
+    {
+      "id": "ch4-m11",
+      "title": "Defense playbook (what you actually do at work)",
+      "tag_ids": [
+        "phishing",
+        "bec",
+        "password_spraying",
+        "brute_force"
+      ],
+      "pages": [
+        {
+          "id": "ch4-m11-p01",
+          "title": "Human-side controls",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "- Awareness training + phishing simulations\n- Verification procedures (call-backs, approvals)\n- Clear reporting channels (one-click report phishing)\n- Limit public org info (reduce OSINT fuel)"
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which chapter topic is the main focus of \"Human-side controls\"?",
+              "options": [
+                "Defense playbook (what you actually do at work)",
+                "Network segmentation controls",
+                "Disaster recovery logistics",
+                "Physical lock maintenance"
+              ],
+              "correct_index": 0,
+              "explanation": "This page belongs to the module \"Defense playbook (what you actually do at work)\".",
+              "objectiveIds": [
+                "1.1",
+                "1.2",
+                "1.3",
+                "1.4",
+                "2.1",
+                "2.2",
+                "2.3",
+                "2.4",
+                "3.3",
+                "4.4",
+                "4.6",
+                "4.8",
+                "5.6"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.3",
+            "4.4",
+            "4.6",
+            "4.8",
+            "5.6"
+          ]
+        },
+        {
+          "id": "ch4-m11-p02",
+          "title": "Technical controls",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "- MFA everywhere (kills most password-only takeovers)\n- Rate limiting / lockout policies tuned against spraying\n- Email defenses (SPF/DKIM/DMARC, filtering, sandboxing)\n- Domain monitoring (typosquat detection), DNS protections"
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which chapter topic is the main focus of \"Technical controls\"?",
+              "options": [
+                "Defense playbook (what you actually do at work)",
+                "Network segmentation controls",
+                "Disaster recovery logistics",
+                "Physical lock maintenance"
+              ],
+              "correct_index": 0,
+              "explanation": "This page belongs to the module \"Defense playbook (what you actually do at work)\".",
+              "objectiveIds": [
+                "1.1",
+                "1.2",
+                "1.3",
+                "1.4",
+                "2.1",
+                "2.2",
+                "2.3",
+                "2.4",
+                "3.3",
+                "4.4",
+                "4.6",
+                "4.8",
+                "5.6"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.3",
+            "4.4",
+            "4.6",
+            "4.8",
+            "5.6"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.1",
+        "2.2",
+        "2.3",
+        "2.4",
+        "3.3",
+        "4.4",
+        "4.6",
+        "4.8",
+        "5.6"
+      ]
+    }
+  ],
+  "objectiveIds": [
+    "1.1",
+    "1.2",
+    "1.3",
+    "1.4",
+    "2.1",
+    "2.2",
+    "2.3",
+    "2.4",
+    "3.3",
+    "4.4",
+    "4.6",
+    "4.8",
+    "5.6"
+  ]
+}

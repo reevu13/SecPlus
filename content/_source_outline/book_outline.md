@@ -1,0 +1,1068 @@
+# EPUB Structure Outline
+
+- Generated: 2026-02-14T15:14:02.361309+00:00
+- Source: `content/source/sybex.epub`
+- Source SHA-256: `fb8fd45a06923b7082740200882e20b7131ac9e0495bc72b823c77279f51bec0`
+- Engine: `zip_fallback`
+- Chapters: 33
+- Sections: 829
+
+## 1. Cover Page
+- Chapter number: 1
+- Href: `cover.xhtml`
+- Words: 2
+- Hash: `59cbe8b292531daedde8c29660504d40048036dd37919b058da99c5ae2598446`
+- Sections: _none detected_
+
+## 2. Table of Contents
+- Chapter number: 2
+- Href: `navigation.xhtml`
+- Words: 2599
+- Hash: `e42167ca9a20d05875acceace425c866e810d50c38d83f8a7440418b28ef9f5c`
+- Sections:
+  - 1. [2] List of Tables (words: 146, hash: `b364f3d552b80725fd74c348f9a08adf8f4152d669a7d22cfdcef8b23dcb4053`)
+  - 2. [2] List of Illustrations (words: 1185, hash: `d6e0e26676c292290e42d095ecb127e51242c14a5c217a20f5098efa620996f8`)
+  - 3. [2] Guide (words: 34, hash: `ab1c724cea239b743784ef85813cbe5bec9148451233928e5628ee8e63f822c3`)
+  - 4. [2] Pages (words: 670, hash: `f292a3e03c34f06eff5bf986686b757f05c5a79b3911a7243886a029599b7b41`)
+
+## 3. Advertisement Page
+- Chapter number: 3
+- Href: `f01.xhtml`
+- Words: 2
+- Hash: `362792fb166e7ecb13165a7da1cbf9df53d6a470beb55a04e18ce73d56931888`
+- Sections: _none detected_
+
+## 4. CompTIA ® Security+ ® Study Guide
+- Chapter number: 4
+- Href: `f02.xhtml`
+- Words: 15
+- Hash: `598cff7c0371a13e8af9d364b63ccdda49774806313fa12b9b8c037a511e1b91`
+- Sections:
+  - 1. [2] Exam SY0-701 (words: 6, hash: `7608bd49d11c56973db71f57ceeb3ba6f1fff065fc5f26b3c1df1c5dc7d1e833`)
+
+## 5. Copyright
+- Chapter number: 5
+- Href: `f03.xhtml`
+- Words: 474
+- Hash: `0703fbdafea9ccdf11353d06b241fadcbf8e2c7e59a4c811635ec46de1cefd57`
+- Sections: _none detected_
+
+## 6. Dedication
+- Chapter number: 6
+- Href: `f04.xhtml`
+- Words: 65
+- Hash: `6fb7810615936393aeeee552a41f002567f084c075658298e3b02769dc2785e8`
+- Sections: _none detected_
+
+## 7. Acknowledgments
+- Chapter number: 7
+- Href: `f05.xhtml`
+- Words: 241
+- Hash: `e3590ae189458a70e449f0fa1758c9ae53b634e93106e31867411e1477f22a9b`
+- Sections: _none detected_
+
+## 8. About the Authors
+- Chapter number: 8
+- Href: `f06.xhtml`
+- Words: 417
+- Hash: `39349b1a6cf04d4f1048f227964cd15e3cf07328ab6a4ff56f44e159c1bd053d`
+- Sections: _none detected_
+
+## 9. About the Technical Editor
+- Chapter number: 9
+- Href: `f07.xhtml`
+- Words: 79
+- Hash: `81033c12ab1a71cd335c00db6b61ca87b29aff3e2df0ef1234f9cf5016aac6ee`
+- Sections: _none detected_
+
+## 10. About the Technical Proofreader
+- Chapter number: 10
+- Href: `f08.xhtml`
+- Words: 90
+- Hash: `7ac51fe348f193961ff803c14b733337c2c1c206a9fd80250c6ead2414283627`
+- Sections: _none detected_
+
+## 11. Introduction
+- Chapter number: 11
+- Href: `f09.xhtml`
+- Words: 5845
+- Hash: `ca6e152a41f966994b8da52967d4315a6bd38b4bb892c64ae51e7334fcc9935a`
+- Sections:
+  - 1. [2] The Security+ Exam (words: 523, hash: `cbe8d9c830afa168eceb335bc05450c73d88af9f8434c73757d1cf0f39497bbb`)
+  - 2. [3] Taking the Exam (words: 71, hash: `61f3a5dbe900c370b1c16ab804279abb681614c5913a87633ffc04c0144372b7`)
+  - 3. [4] In-Person Exams (words: 152, hash: `4b7bd576c7218970e88f7f51f30015bd300ba1873c13acedd998753454323583`)
+  - 4. [4] At-Home Exams (words: 86, hash: `b31f221f03f8854c5a25f3c1b90bbbcc80b846bf9b0dd474f07308b3ea808876`)
+  - 5. [3] After the Security+ Exam (words: 48, hash: `94e8a047008dad93fa542d197167d40066e6813864719eb597666a2af0a11b54`)
+  - 6. [4] Maintaining Your Certification (words: 150, hash: `ed797be5b1c88e3ddeb995119f7bfd1d6cf593dbc666b0f2509016321f123a5e`)
+  - 7. [2] What Does This Book Cover? (words: 1192, hash: `ba439935b1a4d7021196921cd6df07e094c87b182c606f2fa2817560b39a7d64`)
+  - 8. [3] Study Guide Elements (words: 120, hash: `6e7d362b5070a8db4075c0f9ac8a20d2071bb97f28624908ed6f90af42a59504`)
+  - 9. [3] Interactive Online Learning Environment and Test Bank (words: 94, hash: `d18582bb60a3e979432d48c13cfab56cfa096a249ad6e2a7ca2f6200c5172729`)
+  - 10. [4] Practice Exams (words: 45, hash: `620c4ffc2bd1ee14dd1be16f3d7a9c96c5fa26712fbbf587c5c94e714dc2b4f7`)
+  - 11. [4] Electronic Flashcards (words: 24, hash: `3676a65da31dc37112b3f3bf4928b691e16c237a0b90bd82e22137efc754f573`)
+  - 12. [4] Glossary of Terms (words: 113, hash: `4802065e43048ad0ca482ecae3acf24a5b996393bc06b35fb460fb79ec62082b`)
+  - 13. [2] Exam SY0-701 Exam Objectives (words: 262, hash: `7f343aa1c5d5b90b6bacb1eb2df2e82c5aecc5f3002b0d01144d50ee7d784856`)
+  - 14. [2] SY0-701 Certification Exam Objective Map (words: 420, hash: `268ce34b7be67299b2be70ec53152ab71ce84798be9eb428a5cafd464efd6f21`)
+  - 15. [3] How to Contact the Publisher (words: 71, hash: `f401f6c2b2b9ebc98bab17a84608ad9142a22dafc288a83fa086596c5cb0572f`)
+  - 16. [2] Assessment Test (words: 784, hash: `00733e3cacfc4f478ad159f4a8f59a61b3aa4707392e7f1da5854140d558e9a2`)
+  - 17. [2] Answers to Assessment Test (words: 1327, hash: `8aa7ec3650f8ba6fc90a5b6651b247381c2f09f7c91cf96f72f72fbbab897e4c`)
+
+## 12. Chapter 1 Today's Security Professional
+- Chapter number: 1
+- Href: `c01.xhtml`
+- Words: 5843
+- Hash: `019ec7f9f724c71b8e60921fbd8d71d469a2fd3932026cd3e1a9e9d6d49981e8`
+- Sections:
+  - 1. [2] Cybersecurity Objectives (words: 366, hash: `5ec37fe191f47c10b7975aeceebc2e1670ccb07b3e41bf885aca697a9fbdb8ff`)
+  - 2. [3] Exam Note (words: 29, hash: `abe13e962decf14fa319b9f8e818ea14af837502c7ce6f764ac764e627f309ad`)
+  - 3. [2] Data Breach Risks (words: 126, hash: `fdcb9a1df64f1475286a0cb0d0e2e73793ca56d02f76954a21d99f5da43f4c5a`)
+  - 4. [3] The DAD Triad (words: 475, hash: `5efcbe11c963e1acf70682d672ad444951c0ea8cd55ef70585ae4ede5ca8e91f`)
+  - 5. [3] Breach Impact (words: 63, hash: `b64f60a85a15f78cf9a0a2d92a89609feb34d5311f2c96e9798f4738890d829d`)
+  - 6. [4] Financial Risk (words: 133, hash: `afe183785ea4784b7ad593262327830378c33614e3e8ee83478d16c876a13958`)
+  - 7. [4] Reputational Risk (words: 79, hash: `780aa5e0bd787179887152524d6a90dd1184fa1207e714e15c409f7723dcccd3`)
+  - 8. [3] Identity Theft (words: 96, hash: `9f74f1c2e2c0564e5c6cfc3b24aa60ebae3cfa133fa5f5fb804da13ce78b38b3`)
+  - 9. [4] Strategic Risk (words: 132, hash: `23253df6002fc64effb1cb161bbf26ca626a66ef150ce2c634642b21f6786426`)
+  - 10. [4] Operational Risk (words: 132, hash: `4ea2fd71d14aa36a6c3187f9cebb85bec96b50651376de2e04e5e90b586bbb39`)
+  - 11. [4] Compliance Risk (words: 138, hash: `0ca6fcd52aef7cc168fe75c206fb11a180f9b9162c09dca4f7590d5e82b9ea96`)
+  - 12. [3] Risks Often Cross Categories (words: 130, hash: `d154ccc051f8ffa1da0fdf634f29457d7f09f1567fc010940c51288401b7f269`)
+  - 13. [2] Implementing Security Controls (words: 78, hash: `988ec31d418e6056ca0df8790f231829340d228597f8ee4b386684d92dc6e791`)
+  - 14. [3] Gap Analysis (words: 98, hash: `b3a2d48afca3b41b3858c1f5904f614c4c888c26ede08d0f8143b9b57a7feeb8`)
+  - 15. [3] Security Control Categories (words: 375, hash: `6c1b963c20ca8ae6ed697f822fae4167d3f133f5c2cf7ed6f47c34fed527f2a2`)
+  - 16. [3] Security Control Types (words: 140, hash: `eb9d3bdae0d1ad20a31089c18888938667266d04da5033de21219c4ea66cfd52`)
+  - 17. [3] Exam Note (words: 19, hash: `05ef4f12ec0c96494e60b45de748bda5a9ba17ad6d0e0a47353c973434da8dd5`)
+  - 18. [3] Exploring Compensating Controls (words: 303, hash: `f81444f6ad8d6de62fd9156478ef7faf613f74a3342ec881dcc8371f627b05e5`)
+  - 19. [2] Data Protection (words: 211, hash: `61cb8062dd6b4dffaa26ae4e37b2e7255e246e7a090a04210e7559ba643dbbc7`)
+  - 20. [3] Data Encryption (words: 70, hash: `f7a6583d718d896c62335510d36a7682cf2ca80090e1991e8430a85657848f8d`)
+  - 21. [3] Data Loss Prevention (words: 416, hash: `b7a729941b92f2ffe487efd0b77e94514397e0c642636542475d68558f0a88ba`)
+  - 22. [3] Data Minimization (words: 407, hash: `763b57586213f1ddb0125fbc4a685fba2cfd02006b016adc181edf1f35898aa9`)
+  - 23. [3] Access Restrictions (words: 162, hash: `fec1d8ba40e219cf2c4cc61019433acdf5019e9c1445f46870961566a71f4459`)
+  - 24. [3] Segmentation and Isolation (words: 60, hash: `bfd4cfbfe0edde0a7a7ec469fa778cfa45778011b38aed7086bfa3e0c09a168b`)
+  - 25. [2] Summary (words: 140, hash: `070a388da00e6c73ab4d5b4210ffbd25b1729408d9fc89dc54395c479a721afc`)
+  - 26. [2] Exam Essentials (words: 454, hash: `7126d43972801554a71068168a5f374846b5dab56e1b62e27364252d4c6ce26f`)
+  - 27. [2] Review Questions (words: 664, hash: `a297fc93092314d2955d072cfa00b9c23c66df25c0e1e28f7bb80860e618425e`)
+
+## 13. Chapter 2 Cybersecurity Threat Landscape
+- Chapter number: 2
+- Href: `c02.xhtml`
+- Words: 8480
+- Hash: `c97a75fd268861f9f477f20701731ae19685b8329d5779067b1027874afa01c7`
+- Sections:
+  - 1. [2] Exploring Cybersecurity Threats (words: 47, hash: `4d0aaa4a7e1d15b7247de1f2b81948407a11b8f1daabf4d0d481cf5e9849de38`)
+  - 2. [3] Classifying Cybersecurity Threats (words: 29, hash: `4f1d1958d80a33eea370d7655084b5941c5ad5d55457f4a4a6d3ad08cbe9f366`)
+  - 3. [3] Exam Note (words: 378, hash: `1cbab5b3f8354653f50097b33b12f2751bcdae0942afc7112e6fb6550802432c`)
+  - 4. [3] The Hats Hackers Wear (words: 217, hash: `2df7bf4b33a6bfb70db862194f1d4df3e68373ac2c74ebe529a0d9ef88c6467c`)
+  - 5. [3] Threat Actors (words: 33, hash: `e3f901268fba5b18be1e3874d877ffee9d0538aca31f607e6b9680bddba56540`)
+  - 6. [3] Exam Note (words: 56, hash: `5ebb6ed8d3b3912c6bb51587bd5071acae600c04175beec3b31ced9e7893883d`)
+  - 7. [4] Unskilled Attackers (words: 329, hash: `ec32f03f8f6e68f64feaa9cd4cd5f190cc1c4959d02d8f9008e259aff02c6a87`)
+  - 8. [4] Hacktivists (words: 448, hash: `006f58b753b32edf281f1f82486024c770fbe75f06abad0fdfe3ad8146c28e7e`)
+  - 9. [4] Organized Crime (words: 316, hash: `006f8088c071d7448ba160ba1b02b768c72abd6b615d8e51c4ff3f8d22406f8c`)
+  - 10. [4] Nation-State Attackers (words: 197, hash: `377abe79af7afe402f723a5945eef7e23dffdd0fe5d931987fbe53a7e5107d19`)
+  - 11. [3] Zero-Day Attacks (words: 133, hash: `8d1190fc4cee627bad2ed744d11779ddf5f3f7ae281aac3c20be22c25fbd2670`)
+  - 12. [4] Insider Threat (words: 192, hash: `87202049053b4110600c79143509d48683c019f50b3da740781475fe2ef81dd6`)
+  - 13. [3] The Threat of Shadow IT (words: 176, hash: `e32a7abd903ad20cb39111871044551963cc7dae6ee186af7c64f0ed1caf3e1c`)
+  - 14. [4] Competitors (words: 234, hash: `8bb329f08537fea04330556629d9b7b2dd8fb461709572b34a8cf09857a5ac6c`)
+  - 15. [3] Attacker Motivations (words: 325, hash: `0a40b556b1d90c3316822aa55c039e1e95eedfc418e24b1579938a1766ee4a69`)
+  - 16. [3] Exam Note (words: 28, hash: `1b89022c0cc5ea71926b55aea7321e59be905854508d64f53892c92ba24d9869`)
+  - 17. [3] Threat Vectors and Attack Surfaces (words: 92, hash: `4586468560de5f1b66837a40693ce94f0ec14eeb39c4adc0ad9561cab479290c`)
+  - 18. [4] Message-Based Threat Vectors (words: 185, hash: `a0e51e31a21b32845ce4b0956844e0f98ac75537a7cba25e1ad3c67886483010`)
+  - 19. [4] Wired Networks (words: 136, hash: `456e7832b3e42047c68dd75248db682675971f231ce00547bf99f5aea1d8f204`)
+  - 20. [4] Wireless Networks (words: 78, hash: `58dfabc3780ee5ebd2e56ac5219b32cd6a849062746e0926e35edeb0659cde8e`)
+  - 21. [4] Systems (words: 110, hash: `ef572b53bbd026761c035d6f0a464f61632653226951b8d9b1d192b2cc548a40`)
+  - 22. [4] Files and Images (words: 62, hash: `85537b2204b2cadc3078bcd4c2b03b8baa4ff5ed92864225e97cff479f4be6e9`)
+  - 23. [4] Removable Devices (words: 95, hash: `febc94a89044f0bfe8b33fe12b5478a64b59082172dca9288ea2572b7f308b66`)
+  - 24. [4] Cloud (words: 85, hash: `7d5764a44b3fb38407b9e7a6b8f3bc42d4ed35c20499d3471cb9c0cf30f19fc8`)
+  - 25. [4] Supply Chain (words: 224, hash: `9c0145b4deab6417a384c740e2654adbb48f5f05625f26408dabd75d940830e9`)
+  - 26. [3] Exam Note (words: 13, hash: `8b38fee2b2c674ff9bc86461141ce0ceee8cfbbaa21d584211bc231aa6c5e972`)
+  - 27. [2] Threat Data and Intelligence (words: 320, hash: `615a60c19db539435a014732c506015a46ad48c3fb82ea616ea4934ff8f9ba8d`)
+  - 28. [3] Open Source Intelligence (words: 489, hash: `a5bba5585650a2f004dde3ecace0b5724a29db9d6b723e430b83c4155a32a855`)
+  - 29. [3] Exploring the Dark Web (words: 115, hash: `4e32dfc9ce34d9c33205711e12306b2fd387a661f8f8c470f0b80aefd28435d3`)
+  - 30. [3] Proprietary and Closed-Source Intelligence (words: 205, hash: `ed7e67fa32a38cd483461e1e795e7449e6ef0c8e969676caeb74f294b0ba39de`)
+  - 31. [3] When a Threat Feed Fails (words: 268, hash: `3fd394fb10d99dee08f55af630d3c3a3d39c8d6d1808e30148a8bfa9fd65e5ec`)
+  - 32. [3] Assessing Threat Intelligence (words: 238, hash: `ddd32d158b47007ce1ec08cfcfcf1e65be2bcfea63b6827a80731c1f962662cd`)
+  - 33. [3] Assessing the Confidence Level of Your Intelligence (words: 178, hash: `9641090c4dcb95bc0c60831baa8f75ba0be28a96da858fae071e44a406bb574f`)
+  - 34. [3] Threat Indicator Management and Exchange (words: 373, hash: `b68ec04545139502e2dabc9fd1c6e7ef1ec4eeac534920c532576215a6038cbc`)
+  - 35. [3] Information Sharing Organizations (words: 223, hash: `dafd806b88ca4244852c5c6a09d4f8aa6bbc8701039dbd2bd20e11c445a0ac9f`)
+  - 36. [3] Conducting Your Own Research (words: 122, hash: `c6fcb38573b46312a22622103b33b3b9cae828df967fabfb76d273005574aa6b`)
+  - 37. [2] Summary (words: 169, hash: `310e6b7893db7537a77f96b0659cb0a24b3cf3a7ce1722084a20e4a509132a7d`)
+  - 38. [2] Exam Essentials (words: 420, hash: `d2f6af53db8dc2e500f39d80d00df210907b8cabcb12943a8d6e2d2b764e498d`)
+  - 39. [2] Review Questions (words: 722, hash: `294e86e469196350bcd763373a19213ee75c786126887271a8c6307243c5f38f`)
+
+## 14. Chapter 3 Malicious Code
+- Chapter number: 3
+- Href: `c03.xhtml`
+- Words: 5753
+- Hash: `11b66f3a9e582f7d7d8e440591e98d05818d15e780a2df580b02a1e0c0b401e6`
+- Sections:
+  - 1. [2] Malware (words: 96, hash: `e95972845f64e9cbb12e059b5b5953aed6495d3e9e86c2f69c9794e7516bf95a`)
+  - 2. [3] Exam Note (words: 103, hash: `4173b4446647fd92862270dd675356e988ef08a7744b74bcc4129c735a8b9868`)
+  - 3. [3] Ransomware (words: 357, hash: `2871faea281696dd10acd149fff14085dbd45cbe7ae0adf9f592a7c523f4a7a1`)
+  - 4. [3] Trojans (words: 478, hash: `41944cd712648a032bb8a1b9e1578fdde14664d835ad5bcdf687283563a930d4`)
+  - 5. [3] Bots, Botnets, and Command and Control (words: 122, hash: `a3139b3703788f76346dcf810af98b189215065232041db1ee8db8ea16bea509`)
+  - 6. [3] Worms (words: 71, hash: `338faac9d1a3014cfa5b25ec537c26ca2ecf969109e4d75eeab1e90446e54317`)
+  - 7. [3] Stuxnet: Nation-State-Level Worm Attacks (words: 416, hash: `87e100035202466a095c00b91c61ddd1cf6d8c234584effb8a25744a3cd3c951`)
+  - 8. [3] Spyware (words: 368, hash: `6991a215a04e8dcac8c26b2ebd2444e6a33a59bb5d0aaad0ac0dc3b2e7d1ed14`)
+  - 9. [3] Bloatware (words: 186, hash: `cf1baea4baa435271bbb920a67b3784eca7d5a466b5dfc7b0066b2b4f6bb4f7c`)
+  - 10. [3] Exam Note (words: 66, hash: `02c323794ea4883437d4f5ebf169c2480efdcfb1ad31ab826ccbf2343fa62e6f`)
+  - 11. [3] Viruses (words: 643, hash: `b6372a4e5b11b789e9b23ef582d83c7890b971b39efe950251dcd8fe7d7d4163`)
+  - 12. [3] Keyloggers (words: 268, hash: `31692436d270c4fbcf46be797e2530c20acaec4996df8ae40f29d06c3c6f3ad4`)
+  - 13. [3] Logic Bombs (words: 117, hash: `95589c28e964faa096d445f7f0a2d4a936c1acc8d362ce8b6707e8d666159280`)
+  - 14. [3] Analyzing Malware (words: 126, hash: `54a1c14a6115c8856315656ee168b1a9779f3a7be1c7811e4c34e78fa4aaf5d8`)
+  - 15. [3] Rootkits (words: 561, hash: `66be2ddfed4128876bd76011282ce5e34e3a4e7b2207e60a6775302ef578b99e`)
+  - 16. [2] Summary (words: 388, hash: `846b31381faac690f51a4cade016bfbf277f1b39ffd616fc8c10ceb6b104afbc`)
+  - 17. [2] Exam Essentials (words: 228, hash: `9eec6220d09e3dae29e616671f727f23ad2912200c583ddb19a8e20b9ce3fc2e`)
+  - 18. [2] Review Questions (words: 989, hash: `d0fd66150d929f8e2271361d4970ae0561ff2fb25316f6e61c07d7555080e379`)
+
+## 15. Chapter 4 Social Engineering and Password Attacks
+- Chapter number: 4
+- Href: `c04.xhtml`
+- Words: 4499
+- Hash: `56e18fd60812f7cd80f2c3e6107b11e8f240b12bf0e402a7e9c1d46037708e3c`
+- Sections:
+  - 1. [2] Social Engineering and Human Vectors (words: 513, hash: `8c1a9eafb189c4269a7aa28570cef899972ec4fcb6f3314cadec279d9d542916`)
+  - 2. [3] Exam Note (words: 44, hash: `87ff31662818b82fdbb55f44e421be6a85aa01e7afc03081f0b91f1435c50e84`)
+  - 3. [3] Social Engineering Techniques (words: 58, hash: `05e4564e205efbcbcb5cc01041ff01c38a55ff04f9abcde436262b28c127b51c`)
+  - 4. [4] Phishing (words: 203, hash: `11624697d01627a3be6cd96f889097f8f06055415537860f0187f7991e3d3c60`)
+  - 5. [4] Vishing (words: 116, hash: `1ff5740f98fa94fdf0f659514c4c8d292cbfdefbd0e8d1ae62b23f5e91ce0391`)
+  - 6. [4] Smishing (words: 107, hash: `c7033334947c4de62a5c3bdcb3aad4b454b0c8e8f7d90b0931a13ca40fb00738`)
+  - 7. [4] Misinformation and Disinformation (words: 307, hash: `4627498c17367b4772abd4ca6b477f9d2b269fa587f67a56fe00aaf51c118c9b`)
+  - 8. [4] Impersonation (words: 175, hash: `54bcfaa1cf9017dc6161c94df960ae7926689c42c9b8d67b1eb31e1cd87fcb68`)
+  - 9. [4] Business Email Compromises (words: 149, hash: `5664121b1879fad1947a27315450cb9c6e28b5c5aad86d33315b80f13ed571e3`)
+  - 10. [4] Pretexting (words: 62, hash: `245bf7ac0bfcda20af7de5353662f81dc31e13235d4e43bc8f2d8455b038f792`)
+  - 11. [4] Watering Hole Attacks (words: 69, hash: `1ead1af02e978bdb7b75cf451ad7e685a6ecb9db50015ba447ccd2f81234a919`)
+  - 12. [4] Brand Impersonation (words: 132, hash: `b955949aadc790e612272a0a17e2153ec5b65cc9999ec7a9b250709cc73a5032`)
+  - 13. [4] Typosquatting (words: 161, hash: `8a8951c306964026c4afdc097c23b021328fef0b718b0b5baf1b662ff63bdd17`)
+  - 14. [2] Password Attacks (words: 301, hash: `df25c53c298a02210bcee518753e92e420b0464ecf46e20e6ec2a4a0d591d8a3`)
+  - 15. [3] Exam Note (words: 618, hash: `b4eaed0ad5085bb404df47311e574c6a3d308616f4d5d437f77929fc3d2ebc1a`)
+  - 16. [2] Summary (words: 158, hash: `f9e7c5d45bd691b3344156aed969129a736b7b7d20b7541403e67be672e4df0c`)
+  - 17. [2] Exam Essentials (words: 205, hash: `8678b6b1ebd3d3e57053d2fae8ab9ef91f9d99093902a9e70d879626474d6ea3`)
+  - 18. [2] Review Questions (words: 906, hash: `32fc71c8d368236431c8add1ab316cd40abb62b56ab0e049022ae449a12f62e8`)
+
+## 16. Chapter 5 Security Assessment and Testing
+- Chapter number: 5
+- Href: `c05.xhtml`
+- Words: 14502
+- Hash: `60298e34df84fc698ba82664e9a09a82e76097d4ef183451a376f2816e5ab534`
+- Sections:
+  - 1. [2] Vulnerability Management (words: 105, hash: `671168158f63535c2a342869d6ec2ce4bc1a7ef11a6ad078226adee9c74442ae`)
+  - 2. [3] Identifying Scan Targets (words: 258, hash: `b11192b986ae0e02d073966d3031ecabeb62f97d3a2ae7c29ec7a0d43bbf228e`)
+  - 3. [3] Determining Scan Frequency (words: 360, hash: `519c6874b260a3f23e03af72f0e5c98803cbe682d7b5a36977ad1ef3f61e98e4`)
+  - 4. [3] Configuring Vulnerability Scans (words: 76, hash: `6a198edd8df66318a3e7068bf713df3e4291223abd3cebcfbc8246de16f8d181`)
+  - 5. [4] Scan Sensitivity Levels (words: 405, hash: `279d48f3e782591c9f0fd0abd8cb774322b78bacfe07ea8c7512d60b259bcb9d`)
+  - 6. [4] Supplementing Network Scans (words: 252, hash: `5a1cae8d565f520c079940beb85f5f3a79fdfcf562286d441c973dc4058bd340`)
+  - 7. [3] Exam Note (words: 197, hash: `e42b2caafe39cefaf63081c50bc7f0f38efdf94888c4ca17fbab110db4e4afa6`)
+  - 8. [4] Scan Perspective (words: 234, hash: `13fb2ae7fb6b22ea3e3fc5a7c62c96316ab3006142d720067dfbc45ed5d14f52`)
+  - 9. [3] Scanner Maintenance (words: 82, hash: `3b47fcf0e15cdcb84ab3d1073b53f1da6766812053e1d8e3574642e290670ee4`)
+  - 10. [4] Scanner Software (words: 63, hash: `dcdf656376e9f1a3d6c1f195df437de912cdfc4cd0621a0c6e9d25509b58d8bf`)
+  - 11. [4] Vulnerability Plug-in Feeds (words: 60, hash: `fbb382fded70b0f0947ecdaec20a405c52d406986d6d4b92cb7373457dd238d9`)
+  - 12. [3] Security Content Automation Protocol (SCAP) (words: 195, hash: `3a5e2b77009339702b461707e2c4660cddfc463e642cc584f0cc913e24dddb1d`)
+  - 13. [3] Exam Note (words: 73, hash: `2c468b96df0b61dc098047504d7428e3c5440f877e1fc80e1141c69c4141955c`)
+  - 14. [3] Vulnerability Scanning Tools (words: 63, hash: `0303c884b4f30c95a626094cf1ce98cbbf208944d57846468dfadba3522a622d`)
+  - 15. [4] Infrastructure Vulnerability Scanning (words: 210, hash: `e3b09b75e6361a2ea7c9f285a535b66d8a27cf23796ec06aeda1b264c8d1d8f8`)
+  - 16. [4] Application Testing (words: 128, hash: `41cd092635bfc7b63dfb00bb3c33163bbd1c5c43d2bc6b5a432580b3f4af0482`)
+  - 17. [4] Web Application Scanning (words: 208, hash: `44ef44214ac9265db676d3bc38c1b1094f89e8466edcc04f946f4b841e0c3a11`)
+  - 18. [3] Reviewing and Interpreting Scan Reports (words: 653, hash: `ed75889eb64d7d3bdc26c81db58bc0d9490d0ff754fcb94307693c0d8c7729f2`)
+  - 19. [4] Understanding CVSS (words: 40, hash: `4c6bca108899c45d5684230bd12fcd329bad28ec427735db2a5956c6d70750b4`)
+  - 20. [3] Exam Note (words: 113, hash: `4eedd694d50b01dc6338648409f906bfcfb5c67803ed92e299075523814d2f83`)
+  - 21. [5] Attack Vector Metric (words: 97, hash: `2960499f89ff152815de74b58e3304bf9b5364be4674cf29bc5ff20b78ecb095`)
+  - 22. [5] Attack Complexity Metric (words: 63, hash: `d16eb1fcb1318f5ba4c028e141e46397003d7414f51b66e95f15657d52af61e3`)
+  - 23. [5] Privileges Required Metric (words: 94, hash: `3bdae139f83810700e1fc1193eb03c480c1fe0f8e813ffe46726a611df1e91ad`)
+  - 24. [5] User Interaction Metric (words: 74, hash: `55f1c79ee3845190cdcebe8392a46f498f0ce1f58bf87469709d6205e56dd703`)
+  - 25. [5] Confidentiality Metric (words: 84, hash: `0e1856f29888147bd2d53142e448535615f3d10c157c2eb264fd79272084dbfd`)
+  - 26. [5] Integrity Metric (words: 94, hash: `03bc66242a0dca5427e9a520df147a09e1192480b4dbfab4cf213acadecec667`)
+  - 27. [5] Availability Metric (words: 71, hash: `d70f750033b6770dedcfa7266a2f567e8dbb362b0a724342b13bd9419162eaed`)
+  - 28. [5] Scope Metric (words: 185, hash: `aee92f41710fd3033e8f7a2d71724cedef821f854c129b0d856247d867a68bbd`)
+  - 29. [5] Interpreting the CVSS Vector (words: 153, hash: `8d3f11c541eda3bbcbfa62cd2f2144e4325fd5ffa0618b05d8fe0f3304379309`)
+  - 30. [5] Summarizing CVSS Scores (words: 67, hash: `bc76fdf934382c81acfd1daeacb38c3d9089f2c15a0ffcab624a9392a46c23c0`)
+  - 31. [6] CALCULATING THE IMPACT SUB-SCORE (ISS) (words: 32, hash: `83564c817d45e2dd03fc07a175595a6e841c6fe5aea1571b8bee9f2e95aa0bdf`)
+  - 32. [6] CALCULATING THE IMPACT SCORE (words: 52, hash: `f4b7e02fd6bb997963c1ca640c2ddad9c4f60e915c99b725408659900f44a8e8`)
+  - 33. [6] CALCULATING THE EXPLOITABILITY SCORE (words: 21, hash: `ede07b1318aa306b805e31eb1cebb276370b5ae9acd21b45ddf99581e529a80b`)
+  - 34. [6] CALCULATING THE BASE SCORE (words: 179, hash: `31b2046f42e5a466a1ec9d6fb6c4763707120dc4e6461fd6b4f10f01c5899cd2`)
+  - 35. [6] CATEGORIZING CVSS BASE SCORES (words: 105, hash: `fb698209c1ce979fa6ea5fc5d92fd31b86cf954589d1749900253da587251b92`)
+  - 36. [3] Exam Note (words: 23, hash: `69b697bf7c83d4e65156ae93a7a11e0c08bcbaa572fcf24eedeb6350a634fcad`)
+  - 37. [3] Confirmation of Scan Results (words: 35, hash: `ed7f49758d5841fafccb43289d291b35fac0b961123970bbeb696e0bdfd36c65`)
+  - 38. [4] False Positives (words: 132, hash: `44848a371b3b8603d0d10b0f8df77541b313779fb855052178e8dcbc27b0a707`)
+  - 39. [3] Exam Note (words: 160, hash: `9e5352824caadb27374801ef2d4ffd26a0420247a4cea7ebf46a73b5715d5848`)
+  - 40. [4] Reconciling Scan Results with Other Data Sources (words: 117, hash: `bd78c8812e07665ba50336d22316a9b82c56cb40eaf0c63e6e2dd0ec9a236f26`)
+  - 41. [2] Vulnerability Classification (words: 70, hash: `1f1ae1855091655b96cad647eba6fb13e5a36a62bcfdbc0b09a445247e0ed992`)
+  - 42. [3] Patch Management (words: 216, hash: `7552987d8330b89672a0d06d39bedc54dae765fd5b87037d551f9e4822873a18`)
+  - 43. [3] Legacy Platforms (words: 342, hash: `1b7dc16ee613bb18f1ec0c3b3c8d68474a9d83656698879666299fd243c88912`)
+  - 44. [3] Exam Note (words: 17, hash: `da54c3b73ff64488b0173d8be4ebdd70d38f3ad308780ad089de4b62ef3fefc2`)
+  - 45. [3] Weak Configurations (words: 174, hash: `b586011cc26b6862620170f3c8acdfac88a34f4aaa12614b6c4a11bbd14262c8`)
+  - 46. [3] Error Messages (words: 226, hash: `f4ed8fdd37b78906a7bea353fabb395ad5cad580d2b43531eeed29e80b27fd38`)
+  - 47. [3] Insecure Protocols (words: 180, hash: `c99993ca9a9f84ddc00b07589bebae7bb20fdc0f711521acabfea005afc8cf35`)
+  - 48. [3] Weak Encryption (words: 180, hash: `fc0901b127e214b2042bebeb5234fb1e10870fea44611bd87cbfa34e96837c60`)
+  - 49. [2] Penetration Testing (words: 98, hash: `1ed7b51cb9e26ef9b7336e142cdcc87ec575f1387effcfe772448cdf67c8a32e`)
+  - 50. [3] Adopting the Hacker Mindset (words: 567, hash: `60fcb584a9448c8f3480171d763efdb343d904eef4c1ae409e2aee50c4791f8d`)
+  - 51. [3] Reasons for Penetration Testing (words: 193, hash: `5968f2d1e8eab516ead71fd041f0a4eda2ab3fcd1a7f21e65a9904aff422b6a6`)
+  - 52. [3] Benefits of Penetration Testing (words: 263, hash: `43258405b733760a58193e8cbe5139fbcb1453ebcd0871553660e0c297ec6716`)
+  - 53. [3] Threat Hunting (words: 266, hash: `7eea17173aedbc0656fba081fcc5c925f17d6965d916643004e561f1848b4f19`)
+  - 54. [3] Penetration Test Types (words: 576, hash: `cdb71709e1140375cfbd5ce3c9a98776d15d18fba5e58b7e4c61e177a52b6739`)
+  - 55. [3] Exam Note (words: 70, hash: `889a00776895d8c50c7357b1c8ab06005ee52dd33730153029fa9fdfa7072831`)
+  - 56. [3] Rules of Engagement (words: 374, hash: `33428d16ba6a43aa90f3f7b32695d6a935ce604db319fba18e592f96ee330285`)
+  - 57. [3] Permission (words: 362, hash: `9884d24c4d3f7bbbe9603d7d4417389996ed530b00746b09ad09161f29095b92`)
+  - 58. [3] Reconnaissance (words: 146, hash: `786abd29ac9809bb881a7e724416da36a1c0481ac5279854337992e7b365865b`)
+  - 59. [3] Exam Note (words: 110, hash: `f01cc5f9405ae9ec61bf8bbb7acbfa0e330e91cbf708edfc44d7c35c11cd1eda`)
+  - 60. [3] Running the Test (words: 188, hash: `4e858416fc83464d5eaf397201f3bdd58fa6df68859d29fd11c017954f9d8660`)
+  - 61. [3] Cleaning Up (words: 74, hash: `21a5d9ac32f3d04df789f1f04a7f4a1c7b0978de770be33c1fb1f515f3b206db`)
+  - 62. [2] Audits and Assessments (words: 68, hash: `c3a10604ecc9ffe144d242ebff83e747c007a26b80bfb78ea86eb497a2a9d448`)
+  - 63. [3] Security Tests (words: 445, hash: `451f56d7569fd5ce570513f07ad115e9e0e25f1b7cad64ec357cc7ed06ba02e8`)
+  - 64. [3] Responsible Disclosure Programs (words: 139, hash: `7cc4b8d3103e21169edddf1e2d2d48b87764397c8fafd0cd013392a44ce4ee18`)
+  - 65. [3] Security Assessments (words: 154, hash: `ad3ed8c691cbbd48bd5623ca82bdc4d690e03415627e740e02ed3d2d1761b700`)
+  - 66. [3] Security Audits (words: 208, hash: `056c52eb9653dc6796431077bf459b7d92bc827b1fef4d97fb0a418c5e4e33a5`)
+  - 67. [4] Internal Audits (words: 135, hash: `fb6431a4f30c380051000ee8edae30bc144e30579def81ca2055abe2bf3289ce`)
+  - 68. [4] External Audits (words: 87, hash: `3e941fa28b70755af1c62a8297dbd5d94a5f912306f39754e9edf0c40afaa372`)
+  - 69. [4] Independent Third-Party Audits (words: 59, hash: `fb478de562d23fa1f64ff5a3821f68e9d11227c3a63d8f53ca2d2bca842d22b0`)
+  - 70. [3] Exam Note (words: 172, hash: `78dd16c5b808af9d18e3dc80c2863c5781bab12e1d04d5e5c79d2051080db22e`)
+  - 71. [4] Auditing Standards (words: 188, hash: `1624aeb24f6e34f2e9a7d59ac573a3600911c845fa12537f8b5ed256a3f950e9`)
+  - 72. [2] Vulnerability Life Cycle (words: 41, hash: `02a00140f459347d0dc237e953f4fb55d7fcd106e2c949079d6f12ea7419122f`)
+  - 73. [3] Vulnerability Identification (words: 57, hash: `d574d5b682174e01e48e6e21a57719ce07c213337d7d8fb3d0795e504549b91a`)
+  - 74. [3] Vulnerability Analysis (words: 89, hash: `2d533a71c879e5db2c2c020aee8e2397a1150c974746b141f1a3237511a05e8e`)
+  - 75. [3] Vulnerability Response and Remediation (words: 120, hash: `788e187d1d1b1011cedce5334b9b9db3102112f266dbe91dba8e8cb2bce27e22`)
+  - 76. [3] Validation of Remediation (words: 63, hash: `ed7e8e599ad2bef6c832b07c27cb39afe6dbeb9aae83ae7e64ddd201ddac294b`)
+  - 77. [3] Reporting (words: 170, hash: `da8810d361671cf911bedbf4776d7ab87680b22ccd1ba7a036d5add554282c57`)
+  - 78. [2] Summary (words: 133, hash: `58313a512cf42cf971df55ee085da670ce203a9d47bb16f71b598e6267bfa136`)
+  - 79. [2] Exam Essentials (words: 624, hash: `1b90fb8c66009a104519424f81761d83626be053a9e0140eecd930a9f818352f`)
+  - 80. [2] Review Questions (words: 710, hash: `bdb45d70c295ac6014181832caa0ce50d44872ae88f55ed80773e0d1d2d5f949`)
+
+## 17. Chapter 6 Application Security
+- Chapter number: 6
+- Href: `c06.xhtml`
+- Words: 14828
+- Hash: `23521786fae5ca040f2665e6bf20da4270b73a574862ff181375bfdf9c4a0b5c`
+- Sections:
+  - 1. [2] Software Assurance Best Practices (words: 30, hash: `d7550f7d7c9bf6727f6966bd3b361a56f0b6e790d314a78394b0864fc042c982`)
+  - 2. [3] The Software Development Life Cycle (words: 231, hash: `6f7973ed7c52f565d3dc43eb71eadd531f3ab5ee94b9772ea2a5b6afa9cec311`)
+  - 3. [3] Software Development Phases (words: 471, hash: `61527562112ac551bd73a55876bd0484dc932a9c35827bf274b75c8e604cb5c6`)
+  - 4. [3] Code Deployment Environments (words: 178, hash: `533c1ff6eccf2bcb6bc4b113cafb6dbb419c3638861b64de72e0ed5ce9b8d29e`)
+  - 5. [3] Exam Note (words: 49, hash: `264db7eb54ec67616bc1a870bcc8f38f12eafaf9c0d3cd91bb82ec09d9170e6c`)
+  - 6. [3] DevSecOps and DevOps (words: 196, hash: `9804fda9d3da261740c72f40139c04337b9887d98fffbca386960071e3d086ea`)
+  - 7. [4] Continuous Integration and Continuous Deployment (words: 211, hash: `3bc9b350bdf8738348a465d05d8eb15b5d8411789eef554f45da4c26ad55c03b`)
+  - 8. [2] Designing and Coding for Security (words: 138, hash: `774fa2d993340e74121ee6a320610989b7fae77302d8d37ed8d01dc25dfe6943`)
+  - 9. [3] Secure Coding Practices (words: 278, hash: `26d4d79db41032024cee93be14f3a0b5ff25d74312a795fea9624ca655ce0cf9`)
+  - 10. [3] API Security (words: 180, hash: `a6a234e538271d26c6b396aca6207f2e64a4304e169a3a6c7d65a71f2035b013`)
+  - 11. [2] Software Security Testing (words: 171, hash: `805a02ee7202d5d1585d957cb7e5d65c910ab9cef411e43add73de0f7a6db50a`)
+  - 12. [3] Analyzing and Testing Code (words: 113, hash: `ccc7c85a1d5a824364b6c39d6a725fe3c14ac2dd250bf0645e701eb116cee0fe`)
+  - 13. [4] Static Code Analysis (words: 173, hash: `0f3efbcc454ed7d896f35edf069b1ba8f5458fed25e3c1b93a6d35f28c3907f2`)
+  - 14. [4] Dynamic Code Analysis (words: 60, hash: `108ba770900bcd2879d1368bcfd8cc26b9c07b6e4636c047d189bc1faf4d340b`)
+  - 15. [3] Exam Note (words: 50, hash: `2499791fbab656b3911244ba77797087d54f4aa7295a52dabf411d8bc440c6c1`)
+  - 16. [4] Fuzzing (words: 106, hash: `ff3d6ad263fcb91454fb9680127b80acbddc8608dfcc8635caa72ab2bc19d0cc`)
+  - 17. [2] Injection Vulnerabilities (words: 110, hash: `2d9369ee6da8f34a03568d4ee8ba96a7f5472940e4cd7fb2e0b998dc68504236`)
+  - 18. [3] SQL Injection Attacks (words: 344, hash: `23a85140ec0d8fd45cd81fe284f91529b94ae5c5ff57c9fbe5e3a66e8e8257c3`)
+  - 19. [4] Blind Content-Based SQL Injection (words: 446, hash: `5748e30a86a5b0e37fdffdc1504d3d288f11a3b52fa5b69ef3e96ce194db8745`)
+  - 20. [4] Blind Timing-Based SQL Injection (words: 312, hash: `35afb35a27a5c3bf14b59876df12bf47b78c978e6b23816c26ce2fee76e783fd`)
+  - 21. [3] Exam Note (words: 22, hash: `433e22e4e8001e791b5d5a8c5a3c459354b590190e6fd97c7469ca69ce3f122e`)
+  - 22. [3] Code Injection Attacks (words: 174, hash: `11ba3992c117cc3686a3b16277b90366b5c6a36e7281ed93078049a61deccdb1`)
+  - 23. [3] Command Injection Attacks (words: 235, hash: `a181e4b57c01927bb2cbb3a7759d029476b467a87273edc4f7e220f1b24bd10c`)
+  - 24. [2] Exploiting Authentication Vulnerabilities (words: 61, hash: `6ddf09396b7bdef67a700ad01c4af4f061cd4b3fa6b1c98afef12c188c19a8aa`)
+  - 25. [3] Password Authentication (words: 344, hash: `7fc549883795b7074f619240d60b80be4d92739274c480e14f35cd8213241548`)
+  - 26. [3] Session Attacks (words: 307, hash: `022c365ad6c6849d916aa88e8c81c6e41f273adccf954b55c2c0e5ea107d9f76`)
+  - 27. [4] Cookie Stealing and Manipulation (words: 414, hash: `c5424e3879b7f918f3c57778d2fd48a608fcb88edffc63e1117184b7f5e51bfa`)
+  - 28. [4] Unvalidated Redirects (words: 258, hash: `c2471886fd52e1c6a19b9e22879fd2cad8f6d75abadb9bace0087b56b4d67998`)
+  - 29. [2] Exploiting Authorization Vulnerabilities (words: 53, hash: `8cbb9b05dfc9e6fb5db078ebf090defb6c6e33999106d872dda3f0ba3dd5b72c`)
+  - 30. [3] Insecure Direct Object References (words: 173, hash: `97ae433f281232d5915dd0a347bb9e220d82b48b603dc3ba288274e18b33a0ce`)
+  - 31. [3] Canadian Teenager Arrested for Exploiting Insecure Direct Object Reference (words: 112, hash: `0c773cd7b69c6e9b188c13fec63cf9c333711008c37eaa32b3facabb91e95c72`)
+  - 32. [3] Directory Traversal (words: 377, hash: `dcb1073161ccc235a86654b14c201f7a62d4a2a7fa7eefd90d3c6e4896a2b837`)
+  - 33. [3] File Inclusion (words: 316, hash: `cb89aff99b92b2548c438336008f2945f7c420c586e99ed21e4463c3b6a9ebd9`)
+  - 34. [3] Privilege Escalation (words: 82, hash: `f7c0b6b96a3d45fe348e9a6023e7661262d2ce3ed122e732fff4cad74453fbfb`)
+  - 35. [3] Exam Note (words: 35, hash: `5afb785d6ce1ff264260b0411beab60cdb175f471e1ea8aa5c9c72c9150c92d2`)
+  - 36. [2] Exploiting Web Application Vulnerabilities (words: 83, hash: `aa989ecb45238fc96a8478e6318c3c0283859cfd323a5385000424f1c4ef414a`)
+  - 37. [3] Cross-Site Scripting (XSS) (words: 25, hash: `ba01a53568030a1dbe41a5b3a0eaa432485dd098dbf73b88494ae4d76b18361e`)
+  - 38. [4] Reflected XSS (words: 463, hash: `a8ecb7cf9d53b1731f1d19afda5472476cdd2785b702deee0c717f53ad4e3622`)
+  - 39. [3] Exam Note (words: 74, hash: `398ab6f6a6a176b20862881ef2eedda50d148a2700d1852780bd0f87480c6be1`)
+  - 40. [4] Stored/Persistent XSS (words: 359, hash: `7dba206dba591c48990da27bb648ed26b9309fa1d461aa01cfed6d0cf04e0c60`)
+  - 41. [3] Request Forgery (words: 32, hash: `7c9fab2201f404bfe6ea52f7a1094e5d74931aed0c1bada8c7ac5c1fa97d9dcc`)
+  - 42. [4] Cross-Site Request Forgery (CSRF/XSRF) (words: 282, hash: `83d7e00e3f7546923546286c420c33beb5958968669a8433a686c99c46f223c3`)
+  - 43. [4] Server-Side Request Forgery (SSRF) (words: 75, hash: `1ceb77b2f59ff86cb0e94d480f50afcde20cabae4cbb4bdc4684335a85d84807`)
+  - 44. [2] Application Security Controls (words: 59, hash: `9abda58cf78b2bdd574e8a9b1387a50679b83654a791ce08f6a451ce5378376a`)
+  - 45. [3] Input Validation (words: 145, hash: `c2f3ef63948b3cc0cc74003e97fad557dbbad9ff1913406af1d4f718941db2f5`)
+  - 46. [3] Exam Note (words: 252, hash: `b370639ad83950949318c90329e2d733576d29204671081ac54bf158f6b5294b`)
+  - 47. [3] Parameter Pollution (words: 258, hash: `5b5096e26ce65b47b7860dadd57960d038f3acfd6fe8a9216942517e89f3bf69`)
+  - 48. [3] Web Application Firewalls (words: 146, hash: `39439d9171fc386c5fa2e4939f972f271e99b20bbdf7daa98f38c7d6bd1dee8c`)
+  - 49. [3] Parameterized Queries (words: 72, hash: `88a838c301c56c5ab049dc44214750a55c0a400f569fe7a562ab12a611e32554`)
+  - 50. [3] Sandboxing (words: 167, hash: `bdf7be258f34722616e210f14b3c14e728347605f15b9cb3f5f1d1cbfbe29513`)
+  - 51. [3] Exam Note (words: 28, hash: `10900600a5265a19929a7ae176cde3753463638e7189b51abb1219154b0e75cf`)
+  - 52. [3] Code Security (words: 24, hash: `d712043adb351b71382be4e5759073abe7afeae11af23e4392b17b95c783b04a`)
+  - 53. [4] Code Signing (words: 122, hash: `bf07051e20ed3e227b18d089cb40935b79d9fa3b68e2e391850f9ae9b4e8040d`)
+  - 54. [4] Code Reuse (words: 237, hash: `3c1e677b4da20187d3c2d9a45446f2394b2b891e681cc6250b0ffa6580296e1b`)
+  - 55. [4] Software Diversity (words: 76, hash: `d297d5a7262cdf5b11d4b2a7119a6e17128c650ca22e3817de190fa9672736b0`)
+  - 56. [4] Code Repositories (words: 200, hash: `2cba687b63d465be4b89d23c83503039df4dc45bcd530b578979ac4064a75106`)
+  - 57. [4] Integrity Measurement (words: 100, hash: `b2f01fe8fbc1f2d7ffec989520bd297ebeea8b843dfc58479b9351ecb11a38db`)
+  - 58. [4] Application Resilience (words: 91, hash: `daa73bf6b76016da7ffdd5abb518235a3313bba88857c620640c6d18291e4879`)
+  - 59. [2] Secure Coding Practices (words: 77, hash: `1f699a915930242da614a076205381bb80bfaf66b62d7866ff2ee95673ed90fa`)
+  - 60. [3] Source Code Comments (words: 171, hash: `084aa55ea7558440e028cdd2f4f07aa0b5828e28458d2e1dd983eb7e8847fa93`)
+  - 61. [3] Error Handling (words: 283, hash: `e59ee96d9d29dc5a6cdae4af0ac5535146ead73a79e632fbdb1e99a54c2a183e`)
+  - 62. [3] Hard-Coded Credentials (words: 153, hash: `17a7193226b14fa02d6191dd81b8934ee40cd44dae3b8d80c9de83a0ca99ffdd`)
+  - 63. [3] Package Monitoring (words: 160, hash: `99a057c4e0f6c229859d4b73e1fe7de051d90b827d1044c3f74a2977a899fdf6`)
+  - 64. [3] Memory Management (words: 27, hash: `f91a66c9945bfb7b9af914e7ba4a1978ae5e09bddf7928cb0b500b2e16ef73a0`)
+  - 65. [4] Resource Exhaustion (words: 183, hash: `3b1c75797204c893cfab8775eff728a73ed9875c72b980f1a95a1282b0c5994d`)
+  - 66. [4] Pointer Dereferencing (words: 199, hash: `408f5280b95758efbdc394fdaaa9b3a80a034474de3546c6a3f79c1928296296`)
+  - 67. [4] Buffer Overflows (words: 190, hash: `dcab6d2efb27e86892627b960f71838f0e4184b1f3363840586308fc62f78946`)
+  - 68. [3] Race Conditions (words: 252, hash: `2c25fa8b8b20b954760978226a5903d774b219685df36d5be5b554b47f7690a2`)
+  - 69. [3] Exam Note (words: 50, hash: `2499791fbab656b3911244ba77797087d54f4aa7295a52dabf411d8bc440c6c1`)
+  - 70. [3] Unprotected APIs (words: 127, hash: `e6663ced4024e074d15ae505b0c8436c3310bbcdaa3535e53970b96b54e46ba1`)
+  - 71. [2] Automation and Orchestration (words: 255, hash: `7f9906351426aff71321e94c31d4579d18093bb763606eebda887fb02d12ff96`)
+  - 72. [3] Use Cases of Automation and Scripting (words: 213, hash: `cc6f13024215c69d2c74912d3b64693361bb789c24578c71190fbf3aaae53eca`)
+  - 73. [3] Benefits of Automation and Scripting (words: 159, hash: `2d2e8e3e236488c13bf1b6cc9c611bb1ce42d955fd74bdb831f67656f90ade04`)
+  - 74. [3] Other Considerations (words: 208, hash: `c940c8d9a4eb140ed973c2eb68bdc42db44558fcc65974df3182812ee44f4f95`)
+  - 75. [3] Exam Note (words: 38, hash: `b4a000cfe1ba9473d6ff8f633ca715e3461ab4827607f2950cd8ecdd5a04a14c`)
+  - 76. [2] Summary (words: 101, hash: `bc01ff2be23ded31b20134bd04ad0c8b739eb181a356dbf42fcf7d34ced1f0ce`)
+  - 77. [2] Exam Essentials (words: 349, hash: `383d44d41a03908105226df1ba0c9492cc3630f31ebfaf63ecb5c49563a1f040`)
+  - 78. [2] Review Questions (words: 841, hash: `d843121b4749cf6eaf0dfe8aaab54df33d57155792300c275f60bc04ac20bce3`)
+
+## 18. Chapter 7 Cryptography and the PKI
+- Chapter number: 7
+- Href: `c07.xhtml`
+- Words: 16597
+- Hash: `c9dc4180d0dd3954106dfd5e454b0ae4eed404188e47b187e3d878ed9fcc082e`
+- Sections:
+  - 1. [2] An Overview of Cryptography (words: 97, hash: `74a84c3f7f7024dd73ecc7c723bb379a7658c0588d20b1f35aaeed21837f1e9f`)
+  - 2. [3] Historical Cryptography (words: 86, hash: `9059c37d0be52c3b58474ecae00cbf4c0ac926e11389c8f546f4032522ac7d44`)
+  - 3. [4] Substitution Ciphers (words: 206, hash: `5056d037c6e4c3b12c5a04130b240352bac93d1b15aaaf03c48890c2d0c326a2`)
+  - 4. [3] ROT13 (words: 134, hash: `8bb66fac69c854a1964ce03b786c52bbb21b04e32664d233bc54b9ac9b33a87a`)
+  - 5. [4] Polyalphabetic Substitution (words: 453, hash: `027b7aa3da1bb11ba986982568d0642d7aa24bee702fcb1fffdad27b0ca34d5d`)
+  - 6. [4] Transposition Ciphers (words: 286, hash: `fde82e74b5449d1f2ddbc6e1bf7e76605b544bb31f869f537a3379123823d5c1`)
+  - 7. [4] The Enigma Machine (words: 266, hash: `35b6a4005b5c0ba3b77f6297e8235af7750adeabc32db67644203fa70ffa54a9`)
+  - 8. [4] Steganography (words: 78, hash: `8742cc75458390777aed40a99f7d113bc1e3f0c40e438719a201e38408f3c7a9`)
+  - 9. [3] Exam Note (words: 242, hash: `bb4306a60c8b05f64ac1818799206040b4880bd430aab244880a77d9b9458899`)
+  - 10. [2] Goals of Cryptography (words: 76, hash: `d3e70fb8cddcf925b69a21b20ae0ba7917d7bfb87783da437add3dbac0bb036d`)
+  - 11. [3] Confidentiality (words: 102, hash: `8ac9b958eb486ba8130854ce16a3ed13382f8c02247530bb4fae1ec1fb06f463`)
+  - 12. [3] Exam Tip (words: 303, hash: `c3a144020335ccf53755dab221aa1a9ec80a56752102675ee8526a6b515f4eec`)
+  - 13. [4] Protecting Data at Rest with Different Levels of Encryption (words: 18, hash: `83bbdf16a59a6144a4e6cbbacbab81f17ca34279e2ca5dc5ce74f2aef85bbd85`)
+  - 14. [5] Encrypting Data on Disk (words: 275, hash: `14523a82856cf5db9181347b980d0ff39faff42c3d60984895f084e4b8fe41d9`)
+  - 15. [5] Encrypting Database Data (words: 150, hash: `583e6c541891fc3cd60fed60d9c656a9d53c6f25491afda6396df1596f24f0a2`)
+  - 16. [3] Exam Note (words: 19, hash: `91e3d219d59b883a5312dfb747801a9ef453f306ebfd7e21c14ad3e6ae50afb5`)
+  - 17. [3] Integrity (words: 149, hash: `e9a9dbf8d87e8af66198c3164f7c74a83a3e7bbfda8d0630ef78ed3b796e18a2`)
+  - 18. [3] Authentication (words: 161, hash: `37babad796fd3f8f05470710a135cba090e517062d2ff78d4a7b1d305c6b1226`)
+  - 19. [3] Non-repudiation (words: 106, hash: `a6fb43d8fba5efd60a96eefe279c404dd48919b5598f9410b64bcfbc0f1b6254`)
+  - 20. [2] Cryptographic Concepts (words: 116, hash: `b1dd1a203c2afd6fa5cb7b7b3e9273f6b44db1a16311920f00f506c0e92c6fd3`)
+  - 21. [3] Cryptographic Keys (words: 190, hash: `8f752681cea6ad5228493373ba2f8c1cc73ae748db8f7d1d0e3c20995943cbf3`)
+  - 22. [3] The Kerckhoffs’ Principle (words: 269, hash: `892c9dc7245e2f10241826805bf71e5474028638a73b98580e468436c30ce9fa`)
+  - 23. [3] Ciphers (words: 210, hash: `60cac3f1ba2e91249d25de5bda585769084d75ec4c5f75d2c50871c52c01e980`)
+  - 24. [2] Modern Cryptography (words: 56, hash: `a80ad55a5010822344a993573b38ae9eae6ef9800b8044598462b6b270c6aaae`)
+  - 25. [3] Cryptographic Secrecy (words: 552, hash: `d3db2416e82ada942985052778d987f0b183cc1f7ccc0828e0764a0250e9bb3c`)
+  - 26. [3] Symmetric Key Algorithms (words: 454, hash: `70a271a5dde0ddc232de984c49cc7b8b8774cfd9327804e2032d566b889b4afa`)
+  - 27. [3] Asymmetric Key Algorithms (words: 212, hash: `1d8e58f51b78fa885de22076bf2cbc1456d0a74e2d4a991e2975ca416bec71b5`)
+  - 28. [3] Key Requirements (words: 575, hash: `9fdb3e6041672372610441bf269ca768f739cf537a09e76750915bf161decbbd`)
+  - 29. [3] Exam Note (words: 69, hash: `65241304b6b41b3176482b295fb3b47991ad5e1fbac8f5ad2f9d7d1ffa688854`)
+  - 30. [3] Hashing Algorithms (words: 100, hash: `435d6b83d06283b92099eb1a6d01f8e1169b655f2977eae74a445466e1a766be`)
+  - 31. [2] Symmetric Cryptography (words: 44, hash: `add0831fe1677d9eb9ab5e924948863d572409ece9c6e052d778e432760fd3a5`)
+  - 32. [3] Data Encryption Standard (words: 104, hash: `f70083a7de59b5554b65933e02464f02916accd8c763cee37799b5d6a87f67a1`)
+  - 33. [3] Advanced Encryption Standard (words: 177, hash: `b07cb2d76422bf8276bc910ae03a070f901c83fd25e39da1d64ecf2fd7bcb604`)
+  - 34. [3] Symmetric Key Management (words: 57, hash: `7dd2aa496ae4abddf5888b0d6f9db050987de694a546410208bdd96b8ee7cee2`)
+  - 35. [4] Creation and Distribution of Symmetric Keys (words: 319, hash: `e9e66a00307c35360ac8a3c43b577b6ca52f40452f618b08c318dd3cbd9acd00`)
+  - 36. [3] About the Diffie–Hellman Algorithm (words: 150, hash: `f59c2608b5a02398cb8d67fee15f24d1331e3ba2006cba5e0137340ac6f089e1`)
+  - 37. [4] Storage and Destruction of Symmetric Keys (words: 154, hash: `836fb818695cc6a183d798d0ac54879d7f3cd79941dc7d5ad96fbc5c1b3534bf`)
+  - 38. [4] Key Escrow and Recovery (words: 109, hash: `7aecea2bb8eb9311c0d2e3f10ca582e147789612f336d44209aa8c8cbab962d5`)
+  - 39. [2] Asymmetric Cryptography (words: 275, hash: `857b516ff7c59194b3ba6f7fe612ba1fbf1df359ff96114c4f3b62ae334cfe07`)
+  - 40. [3] RSA (words: 129, hash: `f4185bb7e8c081d2741cd1862950bede7baa95912d68f60722e08569eed7c681`)
+  - 41. [3] Key Length (words: 322, hash: `0d12b3f9508c5d4bdf721306cb60c33947b76ae613163f9d8cd38771dd1416e6`)
+  - 42. [3] Elliptic Curve (words: 247, hash: `16260cfd47ea8b51ee78dd14d6f607a2ab5c1ab21800280ce6a63b63ea4c2b57`)
+  - 43. [2] Hash Functions (words: 414, hash: `2d9ced91b8b8bc817d18370ab0cf56241a4c44da0ea8d89d13db6bf3c1d2be4c`)
+  - 44. [3] Exam Note (words: 51, hash: `ab40bbe659168f0bc5a10d6cc44055faea25dceb3bd0df575918fca4c8286f92`)
+  - 45. [3] SHA (words: 286, hash: `d9a936d619950be5d8b034027f429ac1cb722983aff4bffe4b5a6fbed5e60b1c`)
+  - 46. [3] MD5 (words: 83, hash: `5dae95a640534b3bd827301a91255a7012e80d23cf03fa23dba80c044c164884`)
+  - 47. [2] Digital Signatures (words: 434, hash: `42d8e4d6037f731c26efc35c6dac401c46e75c176bd8ecc45e4d0300eb11774b`)
+  - 48. [3] HMAC (words: 30, hash: `26c837f7049b2935a17683e0c86a2a967b382535acf867d6a3194eeb01ef5e3f`)
+  - 49. [3] Which Key Should I Use? (words: 285, hash: `25c7d30b273f6da75cbe2386cda0cc8ae5ffd41910e2c000d3ffb9967e625cc5`)
+  - 50. [2] Public Key Infrastructure (words: 99, hash: `cba3096e1ac80556dea40cd6cd80659ec785b6ab27206a32315c8cbba6f5ea80`)
+  - 51. [3] Certificates (words: 361, hash: `36e8846295c8485a75fd9ae4c673843a73220b827e5479048738d88c47c31e03`)
+  - 52. [3] Certificate Authorities (words: 438, hash: `dce7d2f79ac0a6f729afaae4c0151a8faab227bffb820f9b7665920f606725f9`)
+  - 53. [3] Certificate Generation and Destruction (words: 30, hash: `f72868a8919ed5b2695db20c4d8a95651206ebb33c5154fe9e6477240e6d067a`)
+  - 54. [4] Enrollment (words: 226, hash: `e50bbf920364016332aa522c5db93a0347130ba2fd11146da6d548646ec79dc1`)
+  - 55. [4] Verification (words: 448, hash: `b07d05ab62b9250d09c5d820f0913aa11df3a37fedcd093347e50fc91de5b102`)
+  - 56. [4] Revocation (words: 611, hash: `5a827d9704f2ed4288357addbceb981c9042c4afa97f09a3a1ac6a3ead3d93e7`)
+  - 57. [3] Certificate Formats (words: 213, hash: `0fe5211ec7ee592c7ffd6b425d1650e335360499be3097f80de72417567baf11`)
+  - 58. [2] Asymmetric Key Management (words: 459, hash: `482118f4de7cee0b9340c249474e7b081601173d16adbacece31894602471f29`)
+  - 59. [2] Cryptographic Attacks (words: 51, hash: `99495e0b056be91404da882704362f2f0647e64c99d2ab7207bfb41bc2e0a765`)
+  - 60. [3] Brute Force (words: 103, hash: `98d16542a53b0136c19a3b96aa33854757d571aa55225912c2abb21e68ce1cf6`)
+  - 61. [3] Frequency Analysis (words: 133, hash: `38b4a5476b700037859171e06b0d3951ea915c5c5f1080ec90c7b54c342429e8`)
+  - 62. [3] Known Plain Text (words: 91, hash: `a1af61a8fb24f4b6f86a3d841836b0b2b96f1b1e9186426e7ee79a051354bc0e`)
+  - 63. [3] Chosen Plain Text (words: 61, hash: `10e2b915f0c2ef2c86e3b0c40661a837752be6e42eb425a2909cf553e13ba641`)
+  - 64. [3] Related Key Attack (words: 34, hash: `97fdadf342d9d877045817c53fcadaa75767b80085363d4b5f5ccda1b036effd`)
+  - 65. [3] Birthday Attack (words: 417, hash: `9c52553d005aba518b6d5f4943c24837e4bd414d2515c7e493e3dd32c715c43d`)
+  - 66. [3] Downgrade Attack (words: 53, hash: `49cf5891e193700e7b64ec4b4ca9c0e51bf84984cad15dd51b88e108d880db3f`)
+  - 67. [3] Exam Note (words: 34, hash: `dc6150fc31fd8861b59e7a1b0d906754b8d40cf370113a9e3f92fc87044a55f3`)
+  - 68. [3] Hashing, Salting, and Key Stretching (words: 117, hash: `a90122b497c2ed900bab17b4e248259f547c1e2eb96ccf02dbe6b9f9176e05b9`)
+  - 69. [3] Exam Note (words: 20, hash: `a79e5bc560f40961e0e3b19e8120d064e20bde8708ca7c0dce6cccaecb82f8cd`)
+  - 70. [3] Exploiting Weak Keys (words: 67, hash: `80705af174dd635902953e54350d8334bce80a1a7374d4ce229972705221b20b`)
+  - 71. [3] Exploiting Human Error (words: 269, hash: `f491f0b6ffe8372f94c8edf8a7620c3d26a2141e49967eb9cc06e39bba5ab771`)
+  - 72. [2] Emerging Issues in Cryptography (words: 33, hash: `d3bd5a83950ebc9036cf2c13726a19d51cfbab8ae7a00b1706e2d747e5333388`)
+  - 73. [3] Tor and the Dark Web (words: 100, hash: `db57084b3939d9bb8e5fa793ddb0b9b386ac5c9f052675b63d7328dc87b23f22`)
+  - 74. [3] Blockchain (words: 224, hash: `12bf78b4c365a3ffeb56072f9d8dc85c16feba1ec406d826e43328447a5f32e3`)
+  - 75. [3] Lightweight Cryptography (words: 330, hash: `8834ba26b83b2a140689f4482b93da69b335c58d1921fefdb103e00207663502`)
+  - 76. [3] Homomorphic Encryption (words: 98, hash: `3add4dd21c991a2e1f64ee2d9900d271224367185330fbc9f07c391906f01353`)
+  - 77. [3] Quantum Computing (words: 98, hash: `9a493171ebd8dcd1f9a6fea0d495f6d93f097eb925118ced85e7f6137b73b4ab`)
+  - 78. [2] Summary (words: 111, hash: `55ba7de9ecef987a5b816ab8dbc71c44da88d3f78caf670f8e6913568f4f0f8f`)
+  - 79. [2] Exam Essentials (words: 343, hash: `314e14fdbc1f1c329393f8d6c196da092f971a71a1042e6659c5b27643a95fef`)
+  - 80. [2] Review Questions (words: 650, hash: `84e0571e54d9616a6419a59799d17fefcb8d059f0a83de70dc7224a4ab693f98`)
+
+## 19. Chapter 8 Identity and Access Management
+- Chapter number: 8
+- Href: `c08.xhtml`
+- Words: 10200
+- Hash: `e99c691b3bbbcfefe8b0aba5dd28f2d09ae7ff5140b61a16c7d02eddca5caa42`
+- Sections:
+  - 1. [2] Identity (words: 280, hash: `270bca4c8ac63a1efac31c68b293bd28ee0593b27c363212eaf91c11c1d99b7d`)
+  - 2. [3] Lost Key Pairs (words: 148, hash: `13adda956e109017ce954d7e98a5cbe30ac7e4983f5d937ed91a5155353f071a`)
+  - 3. [2] Authentication and Authorization (words: 102, hash: `1b91d3c07f6c9c3ccc94e990e9745812441297a4f990e5e0c4f40720d1d5d93c`)
+  - 4. [3] Authentication and Authorization Technologies (words: 60, hash: `38899ce26b7fdb619e21b9d940d15c76659966427b8331cbeeb8e7107a335e89`)
+  - 5. [3] Exam Note (words: 709, hash: `f9d9fad3882876ae3375e5eee841604a34e72978e064b6dccd7bccf1f033c18e`)
+  - 6. [4] Single Sign-On (words: 730, hash: `56e42c06c0872f39e6a57b494cda9b30f56ff7ae954c510aca2e2be540b9eb42`)
+  - 7. [4] Federation (words: 369, hash: `4ee7d218b270372a73e4c4a33153ef7faabcddd4087e0eac5d428c094571b318`)
+  - 8. [2] Authentication Methods (words: 133, hash: `065c43b8f4394d5e00d0b142bdc02cc2b0e166f41ec6f799008ebe2cc5a8de5d`)
+  - 9. [3] Passwords (words: 591, hash: `ca994116608746a4ff2d009610610a80526067b9ba5d80b8c42eaaf235038424`)
+  - 10. [4] Password Managers (words: 133, hash: `765478386171fa8b88c743757a46721eb440b8e871c4d2303d59e6937be1887c`)
+  - 11. [3] What Happens When Your Password Manager Is Breached? (words: 163, hash: `464a5e5aa9ff116c2532635fe3dfb06936938d80a62dbd252c276da6b7d7bd2d`)
+  - 12. [4] Passwordless (words: 307, hash: `14e1fb29f6fd19e6d94a2ddb5d1457435afb8272341b36b1a76308a2fd6a5f01`)
+  - 13. [3] Multifactor Authentication (words: 342, hash: `0f9b50adc2a18ccf4847bc3951baf501f97d2761758414a9b12c13947790b60f`)
+  - 14. [3] One-Time Passwords (words: 487, hash: `e7545dd770b47662c3a8bb0975a67a0f2c7b565ece4179dbf752b82fa2b64514`)
+  - 15. [3] Attacking One-Time Passwords (words: 395, hash: `9984ea64fbcf83028a3585b8bad5af3d9853e85b4f592edd6a6a2c074a2b545d`)
+  - 16. [3] Biometrics (words: 407, hash: `b7e6cba08d7d5c48f431a62ad5da8aff4a8db2eaba1e376d50c0834de111e24c`)
+  - 17. [3] Evaluating Biometrics (words: 318, hash: `1499bb90df0ad2202c196f25c4fafc58f2a9a95fb69a234268aefd650951bb6a`)
+  - 18. [2] Accounts (words: 34, hash: `152ab04d3064521c885a925645df53cf62e047cd9b8f91a9a7457ea72784d55e`)
+  - 19. [3] Account Types (words: 234, hash: `04899600ffd6d98ccf4f29cce41f8117e8a8f8a4ab38e1157f67354e54153348`)
+  - 20. [3] Provisioning and Deprovisioning Accounts (words: 590, hash: `b96687916ede12526cede4077919ba2b2e308cff0256467067124f3209dfc5b5`)
+  - 21. [4] Privileged Access Management (words: 294, hash: `3985130175bc206580f4d9e05efd57148574f7188b3594be780f53778e0f6432`)
+  - 22. [2] Access Control Schemes (words: 830, hash: `34d12c003c9347ed6a28bd3f946672ee402489dd575dcf1fa1cf37cf52510d59`)
+  - 23. [3] Filesystem Permissions (words: 390, hash: `cc645ed39d5fe1e8f3c59bcf3c0134402b965ece4e5e25e2a28c2d252611a98c`)
+  - 24. [2] Summary (words: 419, hash: `6562ad3b8afd4001e4f7d58c4fca08d15f28a008113aa8f57be1936378bed1c9`)
+  - 25. [2] Exam Essentials (words: 468, hash: `41e22e88bd8dc0168731a05c26f91faf5c7fa0a0209e362d8b0be40aea9a0d9b`)
+  - 26. [2] Review Questions (words: 777, hash: `73a74627d8637b33619bdd9b6c68984a984d61b58af920b07dec0c9c0b540bf3`)
+
+## 20. Chapter 9 Resilience and Physical Security
+- Chapter number: 9
+- Href: `c09.xhtml`
+- Words: 10913
+- Hash: `e439759f0d687b09f7f5158b0a25d91ea1d5463415df18c83eb040fb4ca10543`
+- Sections:
+  - 1. [2] Resilience and Recovery in Security Architectures (words: 932, hash: `8ed2fba04f4452db1bf6e514bfca22be57de13aa462910fda10cc75d9f037e8d`)
+  - 2. [3] Exam Note (words: 65, hash: `4f7e0113312461e33acc514bcfa25f7c48ba19ec6aae9cfd4c63d3b0dd545b02`)
+  - 3. [3] Architectural Considerations and Security (words: 349, hash: `16b6f442c39a2ee00b283fcca4fa6e21c962f0ceff6dd10ab6fcf30a820c5200`)
+  - 4. [3] Storage Resiliency (words: 614, hash: `72e48f4aab6aecc6c15feffef14b37d467012af78af667933ca3bbfb486ba02b`)
+  - 5. [3] Why journaling isn't always the answer (words: 403, hash: `626d045be1ce6e7b5226852a7b0e28329fe31be9c39127d7f1d8e12bc92e1385`)
+  - 6. [3] Exam Note (words: 963, hash: `67247c34d3c0a14d357cd559da21522afe56b4b2f35977a36749b016f8992921`)
+  - 7. [3] The Changing Model for Backups (words: 229, hash: `f0afe5ee8610e90b2231120945f31ce2b5f9f80f2bce032ca5aeabc047738cec`)
+  - 8. [3] Off-site Storage Done Badly (words: 456, hash: `18a4389cd9478d24cbd9c8061fbe0874d45f9692cf90d584dd293e76d94a5a9a`)
+  - 9. [2] Response and Recovery Controls (words: 268, hash: `7dce536ab36974cb2d92c8c05189f4bdb4a54fea05546108ecb5e8a796888d6a`)
+  - 10. [3] When You Can't Trust the System (words: 865, hash: `02758490f8bcbb003a1be6d0c959f6b6e9c9e09a621ac36e62659346976b8d5d`)
+  - 11. [3] What Happens When the Staff Are Gone? (words: 344, hash: `23ea6c1031184a803a09bf99d4060ad3e359032fa33fa13ba188ade753ff33de`)
+  - 12. [3] Exam Note (words: 57, hash: `4d6122197963126ee093cdb5af92b215e7ada996bca69a91e8dd6969c51bdb8d`)
+  - 13. [3] Capacity Planning for Resilience and Recovery (words: 301, hash: `f9e788738ee244c5a7aa3087cdb567bccfba0bd80a6aae17b3700ce51d7ec7ed`)
+  - 14. [3] Testing Resilience and Recovery Controls and Designs (words: 281, hash: `788c6eb88b67710d7e4c7cacaf1bf3f26a47ae9f19b63e109183d9622781c3e8`)
+  - 15. [3] Exam Note (words: 29, hash: `49f73f5a938d64c1c539e5ef513967da38f5235621af78afaaff060304e594c7`)
+  - 16. [2] Physical Security Controls (words: 91, hash: `aab6fc57162791a7c75ce61dc2ef4b93802a6948c4da870ae30cc55d348de7d1`)
+  - 17. [3] Site Security (words: 448, hash: `d078a4b4144915f3a495b663a47f370cdc9890cae622164ca1cab2848ffa8c28`)
+  - 18. [3] Drone Defense (words: 514, hash: `62cb608f2cf523450323d17b7b090469723072086829053f01cc262586bc0f13`)
+  - 19. [3] Other Common Physical Security Elements (words: 483, hash: `a1a9cce66a96d1cd67e3b8dd3b417a731ebe6c44d9803e81bb2f26de9bc2916f`)
+  - 20. [4] Guards (words: 202, hash: `a31c40c5ac651322dcc99ed28d0ec29ef1f204b539232cf0f1fb502ef205c32c`)
+  - 21. [4] Video Surveillance, Cameras, and Sensors (words: 236, hash: `cdbb5efe5f099e96f3160b075372a0140c4f25abe5d20b98b7008a331e136d6c`)
+  - 22. [3] What about face recognition? (words: 469, hash: `fa8221863d0a6cde3f1ccb593c941103bb4a4811592032c48f0016ad4e23fadf`)
+  - 23. [3] Detecting Physical Attacks (words: 176, hash: `33b3d93faf557b38410f53750e3c091b64b55578d88c04867765a94f166c34df`)
+  - 24. [2] Summary (words: 422, hash: `6bff4c4ecbcd02881389768c3e853ee52330e65977ca0af0d7c4b84516c7e78d`)
+  - 25. [2] Exam Essentials (words: 440, hash: `63a1594897604a259ee4f7b83bb4bc4a5fd134a35e5052f52977dbd11b95f4db`)
+  - 26. [2] Review Questions (words: 747, hash: `69268b32c392ede4b73136c19ee61f34e449349ed718039b17b1159ec496d6c0`)
+
+## 21. Chapter 10 Cloud and Virtualization Security
+- Chapter number: 10
+- Href: `c10.xhtml`
+- Words: 9188
+- Hash: `bd78b2f5648292a88c0e5e16082fd92f5d410febe4101b317d7098df0a3c3233`
+- Sections:
+  - 1. [2] Exploring the Cloud (words: 480, hash: `837018d5deffbfe625fa0bf0624085c61dfcb497809114627b78dd68de580c3b`)
+  - 2. [3] Benefits of the Cloud (words: 457, hash: `dd2257a30e0dae56b8a0adb023d02f4d6dbc01387f6ee8e99cb7255852084b09`)
+  - 3. [3] Cloud Roles (words: 269, hash: `a961060e69d709b95b4fc6cb8ca0a7176ba2743158e0fa6ca93a1362e025bd09`)
+  - 4. [3] Cloud Service Models (words: 85, hash: `4584c58591f259128d5f37e631cd2bdbed01f21dbb0d65d2cd248dc0ff7f766f`)
+  - 5. [4] Infrastructure as a Service (IaaS) (words: 192, hash: `94f9c705035e42723e2ea0b13423c63383e11aeb8e03b16c2f1a0e34ea6d9fbe`)
+  - 6. [4] Software as a Service (SaaS) (words: 170, hash: `001ac199cf6e43e1fa8552ce9961ddbefce992f280ecd11d783e3d65d00b5ab7`)
+  - 7. [4] Platform as a Service (PaaS) (words: 243, hash: `f34d293e727fad264ba0144f878d1054235172ff17969c82c167e6f81fd3fb2c`)
+  - 8. [3] Managed Services (words: 133, hash: `4fd8be13afb565bde549696efe2ebb452e906aa7f3321e4183c93563c8fce3f3`)
+  - 9. [3] Cloud Deployment Models (words: 28, hash: `25f36339e2dc285d4b680e1ac96fd1a622352b25a366499fe4413092a292a20e`)
+  - 10. [4] Public Cloud (words: 127, hash: `8e335618b5047f3f354f7b1e8c540bcbf3e666d4a6ce800852690016370b8c43`)
+  - 11. [3] Private Cloud (words: 88, hash: `900cc4ead83bd1d3f897a40d93d6cadd61350e4e6562aa298c420480d6f5e696`)
+  - 12. [3] The Intelligence Community Leverages a “Private Public” Cloud (words: 239, hash: `314850ea3eda4f4d42dc0da20473eaca421557ed36d7cce7af73b25e6cd98911`)
+  - 13. [4] Community Cloud (words: 102, hash: `9168c031e66c84692ff000df214d4cc2b3002f3ead3c7d6bbeee1c473c1c13c1`)
+  - 14. [4] Hybrid Cloud (words: 240, hash: `3be2dbcb737caeee8e7e8707a2866a46bf79ed491a8b2b6dc511e13fa7d51acc`)
+  - 15. [3] Shared Responsibility Model (words: 453, hash: `f20d9f4e933aa19229d4669a6d572a0495ad40a3f5e7fee6029aac7861429dc0`)
+  - 16. [3] Cloud Standards and Guidelines (words: 194, hash: `9473a57f4237f33be029ec0143391ac7c3af9a2e3d02145cad5c556b9f5f1ecb`)
+  - 17. [3] Edge Computing (words: 231, hash: `3b24c048fcc477e8249f04c7d402bf7c738718d0f13a4702470ddc289a0cd43a`)
+  - 18. [2] Virtualization (words: 118, hash: `574b8f0d0cec6e189a14f6d42281b5ca756a1695043c94308562a1f13e47edeb`)
+  - 19. [3] Hypervisors (words: 238, hash: `caaf31fec783441de8cdc0549c34e4594f7d3987879eeadad792242d22290a34`)
+  - 20. [2] Cloud Infrastructure Components (words: 36, hash: `a847021f332e655856f56240d88fe1e7c492ca21603957ccd9196611857288b5`)
+  - 21. [3] Cloud Compute Resources (words: 67, hash: `e802d80f74289c091417fe2c85852300677912e8c8dc73ff755610659ee3c758`)
+  - 22. [4] Virtualization (words: 154, hash: `2339df79df0bea75326c41f63ac4fb33f6a3df86f1d1106b6de6bd162e166856`)
+  - 23. [4] Containerization (words: 203, hash: `2646bd00c1c46a890d36d34af0a39fb9d252a29c8355f5cc2606182bb9517a28`)
+  - 24. [3] Exam Note (words: 25, hash: `29cb5b0c143513cd534a132acd7ea7c5eec96fff01dc4cdd2f2278b4f913fdc9`)
+  - 25. [3] Cloud Storage Resources (words: 456, hash: `d7b5393fcf142f1cc2088484bfff9534d183323719a5e70ba5303688f0e99fa4`)
+  - 26. [3] Cloud Networking (words: 80, hash: `4d53c1e9788054dddd475be986001819732c5ee064104062a1335fdbfc051fdc`)
+  - 27. [4] Security Groups (words: 183, hash: `423c918355f86aebe4a0a92e634eb2df586e6bed0107a64298877895d9fab0ea`)
+  - 28. [4] Virtual Private Cloud (VPC) (words: 175, hash: `5c50e8a393c5dea95dc8f5581156b2c2f4237ab8f2552f40b34338f23572793e`)
+  - 29. [4] DevOps and Cloud Automation (words: 527, hash: `84fcf35b7968d0d4c96f9d626c424e57a7a32bbd201b20c87a7c07f8b0c11b84`)
+  - 30. [2] Cloud Security Issues (words: 24, hash: `af9971b45516f8d2ed3e2ce5f1e24d13e2edeeb1b60bfdbfe0b1b00f4931e42f`)
+  - 31. [3] Availability (words: 103, hash: `309dd7bea0b9f0aac0d4a2456b69aa1a1e74e50e0b8faa8d5788c4595cfd7b5c`)
+  - 32. [3] Exam Note (words: 34, hash: `6fdac4a3b751dc0a9f669aa688f95079ef999531bf4fa4f901520487bd87f2da`)
+  - 33. [3] Data Sovereignty (words: 227, hash: `ce1e41d93d5c5a295f624ed6cf6abec737c6cf220d32774ea0581de6d5c80a06`)
+  - 34. [3] Virtualization Security (words: 183, hash: `69b32460396c8c281501bbe20ec7e1ef4abfbff1ca77d721115d01d8a828e567`)
+  - 35. [3] Exam Note (words: 25, hash: `29cb5b0c143513cd534a132acd7ea7c5eec96fff01dc4cdd2f2278b4f913fdc9`)
+  - 36. [3] Application Security (words: 141, hash: `f89364031845d60861c697b50c0bc0019a8799e357d0c5ea819d724dd2403203`)
+  - 37. [3] Governance and Auditing of Third-Party Vendors (words: 140, hash: `d17180187127f0b11e2d7a11388de68fe567db557ded17260908b897e486ab7e`)
+  - 38. [2] Hardening Cloud Infrastructure (words: 108, hash: `7c2b78f231406c16326d469ae5a9ef0d295c59687334f498b33270060a175054`)
+  - 39. [3] Cloud Access Security Brokers (words: 238, hash: `bdaf97216343c9c912e96cdf1bd8e1bcd901e1cc5ac4c307f1412132c0c72d59`)
+  - 40. [3] Resource Policies (words: 163, hash: `9fa6471d0162e7efb3e5bf937ac4c60bb35880f2b2db679a00d407a0d05c26e9`)
+  - 41. [3] Secrets Management (words: 110, hash: `8a7ae16dc78d14255457fd6f0ed81a703076cb24cdf69f8a21c934798eeb107e`)
+  - 42. [2] Summary (words: 157, hash: `2d08929997f6b1830551bbe1f41b3c218984f7c875a78ea00d8a32763e640bae`)
+  - 43. [2] Exam Essentials (words: 400, hash: `b3aa5c98d330a0f57fb294883fad100cb0efc3313352f9ae8d4a19fe11c84c9f`)
+  - 44. [2] Review Questions (words: 786, hash: `28192b4729e086c54d73848bcbdd3ffb4e3006624245885fed399675e493eaeb`)
+
+## 22. Chapter 11 Endpoint Security
+- Chapter number: 11
+- Href: `c11.xhtml`
+- Words: 13788
+- Hash: `fa8f7ed4a3b463e7eb1b08310a6272504a0f4bd6a37f943e05a2fc611dc5140b`
+- Sections:
+  - 1. [2] Operating System Vulnerabilities (words: 218, hash: `7017e7444751a5318800d3ed8622bee4a68e465cbb29dfef314fc684edf6260f`)
+  - 2. [3] Exam Note (words: 45, hash: `c50ad9f938fbe2120b4ac90cc4b5bcc2cbb6729a7cda1d2c31cbc24e955b7311`)
+  - 3. [2] Hardware Vulnerabilities (words: 40, hash: `ef398d8aa572ff654b4d0743fe59f4392820262559922f2309c2ed2b5515fad2`)
+  - 4. [3] Exam Note (words: 492, hash: `64d1c01168d2c969ee4542c1c6d63f53aa7f3d36603be0fdeb79c8797224f29f`)
+  - 5. [2] Protecting Endpoints (words: 97, hash: `b1b383887f3edd7e84887600bd67d03789d361c70eae4e708e5b3342b835b710`)
+  - 6. [3] Preserving Boot Integrity (words: 611, hash: `f0856336659327528b81c714c29dcc3ddebd04c0f0f03fdb743b65cca3beab22`)
+  - 7. [3] Protecting the Keys to the Kingdom (words: 116, hash: `5403a3ea1c080fb13d3ffb14eb32b150edc1f1c4352f500985cc431bb9d5c5b3`)
+  - 8. [3] Exam Note (words: 58, hash: `e0dec4b17274d66c82c832cd7eb81829a211e9aa4acd99707a05d69a0cec68fb`)
+  - 9. [3] Endpoint Security Tools (words: 61, hash: `01c19925874b9f59344ab39f71b3ad6d535e07ef59f9e03b6360b3b5e82809df`)
+  - 10. [4] Antivirus and Antimalware (words: 299, hash: `1dd0ba9de8dcde7f800fcb4350fb93859f62793b28d9dd1c3343bd5fcd2cfecb`)
+  - 11. [3] Playing In a Sandbox (words: 398, hash: `b9be26ec880b58dea4b6a979ea93c7051c284c6866b8677c6262cd7ad9f9d828`)
+  - 12. [4] Allow Lists and Deny Lists (words: 222, hash: `35345d5c643b37a9328c5b7b02118089b09d06d0dc38472a3cf0627a64191611`)
+  - 13. [3] Exam Note (words: 54, hash: `349fcc205c3fddcef3d1b59597b2b2bba4f9bdcc69752d4703b95c599a4d84ea`)
+  - 14. [4] Endpoint Detection and Response and Extended Detection and Response (words: 284, hash: `7af5835ca28856919c02e1851c32ec7886984afce2d28220694fb4a03af1ac52`)
+  - 15. [4] Data Loss Prevention (words: 347, hash: `8e648e9a2baa4018bb2e8dac59ef109d0474666ccaf3287b5b1ff1bd46ae8485`)
+  - 16. [3] Exam Note (words: 67, hash: `fc37a949d8f3120a6f2a9d5659478e9075d090de87d216e707d85864c513082b`)
+  - 17. [4] Network Defenses (words: 216, hash: `1a6566d05c321e76c952118b3339c5b5231b7233dc87b9819602c6514acfb152`)
+  - 18. [3] When the HIPS Blocks Legitimate Traffic (words: 375, hash: `a980e7e6f11bcd145f9fce2abe029fba7a009212174837b6e4a6fe60a7f30162`)
+  - 19. [2] Hardening Techniques (words: 38, hash: `e592e231c5d14a5c952a9362aae0a098d6174b0824ab8ede70e1bc6bf64d29b4`)
+  - 20. [3] Hardening (words: 105, hash: `196186d482bb76b12085c0bb0dbaee471af83a558685891b4d48d2f8f542e796`)
+  - 21. [3] Exam Note (words: 39, hash: `61e8eae3b29e8ee85b9b80477925b6a97a801f125e5217e5a39c6c6a045b615b`)
+  - 22. [3] Service Hardening (words: 457, hash: `cea0a0c7fe6db4d3928d1da4bd5ebdbb11af8b088587cb0c256460247e0e93dd`)
+  - 23. [3] Exam Note (words: 49, hash: `5c1977f503845628c442d06418608ed1c2f6549620dd23b7966d2025d226133e`)
+  - 24. [3] Network Hardening (words: 71, hash: `cef85295bd34799ebcfaf87c3c387642fc957cc21ff8536120c622010c3b147b`)
+  - 25. [3] Default Passwords (words: 101, hash: `123572e0dcefbe6f8a12e08a906698ae92e3f32e02d6d60818a438434909f1b0`)
+  - 26. [3] Removing Unnecessary Software (words: 135, hash: `bd91ad64645e66be76b8796812741037ca336af6b9088e83fbcd5702cfeda533`)
+  - 27. [2] Operating System Hardening (words: 311, hash: `af37e5aaff7a23540d099944fe452f21eb94c56941417c7c517d8ca57ca7c2de`)
+  - 28. [4] Hardening the Windows Registry (words: 158, hash: `c652ed8cfca0e8dbadd48d2b29d4f6ab21847edb89a5fef0ed379513f1d95f5d`)
+  - 29. [4] Windows Group Policy and Hardening (words: 166, hash: `2d5c49e9b668c4d3dc2c9b6fc0fcda6239b637eb255ab537f297eefb5f083de4`)
+  - 30. [4] Hardening Linux: SELinux (words: 179, hash: `20c48543bcf9475a62f22d920a9d5439e4fa12138fe0c537a4185751f1a828be`)
+  - 31. [3] Configuration, Standards, and Schemas (words: 320, hash: `24b453707bccddf5cdc88bc750698088e8368ad2a30bd41b6bee4771dc115fea`)
+  - 32. [4] Patching and Patch Management (words: 433, hash: `31b4682a00542f5f21d7d5c7525cef474cf982b32a96c59369354b3101f775c9`)
+  - 33. [3] Encryption (words: 381, hash: `7171e283d718553e7e94c407206d13b20fe4a100103705e73d71addb8a129932`)
+  - 34. [2] Securing Embedded and Specialized Systems (words: 61, hash: `5c840ab8b687f4729bc71a17ed33ff7c1cc6444a31515517ce6ae557245770fc`)
+  - 35. [3] Embedded Systems (words: 640, hash: `9dbdc2a88f607aeae9cac1559cca503786b19297d00790abd8969c1d68a9b99f`)
+  - 36. [3] Your Car as an Internet-Connected Device (words: 453, hash: `7ca9bfc3943b7d9fdc344906cf965c2da13954f1177b7c62f8b17c6d40f766d4`)
+  - 37. [3] SCADA and ICS (words: 506, hash: `975f1953ffef72b0a7717e2b633d9e5451a9a24adec449390520b94c57be4d41`)
+  - 38. [3] Securing the Internet of Things (words: 218, hash: `4c88212b4fca2c30fc338c81182612b18bf08f9c9eddf241cf687ac9d7377eb4`)
+  - 39. [3] When Fitness Trackers Reveal Too Much (words: 183, hash: `23c894ecdf58331247a7dc14fe4bfc1b1f482b1d3501ce9c4094ff5d19644f17`)
+  - 40. [3] Exam Note (words: 47, hash: `01ae5707c249e71339c1e5a9efbf2c87ff6b3d82f5dcd92a413b80770a2d6eb3`)
+  - 41. [3] Communication Considerations (words: 356, hash: `7caf0e4a751a9f4b76a96bf1860a010e3814edb81061b3ac12b4cdd61af174e8`)
+  - 42. [3] Security Constraints of Embedded Systems (words: 483, hash: `1e2a12bef0c12f366c4014dda79f70c86034189ba7d33a1c41293d3e1bf13321`)
+  - 43. [2] Asset Management (words: 199, hash: `02685472851a0f386828831d6304e38c7b4b711887dd8b6ce415e3ff067b1af2`)
+  - 44. [3] Exam Note (words: 136, hash: `7fae96e6b5f5cdc0cb5900c14e1be95bbf58c476221f83a19935351fc249df17`)
+  - 45. [4] Decommissioning (words: 547, hash: `1b14a264b760a8f28ef372e529c36dd8b0687e7868ed94de80cff43cbbf47cca`)
+  - 46. [3] Using Someone Else's Hand-Me-Downs (words: 217, hash: `aac5501cca55f8ec8557920223fcdd026d1417cb7fb0b947b4edd4a3828d2e5d`)
+  - 47. [4] Retention (words: 141, hash: `a487dbdcd5dc7e11851c7b4d134bae4745cfba0c0e1df58b68346f82bb516098`)
+  - 48. [2] Summary (words: 486, hash: `58f896d3028c530269ffd4581ac6dea166dfcf99ff367d913f5aa14704f1dff1`)
+  - 49. [2] Exam Essentials (words: 533, hash: `141e9d769aa18caf447f8ae167398e81d6a7ce4fc016228a8e0d3982384d21e0`)
+  - 50. [2] Review Questions (words: 916, hash: `8fa1652822955cf1006d7c7a4dd877e2d3f0fe75554d151ea2938eac658ca570`)
+
+## 23. Chapter 12 Network Security
+- Chapter number: 12
+- Href: `c12.xhtml`
+- Words: 19055
+- Hash: `8d47e0b73140c4ff4f34c48be1f5372cb09da3a4d7d6fb1646666cb7e9af7470`
+- Sections:
+  - 1. [2] Designing Secure Networks (words: 80, hash: `41a84edf8096a934b40a78c894a007a8a862e709bc2c26fe4cb6182617891a91`)
+  - 2. [3] Exam Note (words: 293, hash: `4026a3db7dd034de7c5ad4165689fc80310f2d168d91d55508030082ad2e6797`)
+  - 3. [3] Networking Concepts: The OSI Model (words: 219, hash: `cb8bb7d8c935876119f532c813495a9c9abb2a8a3b035805f7e25e229bb61e68`)
+  - 4. [3] Infrastructure Considerations (words: 504, hash: `90dea38e18e129f82b97eda8a521dbadea93c70cdec94ca46197e3977d20796e`)
+  - 5. [3] Network Design Concepts (words: 33, hash: `2f1c89a5d654e05acad7684088094c782bec7107591ad895163dca096b33be2d`)
+  - 6. [4] Physical Isolation (words: 58, hash: `0dc00cacce0731245a019cac0fe1bf8d5756dd1709c32fcb81b22b0419ef5d51`)
+  - 7. [3] When Air Gaps Fail (words: 84, hash: `f3c906c64598b834a7a5e1fa11371f57cf308c8e95f2be7387d53f985132e905`)
+  - 8. [4] Logical Segmentation (words: 81, hash: `3f84e5ec2b1f217a002b708299313c08ea54059facacc383df47ee66f53ce539`)
+  - 9. [4] High Availability (words: 115, hash: `b264892c91971534f79c06503b48d874741271c682387a46930a3678df59ed93`)
+  - 10. [4] Implementing Secure Protocols (words: 180, hash: `b8e3ccd38b214cd8e70343df9d26c99b4013e72e1b34f39d8abafaa45be8e886`)
+  - 11. [3] Security Through Obscurity and Port Selection (words: 108, hash: `6eb495d1c94cc83e40bb84295bfc04eb9c554f66833f967266b324fe93039ab9`)
+  - 12. [4] Reputation Services (words: 50, hash: `fcbc2065c46f730f5f3e9b1cc972a31f239e31fac4d67eb9ad45e1e1bff45736`)
+  - 13. [4] Software-Defined Networking (words: 88, hash: `361b3f6f4bcdf24c53fae8be14431250e8b6e5ac711df7cbb942e41755f668f4`)
+  - 14. [4] SD-WAN (words: 178, hash: `502ae8eff53e676bf2dfbd5cbc40b0892b306414b8720388f54b7555444a95e1`)
+  - 15. [4] Secure Access Service Edge (words: 188, hash: `711c907be1b23c2de008e6fdbe8637172fa082e1f66a9de7a9edc9fd3bf5a485`)
+  - 16. [3] Network Segmentation (words: 381, hash: `dc58949d6b6e74f8ae2977d0d0be0fd332a0591b8b21e6b562d0928685dda498`)
+  - 17. [3] They Left on a Packet Traveling East (words: 119, hash: `fd6a65c8c1e50288781485391cbf48bbc74e9c681323bf9369600b4beb046db5`)
+  - 18. [3] Zero Trust (words: 649, hash: `620da5ecf131cf4efaebab501a2cb2a14aee75c87e5f99e95ac0ffda65cb2421`)
+  - 19. [3] Exam Note (words: 65, hash: `a2f0eb06c8239f7f149c3345e99fc97fbd710cfc5c7662a568c89138b78a373f`)
+  - 20. [3] Network Access Control (words: 379, hash: `c1dd4574654ecbce6dab44583fc8241c1824ca9815a307bb388297421aaf96c5`)
+  - 21. [4] NAC and 802.1X (words: 162, hash: `a30661fd6eb70b8066094892249de180bc8082a4da600fef473606eeade7e290`)
+  - 22. [3] Port Security and Port-Level Protections (words: 895, hash: `e8d2f384a3dcf5eaf7c3ec5a533bd47ec57ec0df84f0e15f86180b4f85f89ffe`)
+  - 23. [3] Virtual Private Networks and Remote Access (words: 295, hash: `9ecee18c147a1940e90cc383575757a670f52e2e5cdc4926716c68165cbcb174`)
+  - 24. [3] Exam Note (words: 203, hash: `83ed907dc528b887459fab83c865403f7fec74e857db42937733658c280348b1`)
+  - 25. [4] Tunneling (words: 175, hash: `32ad38fc4628f62058cd217c696796856ccdda56abad0aee10b1da7be19da72c`)
+  - 26. [3] Exam Note (words: 39, hash: `d7a1dfd697fe2298d24178b2a1e02d6c1f2d0ea8615bd581135392a31dfeb3f9`)
+  - 27. [3] Network Appliances and Security Tools (words: 135, hash: `f0c871ed7f9f8643c7370346496caa48ca3bb4caa8bc479364007659ee678f79`)
+  - 28. [3] Hardware, Software, and Vendor Choices (words: 186, hash: `d803f0cc188df8548ef7b04584cbe111daa0310f1737c3813ca34259aa52115e`)
+  - 29. [4] Jump Servers (words: 90, hash: `46aa2d72acf8ff79b245a0c7a40f51315c271b744f142e93f338c37078a28e28`)
+  - 30. [4] Load Balancing (words: 502, hash: `20f46f8aa9b01c58db898131814fd77c506aa751a6c285e2203634b46e7b13a1`)
+  - 31. [3] Layer 4 vs. Layer 7 (words: 141, hash: `a19068311e5f8f61e40f78fdece7f16da6638568cfd5ac8586c2166cdec21d3f`)
+  - 32. [4] Proxy Servers (words: 156, hash: `2affc804f10a7a533ed5a35059a732f9467109346de6d683ab9fd7f07e2268b9`)
+  - 33. [4] Web Filters (words: 235, hash: `7b7637d1447bb4e1d296f8c89b1c67a1d250cbbe3c8042923513721e593cfa08`)
+  - 34. [4] Data Protection (words: 121, hash: `66154f49ecfb11629d20da9028124dcbb2720e7580aabb4dd80d17a3e2e0aecf`)
+  - 35. [4] Intrusion Detection and Intrusion Prevention Systems (words: 222, hash: `837a0a2a59403405bc6d0c59211fceee69241bc383b69ac14f574ff16edb9bd3`)
+  - 36. [3] Configuration Decisions: Inline vs. Tap, Active vs. Passive (words: 316, hash: `87bc5a4dfe0eb8ca04eb62a336a2b2520d2df87b0b9d684b73edcf7afe761099`)
+  - 37. [4] Firewalls (words: 720, hash: `c1337d7beb702e56b1f43b1fa88d62ee5f1e74a61877c1a653edd42996fd4ba6`)
+  - 38. [4] Access Control Lists (words: 280, hash: `babe567e066b8071e524d01b0732fb9b81b06d773e2d413d9ed7e4ea9c4adef8`)
+  - 39. [3] Deception and Disruption Technology (words: 408, hash: `8c0364d9c07807d031ee323bd4b43457a2551c2f99ca17fc546e47ae0f5a8555`)
+  - 40. [3] Exam Note (words: 76, hash: `08110a0be0231e4cfa95b238c469c5ed18b4a42f1dc9642e4e040a3df608bf7d`)
+  - 41. [3] Network Security, Services, and Management (words: 61, hash: `deb04700210efa73fbe259859667936202d1d716ec83510b3953400f0bdd9e58`)
+  - 42. [4] Out-of-Band Management (words: 143, hash: `711357d44f714289bf36ff430879ecd6dfe04b39e38f9c2374cd2761589f7359`)
+  - 43. [4] DNS (words: 267, hash: `7983acf35846ce9c6082081accbd24ccc7efceea8e1ffe6a79a40ee767ca1a1a`)
+  - 44. [4] Email Security (words: 502, hash: `958a229ec4ce83ec2efc4d92eb1af281c458f1a6c8c8f9bb9800e201abfba43e`)
+  - 45. [4] Secure Sockets Layer/Transport Layer Security (words: 130, hash: `db9ac9a88dda9e47f6d7798cedefe174045e520c4fce3615ea67c71c46d8ba50`)
+  - 46. [3] What about IPv6? (words: 190, hash: `c53841d1f5757fdb9f05c2f64db104adfd96026e6ebe5771366f56b55e6c94d5`)
+  - 47. [4] SNMP (words: 208, hash: `7a471bdfb57cb0af0d87852dce8509c84e45b1de0f7746c33baaa2b39599379d`)
+  - 48. [4] Monitoring Services and Systems (words: 195, hash: `6e1d12db0823ca1ce60ef49ae4a0c0796e9ae5413c514d77b78d933f491e7f04`)
+  - 49. [4] File Integrity Monitors (words: 193, hash: `676d344315ec4cdbe9397413d8778a6428b26b523e8fa2d60923f1993bf65dc7`)
+  - 50. [4] Hardening Network Devices (words: 139, hash: `838e18ccaafe70adc0bbee56435cdc7e437ec0d19ab914545a23b22f8a8cccd4`)
+  - 51. [3] Exam Note (words: 67, hash: `19ca2e27f62a3dc7ee65f1871135e8ca18a6175bd910be191c4986d7d406f852`)
+  - 52. [2] Secure Protocols (words: 77, hash: `ce926200cfd46b6b60624a1cf3d1b4c86ba42c34122e87295e21f6a41de59e1e`)
+  - 53. [3] Using Secure Protocols (words: 559, hash: `3f7160b7cecc1d294d07aa9812e50c427affb443167d8b0749cf833c76575b6c`)
+  - 54. [3] Secure Protocols (words: 763, hash: `1b2841314e8793b99e97b324af9f17a1ea10b9de117fd4d3be4c69c31e7124e7`)
+  - 55. [4] Email-Related Protocols (words: 302, hash: `e6bb315dbb81ec8f3b0f9ef723925d95315307387d7d531fec46a278fa4e7864`)
+  - 56. [4] File Transfer Protocols (words: 73, hash: `8e7b51c6531379cac636ba44e5657c30a91836c5e24f574de574a17623b64ea9`)
+  - 57. [4] IPSec (words: 258, hash: `e40e8342756b7bb26a373d7d42248302811a2ed14de3f0a6cea4d88e8dc58158`)
+  - 58. [2] Network Attacks (words: 40, hash: `220c744b9747eebdafb011b07a8d76a220e993c76b57ab3c3b64da9882cff5f1`)
+  - 59. [3] On-Path Attacks (words: 251, hash: `224a900981001a0aa4e3af5be45984e4b490cb6ca49484810ccebf359c3c3c7b`)
+  - 60. [3] Stopping SSL Stripping and HTTPS On-Path Attacks (words: 379, hash: `302f3b3821108d1422597632424da23300a5537f90edd35af8243d3bfcf2c5cc`)
+  - 61. [3] Domain Name System Attacks (words: 742, hash: `57adb545c04584dfa99d8039190ae88acafb671064c2b941536a585287b8320b`)
+  - 62. [3] Credential Replay Attacks (words: 85, hash: `ac5c85df018b55f426af6420944135e3b25e74a90681c170cea88f6ac33919a1`)
+  - 63. [3] Malicious Code (words: 101, hash: `61a018f3e9cb37431c54f857bc03904a201e121c44748a546d985737636bbe75`)
+  - 64. [3] Distributed Denial-of-Service Attacks (words: 71, hash: `ba6e5a451633e62bdf9e6ab37e4f4d98cea7631ddaa59b3930c73cebf32686aa`)
+  - 65. [4] Network DDoS (words: 946, hash: `4be4ad1ef41ca2713e8760dd1eed5f42de63bd4feca3fd21b77448a433f533e1`)
+  - 66. [3] Exam Note (words: 78, hash: `996d48da01229dac6fba4e9f14d67a64135779c5574078bedbd3a587acc85c69`)
+  - 67. [2] Summary (words: 475, hash: `deabc162522a8efd272856efcedd88a09a8c29cfd02b6265b74e71439a779d2b`)
+  - 68. [2] Exam Essentials (words: 889, hash: `e5dfb34f58340f8edfb4da5bd5bd8a201d11940230f4aa462a2ba3ab62df9e7a`)
+  - 69. [2] Review Questions (words: 765, hash: `b2c19b41bc9eda33a356be327dd531c5c91acea9f56cd6146a18db37cd45f21f`)
+
+## 24. Chapter 13 Wireless and Mobile Security
+- Chapter number: 13
+- Href: `c13.xhtml`
+- Words: 10657
+- Hash: `73b6b6b66e9a32b4035968b8b8e654dadb50bf625bc1f936a7f188c9e7ad4869`
+- Sections:
+  - 1. [2] Building Secure Wireless Networks (words: 140, hash: `646466d5a3baa0fe4bfcbfa2991b8ac93fbf2b0732b99fe9f2390bfcd7d9645e`)
+  - 2. [3] Connection Methods (words: 41, hash: `91708545fe545b6bb53cedac3bd95ef0ca1f39a34d60654ea3f97e537b8a96d6`)
+  - 3. [4] Cellular (words: 195, hash: `2374ae4b668dab8b434284354e1193faad08857c24fb4e5c2e546e376e0e3d55`)
+  - 4. [4] Wi-Fi (words: 397, hash: `0a03d3b9992e93b60497f69f2a49ddcad9977be246f598f27a55bee2a09ea7c1`)
+  - 5. [4] Bluetooth (words: 214, hash: `0d8cc41f2a23b7892400f35f0a5debeff5ac2423539f6c033cdb642ce5dbd937`)
+  - 6. [4] RFID (words: 346, hash: `b0d2b82cd3b4489efc934dd828ac9ca6fbfa3ebe42f6ab5aa018bae575caabc5`)
+  - 7. [3] Rewriting RFID Tags (words: 148, hash: `da0b75bd6dcae1eadfc1b11afb424f4f318e88a9473d16beb39e0247aecb332c`)
+  - 8. [4] GPS (words: 259, hash: `9b3978feea2cb6e3c96838702e0e10cfcac7331c23ae1c1d1b8ac8f96a33c248`)
+  - 9. [3] Exam Note (words: 55, hash: `2dfebb4df4a9836f15384fc4d5153d8ab0622f27d2dc1b330a2210c673d59199`)
+  - 10. [4] NFC (words: 147, hash: `ca5aff3e15c6b92994679804f04a727db50e0997d6eeeba669033e3fba7640d1`)
+  - 11. [4] Infrared (words: 170, hash: `6de73e23cd528700ebd8dd27e02f8046b6e9571d5927bc3acbb6347826cb3d07`)
+  - 12. [3] Wireless Network Models (words: 125, hash: `1eaa2a42eea36c7d985cae0ababad43dc2b0918b27e79f758ef21c8c2e525c61`)
+  - 13. [3] Exam Note (words: 52, hash: `ec2a41e921b04fb50a5569d1ac14066c8491833d3863ec6c504870ff24c21bdb`)
+  - 14. [3] Attacks Against Wireless Networks and Devices (words: 52, hash: `5da3835f14b059e8696325b58e8460951d9e3452133d913899fdf845a58247dd`)
+  - 15. [4] Evil Twins and Rogue Access Points (words: 351, hash: `859543be53e2c0bad7a14f1998e290a4ff8b5b2aa4dc841e171535acc5fdad92`)
+  - 16. [4] Bluetooth Attacks (words: 107, hash: `9417f3a301c16d05e14a0fde425d5103dad2ad681c56ab5ec58cc6fcd2e5e3c7`)
+  - 17. [3] Bluetooth Impersonation Attacks (words: 199, hash: `6881983717596d0cecef2d545e6b90f81d76cff8340f7d31cb9258a1e0701f9f`)
+  - 18. [4] RF and Protocol Attacks (words: 264, hash: `df0254f4934db43a3cc88c7a3478a07d2edafac64235a006e0dd173e0a0ac423`)
+  - 19. [3] Wi-Fi Jammers vs. Deauthers (words: 65, hash: `922cd5c0e07f44365d03fb8678067dee78cdd9b420189c41dc98bf67ef6d0aa8`)
+  - 20. [4] Sideloading and Jailbreaks (words: 202, hash: `70647808029ab012c706a93d8e76d47665957143119ee3cd79a6afb7e08bb198`)
+  - 21. [3] Exam Note (words: 48, hash: `7ac07334ea4676a86df97dc45d978a407bb3fbfa45254cad555b9fa2758a777f`)
+  - 22. [3] Designing a Network (words: 708, hash: `33dca6595f94b85dd3296cd8d8693a1127617f3abd332df2283031e00220b216`)
+  - 23. [3] Exam Note (words: 20, hash: `00ecba7037c2b928f79098738b68246d99ba67238099ebd48950ff9c87ba8f45`)
+  - 24. [3] Controller and Access Point Security (words: 273, hash: `3245fe638103ea63563a4abb0f12244cac1872e3cf0a493d93a49ff65cdf10c1`)
+  - 25. [3] Wi-Fi Security Standards (words: 329, hash: `460e82bb831cc60c417683af9d27317d04203c4bf81596c5a28c26185710abbb`)
+  - 26. [3] Perfect Forward Secrecy (words: 199, hash: `42edf34d31b84ad1f18cee6a339f1875a00dc1230c8fdf47a71a76207e3abfb1`)
+  - 27. [3] Wireless Authentication (words: 180, hash: `21a16c3b791e205d6868609d78713795530ca907254ac41356a93c58bf05b5ba`)
+  - 28. [4] Wireless Authentication Protocols (words: 533, hash: `dace9c734a228c1fcacd2b482ecb551c488b1616413d581552cdad22adeaf908`)
+  - 29. [3] Exam Note (words: 64, hash: `c2bc2bc652d5c9a49f9cd741912aed07cb226583a1bdaceba7daf35b3b51ce48`)
+  - 30. [2] Managing Secure Mobile Devices (words: 56, hash: `63f1b2ad6f92eb250f3aaaaaf2ffbfe6470e5036d53ac6ac0acf474e1f008389`)
+  - 31. [3] Mobile Device Deployment Methods (words: 736, hash: `623840553289af451bc5d96b97bad29a52674cdd0871e91173f3b0b6ab52a5ba`)
+  - 32. [3] Hardening Mobile Devices (words: 178, hash: `7d1684bd1ec0cf02ba04b35fe4b3bf548e6f75dfeb07b810f52c24d0c314dcba`)
+  - 33. [3] Mobile Device Management (words: 1591, hash: `d2b259d8f1e37121a9fc88d026b2504b6eb6bf25290bdd14c292c32ad966007c`)
+  - 34. [3] Exam Note (words: 55, hash: `2dfebb4df4a9836f15384fc4d5153d8ab0622f27d2dc1b330a2210c673d59199`)
+  - 35. [2] Summary (words: 274, hash: `469aafcc9a762029c7e633c1ffc752c86856670be23361812ca646028301114c`)
+  - 36. [2] Exam Essentials (words: 508, hash: `cd9ca765d2d0e1f0ccaf7034bfd9c3fa283a93cb0c532c8fbda06e9bd08e43b5`)
+  - 37. [2] Review Questions (words: 854, hash: `ffbd4a5705045beec6eb07ffd8f6b7978d70388c56585bc983442bd8141b8ed3`)
+
+## 25. Chapter 14 Monitoring and Incident Response
+- Chapter number: 14
+- Href: `c14.xhtml`
+- Words: 11260
+- Hash: `4f5447eede4e4bbf882b8642220c329ae9432c4ac2b0d12bc49f36a6996061fe`
+- Sections:
+  - 1. [2] Incident Response (words: 177, hash: `058f78e355bf2e3cb24e3bbac5aaea9bfe115a5ebd5a84aa1afc6566559b7884`)
+  - 2. [3] The Incident Response Process (words: 613, hash: `f6ddb57596f17600eeede08df09aadfe8ba24d971306e1998864ac967ce03156`)
+  - 3. [4] Preparing for Incident Response (words: 50, hash: `70615cc6709654e533f4c49aa5df791bd7ebabf31424a205a6e1415654a83036`)
+  - 4. [5] Incident Response Team (words: 367, hash: `e1a771791b75ac7206180a6f2cec014fcd32344e997be661923e26799cacc90a`)
+  - 5. [5] Exercises (words: 284, hash: `610ed879e94d0da78fe43b8868333b836640b11f03b6d4b7925095694816af50`)
+  - 6. [5] Building Incident Response Plans (words: 488, hash: `a46ccbbab5e36b010b8bad86ad8317bc41750c86fb5118d9839c7d5a4c68ff48`)
+  - 7. [4] Policies (words: 256, hash: `a3fb7b658c8c2cb3cf334609c62e0eb06629b1fe0a67505109a661cbc50169ea`)
+  - 8. [3] Training (words: 79, hash: `fc42bdf4ef4e700c366a41443c97ffc5f086e0a0794b5d81e452877f6fefcec0`)
+  - 9. [3] Threat Hunting (words: 432, hash: `75bb20f16e5bfb0e30cc1c30a2345277df8527ed4442bba6f19d43eab233e68c`)
+  - 10. [3] Exam Note (words: 90, hash: `ae516d957fb740acaecce9f3c79427b488286cf381f52df419db82f478053f5c`)
+  - 11. [3] Understanding Attacks and Incidents (words: 81, hash: `6366ec4093b717516b0603fe61fa0fa6089bdab052483e605e91c451d67faf3c`)
+  - 12. [4] MITRE ATT&CK (words: 316, hash: `3fdea1de27f63926f07f9f5b982fd4841885d49e3631046cf795424a74ca4f97`)
+  - 13. [2] Incident Response Data and Tools (words: 47, hash: `b8e9e9588ff23e76a6afd60a1c14caf4cd3eff9dad231665a8da36b2b8e477bd`)
+  - 14. [3] Monitoring Computing Resources (words: 203, hash: `ae260fe45d18847364ed0d56d30e200d2374ff671abe9f253f88419c8b48fe48`)
+  - 15. [3] Security Information and Event Management Systems (words: 322, hash: `480bc609ff793504aa5be71e52efb4970daa30f9613691f0e8d4288b5a62a548`)
+  - 16. [4] SIEM Dashboards (words: 136, hash: `3c877dee6241a6f7cb73573a29b6b4c5a9bf7df8cd12d81b0dba0bd15e39f407`)
+  - 17. [4] Sensors (words: 145, hash: `19454d6f5490d8ca50a276bde9df147b057eb9842a47dd9138666453fb491061`)
+  - 18. [4] Sensitivity and Thresholds (words: 127, hash: `61d3e4e28c22ff54b9f3781d9509a5b141f2f63b2dc582b94e88a457b7d4822f`)
+  - 19. [4] Trends (words: 102, hash: `6ca766cbdeb8e3deb833e47a74648f072c10164bef525d656a15f068a4369815`)
+  - 20. [3] Alerts and Alarms (words: 303, hash: `2afa1e8afd2210bafa396f659bda61c344f0e3ff3cdfdf1c0c5adc365d60b213`)
+  - 21. [3] Log Aggregation, Correlation, and Analysis (words: 226, hash: `0698996178fdf3ee4b78338a480a77cdd14fc464fa64281b079412a46160088d`)
+  - 22. [3] Rules (words: 270, hash: `b0333cebb0280a09db2bb7369b1e4fc26bccc7d7452dfac602c194d384c0e01f`)
+  - 23. [4] Log Files (words: 559, hash: `83da747b323af67940853717db3bff1a873560bf7c4690ac324c32dcbdeb66d1`)
+  - 24. [3] Going With the Flow (words: 317, hash: `0260fcd0b9f447b87d359892eb74cc7c6f19e1e4e2fb27264104febf0c3cb357`)
+  - 25. [4] Logging Protocols and Tools (words: 197, hash: `4ee08c11276c6e7e2b9a0af81da0f239a52de064fae441101ce004fcc672e21e`)
+  - 26. [3] Digging Into systemd's Journal in Linux (words: 225, hash: `caaaf67d1e99718f508a0d5f6d3f90acbedc6aa621990d3c0f781f34346f24ab`)
+  - 27. [3] Exam Note (words: 75, hash: `17ecbc6ed3f49ef587b528ecf23dcc955b915a0d33ddc4b1619c76598871edfd`)
+  - 28. [4] Going Beyond Logs: Using Metadata (words: 491, hash: `6333d8a7740a0a71b38e800046666d54966d8fd2f66ef992bf4d30154f295811`)
+  - 29. [4] Other Data Sources (words: 127, hash: `f6110a41457e848a11c27d321cfb1606ece706445e6b6a7001e121939d3af727`)
+  - 30. [3] Benchmarks and Logging (words: 108, hash: `92ee135d903c5fc26068ace012dd71905589db3c82df5e96fa39831365f88e97`)
+  - 31. [3] Reporting and Archiving (words: 121, hash: `868546c15f688c4fb57eb201335137208aaa04042675abf290c8fd462a1569a9`)
+  - 32. [3] Exam Note (words: 54, hash: `d407df0f8a03d941b729cd710f3ba6e577c6de1cc71c37e1e0e8b1fe2bb48e94`)
+  - 33. [2] Mitigation and Recovery (words: 54, hash: `d4a700e2269ce2abc46cca151c756c5bd7b45223144784c23767c173460699be`)
+  - 34. [3] Exam Note (words: 77, hash: `fac739714cab577ca8cca02d866f1114136a02b3d9ce7a9a486ca1b689576bd2`)
+  - 35. [3] Security Orchestration, Automation, and Response (SOAR) (words: 93, hash: `7d49914db19c4dffc4e55735d4f12a39302673639ef15fde971835af0a105c4a`)
+  - 36. [3] Containment, Mitigation, and Recovery Techniques (words: 202, hash: `9cf7a559cc1b9358cb44c0fa4c51e14fdbd6b3e2af0158932e54bde2fcc66c36`)
+  - 37. [3] Exam Note (words: 27, hash: `69c7bad18e9df7aa187e20d2d03e04aec51e737efeae3dc9f889603737e0a0b2`)
+  - 38. [3] Quarantine or Delete? (words: 956, hash: `95a8ac172ed089413810c323ec08feb00fd7ce5b20ae0d31e8d99646dfdf7e22`)
+  - 39. [3] Root Cause Analysis (words: 164, hash: `ec92bb65e5fb59112e900070fe9bf7866cdc1731812abddbd7adef8e80fbd75d`)
+  - 40. [3] Exam Note (words: 49, hash: `c347078cc012d776a2cd6cf32004f1aa7680de053b8287a3ba930b0473035f86`)
+  - 41. [2] Summary (words: 506, hash: `c52edd3d1f98b5f92fd6aa9e9c6417945f40fadf813653a74c2c9295f28d0987`)
+  - 42. [2] Exam Essentials (words: 416, hash: `92826c508a99d578fd6dc593a405c9d68b44cf43caf363d888a2e38d3795ebe7`)
+  - 43. [2] Review Questions (words: 781, hash: `a64c75474d91c9085625bea8832bbc393f7d4463f0a49b46b0d3827fdf66245f`)
+
+## 26. Chapter 15 Digital Forensics
+- Chapter number: 15
+- Href: `c15.xhtml`
+- Words: 8238
+- Hash: `601bc50c10fece9d87a483243e942fcd423b8166b24fedbe606e112cfb4b25c6`
+- Sections:
+  - 1. [2] Digital Forensic Concepts (words: 274, hash: `04011b54e70ddfe3f2de2154c13e633eb53fa00d8a7c3217072a966e221468c4`)
+  - 2. [3] Legal Holds and e-Discovery (words: 641, hash: `f042e1d233fcc1f09e27ac0a1728d88832ed2821dc78473b4fc6ff608675f799`)
+  - 3. [3] Exam Note (words: 39, hash: `566c27d2cc56ae0ffe0d27b8133651cf5e2b73b7ce303b8fe03a268f7c4287ba`)
+  - 4. [2] Conducting Digital Forensics (words: 62, hash: `f2afe079e956f62ea5309bce71dc7c1f33785f026beef3a49ef53abd432b8212`)
+  - 5. [3] Acquiring Forensic Data (words: 558, hash: `47df2bb9c0daec1963389a56e59712a8fb4a2af896822875b12cb2ecf058f00e`)
+  - 6. [3] Preventing Malicious USB Cloning and Data Acquisition (words: 439, hash: `f536ea30c71d0874ef3948778ded51dc6d40ac64e865fac6d9a0a1412def95b4`)
+  - 7. [4] Cloud Forensics (words: 502, hash: `8360748e33731a4a7c7be0dbffd108f003f1652e3b25f679d8e59eb7d87e72e6`)
+  - 8. [3] Regulation and Jurisdiction Issues: Venue and Nexus (words: 157, hash: `1757050e4197782a67a39610f41d759fd2cbfa8fe82261156cff280a7d87f9b5`)
+  - 9. [3] Acquisition Tools (words: 667, hash: `963af9281c651003e6ee67a6a3c42598fbf9892cedd2a3a97315d1c4f03fb4ee`)
+  - 10. [4] Acquiring Network Forensic Data (words: 231, hash: `d5f91a029f2a7876e6e76d2dfb85ee1a238b45dc6aac34a8543a8ab68f6a591b`)
+  - 11. [4] Acquiring Forensic Information from Other Sources (words: 216, hash: `e0ae563d6606a9088bf9c7d2398778e59b0edbe9bbd757065e731e1b92b17394`)
+  - 12. [3] Validating Forensic Data Integrity (words: 241, hash: `71f462fc0c0084340068a1cfae97c9611725bf18e5714eb8d95d5a98c5023986`)
+  - 13. [3] Forensic Copies vs. Logical Copies (words: 348, hash: `2fd32dddc0d7f645217ff0e9bbc96a7c15ce2c6d002bb65479365d4c9ac23507`)
+  - 14. [3] Making Sure the Data Doesn't Change (words: 127, hash: `fd2e888bb3d98f89c3dff91c8c10f02c3f84a231e08c08b60540e0039885751a`)
+  - 15. [3] Data Recovery (words: 325, hash: `e99de6a7b6c99870e8a0aa20fdb65f3ae5b743a92bdc576fadfd6da38a6f9e9c`)
+  - 16. [3] Flash Media and SSDs: What About Wear Leveling? (words: 118, hash: `8552308df136fed3c9dda2f9e93991fe8f5fd8780c3befad8787715f1e00947e`)
+  - 17. [3] Forensic Suites and a Forensic Case Example (words: 598, hash: `90781d2e35ddc7691c699f7f324f255c9ddb11c4ca79424da561750705c63101`)
+  - 18. [2] Reporting (words: 146, hash: `4090b205a4d7c49074c935f050dfd52b3f936e65c3bc4c3102e1ce71b82c23b7`)
+  - 19. [3] Exam Note (words: 52, hash: `7e884ab6e0a7d610dd0691a5089c9b2a4bf65604e484f8151571edcab66a0eb2`)
+  - 20. [2] Digital Forensics and Intelligence (words: 163, hash: `b220d5a923daf4c367704be3a55b4a9e5e10d50da0ef30e8c3fa24b537313215`)
+  - 21. [3] Exam Note (words: 28, hash: `6b53862a8c000ad461a837d32e4fd190567a6bdc8ad107a55516f9f9c2473918`)
+  - 22. [2] Summary (words: 356, hash: `d50c3e2cd5f98ca35b2c72485b0794aa501586534908eca3970f03b4e1fd1ea0`)
+  - 23. [2] Exam Essentials (words: 453, hash: `9fa5fb5104c275012f6819447dea770c45c19bd3b573115c83c9bc146f1cab73`)
+  - 24. [2] Review Questions (words: 1070, hash: `c18941d1c68c4dd685363001f086ececb1a93c3afc5ab653b3098b6a28b4f932`)
+
+## 27. Chapter 16 Security Governance and Compliance
+- Chapter number: 16
+- Href: `c16.xhtml`
+- Words: 13920
+- Hash: `62f8bfca946db2274e2adbba5c8c111be14be162bcdea1c06fc63c955bcb909a`
+- Sections:
+  - 1. [2] Security Governance (words: 112, hash: `7bc3a3f6438c1b3981007b16995b65ed8441704b08564bde3a872088e1a51336`)
+  - 2. [3] Corporate Governance (words: 622, hash: `0938f751802de0f8eb4fe2e6f364ef391962cdd0d579de1a18dd906754ea0e6c`)
+  - 3. [3] Governance, Risk, and Compliance Programs (words: 53, hash: `43c29cf838a5b46e03fec6237e1937f51a80395c59e11b8b8a208220331a4165`)
+  - 4. [3] Information Security Governance (words: 325, hash: `5ad95bc5334b60e180dc857188c0a59fa5ec7a42da4e1f4f29a126d476cc5e28`)
+  - 5. [3] Types of Governance Structures (words: 89, hash: `8f599a3a71d69775f615e8babe66deb430b3887d9d233558f8f41cde6a95e60a`)
+  - 6. [3] Exam Note (words: 83, hash: `5037509d46c8083e68a2b54722d6f3153a1800d6071af45b9110ea5451097be2`)
+  - 7. [2] Understanding Policy Documents (words: 201, hash: `176aadd8842ac4a4fe3b0eced60179f65537ed99b1a0eb184d4ccd8d8808e0b0`)
+  - 8. [3] Policies (words: 621, hash: `19cc116aca4f487f78edfe794b79737956eb4d5fd5ec1f638c941eeb33c6ceb4`)
+  - 9. [3] Exam Note (words: 47, hash: `b9ee574bbc3855e725580f9589188fc91a8c71c8960c087132bacabf7fb664b5`)
+  - 10. [3] Standards (words: 651, hash: `73c3fc9864fc51f89c76c4065fce13cb80631c6cbabb2bc569a7cf071de6f686`)
+  - 11. [3] Exam Note (words: 40, hash: `4ba92bed4ee3c8ba9dc561f95dfc1fc6a33b23f5d1b04bc5df4724e2d4b2ac71`)
+  - 12. [3] Procedures (words: 443, hash: `aff83cda1a34afbe6a7eb430f8ef34119bd624f77c5958fe53cefbfc78be1ad8`)
+  - 13. [3] Exam Note (words: 39, hash: `b34c986ba15f01672ca066c6bd7b2cc333222d96b26dda231b31444051ddaaff`)
+  - 14. [3] Guidelines (words: 446, hash: `7f334cdf6bf1f4b7dcf81ae9dd5c26158f993fc166798eb63697e975e64b5114`)
+  - 15. [3] Exceptions and Compensating Controls (words: 473, hash: `679d1c7b853668d21c6d6af1972b066d5bbeec42216bb1a6d808c9ffb02f9181`)
+  - 16. [3] Monitoring and Revision (words: 148, hash: `6f34f21d2cc4004c95d8e46b7e3c6a77d9468f3279b920a17e5695dc28ed2ac2`)
+  - 17. [2] Change Management (words: 514, hash: `58ebe74fe49af6735420fcf5be30adfb50bfc8aac88773a36bd368d7061963f4`)
+  - 18. [3] Change Management Processes and Controls (words: 71, hash: `e09f6ddd83884a6cccfc0ddc970279827e5afb8b47b6929d32591db19da48ac0`)
+  - 19. [4] Standard Operating Procedures for Changes (words: 357, hash: `aa959fc5b002ce636f119d6c0aebf6c33ddb25503a4a9954220b2aca799a5653`)
+  - 20. [3] Exam Note (words: 260, hash: `9e48b7f7f029c5a2068889258dc59a5bdfb6a2f03316a858e61ec30da7de2463`)
+  - 21. [3] Technical Impact of Changes (words: 140, hash: `f73ff56ed0dc0222c5e48a0ba2104c014b8646fbcd6ecd91e931adf77f6a387a`)
+  - 22. [3] Version Control (words: 166, hash: `14e5e0e43f823beb07bc022829d82003868c83ab3fa6a95d01a8285841f02119`)
+  - 23. [3] Documentation (words: 95, hash: `eaa2bbbb0349d531a62b77af23fc3986dc8814bd60846dc094eb86d50aafbcd6`)
+  - 24. [2] Personnel Management (words: 56, hash: `4761e53e17725730f886717eefc958b3018dab1ecab7b667ac83229d1f41b054`)
+  - 25. [3] Least Privilege (words: 87, hash: `be79d417dc465b7fa6206e608ff4cfcadfc3a217a23c19384c80012ca2c0f75d`)
+  - 26. [3] Separation of Duties (words: 241, hash: `b6beb6e5f4c3d62afa4434952e48dbb8c6babdf6d73a296471897e592ebcc06c`)
+  - 27. [3] Job Rotation and Mandatory Vacations (words: 134, hash: `8fcde1f0dc3a0a6c244a4d39b30dad3901922e6d26a87a8e88087069971e256f`)
+  - 28. [3] Clean Desk Space (words: 45, hash: `c67e78fb562bacd9247cf30d9f618b460a7ff072d588e0d118e349aca5756758`)
+  - 29. [3] Onboarding and Offboarding (words: 76, hash: `309f764aa18adcabf79dd3baf79261aead17795b85fa6b946011453a8c9f5159`)
+  - 30. [3] Nondisclosure Agreements (words: 75, hash: `fd5a4a2d39d1f58a577b75c40150d01091ed774798f04a656d2054783e306865`)
+  - 31. [3] Social Media (words: 57, hash: `374c170e6540dca953ab4280ea5954bbfe393f4e6230f8eb044da9f45a78aa3a`)
+  - 32. [2] Third-Party Risk Management (words: 44, hash: `7441968660621ced52cfeff99052f4234d5bde01e955a401f25fbbb6f9a91e13`)
+  - 33. [3] Vendor Selection (words: 218, hash: `69ea43e268ab4014597e27e2c98a5d3420fb11b48d4b0c5873e392dad024fa8a`)
+  - 34. [3] Vendor Assessment (words: 222, hash: `6b8ebd06c5d6d281dc79c301384fcbe93e130e48cec8825e2e6af466def8da6c`)
+  - 35. [3] Vendor Agreements (words: 305, hash: `5bdc69b4ab0037b6713d5b014e14c39f4781a9aa0269ade4cd533e145dada82d`)
+  - 36. [3] Exam Note (words: 24, hash: `bee4f8bc2870cf931bfc50cf034882ca7caa3f3fbe8e3438f542370b1e2dbfb3`)
+  - 37. [3] Vendor Monitoring (words: 302, hash: `279b2daa7c23e4119d0fe033c0a441c818152c5fae2562a048227b9825800530`)
+  - 38. [3] Winding Down Vendor Relationships (words: 97, hash: `acbef219f1b950d13c259b37bcafb0ddfc04c6386799de2a1b63becb013078ac`)
+  - 39. [3] Exam Note (words: 59, hash: `49dbc3c2ae48edac1f2374d9c8d0a2fcef6312a3da582d0627e4cf2dd82bb17c`)
+  - 40. [2] Complying with Laws and Regulations (words: 58, hash: `7c25d712b99639cabef98fe67d627c0eda4e8a1ffa060f324ef6726f71030da7`)
+  - 41. [3] Common Compliance Requirements (words: 310, hash: `85ebe73fd0d7f1d40176a119ea595f5707526991adcb9459ce669e22d69fdaa2`)
+  - 42. [3] Compliance Reporting (words: 212, hash: `b8af4fefedca91a165e44e0083f2bef03c5fcc5d3b5e0c58f1f92f7361c004a3`)
+  - 43. [3] Consequences of Noncompliance (words: 342, hash: `503566fd5cfffcff641267a3becebec2f70bf5feb3064be829f9287ba0ce232a`)
+  - 44. [3] Compliance Monitoring (words: 269, hash: `cebca88f0cf0004a0a04209d9cb972b837f59d04881e327b9ac0cc6ddcb70e1e`)
+  - 45. [3] Exam Note (words: 20, hash: `c005db722c33bf2d4af93e74d1b4895de95005045355a4f4b694c70c75234340`)
+  - 46. [2] Adopting Standard Frameworks (words: 78, hash: `cd813659a045f908d6544151a35e1175fcb204493dbce674f3bd69017c2674ff`)
+  - 47. [3] NIST Cybersecurity Framework (words: 721, hash: `c5a82b626ba6466fd123a3aa01545176905cc93cc5881305ca9dbc33fcb54a35`)
+  - 48. [3] NIST Risk Management Framework (words: 183, hash: `5b1dace617bae84024a6ffd5223e1be9191620656392336c12731a1303854e98`)
+  - 49. [3] ISO Standards (words: 75, hash: `8a5c9693086e0307b596c880e760c4cd893346af86804f3a6dd39f03343e3387`)
+  - 50. [4] ISO 27001 (words: 137, hash: `98df6bed3d7fc771b310cd2fe51db5ddc37fa321681e7393edfb80ce6dc2ee61`)
+  - 51. [4] ISO 27002 (words: 45, hash: `47e187691da07acc4f168f447dca6410f7f2959600e140feeadf65308071efeb`)
+  - 52. [4] ISO 27701 (words: 70, hash: `ec0c449e2811a12d5431d0c46022d1052161850c12bbaa578148f13a5254a765`)
+  - 53. [4] ISO 31000 (words: 34, hash: `455f4039a087e682cbd90d59a4469b816e47aea9a179466cf8940bf9a2de9c04`)
+  - 54. [3] Benchmarks and Secure Configuration Guides (words: 182, hash: `fc00648321dc9b40cd4e824eabcd5e2b5d7f2dffdd7ac0e90b9db5295ae30bd4`)
+  - 55. [2] Security Awareness and Training (words: 71, hash: `354499d85bfbeb22ce9f854aa0203fa3ecd7980d75b92ce2540efcd38dde224d`)
+  - 56. [3] User Training (words: 47, hash: `e0b20aedabdc4220eadac7645404cc31f312b242e3bd232e9e1ce3cddc97bbd9`)
+  - 57. [4] Role-Based Training (words: 69, hash: `dc8dc2106e07472a4e6e4b97351d1e1645f24b4683d27d74776af490b5fa72f4`)
+  - 58. [4] User Guidance and Training (words: 397, hash: `223795887046f4f04797bdcd1ad52c780d5d8a875af53bf76d15f5e279f6d6cf`)
+  - 59. [3] Exam Note (words: 37, hash: `55d82445702ecc5a73a479f988d8819215e3bf7415799c695b6f338e03cc0d36`)
+  - 60. [4] Training Frequency (words: 72, hash: `b996b115c7adb5b08d975f59fe654ecefbdffad4d56d7ae84552198db60eaaed`)
+  - 61. [4] Development and Execution (words: 122, hash: `31f4e9ed771775fdc3453e69acde9d0e8ed3d35a53f10fff6be572e2aa4f35f8`)
+  - 62. [4] Reporting and Monitoring (words: 131, hash: `571b5b46913b81859837eadc1783ef047a613b3894852c46026f7185fce7d829`)
+  - 63. [3] Ongoing Awareness Efforts (words: 106, hash: `5becabf3b547fe32b0d4b0f75a3722cd5348265ed0e9aa99179c96806cea450b`)
+  - 64. [2] Summary (words: 99, hash: `eed62ccf6d3e4c4aac136973238eab8dc9b1b5e0debd747644cadf3d3869dc81`)
+  - 65. [2] Exam Essentials (words: 514, hash: `142921f9d9dd073054bdd546ec79eab04c6d75a4776a0a56b1cb675c9da1ab6a`)
+  - 66. [2] Review Questions (words: 845, hash: `a455aaa2cb933b26261fd63d5509fc3f44628f1c7f8cbc8f4e79ee7f96cf7373`)
+
+## 28. Chapter 17 Risk Management and Privacy
+- Chapter number: 17
+- Href: `c17.xhtml`
+- Words: 9664
+- Hash: `2f99fd6bff493d387dbf873dbfe2a8c79825d108420453c96e5dbf81a7f123cb`
+- Sections:
+  - 1. [2] Analyzing Risk (words: 535, hash: `692b4e37a5ecb3a6d26313646aa3c959a37ec2a2b886318d88f2fc389c41e6d5`)
+  - 2. [3] Risk Identification (words: 288, hash: `1d52ed202dc2344917a1962134ec8c01539bbc1706c1ff3c257355db665a9353`)
+  - 3. [3] Risk Assessment (words: 605, hash: `60e18abdcdb1bb2d27e203d5401b8f9cf1f88ec73b38bfb9c9ff91d0e1fa6e50`)
+  - 4. [3] Exam Note (words: 64, hash: `5a1ae16148bcc43a736e60212f467d859d8203a9d4b96cba0992631a31a54c59`)
+  - 5. [3] Risk Analysis (words: 97, hash: `750062abaec92e8488f721259680496971330df1fe1149ae29f8a369a166da36`)
+  - 6. [4] Quantitative Risk Analysis (words: 586, hash: `124f37e8f9d0f6380caac438d5640dc3dff3bad75ac00058d50fdcad6bed3f6c`)
+  - 7. [3] Exam Note (words: 145, hash: `40bca166db053d85ab42e92bc813de745ce744967e4e51ff55f842d594b0e5e5`)
+  - 8. [4] Qualitative Risk Analysis (words: 312, hash: `6f26062fee9ef6480b0d60b69e03c6c09380257a661a0a95a854b228d759a062`)
+  - 9. [3] Supply Chain Assessment (words: 164, hash: `0130ac9397d4931a3b5a02a90aed2075a0cd8948b6d65326330d53c09a1df2a9`)
+  - 10. [2] Managing Risk (words: 232, hash: `4392b404175a7c3910c905d6e6df6310f8a42b9df163dc8ffdbf6d09495b704e`)
+  - 11. [3] Risk Mitigation (words: 372, hash: `9ce65c180a03d7dee610c1a8977202fef1b2f7e83c932292aa9623436a0dcc8f`)
+  - 12. [3] Risk Avoidance (words: 198, hash: `b75a34634680f59003c03901e0a577f1aa028258af464118b8147bac8a771dc2`)
+  - 13. [3] Risk Transference (words: 182, hash: `06b01d7a557d45baade7e2ad9c2bb1fa80824ce032762c09eeb9a3f81084d115`)
+  - 14. [3] Risk Acceptance (words: 384, hash: `a951d2eb06ea19541b3b07eb6e055dab01c7e7a22f137ecfa9dd25bcd09bf8a0`)
+  - 15. [3] Exam Note (words: 61, hash: `110052a7734ece0b3523f569207e26baae42f00eb6d205afa774b9201070c21f`)
+  - 16. [2] Risk Tracking (words: 317, hash: `ea582482ad7224489f68694354d56a8a7d94a7d6daf510a15e116a45191b9b1f`)
+  - 17. [3] Risk Appetite (words: 294, hash: `b45e432d9ccd2983d7bc414e5326dd618e65be0c30bf018b03b62bc4fedf1be2`)
+  - 18. [3] Risk Register (words: 153, hash: `6606405b9b72a9555280ea2862f22a38b8c988242dd771d29c5490b8c2a12419`)
+  - 19. [3] Exam Note (words: 51, hash: `28722e2495171a961095a0a87acac2268b822410bbfb2be6b6ee129be06e8bf5`)
+  - 20. [3] Risk Reporting (words: 285, hash: `0f7d374c74c76d0f449c9985bf9c275a9f87ee0c398704ec17d9e86276f9011f`)
+  - 21. [2] Disaster Recovery Planning (words: 95, hash: `81cf8ce1112d9e0bc2eb8ba4346f967b63f7b1babb76cb2bf961d20bc8192f31`)
+  - 22. [3] Disaster Types (words: 136, hash: `cd00e1b85e1a5dea6a7e770f5ea17470f988321f0c75e926ea709fe5eb02bf6e`)
+  - 23. [3] Business Impact Analysis (words: 321, hash: `c57ba7ad6684edac92b916f33ffa20ed5d47822b6f597b300d3d1e69e637fcf4`)
+  - 24. [2] Privacy (words: 193, hash: `03c5b5a91eea9341e50c463fc954ac7a1c59ac967bac98b0ae25da558ab243e7`)
+  - 25. [3] Data Inventory (words: 262, hash: `39ad68dae5fd80ca3507d7ed3f3d8d2bd24589a529e9e08c6a78b766c733c1c8`)
+  - 26. [3] Exam Note (words: 67, hash: `755de64976f9781d8048ec524aacd197f5f9e0cc5710e76811faab325adcbe5e`)
+  - 27. [3] Information Classification (words: 169, hash: `913c13fdc35f1c2527e1038ffed4d63b3da123d012476e582d1ba354a8487093`)
+  - 28. [3] Exam Note (words: 152, hash: `e0fbf743af0f2b7ec452adc717149d1f541967c6fe361ac48d87a8b69bdaaf1c`)
+  - 29. [3] Data Roles and Responsibilities (words: 368, hash: `2cad6a4a44554629f04a825a591806062167138df0a287fa24dafe2d8310722f`)
+  - 30. [3] Data Protection Officers (words: 83, hash: `47a0112e10fb1d716cc53bacc72d7a75785cbc6f4e12876d975ec41e1792d78b`)
+  - 31. [3] Information Life Cycle (words: 116, hash: `1dc73cfff482f43dbaacbd9408aab370388bea393f493b7309b6963031165db4`)
+  - 32. [3] Right to Be Forgotten (words: 224, hash: `d322fbfc8fb939c9f20c6672d135f018cad29e49f95ec89577280f13b3490b1a`)
+  - 33. [3] Exam Note (words: 38, hash: `cdda9a04356451dc426c57a79c9afaba0a5038eae36d45e9cd33d313aeb4a299`)
+  - 34. [3] Privacy Enhancing Technologies (words: 382, hash: `e788f9ea3ca1e26c0b0cada1c4eef870daca394b1481d62ce77784d63b47b11c`)
+  - 35. [3] Privacy and Data Breach Notification (words: 202, hash: `b6f29a2fd4608b635a21def624c20f13f2705fbed427a5fd0b6ca44c75ef5d99`)
+  - 36. [2] Summary (words: 84, hash: `f7158845dae087d2691f24c72ee28b0fcb9587f5d7ce8a0dae0704e4b32c03fb`)
+  - 37. [2] Exam Essentials (words: 292, hash: `435593d91f236d8ed3650ff039caee16244f9899637abc337f28e99e125889e1`)
+  - 38. [2] Review Questions (words: 780, hash: `3def41554b8edb8680036de250e8fbbba97c91346f230d52d6ac946b8e6e4931`)
+
+## 29. Appendix Answers to Review Questions
+- Chapter number: 29
+- Href: `b01.xhtml`
+- Words: 17879
+- Hash: `9a6c0149f78bd4151dd51a6f99ed3086f5e40913b25e8c5bdced027222007299`
+- Sections:
+  - 1. [2] Chapter 1: Today's Security Professional (words: 806, hash: `18e83a0aa693e9f1416a6c1afd101f950cfb4f452a9fe12fda1c4686c61e2e08`)
+  - 2. [2] Chapter 2: Cybersecurity Threat Landscape (words: 986, hash: `f64067894ce599357a4dbba675167e1662f1723dbeb5789ddd4a75751327b8e0`)
+  - 3. [2] Chapter 3: Malicious Code (words: 1082, hash: `d68f0e058380726b8f6d3919d0939747b54c1b8e5b9c156ab0b0eeb4f6eb6b4b`)
+  - 4. [2] Chapter 4: Social Engineering and Password Attacks (words: 1125, hash: `b32b434ed981d11791f68f1ffc5f475db36db82134e2dffcbe08b9bab317f3a7`)
+  - 5. [2] Chapter 5: Security Assessment and Testing (words: 850, hash: `6fa5d876d0f1316ac783fcfe5d37e2d73f944b16df528682f3bc863297778b60`)
+  - 6. [2] Chapter 6: Application Security (words: 1016, hash: `b68ec574073d1ac3d76c39c34cfdc1cb50d883f17e01defc272caf7e1fc2835b`)
+  - 7. [2] Chapter 7: Cryptography and the PKI (words: 699, hash: `2135aa1a470eca7d295a502712de6fcde8e49e33148c2d3160dc3f12abaae830`)
+  - 8. [2] Chapter 8: Identity and Access Management (words: 1036, hash: `6538d2cd95f74e5221c0ee878ce2bb626cd8f5c640f9431a1b498e649848d8ec`)
+  - 9. [2] Chapter 9: Resilience and Physical Security (words: 1164, hash: `8188685b003aaab10f4b5101b42ced76ae419bebdf0ab3961280aece36c08aa6`)
+  - 10. [2] Chapter 10: Cloud and Virtualization Security (words: 1014, hash: `a5a4b4bba0e5f41cc1d0da4eb057f67d99688ba8dfaf19a7acacdc0264c5bebd`)
+  - 11. [2] Chapter 11: Endpoint Security (words: 1235, hash: `2812e8202f6ede5ac53daab8cbc0173cbe660aab64efcdc3c7547338958b0b57`)
+  - 12. [2] Chapter 12: Network Security (words: 1118, hash: `dfed204d7fd63bb43e6b2b699081a61dc56a913b1ba4df7a4645c5f24dfdeff5`)
+  - 13. [2] Chapter 13: Wireless and Mobile Security (words: 1410, hash: `bcae58752f014ef5670086080e7bdf1a02d623ac5256849ad3b6618928a2b53e`)
+  - 14. [2] Chapter 14: Monitoring and Incident Response (words: 1113, hash: `e05184586744eedc9e5a836b4508849aea55e04518e72460d8fc5845ee52144e`)
+  - 15. [2] Chapter 15: Digital Forensics (words: 1243, hash: `5a2fc1d19c5526d608790ba4a3701d6d2baf180d227c82e80dfd7fa900cd9bab`)
+  - 16. [2] Chapter 16: Security Governance and Compliance (words: 1184, hash: `a521de5285c56dd88e1ffe320dcbc32829f7bc91cec45161908c329672fcb008`)
+  - 17. [2] Chapter 17: Risk Management and Privacy (words: 697, hash: `4736a310b82594da664e12db4634e3fd847316a212b805d88963114ac3c6404c`)
+
+## 30. Index
+- Chapter number: 30
+- Href: `b02.xhtml`
+- Words: 6512
+- Hash: `5502b8fcdda2a15d5aa3492224a1f3ac3dfad5de50e7bd942964cbe553b3c0d7`
+- Sections:
+  - 1. [2] A (words: 610, hash: `c10da6c1426571ce410b89244219754483bded00b53e377297b2afd6318426ae`)
+  - 2. [2] B (words: 144, hash: `1d82e3d27049bdd711c0f6a5dd19ebbfcd472801ac6f67f1d97937d115382377`)
+  - 3. [2] C (words: 999, hash: `396c46ede6014028f25a0898558238d2b1126eb7bc8c8f4eebdf3298e539774a`)
+  - 4. [2] D (words: 383, hash: `9a6ca2df9816b2afa962ce437c6856916684f0b0bf3a9b102dbb1c430fff1729`)
+  - 5. [2] E (words: 269, hash: `c974f75f9fdfb103b7bfd834b57e726ce31e3741cd3bf48bf82302226eb82c3c`)
+  - 6. [2] F (words: 183, hash: `aabf5877db12e0c27c5a9da427778ed1502824d60e557eb3f2ec6728411c0cf4`)
+  - 7. [2] G (words: 106, hash: `22a6e8708fb4336437b02b77df480bf4fe0c2282bd224d54f5fb41f0d265d5c4`)
+  - 8. [2] H (words: 125, hash: `748ea667de1c4acf658c8965ec6b2bf6e592f2723bb611caf0175cbdcad92d47`)
+  - 9. [2] I (words: 317, hash: `e348e3a02e4e4b808a965233654b654f08fbe709322c785aa37b53926ec4429e`)
+  - 10. [2] J (words: 16, hash: `10ead2486af9ea16889b981b109acae54e34119286a51d0710198220b593cc4b`)
+  - 11. [2] K (words: 69, hash: `acf2fe791aaf13375a8ad64ea13a2d61232ad0e1ba59a815b93a0059d4b0b7bf`)
+  - 12. [2] L (words: 59, hash: `16bf43fbb8cbb549129c3559ab0ddf0cef216de26c6d847a06e4a3ac0c2a4e10`)
+  - 13. [2] M (words: 243, hash: `6272ac44b6ca679aeb627240b49d82714c94ff7377d6aad024530795b7f630f0`)
+  - 14. [2] N (words: 303, hash: `3ed72b32e667c9bb71e268e5cbcc68a9ac36a5f7defd7acecb4be84581ca044d`)
+  - 15. [2] O (words: 133, hash: `13dcd88377d1b6ee2f074c715d1086f02b1a292628e8d0383a6d8734a2fdf06c`)
+  - 16. [2] P (words: 507, hash: `bc04d7c4fde688522683f0ac98e8f1300a7f44f1b62dcfa41eb04756d884d8a3`)
+  - 17. [2] Q (words: 18, hash: `82dc90128ad2c703e449a1618ec7a15bb191e06b1de58de33c7fc4b9b8ca1152`)
+  - 18. [2] R (words: 351, hash: `9f231a3092993fbeb42537908ea5abe3757bd8a0e3ff2eb288b31210d4ea66ee`)
+  - 19. [2] S (words: 702, hash: `35faa0f04392c6cb6ce16626c77de75210bcf2dfe5d96f30a46d03a22f683f4b`)
+  - 20. [2] T (words: 369, hash: `a5cdce5a888dbb6f26b7f0ea5d5e32cd1e5508dbc2c0cac2cc19b7ec9ca41f87`)
+  - 21. [2] U (words: 44, hash: `1f05dc213d3aed2423ec8686170796839e649cacf2037b0c89bf18c8ed9f89f6`)
+  - 22. [2] V (words: 308, hash: `08cfe0434f74d853dcc98518558298bc90c18d8b3f44f94f28b90ebb5be29e39`)
+  - 23. [2] W (words: 173, hash: `187a8afcb0a9e0e24f50357428c3af3836b1b963f1c5bdfa51de85e4992cd9fe`)
+  - 24. [2] X (words: 27, hash: `ffcc105f18f8830540398f6fd4884605f7f4dd198307e5d6d6352cd6be91b631`)
+  - 25. [2] Y (words: 6, hash: `aa44e1cc2b4fd379af58684e64e79ea3205b97293a6ee4939c651aaef22b864f`)
+  - 26. [2] Z (words: 13, hash: `8ca15127fc46299ab6af5a65d41829f4c465e273ac205da56f708f46c1b108f7`)
+
+## 31. Advertisement Page
+- Chapter number: 31
+- Href: `b03.xhtml`
+- Words: 2
+- Hash: `1ac70ac2a82e758e3a3623f243d49aef34fa57d5509d9e4ef46a432b68552c89`
+- Sections: _none detected_
+
+## 32. Online Test Bank
+- Chapter number: 32
+- Href: `b04.xhtml`
+- Words: 254
+- Hash: `adb565b0abd07bf30dd23310eae34dbf67cd0f019d1981547a9650c595f22851`
+- Sections:
+  - 1. [2] Register and Access the Online Test Bank (words: 178, hash: `fec37c76a0c710b37c7a42308f754a3b38b30288d35c90ba8f677e609a399846`)
+
+## 33. WILEY END USER LICENSE AGREEMENT
+- Chapter number: 33
+- Href: `eula.xhtml`
+- Words: 23
+- Hash: `0a3a8c410bdc7b7ab73735f86ed94257d1acabb152adc8abc2d2c694867e9e66`
+- Sections: _none detected_

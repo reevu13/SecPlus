@@ -1,0 +1,2390 @@
+{
+  "schema_version": "1.0.0",
+  "pack_id": "ch15",
+  "exam": {
+    "vendor": "CompTIA",
+    "name": "Security+",
+    "code": "SY0-701",
+    "max_exam_minutes": 90
+  },
+  "chapter": {
+    "number": 15,
+    "title": "Digital Forensics",
+    "page_range_in_user_pdf": "717-752"
+  },
+  "design_intent": {
+    "mode": [
+      "campaign",
+      "roguelike",
+      "drill"
+    ],
+    "pvp_optional": true,
+    "default_pvp_enabled": false,
+    "player_goal": "Collect, preserve, and explain digital evidence without wrecking its admissibility."
+  },
+  "progression": {
+    "xp_rules": {
+      "base_xp_per_correct": 10,
+      "streak_bonus_per_5": 5,
+      "time_bonus_threshold_seconds": 60,
+      "time_bonus_xp": 3,
+      "mistake_penalty_xp": 2
+    },
+    "mastery_model": {
+      "scale": "0-5",
+      "update": "tag_mastery_decay_resistant",
+      "tags_drive_mastery": true
+    },
+    "unlock_rules": [
+      {
+        "unlock": "boss",
+        "when": "complete_all_missions"
+      },
+      {
+        "unlock": "roguelike",
+        "when": "defeat_boss_once"
+      },
+      {
+        "unlock": "pvp",
+        "when": "reach_mastery_3_on_7_tags"
+      }
+    ]
+  },
+  "tags": {
+    "concepts": [
+      "forensics.overview.definition",
+      "forensics.process.documentation",
+      "forensics.process.timelines",
+      "forensics.human_factor.interviews",
+      "forensics.legal_hold",
+      "forensics.spoliation",
+      "forensics.ediscovery.edrm",
+      "forensics.ediscovery.stages.information_governance",
+      "forensics.ediscovery.stages.identification",
+      "forensics.ediscovery.stages.preservation",
+      "forensics.ediscovery.stages.collection",
+      "forensics.ediscovery.stages.processing",
+      "forensics.ediscovery.stages.review",
+      "forensics.ediscovery.stages.analysis",
+      "forensics.ediscovery.stages.production",
+      "forensics.ediscovery.stages.presentation",
+      "forensics.chain_of_custody",
+      "forensics.admissibility.criteria",
+      "forensics.nonrepudiation.provenance",
+      "forensics.acquisition.order_of_volatility",
+      "forensics.acquisition.cpu_cache_registers",
+      "forensics.acquisition.ephemeral_state",
+      "forensics.acquisition.ram",
+      "forensics.acquisition.swap_pagefile",
+      "forensics.acquisition.disk_image.bit_by_bit",
+      "forensics.acquisition.os.windows_registry",
+      "forensics.acquisition.mobile_iot",
+      "forensics.acquisition.firmware",
+      "forensics.acquisition.vm_snapshot",
+      "forensics.acquisition.containers",
+      "forensics.acquisition.network.pcap",
+      "forensics.acquisition.network.taps_span",
+      "forensics.acquisition.logs.secondary_sources",
+      "usb.data_blocker",
+      "forensics.tools.dd",
+      "forensics.tools.ftk_imager",
+      "forensics.tools.winhex",
+      "forensics.tools.autopsy",
+      "forensics.tools.wireshark",
+      "forensics.integrity.hashing.md5",
+      "forensics.integrity.hashing.sha1",
+      "forensics.integrity.validation.hash_compare",
+      "forensics.integrity.checksum_vs_hash",
+      "forensics.preservation.write_blocker",
+      "forensics.preservation.evidence_storage",
+      "forensics.preservation.legal_hold_tools",
+      "forensics.preservation.cloud_limitations",
+      "cloud.contracts.right_to_audit",
+      "cloud.contracts.breach_notification",
+      "cloud.regulatory.jurisdiction",
+      "cloud.regulatory.venue",
+      "cloud.regulatory.nexus",
+      "forensics.data_recovery.deleted_files",
+      "forensics.data_recovery.quick_format",
+      "forensics.data_recovery.slack_space",
+      "forensics.data_recovery.partial_overwrite",
+      "forensics.data_recovery.secure_delete",
+      "forensics.storage.ssd_wear_leveling",
+      "forensics.storage.full_disk_encryption",
+      "forensics.reporting.components",
+      "forensics.reporting.repeatability",
+      "forensics.intel.forensics_role",
+      "forensics.counterintel"
+    ],
+    "difficulty_scale": {
+      "1": "Recall",
+      "2": "Basic application",
+      "3": "Scenario reasoning",
+      "4": "Trap-heavy / multi-concept",
+      "5": "Boss-level synthesis"
+    }
+  },
+  "trap_list": [
+    {
+      "id": "ch15.trap.logical_vs_forensic_copy",
+      "name": "Logical copy ≠ forensic image",
+      "misconception": "Copying files/folders is enough for forensic work.",
+      "fix": "A forensic image is bit-for-bit and preserves metadata, unallocated/slack space, and deleted remnants; a logical copy usually won’t.",
+      "drill_question_ids": [
+        "ch15.q020",
+        "ch15.q021",
+        "ch15.q022"
+      ]
+    },
+    {
+      "id": "ch15.trap.hash_vs_checksum",
+      "name": "Hash is a fingerprint; checksum is a basic integrity check",
+      "misconception": "Checksums and hashes are interchangeable.",
+      "fix": "Both can detect changes, but hashes are used as unique identifiers/fingerprints for evidence integrity and provenance.",
+      "drill_question_ids": [
+        "ch15.q027",
+        "ch15.q028"
+      ]
+    },
+    {
+      "id": "ch15.trap.md5_sha1_context",
+      "name": "MD5/SHA1 can still show identical copies (in non-adversarial contexts)",
+      "misconception": "MD5/SHA1 are ‘broken’ so they are never used in forensics.",
+      "fix": "They’re weak against deliberate collision attacks, but still commonly used to quickly verify forensic image integrity when adversarial collisions aren’t the main concern.",
+      "drill_question_ids": [
+        "ch15.q026",
+        "ch15.q029"
+      ]
+    },
+    {
+      "id": "ch15.trap.order_of_volatility",
+      "name": "Grab the volatile stuff first",
+      "misconception": "Always power off immediately and image the disk first.",
+      "fix": "Follow the order of volatility: volatile state (RAM/ephemeral tables) can vanish on shutdown; capture it first unless a compelling reason exists.",
+      "drill_question_ids": [
+        "ch15.q012",
+        "ch15.q013",
+        "ch15.q014"
+      ]
+    },
+    {
+      "id": "ch15.trap_write_blockers",
+      "name": "If you didn’t use a write blocker, your case can implode",
+      "misconception": "Write blockers are optional ‘nice-to-haves.’",
+      "fix": "Write blockers prevent any writes to the evidence drive during examination, protecting integrity/admissibility.",
+      "drill_question_ids": [
+        "ch15.q030",
+        "ch15.q031"
+      ]
+    },
+    {
+      "id": "ch15.trap_cloud_forensics_reality",
+      "name": "You usually can’t ‘image the SaaS’",
+      "misconception": "You can install your imaging agent inside a SaaS provider and pull a disk image whenever you want.",
+      "fix": "Cloud providers rarely allow direct forensic acquisition of their service infrastructure; plan for logs, contracts, and available provider tooling instead.",
+      "drill_question_ids": [
+        "ch15.q033",
+        "ch15.q034",
+        "ch15.q035"
+      ]
+    },
+    {
+      "id": "ch15.trap_ssd_secure_delete",
+      "name": "SSDs don’t behave like spinning disks",
+      "misconception": "Secure delete guarantees SSD data is unrecoverable.",
+      "fix": "Wear leveling and reserved blocks can leave old data behind; full-disk encryption helps mitigate residual recoverability.",
+      "drill_question_ids": [
+        "ch15.q041",
+        "ch15.q042"
+      ]
+    },
+    {
+      "id": "ch15.trap_vm_snapshot",
+      "name": "Snapshot beats imaging the whole host",
+      "misconception": "To image a VM you must power it down and image the entire virtualization host.",
+      "fix": "VM snapshots capture the VM state without dragging in unrelated host/tenant data and without massive disruption.",
+      "drill_question_ids": [
+        "ch15.q037",
+        "ch15.q038"
+      ]
+    },
+    {
+      "id": "ch15.trap_time_skew",
+      "name": "Bad clocks make bad timelines",
+      "misconception": "If one system shows the incident an hour earlier, the attacker must have moved laterally slowly.",
+      "fix": "Time zones/clock drift can shift timestamps; verify time settings before drawing timeline conclusions.",
+      "drill_question_ids": [
+        "ch15.q047",
+        "ch15.q048"
+      ]
+    }
+  ],
+  "missions": [
+    {
+      "id": "ch15.m1",
+      "name": "Forensics Fundamentals",
+      "goal": "Know what digital forensics is for, and how documentation makes evidence usable.",
+      "mechanics": {
+        "minigame": "evidence_orientation",
+        "twist": "Short stems, fast recall."
+      },
+      "question_ids": [
+        "ch15.q001",
+        "ch15.q002",
+        "ch15.q003",
+        "ch15.q004",
+        "ch15.q005",
+        "ch15.q006"
+      ],
+      "rewards": {
+        "xp": 220,
+        "loot": [
+          "Card: ‘Forensic Mindset’",
+          "Sticker: ‘Docs or it didn’t happen’"
+        ]
+      }
+    },
+    {
+      "id": "ch15.m2",
+      "name": "Legal Gravity",
+      "goal": "Handle legal holds, avoid spoliation, and understand e‑discovery/EDRM stages.",
+      "mechanics": {
+        "minigame": "legal_hold_sim",
+        "hazard": "One distractor per question is a courtroom trap."
+      },
+      "question_ids": [
+        "ch15.q007",
+        "ch15.q008",
+        "ch15.q009",
+        "ch15.q010",
+        "ch15.q011"
+      ],
+      "rewards": {
+        "xp": 320,
+        "loot": [
+          "Charm: ‘No Spoliation’",
+          "Card: ‘EDRM Map’"
+        ]
+      }
+    },
+    {
+      "id": "ch15.m3",
+      "name": "Volatility Sprint",
+      "goal": "Capture the right artifacts in the right order before they evaporate.",
+      "mechanics": {
+        "minigame": "volatility_stack",
+        "rule": "Wrong order breaks your streak bonus."
+      },
+      "question_ids": [
+        "ch15.q012",
+        "ch15.q013",
+        "ch15.q014",
+        "ch15.q015",
+        "ch15.q016",
+        "ch15.q017"
+      ],
+      "rewards": {
+        "xp": 330,
+        "loot": [
+          "Relic: ‘RAM First’",
+          "Card: ‘Volatility Ladder’"
+        ]
+      }
+    },
+    {
+      "id": "ch15.m4",
+      "name": "Imaging Forge",
+      "goal": "Choose proper acquisition tools and distinguish forensic images from logical copies.",
+      "mechanics": {
+        "minigame": "bit_by_bit",
+        "modifier": "Tool choice matters more than tool name."
+      },
+      "question_ids": [
+        "ch15.q018",
+        "ch15.q019",
+        "ch15.q020",
+        "ch15.q021",
+        "ch15.q022",
+        "ch15.q023",
+        "ch15.q024",
+        "ch15.q025"
+      ],
+      "rewards": {
+        "xp": 380,
+        "loot": [
+          "Tool: ‘dd’",
+          "Tool: ‘FTK Imager’",
+          "Card: ‘Noerror+sync’"
+        ]
+      }
+    },
+    {
+      "id": "ch15.m5",
+      "name": "Integrity & Preservation",
+      "goal": "Prove your evidence is unchanged and preserve it correctly across the whole lifecycle.",
+      "mechanics": {
+        "minigame": "hash_duel",
+        "constraint": "Assume opposing counsel is hostile."
+      },
+      "question_ids": [
+        "ch15.q026",
+        "ch15.q027",
+        "ch15.q028",
+        "ch15.q029",
+        "ch15.q030",
+        "ch15.q031",
+        "ch15.q032"
+      ],
+      "rewards": {
+        "xp": 400,
+        "loot": [
+          "Badge: ‘Hash Whisperer’",
+          "Card: ‘Write Blocker’"
+        ]
+      }
+    },
+    {
+      "id": "ch15.m6",
+      "name": "Clouds, Networks, and Weird Targets",
+      "goal": "Do forensics when the evidence lives in the cloud, on the wire, or inside ephemeral platforms.",
+      "mechanics": {
+        "minigame": "artifact_hunt",
+        "twist": "Some evidence cannot be directly acquired."
+      },
+      "question_ids": [
+        "ch15.q033",
+        "ch15.q034",
+        "ch15.q035",
+        "ch15.q036",
+        "ch15.q037",
+        "ch15.q038",
+        "ch15.q039",
+        "ch15.q040"
+      ],
+      "rewards": {
+        "xp": 420,
+        "loot": [
+          "Card: ‘Right-to-Audit’",
+          "Card: ‘SPAN/TAP’"
+        ],
+        "unlock": "boss"
+      }
+    }
+  ],
+  "boss": {
+    "id": "ch15.boss",
+    "name": "Boss: The Missing Chain",
+    "premise": "A lawsuit and an incident collide: you must preserve evidence, image the right systems, prove integrity, and write a report that survives court scrutiny.",
+    "mechanics": {
+      "phase_1": "Trigger legal hold + protect against spoliation.",
+      "phase_2": "Acquire volatile data + image disks/VMs correctly.",
+      "phase_3": "Validate hashes + maintain chain of custody + deliver a clear report."
+    },
+    "question_ids": [
+      "ch15.q009",
+      "ch15.q014",
+      "ch15.q020",
+      "ch15.q026",
+      "ch15.q031",
+      "ch15.q034",
+      "ch15.q050",
+      "ch15.q053"
+    ],
+    "rewards": {
+      "xp": 680,
+      "loot": [
+        "Trophy: ‘Forensic Steward’",
+        "Relic: ‘Admissibility Seal’"
+      ]
+    }
+  },
+  "roguelike": {
+    "runset_id": "ch15.runset",
+    "run_minutes_target": 18,
+    "structure": {
+      "acts": 3,
+      "encounters_per_act": 4,
+      "rest_sites_per_act": 1,
+      "boss_per_run": "ch15.boss"
+    },
+    "cards": {
+      "threat_cards": [
+        {
+          "id": "ch15.t1",
+          "name": "Legal Hold Drop",
+          "tags": [
+            "forensics.legal_hold",
+            "forensics.spoliation"
+          ]
+        },
+        {
+          "id": "ch15.t2",
+          "name": "Volatile Memory Leak",
+          "tags": [
+            "forensics.acquisition.order_of_volatility",
+            "forensics.acquisition.ram"
+          ]
+        },
+        {
+          "id": "ch15.t3",
+          "name": "Cloud Wall",
+          "tags": [
+            "forensics.preservation.cloud_limitations",
+            "cloud.contracts.right_to_audit"
+          ]
+        },
+        {
+          "id": "ch15.t4",
+          "name": "SSD Ghost Data",
+          "tags": [
+            "forensics.storage.ssd_wear_leveling",
+            "forensics.storage.full_disk_encryption"
+          ]
+        }
+      ],
+      "constraint_cards": [
+        {
+          "id": "ch15.c1",
+          "name": "Hostile Counsel",
+          "effect": "Your preservation and write-blocking choices are heavily weighted."
+        },
+        {
+          "id": "ch15.c2",
+          "name": "Time Skew",
+          "effect": "Timeline questions include misleading timestamps/time zones."
+        },
+        {
+          "id": "ch15.c3",
+          "name": "No Full Packet Capture",
+          "effect": "Rely on logs and metadata; packet data is incomplete."
+        }
+      ],
+      "control_cards": [
+        {
+          "id": "ch15.k1",
+          "name": "Write Blocker",
+          "tags": [
+            "forensics.preservation.write_blocker"
+          ]
+        },
+        {
+          "id": "ch15.k2",
+          "name": "Hash Validation",
+          "tags": [
+            "forensics.integrity.validation.hash_compare"
+          ]
+        },
+        {
+          "id": "ch15.k3",
+          "name": "VM Snapshot",
+          "tags": [
+            "forensics.acquisition.vm_snapshot"
+          ]
+        },
+        {
+          "id": "ch15.k4",
+          "name": "EDRM Workflow",
+          "tags": [
+            "forensics.ediscovery.edrm"
+          ]
+        }
+      ]
+    },
+    "question_pool_ids": "ch15.pool.core"
+  },
+  "pvp": {
+    "enabled": true,
+    "modes": [
+      {
+        "id": "ch15.pvp1",
+        "name": "Chain-of-Custody Clash",
+        "description": "Race to keep evidence admissible while your opponent plants procedural traps.",
+        "rules": {
+          "rounds": 6,
+          "time_limit_seconds": 85,
+          "scoring": "correct - (procedure_penalty)",
+          "tiebreaker": "higher_avg_difficulty"
+        }
+      },
+      {
+        "id": "ch15.pvp2",
+        "name": "Volatility Blitz",
+        "description": "Both players choose acquisition order under pressure.",
+        "rules": {
+          "rounds": 5,
+          "time_limit_seconds": 70,
+          "scoring": "correct + speed_bonus"
+        }
+      }
+    ],
+    "fairness": {
+      "matchmaking": "mmr_weighted_by_tag_mastery",
+      "anti_cheat": "server_side_timer_and_randomized_question_order"
+    }
+  },
+  "question_bank": [
+    {
+      "id": "ch15.q001",
+      "type": "mcq",
+      "stem": "What is the primary goal of digital forensics in an organization?",
+      "options": {
+        "A": "To permanently delete evidence from systems",
+        "B": "To investigate and analyze digital artifacts to determine what happened",
+        "C": "To prevent all incidents from occurring",
+        "D": "To replace incident response entirely"
+      },
+      "answer": "B",
+      "explanation": "Digital forensics focuses on collecting and analyzing digital artifacts to reconstruct events. The trap is C—prevention is important, but forensics is about investigation and evidence, not guarantees.",
+      "tags": [
+        "forensics.overview.definition"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "Digital forensics focuses on collecting and analyzing digital artifacts to reconstruct events.",
+      "misconceptionTags": [
+        "forensics.overview.definition_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q002",
+      "type": "mcq",
+      "stem": "Why is careful documentation essential throughout a forensic investigation?",
+      "options": {
+        "A": "Because it makes disk imaging faster",
+        "B": "Because it allows findings to be repeatable, auditable, and defensible",
+        "C": "Because it replaces chain-of-custody requirements",
+        "D": "Because it prevents encryption from being used"
+      },
+      "answer": "B",
+      "explanation": "Documentation creates an auditable trail and supports repeatability and defensibility of conclusions. The trap is thinking documentation is ‘nice’ but optional—without it, evidence can be attacked in court.",
+      "tags": [
+        "forensics.process.documentation",
+        "forensics.reporting.repeatability"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Documentation creates an auditable trail and supports repeatability and defensibility of conclusions.",
+      "misconceptionTags": [
+        "forensics.process.documentation_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q003",
+      "type": "mcq",
+      "stem": "Timelining in forensics typically relies on which sources?",
+      "options": {
+        "A": "Only screenshots from users",
+        "B": "Time stamps, file metadata, event logs, and related artifacts",
+        "C": "Only packet captures",
+        "D": "Only memory dumps"
+      },
+      "answer": "B",
+      "explanation": "Timelines are built from timestamps and metadata across logs/filesystems and other artifacts. The trap is C: packet captures can help but are rarely the sole source.",
+      "tags": [
+        "forensics.process.timelines"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Timelines are built from timestamps and metadata across logs/filesystems and other artifacts.",
+      "misconceptionTags": [
+        "forensics.process.timelines_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q004",
+      "type": "mcq",
+      "stem": "Why can interviews be valuable in digital forensics?",
+      "options": {
+        "A": "They can provide context and clues that are not obvious in artifacts",
+        "B": "They legally replace the need to collect evidence",
+        "C": "They guarantee the suspect tells the truth",
+        "D": "They eliminate the need for reporting"
+      },
+      "answer": "A",
+      "explanation": "Interviews can reveal context, intent, and leads that guide artifact review. The trap is B/D: interviews supplement evidence; they do not replace collection or reporting.",
+      "tags": [
+        "forensics.human_factor.interviews"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Interviews can reveal context, intent, and leads that guide artifact review.",
+      "misconceptionTags": [
+        "forensics.human_factor.interviews_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q005",
+      "type": "scenario_mcq",
+      "stem": "You are investigating suspicious activity. The system shows few obvious log entries, but you suspect a short-lived process ran. What forensic target is MOST likely to help?",
+      "options": {
+        "A": "Backups from last month",
+        "B": "System memory (RAM) acquisition",
+        "C": "Archived legal hold emails",
+        "D": "A printed network diagram"
+      },
+      "answer": "B",
+      "explanation": "RAM may contain evidence of running processes, ephemeral application data, and even encryption keys. The trap is A: backups are least volatile and may miss transient behavior.",
+      "tags": [
+        "forensics.acquisition.ram",
+        "forensics.acquisition.order_of_volatility"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 85,
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "RAM may contain evidence of running processes, ephemeral application data, and even encryption keys.",
+      "misconceptionTags": [
+        "forensics.acquisition.ram_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q006",
+      "type": "mcq",
+      "stem": "Which statement best reflects the forensic mindset?",
+      "options": {
+        "A": "Make fast changes to stabilize systems before collecting data",
+        "B": "Collect evidence first, then analyze; keep a provable trail of what you did",
+        "C": "Only copy the files you think matter",
+        "D": "Skip hashing if you trust your tools"
+      },
+      "answer": "B",
+      "explanation": "Forensics requires controlled collection and a provable trail (hashes, custody, notes). The trap is A: stabilizing may be needed, but you must consider volatility and avoid destroying evidence.",
+      "tags": [
+        "forensics.overview.definition",
+        "forensics.nonrepudiation.provenance"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "Forensics requires controlled collection and a provable trail (hashes, custody, notes).",
+      "misconceptionTags": [
+        "forensics.overview.definition_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q007",
+      "type": "mcq",
+      "stem": "What is a legal hold (litigation hold)?",
+      "options": {
+        "A": "A request to delete irrelevant files",
+        "B": "A notice requiring an organization to preserve potentially relevant data",
+        "C": "A subpoena to testify in court",
+        "D": "A chain-of-custody document"
+      },
+      "answer": "B",
+      "explanation": "A legal hold instructs preservation of data that might otherwise be altered/destroyed during normal operations. The trap is D—custody tracks evidence handling, not the trigger to preserve everything.",
+      "tags": [
+        "forensics.legal_hold"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "A legal hold instructs preservation of data that might otherwise be altered/destroyed during normal operations.",
+      "misconceptionTags": [
+        "forensics.legal_hold_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q008",
+      "type": "mcq",
+      "stem": "Spoliation of evidence refers to:",
+      "options": {
+        "A": "Encrypting evidence drives",
+        "B": "Altering, destroying, hiding, or withholding relevant evidence intentionally or negligently",
+        "C": "Creating a forensic image with dd",
+        "D": "Presenting evidence in court"
+      },
+      "answer": "B",
+      "explanation": "Spoliation is mishandling evidence so it is altered/destroyed/withheld. The trap is A—encryption may be appropriate; spoliation is about improper alteration/destruction/withholding.",
+      "tags": [
+        "forensics.spoliation"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Spoliation is mishandling evidence so it is altered/destroyed/withheld.",
+      "misconceptionTags": [
+        "forensics.spoliation_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q009",
+      "type": "mcq",
+      "stem": "E-discovery is BEST described as:",
+      "options": {
+        "A": "Physical search of offices for paper records only",
+        "B": "Electronic discovery processes used to identify, preserve, and produce electronically stored information",
+        "C": "A technique for recovering deleted files",
+        "D": "A method for cracking encryption keys"
+      },
+      "answer": "B",
+      "explanation": "E-discovery is discovery focused on electronically stored information (ESI). The trap is C: recovery can be part of forensics, but e-discovery is broader legal process work.",
+      "tags": [
+        "forensics.ediscovery.edrm"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "1.5"
+      ],
+      "rationaleCorrect": "E-discovery is discovery focused on electronically stored information (ESI).",
+      "misconceptionTags": [
+        "forensics.ediscovery.edrm_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q010",
+      "type": "ordering",
+      "stem": "Place these EDRM stages in a sensible high-level order (earliest → latest).",
+      "items": [
+        "Identification",
+        "Preservation",
+        "Collection",
+        "Review",
+        "Production",
+        "Presentation"
+      ],
+      "correct_order": [
+        "Identification",
+        "Preservation",
+        "Collection",
+        "Review",
+        "Production",
+        "Presentation"
+      ],
+      "explanation": "EDRM flows from knowing what exists (identify), protecting it (preserve), gathering it (collect), validating suitability (review), handing it over (produce), and using it (present). The trap is swapping preservation and collection—collecting without preservation risks alteration.",
+      "tags": [
+        "forensics.ediscovery.edrm",
+        "forensics.ediscovery.stages.identification",
+        "forensics.ediscovery.stages.preservation",
+        "forensics.ediscovery.stages.collection",
+        "forensics.ediscovery.stages.review",
+        "forensics.ediscovery.stages.production",
+        "forensics.ediscovery.stages.presentation"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 110,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "EDRM flows from knowing what exists (identify), protecting it (preserve), gathering it (collect), validating suitability (review), handing it over (produce), and using it (present).",
+      "misconceptionTags": [
+        "forensics.ediscovery.edrm_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch15.q011",
+      "type": "matching",
+      "stem": "Match each EDRM stage to what it focuses on.",
+      "left": [
+        "Processing",
+        "Analysis",
+        "Information governance"
+      ],
+      "right": [
+        "Prepare/cull/format data for review",
+        "Identify key topics/terms/people from the data",
+        "Assess/control what data exists before a case"
+      ],
+      "pairs": {
+        "Processing": "Prepare/cull/format data for review",
+        "Analysis": "Identify key topics/terms/people from the data",
+        "Information governance": "Assess/control what data exists before a case"
+      },
+      "explanation": "EDRM separates preparing data (processing) from meaning-making (analysis). Information governance happens ‘before the fact’ so you can scope what exists. The trap is confusing processing and analysis as the same step.",
+      "tags": [
+        "forensics.ediscovery.edrm",
+        "forensics.ediscovery.stages.processing",
+        "forensics.ediscovery.stages.analysis",
+        "forensics.ediscovery.stages.information_governance"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 95,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "EDRM separates preparing data (processing) from meaning-making (analysis).",
+      "misconceptionTags": [
+        "forensics.ediscovery.edrm_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch15.q012",
+      "type": "ordering",
+      "stem": "Order these forensic targets by volatility (most volatile → least volatile).",
+      "items": [
+        "System memory (RAM)",
+        "Temporary files / swap",
+        "Data on hard disk",
+        "Backups"
+      ],
+      "correct_order": [
+        "System memory (RAM)",
+        "Temporary files / swap",
+        "Data on hard disk",
+        "Backups"
+      ],
+      "explanation": "RAM is volatile and is lost on shutdown; swap/temp changes quickly; disk is more stable; backups are least volatile. The trap is imaging disk first and losing RAM-only evidence.",
+      "tags": [
+        "forensics.acquisition.order_of_volatility",
+        "forensics.acquisition.ram",
+        "forensics.acquisition.swap_pagefile",
+        "forensics.acquisition.disk_image.bit_by_bit"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 110,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "RAM is volatile and is lost on shutdown; swap/temp changes quickly; disk is more stable; backups are least volatile.",
+      "misconceptionTags": [
+        "forensics.acquisition.order_of_volatility_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch15.q013",
+      "type": "mcq",
+      "stem": "Which artifact is MOST likely to disappear immediately when a system is powered off?",
+      "options": {
+        "A": "Backups",
+        "B": "System memory (RAM) contents",
+        "C": "Archived email on a server",
+        "D": "A forensic image file stored on an external drive"
+      },
+      "answer": "B",
+      "explanation": "RAM contents vanish on power loss. The trap is confusing swap/pagefile (on disk) with RAM; swap survives power off (though it changes quickly while running).",
+      "tags": [
+        "forensics.acquisition.ram",
+        "forensics.acquisition.order_of_volatility"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "RAM contents vanish on power loss. It aligns with the intended control outcome and avoids the common trap choices in this question.",
+      "misconceptionTags": [
+        "forensics.acquisition.ram_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q014",
+      "type": "multi_select",
+      "stem": "Which items are typically considered highly volatile ephemeral system state? (Choose TWO.)",
+      "options": {
+        "A": "ARP cache / routing table",
+        "B": "Process table / kernel statistics",
+        "C": "Backups stored offsite",
+        "D": "A cold storage archive of images"
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "Ephemeral state includes ARP/routing caches, process tables, and kernel stats that change constantly. The trap is C/D—those are intentionally stable artifacts.",
+      "tags": [
+        "forensics.acquisition.ephemeral_state",
+        "forensics.acquisition.order_of_volatility"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "1.3"
+      ],
+      "rationaleCorrect": "Ephemeral state includes ARP/routing caches, process tables, and kernel stats that change constantly.",
+      "misconceptionTags": [
+        "forensics.acquisition.ephemeral_state_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q015",
+      "type": "mcq",
+      "stem": "Why do forensic practitioners often image an entire disk instead of copying only visible files?",
+      "options": {
+        "A": "It is always faster than copying files",
+        "B": "A full image preserves deleted remnants, metadata, and unallocated/slack space",
+        "C": "It automatically decrypts encrypted files",
+        "D": "It replaces the need for hashing"
+      },
+      "answer": "B",
+      "explanation": "A bit-by-bit image captures the full drive structure, including deleted remnants and metadata. The trap is C—imaging does not magically decrypt data.",
+      "tags": [
+        "forensics.acquisition.disk_image.bit_by_bit"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "A bit-by-bit image captures the full drive structure, including deleted remnants and metadata.",
+      "misconceptionTags": [
+        "forensics.acquisition.disk_image.bit_by_bit_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q016",
+      "type": "mcq",
+      "stem": "The Windows Registry is a common forensic target because:",
+      "options": {
+        "A": "It stores all packet captures",
+        "B": "Many Windows activities and configuration changes leave artifacts in it",
+        "C": "It cannot be modified by malware",
+        "D": "It exists only in RAM"
+      },
+      "answer": "B",
+      "explanation": "The Registry records configuration and many activity traces, making it useful in investigations. The trap is C—malware can modify the Registry; that’s partly why it’s valuable evidence.",
+      "tags": [
+        "forensics.acquisition.os.windows_registry"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "The Registry records configuration and many activity traces, making it useful in investigations.",
+      "misconceptionTags": [
+        "forensics.acquisition.os.windows_registry_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q017",
+      "type": "mcq",
+      "stem": "Firmware acquisition is MOST relevant when:",
+      "options": {
+        "A": "You need to prove the device’s firmware was modified or holds relevant data",
+        "B": "You want to accelerate an MD5 hash",
+        "C": "You are performing an e-discovery review",
+        "D": "You only need a user interview"
+      },
+      "answer": "A",
+      "explanation": "Firmware can be relevant if it was modified (persistence/implant) or contains forensic artifacts. The trap is thinking firmware is always irrelevant; it’s less common but sometimes crucial.",
+      "tags": [
+        "forensics.acquisition.firmware"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Firmware can be relevant if it was modified (persistence/implant) or contains forensic artifacts.",
+      "misconceptionTags": [
+        "forensics.acquisition.firmware_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q018",
+      "type": "mcq",
+      "stem": "Which Linux command-line tool is commonly used to create a bit-for-bit forensic image of a drive?",
+      "options": {
+        "A": "cp",
+        "B": "dd",
+        "C": "ls",
+        "D": "grep"
+      },
+      "answer": "B",
+      "explanation": "dd can copy a block device bit-for-bit into an image file. The trap is A: cp creates logical copies and won’t capture slack/unallocated space reliably.",
+      "tags": [
+        "forensics.tools.dd",
+        "forensics.acquisition.disk_image.bit_by_bit"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "dd can copy a block device bit-for-bit into an image file.",
+      "misconceptionTags": [
+        "forensics.tools.dd_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q019",
+      "type": "scenario_mcq",
+      "stem": "You are imaging /dev/sda and want dd to continue even if it encounters read errors. Which option set best fits?",
+      "options": {
+        "A": "conv=noerror,sync",
+        "B": "-z -9",
+        "C": "--decrypt",
+        "D": "--fast"
+      },
+      "answer": "A",
+      "explanation": "conv=noerror,sync tells dd to continue on read errors and pad with zeros to maintain alignment. The trap is assuming there is a generic '--fast' switch.",
+      "tags": [
+        "forensics.tools.dd"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "conv=noerror,sync tells dd to continue on read errors and pad with zeros to maintain alignment.",
+      "misconceptionTags": [
+        "forensics.tools.dd_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q020",
+      "type": "mcq",
+      "stem": "What is the key difference between a forensic image and a logical copy?",
+      "options": {
+        "A": "A forensic image is encrypted, a logical copy is not",
+        "B": "A forensic image is bit-by-bit and preserves deleted remnants/metadata; a logical copy typically copies allocated files only",
+        "C": "A logical copy includes slack space; a forensic image does not",
+        "D": "They are identical if you hash them"
+      },
+      "answer": "B",
+      "explanation": "Forensic images preserve disk structure, metadata, and unallocated areas; logical copies do not. The trap is D: hashes differ because the content/structure differs.",
+      "tags": [
+        "forensics.acquisition.disk_image.bit_by_bit",
+        "forensics.data_recovery.slack_space"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "1.6"
+      ],
+      "rationaleCorrect": "Forensic images preserve disk structure, metadata, and unallocated areas; logical copies do not.",
+      "misconceptionTags": [
+        "forensics.acquisition.disk_image.bit_by_bit_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q021",
+      "type": "mcq",
+      "stem": "Why can a logical copy be inadmissible or less useful in a forensic case?",
+      "options": {
+        "A": "It is too large to store",
+        "B": "It may omit deleted remnants, metadata, and exact drive structure needed for analysis",
+        "C": "It always modifies the original drive",
+        "D": "It cannot be hashed"
+      },
+      "answer": "B",
+      "explanation": "Logical copies can miss critical evidence like deleted file fragments, timestamps, and structure. The trap is D: you can hash a logical copy, but it’s not the same as the source drive’s full content.",
+      "tags": [
+        "forensics.acquisition.disk_image.bit_by_bit",
+        "forensics.admissibility.criteria"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Logical copies can miss critical evidence like deleted file fragments, timestamps, and structure.",
+      "misconceptionTags": [
+        "forensics.acquisition.disk_image.bit_by_bit_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q022",
+      "type": "scenario_mcq",
+      "stem": "An investigator copied only a suspect’s 'Documents' folder to a USB drive and called it a forensic acquisition. What is the BEST critique?",
+      "options": {
+        "A": "That’s fine; user folders are all that matters",
+        "B": "It’s a logical copy; it likely misses deleted remnants, metadata, and unallocated/slack space needed for full forensics",
+        "C": "It violates right-to-audit clauses",
+        "D": "It ensures nonrepudiation automatically"
+      },
+      "answer": "B",
+      "explanation": "Copying a folder is logical acquisition and often misses key forensic artifacts. The trap is thinking visible files are the whole story.",
+      "tags": [
+        "forensics.acquisition.disk_image.bit_by_bit",
+        "forensics.data_recovery.slack_space",
+        "forensics.nonrepudiation.provenance"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 95,
+      "objectiveIds": [
+        "1.6"
+      ],
+      "rationaleCorrect": "Copying a folder is logical acquisition and often misses key forensic artifacts.",
+      "misconceptionTags": [
+        "forensics.acquisition.disk_image.bit_by_bit_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q023",
+      "type": "mcq",
+      "stem": "FTK Imager can create forensic images in which common formats?",
+      "options": {
+        "A": "Only proprietary FTK format",
+        "B": "Raw (dd-style), E01 (EnCase), and AFF among others",
+        "C": "Only MP4 and PNG",
+        "D": "Only compressed ZIP archives"
+      },
+      "answer": "B",
+      "explanation": "FTK Imager supports raw as well as common forensic formats like E01 and AFF. The trap is assuming it’s locked to one format.",
+      "tags": [
+        "forensics.tools.ftk_imager"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "FTK Imager supports raw as well as common forensic formats like E01 and AFF.",
+      "misconceptionTags": [
+        "forensics.tools.ftk_imager_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q024",
+      "type": "mcq",
+      "stem": "WinHex is BEST described as:",
+      "options": {
+        "A": "A packet capture tool",
+        "B": "A disk editor that can also acquire disk images and view low-level structures",
+        "C": "A legal hold notification system",
+        "D": "A cloud audit portal"
+      },
+      "answer": "B",
+      "explanation": "WinHex is a disk editing tool useful for low-level examination and imaging. The trap is A—Wireshark is the packet analyzer.",
+      "tags": [
+        "forensics.tools.winhex"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "WinHex is a disk editing tool useful for low-level examination and imaging.",
+      "misconceptionTags": [
+        "forensics.tools.winhex_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q025",
+      "type": "scenario_mcq",
+      "stem": "You need to capture live memory from a Windows workstation using an easy GUI tool. Which tool in this chapter supports memory capture?",
+      "options": {
+        "A": "FTK Imager",
+        "B": "dd",
+        "C": "WinHex only",
+        "D": "EDRM"
+      },
+      "answer": "A",
+      "explanation": "FTK Imager can capture live memory (and optionally pagefile). The trap is dd: it's great for disk imaging but not a typical Windows memory capture tool in this context.",
+      "tags": [
+        "forensics.tools.ftk_imager",
+        "forensics.acquisition.ram",
+        "forensics.acquisition.swap_pagefile"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 85,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "FTK Imager can capture live memory (and optionally pagefile).",
+      "misconceptionTags": [
+        "forensics.tools.ftk_imager_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q026",
+      "type": "mcq",
+      "stem": "What is the most common method to validate that a forensic image matches the original drive?",
+      "options": {
+        "A": "Compare file names",
+        "B": "Compare hashes of the original and the image",
+        "C": "Open a few files and spot-check content",
+        "D": "Ask the user if anything changed"
+      },
+      "answer": "B",
+      "explanation": "Hashing the source and the image and comparing values proves bit-level equivalence. The trap is C: spot checks are not sufficient in court.",
+      "tags": [
+        "forensics.integrity.validation.hash_compare"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Hashing the source and the image and comparing values proves bit-level equivalence.",
+      "misconceptionTags": [
+        "forensics.integrity.validation.hash_compare_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q027",
+      "type": "mcq",
+      "stem": "Which statement about hashes vs checksums is MOST accurate?",
+      "options": {
+        "A": "Checksums are unique fingerprints; hashes are not",
+        "B": "Both validate integrity, but a hash is also used as a unique fingerprint for evidence identity",
+        "C": "Checksums are always cryptographically secure",
+        "D": "Hashes cannot detect accidental corruption"
+      },
+      "answer": "B",
+      "explanation": "Hashes can validate integrity and provide an identifying fingerprint for artifacts in forensic workflows. The trap is C: checksums are not inherently crypto-secure.",
+      "tags": [
+        "forensics.integrity.checksum_vs_hash"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "3.1"
+      ],
+      "rationaleCorrect": "Hashes can validate integrity and provide an identifying fingerprint for artifacts in forensic workflows.",
+      "misconceptionTags": [
+        "forensics.integrity.checksum_vs_hash_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q028",
+      "type": "mcq",
+      "stem": "Why are MD5 and SHA1 still commonly seen in forensic hashing workflows?",
+      "options": {
+        "A": "They are required by law for all forensic cases",
+        "B": "They are fast and still useful for verifying identical copies when adversarial collision attacks aren’t the main concern",
+        "C": "They are impossible to collide",
+        "D": "They automatically encrypt the evidence"
+      },
+      "answer": "B",
+      "explanation": "MD5/SHA1 are fast and often used to verify that an image equals the source. The trap is C: they are not collision-resistant against deliberate attacks.",
+      "tags": [
+        "forensics.integrity.hashing.md5",
+        "forensics.integrity.hashing.sha1"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "MD5/SHA1 are fast and often used to verify that an image equals the source.",
+      "misconceptionTags": [
+        "forensics.integrity.hashing.md5_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q029",
+      "type": "scenario_mcq",
+      "stem": "An examiner claims 'MD5 is broken, so hashing is pointless.' What is the BEST response in a typical non-adversarial forensic integrity check?",
+      "options": {
+        "A": "Correct—never hash forensic images",
+        "B": "Hashing is still useful to verify image integrity; use stronger hashes if adversarial manipulation is a concern",
+        "C": "MD5 always decrypts data, so it’s unsafe",
+        "D": "Hashing replaces chain-of-custody needs"
+      },
+      "answer": "B",
+      "explanation": "Even a weak hash can detect changes and verify identical copies; choose stronger hashes when adversaries may manipulate evidence. The trap is D—hashing complements, not replaces, custody.",
+      "tags": [
+        "forensics.integrity.hashing.md5",
+        "forensics.integrity.validation.hash_compare",
+        "forensics.chain_of_custody"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 90,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Even a weak hash can detect changes and verify identical copies; choose stronger hashes when adversaries may manipulate evidence.",
+      "misconceptionTags": [
+        "forensics.integrity.hashing.md5_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q030",
+      "type": "mcq",
+      "stem": "What is a write blocker used for in forensic work?",
+      "options": {
+        "A": "To speed up disk imaging",
+        "B": "To prevent any writes to evidence media during examination",
+        "C": "To block Wi‑Fi traffic from suspects",
+        "D": "To hide the investigator’s IP"
+      },
+      "answer": "B",
+      "explanation": "Write blockers ensure the evidence drive cannot be modified during access/analysis. The trap is A: it’s about integrity, not performance.",
+      "tags": [
+        "forensics.preservation.write_blocker"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "Write blockers ensure the evidence drive cannot be modified during access/analysis.",
+      "misconceptionTags": [
+        "forensics.preservation.write_blocker_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q031",
+      "type": "scenario_mcq",
+      "stem": "In court, opposing counsel asks how you ensured you didn’t alter the evidence drive during analysis. Which answer is strongest?",
+      "options": {
+        "A": "I was careful",
+        "B": "I used a hardware or software write blocker and documented custody and hashes",
+        "C": "I only opened a few files",
+        "D": "I copied the folder I needed and deleted the rest"
+      },
+      "answer": "B",
+      "explanation": "Write blocking plus documentation and hashes is the defensible standard. The trap is A: ‘trust me’ is not a forensic control.",
+      "tags": [
+        "forensics.preservation.write_blocker",
+        "forensics.chain_of_custody",
+        "forensics.integrity.validation.hash_compare"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 95,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Write blocking plus documentation and hashes is the defensible standard.",
+      "misconceptionTags": [
+        "forensics.preservation.write_blocker_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q032",
+      "type": "mcq",
+      "stem": "Nonrepudiation/provenance in forensics MOST depends on:",
+      "options": {
+        "A": "A single screenshot of the system",
+        "B": "An auditable trail: hashes, custody records, documented steps and tooling",
+        "C": "Using only open source tools",
+        "D": "Keeping evidence unencrypted"
+      },
+      "answer": "B",
+      "explanation": "Provenance is built from documentation, chain-of-custody, and integrity checks. The trap is thinking tool licensing determines validity; process and documentation do.",
+      "tags": [
+        "forensics.nonrepudiation.provenance",
+        "forensics.chain_of_custody"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Provenance is built from documentation, chain-of-custody, and integrity checks.",
+      "misconceptionTags": [
+        "forensics.nonrepudiation.provenance_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q033",
+      "type": "mcq",
+      "stem": "Why is direct forensic acquisition from a SaaS provider’s underlying servers often unlikely?",
+      "options": {
+        "A": "Because SaaS uses only IPv6",
+        "B": "Because providers typically won’t allow customers to image shared multi-tenant service infrastructure",
+        "C": "Because hashing cannot be used in the cloud",
+        "D": "Because e-discovery is illegal in cloud environments"
+      },
+      "answer": "B",
+      "explanation": "SaaS is shared and provider-controlled; customers usually can’t install imaging agents or seize disks. The trap is C—hashing still applies to artifacts you can obtain.",
+      "tags": [
+        "forensics.preservation.cloud_limitations"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "3.2"
+      ],
+      "rationaleCorrect": "SaaS is shared and provider-controlled; customers usually can’t install imaging agents or seize disks.",
+      "misconceptionTags": [
+        "forensics.preservation.cloud_limitations_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q034",
+      "type": "scenario_mcq",
+      "stem": "Your company uses a cloud provider and wants to ensure it can perform audits or obtain third-party audit evidence. Which contract item is MOST relevant?",
+      "options": {
+        "A": "Right-to-audit clause",
+        "B": "WPA3 requirement",
+        "C": "Certificate pinning clause",
+        "D": "Password rotation schedule"
+      },
+      "answer": "A",
+      "explanation": "Right-to-audit clauses (or third-party audit access) define audit capabilities. The trap is focusing on technical controls without ensuring contractual rights.",
+      "tags": [
+        "cloud.contracts.right_to_audit",
+        "forensics.preservation.cloud_limitations"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "Right-to-audit clauses (or third-party audit access) define audit capabilities.",
+      "misconceptionTags": [
+        "cloud.contracts.right_to_audit_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q035",
+      "type": "mcq",
+      "stem": "Why do breach notification timeframes belong in cloud/third-party contracts?",
+      "options": {
+        "A": "To ensure customers are informed within a defined maximum time after a breach",
+        "B": "To make hashing faster",
+        "C": "To remove the need for incident response",
+        "D": "To prevent SSD wear leveling"
+      },
+      "answer": "A",
+      "explanation": "Notification clauses define how quickly the provider must notify you of breaches. The trap is C: notification is not response; you still need IR.",
+      "tags": [
+        "cloud.contracts.breach_notification"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "Notification clauses define how quickly the provider must notify you of breaches.",
+      "misconceptionTags": [
+        "cloud.contracts.breach_notification_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q036",
+      "type": "mcq",
+      "stem": "Which is a realistic approach when you need forensic evidence about network activity but you did not capture full packet data?",
+      "options": {
+        "A": "Assume traffic never happened",
+        "B": "Use secondary sources like firewall, IDS/IPS, email, and authentication logs",
+        "C": "Use dd to image the router’s RAM only",
+        "D": "Create an evil twin to reproduce the incident"
+      },
+      "answer": "B",
+      "explanation": "Logs and metadata become critical when packets weren’t captured. The trap is A: absence of PCAP doesn’t mean absence of activity.",
+      "tags": [
+        "forensics.acquisition.logs.secondary_sources",
+        "forensics.acquisition.network.pcap"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "Logs and metadata become critical when packets weren’t captured.",
+      "misconceptionTags": [
+        "forensics.acquisition.logs.secondary_sources_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q037",
+      "type": "mcq",
+      "stem": "To capture a forensic copy of a running virtual machine with minimal disruption, you should typically:",
+      "options": {
+        "A": "Image the entire virtualization host disk",
+        "B": "Create a VM snapshot via the hypervisor/host tools",
+        "C": "Unplug the host power cable",
+        "D": "Run Wireshark on the VM"
+      },
+      "answer": "B",
+      "explanation": "VM snapshots capture the VM’s state without imaging unrelated host data. The trap is A: imaging the host is overbroad and disruptive.",
+      "tags": [
+        "forensics.acquisition.vm_snapshot"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "VM snapshots capture the VM’s state without imaging unrelated host data.",
+      "misconceptionTags": [
+        "forensics.acquisition.vm_snapshot_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q038",
+      "type": "mcq",
+      "stem": "Why are containers challenging for traditional forensics?",
+      "options": {
+        "A": "They are always stored on tape backups",
+        "B": "They are designed to be ephemeral and share resources, leaving fewer persistent artifacts",
+        "C": "They cannot generate logs",
+        "D": "They are immune to compromise"
+      },
+      "answer": "B",
+      "explanation": "Containers are ephemeral and resource-shared, which reduces classic disk-based artifacts and complicates capture. The trap is C: containers can log, but logs might live outside the container.",
+      "tags": [
+        "forensics.acquisition.containers"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "Containers are ephemeral and resource-shared, which reduces classic disk-based artifacts and complicates capture.",
+      "misconceptionTags": [
+        "forensics.acquisition.containers_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q039",
+      "type": "mcq",
+      "stem": "Which tool is commonly used to analyze captured network traffic (pcap) at the packet level?",
+      "options": {
+        "A": "FTK Imager",
+        "B": "Wireshark",
+        "C": "EDRM",
+        "D": "WinHex"
+      },
+      "answer": "B",
+      "explanation": "Wireshark is the classic packet analyzer. The trap is FTK Imager/WinHex—those are disk/memory and low-level tools, not packet analyzers.",
+      "tags": [
+        "forensics.tools.wireshark",
+        "forensics.acquisition.network.pcap"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "Wireshark is the classic packet analyzer.",
+      "misconceptionTags": [
+        "forensics.tools.wireshark_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q040",
+      "type": "scenario_mcq",
+      "stem": "You need to collect a copy of network traffic to a forensic collection server in real time. Which technique is MOST aligned with this goal?",
+      "options": {
+        "A": "Use a network tap or switch SPAN/port mirror to send a copy of traffic to the collector",
+        "B": "Use md5sum on the firewall configuration",
+        "C": "Use a legal hold notice",
+        "D": "Use slack space analysis"
+      },
+      "answer": "A",
+      "explanation": "Taps and SPAN/port mirrors duplicate traffic for capture. The trap is B—hashing configs can be useful, but it doesn’t capture traffic.",
+      "tags": [
+        "forensics.acquisition.network.taps_span",
+        "forensics.acquisition.network.pcap"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Taps and SPAN/port mirrors duplicate traffic for capture.",
+      "misconceptionTags": [
+        "forensics.acquisition.network.taps_span_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q041",
+      "type": "mcq",
+      "stem": "Why can deleted files often be recovered from a drive?",
+      "options": {
+        "A": "Deletion typically removes the file content immediately",
+        "B": "Deletion often removes only the file index/metadata, leaving content until overwritten",
+        "C": "All deleted files are copied to backups automatically",
+        "D": "Deleted data is always encrypted"
+      },
+      "answer": "B",
+      "explanation": "Many systems delete pointers/index entries, leaving data blocks until overwritten. The trap is A: immediate overwriting is not typical for performance reasons.",
+      "tags": [
+        "forensics.data_recovery.deleted_files"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Many systems delete pointers/index entries, leaving data blocks until overwritten.",
+      "misconceptionTags": [
+        "forensics.data_recovery.deleted_files_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q042",
+      "type": "scenario_mcq",
+      "stem": "A USB drive was 'quick formatted.' What usually remains that enables data recovery?",
+      "options": {
+        "A": "Nothing remains",
+        "B": "File contents may remain, but file indexes are cleared/removed",
+        "C": "File indexes remain, but file contents are wiped",
+        "D": "Only encrypted containers remain"
+      },
+      "answer": "B",
+      "explanation": "Quick format often wipes the file index but not the underlying data blocks, enabling recovery. The trap is A: quick format is not a secure wipe.",
+      "tags": [
+        "forensics.data_recovery.quick_format",
+        "forensics.data_recovery.deleted_files"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "1.6"
+      ],
+      "rationaleCorrect": "Quick format often wipes the file index but not the underlying data blocks, enabling recovery.",
+      "misconceptionTags": [
+        "forensics.data_recovery.quick_format_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q043",
+      "type": "mcq",
+      "stem": "Slack space analysis is useful because slack/unallocated areas may contain:",
+      "options": {
+        "A": "Only random zeros",
+        "B": "Fragments of previously deleted files and artifacts",
+        "C": "Only Wi‑Fi passwords",
+        "D": "Only encrypted backups"
+      },
+      "answer": "B",
+      "explanation": "Slack/unallocated space can contain remnants of deleted or partially overwritten data. The trap is assuming unallocated equals empty.",
+      "tags": [
+        "forensics.data_recovery.slack_space"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Slack/unallocated space can contain remnants of deleted or partially overwritten data.",
+      "misconceptionTags": [
+        "forensics.data_recovery.slack_space_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q044",
+      "type": "mcq",
+      "stem": "Why can secure deletion on SSDs be less reliable than on magnetic drives?",
+      "options": {
+        "A": "SSDs do not store data in blocks",
+        "B": "Wear leveling can move data into reserved/spare blocks that aren’t overwritten by a simple delete",
+        "C": "SSDs cannot be encrypted",
+        "D": "SSDs always overwrite data three times"
+      },
+      "answer": "B",
+      "explanation": "Wear leveling and spare blocks can leave residual data even after deletion attempts. The trap is thinking SSDs behave like HDDs.",
+      "tags": [
+        "forensics.storage.ssd_wear_leveling",
+        "forensics.data_recovery.secure_delete"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "3.1"
+      ],
+      "rationaleCorrect": "Wear leveling and spare blocks can leave residual data even after deletion attempts.",
+      "misconceptionTags": [
+        "forensics.storage.ssd_wear_leveling_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q045",
+      "type": "mcq",
+      "stem": "Chain of custody is BEST defined as:",
+      "options": {
+        "A": "A list of all network ports used in an incident",
+        "B": "Documentation tracking control/handling of evidence over time",
+        "C": "A checklist of EDRM stages",
+        "D": "A method for compressing forensic images"
+      },
+      "answer": "B",
+      "explanation": "Chain of custody records who handled evidence, when, and what happened—supporting admissibility. The trap is confusing it with general logging.",
+      "tags": [
+        "forensics.chain_of_custody"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "Chain of custody records who handled evidence, when, and what happened—supporting admissibility.",
+      "misconceptionTags": [
+        "forensics.chain_of_custody_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q046",
+      "type": "scenario_mcq",
+      "stem": "A forensic drive’s custody log has an unexplained gap where no handler is documented for 6 hours. What is the most likely consequence?",
+      "options": {
+        "A": "Evidence may be challenged as inadmissible or unreliable",
+        "B": "Hashing becomes faster",
+        "C": "The case is automatically dismissed",
+        "D": "The drive content is encrypted automatically"
+      },
+      "answer": "A",
+      "explanation": "Gaps undermine confidence that evidence wasn’t altered, risking admissibility. The trap is C: not automatic, but it becomes a legal vulnerability.",
+      "tags": [
+        "forensics.chain_of_custody",
+        "forensics.admissibility.criteria"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Gaps undermine confidence that evidence wasn’t altered, risking admissibility.",
+      "misconceptionTags": [
+        "forensics.chain_of_custody_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q047",
+      "type": "mcq",
+      "stem": "Two compromised systems in the same facility show incident events exactly one hour apart. What is a likely explanation?",
+      "options": {
+        "A": "The attacker waited exactly one hour between attacks",
+        "B": "One system has an incorrect time zone or clock setting",
+        "C": "MD5 collisions caused timestamp drift",
+        "D": "The CPU cache was not captured"
+      },
+      "answer": "B",
+      "explanation": "Clock/time zone differences can shift event times and break correlation. The trap is assuming attacker behavior based only on timestamps.",
+      "tags": [
+        "forensics.process.timelines"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "Clock/time zone differences can shift event times and break correlation.",
+      "misconceptionTags": [
+        "forensics.process.timelines_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q048",
+      "type": "scenario_mcq",
+      "stem": "Before you trust a forensic timeline, what check is MOST important to avoid being misled?",
+      "options": {
+        "A": "Verify time settings/time zones and look for clock drift between systems",
+        "B": "Rename all evidence files",
+        "C": "Disable hashing to speed analysis",
+        "D": "Delete temporary files to reduce noise"
+      },
+      "answer": "A",
+      "explanation": "Timeline reliability depends on accurate time settings. The trap is D: deleting temp files can destroy evidence and is anti-forensic in this context.",
+      "tags": [
+        "forensics.process.timelines",
+        "forensics.acquisition.order_of_volatility"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 85,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Timeline reliability depends on accurate time settings.",
+      "misconceptionTags": [
+        "forensics.process.timelines_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q049",
+      "type": "multi_select",
+      "stem": "Which criteria often matter when determining if evidence is admissible? (Choose THREE.)",
+      "options": {
+        "A": "Relevance and reliability of evidence",
+        "B": "Whether evidence was obtained legally",
+        "C": "Authenticity of the evidence",
+        "D": "Whether the analyst prefers Windows"
+      },
+      "answers": [
+        "A",
+        "B",
+        "C"
+      ],
+      "explanation": "Admissibility generally considers relevance, reliability, legality, and authenticity. The trap is D—platform preference has nothing to do with admissibility.",
+      "tags": [
+        "forensics.admissibility.criteria"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Admissibility generally considers relevance, reliability, legality, and authenticity.",
+      "misconceptionTags": [
+        "forensics.admissibility.criteria_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q050",
+      "type": "multi_select",
+      "stem": "A typical forensic report should include which elements? (Choose THREE.)",
+      "options": {
+        "A": "Summary of findings",
+        "B": "Outline of process/tools/assumptions",
+        "C": "Detailed findings per device/drive with evidence-backed conclusions",
+        "D": "Full source code of every tool used"
+      },
+      "answers": [
+        "A",
+        "B",
+        "C"
+      ],
+      "explanation": "Reports summarize, describe methods/tools/assumptions, and document device-specific findings with evidence. The trap is D—tool code is not a standard requirement for a report.",
+      "tags": [
+        "forensics.reporting.components"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 85,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Reports summarize, describe methods/tools/assumptions, and document device-specific findings with evidence.",
+      "misconceptionTags": [
+        "forensics.reporting.components_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q051",
+      "type": "mcq",
+      "stem": "Why must forensic findings be repeatable by a third party?",
+      "options": {
+        "A": "So the investigator can skip documentation",
+        "B": "To allow independent verification and withstand challenges",
+        "C": "Because it speeds up hashing",
+        "D": "Because it eliminates jurisdiction issues"
+      },
+      "answer": "B",
+      "explanation": "Repeatability supports credibility and legal defensibility. The trap is A—repeatability requires documentation, it doesn’t replace it.",
+      "tags": [
+        "forensics.reporting.repeatability",
+        "forensics.process.documentation"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "Repeatability supports credibility and legal defensibility.",
+      "misconceptionTags": [
+        "forensics.reporting.repeatability_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q052",
+      "type": "mcq",
+      "stem": "In cloud forensics planning, why do regulatory and jurisdiction concerns matter?",
+      "options": {
+        "A": "They determine whether WPA3 is supported",
+        "B": "Data may be stored/processed in multiple locations under different laws, affecting access and obligations",
+        "C": "They ensure containers leave more artifacts",
+        "D": "They eliminate the need for breach notification clauses"
+      },
+      "answer": "B",
+      "explanation": "Cloud data locality and multi-jurisdiction operations affect what laws apply and who can compel access. The trap is D: jurisdiction makes notification clauses more important, not less.",
+      "tags": [
+        "cloud.regulatory.jurisdiction",
+        "forensics.preservation.cloud_limitations"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "Cloud data locality and multi-jurisdiction operations affect what laws apply and who can compel access.",
+      "misconceptionTags": [
+        "cloud.regulatory.jurisdiction_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q053",
+      "type": "matching",
+      "stem": "Match the legal concept to its meaning.",
+      "left": [
+        "Venue",
+        "Nexus"
+      ],
+      "right": [
+        "Where a case is heard",
+        "A connection that can trigger obligations (e.g., tax/regulatory)"
+      ],
+      "pairs": {
+        "Venue": "Where a case is heard",
+        "Nexus": "A connection that can trigger obligations (e.g., tax/regulatory)"
+      },
+      "explanation": "Venue is the location/jurisdiction for hearings; nexus is the connection that creates legal obligations. The trap is flipping them because both are legal geography concepts.",
+      "tags": [
+        "cloud.regulatory.venue",
+        "cloud.regulatory.nexus"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Venue is the location/jurisdiction for hearings; nexus is the connection that creates legal obligations.",
+      "misconceptionTags": [
+        "cloud.regulatory.venue_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch15.q054",
+      "type": "mcq",
+      "stem": "Digital forensics also supports intelligence and counterintelligence by:",
+      "options": {
+        "A": "Only performing legal holds",
+        "B": "Analyzing adversary tools/artifacts and extracting information from recovered systems/devices",
+        "C": "Replacing encryption with plaintext storage",
+        "D": "Eliminating the need for incident response"
+      },
+      "answer": "B",
+      "explanation": "Forensics helps analyze adversary tools/behavior and recover data for intel/counterintel efforts. The trap is D—IR and forensics often complement each other.",
+      "tags": [
+        "forensics.intel.forensics_role",
+        "forensics.counterintel"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "Forensics helps analyze adversary tools/behavior and recover data for intel/counterintel efforts.",
+      "misconceptionTags": [
+        "forensics.intel.forensics_role_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q055",
+      "type": "scenario_mcq",
+      "stem": "You suspect a targeted actor used a malicious USB charging station to clone data from devices. What defensive hardware accessory best mitigates this specific risk?",
+      "options": {
+        "A": "A Wi‑Fi jammer",
+        "B": "A USB data blocker that allows charging but blocks data pins",
+        "C": "A RAID controller",
+        "D": "A packet analyzer"
+      },
+      "answer": "B",
+      "explanation": "USB data blockers prevent data transfer while still allowing charging, mitigating 'juice jacking'/data cloning risks. The trap is D—packet analysis doesn’t stop data pin access.",
+      "tags": [
+        "usb.data_blocker"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "USB data blockers prevent data transfer while still allowing charging, mitigating 'juice jacking'/data cloning risks.",
+      "misconceptionTags": [
+        "usb.data_blocker_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q056",
+      "type": "scenario_mcq",
+      "stem": "An incident responder arrives at a compromised workstation that is still powered on. What is the BEST first action if you need volatile evidence and you can do so safely?",
+      "options": {
+        "A": "Pull the power cable immediately",
+        "B": "Capture volatile data like RAM and ephemeral state before shutdown, then image disk",
+        "C": "Delete temp files to reduce noise",
+        "D": "Run a full OS upgrade and reboot"
+      },
+      "answer": "B",
+      "explanation": "Following the order of volatility preserves RAM and ephemeral state before shutdown destroys it. The trap is A: pulling power preserves disk state but sacrifices RAM evidence.",
+      "tags": [
+        "forensics.acquisition.order_of_volatility",
+        "forensics.acquisition.ram",
+        "forensics.acquisition.ephemeral_state"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 95,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Following the order of volatility preserves RAM and ephemeral state before shutdown destroys it.",
+      "misconceptionTags": [
+        "forensics.acquisition.order_of_volatility_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q057",
+      "type": "scenario_mcq",
+      "stem": "You have a disk image and hashes match the original. A week later, you re-hash the image and it no longer matches the stored hash. What does this most likely indicate?",
+      "options": {
+        "A": "The hash algorithm got slower",
+        "B": "The image changed (corruption or modification) and integrity is no longer provable",
+        "C": "The original drive changed",
+        "D": "Chain of custody is irrelevant"
+      },
+      "answer": "B",
+      "explanation": "A changed hash indicates the image is not identical to what it was—integrity is compromised. The trap is C: you’re hashing the image, not the original drive.",
+      "tags": [
+        "forensics.integrity.validation.hash_compare",
+        "forensics.integrity.checksum_vs_hash"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "A changed hash indicates the image is not identical to what it was—integrity is compromised.",
+      "misconceptionTags": [
+        "forensics.integrity.validation.hash_compare_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch15.q058",
+      "type": "scenario_mcq",
+      "stem": "A cloud provider refuses direct access to underlying service disks after an incident. What is the most practical path to support an investigation?",
+      "options": {
+        "A": "Demand the provider hand over all customers’ disks",
+        "B": "Use available provider logs/exports, your own logs, and contractual mechanisms (audit reports/requests) to reconstruct events",
+        "C": "Ignore the incident because you can’t image the service",
+        "D": "Format your own systems to ‘start clean’"
+      },
+      "answer": "B",
+      "explanation": "Cloud investigations typically rely on logs, exports, and contractual avenues rather than direct disk imaging of provider infrastructure. The trap is D: wiping destroys your own evidence and hinders investigation.",
+      "tags": [
+        "forensics.preservation.cloud_limitations",
+        "cloud.contracts.right_to_audit",
+        "forensics.acquisition.logs.secondary_sources"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 110,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "Cloud investigations typically rely on logs, exports, and contractual avenues rather than direct disk imaging of provider infrastructure.",
+      "misconceptionTags": [
+        "forensics.preservation.cloud_limitations_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    }
+  ]
+}

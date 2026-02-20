@@ -1,0 +1,675 @@
+{
+  "pack_id": "sec701_ch6_pack_v1",
+  "version": "1.0.0",
+  "confusion_pairs": [
+    {
+      "id": "cp_authn_vs_authz",
+      "title": "Authentication vs Authorization",
+      "a": {
+        "term": "Authentication",
+        "definition": "Focus on authentication when this distinction appears."
+      },
+      "b": {
+        "term": "Authorization",
+        "definition": "Focus on authorization when this distinction appears."
+      },
+      "bullets": [
+        "Authentication proves who you are; authorization decides what you can do.",
+        "If it's about identity (login, MFA, SSO) → authentication. If it's about permissions (roles, ACLs) → authorization.",
+        "You sign in with MFA (authn). The app blocks admin pages for normal users (authz)."
+      ]
+    },
+    {
+      "id": "cp_xss_vs_csrf",
+      "title": "XSS vs CSRF",
+      "a": {
+        "term": "XSS",
+        "definition": "Focus on xss when this distinction appears."
+      },
+      "b": {
+        "term": "CSRF",
+        "definition": "Focus on csrf when this distinction appears."
+      },
+      "bullets": [
+        "XSS runs attacker script in a victim’s browser; CSRF tricks a logged-in browser into sending a request.",
+        "If the victim receives/executes script → XSS. If the victim’s browser sends an unwanted state-changing request → CSRF.",
+        "XSS steals a session cookie. CSRF silently changes the victim’s email/password while they’re logged in."
+      ]
+    },
+    {
+      "id": "cp_ssrf_vs_csrf",
+      "title": "SSRF vs CSRF",
+      "a": {
+        "term": "SSRF",
+        "definition": "Focus on ssrf when this distinction appears."
+      },
+      "b": {
+        "term": "CSRF",
+        "definition": "Focus on csrf when this distinction appears."
+      },
+      "bullets": [
+        "SSRF makes the server send requests to internal/remote targets; CSRF makes the victim’s browser send requests.",
+        "If the server is the one fetching a URL → SSRF. If the browser is the one submitting a forged request → CSRF.",
+        "SSRF hits 169.254.169.254 cloud metadata. CSRF submits a bank transfer from the victim’s session."
+      ]
+    },
+    {
+      "id": "cp_sast_vs_dast",
+      "title": "SAST vs DAST",
+      "a": {
+        "term": "SAST",
+        "definition": "Focus on sast when this distinction appears."
+      },
+      "b": {
+        "term": "DAST",
+        "definition": "Focus on dast when this distinction appears."
+      },
+      "bullets": [
+        "SAST analyzes source/bytecode without running the app; DAST tests the running app from the outside.",
+        "‘Code / build / CI pipeline’ → SAST. ‘Live app / proxy / HTTP requests’ → DAST.",
+        "SAST finds hardcoded secrets; DAST discovers SQLi by sending payloads to a live endpoint."
+      ]
+    },
+    {
+      "id": "cp_fuzzing_vs_dast",
+      "title": "Fuzzing vs DAST",
+      "a": {
+        "term": "Fuzzing",
+        "definition": "Focus on fuzzing when this distinction appears."
+      },
+      "b": {
+        "term": "DAST",
+        "definition": "Focus on dast when this distinction appears."
+      },
+      "bullets": [
+        "Fuzzing bombards inputs with malformed/unexpected data to crash or misbehave; DAST is broader functional security testing of a running app.",
+        "If it's ‘random/mutated inputs to trigger crashes’ → fuzzing. If it's ‘scan/test web app behaviors’ → DAST.",
+        "Fuzzer finds a parser crash with a weird file. DAST finds broken access control in a normal request flow."
+      ]
+    },
+    {
+      "id": "cp_validation_vs_sanitization",
+      "title": "Input validation vs Input sanitization",
+      "a": {
+        "term": "Input validation",
+        "definition": "Focus on input validation when this distinction appears."
+      },
+      "b": {
+        "term": "Input sanitization",
+        "definition": "Focus on input sanitization when this distinction appears."
+      },
+      "bullets": [
+        "Validation rejects bad input (allowlist); sanitization tries to clean/escape input.",
+        "If the safest path is ‘only allow known-good’ → validation. If it's ‘strip/escape dangerous characters’ → sanitization.",
+        "Allowlist: usernames must match [a-z0-9_]{3,16}. Sanitization: escape HTML characters before display."
+      ]
+    },
+    {
+      "id": "cp_output_encoding_vs_input_validation",
+      "title": "Output encoding vs Input validation",
+      "a": {
+        "term": "Output encoding",
+        "definition": "Focus on output encoding when this distinction appears."
+      },
+      "b": {
+        "term": "Input validation",
+        "definition": "Focus on input validation when this distinction appears."
+      },
+      "bullets": [
+        "Validation keeps bad data out; output encoding makes data safe for a specific context when displayed.",
+        "If it’s about what you accept → validation. If it’s about how you render/print data (HTML/JS/URL) → output encoding.",
+        "Validate email format on input; HTML-encode comment text on output to prevent XSS."
+      ]
+    },
+    {
+      "id": "cp_sql_injection_vs_command_injection",
+      "title": "SQL injection vs Command injection",
+      "a": {
+        "term": "SQL injection",
+        "definition": "Focus on sql injection when this distinction appears."
+      },
+      "b": {
+        "term": "Command injection",
+        "definition": "Focus on command injection when this distinction appears."
+      },
+      "bullets": [
+        "SQLi attacks the database query; command injection attacks the OS command interpreter.",
+        "If it mentions SELECT/UNION/DB errors → SQLi. If it mentions shell commands (| ; &&) → command injection.",
+        "SQLi dumps users table. Command injection runs `cat /etc/passwd` from a vulnerable ping feature."
+      ]
+    },
+    {
+      "id": "cp_path_traversal_vs_file_inclusion",
+      "title": "Path traversal vs File inclusion (LFI/RFI)",
+      "a": {
+        "term": "Path traversal",
+        "definition": "Focus on path traversal when this distinction appears."
+      },
+      "b": {
+        "term": "File inclusion (LFI/RFI)",
+        "definition": "Focus on file inclusion (lfi/rfi) when this distinction appears."
+      },
+      "bullets": [
+        "Traversal reads/writes files by abusing paths like ../; inclusion forces the app to execute/include a file.",
+        "If it’s ‘read sensitive file via ../’ → traversal. If it’s ‘include/execute template/script’ → LFI/RFI.",
+        "Traversal reads /etc/shadow. LFI includes log file containing injected PHP code."
+      ]
+    },
+    {
+      "id": "cp_idor_vs_broken_access_control",
+      "title": "IDOR vs Broken access control",
+      "a": {
+        "term": "IDOR",
+        "definition": "Focus on idor when this distinction appears."
+      },
+      "b": {
+        "term": "Broken access control",
+        "definition": "Focus on broken access control when this distinction appears."
+      },
+      "bullets": [
+        "IDOR is a common broken-access-control pattern: direct object references without permission checks.",
+        "If changing an ID in a URL accesses another user’s data → IDOR. If it’s any missing/weak permission check → broken access control.",
+        "/invoice?invoiceId=1002 shows another customer’s invoice when you change the number."
+      ]
+    },
+    {
+      "id": "cp_secure_cookie_flags",
+      "title": "Secure/HttpOnly/SameSite cookies vs Session management",
+      "a": {
+        "term": "Secure/HttpOnly/SameSite cookies",
+        "definition": "Focus on secure/httponly/samesite cookies when this distinction appears."
+      },
+      "b": {
+        "term": "Session management",
+        "definition": "Focus on session management when this distinction appears."
+      },
+      "bullets": [
+        "Cookie flags reduce specific browser risks; session management is the broader lifecycle: creation, rotation, timeout, invalidation.",
+        "If it’s about cookie attributes → flags. If it’s about logout/rotation/timeout/session fixation → session management.",
+        "Set HttpOnly+Secure+SameSite=Lax; rotate session ID after login and invalidate on logout."
+      ]
+    },
+    {
+      "id": "cp_hashing_vs_encryption_passwords",
+      "title": "Hashing passwords (salted) vs Encrypting passwords",
+      "a": {
+        "term": "Hashing passwords (salted)",
+        "definition": "Focus on hashing passwords (salted) when this distinction appears."
+      },
+      "b": {
+        "term": "Encrypting passwords",
+        "definition": "Focus on encrypting passwords when this distinction appears."
+      },
+      "bullets": [
+        "Passwords should be hashed (one-way) with salt; encryption is reversible and is the wrong default for stored passwords.",
+        "If it’s ‘store passwords’ → hash+salt (and slow KDF). If it’s ‘need to recover plaintext’ → you usually shouldn’t be storing passwords.",
+        "Store bcrypt/Argon2 hash with per-user salt; never store decryptable password strings."
+      ]
+    },
+    {
+      "id": "cp_sca_vs_vuln_scanning",
+      "title": "SCA (software composition analysis) vs Vulnerability scanning",
+      "a": {
+        "term": "SCA (software composition analysis)",
+        "definition": "Focus on sca (software composition analysis) when this distinction appears."
+      },
+      "b": {
+        "term": "Vulnerability scanning",
+        "definition": "Focus on vulnerability scanning when this distinction appears."
+      },
+      "bullets": [
+        "SCA targets third-party dependencies (libraries/packages); vuln scanning targets hosts/services/configs for known CVEs and misconfigs.",
+        "If it mentions SBOM/dependencies/package versions → SCA. If it mentions ports/hosts/missing patches → vuln scanning.",
+        "SCA flags a vulnerable Log4j version in your app; vuln scan flags SMBv1 enabled on servers."
+      ]
+    },
+    {
+      "id": "cp_code_signing_vs_tls",
+      "title": "Code signing vs TLS",
+      "a": {
+        "term": "Code signing",
+        "definition": "Focus on code signing when this distinction appears."
+      },
+      "b": {
+        "term": "TLS",
+        "definition": "Focus on tls when this distinction appears."
+      },
+      "bullets": [
+        "Code signing proves software integrity/publisher; TLS protects data in transit between endpoints.",
+        "If it’s ‘is this update/app legit?’ → code signing. If it’s ‘protect this connection’ → TLS.",
+        "Signed update verifies publisher before install; TLS encrypts API calls to the update server."
+      ]
+    },
+    {
+      "id": "cp_sandboxing_vs_virtualization",
+      "title": "Sandboxing vs Virtualization/containers",
+      "a": {
+        "term": "Sandboxing",
+        "definition": "Focus on sandboxing when this distinction appears."
+      },
+      "b": {
+        "term": "Virtualization/containers",
+        "definition": "Focus on virtualization/containers when this distinction appears."
+      },
+      "bullets": [
+        "Sandboxing restricts what a process can do; virtualization/containers provide isolated environments but still need hardening.",
+        "If it’s about limiting permissions/syscalls/filesystem → sandboxing. If it’s about running isolated environments/instances → VM/containers.",
+        "Browser tab sandbox blocks file access; a container isolates an app but still needs least privilege."
+      ]
+    },
+    {
+      "id": "cp_secrets_mgmt_vs_encryption_at_rest",
+      "title": "Secrets management vs Encryption at rest",
+      "a": {
+        "term": "Secrets management",
+        "definition": "Focus on secrets management when this distinction appears."
+      },
+      "b": {
+        "term": "Encryption at rest",
+        "definition": "Focus on encryption at rest when this distinction appears."
+      },
+      "bullets": [
+        "Secrets management is handling credentials/keys safely (rotation, access control); encryption at rest protects stored data on disk.",
+        "If it’s about API keys/passwords/rotation/vault → secrets management. If it’s about disk/db encryption → encryption at rest.",
+        "Store API keys in a vault with rotation; encrypt database files using full-disk/db encryption."
+      ]
+    }
+  ],
+  "tag_rules": {
+    "sdlc": {
+      "rule": "SAST reads code; DAST attacks the running app.",
+      "micro_example": "SAST early, DAST later.",
+      "confusion_pair_id": "cp_sast_vs_dast"
+    },
+    "devsecops": {
+      "rule": "SAST reads code; DAST attacks the running app.",
+      "micro_example": "SAST early, DAST later.",
+      "confusion_pair_id": "cp_sast_vs_dast"
+    },
+    "cicd": {
+      "rule": "SAST reads code; DAST attacks the running app.",
+      "micro_example": "SAST early, DAST later.",
+      "confusion_pair_id": "cp_sast_vs_dast"
+    },
+    "secure_coding": {
+      "rule": "Prefer allowlist validation; sanitize as a secondary safety net.",
+      "micro_example": "Validate numbers; sanitize HTML for display.",
+      "confusion_pair_id": "cp_validation_vs_sanitization"
+    },
+    "code_review": {
+      "rule": "SAST reads code; DAST attacks the running app.",
+      "micro_example": "SAST early, DAST later.",
+      "confusion_pair_id": "cp_sast_vs_dast"
+    },
+    "sast": {
+      "rule": "SAST reads code; DAST attacks the running app.",
+      "micro_example": "SAST early, DAST later.",
+      "confusion_pair_id": "cp_sast_vs_dast"
+    },
+    "static_analysis": {
+      "rule": "SAST reads code; DAST attacks the running app.",
+      "micro_example": "SAST early, DAST later.",
+      "confusion_pair_id": "cp_sast_vs_dast"
+    },
+    "dast": {
+      "rule": "SAST reads code; DAST attacks the running app.",
+      "micro_example": "SAST early, DAST later.",
+      "confusion_pair_id": "cp_sast_vs_dast"
+    },
+    "dynamic_analysis": {
+      "rule": "SAST reads code; DAST attacks the running app.",
+      "micro_example": "SAST early, DAST later.",
+      "confusion_pair_id": "cp_sast_vs_dast"
+    },
+    "fuzzing": {
+      "rule": "Fuzzing is chaos-input testing; DAST is broad black-box testing.",
+      "micro_example": "Fuzzers find crashes; DAST often finds logic flaws.",
+      "confusion_pair_id": "cp_fuzzing_vs_dast"
+    },
+    "regression_testing": {
+      "rule": "Fuzzing is chaos-input testing; DAST is broad black-box testing.",
+      "micro_example": "Fuzzers find crashes; DAST often finds logic flaws.",
+      "confusion_pair_id": "cp_fuzzing_vs_dast"
+    },
+    "automation_orchestration": {
+      "rule": "SAST reads code; DAST attacks the running app.",
+      "micro_example": "SAST early, DAST later.",
+      "confusion_pair_id": "cp_sast_vs_dast"
+    },
+    "guard_rails": {
+      "rule": "SAST reads code; DAST attacks the running app.",
+      "micro_example": "SAST early, DAST later.",
+      "confusion_pair_id": "cp_sast_vs_dast"
+    },
+    "api_security": {
+      "rule": "SSRF abuses server-side fetch; CSRF abuses client-side session.",
+      "micro_example": "SSRF pivots into internal networks.",
+      "confusion_pair_id": "cp_ssrf_vs_csrf"
+    },
+    "input_validation": {
+      "rule": "Prefer allowlist validation; sanitize as a secondary safety net.",
+      "micro_example": "Validate numbers; sanitize HTML for display.",
+      "confusion_pair_id": "cp_validation_vs_sanitization"
+    },
+    "allowlist": {
+      "rule": "Prefer allowlist validation; sanitize as a secondary safety net.",
+      "micro_example": "Validate numbers; sanitize HTML for display.",
+      "confusion_pair_id": "cp_validation_vs_sanitization"
+    },
+    "encode_escape": {
+      "rule": "Validate inputs; encode outputs per context.",
+      "micro_example": "HTML-encode user comments before rendering.",
+      "confusion_pair_id": "cp_output_encoding_vs_input_validation"
+    },
+    "error_handling": {
+      "rule": "Prefer allowlist validation; sanitize as a secondary safety net.",
+      "micro_example": "Validate numbers; sanitize HTML for display.",
+      "confusion_pair_id": "cp_validation_vs_sanitization"
+    },
+    "injection": {
+      "rule": "SQLi targets queries; command injection targets shells.",
+      "micro_example": "Parameterized queries stop SQLi; avoid shell execution to stop command injection.",
+      "confusion_pair_id": "cp_sql_injection_vs_command_injection"
+    },
+    "sql_injection": {
+      "rule": "SQLi targets queries; command injection targets shells.",
+      "micro_example": "Parameterized queries stop SQLi; avoid shell execution to stop command injection.",
+      "confusion_pair_id": "cp_sql_injection_vs_command_injection"
+    },
+    "parameterized_queries": {
+      "rule": "SQLi targets queries; command injection targets shells.",
+      "micro_example": "Parameterized queries stop SQLi; avoid shell execution to stop command injection.",
+      "confusion_pair_id": "cp_sql_injection_vs_command_injection"
+    },
+    "blind_sqli": {
+      "rule": "SQLi targets queries; command injection targets shells.",
+      "micro_example": "Parameterized queries stop SQLi; avoid shell execution to stop command injection.",
+      "confusion_pair_id": "cp_sql_injection_vs_command_injection"
+    },
+    "timing_based_sqli": {
+      "rule": "SQLi targets queries; command injection targets shells.",
+      "micro_example": "Parameterized queries stop SQLi; avoid shell execution to stop command injection.",
+      "confusion_pair_id": "cp_sql_injection_vs_command_injection"
+    },
+    "command_injection": {
+      "rule": "SQLi targets queries; command injection targets shells.",
+      "micro_example": "Parameterized queries stop SQLi; avoid shell execution to stop command injection.",
+      "confusion_pair_id": "cp_sql_injection_vs_command_injection"
+    },
+    "ldap_injection": {
+      "rule": "SQLi targets queries; command injection targets shells.",
+      "micro_example": "Parameterized queries stop SQLi; avoid shell execution to stop command injection.",
+      "confusion_pair_id": "cp_sql_injection_vs_command_injection"
+    },
+    "xml_injection": {
+      "rule": "SQLi targets queries; command injection targets shells.",
+      "micro_example": "Parameterized queries stop SQLi; avoid shell execution to stop command injection.",
+      "confusion_pair_id": "cp_sql_injection_vs_command_injection"
+    },
+    "dll_injection": {
+      "rule": "SQLi targets queries; command injection targets shells.",
+      "micro_example": "Parameterized queries stop SQLi; avoid shell execution to stop command injection.",
+      "confusion_pair_id": "cp_sql_injection_vs_command_injection"
+    },
+    "waf": {
+      "rule": "Prefer allowlist validation; sanitize as a secondary safety net.",
+      "micro_example": "Validate numbers; sanitize HTML for display.",
+      "confusion_pair_id": "cp_validation_vs_sanitization"
+    },
+    "secure_database_access": {
+      "rule": "SQLi targets queries; command injection targets shells.",
+      "micro_example": "Parameterized queries stop SQLi; avoid shell execution to stop command injection.",
+      "confusion_pair_id": "cp_sql_injection_vs_command_injection"
+    },
+    "least_privilege": {
+      "rule": "Sandboxing limits capabilities; isolation runs separate environments.",
+      "micro_example": "Sandbox + container hardening is better than either alone.",
+      "confusion_pair_id": "cp_sandboxing_vs_virtualization"
+    },
+    "cookies": {
+      "rule": "Cookie flags harden transport/browser behavior; sessions need rotation/timeout/invalidation.",
+      "micro_example": "Rotate session IDs after auth; set HttpOnly+Secure.",
+      "confusion_pair_id": "cp_secure_cookie_flags"
+    },
+    "cookie_secure": {
+      "rule": "Cookie flags harden transport/browser behavior; sessions need rotation/timeout/invalidation.",
+      "micro_example": "Rotate session IDs after auth; set HttpOnly+Secure.",
+      "confusion_pair_id": "cp_secure_cookie_flags"
+    },
+    "cookie_httponly": {
+      "rule": "Cookie flags harden transport/browser behavior; sessions need rotation/timeout/invalidation.",
+      "micro_example": "Rotate session IDs after auth; set HttpOnly+Secure.",
+      "confusion_pair_id": "cp_secure_cookie_flags"
+    },
+    "cookie_samesite": {
+      "rule": "Cookie flags harden transport/browser behavior; sessions need rotation/timeout/invalidation.",
+      "micro_example": "Rotate session IDs after auth; set HttpOnly+Secure.",
+      "confusion_pair_id": "cp_secure_cookie_flags"
+    },
+    "session_hijacking": {
+      "rule": "Cookie flags harden transport/browser behavior; sessions need rotation/timeout/invalidation.",
+      "micro_example": "Rotate session IDs after auth; set HttpOnly+Secure.",
+      "confusion_pair_id": "cp_secure_cookie_flags"
+    },
+    "session_replay": {
+      "rule": "Cookie flags harden transport/browser behavior; sessions need rotation/timeout/invalidation.",
+      "micro_example": "Rotate session IDs after auth; set HttpOnly+Secure.",
+      "confusion_pair_id": "cp_secure_cookie_flags"
+    },
+    "on_path_attack": {
+      "rule": "Cookie flags harden transport/browser behavior; sessions need rotation/timeout/invalidation.",
+      "micro_example": "Rotate session IDs after auth; set HttpOnly+Secure.",
+      "confusion_pair_id": "cp_secure_cookie_flags"
+    },
+    "unvalidated_redirect": {
+      "rule": "Cookie flags harden transport/browser behavior; sessions need rotation/timeout/invalidation.",
+      "micro_example": "Rotate session IDs after auth; set HttpOnly+Secure.",
+      "confusion_pair_id": "cp_secure_cookie_flags"
+    },
+    "phishing": {
+      "rule": "Cookie flags harden transport/browser behavior; sessions need rotation/timeout/invalidation.",
+      "micro_example": "Rotate session IDs after auth; set HttpOnly+Secure.",
+      "confusion_pair_id": "cp_secure_cookie_flags"
+    },
+    "authorization": {
+      "rule": "Authn = who. Authz = what you’re allowed to do.",
+      "micro_example": "Login success doesn’t mean you can view admin data.",
+      "confusion_pair_id": "cp_authn_vs_authz"
+    },
+    "idor": {
+      "rule": "IDOR is broken access control with direct object references.",
+      "micro_example": "Changing an ID should still enforce authorization checks.",
+      "confusion_pair_id": "cp_idor_vs_broken_access_control"
+    },
+    "privilege_escalation": {
+      "rule": "IDOR is broken access control with direct object references.",
+      "micro_example": "Changing an ID should still enforce authorization checks.",
+      "confusion_pair_id": "cp_idor_vs_broken_access_control"
+    },
+    "directory_traversal": {
+      "rule": "Traversal reads files; inclusion can execute/include files.",
+      "micro_example": "../ reveals secrets; include() can run attacker-controlled code.",
+      "confusion_pair_id": "cp_path_traversal_vs_file_inclusion"
+    },
+    "path_traversal": {
+      "rule": "Traversal reads files; inclusion can execute/include files.",
+      "micro_example": "../ reveals secrets; include() can run attacker-controlled code.",
+      "confusion_pair_id": "cp_path_traversal_vs_file_inclusion"
+    },
+    "file_inclusion": {
+      "rule": "Traversal reads files; inclusion can execute/include files.",
+      "micro_example": "../ reveals secrets; include() can run attacker-controlled code.",
+      "confusion_pair_id": "cp_path_traversal_vs_file_inclusion"
+    },
+    "remote_file_inclusion": {
+      "rule": "Traversal reads files; inclusion can execute/include files.",
+      "micro_example": "../ reveals secrets; include() can run attacker-controlled code.",
+      "confusion_pair_id": "cp_path_traversal_vs_file_inclusion"
+    },
+    "web_shell": {
+      "rule": "Traversal reads files; inclusion can execute/include files.",
+      "micro_example": "../ reveals secrets; include() can run attacker-controlled code.",
+      "confusion_pair_id": "cp_path_traversal_vs_file_inclusion"
+    },
+    "xss": {
+      "rule": "XSS is code-in-browser. CSRF is request-forgery-by-browser.",
+      "micro_example": "XSS steals tokens; CSRF spends tokens.",
+      "confusion_pair_id": "cp_xss_vs_csrf"
+    },
+    "xss_reflected": {
+      "rule": "XSS is code-in-browser. CSRF is request-forgery-by-browser.",
+      "micro_example": "XSS steals tokens; CSRF spends tokens.",
+      "confusion_pair_id": "cp_xss_vs_csrf"
+    },
+    "xss_stored": {
+      "rule": "XSS is code-in-browser. CSRF is request-forgery-by-browser.",
+      "micro_example": "XSS steals tokens; CSRF spends tokens.",
+      "confusion_pair_id": "cp_xss_vs_csrf"
+    },
+    "xss_dom": {
+      "rule": "XSS is code-in-browser. CSRF is request-forgery-by-browser.",
+      "micro_example": "XSS steals tokens; CSRF spends tokens.",
+      "confusion_pair_id": "cp_xss_vs_csrf"
+    },
+    "same_origin_policy": {
+      "rule": "XSS is code-in-browser. CSRF is request-forgery-by-browser.",
+      "micro_example": "XSS steals tokens; CSRF spends tokens.",
+      "confusion_pair_id": "cp_xss_vs_csrf"
+    },
+    "SOP": {
+      "rule": "XSS is code-in-browser. CSRF is request-forgery-by-browser.",
+      "micro_example": "XSS steals tokens; CSRF spends tokens.",
+      "confusion_pair_id": "cp_xss_vs_csrf"
+    },
+    "csrf": {
+      "rule": "XSS is code-in-browser. CSRF is request-forgery-by-browser.",
+      "micro_example": "XSS steals tokens; CSRF spends tokens.",
+      "confusion_pair_id": "cp_xss_vs_csrf"
+    },
+    "secure_tokens": {
+      "rule": "Cookie flags harden transport/browser behavior; sessions need rotation/timeout/invalidation.",
+      "micro_example": "Rotate session IDs after auth; set HttpOnly+Secure.",
+      "confusion_pair_id": "cp_secure_cookie_flags"
+    },
+    "ssrf": {
+      "rule": "SSRF abuses server-side fetch; CSRF abuses client-side session.",
+      "micro_example": "SSRF pivots into internal networks.",
+      "confusion_pair_id": "cp_ssrf_vs_csrf"
+    },
+    "clickjacking": {
+      "rule": "XSS is code-in-browser. CSRF is request-forgery-by-browser.",
+      "micro_example": "XSS steals tokens; CSRF spends tokens.",
+      "confusion_pair_id": "cp_xss_vs_csrf"
+    },
+    "buffer_overflow": {
+      "rule": "Fuzzing is chaos-input testing; DAST is broad black-box testing.",
+      "micro_example": "Fuzzers find crashes; DAST often finds logic flaws.",
+      "confusion_pair_id": "cp_fuzzing_vs_dast"
+    },
+    "memory_injection": {
+      "rule": "Fuzzing is chaos-input testing; DAST is broad black-box testing.",
+      "micro_example": "Fuzzers find crashes; DAST often finds logic flaws.",
+      "confusion_pair_id": "cp_fuzzing_vs_dast"
+    },
+    "race_condition": {
+      "rule": "Fuzzing is chaos-input testing; DAST is broad black-box testing.",
+      "micro_example": "Fuzzers find crashes; DAST often finds logic flaws.",
+      "confusion_pair_id": "cp_fuzzing_vs_dast"
+    },
+    "toctou": {
+      "rule": "Fuzzing is chaos-input testing; DAST is broad black-box testing.",
+      "micro_example": "Fuzzers find crashes; DAST often finds logic flaws.",
+      "confusion_pair_id": "cp_fuzzing_vs_dast"
+    },
+    "malicious_update": {
+      "rule": "TLS protects the pipe; code signing proves the payload.",
+      "micro_example": "A secure download still needs signature verification.",
+      "confusion_pair_id": "cp_code_signing_vs_tls"
+    },
+    "code_signing": {
+      "rule": "TLS protects the pipe; code signing proves the payload.",
+      "micro_example": "A secure download still needs signature verification.",
+      "confusion_pair_id": "cp_code_signing_vs_tls"
+    },
+    "supply_chain": {
+      "rule": "SCA = libraries; vuln scan = systems/services/config.",
+      "micro_example": "SCA catches vulnerable packages in code.",
+      "confusion_pair_id": "cp_sca_vs_vuln_scanning"
+    },
+    "sandboxing": {
+      "rule": "Sandboxing limits capabilities; isolation runs separate environments.",
+      "micro_example": "Sandbox + container hardening is better than either alone.",
+      "confusion_pair_id": "cp_sandboxing_vs_virtualization"
+    },
+    "isolation": {
+      "rule": "Sandboxing limits capabilities; isolation runs separate environments.",
+      "micro_example": "Sandbox + container hardening is better than either alone.",
+      "confusion_pair_id": "cp_sandboxing_vs_virtualization"
+    },
+    "package_monitoring": {
+      "rule": "SCA = libraries; vuln scan = systems/services/config.",
+      "micro_example": "SCA catches vulnerable packages in code.",
+      "confusion_pair_id": "cp_sca_vs_vuln_scanning"
+    },
+    "software_composition_analysis": {
+      "rule": "SCA = libraries; vuln scan = systems/services/config.",
+      "micro_example": "SCA catches vulnerable packages in code.",
+      "confusion_pair_id": "cp_sca_vs_vuln_scanning"
+    },
+    "trap_client_side_validation": {
+      "rule": "Prefer allowlist validation; sanitize as a secondary safety net.",
+      "micro_example": "Validate numbers; sanitize HTML for display.",
+      "confusion_pair_id": "cp_validation_vs_sanitization"
+    },
+    "trap_xss_vs_csrf": {
+      "rule": "XSS is code-in-browser. CSRF is request-forgery-by-browser.",
+      "micro_example": "XSS steals tokens; CSRF spends tokens.",
+      "confusion_pair_id": "cp_xss_vs_csrf"
+    },
+    "trap_sqli_vs_xss": {
+      "rule": "SQLi targets queries; command injection targets shells.",
+      "micro_example": "Parameterized queries stop SQLi; avoid shell execution to stop command injection.",
+      "confusion_pair_id": "cp_sql_injection_vs_command_injection"
+    },
+    "trap_secure_vs_httponly": {
+      "rule": "Cookie flags harden transport/browser behavior; sessions need rotation/timeout/invalidation.",
+      "micro_example": "Rotate session IDs after auth; set HttpOnly+Secure.",
+      "confusion_pair_id": "cp_secure_cookie_flags"
+    },
+    "trap_idor_vs_authn": {
+      "rule": "IDOR is broken access control with direct object references.",
+      "micro_example": "Changing an ID should still enforce authorization checks.",
+      "confusion_pair_id": "cp_idor_vs_broken_access_control"
+    },
+    "trap_ssrf_vs_csrf": {
+      "rule": "SSRF abuses server-side fetch; CSRF abuses client-side session.",
+      "micro_example": "SSRF pivots into internal networks.",
+      "confusion_pair_id": "cp_ssrf_vs_csrf"
+    },
+    "2.3": {
+      "rule": "SQLi targets queries; command injection targets shells.",
+      "micro_example": "Parameterized queries stop SQLi; avoid shell execution to stop command injection.",
+      "confusion_pair_id": "cp_sql_injection_vs_command_injection"
+    },
+    "2.4": {
+      "rule": "Prefer allowlist validation; sanitize as a secondary safety net.",
+      "micro_example": "Validate numbers; sanitize HTML for display.",
+      "confusion_pair_id": "cp_validation_vs_sanitization"
+    },
+    "4.1": {
+      "rule": "SAST reads code; DAST attacks the running app.",
+      "micro_example": "SAST early, DAST later.",
+      "confusion_pair_id": "cp_sast_vs_dast"
+    },
+    "4.3": {
+      "rule": "SCA = libraries; vuln scan = systems/services/config.",
+      "micro_example": "SCA catches vulnerable packages in code.",
+      "confusion_pair_id": "cp_sca_vs_vuln_scanning"
+    },
+    "4.7": {
+      "rule": "SAST reads code; DAST attacks the running app.",
+      "micro_example": "SAST early, DAST later.",
+      "confusion_pair_id": "cp_sast_vs_dast"
+    }
+  }
+}

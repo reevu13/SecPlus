@@ -1,0 +1,765 @@
+{
+  "pack_id": "ch16",
+  "version": "1.0.0",
+  "confusion_pairs": [
+    {
+      "id": "cp16.awareness_vs_training",
+      "title": "Awareness vs Training",
+      "a": {
+        "term": "Security awareness",
+        "definition": "Broad messaging to keep security top-of-mind and influence behavior (posters, reminders, comms)."
+      },
+      "b": {
+        "term": "Security training",
+        "definition": "Skill-building instruction for doing tasks correctly (hands-on, role-specific, measurable outcomes)."
+      },
+      "bullets": [
+        "Awareness = habits and attention; training = competence and performance.",
+        "Awareness is broad and frequent; training is deeper and role-focused.",
+        "Phishing simulations support awareness; secure admin training supports operations."
+      ]
+    },
+    {
+      "id": "cp16.policy_standard_procedure_guideline",
+      "title": "Policy vs Standard vs Procedure vs Guideline",
+      "a": {
+        "term": "Policy",
+        "definition": "High-level, mandatory statements of intent and requirements ('what' and 'why')."
+      },
+      "b": {
+        "term": "Standard/Procedure/Guideline",
+        "definition": "Standards define specific mandatory controls; procedures define step-by-step 'how'; guidelines are recommended (optional)."
+      },
+      "bullets": [
+        "Policy sets direction; standards and procedures implement it.",
+        "Procedures are detailed steps; guidelines are flexible suggestions.",
+        "Auditors look for policy + enforceable standards + workable procedures."
+      ]
+    },
+    {
+      "id": "cp16.due_care_vs_due_diligence",
+      "title": "Due care vs Due diligence",
+      "a": {
+        "term": "Due diligence",
+        "definition": "Doing the homework: identify risks, evaluate options, plan controls (before decisions)."
+      },
+      "b": {
+        "term": "Due care",
+        "definition": "Doing the work: implement and operate reasonable controls consistently (ongoing duty)."
+      },
+      "bullets": [
+        "Diligence = assess/plan; care = implement/operate.",
+        "Diligence is often before purchase/launch; care is continuous after.",
+        "Skipping diligence leads to bad control choices; skipping care leads to paper-only security."
+      ]
+    },
+    {
+      "id": "cp16.msa_sow_sla",
+      "title": "MSA vs SOW vs SLA",
+      "a": {
+        "term": "MSA (Master Service Agreement)",
+        "definition": "The umbrella contract: legal terms, responsibilities, and relationship rules."
+      },
+      "b": {
+        "term": "SOW/SLA",
+        "definition": "SOW defines the work to be done; SLA defines measurable service performance and remedies."
+      },
+      "bullets": [
+        "MSA = the rules; SOW = the work; SLA = the performance targets.",
+        "SOW often changes per project; MSA usually stays stable across projects.",
+        "SLA without monitoring is just vibes; enforce it with metrics and reporting."
+      ]
+    },
+    {
+      "id": "cp16.mou_vs_moa",
+      "title": "MOU vs MOA",
+      "a": {
+        "term": "MOU (Memorandum of Understanding)",
+        "definition": "A non-binding or lightly binding understanding of cooperation and intent."
+      },
+      "b": {
+        "term": "MOA (Memorandum of Agreement)",
+        "definition": "A more formal agreement defining responsibilities; often treated as binding in practice."
+      },
+      "bullets": [
+        "MOU = intent to cooperate; MOA = agreed responsibilities and expectations.",
+        "Use MOU for exploratory collaboration; MOA when you must define who does what.",
+        "Don’t assume either replaces a security addendum or SLA when services are delivered."
+      ]
+    },
+    {
+      "id": "cp16.nist_csf_vs_nist_rmf",
+      "title": "NIST CSF vs NIST RMF",
+      "a": {
+        "term": "NIST CSF",
+        "definition": "A cybersecurity program framework for organizing activities (Identify/Protect/Detect/Respond/Recover)."
+      },
+      "b": {
+        "term": "NIST RMF",
+        "definition": "A risk management lifecycle for systems (categorize → select → implement → assess → authorize → monitor)."
+      },
+      "bullets": [
+        "CSF = program organization; RMF = system-by-system lifecycle.",
+        "CSF is flexible and communication-friendly; RMF is process-heavy and authorization-oriented.",
+        "CSF helps you talk to leadership; RMF helps you justify controls and formal risk decisions."
+      ]
+    },
+    {
+      "id": "cp16.iso_27001_vs_27002",
+      "title": "ISO 27001 vs ISO 27002",
+      "a": {
+        "term": "ISO/IEC 27001",
+        "definition": "Requirements for an Information Security Management System (ISMS); certifiable."
+      },
+      "b": {
+        "term": "ISO/IEC 27002",
+        "definition": "Guidance and control recommendations to support an ISMS; not the certification standard."
+      },
+      "bullets": [
+        "27001 = requirements + certification; 27002 = control guidance.",
+        "Implement controls (27002) to satisfy the ISMS requirements (27001).",
+        "Audits focus on 27001 compliance; 27002 helps you choose and explain controls."
+      ]
+    },
+    {
+      "id": "cp16.centralized_vs_decentralized_governance",
+      "title": "Centralized vs Decentralized governance",
+      "a": {
+        "term": "Centralized governance",
+        "definition": "Security decisions and standards are controlled by a central authority/team."
+      },
+      "b": {
+        "term": "Decentralized governance",
+        "definition": "Security decision-making is distributed across business units (with varying degrees of central oversight)."
+      },
+      "bullets": [
+        "Centralized = consistency; decentralized = agility and business alignment.",
+        "Decentralization increases drift; centralization can create bottlenecks.",
+        "Most orgs use a hybrid: central policies + local implementation."
+      ]
+    },
+    {
+      "id": "cp16.least_privilege_vs_separation_of_duties",
+      "title": "Least privilege vs Separation of duties",
+      "a": {
+        "term": "Least privilege",
+        "definition": "Give users/processes only the access needed to do the job—nothing more."
+      },
+      "b": {
+        "term": "Separation of duties",
+        "definition": "Split critical tasks across multiple people/roles so one person can’t complete abuse end-to-end."
+      },
+      "bullets": [
+        "Least privilege limits access; SoD limits power concentration.",
+        "SoD is about workflow design; least privilege is about permissions design.",
+        "Two-person control is SoD in action for high-risk operations."
+      ]
+    },
+    {
+      "id": "cp16.job_rotation_vs_mandatory_vacation",
+      "title": "Job rotation vs Mandatory vacation",
+      "a": {
+        "term": "Job rotation",
+        "definition": "Periodic role changes to reduce fraud risk and spread knowledge."
+      },
+      "b": {
+        "term": "Mandatory vacation",
+        "definition": "Forced time away so ongoing fraud (that requires daily actions) is more likely to be discovered."
+      },
+      "bullets": [
+        "Rotation reduces single-person dependency; vacations break continuous control of a scheme.",
+        "Both are anti-fraud/insider-risk controls; neither replaces monitoring.",
+        "Mandatory vacations are especially useful in finance/privileged admin roles."
+      ]
+    },
+    {
+      "id": "cp16.eol_vs_eosl",
+      "title": "EOL vs EOSL",
+      "a": {
+        "term": "EOL (End of Life)",
+        "definition": "Product is no longer sold/actively developed; support may be winding down."
+      },
+      "b": {
+        "term": "EOSL (End of Service Life)",
+        "definition": "Support and security updates end; running it becomes a growing risk."
+      },
+      "bullets": [
+        "EOL often comes before EOSL; EOSL is the security cliff.",
+        "Post‑EOSL = no patches, no vendor help—plan migration.",
+        "Treat EOSL exceptions as high-risk with strict compensating controls and time limits."
+      ]
+    }
+  ],
+  "tag_rules": {
+    "access.account_lifecycle.deprovisioning": {
+      "rule": "Deprovisioning must be fast and complete: disable accounts, revoke tokens, remove access, rotate shared secrets.",
+      "micro_example": "Terminate SSO session, revoke OAuth tokens, remove from groups, disable VPN.",
+      "confusion_pair_id": "none"
+    },
+    "awareness.anomalous_behavior": {
+      "rule": "Anomalous behavior is 'unusual for this user/device'—investigate before you accuse.",
+      "micro_example": "A user suddenly downloads 10GB at 2 AM—trigger an alert and verify.",
+      "confusion_pair_id": "none"
+    },
+    "awareness.insider_threat": {
+      "rule": "Insider threats need controls + culture: monitoring, least privilege, and reporting.",
+      "micro_example": "Detect unusual downloads; enforce SoD; encourage anonymous reporting.",
+      "confusion_pair_id": "none"
+    },
+    "awareness.metrics.trends": {
+      "rule": "Use trends to prove improvement (or highlight problems) over time.",
+      "micro_example": "Quarterly trend: click rate down, reporting rate up—keep iterating.",
+      "confusion_pair_id": "none"
+    },
+    "awareness.phishing.campaigns": {
+      "rule": "Phishing campaigns exploit social engineering; awareness reduces success rates.",
+      "micro_example": "Teach users to verify senders and avoid urgent payment requests.",
+      "confusion_pair_id": "none"
+    },
+    "awareness.phishing.simulations": {
+      "rule": "Phishing simulations test behavior and improve reporting habits.",
+      "micro_example": "Run a simulated phish; track clicks and 'report phish' submissions.",
+      "confusion_pair_id": "cp16.awareness_vs_training"
+    },
+    "awareness.programs.definition": {
+      "rule": "A security awareness program changes behavior through consistent messaging plus measurement.",
+      "micro_example": "Monthly micro-lessons + phishing sims + metrics on click rates and reporting.",
+      "confusion_pair_id": "none"
+    },
+    "awareness.reporting_monitoring": {
+      "rule": "Measure awareness outcomes: reporting rates and time-to-report beat vanity completion stats.",
+      "micro_example": "Track how quickly users report suspicious email after simulation.",
+      "confusion_pair_id": "none"
+    },
+    "awareness.role_based_training": {
+      "rule": "Role-based training targets job-specific risks and responsibilities.",
+      "micro_example": "Finance learns BEC fraud patterns; IT learns incident escalation and change control.",
+      "confusion_pair_id": "cp16.awareness_vs_training"
+    },
+    "awareness.training.design": {
+      "rule": "Good training is role-based, measurable, and practiced—not a one-time slideshow.",
+      "micro_example": "Developers train on secure coding; HR trains on data handling; measure post-test results.",
+      "confusion_pair_id": "cp16.awareness_vs_training"
+    },
+    "awareness.training.vs_awareness": {
+      "rule": "Awareness keeps people alert; training teaches people to do tasks correctly.",
+      "micro_example": "Awareness: remind about phishing. Training: teach admins secure change procedures.",
+      "confusion_pair_id": "cp16.awareness_vs_training"
+    },
+    "awareness.user_training.password_management": {
+      "rule": "Know and apply: awareness user_training password_management.",
+      "micro_example": "Translate it into a control, a process, or evidence.",
+      "confusion_pair_id": "none"
+    },
+    "awareness.user_training.removable_media": {
+      "rule": "Know and apply: awareness user_training removable_media.",
+      "micro_example": "Translate it into a control, a process, or evidence.",
+      "confusion_pair_id": "none"
+    },
+    "change_mgmt.approval_controls": {
+      "rule": "Approvals separate requesters from implementers and reduce risky changes.",
+      "micro_example": "CAB approval required for production firewall rule changes.",
+      "confusion_pair_id": "none"
+    },
+    "change_mgmt.backout_plan": {
+      "rule": "Every meaningful change needs a rollback/backout plan.",
+      "micro_example": "If deployment fails health checks, automatically roll back to last version.",
+      "confusion_pair_id": "none"
+    },
+    "change_mgmt.documentation": {
+      "rule": "Change documentation creates repeatability and accountability.",
+      "micro_example": "Ticket includes purpose, steps, test plan, rollback, owner, and timestamps.",
+      "confusion_pair_id": "none"
+    },
+    "change_mgmt.documentation.update": {
+      "rule": "Update diagrams/policies/docs after changes—or your documentation becomes a liability.",
+      "micro_example": "After VLAN redesign, update network diagram and security policy references.",
+      "confusion_pair_id": "none"
+    },
+    "change_mgmt.documentation.update_diagrams": {
+      "rule": "Update diagrams/policies/docs after changes—or your documentation becomes a liability.",
+      "micro_example": "After VLAN redesign, update network diagram and security policy references.",
+      "confusion_pair_id": "none"
+    },
+    "change_mgmt.documentation.update_policies": {
+      "rule": "Update diagrams/policies/docs after changes—or your documentation becomes a liability.",
+      "micro_example": "After VLAN redesign, update network diagram and security policy references.",
+      "confusion_pair_id": "none"
+    },
+    "change_mgmt.emergency_changes": {
+      "rule": "Emergency changes happen fast—but still require documentation and post-approval review.",
+      "micro_example": "Hotfix a critical vuln, then do retroactive CAB review within 24–48h.",
+      "confusion_pair_id": "none"
+    },
+    "change_mgmt.goal.availability": {
+      "rule": "Change control protects availability by avoiding untested surprises.",
+      "micro_example": "Reject changes without test evidence or rollback plan.",
+      "confusion_pair_id": "none"
+    },
+    "change_mgmt.impact_analysis.dependencies": {
+      "rule": "Impact analysis maps dependencies so changes don’t break downstream systems.",
+      "micro_example": "App update requires DB schema change and service restart—schedule together.",
+      "confusion_pair_id": "none"
+    },
+    "change_mgmt.maintenance_windows": {
+      "rule": "Maintenance windows reduce business impact by scheduling downtime.",
+      "micro_example": "Apply network firmware updates Sunday 2–4 AM local time.",
+      "confusion_pair_id": "none"
+    },
+    "change_mgmt.overview": {
+      "rule": "Change management reduces outages and security drift by controlling how changes happen.",
+      "micro_example": "Require approvals, testing, and a rollback plan before production changes.",
+      "confusion_pair_id": "none"
+    },
+    "change_mgmt.schedule_implement": {
+      "rule": "Schedule + implementation steps prevent 'cowboy deploys'.",
+      "micro_example": "Pre-stage configs, validate in staging, deploy in window, verify, then close ticket.",
+      "confusion_pair_id": "none"
+    },
+    "change_mgmt.security_vs_usability_tradeoff": {
+      "rule": "Security controls that break workflows get bypassed—design for usable security.",
+      "micro_example": "MFA with sensible prompts beats overly strict rules that push users to workarounds.",
+      "confusion_pair_id": "none"
+    },
+    "change_mgmt.sop.steps": {
+      "rule": "SOPs define the consistent steps for safe changes.",
+      "micro_example": "Standard patch SOP: approve → test → deploy → verify → document.",
+      "confusion_pair_id": "none"
+    },
+    "change_mgmt.technical_implications.allow_deny": {
+      "rule": "Know the allow/deny implications: a default-allow rule-set is a breach waiting to happen.",
+      "micro_example": "Use default-deny with explicit allows for inbound services.",
+      "confusion_pair_id": "none"
+    },
+    "change_mgmt.technical_implications.dependencies": {
+      "rule": "Dependencies determine blast radius—map them before changes.",
+      "micro_example": "Updating a shared library can break multiple services; test consumers.",
+      "confusion_pair_id": "none"
+    },
+    "change_mgmt.technical_implications.service_restart": {
+      "rule": "Service restarts can be outages—coordinate and communicate.",
+      "micro_example": "Restart identity service after config change; monitor auth failures.",
+      "confusion_pair_id": "none"
+    },
+    "change_mgmt.version_control": {
+      "rule": "Version control provides traceability for config and code changes.",
+      "micro_example": "Track firewall configs in git; tie commits to approved change tickets.",
+      "confusion_pair_id": "none"
+    },
+    "compliance.consequences.fines_sanctions": {
+      "rule": "Noncompliance has consequences—money, reputation, or both.",
+      "micro_example": "PCI violation can trigger fines; GDPR issues can trigger sanctions and trust loss.",
+      "confusion_pair_id": "none"
+    },
+    "compliance.consequences.reputation": {
+      "rule": "Noncompliance has consequences—money, reputation, or both.",
+      "micro_example": "PCI violation can trigger fines; GDPR issues can trigger sanctions and trust loss.",
+      "confusion_pair_id": "none"
+    },
+    "compliance.gdpr": {
+      "rule": "GDPR governs personal data processing; focus on lawful basis, rights, and protection of PII.",
+      "micro_example": "Minimize data, restrict access, and ensure breach notification processes exist.",
+      "confusion_pair_id": "none"
+    },
+    "compliance.monitoring.acknowledgment": {
+      "rule": "Acknowledgment proves users received/accepted policies.",
+      "micro_example": "Employees sign acceptable use policy on hire and annually.",
+      "confusion_pair_id": "none"
+    },
+    "compliance.monitoring.attestation": {
+      "rule": "Attestation is a formal statement that controls/processes meet requirements.",
+      "micro_example": "Manager attests quarterly that access reviews were completed.",
+      "confusion_pair_id": "none"
+    },
+    "compliance.monitoring.due_care": {
+      "rule": "Due care: operate reasonable controls consistently over time.",
+      "micro_example": "Ongoing patching, logging reviews, and access recertification.",
+      "confusion_pair_id": "cp16.due_care_vs_due_diligence"
+    },
+    "compliance.monitoring.due_diligence": {
+      "rule": "Due diligence: assess risks and select controls before committing.",
+      "micro_example": "Vendor assessment before signing: questionnaires, audit reports, pen test scope.",
+      "confusion_pair_id": "cp16.due_care_vs_due_diligence"
+    },
+    "compliance.pci_dss": {
+      "rule": "PCI DSS applies to cardholder data environments—segment and harden systems that touch CHD.",
+      "micro_example": "Isolate payment processing network and enforce strict logging and access control.",
+      "confusion_pair_id": "none"
+    },
+    "compliance.reporting.external": {
+      "rule": "Compliance reporting must match audience: internal assurance vs external regulators/auditors.",
+      "micro_example": "Internal: control status dashboards. External: formal audit artifacts and attestations.",
+      "confusion_pair_id": "none"
+    },
+    "compliance.reporting.internal": {
+      "rule": "Compliance reporting must match audience: internal assurance vs external regulators/auditors.",
+      "micro_example": "Internal: control status dashboards. External: formal audit artifacts and attestations.",
+      "confusion_pair_id": "none"
+    },
+    "compliance.requirements": {
+      "rule": "Compliance requirements are external constraints—translate them into enforceable controls.",
+      "micro_example": "Map PCI DSS to network segmentation, logging, and access controls.",
+      "confusion_pair_id": "none"
+    },
+    "frameworks.benchmarks.cis": {
+      "rule": "CIS Benchmarks provide practical hardening baselines for systems and apps.",
+      "micro_example": "Use CIS Windows benchmark to set audit policy and disable insecure services.",
+      "confusion_pair_id": "none"
+    },
+    "frameworks.iso.27001": {
+      "rule": "ISO 27001 defines ISMS requirements and is certifiable.",
+      "micro_example": "Implement an ISMS, run internal audits, and pursue certification.",
+      "confusion_pair_id": "cp16.iso_27001_vs_27002"
+    },
+    "frameworks.iso.27002": {
+      "rule": "ISO 27002 gives guidance on security controls supporting an ISMS.",
+      "micro_example": "Use 27002 control guidance to design your access control policy and standards.",
+      "confusion_pair_id": "cp16.iso_27001_vs_27002"
+    },
+    "frameworks.iso.27701": {
+      "rule": "ISO 27701 extends privacy management (PIMS) on top of an ISMS.",
+      "micro_example": "Add privacy controls and roles to support personal data obligations.",
+      "confusion_pair_id": "none"
+    },
+    "frameworks.iso.31000": {
+      "rule": "ISO 31000 is broad risk management guidance—not security-only.",
+      "micro_example": "Use it to structure enterprise risk discussions beyond cyber.",
+      "confusion_pair_id": "none"
+    },
+    "frameworks.nist.csf.communication": {
+      "rule": "CSF is a communication tool: translate security work into business outcomes.",
+      "micro_example": "Map projects to CSF functions for leadership reporting.",
+      "confusion_pair_id": "cp16.nist_csf_vs_nist_rmf"
+    },
+    "frameworks.nist.csf.core_functions": {
+      "rule": "NIST CSF core functions: Identify, Protect, Detect, Respond, Recover.",
+      "micro_example": "Detect = monitoring; Respond = containment; Recover = restore services.",
+      "confusion_pair_id": "cp16.nist_csf_vs_nist_rmf"
+    },
+    "frameworks.nist.csf.functions": {
+      "rule": "NIST CSF core functions: Identify, Protect, Detect, Respond, Recover.",
+      "micro_example": "Detect = monitoring; Respond = containment; Recover = restore services.",
+      "confusion_pair_id": "cp16.nist_csf_vs_nist_rmf"
+    },
+    "frameworks.nist.csf.purpose": {
+      "rule": "CSF organizes security outcomes—use it to build and explain a security program.",
+      "micro_example": "Use CSF to gap-assess and prioritize roadmap items.",
+      "confusion_pair_id": "cp16.nist_csf_vs_nist_rmf"
+    },
+    "frameworks.nist.csf.tiers.tier1": {
+      "rule": "CSF Tier 1: Partial—ad hoc risk practices, inconsistent.",
+      "micro_example": "Controls exist but vary by team; little formal risk process.",
+      "confusion_pair_id": "cp16.nist_csf_vs_nist_rmf"
+    },
+    "frameworks.nist.csf.tiers.tier2": {
+      "rule": "CSF Tier 2: Risk-informed—approved practices exist but not organization-wide.",
+      "micro_example": "Some policies exist; implementation depends on business unit.",
+      "confusion_pair_id": "cp16.nist_csf_vs_nist_rmf"
+    },
+    "frameworks.nist.csf.tiers.tier3": {
+      "rule": "CSF Tier 3: Repeatable—formal, consistent risk management practices.",
+      "micro_example": "Standard processes for asset mgmt, access, and monitoring across teams.",
+      "confusion_pair_id": "cp16.nist_csf_vs_nist_rmf"
+    },
+    "frameworks.nist.csf.tiers.tier4": {
+      "rule": "CSF Tier 4: Adaptive—continuous improvement using lessons learned and intelligence.",
+      "micro_example": "Metrics + threat intel drive rapid control updates and automation.",
+      "confusion_pair_id": "cp16.nist_csf_vs_nist_rmf"
+    },
+    "frameworks.nist.csf.vs_rmf": {
+      "rule": "CSF organizes program outcomes; RMF is the lifecycle for system risk decisions.",
+      "micro_example": "Use CSF for program maturity, RMF for system authorization.",
+      "confusion_pair_id": "cp16.nist_csf_vs_nist_rmf"
+    },
+    "frameworks.nist.rmf.definition": {
+      "rule": "NIST RMF is a system lifecycle for selecting, assessing, authorizing, and monitoring controls.",
+      "micro_example": "Categorize system → pick controls → assess → authorize → continuous monitoring.",
+      "confusion_pair_id": "cp16.nist_csf_vs_nist_rmf"
+    },
+    "frameworks.secure_config_guides": {
+      "rule": "Secure configuration guides turn 'best practice' into repeatable baselines.",
+      "micro_example": "Apply a hardened OS baseline, then monitor drift from it.",
+      "confusion_pair_id": "none"
+    },
+    "governance.corporate.board_authority": {
+      "rule": "The board sets risk appetite and holds executives accountable.",
+      "micro_example": "Board approves security strategy and receives KPI/KRI reports.",
+      "confusion_pair_id": "none"
+    },
+    "governance.grc.definition": {
+      "rule": "GRC = Governance, Risk, and Compliance: how an org sets direction, manages risk, and proves obligations.",
+      "micro_example": "Policies + risk register + audit evidence in one coherent program.",
+      "confusion_pair_id": "none"
+    },
+    "governance.infosec.alignment": {
+      "rule": "Security must align to business goals—otherwise it becomes ignored or defunded.",
+      "micro_example": "Prioritize controls that protect revenue-critical systems first.",
+      "confusion_pair_id": "none"
+    },
+    "governance.infosec.enforcement.policies": {
+      "rule": "Policies without enforcement are fiction—define ownership and consequences.",
+      "micro_example": "Policy violations trigger exception process or disciplinary action.",
+      "confusion_pair_id": "cp16.policy_standard_procedure_guideline"
+    },
+    "governance.infosec.extension": {
+      "rule": "Security extends beyond IT: business processes and vendors are part of the threat surface.",
+      "micro_example": "TPRM controls apply to SaaS providers handling sensitive data.",
+      "confusion_pair_id": "none"
+    },
+    "governance.models.centralized": {
+      "rule": "Centralized governance enforces consistent standards and faster control rollouts.",
+      "micro_example": "One security team defines baselines for all business units.",
+      "confusion_pair_id": "cp16.centralized_vs_decentralized_governance"
+    },
+    "governance.models.decentralized": {
+      "rule": "Decentralized governance improves local fit but risks inconsistent controls.",
+      "micro_example": "Each division chooses tools; central team sets minimum policy guardrails.",
+      "confusion_pair_id": "cp16.centralized_vs_decentralized_governance"
+    },
+    "governance.policies": {
+      "rule": "Governance policies are the top-level rules—everything else inherits from them.",
+      "micro_example": "A data classification policy drives standards for encryption and retention.",
+      "confusion_pair_id": "cp16.policy_standard_procedure_guideline"
+    },
+    "governance.structures.committees": {
+      "rule": "Committees (like CAB or security steering) make cross-team decisions and reduce silos.",
+      "micro_example": "Security steering committee prioritizes risk reduction projects.",
+      "confusion_pair_id": "none"
+    },
+    "governance.structures.regulators": {
+      "rule": "Regulators define constraints—design controls to meet them proactively.",
+      "micro_example": "Financial regulator requires retention and monitoring; build evidence pipelines.",
+      "confusion_pair_id": "none"
+    },
+    "mitigation.least_privilege": {
+      "rule": "Know and apply: mitigation least_privilege.",
+      "micro_example": "Translate it into a control, a process, or evidence.",
+      "confusion_pair_id": "none"
+    },
+    "personnel.clean_desk": {
+      "rule": "Clean desk policies reduce shoulder-surfing and accidental exposure.",
+      "micro_example": "Lock screens; store documents; no passwords on sticky notes.",
+      "confusion_pair_id": "none"
+    },
+    "personnel.fraud_controls": {
+      "rule": "Fraud controls combine SoD, monitoring, and periodic independent review.",
+      "micro_example": "Reconcile payments and audit privileged admin activity.",
+      "confusion_pair_id": "none"
+    },
+    "personnel.job_rotation": {
+      "rule": "Job rotation reduces fraud risk and prevents single points of failure.",
+      "micro_example": "Rotate payroll duties quarterly; anomalies surface when a new person takes over.",
+      "confusion_pair_id": "cp16.job_rotation_vs_mandatory_vacation"
+    },
+    "personnel.least_privilege": {
+      "rule": "Least privilege: grant only what’s needed, review regularly, and remove quickly.",
+      "micro_example": "Developers don’t need prod DB write access; use just-in-time elevation.",
+      "confusion_pair_id": "cp16.least_privilege_vs_separation_of_duties"
+    },
+    "personnel.mandatory_vacations": {
+      "rule": "Mandatory vacations help uncover fraud that requires constant attention.",
+      "micro_example": "Force 2-week vacation for traders/admins; monitoring catches irregularities.",
+      "confusion_pair_id": "cp16.job_rotation_vs_mandatory_vacation"
+    },
+    "personnel.nda": {
+      "rule": "NDAs define confidentiality expectations and legal consequences.",
+      "micro_example": "Vendor signs NDA before seeing architecture diagrams or customer data.",
+      "confusion_pair_id": "none"
+    },
+    "personnel.offboarding": {
+      "rule": "Offboarding must remove access fast—accounts, tokens, devices, and shared secrets.",
+      "micro_example": "Disable SSO, revoke MFA tokens, and collect badges on last day.",
+      "confusion_pair_id": "none"
+    },
+    "personnel.offboarding.exit_interview": {
+      "rule": "Exit interviews can surface risks (data exfil, grievances) but don’t replace technical controls.",
+      "micro_example": "Ask about outstanding access; verify by disabling accounts and checking logs.",
+      "confusion_pair_id": "none"
+    },
+    "personnel.privilege_creep": {
+      "rule": "Privilege creep happens when access accumulates—fix with periodic access reviews and deprovisioning.",
+      "micro_example": "Quarterly recertification removes stale group memberships.",
+      "confusion_pair_id": "none"
+    },
+    "personnel.separation_of_duties": {
+      "rule": "Separate duties so no single person can complete abuse end-to-end.",
+      "micro_example": "One person requests payment; another approves; a third reconciles.",
+      "confusion_pair_id": "cp16.least_privilege_vs_separation_of_duties"
+    },
+    "personnel.social_media_policy": {
+      "rule": "Social media policies reduce oversharing that helps attackers (OSINT).",
+      "micro_example": "No posting badge photos, internal screenshots, or travel patterns.",
+      "confusion_pair_id": "none"
+    },
+    "personnel.two_person_control": {
+      "rule": "Two-person control requires a second person for high-risk actions.",
+      "micro_example": "Two admins must approve key escrow access or HSM key ceremonies.",
+      "confusion_pair_id": "cp16.least_privilege_vs_separation_of_duties"
+    },
+    "physical.security.policies": {
+      "rule": "Physical security policies protect facilities and hardware—cyber controls don’t matter if attackers can walk in.",
+      "micro_example": "Badge access, visitor logs, and locked server rooms.",
+      "confusion_pair_id": "none"
+    },
+    "policy.documents.guideline": {
+      "rule": "Guidelines are recommended best practices—flexible, not mandatory.",
+      "micro_example": "Guideline suggests using password managers; not an enforcement doc.",
+      "confusion_pair_id": "cp16.policy_standard_procedure_guideline"
+    },
+    "policy.documents.policy": {
+      "rule": "Policies are mandatory high-level rules approved by leadership.",
+      "micro_example": "AUP policy states acceptable systems use and consequences.",
+      "confusion_pair_id": "cp16.policy_standard_procedure_guideline"
+    },
+    "policy.documents.policy.approval_level": {
+      "rule": "Approval level defines who can authorize the document and changes.",
+      "micro_example": "Security policy approved by CISO; standards approved by security leadership.",
+      "confusion_pair_id": "cp16.policy_standard_procedure_guideline"
+    },
+    "policy.documents.procedure": {
+      "rule": "Procedures are step-by-step instructions to implement standards.",
+      "micro_example": "Procedure: how to onboard a new user and assign groups.",
+      "confusion_pair_id": "cp16.policy_standard_procedure_guideline"
+    },
+    "policy.documents.standard": {
+      "rule": "Standards are mandatory specifics that make policy enforceable.",
+      "micro_example": "Password standard: min length, MFA, lockout, rotation rules.",
+      "confusion_pair_id": "cp16.policy_standard_procedure_guideline"
+    },
+    "policy.encryption_standard": {
+      "rule": "Encryption standards define approved algorithms, key sizes, and where encryption is mandatory.",
+      "micro_example": "Require TLS 1.2+ and AES; forbid RC4 and weak hashes.",
+      "confusion_pair_id": "cp16.policy_standard_procedure_guideline"
+    },
+    "policy.examples.aup": {
+      "rule": "AUP defines acceptable use, prohibited activities, and monitoring expectations.",
+      "micro_example": "No pirated software; no bypassing controls; consent to monitoring.",
+      "confusion_pair_id": "cp16.policy_standard_procedure_guideline"
+    },
+    "policy.exceptions.compensating_controls": {
+      "rule": "Compensating controls reduce risk when you can’t meet the standard.",
+      "micro_example": "Can’t patch fast? Add network isolation + monitoring + strict access.",
+      "confusion_pair_id": "none"
+    },
+    "policy.exceptions.exception_process": {
+      "rule": "Use a formal exception process: request → risk assessment → approval → review/expiry.",
+      "micro_example": "Ticketed exception with owner, scope, and expiry date.",
+      "confusion_pair_id": "none"
+    },
+    "policy.exceptions.legacy_exception": {
+      "rule": "Legacy exceptions are high-risk; require remediation plans and strict deadlines.",
+      "micro_example": "Unpatchable OS allowed only behind firewall + jump host + monitoring.",
+      "confusion_pair_id": "none"
+    },
+    "policy.exceptions.remediation_plan": {
+      "rule": "Every exception needs a plan to remove it.",
+      "micro_example": "Upgrade path + date + resources; track milestones.",
+      "confusion_pair_id": "none"
+    },
+    "policy.exceptions.risk_assessment": {
+      "rule": "Risk assessment justifies why the exception is acceptable (or not).",
+      "micro_example": "Assess likelihood/impact; document residual risk and sign-off.",
+      "confusion_pair_id": "none"
+    },
+    "policy.exceptions.scope_duration": {
+      "rule": "Define scope and duration or your exception becomes a loophole.",
+      "micro_example": "Applies to 3 servers in DMZ for 60 days only.",
+      "confusion_pair_id": "none"
+    },
+    "policy.external_considerations.industry": {
+      "rule": "External considerations (industry/regulatory) shape what policies must require.",
+      "micro_example": "Healthcare: privacy rules; payments: PCI DSS; EU users: GDPR constraints.",
+      "confusion_pair_id": "none"
+    },
+    "policy.external_considerations.regulatory": {
+      "rule": "External considerations (industry/regulatory) shape what policies must require.",
+      "micro_example": "Healthcare: privacy rules; payments: PCI DSS; EU users: GDPR constraints.",
+      "confusion_pair_id": "none"
+    },
+    "policy.framework.mandatory_vs_optional": {
+      "rule": "Mandatory controls must be followed; optional guidance is best-effort.",
+      "micro_example": "Standard says 'must encrypt laptops'; guideline says 'should encrypt USB drives.'",
+      "confusion_pair_id": "cp16.policy_standard_procedure_guideline"
+    },
+    "policy.framework.overview": {
+      "rule": "Policy frameworks define how policy documents fit together and get enforced.",
+      "micro_example": "Define document hierarchy, ownership, review cycles, and exception handling.",
+      "confusion_pair_id": "none"
+    },
+    "tprm.agreements.bpa": {
+      "rule": "BPA defines how purchases are handled (pricing/terms) for repeated buying.",
+      "micro_example": "Pre-negotiated rates for security assessments over a year.",
+      "confusion_pair_id": "cp16.msa_sow_sla"
+    },
+    "tprm.agreements.moa": {
+      "rule": "MOA defines responsibilities for cooperation; more formal than an MOU.",
+      "micro_example": "Org A provides hosting; Org B provides monitoring; response timelines defined.",
+      "confusion_pair_id": "cp16.mou_vs_moa"
+    },
+    "tprm.agreements.mou": {
+      "rule": "MOU documents cooperation intent; often non-binding.",
+      "micro_example": "Two orgs agree to share threat intel contacts.",
+      "confusion_pair_id": "cp16.mou_vs_moa"
+    },
+    "tprm.agreements.msa": {
+      "rule": "MSA is the umbrella agreement: legal terms and responsibilities.",
+      "micro_example": "Defines liability, confidentiality, and dispute terms across projects.",
+      "confusion_pair_id": "cp16.msa_sow_sla"
+    },
+    "tprm.agreements.nda": {
+      "rule": "NDA protects confidential info during vendor evaluation and delivery.",
+      "micro_example": "Vendor can access design docs only after NDA is signed.",
+      "confusion_pair_id": "cp16.msa_sow_sla"
+    },
+    "tprm.agreements.sla": {
+      "rule": "SLA defines uptime/response targets and penalties—monitor it.",
+      "micro_example": "99.9% uptime with service credits if breached; monthly SLA reports.",
+      "confusion_pair_id": "cp16.msa_sow_sla"
+    },
+    "tprm.agreements.sow_wo": {
+      "rule": "SOW/WO defines deliverables, scope, timelines, and acceptance criteria.",
+      "micro_example": "SOW for SOC service includes log sources, onboarding dates, and acceptance tests.",
+      "confusion_pair_id": "cp16.msa_sow_sla"
+    },
+    "tprm.vendor_assessment.pen_test": {
+      "rule": "Pen tests validate real-world exposure—define scope and rules of engagement.",
+      "micro_example": "Test the SaaS tenant under agreed ROE; remediate findings.",
+      "confusion_pair_id": "none"
+    },
+    "tprm.vendor_assessment.right_to_audit": {
+      "rule": "Right-to-audit lets you demand evidence and sometimes run assessments.",
+      "micro_example": "Contract allows requesting logs and audit reports during incidents.",
+      "confusion_pair_id": "none"
+    },
+    "tprm.vendor_assessment.sensitive_info_access": {
+      "rule": "Limit vendor access to sensitive data; enforce least privilege and monitoring.",
+      "micro_example": "Vendor accounts are time-bound, MFA-protected, and logged.",
+      "confusion_pair_id": "none"
+    },
+    "tprm.vendor_monitoring.rules_of_engagement": {
+      "rule": "Rules of engagement define what testing/monitoring is allowed and how to report issues.",
+      "micro_example": "Pen test ROE: targets, time windows, safety rules, and escalation contacts.",
+      "confusion_pair_id": "none"
+    },
+    "tprm.vendor_monitoring.transition_planning": {
+      "rule": "Transition planning prevents lock-in and chaos if a vendor fails or is replaced.",
+      "micro_example": "Plan data export, account migration, and cutover steps before contract ends.",
+      "confusion_pair_id": "none"
+    },
+    "tprm.vendor_selection.conflict_of_interest": {
+      "rule": "Conflicts of interest corrupt assessments—separate evaluators from sellers.",
+      "micro_example": "The vendor can’t grade their own security homework.",
+      "confusion_pair_id": "none"
+    },
+    "tprm.vendor_selection.due_diligence": {
+      "rule": "Vendor due diligence: assess security posture before you sign.",
+      "micro_example": "Questionnaire + SOC reports + pen test scope + data flow review.",
+      "confusion_pair_id": "cp16.due_care_vs_due_diligence"
+    },
+    "tprm.winding_down.eol_eosl": {
+      "rule": "Winding down vendors/products requires EOL/EOSL planning and secure offboarding.",
+      "micro_example": "Export data, revoke access, terminate integrations, and confirm secure deletion.",
+      "confusion_pair_id": "cp16.eol_vs_eosl"
+    }
+  }
+}

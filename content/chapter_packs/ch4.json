@@ -1,0 +1,2084 @@
+{
+  "schema_version": "secplus_game_pack_v1",
+  "pack_id": "ch4",
+  "exam": {
+    "vendor": "CompTIA",
+    "name": "Security+",
+    "code": "SY0-701",
+    "max_exam_minutes": 90
+  },
+  "chapter": {
+    "number": 4,
+    "title": "Social Engineering and Password Attacks",
+    "page_range_in_user_pdf": "142-161"
+  },
+  "design_intent": {
+    "mode": [
+      "campaign",
+      "roguelike_practice"
+    ],
+    "pvp_optional": true,
+    "default_pvp_enabled": false,
+    "player_goal": "Master social engineering patterns and password attack tradecraft for SY0-701 Objectives 2.2 and 2.4."
+  },
+  "progression": {
+    "xp_rules": {
+      "base_xp_per_correct": 10,
+      "streak_bonus_per_5": 15,
+      "time_bonus_threshold_seconds": 30,
+      "time_bonus_xp": 5,
+      "mistake_penalty_xp": 0
+    },
+    "mastery_model": {
+      "scale": "0-100",
+      "update": "Mastery += 8 on first correct; +4 on repeat correct; -6 on wrong (floor 0).",
+      "tags_drive_mastery": true
+    },
+    "unlock_rules": [
+      {
+        "unlock": "ch4-m2",
+        "when": "complete ch4-m1"
+      },
+      {
+        "unlock": "ch4-m3",
+        "when": "complete ch4-m2"
+      },
+      {
+        "unlock": "boss_4",
+        "when": "complete ch4-m3"
+      }
+    ]
+  },
+  "tags": {
+    "concepts": [
+      "se_authority",
+      "se_intimidation",
+      "se_social_proof",
+      "se_scarcity",
+      "se_familiarity",
+      "se_trust",
+      "se_urgency",
+      "phishing",
+      "smishing",
+      "vishing",
+      "spear_phishing",
+      "whaling",
+      "impersonation",
+      "identity_fraud",
+      "pretexting",
+      "bec",
+      "watering_hole",
+      "brand_impersonation",
+      "typosquatting",
+      "pharming",
+      "mdm",
+      "trust_model",
+      "brute_force",
+      "password_spraying",
+      "online_vs_offline",
+      "rainbow_tables",
+      "hashing_basics",
+      "salts_peppers",
+      "2.2",
+      "2.4"
+    ],
+    "difficulty_scale": {
+      "1": "easy recall",
+      "2": "basic apply",
+      "3": "scenario apply",
+      "4": "mixed concept trap",
+      "5": "boss-level synthesis"
+    }
+  },
+  "trap_list": [
+    {
+      "id": "trap_spear_vs_whaling",
+      "name": "Spear Phishing vs Whaling",
+      "misconception": "Treating any targeted phishing as whaling.",
+      "fix": "Whaling specifically targets senior executives such as CEO/CFO.",
+      "drill_question_ids": [
+        "ch4-q06",
+        "ch4-q07",
+        "ch4-q13"
+      ]
+    },
+    {
+      "id": "trap_typo_vs_pharming",
+      "name": "Typosquatting vs Pharming",
+      "misconception": "Assuming all fake-site redirects are caused by mistyped URLs.",
+      "fix": "Typosquatting needs a typo; pharming can redirect even with a correct URL via DNS/hosts manipulation.",
+      "drill_question_ids": [
+        "ch4-q11",
+        "ch4-q12"
+      ]
+    },
+    {
+      "id": "trap_bruteforce_vs_spraying",
+      "name": "Brute Force vs Password Spraying",
+      "misconception": "Mixing up many-passwords-one-user with few-passwords-many-users.",
+      "fix": "Brute force attacks one account with many guesses; spraying attacks many accounts with common passwords.",
+      "drill_question_ids": [
+        "ch4-q17",
+        "ch4-q18"
+      ]
+    },
+    {
+      "id": "trap_online_vs_offline",
+      "name": "Online vs Offline Password Attacks",
+      "misconception": "Assuming all password guessing hits live login systems.",
+      "fix": "Offline cracking targets stolen hashes and bypasses live lockout controls.",
+      "drill_question_ids": [
+        "ch4-q19",
+        "ch4-q20",
+        "ch4-q22"
+      ]
+    },
+    {
+      "id": "trap_misinfo_vs_disinfo",
+      "name": "Misinformation vs Disinformation",
+      "misconception": "Ignoring intent when classifying influence campaigns.",
+      "fix": "Disinformation is intentional deception; misinformation can be accidental.",
+      "drill_question_ids": [
+        "ch4-q15",
+        "ch4-q16"
+      ]
+    }
+  ],
+  "missions": [
+    {
+      "id": "ch4-m1",
+      "name": "Social Engineering Principles and Lures",
+      "goal": "Classify social engineering principles and identify common phishing-style lures.",
+      "mechanics": {
+        "minigame": "learn_quiz",
+        "mode": "campaign",
+        "recommended_time_min": 18,
+        "coaching_tips": [
+          "If a message pushes speed or fear, pause and verify via a trusted channel.",
+          "Map each lure to a principle: authority, urgency, social proof, scarcity, familiarity, trust, intimidation."
+        ],
+        "rules": {
+          "hints_per_question": 1,
+          "show_explanations": true
+        }
+      },
+      "question_ids": [
+        "ch4-q01",
+        "ch4-q02",
+        "ch4-q03",
+        "ch4-q04",
+        "ch4-q05",
+        "ch4-q06",
+        "ch4-q07",
+        "ch4-q08"
+      ],
+      "rewards": {
+        "xp": 130,
+        "loot": [
+          "badge_ch4-m1"
+        ],
+        "unlock": "ch4-m2"
+      }
+    },
+    {
+      "id": "ch4-m2",
+      "name": "Attack Delivery Patterns and Influence Ops",
+      "goal": "Differentiate watering hole, brand impersonation, typosquatting, pharming, and MDM workflows.",
+      "mechanics": {
+        "minigame": "learn_quiz",
+        "mode": "campaign",
+        "recommended_time_min": 16,
+        "coaching_tips": [
+          "Typosquatting needs a typo; pharming redirects even with the right URL.",
+          "For misinformation/disinformation, classify intent first, then apply TRUST response steps."
+        ],
+        "rules": {
+          "hints_per_question": 1,
+          "show_explanations": true
+        }
+      },
+      "question_ids": [
+        "ch4-q09",
+        "ch4-q10",
+        "ch4-q11",
+        "ch4-q12",
+        "ch4-q13",
+        "ch4-q14",
+        "ch4-q15",
+        "ch4-q16"
+      ],
+      "rewards": {
+        "xp": 150,
+        "loot": [
+          "badge_ch4-m2"
+        ],
+        "unlock": "ch4-m3"
+      }
+    },
+    {
+      "id": "ch4-m3",
+      "name": "Password Attack Tactics and Defenses",
+      "goal": "Separate brute force vs spraying and map hashing controls to realistic cracking scenarios.",
+      "mechanics": {
+        "minigame": "learn_quiz",
+        "mode": "campaign",
+        "recommended_time_min": 20,
+        "coaching_tips": [
+          "Brute force = many guesses, one account; spraying = few common guesses, many accounts.",
+          "Offline cracking is faster once hashes are stolen, so hardening storage and hashing is critical."
+        ],
+        "rules": {
+          "hints_per_question": 1,
+          "show_explanations": true
+        }
+      },
+      "question_ids": [
+        "ch4-q17",
+        "ch4-q18",
+        "ch4-q19",
+        "ch4-q20",
+        "ch4-q21",
+        "ch4-q22",
+        "ch4-q23",
+        "ch4-q24",
+        "ch4-q25",
+        "ch4-q26",
+        "ch4-q27"
+      ],
+      "rewards": {
+        "xp": 170,
+        "loot": [
+          "badge_ch4-m3"
+        ],
+        "unlock": "boss_4"
+      }
+    },
+    {
+      "id": "ch4-m4",
+      "name": "Understanding Drill: Matching, Ordering, and Scenario Reasoning",
+      "goal": "Apply social engineering and password-defense concepts in interactive formats.",
+      "mechanics": {
+        "minigame": "learn_quiz",
+        "focus": "interactive_v2"
+      },
+      "question_ids": [
+        "ch4-q33",
+        "ch4-q34",
+        "ch4-q35",
+        "ch4-q36",
+        "ch4-q37",
+        "ch4-q38",
+        "ch4-q39",
+        "ch4-q40",
+        "ch4-q41",
+        "ch4-q42"
+      ],
+      "rewards": {
+        "xp": 140,
+        "loot": [
+          "Insight Token",
+          "Pattern Badge"
+        ]
+      }
+    }
+  ],
+  "boss": {
+    "id": "boss_4",
+    "name": "Boss Fight: Human Vector Kill Chain",
+    "premise": "Resolve mixed social engineering and password attack scenarios under time pressure.",
+    "mechanics": {
+      "format": "timed_synthesis",
+      "total_questions": 8,
+      "time_limit_seconds_total": 720,
+      "lives": 2
+    },
+    "question_ids": [
+      "ch4-q15",
+      "ch4-q16",
+      "ch4-q17",
+      "ch4-q18",
+      "ch4-q19",
+      "ch4-q20",
+      "ch4-q21",
+      "ch4-q22",
+      "ch4-q28",
+      "ch4-q29",
+      "ch4-q30",
+      "ch4-q31",
+      "ch4-q32"
+    ],
+    "rewards": {
+      "xp": 320,
+      "loot": [
+        "title_ch4_cleared",
+        "unlock_roguelike_runset_ch4"
+      ]
+    }
+  },
+  "roguelike": {
+    "runset_id": "roguelike_runset_ch4",
+    "run_minutes_target": 18,
+    "structure": {
+      "acts": 3,
+      "encounters_per_act": 4,
+      "rest_sites_per_act": 1,
+      "boss_per_run": "boss_4_variant"
+    },
+    "cards": {
+      "threat_cards": [
+        {
+          "id": "threat_bec",
+          "name": "BEC Escalation",
+          "tags": [
+            "bec",
+            "se_urgency"
+          ]
+        },
+        {
+          "id": "threat_whaling",
+          "name": "Executive Whaling",
+          "tags": [
+            "whaling",
+            "phishing"
+          ]
+        },
+        {
+          "id": "threat_spraying",
+          "name": "Password Spray Wave",
+          "tags": [
+            "password_spraying",
+            "online_vs_offline"
+          ]
+        }
+      ],
+      "constraint_cards": [
+        {
+          "id": "constraint_dns",
+          "name": "DNS Drift",
+          "effect": "Inject one pharming or typosquatting decision this act."
+        },
+        {
+          "id": "constraint_identity",
+          "name": "Identity Spoofing",
+          "effect": "At least one scenario uses impersonation or pretexting cues."
+        }
+      ],
+      "control_cards": [
+        {
+          "id": "control_mfa",
+          "name": "MFA Enforcement",
+          "tags": [
+            "bec",
+            "password_spraying"
+          ]
+        },
+        {
+          "id": "control_verification",
+          "name": "Call-back Policy",
+          "tags": [
+            "pretexting",
+            "se_authority"
+          ]
+        },
+        {
+          "id": "control_hash_hardening",
+          "name": "Hash Hardening",
+          "tags": [
+            "hashing_basics",
+            "salts_peppers"
+          ]
+        }
+      ]
+    },
+    "question_pool_ids": "use_all_questions_in_pack"
+  },
+  "pvp": {
+    "enabled": false,
+    "modes": [
+      {
+        "id": "duel_quickfire",
+        "name": "Quickfire Duel",
+        "description": "Both players answer the same 10 questions. Faster correct answers generate a 5s time tax on the opponent's next question.",
+        "rules": {
+          "questions": 10,
+          "time_per_question_seconds": 35,
+          "attack_on_correct_under_seconds": 20,
+          "time_tax_seconds": 5
+        }
+      }
+    ],
+    "fairness": {
+      "matchmaking": "match by mastery band (+/- 10 mastery points)",
+      "anti_cheat": "server timestamps + random question order"
+    }
+  },
+  "question_bank": [
+    {
+      "id": "ch4-q01",
+      "type": "mcq",
+      "stem": "A caller says: “I’m the CIO’s assistant. Give me the VPN reset code right now.” Which social engineering principle is being used most directly?",
+      "explanation": "Authority relies on people obeying someone who appears to be in charge or connected to leadership. It’s a common social engineering principle.",
+      "tags": [
+        "se_authority"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Authority",
+        "B": "Scarcity",
+        "C": "Consensus (social proof)",
+        "D": "Reciprocity"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "1.1",
+        "1.2"
+      ],
+      "rationaleCorrect": "Authority relies on people obeying someone who appears to be in charge or connected to leadership.",
+      "misconceptionTags": [
+        "se_authority_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch4-q02",
+      "type": "mcq",
+      "stem": "An email says: “Everyone in Finance already reviewed this document—click here to confirm.” Which principle is being exploited?",
+      "explanation": "Consensus/social proof pushes targets to do what they believe everyone else is doing (even if it’s fake).",
+      "tags": [
+        "se_social_proof"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Intimidation",
+        "B": "Consensus (social proof)",
+        "C": "Scarcity",
+        "D": "Trust"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Consensus/social proof pushes targets to do what they believe everyone else is doing (even if it’s fake).",
+      "misconceptionTags": [
+        "se_social_proof_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch4-q03",
+      "type": "mcq",
+      "stem": "A message says: “Your account will be deleted in 10 minutes unless you verify now.” Which principle is being used?",
+      "explanation": "Urgency forces speed and reduces careful verification—classic social engineering.",
+      "tags": [
+        "se_urgency"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Urgency",
+        "B": "Familiarity",
+        "C": "Scarcity",
+        "D": "Consensus"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Urgency forces speed and reduces careful verification—classic social engineering.",
+      "misconceptionTags": [
+        "se_urgency_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch4-q04",
+      "type": "mcq",
+      "stem": "What is the best definition of phishing?",
+      "explanation": "Phishing is a broad term for fraudulent acquisition of information, often credentials, most commonly via email (with variants like smishing/vishing).",
+      "tags": [
+        "phishing"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Guessing passwords by trying many combinations",
+        "B": "Fraudulently acquiring information (often credentials) using deceptive messages, commonly email",
+        "C": "Redirecting DNS to a malicious site by editing the hosts file",
+        "D": "Compromising a website that targets frequently visit"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "Phishing is a broad term for fraudulent acquisition of information, often credentials, most commonly via email (with variants like smishing/vishing).",
+      "misconceptionTags": [
+        "phishing_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch4-q05",
+      "type": "multi_select",
+      "stem": "Which are phishing variants by communication channel? (Choose TWO.)",
+      "explanation": "Smishing is phishing via SMS texts, and vishing is phishing via voice/phone/voicemail.",
+      "tags": [
+        "smishing",
+        "vishing"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Smishing",
+        "B": "Vishing",
+        "C": "Watering hole",
+        "D": "Typosquatting"
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Smishing is phishing via SMS texts, and vishing is phishing via voice/phone/voicemail.",
+      "misconceptionTags": [
+        "smishing_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch4-q06",
+      "type": "mcq",
+      "stem": "A highly customized email targets the Accounts Payable team with internal project details. What is this most specifically?",
+      "explanation": "Spear phishing targets specific individuals or groups with customized context. Whaling is specifically senior executives.",
+      "tags": [
+        "spear_phishing",
+        "phishing"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Spear phishing",
+        "B": "Whaling",
+        "C": "Smishing",
+        "D": "Pharming"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Spear phishing targets specific individuals or groups with customized context.",
+      "misconceptionTags": [
+        "spear_phishing_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch4-q07",
+      "type": "mcq",
+      "stem": "An attacker targets the CEO and CFO with an urgent payment request. What is the most specific term?",
+      "explanation": "Whaling targets senior employees like CEOs and CFOs (the “big fish”).",
+      "tags": [
+        "whaling",
+        "phishing",
+        "se_urgency"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Whaling",
+        "B": "Smishing",
+        "C": "Pretexting",
+        "D": "Watering hole"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Whaling targets senior employees like CEOs and CFOs (the “big fish”).",
+      "misconceptionTags": [
+        "whaling_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch4-q08",
+      "type": "mcq",
+      "stem": "What is pretexting?",
+      "explanation": "Pretexting uses a fabricated scenario to make the approach feel legitimate; verification calls can defeat it.",
+      "tags": [
+        "pretexting",
+        "impersonation"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "A misspelled URL that looks like a real brand",
+        "B": "A made-up scenario used to justify approaching a target",
+        "C": "Poisoning a site that targets visit frequently",
+        "D": "Using a stolen hash database to crack passwords"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Pretexting uses a fabricated scenario to make the approach feel legitimate; verification calls can defeat it.",
+      "misconceptionTags": [
+        "pretexting_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch4-q09",
+      "type": "mcq",
+      "stem": "A threat actor compromises a popular industry forum that your engineers visit daily, then uses it to deliver malware. What attack is this?",
+      "explanation": "Watering hole attacks compromise sites victims frequent, staging an attack where targets naturally visit.",
+      "tags": [
+        "watering_hole"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Brand impersonation",
+        "B": "Watering hole",
+        "C": "Vishing",
+        "D": "Password spraying"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "2.2"
+      ],
+      "rationaleCorrect": "Watering hole attacks compromise sites victims frequent, staging an attack where targets naturally visit.",
+      "misconceptionTags": [
+        "watering_hole_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch4-q10",
+      "type": "mcq",
+      "stem": "An email looks exactly like your bank’s official template and asks you to log in to “verify your account.” What is this?",
+      "explanation": "Brand impersonation spoofing relies on name recognition and real-looking templates to steal logins, payments, or deliver malware.",
+      "tags": [
+        "brand_impersonation",
+        "phishing"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Brand impersonation",
+        "B": "Pharming",
+        "C": "Typosquatting",
+        "D": "Brute force"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Brand impersonation spoofing relies on name recognition and real-looking templates to steal logins, payments, or deliver malware.",
+      "misconceptionTags": [
+        "brand_impersonation_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch4-q11",
+      "type": "mcq",
+      "stem": "You mistype a URL and land on a lookalike domain that shows ads and fake login pages. What is this?",
+      "explanation": "Typosquatting uses misspelled/similar URLs and relies on users mistyping domains.",
+      "tags": [
+        "typosquatting"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Typosquatting",
+        "B": "Pharming",
+        "C": "Whaling",
+        "D": "Pretexting"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Typosquatting uses misspelled/similar URLs and relies on users mistyping domains.",
+      "misconceptionTags": [
+        "typosquatting_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch4-q12",
+      "type": "mcq",
+      "stem": "You type the correct URL, but you still get redirected to a fake site because malware changed DNS settings. What is this?",
+      "explanation": "Pharming redirects you by altering hosts/DNS resolution (hosts file change or malware changing DNS servers), not by relying on typos.",
+      "tags": [
+        "pharming"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Pharming",
+        "B": "Typosquatting",
+        "C": "Brand impersonation",
+        "D": "Smishing"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "1.3"
+      ],
+      "rationaleCorrect": "Pharming redirects you by altering hosts/DNS resolution (hosts file change or malware changing DNS servers), not by relying on typos.",
+      "misconceptionTags": [
+        "pharming_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch4-q13",
+      "type": "mcq",
+      "stem": "Business Email Compromise (BEC) most commonly involves which idea?",
+      "explanation": "BEC relies on legitimate-looking addresses and often uses compromised accounts, spoofing, or similar domains; mitigations include MFA, training, and policies.",
+      "tags": [
+        "bec"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Using apparently legitimate email addresses to run invoice/gift card/data theft scams",
+        "B": "Compromising a frequent-visit website to deliver malware",
+        "C": "Trying thousands of passwords against one account",
+        "D": "Changing the hosts file to alter DNS lookups"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "BEC relies on legitimate-looking addresses and often uses compromised accounts, spoofing, or similar domains; mitigations include MFA, training, and policies.",
+      "misconceptionTags": [
+        "bec_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch4-q14",
+      "type": "multi_select",
+      "stem": "Which controls are commonly recommended to mitigate BEC? (Choose THREE.)",
+      "explanation": "BEC mitigation commonly involves MFA, awareness training, and policies that enforce safe behavior (verification steps).",
+      "tags": [
+        "bec",
+        "impersonation"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Multifactor authentication (MFA)",
+        "B": "Awareness training",
+        "C": "Policies/workflows that require verification",
+        "D": "Disable hashing for passwords"
+      },
+      "answers": [
+        "A",
+        "B",
+        "C"
+      ],
+      "objectiveIds": [
+        "5.6"
+      ],
+      "rationaleCorrect": "BEC mitigation commonly involves MFA, awareness training, and policies that enforce safe behavior (verification steps).",
+      "misconceptionTags": [
+        "bec_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch4-q15",
+      "type": "mcq",
+      "stem": "Which statement best distinguishes misinformation from disinformation?",
+      "explanation": "The core difference is intent: disinformation is intentional deception; misinformation may be accidental.",
+      "tags": [
+        "mdm"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Misinformation is always political; disinformation is always financial",
+        "B": "Misinformation is false information shared without intent to mislead; disinformation is false information shared intentionally to mislead",
+        "C": "Misinformation targets executives; disinformation targets staff",
+        "D": "Misinformation is email-based; disinformation is SMS-based"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "The core difference is intent: disinformation is intentional deception; misinformation may be accidental.",
+      "misconceptionTags": [
+        "mdm_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch4-q16",
+      "type": "matching",
+      "stem": "Match each TRUST step to its correct phrase.",
+      "explanation": "TRUST = Tell your story, Ready your team, Understand/assess MDM, Strategize response, Track outcomes.",
+      "tags": [
+        "trust_model",
+        "mdm"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "left": [
+        "T",
+        "R",
+        "U",
+        "S",
+        "T2"
+      ],
+      "right": [
+        "Tell your story",
+        "Ready your team",
+        "Understand and assess MDM",
+        "Strategize response",
+        "Track outcomes"
+      ],
+      "pairs": {
+        "T": "Tell your story",
+        "R": "Ready your team",
+        "U": "Understand and assess MDM",
+        "S": "Strategize response",
+        "T2": "Track outcomes"
+      },
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "TRUST = Tell your story, Ready your team, Understand/assess MDM, Strategize response, Track outcomes.",
+      "misconceptionTags": [
+        "trust_model_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch4-q17",
+      "type": "mcq",
+      "stem": "Which password attack tries a small set of common passwords across many accounts to avoid lockouts?",
+      "explanation": "Password spraying typically tries one/few common passwords across many users to avoid lockouts triggered by repeated attempts on one account.",
+      "tags": [
+        "password_spraying"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Brute force",
+        "B": "Password spraying",
+        "C": "Typosquatting",
+        "D": "Vishing"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "2.2"
+      ],
+      "rationaleCorrect": "Password spraying typically tries one/few common passwords across many users to avoid lockouts triggered by repeated attempts on one account.",
+      "misconceptionTags": [
+        "password_spraying_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch4-q18",
+      "type": "mcq",
+      "stem": "Which password attack is most accurately described as “try many password combinations until one works”?",
+      "explanation": "Brute force relies on trying many password guesses; online systems may slow or block it, but offline stores can be attacked faster.",
+      "tags": [
+        "brute_force"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Brute force",
+        "B": "Password spraying",
+        "C": "Spear phishing",
+        "D": "Brand impersonation"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "2.2"
+      ],
+      "rationaleCorrect": "Brute force relies on trying many password guesses; online systems may slow or block it, but offline stores can be attacked faster.",
+      "misconceptionTags": [
+        "brute_force_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch4-q19",
+      "type": "mcq",
+      "stem": "An attacker steals a file of hashed passwords and cracks them without touching the live login system. This is an example of:",
+      "explanation": "Offline attacks happen against captured password stores (hashes). They’re typically faster because there’s no lockout/rate-limit defense from a live system.",
+      "tags": [
+        "online_vs_offline"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Online password attack",
+        "B": "Offline password attack",
+        "C": "Smishing",
+        "D": "Pretexting"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "2.2"
+      ],
+      "rationaleCorrect": "Offline attacks happen against captured password stores (hashes).",
+      "misconceptionTags": [
+        "online_vs_offline_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch4-q20",
+      "type": "mcq",
+      "stem": "What best describes a rainbow table?",
+      "explanation": "Rainbow tables are precomputed hash databases. Attackers can look up stolen hashes (if the hashing method matches) instead of brute forcing every guess.",
+      "tags": [
+        "rainbow_tables",
+        "hashing_basics"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "A list of the most common passwords used in phishing campaigns",
+        "B": "An easily searchable database of precomputed hashes used to speed up cracking when hashes are captured",
+        "C": "A type of social engineering that uses scarcity",
+        "D": "A method of encrypting passwords so they can be reversed later"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Rainbow tables are precomputed hash databases.",
+      "misconceptionTags": [
+        "rainbow_tables_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch4-q21",
+      "type": "mcq",
+      "stem": "Which statement about hashing is most accurate in this context?",
+      "explanation": "A hash is a one-way cryptographic function with repeatable outputs; attackers crack by guessing plaintext values and matching hashes, not by “reversing” a hash.",
+      "tags": [
+        "hashing_basics"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Hashing is reversible if you have the public key",
+        "B": "Hashing is a one-way function; attackers typically guess plaintext and compare hashes",
+        "C": "Hashing and encryption are the same thing",
+        "D": "Hashing is only used for phishing detection"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "1.4"
+      ],
+      "rationaleCorrect": "A hash is a one-way cryptographic function with repeatable outputs; attackers crack by guessing plaintext values and matching hashes, not by “reversing” a hash.",
+      "misconceptionTags": [
+        "hashing_basics_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch4-q22",
+      "type": "mcq",
+      "stem": "Why do salts/peppers help defend against rainbow table attacks?",
+      "explanation": "Salts/peppers add extra data before hashing, disrupting precomputed lookups and making rainbow tables far less useful.",
+      "tags": [
+        "salts_peppers",
+        "hashing_basics",
+        "rainbow_tables"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "They prevent users from clicking phishing links",
+        "B": "They add extra data before hashing so identical passwords don’t always produce the same hash",
+        "C": "They reduce DNS resolution times",
+        "D": "They block brute-force attempts on live systems"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Salts/peppers add extra data before hashing, disrupting precomputed lookups and making rainbow tables far less useful.",
+      "misconceptionTags": [
+        "salts_peppers_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch4-q23",
+      "type": "matching",
+      "stem": "Match each phishing red flag to the best interpretation.",
+      "explanation": "Strong phishing detection comes from mapping a concrete signal to a specific risk, not just a vague feeling that the message looks odd.",
+      "tags": [
+        "phishing",
+        "spear_phishing",
+        "brand_impersonation"
+      ],
+      "objectiveIds": [
+        "2.2",
+        "5.6"
+      ],
+      "rationaleCorrect": "You identified each signal by what it implies: urgency pressures behavior, domain mismatch indicates impersonation, and credential links indicate harvesting.",
+      "rationaleIncorrect": {
+        "Urgent payment demand": "Urgency alone does not prove fraud, but in a payment context it is a pressure tactic that should trigger verification.",
+        "Display name looks familiar, but sender domain is different": "Display names are easy to spoof; domain mismatch is a high-confidence impersonation indicator.",
+        "Link asks for credentials after a 'security check'": "Credential prompts in unsolicited links are a classic account-harvest move."
+      },
+      "misconceptionTags": [
+        "se_trust_by_display_name",
+        "se_urgency_bias"
+      ],
+      "sourceRef": {
+        "outlineId": "sybex-ch4-social-engineering",
+        "href": "b01.xhtml#s4",
+        "title": "Chapter 4: Social Engineering and Password Attacks"
+      },
+      "difficulty": 2,
+      "estimated_seconds": 70,
+      "left": [
+        "Urgent payment demand",
+        "Display name looks familiar, but sender domain is different",
+        "Link asks for credentials after a 'security check'"
+      ],
+      "right": [
+        "Pressure tactic to bypass normal approval",
+        "Likely impersonation despite familiar branding",
+        "Credential harvesting attempt"
+      ],
+      "pairs": {
+        "Urgent payment demand": "Pressure tactic to bypass normal approval",
+        "Display name looks familiar, but sender domain is different": "Likely impersonation despite familiar branding",
+        "Link asks for credentials after a 'security check'": "Credential harvesting attempt"
+      }
+    },
+    {
+      "id": "ch4-q24",
+      "type": "ordering",
+      "stem": "Place these actions in the safest order after receiving a suspicious invoice email.",
+      "explanation": "Effective response is sequence-dependent: preserve evidence, verify through a trusted channel, then report and contain.",
+      "tags": [
+        "phishing",
+        "bec",
+        "se_urgency"
+      ],
+      "objectiveIds": [
+        "2.2",
+        "5.6"
+      ],
+      "rationaleCorrect": "The safest sequence avoids engaging the attacker first and uses trusted channels before any payment action.",
+      "rationaleIncorrect": {
+        "Pause and avoid clicking links or attachments": "If this is delayed, you can accidentally execute malicious content before analysis.",
+        "Verify the request using a known-good channel": "Verification must happen before payment decisions; replying to the same email can reach the attacker.",
+        "Report the message to security": "Reporting early allows containment and broader warning to other users.",
+        "Delete or quarantine the message after reporting": "Cleanup comes after evidence is captured and routing decisions are made."
+      },
+      "misconceptionTags": [
+        "se_reply_channel_trust",
+        "se_speed_over_process"
+      ],
+      "sourceRef": {
+        "outlineId": "sybex-ch4-social-engineering",
+        "href": "b01.xhtml#s4",
+        "title": "Chapter 4: Social Engineering and Password Attacks"
+      },
+      "difficulty": 2,
+      "estimated_seconds": 75,
+      "items": [
+        "Report the message to security",
+        "Verify the request using a known-good channel",
+        "Delete or quarantine the message after reporting",
+        "Pause and avoid clicking links or attachments"
+      ],
+      "correct_order": [
+        "Pause and avoid clicking links or attachments",
+        "Verify the request using a known-good channel",
+        "Report the message to security",
+        "Delete or quarantine the message after reporting"
+      ]
+    },
+    {
+      "id": "ch4-q25",
+      "type": "matching",
+      "stem": "Match the social engineering principle to the attacker message pattern.",
+      "explanation": "Classifying the persuasion principle helps you predict what control bypass the attacker is attempting.",
+      "tags": [
+        "se_authority",
+        "se_scarcity",
+        "se_social_proof",
+        "se_trust"
+      ],
+      "objectiveIds": [
+        "2.1",
+        "2.2"
+      ],
+      "rationaleCorrect": "You mapped each message to the principle that manipulates human decision-making in that context.",
+      "rationaleIncorrect": {
+        "'The CFO approved this transfer—process it now.'": "This is authority pressure, not social proof; it relies on role power.",
+        "'Only two licenses left—act before they expire.'": "Scarcity creates fear of loss to force a rushed decision.",
+        "'Everyone in your team already completed this form.'": "Social proof leverages group behavior to reduce skepticism.",
+        "'I met your manager at last week's offsite.'": "Familiarity/trust tactics reduce scrutiny by claiming a shared relationship."
+      },
+      "misconceptionTags": [
+        "se_principle_confusion"
+      ],
+      "sourceRef": {
+        "outlineId": "sybex-ch4-social-engineering",
+        "href": "b01.xhtml#s4",
+        "title": "Chapter 4: Social Engineering and Password Attacks"
+      },
+      "difficulty": 2,
+      "estimated_seconds": 70,
+      "left": [
+        "'The CFO approved this transfer—process it now.'",
+        "'Only two licenses left—act before they expire.'",
+        "'Everyone in your team already completed this form.'",
+        "'I met your manager at last week's offsite.'"
+      ],
+      "right": [
+        "Authority",
+        "Scarcity",
+        "Social proof",
+        "Familiarity/Trust"
+      ],
+      "pairs": {
+        "'The CFO approved this transfer—process it now.'": "Authority",
+        "'Only two licenses left—act before they expire.'": "Scarcity",
+        "'Everyone in your team already completed this form.'": "Social proof",
+        "'I met your manager at last week's offsite.'": "Familiarity/Trust"
+      }
+    },
+    {
+      "id": "ch4-q26",
+      "type": "ordering",
+      "stem": "Order the steps for creating a reusable passphrase policy recommendation.",
+      "explanation": "Strong password guidance should begin with policy constraints and end with measurable rollout checks.",
+      "tags": [
+        "password_policy",
+        "passphrase",
+        "security_awareness"
+      ],
+      "objectiveIds": [
+        "5.6"
+      ],
+      "rationaleCorrect": "This order moves from policy requirements to user behavior guidance, then to validation and monitoring.",
+      "rationaleIncorrect": {
+        "Define minimum policy requirements (length, reuse, MFA support)": "Requirements should come first so every recommendation aligns with enforceable controls.",
+        "Provide a memorable passphrase construction method": "Methods should follow policy so users build compliant phrases by design.",
+        "Show examples of weak vs strong phrases": "Examples reinforce the method and reduce ambiguity.",
+        "Measure adoption with failed-login and reset trends": "Measurement belongs at the end to verify the rollout worked."
+      },
+      "misconceptionTags": [
+        "password_complexity_only"
+      ],
+      "sourceRef": {
+        "outlineId": "sybex-ch4-social-engineering",
+        "href": "b01.xhtml#s4",
+        "title": "Chapter 4: Social Engineering and Password Attacks"
+      },
+      "difficulty": 2,
+      "estimated_seconds": 70,
+      "items": [
+        "Show examples of weak vs strong phrases",
+        "Define minimum policy requirements (length, reuse, MFA support)",
+        "Measure adoption with failed-login and reset trends",
+        "Provide a memorable passphrase construction method"
+      ],
+      "correct_order": [
+        "Define minimum policy requirements (length, reuse, MFA support)",
+        "Provide a memorable passphrase construction method",
+        "Show examples of weak vs strong phrases",
+        "Measure adoption with failed-login and reset trends"
+      ]
+    },
+    {
+      "id": "ch4-q27",
+      "type": "multi_select",
+      "stem": "Which controls most directly reduce business email compromise payment fraud? (Choose TWO.)",
+      "explanation": "BEC prevention focuses on process controls plus out-of-band verification for high-risk transactions.",
+      "tags": [
+        "bec",
+        "se_authority",
+        "security_awareness"
+      ],
+      "objectiveIds": [
+        "2.2",
+        "5.6"
+      ],
+      "rationaleCorrect": "Dual approval and out-of-band verification both add independent checks before funds move.",
+      "rationaleIncorrect": {
+        "A": "Dual approval reduces single-user compromise impact on payment workflows.",
+        "B": "Out-of-band verification blocks attacker-controlled email threads from being trusted as sole evidence.",
+        "C": "Quarterly phishing posters can help awareness but do not enforce transaction integrity at payment time.",
+        "D": "Shorter password rotation windows alone do not address fraudulent payment authorization logic."
+      },
+      "misconceptionTags": [
+        "bec_control_misprioritization"
+      ],
+      "sourceRef": {
+        "outlineId": "sybex-ch4-social-engineering",
+        "href": "b01.xhtml#s4",
+        "title": "Chapter 4: Social Engineering and Password Attacks"
+      },
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "Require dual approval for wire changes and urgent payments",
+        "B": "Verify new payment instructions through a known phone number",
+        "C": "Rely only on quarterly anti-phishing posters",
+        "D": "Reduce password reset cooldown to 5 minutes"
+      },
+      "answers": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "id": "ch4-q28",
+      "type": "mcq",
+      "stem": "An employee receives repeated MFA push prompts they did not initiate. What is the best immediate response?",
+      "explanation": "Push fatigue attacks rely on user annoyance. Deny prompts and report immediately so responders can contain the session source.",
+      "tags": [
+        "mfa_fatigue",
+        "incident_response",
+        "security_awareness"
+      ],
+      "objectiveIds": [
+        "2.2",
+        "4.8"
+      ],
+      "rationaleCorrect": "Denying and escalating immediately prevents accidental approval and gives defenders usable timeline evidence.",
+      "rationaleIncorrect": {
+        "A": "Approving once confirms attacker access and escalates compromise.",
+        "B": "Ignoring prompts delays containment and still leaves the attacker attempting access.",
+        "C": "Changing a password helps, but not before reporting and denying the active push attempts.",
+        "D": "Deny and report immediately is the safest immediate action."
+      },
+      "misconceptionTags": [
+        "mfa_prompt_fatigue"
+      ],
+      "sourceRef": {
+        "outlineId": "sybex-ch4-social-engineering",
+        "href": "b01.xhtml#s4",
+        "title": "Chapter 4: Social Engineering and Password Attacks"
+      },
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "options": {
+        "A": "Approve one prompt to stop notifications",
+        "B": "Ignore the prompts and continue working",
+        "C": "Reset password later and do nothing now",
+        "D": "Deny prompts and report possible account abuse"
+      },
+      "answer": "D"
+    },
+    {
+      "id": "ch4-q29",
+      "type": "matching",
+      "stem": "Match each attack type to its most accurate scenario.",
+      "explanation": "Attack labeling matters because each attack family has different preventive controls and detection points.",
+      "tags": [
+        "smishing",
+        "vishing",
+        "watering_hole",
+        "typosquatting"
+      ],
+      "objectiveIds": [
+        "2.2"
+      ],
+      "rationaleCorrect": "Each scenario maps to channel and delivery method, which determines likely controls.",
+      "rationaleIncorrect": {
+        "Smishing": "Smishing is SMS-based, so look for text-message delivery clues.",
+        "Vishing": "Vishing uses voice or phone channels, not web redirection alone.",
+        "Watering hole": "Watering hole compromises sites victims already trust and visit.",
+        "Typosquatting": "Typosquatting exploits misspelled domains to capture traffic."
+      },
+      "misconceptionTags": [
+        "vector_label_confusion"
+      ],
+      "sourceRef": {
+        "outlineId": "sybex-ch4-social-engineering",
+        "href": "b01.xhtml#s4",
+        "title": "Chapter 4: Social Engineering and Password Attacks"
+      },
+      "difficulty": 2,
+      "estimated_seconds": 65,
+      "left": [
+        "Smishing",
+        "Vishing",
+        "Watering hole",
+        "Typosquatting"
+      ],
+      "right": [
+        "Fake security text includes malicious login link",
+        "Caller impersonates help desk to collect OTP",
+        "Industry blog visited by target team serves exploit kit",
+        "Lookalike domain captures users who mistype URL"
+      ],
+      "pairs": {
+        "Smishing": "Fake security text includes malicious login link",
+        "Vishing": "Caller impersonates help desk to collect OTP",
+        "Watering hole": "Industry blog visited by target team serves exploit kit",
+        "Typosquatting": "Lookalike domain captures users who mistype URL"
+      }
+    },
+    {
+      "id": "ch4-q30",
+      "type": "ordering",
+      "stem": "Order the response steps after detecting probable credential harvesting on a user workstation.",
+      "explanation": "Containment before broad remediation avoids spreading uncertainty and preserves artifacts for investigation.",
+      "tags": [
+        "credential_harvest",
+        "incident_response",
+        "phishing"
+      ],
+      "objectiveIds": [
+        "2.2",
+        "4.8"
+      ],
+      "rationaleCorrect": "The correct order isolates risk first, then investigates and recovers with controlled communications.",
+      "rationaleIncorrect": {
+        "Isolate the affected account/session": "Containment should happen immediately to prevent further token misuse.",
+        "Collect relevant evidence (email headers, URL, logs)": "Evidence collection must happen before mass cleanup to preserve forensic detail.",
+        "Reset credentials and revoke active tokens": "Credential reset is essential but should follow initial evidence capture.",
+        "Communicate indicators and lessons to users": "Communication is most useful once facts and controls are confirmed."
+      },
+      "misconceptionTags": [
+        "ir_ordering_error"
+      ],
+      "sourceRef": {
+        "outlineId": "sybex-ch4-social-engineering",
+        "href": "b01.xhtml#s4",
+        "title": "Chapter 4: Social Engineering and Password Attacks"
+      },
+      "difficulty": 3,
+      "estimated_seconds": 80,
+      "items": [
+        "Reset credentials and revoke active tokens",
+        "Communicate indicators and lessons to users",
+        "Isolate the affected account/session",
+        "Collect relevant evidence (email headers, URL, logs)"
+      ],
+      "correct_order": [
+        "Isolate the affected account/session",
+        "Collect relevant evidence (email headers, URL, logs)",
+        "Reset credentials and revoke active tokens",
+        "Communicate indicators and lessons to users"
+      ]
+    },
+    {
+      "id": "ch4-q31",
+      "type": "matching",
+      "stem": "Match each password attack to its best defensive control focus.",
+      "explanation": "The defense should target attacker cost: slow guesses, block reuse, and reduce token replay value.",
+      "tags": [
+        "password_attack_bruteforce",
+        "password_attack_spraying",
+        "password_attack_stuffing",
+        "mfa"
+      ],
+      "objectiveIds": [
+        "2.3",
+        "4.6"
+      ],
+      "rationaleCorrect": "Each attack has a distinct bottleneck, so pairing with the right control gives stronger reduction than generic complexity changes.",
+      "rationaleIncorrect": {
+        "Brute force": "Brute force is best countered with lockout/rate limiting and stronger secrets.",
+        "Password spraying": "Spraying uses low-volume attempts across many users, so smart lockout and detection are key.",
+        "Credential stuffing": "Stuffing relies on reused credentials from breaches; MFA and password reuse prevention are critical.",
+        "MFA fatigue": "Fatigue exploits user behavior, so push-number matching and user training are high-value controls."
+      },
+      "misconceptionTags": [
+        "password_attack_control_mismatch"
+      ],
+      "sourceRef": {
+        "outlineId": "sybex-ch4-social-engineering",
+        "href": "b01.xhtml#s4",
+        "title": "Chapter 4: Social Engineering and Password Attacks"
+      },
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "left": [
+        "Brute force",
+        "Password spraying",
+        "Credential stuffing",
+        "MFA fatigue"
+      ],
+      "right": [
+        "Rate limits and account lockout thresholds",
+        "Detection for low-and-slow attempts across many accounts",
+        "MFA plus password reuse prevention",
+        "Number matching and deny-by-default guidance"
+      ],
+      "pairs": {
+        "Brute force": "Rate limits and account lockout thresholds",
+        "Password spraying": "Detection for low-and-slow attempts across many accounts",
+        "Credential stuffing": "MFA plus password reuse prevention",
+        "MFA fatigue": "Number matching and deny-by-default guidance"
+      }
+    },
+    {
+      "id": "ch4-q32",
+      "type": "ordering",
+      "stem": "Order these security awareness program actions from design to continuous improvement.",
+      "explanation": "Awareness programs are most effective when they are measured and iterated, not treated as one-time training.",
+      "tags": [
+        "security_awareness",
+        "phishing",
+        "metrics"
+      ],
+      "objectiveIds": [
+        "5.6"
+      ],
+      "rationaleCorrect": "Program lifecycle should move from baseline to targeted training, simulation, and measurable iteration.",
+      "rationaleIncorrect": {
+        "Establish baseline user-risk metrics": "You need baseline metrics first to know if training changes behavior.",
+        "Deliver role-specific training and job aids": "Training should be tailored after baseline risk is known.",
+        "Run controlled phishing simulations with feedback": "Simulation validates whether training transfers to real behavior.",
+        "Review outcomes and tune the next campaign": "Iteration is the final step that keeps the program improving."
+      },
+      "misconceptionTags": [
+        "awareness_one_time_event"
+      ],
+      "sourceRef": {
+        "outlineId": "sybex-ch4-social-engineering",
+        "href": "b01.xhtml#s4",
+        "title": "Chapter 4: Social Engineering and Password Attacks"
+      },
+      "difficulty": 2,
+      "estimated_seconds": 70,
+      "items": [
+        "Run controlled phishing simulations with feedback",
+        "Review outcomes and tune the next campaign",
+        "Deliver role-specific training and job aids",
+        "Establish baseline user-risk metrics"
+      ],
+      "correct_order": [
+        "Establish baseline user-risk metrics",
+        "Deliver role-specific training and job aids",
+        "Run controlled phishing simulations with feedback",
+        "Review outcomes and tune the next campaign"
+      ]
+    },
+    {
+      "id": "ch4-q33",
+      "type": "ordering",
+      "stem": "A help desk analyst receives a suspected phishing report. Put the response steps in the best initial order.",
+      "items": [
+        "Preserve the reported message and metadata",
+        "Contain immediate risk by blocking sender, URL, or hash",
+        "Identify other impacted users and systems",
+        "Document actions and notify incident response stakeholders"
+      ],
+      "correct_order": [
+        "Preserve the reported message and metadata",
+        "Contain immediate risk by blocking sender, URL, or hash",
+        "Identify other impacted users and systems",
+        "Document actions and notify incident response stakeholders"
+      ],
+      "explanation": "Good incident handling starts by preserving evidence, then reducing blast radius, then scoping impact, then communicating and recording decisions.",
+      "tags": [
+        "phishing",
+        "incident_response",
+        "4.8"
+      ],
+      "objectiveIds": [
+        "2.2",
+        "4.8"
+      ],
+      "rationaleCorrect": "This sequence balances evidence integrity with speed. You keep forensic value while still reducing ongoing risk.",
+      "rationaleIncorrect": {
+        "Preserve the reported message and metadata": "Skipping evidence preservation early can break later analysis and prevent reliable timeline reconstruction.",
+        "Contain immediate risk by blocking sender, URL, or hash": "Containment is high priority, but doing it before evidence capture can erase key indicators.",
+        "Identify other impacted users and systems": "Scoping before containment can allow continued credential theft or malware delivery.",
+        "Document actions and notify incident response stakeholders": "Documentation is essential, but it follows concrete evidence and containment work."
+      },
+      "misconceptionTags": [
+        "phishing-first-action",
+        "ir-sequencing"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 85,
+      "sourceRef": {
+        "outlineId": "ol-4-sample-phishing-ir",
+        "title": "Phishing triage sequence"
+      },
+      "hints": [
+        "Start by preserving evidence before making environment changes.",
+        "Contain active risk before broad impact analysis and stakeholder reporting."
+      ]
+    },
+    {
+      "id": "ch4-q34",
+      "type": "ordering",
+      "stem": "Order these password hardening actions from foundation to advanced protection.",
+      "items": [
+        "Set minimum length and banned-password policy",
+        "Require MFA for remote and privileged access",
+        "Enable account lockout or throttling controls",
+        "Monitor authentication logs for spray/stuffing patterns"
+      ],
+      "correct_order": [
+        "Set minimum length and banned-password policy",
+        "Enable account lockout or throttling controls",
+        "Require MFA for remote and privileged access",
+        "Monitor authentication logs for spray/stuffing patterns"
+      ],
+      "explanation": "Start with baseline password quality, then rate-limit guessing, then add a second factor, then continuously monitor for abuse.",
+      "tags": [
+        "password_policy",
+        "mfa",
+        "metrics"
+      ],
+      "objectiveIds": [
+        "2.3",
+        "4.6",
+        "4.4"
+      ],
+      "rationaleCorrect": "The order reflects layered defense: policy, preventive controls, stronger authentication, then detection and tuning.",
+      "rationaleIncorrect": {
+        "Set minimum length and banned-password policy": "Without baseline hygiene, other controls still inherit weak credentials.",
+        "Require MFA for remote and privileged access": "MFA is strong, but applying it before baseline policy and lockout leaves avoidable gaps.",
+        "Enable account lockout or throttling controls": "Rate limiting works best after baseline policy definition so thresholds are meaningful.",
+        "Monitor authentication logs for spray/stuffing patterns": "Monitoring should validate and improve controls after they are deployed."
+      },
+      "misconceptionTags": [
+        "password-control-order",
+        "mfa-overreliance"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "sourceRef": {
+        "outlineId": "ol-4-sample-password-defense",
+        "title": "Password defense layering"
+      },
+      "hints": [
+        "Establish baseline identity policy before advanced detection tuning.",
+        "Think in layers: policy, throttling, stronger auth, then telemetry."
+      ]
+    },
+    {
+      "id": "ch4-q35",
+      "type": "ordering",
+      "stem": "A suspected business email compromise (BEC) payment request arrives. Choose the safest order of actions.",
+      "items": [
+        "Pause payment execution and flag as suspicious",
+        "Verify request through an out-of-band trusted channel",
+        "Check sender/domain anomalies and mailbox activity",
+        "Escalate confirmed fraud attempt and update controls/training"
+      ],
+      "correct_order": [
+        "Pause payment execution and flag as suspicious",
+        "Verify request through an out-of-band trusted channel",
+        "Check sender/domain anomalies and mailbox activity",
+        "Escalate confirmed fraud attempt and update controls/training"
+      ],
+      "explanation": "Financial fraud handling should stop loss first, then verify independently, then investigate artifacts, then harden process and awareness.",
+      "tags": [
+        "bec",
+        "impersonation",
+        "security_awareness"
+      ],
+      "objectiveIds": [
+        "2.2",
+        "4.8",
+        "5.6"
+      ],
+      "rationaleCorrect": "This ordering prevents immediate loss while preserving room to verify and improve process controls.",
+      "rationaleIncorrect": {
+        "Pause payment execution and flag as suspicious": "If you skip this first, money can leave before verification finishes.",
+        "Verify request through an out-of-band trusted channel": "Verification is critical, but only after freezing execution risk.",
+        "Check sender/domain anomalies and mailbox activity": "Technical checks support confidence but do not replace direct verification.",
+        "Escalate confirmed fraud attempt and update controls/training": "Escalation closes the loop; doing it before verification causes noise and confusion."
+      },
+      "misconceptionTags": [
+        "bec-verification-order",
+        "payment-fraud-response"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 90,
+      "sourceRef": {
+        "outlineId": "ol-4-sample-bec-playbook",
+        "title": "BEC payment verification"
+      },
+      "hints": [
+        "Reduce financial exposure first, then validate identity out-of-band.",
+        "Deep artifact review belongs after transaction risk is paused."
+      ]
+    },
+    {
+      "id": "ch4-q36",
+      "type": "matching",
+      "stem": "Match each social engineering tactic to its best description.",
+      "left": [
+        "Authority",
+        "Scarcity",
+        "Social proof",
+        "Urgency"
+      ],
+      "right": [
+        "Claims senior status to override normal process",
+        "Creates fear of missing a limited opportunity",
+        "Suggests others already complied so you should too",
+        "Pushes immediate action before proper verification"
+      ],
+      "pairs": {
+        "Authority": "Claims senior status to override normal process",
+        "Scarcity": "Creates fear of missing a limited opportunity",
+        "Social proof": "Suggests others already complied so you should too",
+        "Urgency": "Pushes immediate action before proper verification"
+      },
+      "explanation": "The attacker goal is to replace critical thinking with emotion-driven compliance. Correctly labeling each tactic helps defenders choose the right countermeasure.",
+      "tags": [
+        "se_authority",
+        "se_scarcity",
+        "se_social_proof",
+        "se_urgency"
+      ],
+      "objectiveIds": [
+        "2.2"
+      ],
+      "rationaleCorrect": "Each pairing maps a persuasion lever to its characteristic behavior in phishing and pretexting campaigns.",
+      "rationaleIncorrect": {
+        "Authority": "Authority is specifically about abusing hierarchy, not just speed or popularity.",
+        "Scarcity": "Scarcity manipulates limited-time pressure, not organizational role.",
+        "Social proof": "Social proof leans on herd behavior signals, not direct command.",
+        "Urgency": "Urgency centers on compressed timelines to bypass verification."
+      },
+      "misconceptionTags": [
+        "se-tactic-confusion",
+        "persuasion-patterns"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 70,
+      "sourceRef": {
+        "outlineId": "ol-4-sample-se-tactics",
+        "title": "Social engineering persuasion tactics"
+      },
+      "hints": [
+        "Map each tactic to the persuasion lever being exploited.",
+        "Classify pressure by hierarchy, scarcity, crowd behavior, or time pressure."
+      ]
+    },
+    {
+      "id": "ch4-q37",
+      "type": "matching",
+      "stem": "Match each password attack to the most accurate profile.",
+      "left": [
+        "Brute force",
+        "Password spraying",
+        "Credential stuffing",
+        "Rainbow table attack"
+      ],
+      "right": [
+        "Tries many passwords against one account",
+        "Tries one common password across many accounts",
+        "Reuses breached username/password pairs against another service",
+        "Uses precomputed hash lookup data"
+      ],
+      "pairs": {
+        "Brute force": "Tries many passwords against one account",
+        "Password spraying": "Tries one common password across many accounts",
+        "Credential stuffing": "Reuses breached username/password pairs against another service",
+        "Rainbow table attack": "Uses precomputed hash lookup data"
+      },
+      "explanation": "These attacks differ by data source and guessing strategy. Knowing the pattern points to the right mitigation (MFA, lockout, and salted hashes).",
+      "tags": [
+        "brute_force",
+        "password_spraying",
+        "rainbow_tables"
+      ],
+      "objectiveIds": [
+        "2.3",
+        "4.6"
+      ],
+      "rationaleCorrect": "Correct mapping distinguishes guessing attacks from reused-credential attacks and hash cracking workflows.",
+      "rationaleIncorrect": {
+        "Brute force": "Brute force focuses depth on one account rather than broad account coverage.",
+        "Password spraying": "Spraying avoids lockouts by keeping password attempts low per account.",
+        "Credential stuffing": "Stuffing depends on previously leaked credentials, not random guessing.",
+        "Rainbow table attack": "Rainbow tables are hash-focused and weakened by salting."
+      },
+      "misconceptionTags": [
+        "password-attack-mixup",
+        "hash-vs-auth-attacks"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 80,
+      "sourceRef": {
+        "outlineId": "ol-4-sample-password-attacks",
+        "title": "Password attack taxonomy"
+      },
+      "hints": [
+        "Separate methods by input source: guessed secrets, leaked creds, or hash material.",
+        "One approach spreads across many users while another targets one account deeply."
+      ]
+    },
+    {
+      "id": "ch4-q38",
+      "type": "matching",
+      "stem": "Match each phishing channel to its usual delivery medium.",
+      "left": [
+        "Phishing",
+        "Smishing",
+        "Vishing",
+        "Whaling"
+      ],
+      "right": [
+        "General email campaigns",
+        "SMS/text messaging",
+        "Voice or phone calls",
+        "Executive-targeted phishing"
+      ],
+      "pairs": {
+        "Phishing": "General email campaigns",
+        "Smishing": "SMS/text messaging",
+        "Vishing": "Voice or phone calls",
+        "Whaling": "Executive-targeted phishing"
+      },
+      "explanation": "Channel names map to where the social engineering happens. Whaling is still phishing, but with high-value executive targeting.",
+      "tags": [
+        "phishing",
+        "smishing",
+        "vishing",
+        "whaling"
+      ],
+      "objectiveIds": [
+        "2.2"
+      ],
+      "rationaleCorrect": "Each pairing aligns with the communication channel the attacker exploits.",
+      "rationaleIncorrect": {
+        "Phishing": "Generic phishing is usually broad email-based targeting.",
+        "Smishing": "Smishing is text-message phishing, not voice.",
+        "Vishing": "Vishing occurs over calls and voicemail workflows.",
+        "Whaling": "Whaling focuses on senior leaders and high-impact approvals."
+      },
+      "misconceptionTags": [
+        "channel-confusion",
+        "phishing-variants"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 65,
+      "sourceRef": {
+        "outlineId": "ol-4-sample-channel-map",
+        "title": "Phishing channel map"
+      },
+      "hints": [
+        "Identify the communication medium first, then targeting scope.",
+        "One variant is defined by executive targeting rather than medium."
+      ]
+    },
+    {
+      "id": "ch4-q39",
+      "type": "multi_select",
+      "stem": "Which controls are most effective against credential stuffing? (Choose two.)",
+      "options": {
+        "A": "Mandatory MFA on user logins",
+        "B": "Password reuse across internal apps",
+        "C": "Rate limiting and anomaly detection on auth endpoints",
+        "D": "Allowing legacy protocols without modern auth",
+        "E": "Publishing password complexity hints in public docs"
+      },
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "Credential stuffing succeeds when leaked credentials are reusable at scale. MFA and login-abuse detection disrupt both reuse and automation.",
+      "tags": [
+        "credential_harvest",
+        "mfa",
+        "metrics"
+      ],
+      "objectiveIds": [
+        "2.3",
+        "4.6",
+        "4.4"
+      ],
+      "rationaleCorrect": "These two controls specifically reduce account takeover risk from reused credentials and scripted login attempts.",
+      "rationaleIncorrect": {
+        "A": "MFA is a strong anti-takeover control against reused passwords.",
+        "B": "Password reuse increases stuffing success, so this is harmful.",
+        "C": "Rate limiting and behavioral detection directly reduce automated abuse.",
+        "D": "Legacy protocols commonly bypass strong modern controls.",
+        "E": "Public hints can assist attackers without improving defense."
+      },
+      "misconceptionTags": [
+        "credential-stuffing-controls",
+        "mfa-purpose"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "sourceRef": {
+        "outlineId": "ol-4-sample-credential-stuffing",
+        "title": "Credential stuffing mitigations"
+      },
+      "hints": [
+        "Select controls that block reused credentials and automated auth abuse.",
+        "Skip choices that weaken authentication or expose defensive details."
+      ]
+    },
+    {
+      "id": "ch4-q40",
+      "type": "multi_select",
+      "stem": "A workforce reports many suspicious messages. Which actions improve resilience the most? (Choose two.)",
+      "options": {
+        "A": "Run short role-based phishing simulations with feedback",
+        "B": "Disable all external email attachments permanently",
+        "C": "Publish a one-click reporting workflow in mail clients",
+        "D": "Rely only on annual policy acknowledgement",
+        "E": "Ignore false positives to avoid analyst workload"
+      },
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "Behavior improves with frequent practical drills and easy reporting paths. Those two controls increase detection speed and user confidence.",
+      "tags": [
+        "security_awareness",
+        "phishing",
+        "incident_response"
+      ],
+      "objectiveIds": [
+        "2.2",
+        "4.8"
+      ],
+      "rationaleCorrect": "Training plus simple reporting creates fast detection loops without depending on perfect user judgment.",
+      "rationaleIncorrect": {
+        "A": "Frequent practice builds pattern recognition and better reporting habits.",
+        "B": "Blanket attachment bans often break business and drive risky workarounds.",
+        "C": "Low-friction reporting is one of the highest leverage controls.",
+        "D": "Annual acknowledgment alone does not build real response muscle memory.",
+        "E": "Ignoring reports hides useful indicators and degrades trust in reporting."
+      },
+      "misconceptionTags": [
+        "awareness-program-design",
+        "reporting-friction"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 65,
+      "sourceRef": {
+        "outlineId": "ol-4-sample-awareness-loop",
+        "title": "Awareness and reporting loop"
+      },
+      "hints": [
+        "Pick options that improve both user practice and reporting speed.",
+        "Prioritize repeatable workflows over annual policy-only efforts."
+      ]
+    },
+    {
+      "id": "ch4-q41",
+      "type": "mcq",
+      "legacyType": "scenario_mcq",
+      "stem": "Scenario: A finance employee receives an \"urgent\" vendor bank-change request from a familiar display name. The reply-to domain differs slightly from the legitimate one. What is the best next action?",
+      "options": {
+        "A": "Process the change to avoid late-payment penalties",
+        "B": "Forward the message to coworkers to ask if it looks real",
+        "C": "Verify the change using a trusted out-of-band contact method",
+        "D": "Reply to the same email asking for more details"
+      },
+      "answer": "C",
+      "explanation": "Display names and similar domains are common BEC tricks. Independent verification over a trusted channel breaks the attack path.",
+      "tags": [
+        "bec",
+        "brand_impersonation",
+        "incident_response"
+      ],
+      "objectiveIds": [
+        "2.2",
+        "4.8"
+      ],
+      "rationaleCorrect": "Out-of-band verification prevents business process abuse by validating intent through a known-good contact path.",
+      "rationaleIncorrect": {
+        "A": "Speed without verification is exactly what BEC campaigns exploit.",
+        "B": "Peer opinion is not identity verification and can spread attacker content.",
+        "C": "This is the safest control when payment or identity changes are requested.",
+        "D": "Replying in-thread keeps you inside attacker-controlled communication."
+      },
+      "misconceptionTags": [
+        "bec-verification",
+        "display-name-trust"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "sourceRef": {
+        "outlineId": "ol-4-sample-bec-scenario",
+        "title": "Vendor payment change verification"
+      },
+      "hints": [
+        "Treat display names as weak identity proof and verify independently.",
+        "Avoid actions that keep verification in the same suspicious thread."
+      ]
+    },
+    {
+      "id": "ch4-q42",
+      "type": "mcq",
+      "legacyType": "scenario_mcq",
+      "stem": "Scenario: A user receives an MFA push they did not initiate and then gets a call claiming to be IT asking them to approve it \"to fix sync.\" What should the user do first?",
+      "options": {
+        "A": "Approve once, then immediately reset password",
+        "B": "Deny the push and report a suspected account takeover attempt",
+        "C": "Ignore the push and wait for IT to call back",
+        "D": "Approve if the caller knows the employee ID"
+      },
+      "answer": "B",
+      "explanation": "Unexpected MFA prompts combined with social pressure often indicate MFA fatigue attacks. Deny and report immediately to trigger containment.",
+      "tags": [
+        "mfa_fatigue",
+        "social_engineering",
+        "incident_response"
+      ],
+      "objectiveIds": [
+        "2.2",
+        "4.8",
+        "4.6"
+      ],
+      "rationaleCorrect": "Rejecting unauthorized prompts and escalating quickly reduces attacker dwell time and protects downstream systems.",
+      "rationaleIncorrect": {
+        "A": "Approving even once can hand attackers a valid session.",
+        "B": "Deny plus report is the safest and fastest containment path.",
+        "C": "Silence without reporting delays response and keeps risk hidden.",
+        "D": "Partial personal details are easy to gather and are not proof of legitimacy."
+      },
+      "misconceptionTags": [
+        "mfa-fatigue-response",
+        "phone-pretexting"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 55,
+      "sourceRef": {
+        "outlineId": "ol-4-sample-mfa-fatigue",
+        "title": "MFA fatigue social engineering"
+      },
+      "hints": [
+        "Unexpected MFA prompts plus social pressure usually signal an attack in progress.",
+        "Immediate denial and escalation protects downstream systems fastest."
+      ]
+    }
+  ],
+  "objectiveIds": [
+    "2.1",
+    "2.2",
+    "2.3",
+    "4.6",
+    "4.8",
+    "5.6"
+  ]
+}

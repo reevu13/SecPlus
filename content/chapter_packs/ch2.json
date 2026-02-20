@@ -1,0 +1,1004 @@
+{
+  "schema_version": "secplus_game_pack_v1",
+  "pack_id": "sec701_ch2_pack_v1",
+  "exam": {
+    "vendor": "CompTIA",
+    "name": "Security+",
+    "code": "SY0-701",
+    "max_exam_minutes": 90
+  },
+  "chapter": {
+    "number": 2,
+    "title": "Cybersecurity Threat Landscape",
+    "page_range_in_user_pdf": "1-37"
+  },
+  "design_intent": {
+    "mode": [
+      "campaign",
+      "roguelike_practice"
+    ],
+    "pvp_optional": true,
+    "default_pvp_enabled": false,
+    "player_goal": "Covers threat actor attributes/types, motivations, vectors/attack surfaces, and threat intelligence concepts including OSINT, dark web, confidence scoring, STIX/TAXII, and sharing orgs. Objectives: 2.1: Compare and contrast common threat actors and motivations.; 2.2: Explain common threat vectors and attack surfaces.; 2.3: Explain various types of vulnerabilities (incl. zero-day, supply chain).; 4.3: Explain activities associated with vulnerability management (threat feeds, OSINT, info sharing, dark web). Glossary: Attack surface - Any system/app/service exposure that may contain a vulnerability an attacker can target.; Threat vector - The method/path used to obtain access (email, USB, wireless, supply chain, etc.).; APT - Advanced Persistent Threat: sophisticated, well-resourced, long-duration attacks, often nation-state linked.; Zero-day - A vulnerability unknown to the vendor/defenders at discovery time; no patch exists yet.; STIX - A structured format (objects/relationships) for describing threats so tools can process them consistently.; TAXII - An HTTPS-based protocol used to exchange cyber threat intelligence, often STIX."
+  },
+  "progression": {
+    "xp_rules": {
+      "base_xp_per_correct": 10,
+      "streak_bonus_per_5": 15,
+      "time_bonus_threshold_seconds": 30,
+      "time_bonus_xp": 5,
+      "mistake_penalty_xp": 0
+    },
+    "mastery_model": {
+      "scale": "0-100",
+      "update": "Mastery += 8 on first correct; +4 on repeat correct; -6 on wrong (floor 0).",
+      "tags_drive_mastery": true
+    },
+    "unlock_rules": [
+      {
+        "unlock": "ch2-m2",
+        "when": "complete ch2-m1"
+      },
+      {
+        "unlock": "ch2-m3",
+        "when": "complete ch2-m2"
+      },
+      {
+        "unlock": "boss_2",
+        "when": "complete ch2-m3"
+      }
+    ]
+  },
+  "tags": {
+    "concepts": [
+      "attr_internal_external",
+      "attr_sophistication",
+      "attr_resources",
+      "attr_motivation",
+      "actor_unskilled",
+      "actor_hacktivist",
+      "actor_orgcrime",
+      "actor_nation_state",
+      "actor_insider",
+      "actor_shadow_it",
+      "actor_competitor",
+      "mot_data_exfil",
+      "mot_espionage",
+      "mot_disruption",
+      "mot_blackmail",
+      "mot_financial",
+      "mot_political",
+      "mot_ethical",
+      "mot_revenge",
+      "mot_chaos",
+      "mot_war",
+      "vector_message",
+      "vector_wired",
+      "vector_wireless",
+      "vector_systems",
+      "vector_files",
+      "vector_removable",
+      "vector_cloud",
+      "vector_supply_chain",
+      "ti_osint",
+      "ti_closed",
+      "ti_ioc",
+      "ti_confidence",
+      "ti_stix_taxii",
+      "ti_isac",
+      "2.1",
+      "2.2",
+      "2.3",
+      "4.3"
+    ],
+    "difficulty_scale": {
+      "1": "easy recall",
+      "2": "basic apply",
+      "3": "scenario apply",
+      "4": "mixed concept trap",
+      "5": "boss-level synthesis"
+    }
+  },
+  "trap_list": [],
+  "missions": [
+    {
+      "id": "ch2-m1",
+      "name": "Profile the Adversary",
+      "goal": "Threat actor attributes + common actor types + motivations.",
+      "mechanics": {
+        "minigame": "learn_quiz",
+        "mode": "campaign",
+        "recommended_time_min": 18,
+        "coaching_tips": [
+          "Money-driven? Think organized crime or fraud-first attackers.",
+          "Ideology-driven? Think hacktivist.",
+          "Long-term + high resources + stealth? Think nation-state/APT.",
+          "Already has access? Always consider insider."
+        ],
+        "rules": {
+          "hints_per_question": 1,
+          "show_explanations": true
+        }
+      },
+      "question_ids": [
+        "ch2-q1",
+        "ch2-q2",
+        "ch2-q3",
+        "ch2-q4",
+        "ch2-q5",
+        "ch2-q6",
+        "ch2-q7",
+        "ch2-q18"
+      ],
+      "rewards": {
+        "xp": 130,
+        "loot": [
+          "badge_ch2-m1"
+        ],
+        "unlock": "ch2-m2"
+      }
+    },
+    {
+      "id": "ch2-m2",
+      "name": "Find the Front Door",
+      "goal": "Threat vectors and attack surfaces used for initial access.",
+      "mechanics": {
+        "minigame": "learn_quiz",
+        "mode": "campaign",
+        "recommended_time_min": 16,
+        "coaching_tips": [
+          "Attack surface = what can be attacked. Vector = how they get in.",
+          "If it’s a USB drop, the vector is removable media even if payload is a file.",
+          "Physical access turns “hard” attacks into “easy” attacks."
+        ],
+        "rules": {
+          "hints_per_question": 1,
+          "show_explanations": true
+        }
+      },
+      "question_ids": [
+        "ch2-q8",
+        "ch2-q9",
+        "ch2-q10",
+        "ch2-q17",
+        "ch2-q15"
+      ],
+      "rewards": {
+        "xp": 150,
+        "loot": [
+          "badge_ch2-m2"
+        ],
+        "unlock": "ch2-m3"
+      }
+    },
+    {
+      "id": "ch2-m3",
+      "name": "Threat Intel Without Losing Your Mind",
+      "goal": "Threat feeds, OSINT/dark web, confidence scoring, STIX/TAXII, sharing orgs.",
+      "mechanics": {
+        "minigame": "learn_quiz",
+        "mode": "campaign",
+        "recommended_time_min": 20,
+        "coaching_tips": [
+          "Assess intel with: timely + accurate + relevant.",
+          "Confidence scores help you use low-confidence intel carefully, not ignore it.",
+          "STIX is the language; TAXII is the delivery truck."
+        ],
+        "rules": {
+          "hints_per_question": 1,
+          "show_explanations": true
+        }
+      },
+      "question_ids": [
+        "ch2-q11",
+        "ch2-q12",
+        "ch2-q13",
+        "ch2-q14",
+        "ch2-q16"
+      ],
+      "rewards": {
+        "xp": 170,
+        "loot": [
+          "badge_ch2-m3"
+        ],
+        "unlock": "boss_2"
+      }
+    }
+  ],
+  "boss": {
+    "id": "boss_2",
+    "name": "Boss Fight: Threat Landscape Labyrinth",
+    "premise": "Pressure-test your understanding of threat actors, vectors, and intel. Identify the best classification and response under time pressure.",
+    "mechanics": {
+      "format": "timed_synthesis",
+      "total_questions": 8,
+      "time_limit_seconds_total": 720,
+      "lives": 2
+    },
+    "question_ids": [
+      "ch2-q11",
+      "ch2-q12",
+      "ch2-q13",
+      "ch2-q14",
+      "ch2-q15",
+      "ch2-q16",
+      "ch2-q17",
+      "ch2-q18"
+    ],
+    "rewards": {
+      "xp": 320,
+      "loot": [
+        "title_ch2_cleared",
+        "unlock_roguelike_runset_ch2"
+      ]
+    }
+  },
+  "roguelike": {
+    "runset_id": "roguelike_runset_ch2",
+    "run_minutes_target": 18,
+    "structure": {
+      "acts": 3,
+      "encounters_per_act": 4,
+      "rest_sites_per_act": 1,
+      "boss_per_run": "boss_2_variant"
+    },
+    "cards": {
+      "threat_cards": [
+        {
+          "id": "threat_phish",
+          "name": "Phishing Wave",
+          "tags": [
+            "vector_message",
+            "attr_internal_external"
+          ]
+        },
+        {
+          "id": "threat_supply_chain",
+          "name": "Supply Chain Breach",
+          "tags": [
+            "vector_supply_chain",
+            "actor_orgcrime"
+          ]
+        },
+        {
+          "id": "threat_insider",
+          "name": "Insider Misuse",
+          "tags": [
+            "actor_insider",
+            "attr_motivation"
+          ]
+        }
+      ],
+      "constraint_cards": [
+        {
+          "id": "constraint_low_confidence",
+          "name": "Low Confidence Intel",
+          "effect": "Treat one intel-based question as low confidence this act."
+        },
+        {
+          "id": "constraint_shadow_it",
+          "name": "Shadow IT Surprise",
+          "effect": "Inject one shadow IT scenario question."
+        }
+      ],
+      "control_cards": [
+        {
+          "id": "control_osint",
+          "name": "OSINT Feed",
+          "tags": [
+            "ti_osint",
+            "ti_ioc"
+          ]
+        },
+        {
+          "id": "control_isac",
+          "name": "ISAC Sharing",
+          "tags": [
+            "ti_isac",
+            "ti_closed"
+          ]
+        },
+        {
+          "id": "control_stix_taxii",
+          "name": "STIX/TAXII Pipeline",
+          "tags": [
+            "ti_stix_taxii"
+          ]
+        }
+      ]
+    },
+    "question_pool_ids": "use_all_questions_in_pack"
+  },
+  "pvp": {
+    "enabled": false,
+    "modes": [
+      {
+        "id": "duel_quickfire",
+        "name": "Quickfire Duel",
+        "description": "Both players answer the same 10 questions. Faster correct answers generate a 5s time tax on the opponent's next question.",
+        "rules": {
+          "questions": 10,
+          "time_per_question_seconds": 35,
+          "attack_on_correct_under_seconds": 20,
+          "time_tax_seconds": 5
+        }
+      }
+    ],
+    "fairness": {
+      "matchmaking": "match by mastery band (+/- 10 mastery points)",
+      "anti_cheat": "server timestamps + random question order"
+    }
+  },
+  "question_bank": [
+    {
+      "id": "ch2-q1",
+      "type": "mcq",
+      "stem": "Which item is NOT one of the core attributes used to classify cybersecurity threat actors in this chapter?",
+      "explanation": "The chapter highlights four main attributes: internal/external, sophistication/capability, resources/funding, and intent/motivation. Education level is not part of that core classification set.\n\nHint: The chapter focuses on where they are, how skilled they are, what resources they have, and why they attack.\n\nDistractor notes: Internal vs. external: This is explicitly called out as a key threat actor attribute. | Level of sophistication/capability: Skill/capability is a core differentiator among actor types. | Resources/funding: Funding/time/people are emphasized as key differentiators.\n\nSource pages 3-4: Threat actor attributes section.",
+      "tags": [
+        "attr_internal_external",
+        "attr_sophistication",
+        "attr_resources",
+        "attr_motivation"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Internal vs. external",
+        "B": "Level of sophistication/capability",
+        "C": "Resources/funding",
+        "D": "Education level of the attacker"
+      },
+      "answer": "D",
+      "objectiveIds": [
+        "2.1"
+      ],
+      "rationaleCorrect": "The chapter highlights four main attributes: internal/external, sophistication/capability, resources/funding, and intent/motivation.",
+      "misconceptionTags": [
+        "attr_internal_external_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      }
+    },
+    {
+      "id": "ch2-q2",
+      "type": "scenario_mcq",
+      "stem": "A person downloads automated hacking tools, scans for easy vulnerable targets, and attacks mostly for bragging rights. What threat actor type best fits?",
+      "explanation": "Unskilled attackers rely heavily on automated tools and seek targets of opportunity, often to prove themselves rather than for strategic goals.\n\nHint: Tool-driven, opportunistic, low skill.\n\nSource pages 6: Unskilled attackers/script kiddies.",
+      "tags": [
+        "actor_unskilled",
+        "attr_sophistication",
+        "attr_resources",
+        "attr_motivation"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 75,
+      "options": {
+        "A": "Hacktivist",
+        "B": "Unskilled attacker (script kiddie)",
+        "C": "Nation-state/APT",
+        "D": "Insider threat"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "2.2"
+      ],
+      "rationaleCorrect": "Unskilled attackers rely heavily on automated tools and seek targets of opportunity, often to prove themselves rather than for strategic goals.",
+      "misconceptionTags": [
+        "actor_unskilled_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch2-q3",
+      "type": "scenario_mcq",
+      "stem": "A group defaces a company website because it disagrees with the company's policies and wants to promote a political cause. What threat actor type best fits?",
+      "explanation": "Hacktivists use hacking techniques to pursue activist/political goals, often believing they act for a greater good despite illegality.\n\nHint: Ideology first, not profit first.\n\nSource pages 7-8: Hacktivists definition and characteristics.",
+      "tags": [
+        "actor_hacktivist",
+        "mot_political",
+        "attr_motivation"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 75,
+      "options": {
+        "A": "Organized crime",
+        "B": "Hacktivist",
+        "C": "Competitor",
+        "D": "Unskilled attacker"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "2.2"
+      ],
+      "rationaleCorrect": "Hacktivists use hacking techniques to pursue activist/political goals, often believing they act for a greater good despite illegality.",
+      "misconceptionTags": [
+        "actor_hacktivist_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch2-q4",
+      "type": "multi_select",
+      "stem": "Which of the following are listed in this chapter as common attacker motivations? (Select all that apply.)",
+      "explanation": "The chapter lists motivations such as data exfiltration, espionage, service disruption, blackmail, financial gain, political/philosophical beliefs, ethical, revenge, disruption/chaos, and war. “Mandatory curiosity” is not part of the list.\n\nHint: One option is a fake-sounding “motivation.”\n\nSource pages 14-15: Attacker motivations list.",
+      "tags": [
+        "attr_motivation",
+        "mot_data_exfil",
+        "mot_espionage",
+        "mot_disruption",
+        "mot_financial",
+        "mot_revenge",
+        "mot_war"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "Data exfiltration",
+        "B": "Espionage",
+        "C": "Service disruption",
+        "D": "Financial gain",
+        "E": "Revenge",
+        "F": "Mandatory curiosity",
+        "G": "War"
+      },
+      "answers": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "G"
+      ],
+      "objectiveIds": [
+        "2.1"
+      ],
+      "rationaleCorrect": "The chapter lists motivations such as data exfiltration, espionage, service disruption, blackmail, financial gain, political/philosophical beliefs, ethical, revenge, disruption/chaos, and war.",
+      "misconceptionTags": [
+        "attr_motivation_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "E": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "F": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "G": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      }
+    },
+    {
+      "id": "ch2-q5",
+      "type": "mcq",
+      "stem": "Which threat actor is MOST strongly associated with illegal financial gain as the primary motivation?",
+      "explanation": "Organized crime groups focus on making money through cybercrime, often preferring to stay hidden while maximizing profit.\n\nHint: Think profit as the main objective.\n\nSource pages 9-10: Organized crime motivation and resources.",
+      "tags": [
+        "actor_orgcrime",
+        "mot_financial",
+        "attr_motivation",
+        "attr_resources"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Organized crime",
+        "B": "Hacktivist",
+        "C": "Nation-state/APT",
+        "D": "Ethical (white-hat) attacker"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "Organized crime groups focus on making money through cybercrime, often preferring to stay hidden while maximizing profit.",
+      "misconceptionTags": [
+        "actor_orgcrime_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch2-q6",
+      "type": "scenario_mcq",
+      "stem": "An attacker quietly maintains access to a target for months, using advanced techniques and significant resources to steal intellectual property. What is the BEST match?",
+      "explanation": "APTs are characterized by advanced techniques and persistence over long periods, typically backed by strong resources (often nation-state).\n\nHint: Advanced + persistent + well-resourced.\n\nSource pages 10-11: Nation-state attackers/APT and persistence.",
+      "tags": [
+        "actor_nation_state",
+        "attr_sophistication",
+        "attr_resources",
+        "mot_espionage"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "options": {
+        "A": "Unskilled attacker",
+        "B": "Nation-state/APT",
+        "C": "Shadow IT",
+        "D": "Gray-hat hacker"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "APTs are characterized by advanced techniques and persistence over long periods, typically backed by strong resources (often nation-state).",
+      "misconceptionTags": [
+        "actor_nation_state_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch2-q7",
+      "type": "mcq",
+      "stem": "What makes a zero-day attack especially dangerous?",
+      "explanation": "Zero-day exploits target vulnerabilities not yet known to the vendor/defenders, meaning patches and signatures may not exist at the time of attack.\n\nHint: Think: “unknown to defenders and vendor.”\n\nSource pages 11: Zero-day definition and risk.",
+      "tags": [
+        "actor_nation_state",
+        "attr_sophistication",
+        "2.3"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "It uses only social engineering and no technical exploits",
+        "B": "It targets wireless networks exclusively",
+        "C": "No patch is available because the vendor is unaware of the vulnerability",
+        "D": "It can only be launched by insiders"
+      },
+      "answer": "C",
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Zero-day exploits target vulnerabilities not yet known to the vendor/defenders, meaning patches and signatures may not exist at the time of attack.",
+      "misconceptionTags": [
+        "actor_nation_state_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch2-q8",
+      "type": "mcq",
+      "stem": "An attacker drops USB drives in a public parking lot hoping employees plug them in. Which threat vector is being used?",
+      "explanation": "USB drops are a classic removable media vector used to trigger malware execution when plugged in.\n\nHint: The device itself is the delivery mechanism.\n\nSource pages 17: Removable devices/USB drop example.",
+      "tags": [
+        "vector_removable",
+        "vector_files"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Cloud services",
+        "B": "Removable devices",
+        "C": "Wired networks",
+        "D": "Instant messaging"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "2.2"
+      ],
+      "rationaleCorrect": "USB drops are a classic removable media vector used to trigger malware execution when plugged in.",
+      "misconceptionTags": [
+        "vector_removable_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch2-q9",
+      "type": "scenario_mcq",
+      "stem": "A person enters a public lobby area and secretly plugs a laptop into an unused network jack on the wall to access the internal network. Which vector is MOST applicable?",
+      "explanation": "Physical access to an exposed wired network jack can provide direct entry to the internal network.\n\nHint: They’re physically present and using a cable/jack.\n\nSource pages 16: Wired networks as a vector via physical access.",
+      "tags": [
+        "vector_wired"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "options": {
+        "A": "Wireless networks",
+        "B": "Wired networks",
+        "C": "Cloud services",
+        "D": "Supply chain"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "1.5"
+      ],
+      "rationaleCorrect": "Physical access to an exposed wired network jack can provide direct entry to the internal network.",
+      "misconceptionTags": [
+        "vector_wired_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch2-q10",
+      "type": "mcq",
+      "stem": "Which scenario BEST describes a supply chain attack?",
+      "explanation": "Supply chain attacks compromise hardware/software/service providers so the victim is attacked indirectly through trusted suppliers or updates.\n\nHint: The vendor becomes the delivery path.\n\nSource pages 18-19: Supply chain risks: hardware/software/MSPs and update mechanisms.",
+      "tags": [
+        "vector_supply_chain",
+        "2.3"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "An attacker brute-forces a user's password over SSH",
+        "B": "An attacker inserts a backdoor into software updates delivered by a vendor",
+        "C": "An attacker sends phishing emails to employees",
+        "D": "An attacker uses Bluetooth to connect to a device in the parking lot"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Supply chain attacks compromise hardware/software/service providers so the victim is attacked indirectly through trusted suppliers or updates.",
+      "misconceptionTags": [
+        "vector_supply_chain_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch2-q11",
+      "type": "multi_select",
+      "stem": "When assessing a threat intelligence source/alert, which factors are emphasized in this chapter? (Select all that apply.)",
+      "explanation": "Threat intel should be assessed for timeliness, accuracy, and relevance to your environment; “entertainment value” is not a factor.\n\nHint: The chapter gives a simple 3-part filter.\n\nSource pages 25-26: Assessing threat intelligence: timely, accurate, relevant.",
+      "tags": [
+        "ti_confidence"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "Timeliness",
+        "B": "Accuracy",
+        "C": "Relevance",
+        "D": "Entertainment value"
+      },
+      "answers": [
+        "A",
+        "B",
+        "C"
+      ],
+      "objectiveIds": [
+        "2.2"
+      ],
+      "rationaleCorrect": "Threat intel should be assessed for timeliness, accuracy, and relevance to your environment; “entertainment value” is not a factor.",
+      "misconceptionTags": [
+        "ti_confidence_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch2-q12",
+      "type": "mcq",
+      "stem": "What is the purpose of using a confidence score for threat intelligence?",
+      "explanation": "Confidence scoring helps teams judge how reliable an intel item is so they can act appropriately (especially when intel is still forming).\n\nHint: It’s about trust and decision-making under uncertainty.\n\nSource pages 26-27: Confidence scoring concept and levels.",
+      "tags": [
+        "ti_confidence"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "To encrypt threat feeds in transit",
+        "B": "To quantify how much trust you should place in the intel and help filter decisions",
+        "C": "To guarantee attribution of attacks to a country",
+        "D": "To replace incident response procedures"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "Confidence scoring helps teams judge how reliable an intel item is so they can act appropriately (especially when intel is still forming).",
+      "misconceptionTags": [
+        "ti_confidence_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch2-q13",
+      "type": "mcq",
+      "stem": "Which statement BEST describes STIX and TAXII?",
+      "explanation": "STIX standardizes how threat data is represented; TAXII supports sharing/exchanging that data over HTTPS.\n\nHint: One is the format, the other is the transport.\n\nSource pages 27-28: STIX objects + TAXII exchange protocol.",
+      "tags": [
+        "ti_stix_taxii"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "STIX is a firewall rule set; TAXII is a vulnerability scanner",
+        "B": "STIX is a structured threat description format; TAXII is an HTTPS-based protocol for exchanging that intel",
+        "C": "STIX is a malware sandbox; TAXII is an email authentication method",
+        "D": "STIX is an encryption algorithm; TAXII is a key management system"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "STIX standardizes how threat data is represented; TAXII supports sharing/exchanging that data over HTTPS.",
+      "misconceptionTags": [
+        "ti_stix_taxii_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch2-q14",
+      "type": "mcq",
+      "stem": "Which information source would NOT typically be considered OSINT (open-source intelligence)?",
+      "explanation": "OSINT comes from publicly available sources (DNS/WHOIS/search). Port scanning is an active probing technique rather than passive public intelligence gathering.\n\nHint: One option actively probes targets rather than using public info.\n\nSource pages 36: Review question concept: OSINT vs non-OSINT.",
+      "tags": [
+        "ti_osint"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "DNS lookup",
+        "B": "Search engine research",
+        "C": "Port scans",
+        "D": "WHOIS queries"
+      },
+      "answer": "C",
+      "objectiveIds": [
+        "2.2"
+      ],
+      "rationaleCorrect": "OSINT comes from publicly available sources (DNS/WHOIS/search).",
+      "misconceptionTags": [
+        "ti_osint_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch2-q15",
+      "type": "scenario_mcq",
+      "stem": "Developers start using an unsanctioned cloud messaging tool to share work data because it is convenient. There is no malicious intent, but it increases risk. What is this called?",
+      "explanation": "Shadow IT is the use of unsanctioned services/tools by staff, often for productivity, which can expose sensitive data outside approved controls.\n\nHint: Unapproved tech used by employees.\n\nSource pages 12: Shadow IT explanation and risks.",
+      "tags": [
+        "actor_shadow_it"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 75,
+      "options": {
+        "A": "Shadow IT",
+        "B": "Insider threat",
+        "C": "Hacktivism",
+        "D": "Supply chain attack"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "Shadow IT is the use of unsanctioned services/tools by staff, often for productivity, which can expose sensitive data outside approved controls.",
+      "misconceptionTags": [
+        "actor_shadow_it_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch2-q16",
+      "type": "mcq",
+      "stem": "What do ISACs (Information Sharing and Analysis Centers) primarily provide?",
+      "explanation": "ISACs are sector-based sharing organizations designed to help members share threat info and receive analysis/support.\n\nHint: Think: trusted sharing community by industry sector.\n\nSource pages 28-29: Information Sharing Organizations and ISACs.",
+      "tags": [
+        "ti_isac"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "A replacement for law enforcement",
+        "B": "Sector-based sharing of threat and vulnerability information and support for members",
+        "C": "A public search engine for leaked passwords",
+        "D": "A protocol for exchanging STIX objects"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "2.2"
+      ],
+      "rationaleCorrect": "ISACs are sector-based sharing organizations designed to help members share threat info and receive analysis/support.",
+      "misconceptionTags": [
+        "ti_isac_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch2-q17",
+      "type": "ordering",
+      "stem": "Put these steps in the correct conceptual order for how an attacker typically proceeds (as described in this chapter).",
+      "explanation": "The chapter distinguishes attack surface (what can be attacked) from threat vector (how access is obtained). The foothold enables follow-on actions.\n\nHint: Surface first, then vector, then foothold, then impact.\n\nSource pages 15: Threat vectors vs attack surfaces discussion.",
+      "tags": [
+        "vector_systems"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "items": [
+        "Exploit a vulnerability using a threat vector",
+        "Discover an attack surface",
+        "Gain access/foothold on a system",
+        "Leverage access for broader objectives (e.g., exfiltration/disruption)"
+      ],
+      "correct_order": [
+        "Discover an attack surface",
+        "Exploit a vulnerability using a threat vector",
+        "Gain access/foothold on a system",
+        "Leverage access for broader objectives (e.g., exfiltration/disruption)"
+      ],
+      "objectiveIds": [
+        "2.2"
+      ],
+      "rationaleCorrect": "The chapter distinguishes attack surface (what can be attacked) from threat vector (how access is obtained).",
+      "misconceptionTags": [
+        "vector_systems_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch2-q18",
+      "type": "matching",
+      "stem": "Match the 'hat' term to the best description.",
+      "explanation": "The chapter uses hat colors as shorthand: white hat authorized, black hat malicious, gray hat unauthorized but claims good intent (still illegal/ethical issues).\n\nHint: White = authorized, Black = malicious, Gray = in-between but still unauthorized.\n\nSource pages 5: The hats hackers wear.",
+      "tags": [
+        "attr_motivation"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 85,
+      "left": [
+        "White hat",
+        "Black hat",
+        "Gray hat"
+      ],
+      "right": [
+        "Acts with authorization to find/fix vulnerabilities",
+        "Acts with malicious intent without authorization",
+        "Acts without authorization but intends to inform/benefit the target"
+      ],
+      "pairs": {
+        "White hat": "Acts with authorization to find/fix vulnerabilities",
+        "Black hat": "Acts with malicious intent without authorization",
+        "Gray hat": "Acts without authorization but intends to inform/benefit the target"
+      },
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "The chapter uses hat colors as shorthand: white hat authorized, black hat malicious, gray hat unauthorized but claims good intent (still illegal/ethical issues).",
+      "misconceptionTags": [
+        "attr_motivation_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "type": "scenario_mcq",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "Strategic targeting plus high sophistication and persistence aligns with nation-state motivations and capabilities.",
+      "rationaleIncorrect": {
+        "A": "Script kiddies usually lack this level of persistence and strategic targeting.",
+        "C": "Accidental insiders do not fit deliberate long-term campaign behavior.",
+        "D": "Commodity affiliates typically pursue short-cycle financial gain.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "actor_capability_mismatch",
+        "motivation_signal_miss"
+      ],
+      "id": "ch2_obj21_scn01",
+      "stem": "A campaign uses long dwell time, custom malware, and strategic targets with geopolitical value. Which threat actor profile is most likely?",
+      "explanation": "Nation-state or state-sponsored actors are typically associated with strategic objectives, resourcing, and persistence.",
+      "tags": [
+        "threat_actors",
+        "nation_state",
+        "motivation"
+      ],
+      "objectiveIds": [
+        "2.1"
+      ],
+      "options": {
+        "A": "Script kiddie seeking notoriety",
+        "B": "Nation-state or state-sponsored group",
+        "C": "Accidental insider with no intent",
+        "D": "Commodity spam affiliate only"
+      },
+      "answer": "B"
+    },
+    {
+      "type": "scenario_mcq",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "The actor is internal with legitimate access but harmful intent, which defines malicious insider activity.",
+      "rationaleIncorrect": {
+        "A": "Hacktivists are typically external and ideologically motivated.",
+        "C": "Nation-state classification does not match this internal abuse pattern.",
+        "D": "Supply chain compromise involves third-party trust path abuse, not direct employee exfiltration.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "insider_vs_external_blur",
+        "access_equals_trust"
+      ],
+      "id": "ch2_obj21_scn02",
+      "stem": "A disgruntled employee with valid access exfiltrates customer records before resignation. What actor category is this?",
+      "explanation": "A malicious insider has authorized access that is intentionally abused for harmful outcomes.",
+      "tags": [
+        "threat_actors",
+        "insider_threat",
+        "motivation"
+      ],
+      "objectiveIds": [
+        "2.1"
+      ],
+      "options": {
+        "A": "Hacktivist external actor",
+        "B": "Malicious insider",
+        "C": "Nation-state actor",
+        "D": "Supply chain compromise only"
+      },
+      "answer": "B"
+    }
+  ]
+}

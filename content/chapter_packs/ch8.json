@@ -1,0 +1,1521 @@
+{
+  "schema_version": "secplus_game_pack_v1",
+  "pack_id": "ch8",
+  "exam": {
+    "vendor": "CompTIA",
+    "name": "Security+",
+    "code": "SY0-701",
+    "max_exam_minutes": 90
+  },
+  "chapter": {
+    "number": 8,
+    "title": "Identity and Access Management",
+    "page_range_in_user_pdf": "362-407"
+  },
+  "design_intent": {
+    "player_goal": "Master Identity & Access Management (IAM): identity claims, AAA, SSO/federation, auth methods (passwords/MFA/biometrics), PAM, access-control models, and filesystem permissions for SY0-701.",
+    "mode": [
+      "campaign",
+      "roguelike_practice"
+    ],
+    "pvp_optional": true,
+    "default_pvp_enabled": false
+  },
+  "progression": {
+    "unlock_rules": [
+      {
+        "when": "complete ch8-m1",
+        "unlock": "ch8-m2"
+      },
+      {
+        "when": "complete ch8-m2",
+        "unlock": "ch8-m3"
+      },
+      {
+        "when": "complete ch8-m3",
+        "unlock": "boss_8"
+      }
+    ],
+    "xp_rules": {
+      "base_xp_per_correct": 10,
+      "time_bonus_threshold_seconds": 28,
+      "time_bonus_xp": 5,
+      "streak_bonus_per_5": 15,
+      "mistake_penalty_xp": 0
+    },
+    "mastery_model": {
+      "scale": "0-100",
+      "tags_drive_mastery": true,
+      "update": "Mastery += 8 on first correct; +4 on repeat correct; -6 on wrong (floor 0)."
+    }
+  },
+  "tags": {
+    "difficulty_scale": {
+      "1": "Recall",
+      "2": "Understand",
+      "3": "Apply",
+      "4": "Analyze",
+      "5": "Synthesize"
+    },
+    "concepts": [
+      "iam.identity.claims",
+      "iam.attributes_vs_traits",
+      "iam.identity_proofing",
+      "aaa.basics",
+      "aaa.accounting",
+      "authn_vs_authz",
+      "sso.basics",
+      "directory.ldap",
+      "directory.active_directory",
+      "federation.basics",
+      "federation.attestation",
+      "federation.saml",
+      "federation.openid_connect",
+      "federation.oauth",
+      "authn.passwords.best_practices",
+      "authn.passwords.policy_settings",
+      "authn.password_managers",
+      "authn.passwordless",
+      "authn.mfa.factors",
+      "authn.mfa.implementations",
+      "authn.otp.totp_hotp",
+      "authn.otp.attacks",
+      "authn.biometrics.basics",
+      "authn.biometrics.far_frr",
+      "accounts.types",
+      "accounts.provisioning_deprovisioning",
+      "pam.tools",
+      "pam.jit_ephemeral",
+      "access_control.models",
+      "access_control.dac",
+      "access_control.mac",
+      "access_control.rbac",
+      "access_control.abac",
+      "access_control.rule_based",
+      "access_control.time_of_day",
+      "access_control.least_privilege",
+      "filesystem.permissions.linux",
+      "filesystem.permissions.windows",
+      "netauth.radius",
+      "netauth.tacacs_plus",
+      "netauth.kerberos"
+    ]
+  },
+  "trap_list": [
+    {
+      "id": "trap-ch8-01",
+      "name": "Identification vs Authentication",
+      "misconception": "A username (or ID) claims who you are; authentication proves it (password, token, biometric, certificate).",
+      "fix": "Clarify this distinction before answering: A username (or ID) claims who you are; authentication proves it (password, token, biometric, certificate).",
+      "drill_question_ids": [
+        "ch8-q01",
+        "ch8-q02",
+        "ch8-q12"
+      ]
+    },
+    {
+      "id": "trap-ch8-02",
+      "name": "Authentication vs Authorization vs Accounting (AAA)",
+      "misconception": "Authenticate = prove identity; Authorize = what you’re allowed to do; Accounting = track usage/actions (logs, time, bandwidth).",
+      "fix": "Clarify this distinction before answering: Authenticate = prove identity; Authorize = what you’re allowed to do; Accounting = track usage/actions (logs, time, bandwidth).",
+      "drill_question_ids": [
+        "ch8-q03",
+        "ch8-q26",
+        "ch8-q29"
+      ]
+    },
+    {
+      "id": "trap-ch8-03",
+      "name": "SSO vs Federation",
+      "misconception": "SSO reduces repeated logins inside a boundary; federation extends trust across orgs/services using an IdP and standards (SAML/OIDC).",
+      "fix": "Clarify this distinction before answering: SSO reduces repeated logins inside a boundary; federation extends trust across orgs/services using an IdP and standards (SAML/OIDC).",
+      "drill_question_ids": [
+        "ch8-q04",
+        "ch8-q05",
+        "ch8-q06"
+      ]
+    },
+    {
+      "id": "trap-ch8-04",
+      "name": "SAML vs OAuth vs OpenID Connect",
+      "misconception": "SAML/OIDC are used for federated authentication assertions; OAuth is authorization (delegated access without sharing credentials).",
+      "fix": "Clarify this distinction before answering: SAML/OIDC are used for federated authentication assertions; OAuth is authorization (delegated access without sharing credentials).",
+      "drill_question_ids": [
+        "ch8-q05",
+        "ch8-q06",
+        "ch8-q07"
+      ]
+    },
+    {
+      "id": "trap-ch8-05",
+      "name": "RADIUS vs TACACS+",
+      "misconception": "RADIUS is common for network access (often UDP; password obfuscated); TACACS+ uses TCP and encrypts the whole packet + supports command-level control.",
+      "fix": "Clarify this distinction before answering: RADIUS is common for network access (often UDP; password obfuscated); TACACS+ uses TCP and encrypts the whole packet + supports command-level control.",
+      "drill_question_ids": [
+        "ch8-q09",
+        "ch8-q10",
+        "ch8-q32"
+      ]
+    },
+    {
+      "id": "trap-ch8-06",
+      "name": "TOTP vs HOTP",
+      "misconception": "TOTP changes with time; HOTP changes with a counter. Both are OTPs; both can be phished/relayed if the user is tricked.",
+      "fix": "Clarify this distinction before answering: TOTP changes with time; HOTP changes with a counter. Both are OTPs; both can be phished/relayed if the user is tricked.",
+      "drill_question_ids": [
+        "ch8-q18",
+        "ch8-q20",
+        "ch8-q21"
+      ]
+    },
+    {
+      "id": "trap-ch8-07",
+      "name": "Biometric errors: FAR vs FRR",
+      "misconception": "FAR = impostor accepted; FRR = legit user rejected. Tuning one typically impacts the other (trade-off).",
+      "fix": "Clarify this distinction before answering: FAR = impostor accepted; FRR = legit user rejected. Tuning one typically impacts the other (trade-off).",
+      "drill_question_ids": [
+        "ch8-q22",
+        "ch8-q23",
+        "ch8-q19"
+      ]
+    },
+    {
+      "id": "trap-ch8-08",
+      "name": "RBAC vs ABAC",
+      "misconception": "RBAC grants based on roles; ABAC grants based on attributes (user/device/location/risk), enabling more fine-grained decisions.",
+      "fix": "Clarify this distinction before answering: RBAC grants based on roles; ABAC grants based on attributes (user/device/location/risk), enabling more fine-grained decisions.",
+      "drill_question_ids": [
+        "ch8-q29",
+        "ch8-q30",
+        "ch8-q26"
+      ]
+    },
+    {
+      "id": "trap-ch8-09",
+      "name": "PAM vs ‘just give admin’",
+      "misconception": "PAM tries to avoid permanent admins: vaulting, JIT permissions, ephemeral creds, session recording, approvals.",
+      "fix": "Clarify this distinction before answering: PAM tries to avoid permanent admins: vaulting, JIT permissions, ephemeral creds, session recording, approvals.",
+      "drill_question_ids": [
+        "ch8-q24",
+        "ch8-q27",
+        "ch8-q28"
+      ]
+    },
+    {
+      "id": "trap-ch8-10",
+      "name": "Linux file permissions numbers",
+      "misconception": "r=4, w=2, x=1 per user/group/other; 755 means rwx for owner, r-x for group and others.",
+      "fix": "Clarify this distinction before answering: r=4, w=2, x=1 per user/group/other; 755 means rwx for owner, r-x for group and others.",
+      "drill_question_ids": [
+        "ch8-q31",
+        "ch8-q29",
+        "ch8-q32"
+      ]
+    }
+  ],
+  "missions": [
+    {
+      "id": "ch8-m1",
+      "name": "Identity, AAA, and Trust Boundaries",
+      "goal": "Understand identity claims, AAA, and core enterprise auth protocols (RADIUS/TACACS+/Kerberos).",
+      "mechanics": {
+        "mode": "campaign",
+        "minigame": "learn_quiz",
+        "recommended_time_min": 22,
+        "rules": {
+          "hints_per_question": 1,
+          "show_explanations": true
+        },
+        "coaching_tips": [
+          "Usernames identify; factors authenticate. Don't confuse the two in questions.",
+          "AAA is a pipeline: authenticate first, then authorize, then account/log.",
+          "RADIUS vs TACACS+ is a classic trap: payload encryption and admin command control."
+        ]
+      },
+      "question_ids": [
+        "ch8-q01",
+        "ch8-q02",
+        "ch8-q03",
+        "ch8-q09",
+        "ch8-q10",
+        "ch8-q11",
+        "ch8-q12",
+        "ch8-q32"
+      ],
+      "rewards": {
+        "xp": 120,
+        "loot": [
+          "badge_ch8-m1"
+        ],
+        "unlock": "ch8-m2"
+      }
+    },
+    {
+      "id": "ch8-m2",
+      "name": "SSO & Federation: One Login, Many Doors",
+      "goal": "Differentiate SSO vs federation and correctly choose SAML/OIDC/OAuth based on authentication vs authorization needs.",
+      "mechanics": {
+        "mode": "campaign",
+        "minigame": "learn_quiz",
+        "recommended_time_min": 22,
+        "rules": {
+          "hints_per_question": 1,
+          "show_explanations": true
+        },
+        "coaching_tips": [
+          "SSO reduces repeated logins; federation extends trust across organizations/services.",
+          "SAML/OIDC = authentication assertions; OAuth = authorization/delegated access.",
+          "Attestation = IdP formally verifying identity to the relying party."
+        ]
+      },
+      "question_ids": [
+        "ch8-q04",
+        "ch8-q05",
+        "ch8-q06",
+        "ch8-q07",
+        "ch8-q08"
+      ],
+      "rewards": {
+        "xp": 90,
+        "loot": [
+          "badge_ch8-m2"
+        ],
+        "unlock": "ch8-m3"
+      }
+    },
+    {
+      "id": "ch8-m3",
+      "name": "Authentication Hardening: Passwords, MFA, Biometrics",
+      "goal": "Apply modern password guidance, MFA factor logic, OTP realities, and biometric error trade-offs.",
+      "mechanics": {
+        "mode": "campaign",
+        "minigame": "learn_quiz",
+        "recommended_time_min": 28,
+        "rules": {
+          "hints_per_question": 1,
+          "show_explanations": true
+        },
+        "coaching_tips": [
+          "Long passphrases + MFA beat complexity gymnastics most of the time.",
+          "OTP reduces replay but can still be phished/relayed; resist magical thinking.",
+          "Biometrics are probabilistic: FAR/FRR trade-off matters for security vs usability."
+        ]
+      },
+      "question_ids": [
+        "ch8-q13",
+        "ch8-q14",
+        "ch8-q15",
+        "ch8-q16",
+        "ch8-q17",
+        "ch8-q18",
+        "ch8-q19",
+        "ch8-q20",
+        "ch8-q21",
+        "ch8-q22",
+        "ch8-q23"
+      ],
+      "rewards": {
+        "xp": 160,
+        "loot": [
+          "badge_ch8-m3"
+        ],
+        "unlock": "boss_8"
+      }
+    }
+  ],
+  "boss": {
+    "id": "boss_8",
+    "name": "Boss Fight: IAM Architect Under Fire",
+    "premise": "Mixed scenarios: pick the right auth method, stop privilege sprawl, and choose the correct access-control model/permissions.",
+    "mechanics": {
+      "format": "timed_synthesis",
+      "time_limit_seconds_total": 900,
+      "lives": 2,
+      "total_questions": 10
+    },
+    "question_ids": [
+      "ch8-q01",
+      "ch8-q03",
+      "ch8-q05",
+      "ch8-q06",
+      "ch8-q14",
+      "ch8-q18",
+      "ch8-q21",
+      "ch8-q26",
+      "ch8-q28",
+      "ch8-q29"
+    ],
+    "rewards": {
+      "xp": 340,
+      "loot": [
+        "title_ch8_cleared",
+        "unlock_roguelike_runset_ch8"
+      ]
+    }
+  },
+  "roguelike": {
+    "runset_id": "roguelike_runset_ch8",
+    "run_minutes_target": 18,
+    "question_pool_ids": "use_all_questions_in_pack",
+    "structure": {
+      "acts": 3,
+      "encounters_per_act": 4,
+      "rest_sites_per_act": 1,
+      "boss_per_run": "boss_8_variant"
+    },
+    "cards": {
+      "threat_cards": [
+        {
+          "id": "threat_credential_stuffing",
+          "name": "Credential Stuffing Surge",
+          "tags": [
+            "authn.passwords.best_practices",
+            "authn.mfa.implementations"
+          ]
+        },
+        {
+          "id": "threat_token_phish",
+          "name": "Token/OTP Phishing Kits",
+          "tags": [
+            "authn.otp.attacks",
+            "sso.basics"
+          ]
+        },
+        {
+          "id": "threat_shadow_admin",
+          "name": "Shadow Admins",
+          "tags": [
+            "pam.tools",
+            "access_control.least_privilege"
+          ]
+        }
+      ],
+      "control_cards": [
+        {
+          "id": "control_mfa_push",
+          "name": "MFA Rollout",
+          "tags": [
+            "authn.mfa.factors",
+            "authn.mfa.implementations"
+          ]
+        },
+        {
+          "id": "control_pam_vault",
+          "name": "PAM Vaulting",
+          "tags": [
+            "pam.tools",
+            "pam.jit_ephemeral"
+          ]
+        },
+        {
+          "id": "control_abac_context",
+          "name": "Context-Aware ABAC",
+          "tags": [
+            "access_control.abac",
+            "access_control.time_of_day"
+          ]
+        }
+      ],
+      "constraint_cards": [
+        {
+          "id": "constraint_user_friction",
+          "name": "User Friction Budget",
+          "effect": "At least one question emphasizes usability trade-offs (FAR/FRR, password rules, SSO)."
+        },
+        {
+          "id": "constraint_compliance",
+          "name": "Audit Pressure",
+          "effect": "Include at least one AAA/accounting/access review question this run."
+        }
+      ]
+    }
+  },
+  "pvp": {
+    "enabled": false,
+    "fairness": {
+      "matchmaking": "match by mastery band (+/- 10 mastery points)",
+      "anti_cheat": "seeded run codes + random question order"
+    },
+    "modes": [
+      {
+        "id": "duel_seeded_run",
+        "name": "Seeded Run Duel",
+        "description": "Both players run the same seeded 12-question run. Compare score + time. (Async; share a run code.)",
+        "rules": {
+          "questions": 12,
+          "time_limit_seconds_total": 900
+        }
+      }
+    ]
+  },
+  "question_bank": [
+    {
+      "id": "ch8-q01",
+      "type": "mcq",
+      "stem": "Which statement best describes an identity in IAM?",
+      "options": {
+        "A": "A password used to prove who you are",
+        "B": "A set of claims about a subject (person/device/app)",
+        "C": "A list of permissions assigned to a user",
+        "D": "A record of actions performed on a system"
+      },
+      "answer": "B",
+      "explanation": "An identity is the collection of claims/attributes about a subject; authentication proves the subject owns that identity, and authorization grants rights.",
+      "tags": [
+        "iam.identity.claims",
+        "authn_vs_authz"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "An identity is the collection of claims/attributes about a subject; authentication proves the subject owns that identity, and authorization grants rights.",
+      "misconceptionTags": [
+        "iam.identity.claims_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch8-q02",
+      "type": "mcq",
+      "stem": "Which of the following is the MOST accurate statement about usernames?",
+      "options": {
+        "A": "A username is an authentication factor",
+        "B": "A username is used to claim an identity, but it is not an authentication factor by itself",
+        "C": "A username is a biometric trait",
+        "D": "A username is always a token"
+      },
+      "answer": "B",
+      "explanation": "Usernames/IDs identify the account (claim the identity). You still need authentication (password/token/biometric/cert) to prove it’s you.",
+      "tags": [
+        "iam.identity.claims"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "Usernames/IDs identify the account (claim the identity).",
+      "misconceptionTags": [
+        "iam.identity.claims_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch8-q03",
+      "type": "mcq",
+      "stem": "In an AAA system, which activity is BEST described as 'accounting'?",
+      "options": {
+        "A": "Validating a username/password",
+        "B": "Granting a role to a user",
+        "C": "Tracking usage such as session time and actions",
+        "D": "Resetting a forgotten password"
+      },
+      "answer": "C",
+      "explanation": "Accounting is the 'A' that measures/records resource use and actions (time, bandwidth, commands) for audits and billing/chargeback.",
+      "tags": [
+        "aaa.accounting",
+        "aaa.basics"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "Accounting is the 'A' that measures/records resource use and actions (time, bandwidth, commands) for audits and billing/chargeback.",
+      "misconceptionTags": [
+        "aaa.accounting_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch8-q04",
+      "type": "mcq",
+      "stem": "A user logs in once and then can access multiple internal services without reauthenticating. What is this called?",
+      "options": {
+        "A": "Federation",
+        "B": "Single sign-on (SSO)",
+        "C": "Mandatory access control (MAC)",
+        "D": "Attestation"
+      },
+      "answer": "B",
+      "explanation": "SSO lets one successful authentication be reused across multiple services, reducing repeated logins (with a trade-off: a compromised session can have wider reach).",
+      "tags": [
+        "sso.basics"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "SSO lets one successful authentication be reused across multiple services, reducing repeated logins (with a trade-off: a compromised session can have wider reach).",
+      "misconceptionTags": [
+        "sso.basics_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch8-q05",
+      "type": "mcq",
+      "stem": "Which technology is an XML-based standard used to exchange authentication/authorization information between an identity provider and a service provider?",
+      "options": {
+        "A": "OAuth",
+        "B": "SAML",
+        "C": "LDAP",
+        "D": "RADIUS"
+      },
+      "answer": "B",
+      "explanation": "SAML is an XML-based open standard commonly used for federated web authentication between IdPs and service providers via assertions.",
+      "tags": [
+        "federation.saml",
+        "federation.basics"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "SAML is an XML-based open standard commonly used for federated web authentication between IdPs and service providers via assertions.",
+      "misconceptionTags": [
+        "federation.saml_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch8-q06",
+      "type": "mcq",
+      "stem": "Which statement best describes OAuth?",
+      "options": {
+        "A": "It is primarily used for federated authentication assertions (SSO login)",
+        "B": "It is an authorization framework that allows delegated access without sharing credentials",
+        "C": "It is a directory protocol used for querying user records",
+        "D": "It is a network AAA protocol used mainly for Wi‑Fi authentication"
+      },
+      "answer": "B",
+      "explanation": "OAuth is authorization: it lets a user grant limited access to a third-party app (scopes/permissions) without handing over their password.",
+      "tags": [
+        "federation.oauth"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "OAuth is authorization: it lets a user grant limited access to a third-party app (scopes/permissions) without handing over their password.",
+      "misconceptionTags": [
+        "federation.oauth_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch8-q07",
+      "type": "mcq",
+      "stem": "An identity provider 'formally verifies' that a user is who they claim to be for a relying party. What term BEST fits this?",
+      "options": {
+        "A": "Obfuscation",
+        "B": "Attestation",
+        "C": "Authorization",
+        "D": "Interoperability"
+      },
+      "answer": "B",
+      "explanation": "Attestation is formal verification. In federation, the IdP attests to the user's identity to the service/relying party.",
+      "tags": [
+        "federation.attestation",
+        "federation.basics"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "Attestation is formal verification. It aligns with the intended control outcome and avoids the common trap choices in this question.",
+      "misconceptionTags": [
+        "federation.attestation_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch8-q08",
+      "type": "mcq",
+      "stem": "Which protocol is commonly used as the backend directory for identity information and is frequently referenced in SSO environments?",
+      "options": {
+        "A": "LDAP",
+        "B": "IPSec",
+        "C": "SMTP",
+        "D": "SNMP"
+      },
+      "answer": "A",
+      "explanation": "Directory services like LDAP store and expose identity records/attributes and are commonly integrated into SSO/IAM environments.",
+      "tags": [
+        "directory.ldap",
+        "sso.basics"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 50,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "Directory services like LDAP store and expose identity records/attributes and are commonly integrated into SSO/IAM environments.",
+      "misconceptionTags": [
+        "directory.ldap_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch8-q09",
+      "type": "mcq",
+      "stem": "Which AAA protocol is Cisco-designed, uses TCP, provides full-packet encryption, and supports granular command controls?",
+      "options": {
+        "A": "RADIUS",
+        "B": "TACACS+",
+        "C": "Kerberos",
+        "D": "CHAP"
+      },
+      "answer": "B",
+      "explanation": "TACACS+ uses TCP and encrypts the whole packet; it can also control/authorize individual administrative commands.",
+      "tags": [
+        "netauth.tacacs_plus",
+        "aaa.basics"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "TACACS+ uses TCP and encrypts the whole packet; it can also control/authorize individual administrative commands.",
+      "misconceptionTags": [
+        "netauth.tacacs_plus_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch8-q10",
+      "type": "mcq",
+      "stem": "Which statement about RADIUS is MOST accurate in many deployments?",
+      "options": {
+        "A": "It provides full-packet encryption by default",
+        "B": "It is commonly used for network access and AAA, and traffic is often protected using tunnels like IPSec",
+        "C": "It always uses TCP port 49",
+        "D": "It is an XML-based federation standard"
+      },
+      "answer": "B",
+      "explanation": "RADIUS is widely used for network AAA. Password handling is limited, so organizations often protect RADIUS traffic (e.g., with IPSec) between NAS and server.",
+      "tags": [
+        "netauth.radius",
+        "aaa.basics"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "RADIUS is widely used for network AAA. It aligns with the intended control outcome and avoids the common trap choices in this question.",
+      "misconceptionTags": [
+        "netauth.radius_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch8-q11",
+      "type": "mcq",
+      "stem": "Which protocol authenticates service requests between trusted hosts using a key distribution center (KDC)?",
+      "options": {
+        "A": "Kerberos",
+        "B": "OpenID Connect",
+        "C": "SAML",
+        "D": "OAuth"
+      },
+      "answer": "A",
+      "explanation": "Kerberos uses a KDC and tickets to authenticate service requests across untrusted networks, common in enterprise domain environments.",
+      "tags": [
+        "netauth.kerberos",
+        "sso.basics"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "3.2"
+      ],
+      "rationaleCorrect": "Kerberos uses a KDC and tickets to authenticate service requests across untrusted networks, common in enterprise domain environments.",
+      "misconceptionTags": [
+        "netauth.kerberos_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch8-q12",
+      "type": "multi_select",
+      "stem": "Which are common ways to claim/represent an identity (before proving it)? (Select all that apply.)",
+      "options": {
+        "A": "Usernames",
+        "B": "Certificates",
+        "C": "Tokens",
+        "D": "SSH keys",
+        "E": "Smartcards",
+        "F": "AES encryption"
+      },
+      "answers": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "explanation": "Identity can be claimed using identifiers like usernames and also via certificates/tokens/SSH keys/smartcards. Encryption algorithms (like AES) are not identity claims by themselves.",
+      "tags": [
+        "iam.identity.claims"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "Identity can be claimed using identifiers like usernames and also via certificates/tokens/SSH keys/smartcards.",
+      "misconceptionTags": [
+        "iam.identity.claims_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "E": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "F": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch8-q13",
+      "type": "mcq",
+      "stem": "Which description best matches identity proofing?",
+      "options": {
+        "A": "Assigning permissions to a role",
+        "B": "Verifying that a real-world person is correctly bound to a digital identity during enrollment",
+        "C": "Encrypting authentication traffic over the network",
+        "D": "Using a password manager to store credentials"
+      },
+      "answer": "B",
+      "explanation": "Identity proofing is the enrollment step that ensures the subject truly is who they claim to be before issuing credentials/identity records.",
+      "tags": [
+        "iam.identity_proofing"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "Identity proofing is the enrollment step that ensures the subject truly is who they claim to be before issuing credentials/identity records.",
+      "misconceptionTags": [
+        "iam.identity_proofing_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch8-q14",
+      "type": "mcq",
+      "stem": "NIST-style modern password guidance generally emphasizes which approach?",
+      "options": {
+        "A": "Strict complexity rules with frequent forced rotation",
+        "B": "Length over complexity, allow password managers, and block known-compromised passwords",
+        "C": "Short passwords plus password hints",
+        "D": "Disallow pasting into password fields"
+      },
+      "answer": "B",
+      "explanation": "Modern guidance emphasizes longer passwords/passphrases, usability features that support password managers, and preventing known-bad passwords rather than arbitrary complexity rules.",
+      "tags": [
+        "authn.passwords.best_practices"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "5.6"
+      ],
+      "rationaleCorrect": "Modern guidance emphasizes longer passwords/passphrases, usability features that support password managers, and preventing known-bad passwords rather than arbitrary complexity rules.",
+      "misconceptionTags": [
+        "authn.passwords.best_practices_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch8-q15",
+      "type": "multi_select",
+      "stem": "Which are common password policy settings an organization may configure? (Select all that apply.)",
+      "options": {
+        "A": "Minimum length",
+        "B": "Complexity rules",
+        "C": "Reuse history",
+        "D": "Expiration/maximum age",
+        "E": "Minimum age before change",
+        "F": "Perfect forward secrecy"
+      },
+      "answers": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "explanation": "Password policy settings often include length, complexity, reuse, expiration, and minimum age. Perfect forward secrecy is a session key property in cryptography, not a password policy toggle.",
+      "tags": [
+        "authn.passwords.policy_settings"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "1.3"
+      ],
+      "rationaleCorrect": "Password policy settings often include length, complexity, reuse, expiration, and minimum age.",
+      "misconceptionTags": [
+        "authn.passwords.policy_settings_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "E": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "F": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch8-q16",
+      "type": "mcq",
+      "stem": "What is the PRIMARY security benefit of using a password manager?",
+      "options": {
+        "A": "It replaces the need for encryption on the network",
+        "B": "It eliminates the need for user accounts",
+        "C": "It reduces password reuse and enables long, unique passwords",
+        "D": "It automatically grants least privilege access"
+      },
+      "answer": "C",
+      "explanation": "Password managers help users generate and store long, unique passwords, reducing reuse—the main real-world driver of account takeover at scale.",
+      "tags": [
+        "authn.password_managers"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "3.2"
+      ],
+      "rationaleCorrect": "Password managers help users generate and store long, unique passwords, reducing reuse—the main real-world driver of account takeover at scale.",
+      "misconceptionTags": [
+        "authn.password_managers_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch8-q17",
+      "type": "mcq",
+      "stem": "A user authenticates to a service using a hardware security key that requires a PIN or biometric to unlock the key; no password is typed. This is BEST described as:",
+      "options": {
+        "A": "Passwordless authentication",
+        "B": "Mandatory access control",
+        "C": "Federation",
+        "D": "Accounting"
+      },
+      "answer": "A",
+      "explanation": "Passwordless commonly relies on something you have (security key/token/cert) and sometimes something you are/know (biometric/PIN) to unlock the device, without typing a password.",
+      "tags": [
+        "authn.passwordless"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "3.2"
+      ],
+      "rationaleCorrect": "Passwordless commonly relies on something you have (security key/token/cert) and sometimes something you are/know (biometric/PIN) to unlock the device, without typing a password.",
+      "misconceptionTags": [
+        "authn.passwordless_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch8-q18",
+      "type": "multi_select",
+      "stem": "Which are valid multifactor authentication (MFA) factor categories? (Select all that apply.)",
+      "options": {
+        "A": "Something you know",
+        "B": "Something you have",
+        "C": "Something you are",
+        "D": "Somewhere you are",
+        "E": "Something you scan",
+        "F": "Something you guess"
+      },
+      "answers": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "explanation": "MFA factors are categories: knowledge (know), possession (have), inherence (are), and sometimes location (somewhere). 'Scan' and 'guess' aren't standard factor categories.",
+      "tags": [
+        "authn.mfa.factors",
+        "authn.mfa.implementations"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "3.2"
+      ],
+      "rationaleCorrect": "MFA factors are categories: knowledge (know), possession (have), inherence (are), and sometimes location (somewhere).",
+      "misconceptionTags": [
+        "authn.mfa.factors_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "E": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "F": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch8-q19",
+      "type": "mcq",
+      "stem": "Which authentication method is MOST resistant to credential stuffing attacks (reused passwords), assuming proper implementation?",
+      "options": {
+        "A": "Password-only login",
+        "B": "Password + security key (hardware token) MFA",
+        "C": "Password hint questions",
+        "D": "A short PIN reused across sites"
+      },
+      "answer": "B",
+      "explanation": "Credential stuffing relies on reused passwords. Adding a strong second factor (like a security key) breaks the attack unless the attacker also steals that factor or can relay it.",
+      "tags": [
+        "authn.mfa.implementations",
+        "authn.passwordless"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "3.2"
+      ],
+      "rationaleCorrect": "Credential stuffing relies on reused passwords.",
+      "misconceptionTags": [
+        "authn.mfa.implementations_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch8-q20",
+      "type": "mcq",
+      "stem": "A time-based one-time password that changes every 30 seconds is MOST likely:",
+      "options": {
+        "A": "HOTP",
+        "B": "TOTP",
+        "C": "SAML",
+        "D": "Kerberos"
+      },
+      "answer": "B",
+      "explanation": "TOTP is time-based; HOTP is counter-based. Both are one-time password methods.",
+      "tags": [
+        "authn.otp.totp_hotp"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 50,
+      "objectiveIds": [
+        "3.2"
+      ],
+      "rationaleCorrect": "TOTP is time-based; HOTP is counter-based.",
+      "misconceptionTags": [
+        "authn.otp.totp_hotp_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch8-q21",
+      "type": "mcq",
+      "stem": "Which attack MOST directly targets one-time passwords by tricking a user into providing the current code to an attacker-controlled site?",
+      "options": {
+        "A": "Rainbow table attack",
+        "B": "Phishing / real-time relay",
+        "C": "Birthday attack",
+        "D": "Buffer overflow"
+      },
+      "answer": "B",
+      "explanation": "OTP codes can be phished and relayed in real time. OTP reduces replay risk but doesn’t stop social engineering or session hijacking by itself.",
+      "tags": [
+        "authn.otp.attacks",
+        "authn.otp.totp_hotp"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "2.2"
+      ],
+      "rationaleCorrect": "OTP codes can be phished and relayed in real time.",
+      "misconceptionTags": [
+        "authn.otp.attacks_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch8-q22",
+      "type": "mcq",
+      "stem": "Which biometric metric measures how often an unauthorized person is incorrectly accepted?",
+      "options": {
+        "A": "FRR (False Rejection Rate)",
+        "B": "FAR (False Acceptance Rate)",
+        "C": "MTTR",
+        "D": "CVSS"
+      },
+      "answer": "B",
+      "explanation": "FAR is the rate that impostors are accepted. FRR is the rate legitimate users are rejected.",
+      "tags": [
+        "authn.biometrics.far_frr",
+        "authn.biometrics.basics"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "3.2"
+      ],
+      "rationaleCorrect": "FAR is the rate that impostors are accepted.",
+      "misconceptionTags": [
+        "authn.biometrics.far_frr_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch8-q23",
+      "type": "mcq",
+      "stem": "A company tunes face recognition to reduce FAR. What is a common trade-off?",
+      "options": {
+        "A": "FRR often increases (more legitimate users get rejected)",
+        "B": "Password length requirements must be reduced",
+        "C": "OAuth stops working",
+        "D": "Kerberos KDC becomes unnecessary"
+      },
+      "answer": "A",
+      "explanation": "Biometrics often trade off FAR vs FRR—tightening acceptance to block impostors can increase rejections for legitimate users.",
+      "tags": [
+        "authn.biometrics.far_frr"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "3.2"
+      ],
+      "rationaleCorrect": "Biometrics often trade off FAR vs FRR—tightening acceptance to block impostors can increase rejections for legitimate users.",
+      "misconceptionTags": [
+        "authn.biometrics.far_frr_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch8-q24",
+      "type": "mcq",
+      "stem": "Which account type is BEST used for routine tasks and should NOT have administrative privileges?",
+      "options": {
+        "A": "Service account",
+        "B": "User (standard) account",
+        "C": "Shared administrator account",
+        "D": "Root account"
+      },
+      "answer": "B",
+      "explanation": "Best practice is to use standard user accounts for normal work and elevate only when needed (separate admin accounts / JIT).",
+      "tags": [
+        "accounts.types",
+        "access_control.least_privilege"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "Best practice is to use standard user accounts for normal work and elevate only when needed (separate admin accounts / JIT).",
+      "misconceptionTags": [
+        "accounts.types_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch8-q25",
+      "type": "multi_select",
+      "stem": "Which are common enterprise account types? (Select all that apply.)",
+      "options": {
+        "A": "User accounts",
+        "B": "Service accounts",
+        "C": "Guest accounts",
+        "D": "Shared accounts",
+        "E": "Privilege accounts (admin/root)",
+        "F": "Botnet accounts"
+      },
+      "answers": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "explanation": "Enterprises use user, service, guest, shared, and privileged accounts. 'Botnet accounts' are attacker-controlled, not a legitimate account category.",
+      "tags": [
+        "accounts.types"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "3.2"
+      ],
+      "rationaleCorrect": "Enterprises use user, service, guest, shared, and privileged accounts.",
+      "misconceptionTags": [
+        "accounts.types_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "E": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "F": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch8-q26",
+      "type": "mcq",
+      "stem": "Which process MOST directly reduces the risk of 'permission creep' when someone changes roles or leaves the company?",
+      "options": {
+        "A": "Provisioning only",
+        "B": "Deprovisioning and periodic access reviews",
+        "C": "Increasing password complexity",
+        "D": "Switching from LDAP to SAML"
+      },
+      "answer": "B",
+      "explanation": "Deprovisioning (removing access) + ongoing access reviews are how you prevent old privileges from accumulating over time (permission creep).",
+      "tags": [
+        "accounts.provisioning_deprovisioning",
+        "access_control.least_privilege"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "Deprovisioning (removing access) + ongoing access reviews are how you prevent old privileges from accumulating over time (permission creep).",
+      "misconceptionTags": [
+        "accounts.provisioning_deprovisioning_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch8-q27",
+      "type": "mcq",
+      "stem": "Which statement BEST describes privileged access management (PAM)?",
+      "options": {
+        "A": "A method to make passwords shorter and easier to remember",
+        "B": "Tools/processes that control, monitor, and reduce standing privileged access (vaulting, JIT, session recording)",
+        "C": "A federation protocol used for SSO between organizations",
+        "D": "A directory lookup protocol for identity attributes"
+      },
+      "answer": "B",
+      "explanation": "PAM is about controlling privileged identities: approvals, password vaulting, session recording, and minimizing permanent admin rights via JIT/ephemeral access.",
+      "tags": [
+        "pam.tools",
+        "pam.jit_ephemeral"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "PAM is about controlling privileged identities: approvals, password vaulting, session recording, and minimizing permanent admin rights via JIT/ephemeral access.",
+      "misconceptionTags": [
+        "pam.tools_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch8-q28",
+      "type": "mcq",
+      "stem": "A help-desk admin receives elevated rights only for 30 minutes, after approval, and credentials expire automatically. This is an example of:",
+      "options": {
+        "A": "Mandatory access control (MAC)",
+        "B": "Ephemeral credentials with just-in-time (JIT) permissions",
+        "C": "Single sign-on (SSO)",
+        "D": "Discretionary access control (DAC)"
+      },
+      "answer": "B",
+      "explanation": "JIT + ephemeral credentials minimize long-lived admin accounts. Rights appear only when needed and disappear automatically, reducing attack surface.",
+      "tags": [
+        "pam.jit_ephemeral",
+        "pam.tools"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "JIT + ephemeral credentials minimize long-lived admin accounts.",
+      "misconceptionTags": [
+        "pam.jit_ephemeral_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch8-q29",
+      "type": "matching",
+      "stem": "Match each access control model to its BEST description.",
+      "left": [
+        "DAC",
+        "MAC",
+        "RBAC",
+        "ABAC"
+      ],
+      "right": [
+        "Owner controls access (permissions set by resource owner)",
+        "System-enforced labels determine access (e.g., classification)",
+        "Access based on roles/job functions",
+        "Access based on attributes (user/device/context/risk)"
+      ],
+      "pairs": {
+        "DAC": "Owner controls access (permissions set by resource owner)",
+        "MAC": "System-enforced labels determine access (e.g., classification)",
+        "RBAC": "Access based on roles/job functions",
+        "ABAC": "Access based on attributes (user/device/context/risk)"
+      },
+      "explanation": "DAC is owner-driven; MAC is label-driven; RBAC maps permissions to roles; ABAC uses attributes and context for fine-grained decisions.",
+      "tags": [
+        "access_control.models",
+        "access_control.dac",
+        "access_control.mac",
+        "access_control.rbac",
+        "access_control.abac"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 95,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "DAC is owner-driven; MAC is label-driven; RBAC maps permissions to roles; ABAC uses attributes and context for fine-grained decisions.",
+      "misconceptionTags": [
+        "access_control.models_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch8-q30",
+      "type": "mcq",
+      "stem": "Which access control approach uses rules like 'only allow logins during business hours'?",
+      "options": {
+        "A": "RBAC",
+        "B": "Time-of-day restrictions (rule-based control)",
+        "C": "MAC",
+        "D": "Kerberos realm trust"
+      },
+      "answer": "B",
+      "explanation": "Rule-based controls can enforce conditions like time-of-day, network zone, or system state before granting access.",
+      "tags": [
+        "access_control.rule_based",
+        "access_control.time_of_day"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "Rule-based controls can enforce conditions like time-of-day, network zone, or system state before granting access.",
+      "misconceptionTags": [
+        "access_control.rule_based_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch8-q31",
+      "type": "mcq",
+      "stem": "In Linux file permissions, what does 755 mean?",
+      "options": {
+        "A": "Owner: rwx, Group: r-x, Other: r-x",
+        "B": "Owner: r--, Group: rw-, Other: r--",
+        "C": "Owner: rw-, Group: rw-, Other: ---",
+        "D": "Owner: r-x, Group: r-x, Other: r-x"
+      },
+      "answer": "A",
+      "explanation": "Linux permissions use r=4, w=2, x=1. 7=4+2+1 (rwx), 5=4+1 (r-x). 755 => owner rwx, group r-x, others r-x.",
+      "tags": [
+        "filesystem.permissions.linux"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "3.2"
+      ],
+      "rationaleCorrect": "Linux permissions use r=4, w=2, x=1. It aligns with the intended control outcome and avoids the common trap choices in this question.",
+      "misconceptionTags": [
+        "filesystem.permissions.linux_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch8-q32",
+      "type": "matching",
+      "stem": "Match each IAM technology to the MOST common use case.",
+      "left": [
+        "LDAP",
+        "Kerberos",
+        "RADIUS",
+        "SAML"
+      ],
+      "right": [
+        "Directory queries and identity attribute storage",
+        "Ticket-based authentication inside a trusted domain",
+        "Network access AAA (often for Wi‑Fi/VPN/NAC)",
+        "Federated web authentication assertions between IdP and service provider"
+      ],
+      "pairs": {
+        "LDAP": "Directory queries and identity attribute storage",
+        "Kerberos": "Ticket-based authentication inside a trusted domain",
+        "RADIUS": "Network access AAA (often for Wi‑Fi/VPN/NAC)",
+        "SAML": "Federated web authentication assertions between IdP and service provider"
+      },
+      "explanation": "LDAP is for directory lookups; Kerberos uses tickets/KDC; RADIUS is common for network access AAA; SAML is a federation assertion standard.",
+      "tags": [
+        "directory.ldap",
+        "netauth.kerberos",
+        "netauth.radius",
+        "federation.saml",
+        "sso.basics"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 95,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "LDAP is for directory lookups; Kerberos uses tickets/KDC; RADIUS is common for network access AAA; SAML is a federation assertion standard.",
+      "misconceptionTags": [
+        "directory.ldap_confusion"
+      ],
+      "rationaleIncorrect": {}
+    }
+  ]
+}

@@ -1,0 +1,512 @@
+{
+  "pack_id": "ch10",
+  "version": "1.0.0",
+  "confusion_pairs": [
+    {
+      "id": "cp_elasticity_scalability",
+      "title": "Elasticity vs Scalability",
+      "a": {
+        "term": "Elasticity",
+        "definition": "Automatically add/remove resources to match demand (up AND down)."
+      },
+      "b": {
+        "term": "Scalability",
+        "definition": "Ability to handle growth by increasing capacity (often planned)."
+      },
+      "bullets": [
+        "Elasticity reacts to demand changes; scalability supports long-term growth.",
+        "Elasticity is typically automated (autoscaling); scalability may be manual/planned.",
+        "Elasticity saves cost by scaling down after peaks."
+      ]
+    },
+    {
+      "id": "cp_vertical_horizontal",
+      "title": "Vertical vs Horizontal Scaling",
+      "a": {
+        "term": "Vertical scaling",
+        "definition": "Add more power to one machine (CPU/RAM)."
+      },
+      "b": {
+        "term": "Horizontal scaling",
+        "definition": "Add more machines/nodes (scale out)."
+      },
+      "bullets": [
+        "Vertical hits hardware limits; horizontal usually scales further.",
+        "Horizontal often needs load balancing and stateless design.",
+        "Vertical is simpler; horizontal is more resilient."
+      ]
+    },
+    {
+      "id": "cp_saas_paas_iaas",
+      "title": "SaaS vs PaaS vs IaaS",
+      "a": {
+        "term": "SaaS",
+        "definition": "Use an application; provider manages nearly everything."
+      },
+      "b": {
+        "term": "PaaS/IaaS",
+        "definition": "PaaS: deploy code on a managed platform; IaaS: manage OS/apps on rented infrastructure."
+      },
+      "bullets": [
+        "SaaS = you manage data/users; provider manages app+platform+infra.",
+        "PaaS = you manage code/data; provider manages runtime/OS/infra.",
+        "IaaS = you manage OS+apps+configs; provider manages physical infra."
+      ]
+    },
+    {
+      "id": "cp_faas_containers_vms",
+      "title": "FaaS (Serverless) vs Containers vs VMs",
+      "a": {
+        "term": "FaaS/Serverless",
+        "definition": "Run small functions on demand; provider manages servers and scaling."
+      },
+      "b": {
+        "term": "Containers/VMs",
+        "definition": "Containers share a host OS; VMs virtualize hardware with separate OS per VM."
+      },
+      "bullets": [
+        "Serverless is event-driven and scales fast; you focus on code.",
+        "Containers are lightweight but share a kernel; VMs isolate with separate OS.",
+        "Choose based on control needs, portability, and isolation."
+      ]
+    },
+    {
+      "id": "cp_public_private_hybrid",
+      "title": "Public vs Private vs Hybrid vs Community Cloud",
+      "a": {
+        "term": "Public cloud",
+        "definition": "Shared provider infrastructure for many customers."
+      },
+      "b": {
+        "term": "Private/Hybrid/Community",
+        "definition": "Private: single org; Hybrid: mix; Community: shared by orgs with common needs."
+      },
+      "bullets": [
+        "Public is flexible and scalable; private gives more control.",
+        "Hybrid mixes environments; bursting is a hybrid technique.",
+        "Community targets shared compliance/mission requirements."
+      ]
+    },
+    {
+      "id": "cp_shared_responsibility",
+      "title": "Shared Responsibility: Provider vs Customer",
+      "a": {
+        "term": "Provider responsibility",
+        "definition": "Security OF the cloud (physical, core infra, managed services baseline)."
+      },
+      "b": {
+        "term": "Customer responsibility",
+        "definition": "Security IN the cloud (identity, configs, data, apps—depends on service model)."
+      },
+      "bullets": [
+        "More provider-managed (SaaS) = less customer responsibility for platform.",
+        "Misconfigurations are usually customer-side failures.",
+        "Always map controls with a responsibility matrix."
+      ]
+    },
+    {
+      "id": "cp_hv_type1_type2",
+      "title": "Hypervisor Type 1 vs Type 2",
+      "a": {
+        "term": "Type 1 (bare-metal)",
+        "definition": "Runs directly on hardware; common in data centers."
+      },
+      "b": {
+        "term": "Type 2 (hosted)",
+        "definition": "Runs on top of a host OS; common on desktops/labs."
+      },
+      "bullets": [
+        "Type 1 generally has better performance and security isolation.",
+        "Type 2 inherits host OS attack surface.",
+        "Exam cue: enterprise = Type 1; personal workstation = Type 2."
+      ]
+    },
+    {
+      "id": "cp_vm_escape_reuse",
+      "title": "VM Escape vs Resource Reuse",
+      "a": {
+        "term": "VM escape",
+        "definition": "Break out of a VM to affect host/hypervisor or other VMs."
+      },
+      "b": {
+        "term": "Resource reuse",
+        "definition": "Residual data exposure when shared resources (memory/storage) are reallocated."
+      },
+      "bullets": [
+        "Escape is active exploitation; reuse is leakage due to improper clearing.",
+        "Mitigate escape with patching and hardening hypervisor; reuse with secure wipe/zeroing.",
+        "Both are multi-tenant risks."
+      ]
+    },
+    {
+      "id": "cp_waf_swg_casb",
+      "title": "WAF vs SWG vs CASB",
+      "a": {
+        "term": "WAF",
+        "definition": "Protects web apps from HTTP(S) attacks (OWASP-style)."
+      },
+      "b": {
+        "term": "SWG/CASB",
+        "definition": "SWG filters web access; CASB governs cloud app usage and data controls."
+      },
+      "bullets": [
+        "WAF sits in front of your web app; SWG sits between users and the internet.",
+        "CASB enforces cloud policies (DLP, visibility, access control) across SaaS.",
+        "Inline CASB can block in real time; API CASB monitors/remediates via provider APIs."
+      ]
+    },
+    {
+      "id": "cp_casb_inline_api",
+      "title": "CASB Inline vs CASB API",
+      "a": {
+        "term": "Inline CASB",
+        "definition": "Sits in the traffic path; can block/allow immediately."
+      },
+      "b": {
+        "term": "API CASB",
+        "definition": "Connects via SaaS APIs; good for visibility and after-the-fact remediation."
+      },
+      "bullets": [
+        "Inline = real-time control; API = broad visibility into SaaS data/events.",
+        "API CASB can scan existing files and permissions at rest.",
+        "Inline can struggle with unmanaged devices unless architecture supports it."
+      ]
+    },
+    {
+      "id": "cp_block_object_storage",
+      "title": "Block Storage vs Object Storage",
+      "a": {
+        "term": "Block storage",
+        "definition": "Raw disk-like volumes attached to compute; good for databases/VM disks."
+      },
+      "b": {
+        "term": "Object storage",
+        "definition": "Stores objects with metadata via API; great for blobs, backups, static assets."
+      },
+      "bullets": [
+        "Block = low-latency, file systems; Object = massively scalable via HTTP APIs.",
+        "Object storage often supports versioning and immutability options.",
+        "Choose based on access pattern and performance needs."
+      ]
+    },
+    {
+      "id": "cp_iac_drift",
+      "title": "Infrastructure as Code vs Configuration Drift",
+      "a": {
+        "term": "IaC",
+        "definition": "Declare infra in code; repeatable builds and reviews."
+      },
+      "b": {
+        "term": "Drift",
+        "definition": "Actual environment deviates from the declared baseline (manual changes)."
+      },
+      "bullets": [
+        "IaC reduces drift, but drift still happens if people change things manually.",
+        "Mitigate drift with policy-as-code, CI/CD checks, and continuous validation.",
+        "Treat infra changes like software: reviews, tests, rollbacks."
+      ]
+    }
+  ],
+  "tag_rules": {
+    "cloud_nist_definition": {
+      "rule": "Cloud computing is on-demand access to shared configurable resources, rapidly provisioned with minimal effort/provider interaction.",
+      "micro_example": "Spin up a VM in minutes from a portal without calling the provider.",
+      "confusion_pair_id": "none"
+    },
+    "cloud_essential_characteristics": {
+      "rule": "NIST essential characteristics: on-demand self-service, broad network access, resource pooling, rapid elasticity, measured service.",
+      "micro_example": "If billing is usage-based and capacity scales on demand, you're in cloud-land.",
+      "confusion_pair_id": "none"
+    },
+    "ondemand_selfservice": {
+      "rule": "On-demand self-service: users provision compute/storage themselves via portal/API, without human ticketing.",
+      "micro_example": "Dev creates a database instance from the cloud console in 2 minutes.",
+      "confusion_pair_id": "none"
+    },
+    "broad_network_access": {
+      "rule": "Broad network access: services available over network via standard mechanisms (web/API) to many device types.",
+      "micro_example": "Access a SaaS app from laptop + phone using HTTPS.",
+      "confusion_pair_id": "none"
+    },
+    "resource_pooling_multitenancy": {
+      "rule": "Resource pooling/multi-tenancy: provider shares resources among customers with logical isolation.",
+      "micro_example": "Many customers run VMs on the same physical host, isolated by hypervisor controls.",
+      "confusion_pair_id": "none"
+    },
+    "rapid_elasticity": {
+      "rule": "Rapid elasticity: capacity can scale out/in quickly—often automatically—to match demand.",
+      "micro_example": "E-commerce adds 20 instances during sale, then drops back to 4 after.",
+      "confusion_pair_id": "cp_elasticity_scalability"
+    },
+    "measured_service": {
+      "rule": "Measured service: usage is monitored/metered and billed (pay-as-you-go).",
+      "micro_example": "You pay per GB stored and per compute-hour used.",
+      "confusion_pair_id": "none"
+    },
+    "cloud_benefits_agility": {
+      "rule": "Cloud boosts agility: faster provisioning and experimentation reduces time-to-value.",
+      "micro_example": "A team launches a test environment for a feature in an hour instead of weeks.",
+      "confusion_pair_id": "none"
+    },
+    "scalability_vertical": {
+      "rule": "Vertical scaling = scale up one node (more CPU/RAM). Quick but hits limits.",
+      "micro_example": "Upgrade a DB VM from 4 vCPU to 16 vCPU.",
+      "confusion_pair_id": "cp_vertical_horizontal"
+    },
+    "scalability_horizontal": {
+      "rule": "Horizontal scaling = scale out (more nodes). More resilient but needs architecture support.",
+      "micro_example": "Add more web servers behind a load balancer.",
+      "confusion_pair_id": "cp_vertical_horizontal"
+    },
+    "elasticity_vs_scalability": {
+      "rule": "Elasticity is auto up/down for demand; scalability is ability to grow capacity.",
+      "micro_example": "Autoscaling group shrinks at night (elasticity) while the company plans to double capacity for next year (scalability).",
+      "confusion_pair_id": "cp_elasticity_scalability"
+    },
+    "cloud_roles_csp": {
+      "rule": "CSP (provider) delivers cloud services and maintains core infrastructure security.",
+      "micro_example": "AWS/Azure/GCP operate physical data centers and core cloud services.",
+      "confusion_pair_id": "none"
+    },
+    "cloud_roles_consumer": {
+      "rule": "Consumer uses cloud services and must secure configurations, identities, and data (varies by SaaS/PaaS/IaaS).",
+      "micro_example": "Your team configures IAM roles and encrypts S3 buckets.",
+      "confusion_pair_id": "cp_shared_responsibility"
+    },
+    "cloud_roles_broker": {
+      "rule": "Broker manages use/performance/relationships between consumers and providers (think: middle layer).",
+      "micro_example": "A broker aggregates multiple SaaS subscriptions and enforces policy/billing.",
+      "confusion_pair_id": "none"
+    },
+    "cloud_roles_auditor": {
+      "rule": "Auditor assesses cloud services for security/compliance (independent checks).",
+      "micro_example": "An external firm reviews your cloud controls and provides an attestation report.",
+      "confusion_pair_id": "none"
+    },
+    "cloud_roles_carrier": {
+      "rule": "Carrier provides connectivity/transport between consumer and provider (ISP/telecom).",
+      "micro_example": "A telecom provides the MPLS link from your HQ to the cloud region.",
+      "confusion_pair_id": "none"
+    },
+    "service_model_saas": {
+      "rule": "SaaS: provider runs the app; you manage users, data, and access policies.",
+      "micro_example": "Microsoft 365: you manage accounts and data retention; Microsoft runs the service.",
+      "confusion_pair_id": "cp_saas_paas_iaas"
+    },
+    "service_model_paas": {
+      "rule": "PaaS: you deploy code; provider manages OS/runtime/platform components.",
+      "micro_example": "Deploy an API to a managed app platform; you patch your app code, not the underlying OS.",
+      "confusion_pair_id": "cp_saas_paas_iaas"
+    },
+    "service_model_iaas": {
+      "rule": "IaaS: you manage OS, middleware, apps; provider manages physical hardware and virtualization.",
+      "micro_example": "Rent VMs and you patch the OS, harden services, and manage firewalls.",
+      "confusion_pair_id": "cp_saas_paas_iaas"
+    },
+    "service_model_faas_serverless": {
+      "rule": "FaaS/Serverless: run functions on events; provider handles servers and scaling. Watch permissions and secrets.",
+      "micro_example": "Image upload triggers a function that resizes it and stores the result.",
+      "confusion_pair_id": "cp_faas_containers_vms"
+    },
+    "deployment_public": {
+      "rule": "Public cloud uses shared provider infra with strong logical isolation.",
+      "micro_example": "A startup runs workloads in a shared AWS region.",
+      "confusion_pair_id": "cp_public_private_hybrid"
+    },
+    "deployment_private": {
+      "rule": "Private cloud is dedicated to one org (on-prem or hosted). More control, less elasticity than public.",
+      "micro_example": "A bank runs an internal private cloud for regulated workloads.",
+      "confusion_pair_id": "cp_public_private_hybrid"
+    },
+    "deployment_community": {
+      "rule": "Community cloud is shared by orgs with common requirements (e.g., government/health).",
+      "micro_example": "Multiple agencies share a compliant environment with shared governance.",
+      "confusion_pair_id": "cp_public_private_hybrid"
+    },
+    "deployment_hybrid": {
+      "rule": "Hybrid mixes environments (private + public). Great for phased migration and burst scenarios.",
+      "micro_example": "Keep sensitive DB on private cloud while web tier runs in public cloud.",
+      "confusion_pair_id": "cp_public_private_hybrid"
+    },
+    "cloud_bursting": {
+      "rule": "Cloud bursting: run normal load privately, burst into public cloud during peaks.",
+      "micro_example": "Retailer uses private cluster normally but bursts to public cloud on Black Friday.",
+      "confusion_pair_id": "cp_public_private_hybrid"
+    },
+    "centralized_vs_decentralized": {
+      "rule": "Centralized management improves consistency; decentralized can boost autonomy but increases policy drift risk.",
+      "micro_example": "A central cloud team enforces guardrails while product teams deploy within them.",
+      "confusion_pair_id": "none"
+    },
+    "shared_responsibility_model": {
+      "rule": "Shared responsibility: provider secures 'of cloud'; customer secures 'in cloud' depending on service model.",
+      "micro_example": "Open S3 bucket is your responsibility, not the CSP’s.",
+      "confusion_pair_id": "cp_shared_responsibility"
+    },
+    "responsibility_matrix": {
+      "rule": "Responsibility matrix maps each control to provider vs customer ownership per service model.",
+      "micro_example": "For SaaS, provider patches app; customer manages user MFA and data classification.",
+      "confusion_pair_id": "cp_shared_responsibility"
+    },
+    "third_party_vendors": {
+      "rule": "Third-party vendors add risk; demand evidence (reports, controls) and constrain access.",
+      "micro_example": "A SaaS vendor must provide audit reports and support least-privilege integration.",
+      "confusion_pair_id": "none"
+    },
+    "audit_rights": {
+      "rule": "Audit rights (contract) let you assess vendor controls and require notifications/SLAs.",
+      "micro_example": "Contract includes right-to-audit + breach notification timelines.",
+      "confusion_pair_id": "none"
+    },
+    "data_sovereignty": {
+      "rule": "Data sovereignty: data is subject to laws of the country where it’s stored/processed. Choose regions accordingly.",
+      "micro_example": "EU customer data stored in EU region to meet legal requirements.",
+      "confusion_pair_id": "none"
+    },
+    "csa_ccm": {
+      "rule": "CSA CCM is a cloud control framework mapping common security controls across cloud services.",
+      "micro_example": "Use CCM to check coverage for IAM, logging, encryption, and governance.",
+      "confusion_pair_id": "none"
+    },
+    "nist_sp_500_292": {
+      "rule": "NIST SP 500-292 provides cloud reference architecture and roles/relationships.",
+      "micro_example": "Use it to explain where broker/carrier/auditor fit in cloud ecosystems.",
+      "confusion_pair_id": "none"
+    },
+    "virtualization_concepts": {
+      "rule": "Virtualization abstracts hardware so multiple OS instances run on one physical host. Security hinges on hypervisor isolation.",
+      "micro_example": "One server hosts 10 VMs for different apps.",
+      "confusion_pair_id": "none"
+    },
+    "hypervisor_type1": {
+      "rule": "Type 1 hypervisors run on bare metal: better for enterprise performance and security.",
+      "micro_example": "VMware ESXi-like setup in a data center cluster.",
+      "confusion_pair_id": "cp_hv_type1_type2"
+    },
+    "hypervisor_type2": {
+      "rule": "Type 2 hypervisors run on a host OS: convenient for labs but adds host OS attack surface.",
+      "micro_example": "VirtualBox on a laptop running Windows/Linux.",
+      "confusion_pair_id": "cp_hv_type1_type2"
+    },
+    "vm_escape": {
+      "rule": "VM escape is when a guest VM breaks out and compromises host/hypervisor/other VMs. Patch and harden hypervisors.",
+      "micro_example": "Exploit in VM leads to host code execution, impacting other tenants.",
+      "confusion_pair_id": "cp_vm_escape_reuse"
+    },
+    "resource_reuse": {
+      "rule": "Resource reuse risks residual data leaks when shared resources are reallocated without proper clearing.",
+      "micro_example": "A new VM reads remnants of memory pages if not zeroed securely.",
+      "confusion_pair_id": "cp_vm_escape_reuse"
+    },
+    "vm_sprawl": {
+      "rule": "VM sprawl = too many unmanaged VMs. It increases cost, patching gaps, and attack surface.",
+      "micro_example": "Old test VMs stay online unpatched for months.",
+      "confusion_pair_id": "none"
+    },
+    "containerization": {
+      "rule": "Containers package app + dependencies while sharing a host kernel. Faster and lighter than VMs.",
+      "micro_example": "Run microservices as containers orchestrated by Kubernetes.",
+      "confusion_pair_id": "cp_faas_containers_vms"
+    },
+    "container_isolation": {
+      "rule": "Container isolation is weaker than VM isolation because containers share a kernel; use namespaces/cgroups and hardening.",
+      "micro_example": "A kernel exploit could impact multiple containers on the same host.",
+      "confusion_pair_id": "cp_faas_containers_vms"
+    },
+    "container_hardening": {
+      "rule": "Harden containers: minimal base images, non-root, signed images, patching, and runtime policies.",
+      "micro_example": "Use distroless images + drop Linux capabilities + scan images in CI.",
+      "confusion_pair_id": "none"
+    },
+    "api_security": {
+      "rule": "APIs are the control plane of cloud. Protect with strong auth, least privilege, rate limiting, and logging.",
+      "micro_example": "Use OAuth/OIDC tokens with scopes and enforce rate limits on public APIs.",
+      "confusion_pair_id": "none"
+    },
+    "waf": {
+      "rule": "WAF protects your web app from HTTP attacks (SQLi, XSS, etc.). It’s not a general web filter for users.",
+      "micro_example": "Put a WAF in front of your login portal to block common injection payloads.",
+      "confusion_pair_id": "cp_waf_swg_casb"
+    },
+    "swg": {
+      "rule": "SWG filters outbound web access for users (URL filtering, malware blocking). It’s not for protecting your app endpoints.",
+      "micro_example": "Employees’ browsers go through SWG to block malware sites.",
+      "confusion_pair_id": "cp_waf_swg_casb"
+    },
+    "security_groups": {
+      "rule": "Security groups are virtual firewalls controlling inbound/outbound to instances—stateful and rule-based.",
+      "micro_example": "Allow 443 to web servers, allow 3306 only from app subnet to DB.",
+      "confusion_pair_id": "none"
+    },
+    "vpc_networking": {
+      "rule": "VPC networking segments cloud networks into isolated virtual networks (subnets, routing, gateways).",
+      "micro_example": "Create separate subnets for web/app/db and route via NAT/IGW appropriately.",
+      "confusion_pair_id": "none"
+    },
+    "sdn": {
+      "rule": "SDN centralizes network control via software (controllers), enabling faster policy changes and micro-segmentation.",
+      "micro_example": "Push a segmentation policy across dozens of virtual networks instantly.",
+      "confusion_pair_id": "none"
+    },
+    "iac": {
+      "rule": "IaC makes cloud repeatable and reviewable; treat infra changes like code with tests and approvals.",
+      "micro_example": "Terraform defines VPC, IAM roles, and security groups in version control.",
+      "confusion_pair_id": "cp_iac_drift"
+    },
+    "microservices": {
+      "rule": "Microservices split an app into small services; secure with service-to-service auth, mTLS, and good observability.",
+      "micro_example": "Each service has its own identity and only the needed permissions.",
+      "confusion_pair_id": "none"
+    },
+    "secrets_management": {
+      "rule": "Secrets management stores and rotates credentials/keys safely. Never bake secrets into images or code.",
+      "micro_example": "App pulls DB password from a secrets vault at runtime and rotates monthly.",
+      "confusion_pair_id": "none"
+    },
+    "hsm": {
+      "rule": "HSM protects cryptographic keys in tamper-resistant hardware; useful for high assurance key protection.",
+      "micro_example": "Root CA private key stays in HSM; signing operations happen inside the device.",
+      "confusion_pair_id": "none"
+    },
+    "block_storage": {
+      "rule": "Block storage is like an attached disk volume: great for OS disks and databases needing low latency.",
+      "micro_example": "Attach a volume to a VM and format it with a file system for a database.",
+      "confusion_pair_id": "cp_block_object_storage"
+    },
+    "object_storage": {
+      "rule": "Object storage stores blobs via APIs with metadata; great for backups, images, logs, and static content.",
+      "micro_example": "Store user uploads in object storage with versioning enabled.",
+      "confusion_pair_id": "cp_block_object_storage"
+    },
+    "storage_encryption": {
+      "rule": "Encrypt storage at rest and control keys (KMS/HSM). Misconfig + wide access defeats encryption.",
+      "micro_example": "Encrypt object storage bucket and restrict read to app role only.",
+      "confusion_pair_id": "none"
+    },
+    "storage_replication_availability": {
+      "rule": "Replication improves availability and durability; choose sync/async based on RPO/RTO and cost.",
+      "micro_example": "Store data across multiple zones for durability; replicate cross-region for DR.",
+      "confusion_pair_id": "none"
+    },
+    "casb_inline": {
+      "rule": "Inline CASB sits in the traffic path for real-time blocking and policy enforcement.",
+      "micro_example": "Block uploading PII to personal cloud drives in real time.",
+      "confusion_pair_id": "cp_casb_inline_api"
+    },
+    "casb_api": {
+      "rule": "API CASB connects to SaaS APIs for visibility and remediation of data already in the cloud.",
+      "micro_example": "Scan existing SaaS files for PII and quarantine risky shares.",
+      "confusion_pair_id": "cp_casb_inline_api"
+    },
+    "cloud_misconfiguration": {
+      "rule": "Most cloud incidents are misconfigurations: overly-permissive IAM, exposed storage, open security groups, weak logging.",
+      "micro_example": "A storage bucket becomes public due to a bad policy—data leaks instantly.",
+      "confusion_pair_id": "cp_shared_responsibility"
+    },
+    "logging_monitoring_cloud": {
+      "rule": "Cloud logging/monitoring is your early warning system: collect control-plane and data-plane logs, alert on anomalies.",
+      "micro_example": "Alert when a new admin key is created or when bucket policy becomes public.",
+      "confusion_pair_id": "none"
+    }
+  }
+}

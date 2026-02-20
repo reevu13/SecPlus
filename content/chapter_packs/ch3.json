@@ -1,0 +1,1328 @@
+{
+  "schema_version": "secplus_game_pack_v1",
+  "pack_id": "ch3",
+  "exam": {
+    "vendor": "CompTIA",
+    "name": "Security+",
+    "code": "SY0-701",
+    "max_exam_minutes": 90
+  },
+  "chapter": {
+    "number": 3,
+    "title": "Malicious Code (SY0-701 Domain 2.4)",
+    "page_range_in_user_pdf": "N/A"
+  },
+  "design_intent": {
+    "mode": [
+      "campaign",
+      "roguelike_practice"
+    ],
+    "pvp_optional": true,
+    "default_pvp_enabled": false,
+    "player_goal": "Master Malicious Code (SY0-701 Domain 2.4) for CompTIA Security+ SY0-701."
+  },
+  "progression": {
+    "xp_rules": {
+      "base_xp_per_correct": 10,
+      "streak_bonus_per_5": 15,
+      "time_bonus_threshold_seconds": 30,
+      "time_bonus_xp": 5,
+      "mistake_penalty_xp": 0
+    },
+    "mastery_model": {
+      "scale": "0-100",
+      "update": "Mastery += 8 on first correct; +4 on repeat correct; -6 on wrong (floor 0).",
+      "tags_drive_mastery": true
+    },
+    "unlock_rules": [
+      {
+        "unlock": "ch3-m2",
+        "when": "complete ch3-m1"
+      },
+      {
+        "unlock": "ch3-m3",
+        "when": "complete ch3-m2"
+      },
+      {
+        "unlock": "boss_3",
+        "when": "complete ch3-m3"
+      }
+    ]
+  },
+  "tags": {
+    "concepts": [
+      "malware.basics",
+      "malware.ransomware",
+      "malware.trojan",
+      "malware.rat",
+      "malware.botnet",
+      "malware.worm",
+      "malware.spyware",
+      "malware.bloatware",
+      "malware.virus",
+      "malware.fileless",
+      "malware.keylogger",
+      "malware.logicbomb",
+      "malware.analysis",
+      "malware.rootkit",
+      "ioc.indicators"
+    ],
+    "difficulty_scale": {
+      "1": "Recall",
+      "2": "Understand",
+      "3": "Apply",
+      "4": "Analyze",
+      "5": "Synthesize"
+    }
+  },
+  "trap_list": [
+    {
+      "id": "trap-ch3-01",
+      "name": "Malware basics",
+      "misconception": "Confusing malware basics with related malware concepts.",
+      "fix": "Core malware concepts and how to tell types apart.",
+      "drill_question_ids": [
+        "ch3-q01",
+        "ch3-q02",
+        "ch3-q03",
+        "ch3-q05"
+      ]
+    },
+    {
+      "id": "trap-ch3-02",
+      "name": "Ransomware",
+      "misconception": "Confusing ransomware with related malware concepts.",
+      "fix": "Malware that demands payment; includes crypto-malware encrypting files.",
+      "drill_question_ids": [
+        "ch3-q01",
+        "ch3-q22"
+      ]
+    },
+    {
+      "id": "trap-ch3-03",
+      "name": "Trojan",
+      "misconception": "Confusing trojan with related malware concepts.",
+      "fix": "Malware disguised as legitimate software; requires user to run/install.",
+      "drill_question_ids": [
+        "ch3-q02",
+        "ch3-q11",
+        "ch3-q21"
+      ]
+    },
+    {
+      "id": "trap-ch3-05",
+      "name": "Bots & botnets / C2",
+      "misconception": "Confusing bots & botnets / c2 with related malware concepts.",
+      "fix": "Command-and-control communications and botnet behavior.",
+      "drill_question_ids": [
+        "ch3-q03",
+        "ch3-q04",
+        "ch3-q21"
+      ]
+    },
+    {
+      "id": "trap-ch3-06",
+      "name": "Worm",
+      "misconception": "Confusing worm with related malware concepts.",
+      "fix": "Self-spreading malware that propagates without user interaction.",
+      "drill_question_ids": [
+        "ch3-q02",
+        "ch3-q28"
+      ]
+    },
+    {
+      "id": "trap-ch3-07",
+      "name": "Spyware",
+      "misconception": "Confusing spyware with related malware concepts.",
+      "fix": "Malware whose primary intent is to gather information.",
+      "drill_question_ids": [
+        "ch3-q05",
+        "ch3-q17"
+      ]
+    },
+    {
+      "id": "trap-ch3-08",
+      "name": "Bloatware",
+      "misconception": "Confusing bloatware with related malware concepts.",
+      "fix": "Unwanted preinstalled software; not truly malicious but adds risk/attack surface.",
+      "drill_question_ids": [
+        "ch3-q06",
+        "ch3-q17"
+      ]
+    },
+    {
+      "id": "trap-ch3-09",
+      "name": "Virus",
+      "misconception": "Confusing virus with related malware concepts.",
+      "fix": "Malicious program that self-replicates once activated; has trigger & payload.",
+      "drill_question_ids": [
+        "ch3-q07",
+        "ch3-q08",
+        "ch3-q09"
+      ]
+    },
+    {
+      "id": "trap-ch3-10",
+      "name": "Fileless malware",
+      "misconception": "Confusing fileless malware with related malware concepts.",
+      "fix": "Memory-resident attacks with persistence via mechanisms like Registry entries; no local file storage required.",
+      "drill_question_ids": [
+        "ch3-q09",
+        "ch3-q23"
+      ]
+    },
+    {
+      "id": "trap-ch3-11",
+      "name": "Keylogger",
+      "misconception": "Confusing keylogger with related malware concepts.",
+      "fix": "Captures keystrokes and other inputs to steal credentials/data.",
+      "drill_question_ids": [
+        "ch3-q10",
+        "ch3-q20"
+      ]
+    }
+  ],
+  "missions": [
+    {
+      "id": "ch3-m1",
+      "name": "Spot the Malware Type",
+      "goal": "Focus on the goal and propagation method: ransom demand (ransomware), disguised legit app (Trojan), self-spread (worm), info-gathering (spyware), hidden backdoor (rootkit).",
+      "mechanics": {
+        "minigame": "learn_quiz",
+        "mode": "campaign",
+        "recommended_time_min": 20,
+        "coaching_tips": [
+          "Focus on the goal and propagation method: ransom demand (ransomware), disguised legit app (Trojan), self-spread (worm), info-gathering (spyware), hidden backdoor (rootkit)."
+        ],
+        "rules": {
+          "hints_per_question": 1,
+          "show_explanations": true
+        }
+      },
+      "question_ids": [
+        "ch3-q01",
+        "ch3-q02",
+        "ch3-q03",
+        "ch3-q04",
+        "ch3-q05",
+        "ch3-q06",
+        "ch3-q07",
+        "ch3-q08",
+        "ch3-q09",
+        "ch3-q10"
+      ],
+      "rewards": {
+        "xp": 120,
+        "loot": [
+          "badge_ch3-m1"
+        ],
+        "unlock": "ch3-m2"
+      }
+    },
+    {
+      "id": "ch3-m2",
+      "name": "IoCs & Defenses",
+      "goal": "IoCs are often hashes, process names, C2 domains/IPs, and weird behavior. For stealthy malware (rootkits/fileless), trust boundaries matter: verify from a trusted environment.",
+      "mechanics": {
+        "minigame": "learn_quiz",
+        "mode": "campaign",
+        "recommended_time_min": 20,
+        "coaching_tips": [
+          "IoCs are often hashes, process names, C2 domains/IPs, and weird behavior. For stealthy malware (rootkits/fileless), trust boundaries matter: verify from a trusted environment."
+        ],
+        "rules": {
+          "hints_per_question": 1,
+          "show_explanations": true
+        }
+      },
+      "question_ids": [
+        "ch3-q11",
+        "ch3-q12",
+        "ch3-q13",
+        "ch3-q14",
+        "ch3-q15",
+        "ch3-q16",
+        "ch3-q17",
+        "ch3-q18",
+        "ch3-q19",
+        "ch3-q20"
+      ],
+      "rewards": {
+        "xp": 120,
+        "loot": [
+          "badge_ch3-m2"
+        ],
+        "unlock": "ch3-m3"
+      }
+    },
+    {
+      "id": "ch3-m3",
+      "name": "Exam-Style Scenarios",
+      "goal": "In SY0-701 questions, the fastest path is: identify malware family → pick the most direct mitigation (patching, restore from backup, rebuild, MFA, etc.).",
+      "mechanics": {
+        "minigame": "learn_quiz",
+        "mode": "campaign",
+        "recommended_time_min": 16,
+        "coaching_tips": [
+          "In SY0-701 questions, the fastest path is: identify malware family → pick the most direct mitigation (patching, restore from backup, rebuild, MFA, etc.)."
+        ],
+        "rules": {
+          "hints_per_question": 1,
+          "show_explanations": true
+        }
+      },
+      "question_ids": [
+        "ch3-q21",
+        "ch3-q22",
+        "ch3-q23",
+        "ch3-q24",
+        "ch3-q25",
+        "ch3-q26",
+        "ch3-q27",
+        "ch3-q28"
+      ],
+      "rewards": {
+        "xp": 96,
+        "loot": [
+          "badge_ch3-m3"
+        ],
+        "unlock": "boss_3"
+      }
+    }
+  ],
+  "boss": {
+    "id": "boss_3",
+    "name": "Malware Hunt Boss",
+    "premise": "Synthesize malware identification, IoC analysis, and containment decisions under pressure.",
+    "mechanics": {
+      "format": "timed_synthesis",
+      "lives": 2,
+      "time_limit_seconds_total": 720,
+      "total_questions": 10
+    },
+    "question_ids": [
+      "ch3-q21",
+      "ch3-q22",
+      "ch3-q23",
+      "ch3-q24",
+      "ch3-q25",
+      "ch3-q26",
+      "ch3-q27",
+      "ch3-q28",
+      "ch3-q04",
+      "ch3-q09"
+    ],
+    "rewards": {
+      "xp": 220,
+      "loot": [
+        "badge_boss_3"
+      ]
+    }
+  },
+  "roguelike": {
+    "runset_id": "roguelike_runset_ch3",
+    "run_minutes_target": 18,
+    "structure": {
+      "acts": 3,
+      "encounters_per_act": 4,
+      "rest_sites_per_act": 1,
+      "boss_per_run": "boss_3_variant"
+    },
+    "cards": {
+      "threat_cards": [
+        {
+          "id": "threat_ch3_1",
+          "name": "Threat focus 1",
+          "tags": [
+            "malware.basics"
+          ]
+        },
+        {
+          "id": "threat_ch3_2",
+          "name": "Threat focus 2",
+          "tags": [
+            "malware.ransomware"
+          ]
+        },
+        {
+          "id": "threat_ch3_3",
+          "name": "Threat focus 3",
+          "tags": [
+            "malware.trojan"
+          ]
+        }
+      ],
+      "constraint_cards": [
+        {
+          "id": "constraint_ch3_time",
+          "name": "Time Pressure",
+          "effect": "Favor fast identification of malware family clues."
+        },
+        {
+          "id": "constraint_ch3_noise",
+          "name": "Noisy Telemetry",
+          "effect": "Prioritize high-confidence indicators of compromise."
+        }
+      ],
+      "control_cards": [
+        {
+          "id": "control_ch3_1",
+          "name": "Control focus 1",
+          "tags": [
+            "malware.rat"
+          ]
+        },
+        {
+          "id": "control_ch3_2",
+          "name": "Control focus 2",
+          "tags": [
+            "malware.botnet"
+          ]
+        },
+        {
+          "id": "control_ch3_3",
+          "name": "Control focus 3",
+          "tags": [
+            "malware.worm"
+          ]
+        }
+      ]
+    },
+    "question_pool_ids": "use_all_questions_in_pack"
+  },
+  "pvp": {
+    "enabled": false,
+    "modes": [
+      {
+        "id": "duel_seeded_run",
+        "name": "Seeded Run Duel",
+        "description": "Both players run the same seeded set and compare score/time asynchronously.",
+        "rules": {
+          "questions": 12,
+          "time_limit_seconds_total": 900
+        }
+      }
+    ],
+    "fairness": {
+      "matchmaking": "match by mastery band (+/- 10 mastery points)",
+      "anti_cheat": "seeded run codes + random question order"
+    }
+  },
+  "question_bank": [
+    {
+      "id": "ch3-q01",
+      "explanation": "Ransomware takes over a system and demands a ransom, often by encrypting files (crypto-malware) or threatening exposure of data.",
+      "tags": [
+        "malware.ransomware",
+        "malware.basics"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 40,
+      "type": "mcq",
+      "stem": "Which malware type primarily demands payment from the victim after taking over a system?",
+      "options": {
+        "A": "Trojan",
+        "B": "Ransomware",
+        "C": "Spyware",
+        "D": "Worm"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Ransomware takes over a system and demands a ransom, often by encrypting files (crypto-malware) or threatening exposure of data.",
+      "misconceptionTags": [
+        "malware.ransomware_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch3-q02",
+      "explanation": "Trojans are typically disguised as legitimate software and require the user to run/install them, while worms self-spread via automated means without needing user interaction.",
+      "tags": [
+        "malware.trojan",
+        "malware.worm",
+        "malware.basics"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "type": "mcq",
+      "stem": "A key difference between a Trojan and a worm is:",
+      "options": {
+        "A": "Trojans spread automatically without user interaction; worms require a user to run them",
+        "B": "Trojans are disguised as legitimate software; worms self-spread without user interaction",
+        "C": "Trojans always encrypt files; worms always steal credentials",
+        "D": "Trojans only target mobile devices; worms only target servers"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Trojans are typically disguised as legitimate software and require the user to run/install them, while worms self-spread via automated means without needing user interaction.",
+      "misconceptionTags": [
+        "malware.trojan_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch3-q03",
+      "explanation": "A botnet is a group of systems (bots) that are under central command-and-control so attackers can direct their activity.",
+      "tags": [
+        "malware.botnet",
+        "malware.basics"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "type": "mcq",
+      "stem": "Which statement best describes a botnet?",
+      "options": {
+        "A": "A set of hosts that share files over SMB",
+        "B": "A group of compromised systems under centralized command-and-control (C2)",
+        "C": "A worm that spreads through email attachments",
+        "D": "A rootkit that hides inside the Master Boot Record"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "A botnet is a group of systems (bots) that are under central command-and-control so attackers can direct their activity.",
+      "misconceptionTags": [
+        "malware.botnet_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch3-q04",
+      "explanation": "Command-and-control traffic is often over encrypted HTTP today, but IRC on port 6667 is still a known/used C2 technique; unknown host beaconing can indicate botnet membership.",
+      "tags": [
+        "malware.botnet",
+        "ioc.indicators"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "type": "mcq",
+      "stem": "A defender sees repeated outbound connections using IRC on TCP port 6667 to unknown hosts. This is most suggestive of:",
+      "options": {
+        "A": "Keylogging activity",
+        "B": "Botnet C2 traffic",
+        "C": "Boot sector virus replication",
+        "D": "Bloatware telemetry"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "Command-and-control traffic is often over encrypted HTTP today, but IRC on port 6667 is still a known/used C2 technique; unknown host beaconing can indicate botnet membership.",
+      "misconceptionTags": [
+        "malware.botnet_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch3-q05",
+      "explanation": "Spyware is typically categorized by intent—its goal is to gather information about a user/system—because it may use Trojan, worm, or virus-like methods to get installed.",
+      "tags": [
+        "malware.spyware",
+        "malware.basics"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "type": "mcq",
+      "stem": "Spyware is best defined by its:",
+      "options": {
+        "A": "Propagation method",
+        "B": "Primary intent to gather information",
+        "C": "Use of encryption",
+        "D": "Ability to spread via vulnerable services"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Spyware is typically categorized by intent—its goal is to gather information about a user/system—because it may use Trojan, worm, or virus-like methods to get installed.",
+      "misconceptionTags": [
+        "malware.spyware_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch3-q06",
+      "explanation": "Bloatware refers to unwanted preinstalled applications; it isn't necessarily malicious, but it can be poorly written, call home, be vulnerable, and add attack surface—so removal/clean images are common mitigations.",
+      "tags": [
+        "malware.bloatware",
+        "malware.basics"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 40,
+      "type": "mcq",
+      "stem": "Bloatware is typically:",
+      "options": {
+        "A": "Unwanted preinstalled software that should be removed to reduce risk/attack surface",
+        "B": "A stealth backdoor installed in firmware",
+        "C": "A type of self-spreading malware",
+        "D": "A payment-extortion malware family"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "2.2"
+      ],
+      "rationaleCorrect": "Bloatware refers to unwanted preinstalled applications; it isn't necessarily malicious, but it can be poorly written, call home, be vulnerable, and add attack surface—so removal/clean images are common mitigations.",
+      "misconceptionTags": [
+        "malware.bloatware_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch3-q07",
+      "explanation": "A virus typically includes a trigger (when it executes) and a payload (what it does/delivers/actions performed).",
+      "tags": [
+        "malware.virus",
+        "malware.basics"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "type": "mcq",
+      "stem": "Viruses usually have both a trigger and a payload. The payload is best described as:",
+      "options": {
+        "A": "The condition that causes execution",
+        "B": "The action the virus performs or delivers when it runs",
+        "C": "The network service the virus exploits to spread",
+        "D": "The file signature used by AV to detect it"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "A virus typically includes a trigger (when it executes) and a payload (what it does/delivers/actions performed).",
+      "misconceptionTags": [
+        "malware.virus_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch3-q08",
+      "explanation": "Boot sector viruses reside in the boot sector of a drive/storage media and can execute during boot-related processes.",
+      "tags": [
+        "malware.virus"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "type": "mcq",
+      "stem": "Which virus type resides inside the boot sector of a drive or storage media?",
+      "options": {
+        "A": "Macro virus",
+        "B": "Boot sector virus",
+        "C": "Email virus",
+        "D": "Memory-resident virus"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "Boot sector viruses reside in the boot sector of a drive/storage media and can execute during boot-related processes.",
+      "misconceptionTags": [
+        "malware.virus_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch3-q09",
+      "explanation": "Fileless attacks commonly exploit vulnerabilities via spam/malicious sites, inject into memory, and may persist via mechanisms like Registry entries—without needing a file stored locally as the main artifact.",
+      "tags": [
+        "malware.fileless",
+        "malware.virus"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "type": "mcq",
+      "stem": "Which description best matches a fileless malware/virus attack?",
+      "options": {
+        "A": "It stores its main executable on disk and spreads via SMB",
+        "B": "It stays memory-resident and can persist using mechanisms like Registry entries without requiring local file storage",
+        "C": "It can only run on mobile devices",
+        "D": "It is always delivered via USB drives"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Fileless attacks commonly exploit vulnerabilities via spam/malicious sites, inject into memory, and may persist via mechanisms like Registry entries—without needing a file stored locally as the main artifact.",
+      "misconceptionTags": [
+        "malware.fileless_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch3-q10",
+      "explanation": "Keyloggers aim to capture credentials. MFA helps reduce the impact because captured passwords alone are less useful to attackers.",
+      "tags": [
+        "malware.keylogger",
+        "malware.basics"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "type": "mcq",
+      "stem": "Which is the BEST immediate control to reduce the impact of credential theft from keylogging?",
+      "options": {
+        "A": "Disable screen locking",
+        "B": "Enable multifactor authentication (MFA)",
+        "C": "Turn off antivirus",
+        "D": "Allow unsigned macros"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Keyloggers aim to capture credentials. It aligns with the intended control outcome and avoids the common trap choices in this question.",
+      "misconceptionTags": [
+        "malware.keylogger_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch3-q11",
+      "explanation": "Trojan IoCs commonly include signatures/hashes for known malware, C2 hostnames/IPs, and artifacts like files/folders created on the target. A ransom note is more specific to ransomware.",
+      "tags": [
+        "malware.trojan",
+        "ioc.indicators"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "type": "multi_select",
+      "stem": "Which of the following are common indicators of compromise (IoCs) for Trojans? (Select all that apply.)",
+      "options": {
+        "A": "C2 hostnames/IP addresses",
+        "B": "Folders or files created on target devices",
+        "C": "A ransom note demanding payment",
+        "D": "Known malware signatures/hashes"
+      },
+      "answers": [
+        "A",
+        "B",
+        "D"
+      ],
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "Trojan IoCs commonly include signatures/hashes for known malware, C2 hostnames/IPs, and artifacts like files/folders created on the target.",
+      "misconceptionTags": [
+        "malware.trojan_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      }
+    },
+    {
+      "id": "ch3-q12",
+      "explanation": "Common analysis methods include online multi-AV tools like VirusTotal, sandboxing, manual code analysis (especially scripts), and utilities like strings to extract readable artifacts.",
+      "tags": [
+        "malware.analysis"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "type": "multi_select",
+      "stem": "Which techniques are commonly used to analyze malware? (Select all that apply.)",
+      "options": {
+        "A": "VirusTotal lookups",
+        "B": "Sandbox detonation/behavior analysis",
+        "C": "Manual code analysis of scripts",
+        "D": "Using the strings tool to extract readable artifacts"
+      },
+      "answers": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Common analysis methods include online multi-AV tools like VirusTotal, sandboxing, manual code analysis (especially scripts), and utilities like strings to extract readable artifacts.",
+      "misconceptionTags": [
+        "malware.analysis_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      }
+    },
+    {
+      "id": "ch3-q13",
+      "explanation": "Logic bombs are code/functions placed inside other programs that activate when specific conditions are met; they are not independent malicious programs.",
+      "tags": [
+        "malware.logicbomb",
+        "malware.basics"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "type": "mcq",
+      "stem": "Logic bombs are best described as:",
+      "options": {
+        "A": "Standalone malicious programs that self-spread",
+        "B": "Code embedded inside other programs that activates when conditions are met",
+        "C": "Firmware-level backdoors",
+        "D": "A type of spyware that only records audio"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "Logic bombs are code/functions placed inside other programs that activate when specific conditions are met; they are not independent malicious programs.",
+      "misconceptionTags": [
+        "malware.logicbomb_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch3-q14",
+      "explanation": "Rootkits aim to provide backdoor access and often conceal themselves. Because the infected system may lie/hide artifacts, detection is best performed from a trusted system/device when possible.",
+      "tags": [
+        "malware.rootkit",
+        "ioc.indicators"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "type": "mcq",
+      "stem": "Why is detecting a rootkit particularly difficult?",
+      "options": {
+        "A": "Rootkits only run on air-gapped systems",
+        "B": "An infected system can't be trusted to accurately report its own state",
+        "C": "Rootkits always delete system logs instantly",
+        "D": "Rootkits cannot communicate over the network"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "Rootkits aim to provide backdoor access and often conceal themselves.",
+      "misconceptionTags": [
+        "malware.rootkit_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch3-q15",
+      "explanation": "While some tools can remove specific rootkits, the common recommendation is to rebuild the system or restore from a known good backup/image because complete removal is hard to guarantee.",
+      "tags": [
+        "malware.rootkit",
+        "malware.analysis"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "type": "mcq",
+      "stem": "Which approach is MOST commonly recommended to ensure a rootkit is fully removed?",
+      "options": {
+        "A": "Rename suspicious executables",
+        "B": "Restore/rebuild from a known-good image or backup",
+        "C": "Disable DNS caching",
+        "D": "Increase password length"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "While some tools can remove specific rootkits, the common recommendation is to rebuild the system or restore from a known good backup/image because complete removal is hard to guarantee.",
+      "misconceptionTags": [
+        "malware.rootkit_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch3-q16",
+      "explanation": "Many rootkits hide by hooking filesystem drivers so users and tools don't see rootkit files; some also infect startup code (e.g., MBR) for persistence.",
+      "tags": [
+        "malware.rootkit"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "type": "mcq",
+      "stem": "Which technique is often used by rootkits to hide files from users?",
+      "options": {
+        "A": "Hooking filesystem drivers",
+        "B": "Encrypting all documents",
+        "C": "Changing Wi-Fi channels",
+        "D": "Disabling the bootloader"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Many rootkits hide by hooking filesystem drivers so users and tools don't see rootkit files; some also infect startup code (e.g., MBR) for persistence.",
+      "misconceptionTags": [
+        "malware.rootkit_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch3-q17",
+      "explanation": "Spyware is defined primarily by intent (gather info about the user/system). Bloatware is unwanted software; it may call home or be vulnerable, but information gathering isn't its primary intent.",
+      "tags": [
+        "malware.spyware",
+        "malware.bloatware"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "type": "mcq",
+      "stem": "Which is a key differentiator between spyware and bloatware?",
+      "options": {
+        "A": "Spyware is always preinstalled; bloatware is always downloaded",
+        "B": "Spyware's primary intention is information gathering; bloatware is simply unwanted programs",
+        "C": "Spyware can never call home; bloatware always can",
+        "D": "Spyware is only used by nation-states; bloatware only by criminals"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Spyware is defined primarily by intent (gather info about the user/system).",
+      "misconceptionTags": [
+        "malware.spyware_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch3-q18",
+      "explanation": "Ransomware demands payment; Trojans masquerade as legit software; worms self-spread without requiring user interaction; logic bombs are embedded code that activates on conditions.",
+      "tags": [
+        "malware.basics"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "type": "matching",
+      "stem": "Match the malware type to the best distinguishing clue.",
+      "left": [
+        "Ransomware",
+        "Trojan",
+        "Worm",
+        "Logic bomb"
+      ],
+      "right": [
+        "Self-spreads without user interaction",
+        "Embedded code that triggers on a condition",
+        "Demands payment after takeover",
+        "Disguised as legitimate software"
+      ],
+      "pairs": {
+        "Ransomware": "Demands payment after takeover",
+        "Trojan": "Disguised as legitimate software",
+        "Worm": "Self-spreads without user interaction",
+        "Logic bomb": "Embedded code that triggers on a condition"
+      },
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Ransomware demands payment; Trojans masquerade as legit software; worms self-spread without requiring user interaction; logic bombs are embedded code that activates on conditions.",
+      "misconceptionTags": [
+        "malware.basics_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch3-q19",
+      "explanation": "VirusTotal checks against many AV engines; sandboxes allow safe behavior observation; strings extracts readable artifacts; rebuilding from known-good is often the surest remediation for rootkits.",
+      "tags": [
+        "malware.analysis",
+        "malware.rootkit"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "type": "matching",
+      "stem": "Match the analysis/defense technique to what it’s used for.",
+      "left": [
+        "VirusTotal",
+        "Sandbox",
+        "strings",
+        "Rebuild from known-good"
+      ],
+      "right": [
+        "Extract readable artifacts from binaries/scripts",
+        "Safest way to remove an untrusted rootkit",
+        "Check detections across many AV engines",
+        "Observe behavior in a contained environment"
+      ],
+      "pairs": {
+        "VirusTotal": "Check detections across many AV engines",
+        "Sandbox": "Observe behavior in a contained environment",
+        "strings": "Extract readable artifacts from binaries/scripts",
+        "Rebuild from known-good": "Safest way to remove an untrusted rootkit"
+      },
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "VirusTotal checks against many AV engines; sandboxes allow safe behavior observation; strings extracts readable artifacts; rebuilding from known-good is often the surest remediation for rootkits.",
+      "misconceptionTags": [
+        "malware.analysis_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch3-q20",
+      "explanation": "Keylogger IoCs commonly include hashes/signatures, process names, known URLs, and exfiltration to C2. Boot sector modification is more aligned with boot-sector malware/rootkits.",
+      "tags": [
+        "malware.keylogger",
+        "ioc.indicators"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "type": "multi_select",
+      "stem": "Which of the following are common IoCs for keyloggers? (Select all that apply.)",
+      "options": {
+        "A": "File hashes/signatures",
+        "B": "Exfiltration activity to C2 systems",
+        "C": "Process names",
+        "D": "A boot sector modification"
+      },
+      "answers": [
+        "A",
+        "B",
+        "C"
+      ],
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "Keylogger IoCs commonly include hashes/signatures, process names, known URLs, and exfiltration to C2.",
+      "misconceptionTags": [
+        "malware.keylogger_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch3-q21",
+      "explanation": "The attachment is disguised as something legitimate and requires user execution—classic Trojan behavior. Beaconing to unknown hosts may indicate C2 after installation.",
+      "tags": [
+        "malware.trojan",
+        "malware.botnet",
+        "ioc.indicators"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "type": "scenario_mcq",
+      "stem": "Scenario: An employee receives an email attachment named 'Invoice.pdf.exe' and runs it. The program looks like a PDF viewer update and installs silently. Soon, the system begins beaconing to an unknown domain every few minutes.\n\nWhat malware type is MOST consistent with this behavior?",
+      "options": {
+        "A": "Worm",
+        "B": "Trojan",
+        "C": "Bloatware",
+        "D": "Logic bomb"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "The attachment is disguised as something legitimate and requires user execution—classic Trojan behavior.",
+      "misconceptionTags": [
+        "malware.trojan_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch3-q22",
+      "explanation": "Crypto-malware ransomware encrypts files and holds them hostage until a ransom is paid.",
+      "tags": [
+        "malware.ransomware"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "type": "scenario_mcq",
+      "stem": "Scenario: A hospital workstation suddenly displays a ransom note. User files are unreadable and have a new extension. The attacker demands cryptocurrency for a decryption key.\n\nWhich malware type is being described?",
+      "options": {
+        "A": "Spyware",
+        "B": "Ransomware (crypto-malware)",
+        "C": "Keylogger",
+        "D": "Rootkit"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Crypto-malware ransomware encrypts files and holds them hostage until a ransom is paid.",
+      "misconceptionTags": [
+        "malware.ransomware_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch3-q23",
+      "explanation": "Fileless malware often remains memory-resident, can persist via Registry entries, and may leverage scripting tools like PowerShell; disk artifacts may be minimal.",
+      "tags": [
+        "malware.fileless",
+        "ioc.indicators"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 85,
+      "type": "scenario_mcq",
+      "stem": "Scenario: Security monitoring shows a new Registry run key added on multiple endpoints. No suspicious executable is found on disk, but PowerShell activity spikes and processes show in-memory injection behavior.\n\nWhat malware category best fits these clues?",
+      "options": {
+        "A": "Fileless malware",
+        "B": "Boot sector virus",
+        "C": "Bloatware",
+        "D": "Hardware keylogger"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "4.4"
+      ],
+      "rationaleCorrect": "Fileless malware often remains memory-resident, can persist via Registry entries, and may leverage scripting tools like PowerShell; disk artifacts may be minimal.",
+      "misconceptionTags": [
+        "malware.fileless_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch3-q24",
+      "explanation": "Rootkits attempt to conceal themselves, making on-host tools unreliable. Verifying from trusted media/system is a best practice for rootkit detection.",
+      "tags": [
+        "malware.rootkit",
+        "ioc.indicators"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 85,
+      "type": "scenario_mcq",
+      "stem": "Scenario: A system administrator notices that malware detection tools run on an infected host report 'clean,' but network traffic shows obvious exfiltration and new services/ports. A forensic boot from trusted media reveals hidden files.\n\nWhat’s the MOST likely explanation?",
+      "options": {
+        "A": "The host has bloatware consuming resources",
+        "B": "The host may be infected with a rootkit that hides itself from local tools",
+        "C": "The host is only infected with spyware, which never hides files",
+        "D": "The host is protected by Secure Boot, so tools are wrong"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "Rootkits attempt to conceal themselves, making on-host tools unreliable.",
+      "misconceptionTags": [
+        "malware.rootkit_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch3-q25",
+      "explanation": "Logic bombs are malicious functions embedded inside legitimate programs that activate when set conditions are met (like a date).",
+      "tags": [
+        "malware.logicbomb"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "type": "scenario_mcq",
+      "stem": "Scenario: A developer’s codebase contains a hidden function that deletes a database table when the system date equals a specific value. The rest of the application appears normal until that day.\n\nWhat is this an example of?",
+      "options": {
+        "A": "Worm",
+        "B": "Logic bomb",
+        "C": "Ransomware",
+        "D": "Botnet"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "Logic bombs are malicious functions embedded inside legitimate programs that activate when set conditions are met (like a date).",
+      "misconceptionTags": [
+        "malware.logicbomb_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch3-q26",
+      "explanation": "VirusTotal and similar services can check whether malware is known and how multiple AV engines identify it.",
+      "tags": [
+        "malware.analysis"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "type": "scenario_mcq",
+      "stem": "Scenario: During incident response, you obtain a suspicious executable. You want a quick, low-effort way to see how multiple antivirus engines classify it.\n\nWhich tool/approach BEST fits?",
+      "options": {
+        "A": "Run it directly on a production endpoint",
+        "B": "Upload its hash or sample to an online multi-engine scanner like VirusTotal",
+        "C": "Change its filename and retry execution",
+        "D": "Open it in a text editor only"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "VirusTotal and similar services can check whether malware is known and how multiple AV engines identify it.",
+      "misconceptionTags": [
+        "malware.analysis_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch3-q27",
+      "explanation": "Sandboxing allows behavior analysis in a controlled environment without risking production systems.",
+      "tags": [
+        "malware.analysis"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "type": "scenario_mcq",
+      "stem": "Scenario: You suspect a binary is malicious but it is packed/obfuscated. You want to safely observe what it does: network connections, file writes, registry changes.\n\nWhat is the BEST next step?",
+      "options": {
+        "A": "Detonate it in a sandbox environment",
+        "B": "Run it on a domain controller",
+        "C": "Disable logging to reduce noise",
+        "D": "Only check its file extension"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "Sandboxing allows behavior analysis in a controlled environment without risking production systems.",
+      "misconceptionTags": [
+        "malware.analysis_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch3-q28",
+      "explanation": "Worms spread automatically without user interaction and can propagate via many automated means (services, email automation, file shares, vulnerable IoT/devices).",
+      "tags": [
+        "malware.worm",
+        "malware.basics"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "type": "scenario_mcq",
+      "stem": "Scenario: A malware outbreak spreads rapidly across a network without users opening attachments. It moves via automated means, including vulnerable devices and shared resources.\n\nWhich malware type is MOST consistent?",
+      "options": {
+        "A": "Trojan",
+        "B": "Worm",
+        "C": "Spyware",
+        "D": "Logic bomb"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "Worms spread automatically without user interaction and can propagate via many automated means (services, email automation, file shares, vulnerable IoT/devices).",
+      "misconceptionTags": [
+        "malware.worm_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    }
+  ]
+}

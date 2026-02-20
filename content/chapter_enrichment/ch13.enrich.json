@@ -1,0 +1,488 @@
+{
+  "pack_id": "ch13",
+  "version": "1.0.0",
+  "confusion_pairs": [
+    {
+      "id": "ch13.cp01",
+      "title": "Evil twin vs Rogue AP",
+      "a": {
+        "term": "Evil twin",
+        "definition": "A malicious access point that imitates a trusted SSID to lure victims and intercept/modify traffic."
+      },
+      "b": {
+        "term": "Rogue AP",
+        "definition": "An unauthorized access point present in the environment or connected to the network (may be accidental or malicious)."
+      },
+      "bullets": [
+        "Evil twin = impersonation attack; rogue AP = unauthorized device (not always impersonating).",
+        "Evil twin targets clients; rogue AP is often an internal policy/asset control problem.",
+        "Defense: detect SSID spoofing and validate AP identity; also control the wired edge to prevent unauthorized uplinks."
+      ]
+    },
+    {
+      "id": "ch13.cp02",
+      "title": "Deauthentication vs RF jamming",
+      "a": {
+        "term": "Deauth/disassoc attack",
+        "definition": "Spoofed management frames force clients off Wi‑Fi, creating a reconnection window."
+      },
+      "b": {
+        "term": "Jamming",
+        "definition": "RF interference that blocks communication by drowning the signal in noise."
+      },
+      "bullets": [
+        "Deauth uses Wi‑Fi protocol frames; jamming uses radio interference.",
+        "Protected management frames (PMF) helps against deauth, not against RF jamming.",
+        "Jamming may be accidental (microwave/other RF) or malicious; deauth is almost always intentional."
+      ]
+    },
+    {
+      "id": "ch13.cp03",
+      "title": "Bluejacking vs Bluesnarfing",
+      "a": {
+        "term": "Bluejacking",
+        "definition": "Unsolicited Bluetooth messages sent to nearby devices (typically nuisance)."
+      },
+      "b": {
+        "term": "Bluesnarfing",
+        "definition": "Unauthorized Bluetooth access to extract data (contacts/files) from a device."
+      },
+      "bullets": [
+        "Bluejacking = spam; bluesnarfing = data theft.",
+        "Bluejacking impact is usually social/annoyance; bluesnarfing is a confidentiality incident.",
+        "Defense: disable Bluetooth when unused, enforce secure pairing modes, and block legacy insecure profiles."
+      ]
+    },
+    {
+      "id": "ch13.cp04",
+      "title": "WPA2-Personal vs WPA2-Enterprise",
+      "a": {
+        "term": "WPA2-Personal (PSK)",
+        "definition": "Wi‑Fi security using a single shared passphrase for the whole network."
+      },
+      "b": {
+        "term": "WPA2-Enterprise (802.1X)",
+        "definition": "Wi‑Fi security using per-user/device authentication via 802.1X, RADIUS, and EAP."
+      },
+      "bullets": [
+        "PSK has weak accountability; Enterprise supports unique identity and policy decisions.",
+        "If a PSK leaks, you rotate it for everyone; Enterprise can disable one user/device.",
+        "Enterprise is more complex (RADIUS/certs) but scales better for organizations."
+      ]
+    },
+    {
+      "id": "ch13.cp05",
+      "title": "WPA2 vs WPA3",
+      "a": {
+        "term": "WPA2",
+        "definition": "Older Wi‑Fi security generation; common, but password-based modes are more guessable and management frames may be less protected."
+      },
+      "b": {
+        "term": "WPA3",
+        "definition": "Newer Wi‑Fi security generation; improves password-based authentication (SAE) and strengthens protections like PMF and forward secrecy options."
+      },
+      "bullets": [
+        "WPA3-Personal uses SAE (better than PSK).",
+        "WPA3 commonly enforces protected management frames to reduce deauth-style abuse.",
+        "Migration must consider legacy client support; design ‘best possible’ without breaking operations."
+      ]
+    },
+    {
+      "id": "ch13.cp06",
+      "title": "OWE Enhanced Open vs Captive portal",
+      "a": {
+        "term": "OWE (Enhanced Open)",
+        "definition": "Provides encryption on an 'open' Wi‑Fi network without requiring a shared password."
+      },
+      "b": {
+        "term": "Captive portal",
+        "definition": "A web-based gate for access/terms; does not inherently encrypt the Wi‑Fi link."
+      },
+      "bullets": [
+        "OWE is about link-layer encryption; captive portals are about access workflow and policy.",
+        "A captive portal can exist on an unencrypted network; OWE can encrypt without a portal.",
+        "For guests, prefer real encryption (WPA2/3 or OWE) plus portal if you need registration."
+      ]
+    },
+    {
+      "id": "ch13.cp07",
+      "title": "EAP-TLS vs PEAP",
+      "a": {
+        "term": "EAP-TLS",
+        "definition": "Mutual certificate authentication (client + server certs) inside 802.1X."
+      },
+      "b": {
+        "term": "PEAP",
+        "definition": "Server certificate creates a TLS tunnel; then inner authentication (often username/password)."
+      },
+      "bullets": [
+        "EAP‑TLS is strongest but requires certificate lifecycle management on clients.",
+        "PEAP is easier to deploy but depends on securely validating the server certificate.",
+        "Pick based on device management maturity: unmanaged BYOD often pushes you away from client certs."
+      ]
+    },
+    {
+      "id": "ch13.cp08",
+      "title": "Geolocation vs Geofencing",
+      "a": {
+        "term": "Geolocation",
+        "definition": "Determining where a device is (GPS/Wi‑Fi/cellular signals)."
+      },
+      "b": {
+        "term": "Geofencing",
+        "definition": "Applying policy based on entering/leaving a defined location boundary."
+      },
+      "bullets": [
+        "Geolocation = measurement; geofencing = enforcement.",
+        "Use geolocation to find lost devices; use geofencing to block access outside allowed areas.",
+        "Location is a context signal—pair it with strong authentication, not as a standalone lock."
+      ]
+    },
+    {
+      "id": "ch13.cp09",
+      "title": "Remote wipe vs Full-device encryption",
+      "a": {
+        "term": "Remote wipe",
+        "definition": "Erase device data via management command (requires the device to receive it)."
+      },
+      "b": {
+        "term": "Full-device encryption (FDE)",
+        "definition": "Encrypt all device storage so offline theft doesn’t reveal data without unlock."
+      },
+      "bullets": [
+        "Remote wipe is great but not guaranteed—offline devices can ignore it.",
+        "FDE protects immediately against offline theft; pair with a strong unlock policy.",
+        "Best practice: use both—wipe for containment, FDE for theft resilience."
+      ]
+    },
+    {
+      "id": "ch13.cp10",
+      "title": "Sideloading vs Jailbreaking",
+      "a": {
+        "term": "Sideloading",
+        "definition": "Installing apps from outside official stores, bypassing normal vetting."
+      },
+      "b": {
+        "term": "Jailbreaking/rooting",
+        "definition": "Gaining elevated OS privileges to bypass platform restrictions and controls."
+      },
+      "bullets": [
+        "Sideloading changes the app supply chain; jailbreaking changes the device trust model.",
+        "Sideloading can happen without root on some platforms; jailbreaking usually enables deeper bypass.",
+        "Defense: MDM policies to block unknown sources, plus compliance checks for rooted devices."
+      ]
+    }
+  ],
+  "tag_rules": {
+    "bluetooth.attacks.bluejacking": {
+      "rule": "Unsolicited Bluetooth messages—annoying, usually not data theft.",
+      "micro_example": "Someone pushes a prank message to nearby phones.",
+      "confusion_pair_id": "ch13.cp03"
+    },
+    "bluetooth.attacks.bluesnarfing": {
+      "rule": "Unauthorized Bluetooth data access (contacts/files) from a victim device.",
+      "micro_example": "Attacker pulls address book data over Bluetooth.",
+      "confusion_pair_id": "ch13.cp03"
+    },
+    "bluetooth.attacks.impersonation_bia": {
+      "rule": "Bluetooth impersonation exploits protocol weaknesses to act as a trusted device.",
+      "micro_example": "Attacker mimics a headset identity to intercept pairing.",
+      "confusion_pair_id": "none"
+    },
+    "bluetooth.security_modes": {
+      "rule": "Bluetooth security depends on pairing mode and auth—disable/limit when not needed.",
+      "micro_example": "Set devices to non-discoverable and require secure pairing.",
+      "confusion_pair_id": "none"
+    },
+    "mobile.deployment.byod": {
+      "rule": "BYOD: user-owned devices; lowest control, highest policy friction.",
+      "micro_example": "Use MDM containers and compliance checks for BYOD access.",
+      "confusion_pair_id": "none"
+    },
+    "mobile.deployment.cobo": {
+      "rule": "COBO: company-owned, business-only; maximum control.",
+      "micro_example": "Kiosk/warehouse scanner runs only approved apps.",
+      "confusion_pair_id": "none"
+    },
+    "mobile.deployment.cope": {
+      "rule": "COPE: org-owned but personal use allowed; strong control + usability.",
+      "micro_example": "Company phone allows personal apps but enforces work container rules.",
+      "confusion_pair_id": "none"
+    },
+    "mobile.deployment.cyod": {
+      "rule": "CYOD: org-owned, user chooses from approved devices.",
+      "micro_example": "IT supports a short list of phone models to simplify security.",
+      "confusion_pair_id": "none"
+    },
+    "mobile.hardening.basic_controls": {
+      "rule": "Baseline mobile hardening: strong unlock + updates + least apps.",
+      "micro_example": "Require PIN/biometric + auto-lock + OS updates.",
+      "confusion_pair_id": "ch13.cp09"
+    },
+    "mobile.mdm.app_management": {
+      "rule": "MDM/UEM control: app management — enforce policy at scale.",
+      "micro_example": "Policy sets app management to meet compliance.",
+      "confusion_pair_id": "none"
+    },
+    "mobile.mdm.containerization": {
+      "rule": "MDM/UEM control: containerization — enforce policy at scale.",
+      "micro_example": "Policy sets containerization to meet compliance.",
+      "confusion_pair_id": "none"
+    },
+    "mobile.mdm.content_management": {
+      "rule": "MDM/UEM control: content management — enforce policy at scale.",
+      "micro_example": "Policy sets content management to meet compliance.",
+      "confusion_pair_id": "none"
+    },
+    "mobile.mdm.full_device_encryption": {
+      "rule": "Encrypt all data at rest so theft without unlock doesn’t expose content.",
+      "micro_example": "Stolen phone stays safe because storage is encrypted and locked.",
+      "confusion_pair_id": "ch13.cp09"
+    },
+    "mobile.mdm.geofencing": {
+      "rule": "Apply policy when a device crosses a boundary (inside/outside allowed zone).",
+      "micro_example": "Outside HQ geofence → block corporate apps or force VPN.",
+      "confusion_pair_id": "ch13.cp08"
+    },
+    "mobile.mdm.geolocation": {
+      "rule": "Figure out where a device is (context signal, not a lock by itself).",
+      "micro_example": "Lost phone is located via GPS/Wi‑Fi/cellular signals.",
+      "confusion_pair_id": "ch13.cp08"
+    },
+    "mobile.mdm.mdm_uem": {
+      "rule": "MDM/UEM control: mdm uem — enforce policy at scale.",
+      "micro_example": "Policy sets mdm uem to meet compliance.",
+      "confusion_pair_id": "none"
+    },
+    "mobile.mdm.remote_wipe": {
+      "rule": "Erase device data remotely—works only if the device receives the command.",
+      "micro_example": "Phone goes offline → wipe may not trigger; rely on encryption too.",
+      "confusion_pair_id": "ch13.cp09"
+    },
+    "mobile.mdm.selective_wipe": {
+      "rule": "MDM/UEM control: selective wipe — enforce policy at scale.",
+      "micro_example": "Policy sets selective wipe to meet compliance.",
+      "confusion_pair_id": "none"
+    },
+    "mobile.privacy.geotagging": {
+      "rule": "Location metadata in photos/docs can leak sensitive places and habits.",
+      "micro_example": "A photo shared publicly reveals the facility’s coordinates.",
+      "confusion_pair_id": "ch13.cp08"
+    },
+    "mobile.vuln.jailbreaking": {
+      "rule": "Privilege escalation/rooting to bypass OS restrictions and controls.",
+      "micro_example": "Rooted phone disables MDM restrictions and installs risky tools.",
+      "confusion_pair_id": "ch13.cp10"
+    },
+    "mobile.vuln.sideloading": {
+      "rule": "Installing apps from outside official stores—bypasses vetting and policy.",
+      "micro_example": "User installs an APK from a forum; malware slips in.",
+      "confusion_pair_id": "ch13.cp10"
+    },
+    "wifi.ap_security": {
+      "rule": "Harden APs: change defaults, limit admin access, patch firmware.",
+      "micro_example": "Disable unused services and restrict AP management to IT subnets.",
+      "confusion_pair_id": "none"
+    },
+    "wifi.bands.2_4ghz": {
+      "rule": "Band choice matters for range vs congestion (band: 2_4ghz).",
+      "micro_example": "High-density office prefers less congested bands when clients support it.",
+      "confusion_pair_id": "none"
+    },
+    "wifi.channel_planning": {
+      "rule": "Plan channels/power to reduce overlap and interference.",
+      "micro_example": "On 2.4 GHz, prefer non-overlapping channels (e.g., 1/6/11).",
+      "confusion_pair_id": "none"
+    },
+    "wifi.controller_security": {
+      "rule": "Treat WLAN controllers like critical infrastructure: isolate, patch, log.",
+      "micro_example": "Controller admin UI on a management VLAN with MFA.",
+      "confusion_pair_id": "none"
+    },
+    "wifi.controls.protected_mgmt_frames": {
+      "rule": "Protect management frames so spoofed deauth/disassoc frames don’t work.",
+      "micro_example": "Enable PMF to stop ‘kick‑off’ attacks on WPA3 WLANs.",
+      "confusion_pair_id": "ch13.cp02"
+    },
+    "wifi.heatmap": {
+      "rule": "Visual map of signal strength/coverage to guide placement and tuning.",
+      "micro_example": "Heatmap shows dead zones; add/relocate an AP.",
+      "confusion_pair_id": "none"
+    },
+    "wifi.identifiers.ssid": {
+      "rule": "SSID is a name, not a security control—attackers can copy it.",
+      "micro_example": "Evil twin uses your SSID to lure clients.",
+      "confusion_pair_id": "ch13.cp01"
+    },
+    "wifi.security.ccmp_aes": {
+      "rule": "AES/CCMP is the modern baseline for Wi‑Fi confidentiality/integrity.",
+      "micro_example": "Choose CCMP over legacy WEP/TKIP for encryption.",
+      "confusion_pair_id": "ch13.cp05"
+    },
+    "wifi.security.owe_enhanced_open": {
+      "rule": "OWE encrypts traffic on ‘open’ Wi‑Fi without a shared password.",
+      "micro_example": "Cafe Wi‑Fi shows as ‘open’ but your link is still encrypted (no PSK).",
+      "confusion_pair_id": "ch13.cp06"
+    },
+    "wifi.security.wpa2_enterprise": {
+      "rule": "802.1X + RADIUS + EAP gives per-user/device auth and policy.",
+      "micro_example": "Employees log in with unique creds; guests go to a separate SSID.",
+      "confusion_pair_id": "ch13.cp04"
+    },
+    "wifi.security.wpa2_personal": {
+      "rule": "Shared passphrase (PSK) Wi‑Fi—easy but weak for accountability.",
+      "micro_example": "One PSK leaks; you must rotate it for everyone.",
+      "confusion_pair_id": "ch13.cp04"
+    },
+    "wifi.security.wpa3_enterprise_192bit": {
+      "rule": "WPA3-Enterprise can run in a stronger 192-bit security mode.",
+      "micro_example": "High‑security WLAN uses WPA3‑Enterprise 192‑bit mode for sensitive users.",
+      "confusion_pair_id": "ch13.cp05"
+    },
+    "wifi.security.wpa3_personal_pfs": {
+      "rule": "WPA3 can provide forward secrecy: past traffic stays safe if a key leaks.",
+      "micro_example": "Password leaks later; yesterday’s captures still can’t be decrypted.",
+      "confusion_pair_id": "ch13.cp05"
+    },
+    "wifi.security.wpa3_personal_sae": {
+      "rule": "WPA3-Personal uses SAE instead of PSK to resist offline guessing.",
+      "micro_example": "Weak password hurts less because attackers can’t grab a hash and crack offline.",
+      "confusion_pair_id": "ch13.cp05"
+    },
+    "wifi.site_survey": {
+      "rule": "Survey the RF environment before deployment to avoid coverage and security surprises.",
+      "micro_example": "Walk the floor and record interference/coverage before installing APs.",
+      "confusion_pair_id": "none"
+    },
+    "wifi.threats.deauth_disassoc": {
+      "rule": "Protocol-frame attack that kicks clients off so they reconnect (often to a trap).",
+      "micro_example": "Attacker spams deauth frames, forcing a laptop to reconnect.",
+      "confusion_pair_id": "ch13.cp02"
+    },
+    "wifi.threats.evil_twin": {
+      "rule": "Fake AP that clones a trusted SSID to trick clients.",
+      "micro_example": "You see 'CorpWiFi' twice; the stronger one is attacker-controlled.",
+      "confusion_pair_id": "ch13.cp01"
+    },
+    "wifi.threats.jamming": {
+      "rule": "RF interference that blocks communication by drowning the signal.",
+      "micro_example": "A jammer or noisy device wipes out Wi‑Fi on a channel.",
+      "confusion_pair_id": "ch13.cp02"
+    },
+    "wifi.threats.rogue_ap": {
+      "rule": "Unauthorized AP in/near your environment (may be accidental or malicious).",
+      "micro_example": "Employee plugs in a cheap router; it bridges into the LAN.",
+      "confusion_pair_id": "ch13.cp01"
+    },
+    "wireless.auth.8021x": {
+      "rule": "Port/AP-based access control that requires authentication before joining.",
+      "micro_example": "Wi‑Fi denies association until 802.1X auth succeeds.",
+      "confusion_pair_id": "ch13.cp04"
+    },
+    "wireless.auth.eap": {
+      "rule": "Authentication framework used inside 802.1X (many EAP methods).",
+      "micro_example": "Choose PEAP or EAP‑TLS based on certificate readiness.",
+      "confusion_pair_id": "ch13.cp04"
+    },
+    "wireless.auth.eap_fast": {
+      "rule": "EAP method designed for faster (re)authentication, useful for roaming.",
+      "micro_example": "Warehouse scanners roam APs without slow reauth delays.",
+      "confusion_pair_id": "ch13.cp07"
+    },
+    "wireless.auth.eap_peap": {
+      "rule": "Server cert + TLS tunnel, then inner auth (often username/password).",
+      "micro_example": "PEAP protects credentials inside TLS even on untrusted airwaves.",
+      "confusion_pair_id": "ch13.cp07"
+    },
+    "wireless.auth.eap_tls": {
+      "rule": "Strong mutual certificate auth (client + server certs).",
+      "micro_example": "Corp laptops use EAP‑TLS with device certificates.",
+      "confusion_pair_id": "ch13.cp07"
+    },
+    "wireless.auth.eap_ttls": {
+      "rule": "TLS tunnel method that can avoid client certs while still protecting auth.",
+      "micro_example": "TTLS lets users authenticate with passwords inside a TLS tunnel.",
+      "confusion_pair_id": "ch13.cp07"
+    },
+    "wireless.auth.open_captive_portal": {
+      "rule": "Web page gate for access; doesn’t automatically encrypt the Wi‑Fi link.",
+      "micro_example": "Hotel portal accepts terms, but you still need HTTPS/VPN on the session.",
+      "confusion_pair_id": "ch13.cp06"
+    },
+    "wireless.auth.psk": {
+      "rule": "Single shared Wi‑Fi secret—no per-user identity.",
+      "micro_example": "Contractor learns the PSK; you can’t tell who used it.",
+      "confusion_pair_id": "ch13.cp04"
+    },
+    "wireless.auth.radius": {
+      "rule": "Central auth server used by 802.1X to validate users/devices.",
+      "micro_example": "AP forwards login to RADIUS; RADIUS returns accept/deny.",
+      "confusion_pair_id": "ch13.cp04"
+    },
+    "wireless.auth.radius_federation": {
+      "rule": "Federated RADIUS lets users authenticate via home org credentials across domains.",
+      "micro_example": "Visitors use their university login on your guest enterprise WLAN.",
+      "confusion_pair_id": "none"
+    },
+    "wireless.connectivity.bluetooth": {
+      "rule": "Bluetooth is a wireless connectivity type with unique range/trust assumptions.",
+      "micro_example": "Use policy/controls specific to bluetooth (disable if unused).",
+      "confusion_pair_id": "none"
+    },
+    "wireless.connectivity.cellular": {
+      "rule": "Cellular is a wireless connectivity type with unique range/trust assumptions.",
+      "micro_example": "Use policy/controls specific to cellular (disable if unused).",
+      "confusion_pair_id": "none"
+    },
+    "wireless.connectivity.gps": {
+      "rule": "GPS is a wireless connectivity type with unique range/trust assumptions.",
+      "micro_example": "Use policy/controls specific to gps (disable if unused).",
+      "confusion_pair_id": "none"
+    },
+    "wireless.connectivity.nfc": {
+      "rule": "NFC is a wireless connectivity type with unique range/trust assumptions.",
+      "micro_example": "Use policy/controls specific to nfc (disable if unused).",
+      "confusion_pair_id": "none"
+    },
+    "wireless.connectivity.rfid": {
+      "rule": "RFID is a wireless connectivity type with unique range/trust assumptions.",
+      "micro_example": "Use policy/controls specific to rfid (disable if unused).",
+      "confusion_pair_id": "none"
+    },
+    "wireless.connectivity.wifi": {
+      "rule": "Wifi is a wireless connectivity type with unique range/trust assumptions.",
+      "micro_example": "Use policy/controls specific to wifi (disable if unused).",
+      "confusion_pair_id": "none"
+    },
+    "wireless.models.broadcast": {
+      "rule": "Wireless topology model: broadcast.",
+      "micro_example": "Choose broadcast based on who talks to whom and control needs.",
+      "confusion_pair_id": "none"
+    },
+    "wireless.models.mesh": {
+      "rule": "Wireless topology model: mesh.",
+      "micro_example": "Choose mesh based on who talks to whom and control needs.",
+      "confusion_pair_id": "none"
+    },
+    "wireless.models.point_to_multipoint": {
+      "rule": "Wireless topology model: point to multipoint.",
+      "micro_example": "Choose point to multipoint based on who talks to whom and control needs.",
+      "confusion_pair_id": "none"
+    },
+    "wireless.models.point_to_point": {
+      "rule": "Wireless topology model: point to point.",
+      "micro_example": "Choose point to point based on who talks to whom and control needs.",
+      "confusion_pair_id": "none"
+    },
+    "wireless.tools.wids_wips": {
+      "rule": "Detect (WIDS) and optionally contain/block (WIPS) wireless threats.",
+      "micro_example": "WIPS flags a rogue AP and can deauth its clients (with care).",
+      "confusion_pair_id": "ch13.cp01"
+    },
+    "wireless.tools.wifi_analyzer": {
+      "rule": "Tooling to see channels, signal strength, and nearby networks for troubleshooting.",
+      "micro_example": "Analyzer finds a neighbor AP sitting on your channel.",
+      "confusion_pair_id": "none"
+    }
+  }
+}

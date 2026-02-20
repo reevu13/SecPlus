@@ -1,0 +1,148 @@
+{
+  "pack_id": "sec701_ch1_pack_v1",
+  "version": "1.0.0",
+  "confusion_pairs": [
+    {
+      "id": "cat_vs_type",
+      "title": "Control Category vs Control Type",
+      "a": {
+        "term": "Control Category",
+        "definition": "Where/how the control acts (technical, operational, managerial, physical)."
+      },
+      "b": {
+        "term": "Control Type",
+        "definition": "The intent/effect (preventive, deterrent, detective, corrective, compensating, directive)."
+      },
+      "bullets": [
+        "Category = mechanism/location; type = purpose.",
+        "One control can have both a category and a type.",
+        "Example: IDS is technical (category) + detective (type)."
+      ]
+    },
+    {
+      "id": "deterrent_vs_preventive",
+      "title": "Deterrent vs Preventive",
+      "a": {
+        "term": "Deterrent",
+        "definition": "Discourages attempts (signs, fences)."
+      },
+      "b": {
+        "term": "Preventive",
+        "definition": "Stops or blocks the action (encryption, ACLs)."
+      },
+      "bullets": [
+        "Deterrent lowers likelihood; preventive blocks.",
+        "A warning sign is deterrent, not preventive.",
+        "Full-disk encryption is preventive for data exposure." 
+      ]
+    },
+    {
+      "id": "data_states",
+      "title": "Data States (At Rest / In Transit / In Use)",
+      "a": {
+        "term": "At Rest",
+        "definition": "Stored on disk or backups."
+      },
+      "b": {
+        "term": "In Transit / In Use",
+        "definition": "Moving over networks / being processed in memory."
+      },
+      "bullets": [
+        "Protect all three states, not just transit.",
+        "In-use data can be exposed via memory scraping.",
+        "At-rest data requires storage encryption and access controls."
+      ]
+    },
+    {
+      "id": "segmentation_vs_isolation",
+      "title": "Segmentation vs Isolation",
+      "a": {
+        "term": "Segmentation",
+        "definition": "Separate networks with controlled communication."
+      },
+      "b": {
+        "term": "Isolation",
+        "definition": "Cut off from outside networks completely."
+      },
+      "bullets": [
+        "Segmentation still allows limited traffic by rules.",
+        "Isolation means no external communication.",
+        "Isolation is often compensating for high-risk exceptions."
+      ]
+    },
+    {
+      "id": "hashing_vs_encryption",
+      "title": "Hashing vs Encryption",
+      "a": {
+        "term": "Hashing",
+        "definition": "One-way transformation used for integrity checks."
+      },
+      "b": {
+        "term": "Encryption",
+        "definition": "Reversible transformation using a key for confidentiality."
+      },
+      "bullets": [
+        "Hashing is not reversible like encryption.",
+        "Hashes can be attacked via guessing/brute force.",
+        "Encryption protects confidentiality; hashing proves integrity."
+      ]
+    }
+  ],
+  "tag_rules": {
+    "control_category_technical": {
+      "rule": "If it acts in the digital/IT layer (firewalls, encryption), it is technical.",
+      "micro_example": "Firewall rules are technical controls.",
+      "confusion_pair_id": "cat_vs_type"
+    },
+    "control_type_detective": {
+      "rule": "Detective controls identify events that already happened.",
+      "micro_example": "IDS alerting is detective.",
+      "confusion_pair_id": "cat_vs_type"
+    },
+    "control_type_preventive": {
+      "rule": "Preventive controls block or stop incidents.",
+      "micro_example": "Full-disk encryption helps prevent data disclosure.",
+      "confusion_pair_id": "deterrent_vs_preventive"
+    },
+    "control_type_deterrent": {
+      "rule": "Deterrent controls discourage attempts rather than blocking them.",
+      "micro_example": "Warning signs and fences are deterrent.",
+      "confusion_pair_id": "deterrent_vs_preventive"
+    },
+    "data_state_in_transit": {
+      "rule": "Data moving over a network is in transit; think TLS or VPN.",
+      "micro_example": "Unencrypted service-to-service traffic is in transit.",
+      "confusion_pair_id": "data_states"
+    },
+    "data_state_in_use": {
+      "rule": "Data being processed in memory is in use and can be scraped.",
+      "micro_example": "API tokens stolen from RAM are in use exposure.",
+      "confusion_pair_id": "data_states"
+    },
+    "data_state_at_rest": {
+      "rule": "Data stored on disk or backups is at rest.",
+      "micro_example": "Database files on a laptop are at rest.",
+      "confusion_pair_id": "data_states"
+    },
+    "segmentation": {
+      "rule": "Segmentation separates networks but allows controlled communication.",
+      "micro_example": "Finance VLAN reachable only through strict rules is segmented.",
+      "confusion_pair_id": "segmentation_vs_isolation"
+    },
+    "isolation": {
+      "rule": "Isolation removes outside network access entirely.",
+      "micro_example": "Legacy system on an air-gapped network is isolated.",
+      "confusion_pair_id": "segmentation_vs_isolation"
+    },
+    "hashing": {
+      "rule": "Hashing is for integrity, not confidentiality.",
+      "micro_example": "Compare file hashes to detect tampering.",
+      "confusion_pair_id": "hashing_vs_encryption"
+    },
+    "encryption": {
+      "rule": "Encryption provides confidentiality using keys.",
+      "micro_example": "TLS encrypts data in transit.",
+      "confusion_pair_id": "hashing_vs_encryption"
+    }
+  }
+}

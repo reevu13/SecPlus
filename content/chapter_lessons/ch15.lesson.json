@@ -1,0 +1,2815 @@
+{
+  "pack_id": "ch15",
+  "version": "1.0.0",
+  "modules": [
+    {
+      "id": "m1_foundations",
+      "title": "Digital forensics: purpose, mindset, and human factors",
+      "tag_ids": [
+        "forensics.overview.definition",
+        "forensics.process.documentation",
+        "forensics.process.timelines",
+        "forensics.human_factor.interviews"
+      ],
+      "pages": [
+        {
+          "id": "m1_p1",
+          "title": "What digital forensics is (and what it is not)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Digital forensics is the disciplined collection, preservation, and analysis of digital evidence to answer: what happened, when, how, and by whom.\n\nIt shows up in:\n- incident response (IR)\n- internal investigations\n- legal cases / compliance\n- e‑discovery and legal hold work"
+            },
+            {
+              "type": "trap",
+              "text": "Trap: treating forensics like \"just running a tool\".\nA tool output without preservation + documentation can be useless (or hostile) in court or during peer review."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Digital forensics is primarily about…",
+              "options": [
+                "Restoring lost data",
+                "Collecting and analyzing evidence in a defensible way",
+                "Encrypting disks",
+                "Blocking malware"
+              ],
+              "correct_index": 1,
+              "explanation": "Forensics is evidence work: collect/preserve/analyze so findings are defensible and repeatable.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill the blank: Digital forensics answers what happened, _____ it happened, and how it happened.",
+              "answers": [
+                "when"
+              ],
+              "explanation": "Timelines are core: time matters as much as artifacts.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "2.4",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.6",
+            "4.8",
+            "5.1",
+            "5.3"
+          ]
+        },
+        {
+          "id": "m1_p2",
+          "title": "Documentation, timelines, and interviews",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Three habits that separate \"good\" forensics from chaos:\n1) Document everything you observe and do (actions, tools, settings, timestamps).\n2) Build timelines and event sequences (file metadata, logs, timestamps).\n3) Use the human side: interviews can reveal context, intent, and missing artifacts."
+            },
+            {
+              "type": "example",
+              "text": "Example timeline sources:\n- file creation/modify/access times\n- event logs / authentication logs\n- email server logs\n- application logs\n- network flow/metadata"
+            }
+          ],
+          "checks": [
+            {
+              "type": "multi_select",
+              "prompt": "Which activities are part of a forensically sound workflow? (Select all that apply)",
+              "options": [
+                "Maintain detailed notes of actions taken",
+                "Rely on memory because tools are accurate",
+                "Correlate timestamps across systems",
+                "Interview involved individuals when appropriate"
+              ],
+              "correct_indices": [
+                0,
+                2,
+                3
+              ],
+              "explanation": "Documentation + time correlation + interviews are all core. \"Rely on memory\" fails under scrutiny.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Why do interviews matter in digital forensics?",
+              "options": [
+                "They replace technical analysis",
+                "They can provide clues and context that artifacts alone may not reveal",
+                "They are only used by law enforcement",
+                "They make chain of custody unnecessary"
+              ],
+              "correct_index": 1,
+              "explanation": "Interviews can point you to devices, accounts, timelines, and intent—then you validate via artifacts.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "2.4",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.6",
+            "4.8",
+            "5.1",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.3",
+        "1.5",
+        "1.6",
+        "2.4",
+        "3.1",
+        "3.2",
+        "3.3",
+        "4.1",
+        "4.6",
+        "4.8",
+        "5.1",
+        "5.3"
+      ]
+    },
+    {
+      "id": "m2_legal_hold",
+      "title": "Legal hold and spoliation",
+      "tag_ids": [
+        "forensics.legal_hold",
+        "forensics.spoliation"
+      ],
+      "pages": [
+        {
+          "id": "m2_p1",
+          "title": "Legal hold basics",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "A legal hold (litigation hold) is a notice to preserve potentially relevant data once litigation is pending or anticipated.\n\nIt typically means:\n- stop normal deletion/rotation policies for relevant data\n- preserve backups, emails, files, logs, and even paper records\n- coordinate with legal counsel and IT"
+            },
+            {
+              "type": "trap",
+              "text": "Trap: thinking \"we have backups\" automatically satisfies a legal hold.\nBackups are not the same as controlled preservation of specific relevant evidence."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A legal hold primarily requires an organization to…",
+              "options": [
+                "Encrypt all data",
+                "Preserve relevant records and data",
+                "Delete irrelevant files",
+                "Give all data to the opposing party immediately"
+              ],
+              "correct_index": 1,
+              "explanation": "Legal holds are about preservation to prevent routine destruction of potential evidence.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill the blank: A legal hold is issued when litigation is pending or ______.",
+              "answers": [
+                "anticipated"
+              ],
+              "explanation": "The trigger is pending or anticipated litigation.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "2.4",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.6",
+            "4.8",
+            "5.1",
+            "5.3"
+          ]
+        },
+        {
+          "id": "m2_p2",
+          "title": "Spoliation: the court’s favorite nightmare",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Spoliation of evidence = intentionally, recklessly, or negligently altering, destroying, hiding, fabricating, or withholding evidence relevant to legal matters.\n\nKey idea: once you’re on notice (legal hold), mishandling evidence can blow up in court."
+            },
+            {
+              "type": "example",
+              "text": "Examples:\n- deleting email archives after legal hold notice\n- wiping laptops of key employees\n- rotating logs more aggressively to \"clean up\""
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Spoliation of evidence refers to…",
+              "options": [
+                "Compressing data to save space",
+                "Altering/destroying/hiding relevant evidence",
+                "Encrypting backups",
+                "Making a forensic copy of a drive"
+              ],
+              "correct_index": 1,
+              "explanation": "Spoliation is evidence tampering or negligent loss; it's a legal and procedural failure.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            },
+            {
+              "type": "multi_select",
+              "prompt": "Which behaviors can qualify as spoliation? (Select all that apply)",
+              "options": [
+                "Intentionally deleting relevant emails",
+                "Negligently letting log retention overwrite key logs after a hold",
+                "Creating a write‑protected forensic image",
+                "Hiding a device involved in the incident"
+              ],
+              "correct_indices": [
+                0,
+                1,
+                3
+              ],
+              "explanation": "Spoliation includes intentional and negligent mishandling; proper imaging is the opposite.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "2.4",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.6",
+            "4.8",
+            "5.1",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.3",
+        "1.5",
+        "1.6",
+        "2.4",
+        "3.1",
+        "3.2",
+        "3.3",
+        "4.1",
+        "4.6",
+        "4.8",
+        "5.1",
+        "5.3"
+      ]
+    },
+    {
+      "id": "m3_ediscovery",
+      "title": "e‑Discovery and the EDRM model",
+      "tag_ids": [
+        "forensics.ediscovery.edrm",
+        "forensics.ediscovery.stages.information_governance",
+        "forensics.ediscovery.stages.identification",
+        "forensics.ediscovery.stages.preservation",
+        "forensics.ediscovery.stages.collection",
+        "forensics.ediscovery.stages.processing",
+        "forensics.ediscovery.stages.review",
+        "forensics.ediscovery.stages.analysis",
+        "forensics.ediscovery.stages.production",
+        "forensics.ediscovery.stages.presentation"
+      ],
+      "pages": [
+        {
+          "id": "m3_p1",
+          "title": "e‑Discovery in one paragraph",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "e‑Discovery is the process of finding, preserving, and producing electronically stored information (ESI) for legal matters, investigations, and requests like FOIA.\n\nThe EDRM (Electronic Discovery Reference Model) gives a practical 9‑stage lifecycle to keep everyone sane."
+            },
+            {
+              "type": "diagram",
+              "text": "EDRM (9 stages):\n1) Information governance\n2) Identification\n3) Preservation\n4) Collection\n5) Processing\n6) Review\n7) Analysis\n8) Production\n9) Presentation"
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "In EDRM, which stage focuses on ensuring information isn't changed or destroyed?",
+              "options": [
+                "Review",
+                "Preservation",
+                "Production",
+                "Presentation"
+              ],
+              "correct_index": 1,
+              "explanation": "Preservation is explicitly about preventing change or destruction of ESI.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill the blank: EDRM has _____ stages.",
+              "answers": [
+                "9"
+              ],
+              "explanation": "The model describes nine stages.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "2.4",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.6",
+            "4.8",
+            "5.1",
+            "5.3"
+          ]
+        },
+        {
+          "id": "m3_p2",
+          "title": "Processing vs review vs analysis (don’t mix these up)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Processing: reduce noise + prep data (dedupe, filter irrelevant, convert formats).\nReview: ensure only what should be shared is included; protect sensitive/privileged info.\nAnalysis: extract meaning—topics, terms, relationships, timelines, key actors."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: treating processing as analysis.\nProcessing makes data usable; analysis makes data meaningful."
+            }
+          ],
+          "checks": [
+            {
+              "type": "matching",
+              "prompt": "Match the EDRM stage to its best description.",
+              "left": [
+                "Processing",
+                "Review",
+                "Analysis"
+              ],
+              "right": [
+                "Prepare/format + remove irrelevant data",
+                "Confirm content is appropriate to share",
+                "Identify key topics/terms/people and meaning"
+              ],
+              "correct_map": {
+                "Processing": "Prepare/format + remove irrelevant data",
+                "Review": "Confirm content is appropriate to share",
+                "Analysis": "Identify key topics/terms/people and meaning"
+              },
+              "explanation": "Processing = prep and reduce. Review = screen. Analysis = interpret.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which EDRM stage typically involves providing information to third parties involved in proceedings?",
+              "options": [
+                "Production",
+                "Identification",
+                "Information governance",
+                "Collection"
+              ],
+              "correct_index": 0,
+              "explanation": "Production is where the prepared set is delivered to others in the legal process.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "2.4",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.6",
+            "4.8",
+            "5.1",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.3",
+        "1.5",
+        "1.6",
+        "2.4",
+        "3.1",
+        "3.2",
+        "3.3",
+        "4.1",
+        "4.6",
+        "4.8",
+        "5.1",
+        "5.3"
+      ]
+    },
+    {
+      "id": "m4_custody_admissibility",
+      "title": "Chain of custody, admissibility, provenance, and repeatability",
+      "tag_ids": [
+        "forensics.chain_of_custody",
+        "forensics.admissibility.criteria",
+        "forensics.nonrepudiation.provenance",
+        "forensics.reporting.repeatability"
+      ],
+      "pages": [
+        {
+          "id": "m4_p1",
+          "title": "Chain of custody: the evidence’s passport",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Chain of custody documents every time evidence is accessed, transferred, or handled.\n\nA strong chain of custody shows:\n- who had it\n- when they had it\n- what they did\n- where it was stored\n- how integrity was protected"
+            },
+            {
+              "type": "trap",
+              "text": "Trap: \"It was in my desk drawer, trust me.\" \nIf you can't show handling history, opposing counsel will try to torch your evidence."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Chain of custody primarily tracks…",
+              "options": [
+                "How attackers moved laterally",
+                "Handling and transfer history of evidence",
+                "Password complexity rules",
+                "Disk partition sizes"
+              ],
+              "correct_index": 1,
+              "explanation": "Chain of custody is an audit trail for evidence handling.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            },
+            {
+              "type": "multi_select",
+              "prompt": "Which details belong in chain-of-custody documentation? (Select all that apply)",
+              "options": [
+                "Who accessed the evidence",
+                "When transfers occurred",
+                "Where evidence was stored",
+                "The attacker’s motive (guessed)"
+              ],
+              "correct_indices": [
+                0,
+                1,
+                2
+              ],
+              "explanation": "Custody logs are factual handling records, not speculation about motive.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "2.4",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.6",
+            "4.8",
+            "5.1",
+            "5.3"
+          ]
+        },
+        {
+          "id": "m4_p2",
+          "title": "Admissibility + provenance + nonrepudiation",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Evidence is generally admissible when it is relevant, reliable, obtained legally, and authentic.\n\nFor digital evidence, you also need to show it stayed intact and unaltered through acquisition and analysis.\n\nProvenance = where the evidence came from and what happened to it. Nonrepudiation = the process can’t be credibly denied."
+            },
+            {
+              "type": "example",
+              "text": "Repeatability matters: a third party should be able to reproduce your results using your documentation, tools, and steps (auditable trail)."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which concept refers to documenting where evidence came from and what happened to it?",
+              "options": [
+                "Provenance",
+                "Venue",
+                "Nexus",
+                "Spoliation"
+              ],
+              "correct_index": 0,
+              "explanation": "Provenance is the origin + handling story of the evidence.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Why is repeatability important in forensics?",
+              "options": [
+                "It makes tools faster",
+                "It helps ensure results can be validated by an independent party",
+                "It prevents encryption",
+                "It replaces chain of custody"
+              ],
+              "correct_index": 1,
+              "explanation": "Repeatability + documentation let others validate your findings under scrutiny.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "2.4",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.6",
+            "4.8",
+            "5.1",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.3",
+        "1.5",
+        "1.6",
+        "2.4",
+        "3.1",
+        "3.2",
+        "3.3",
+        "4.1",
+        "4.6",
+        "4.8",
+        "5.1",
+        "5.3"
+      ]
+    },
+    {
+      "id": "m5_cloud_forensics",
+      "title": "Cloud forensics: contracts, law, and reality checks",
+      "tag_ids": [
+        "forensics.preservation.cloud_limitations",
+        "cloud.contracts.right_to_audit",
+        "cloud.contracts.breach_notification",
+        "cloud.regulatory.jurisdiction",
+        "cloud.regulatory.venue",
+        "cloud.regulatory.nexus"
+      ],
+      "pages": [
+        {
+          "id": "m5_p1",
+          "title": "Why cloud forensics is harder",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "In cloud services, you often can’t get the same low‑level artifacts you’d collect on‑prem.\n\nPractical outcome: you may rely on logs, telemetry, and what you control (IaaS VMs, your apps) rather than provider internals."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: assuming you can always \"seize the server\" in cloud.\nYou typically can't—multi‑tenant systems, provider policies, and contracts limit access."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "In many cloud investigations, organizations usually rely on…",
+              "options": [
+                "Direct forensic imaging of the provider’s storage arrays",
+                "Logs and artifacts from systems they control",
+                "Physical chip-off for all incidents",
+                "Turning off encryption everywhere"
+              ],
+              "correct_index": 1,
+              "explanation": "Most cloud evidence comes from logs/telemetry and customer-controlled systems.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill the blank: In cloud environments, acquiring provider-internal forensic data is often ______.",
+              "answers": [
+                "unlikely"
+              ],
+              "explanation": "Providers rarely hand over deep internal forensic artifacts.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "2.4",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.6",
+            "4.8",
+            "5.1",
+            "5.3"
+          ]
+        },
+        {
+          "id": "m5_p2",
+          "title": "Contract + legal levers (right-to-audit, breach notice, jurisdiction)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Key contract/legal issues:\n- Right‑to‑audit clause: lets you audit the provider directly or via third‑party audits.\n- Breach notification clause: maximum time before customers are notified.\n- Jurisdiction: which laws apply.\n- Venue: where a case is heard (often chosen to favor the provider).\n- Nexus: legal connection (e.g., whether obligations like tax apply)."
+            },
+            {
+              "type": "example",
+              "text": "Reality: many providers won’t negotiate right‑to‑audit for small customers; they may provide third‑party audit reports instead."
+            }
+          ],
+          "checks": [
+            {
+              "type": "multi_select",
+              "prompt": "Which items are commonly addressed via cloud contracts/terms? (Select all that apply)",
+              "options": [
+                "Right-to-audit",
+                "Breach notification timeline",
+                "Venue for legal disputes",
+                "Kernel register capture guarantees"
+              ],
+              "correct_indices": [
+                0,
+                1,
+                2
+              ],
+              "explanation": "Contracts address audit, notification, and venue—not promises about low-level forensic capture.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Venue refers to…",
+              "options": [
+                "Connection that triggers an obligation",
+                "Where the case is heard",
+                "A method to hash evidence",
+                "A write-blocking technique"
+              ],
+              "correct_index": 1,
+              "explanation": "Venue is the legal location where a case is heard.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "2.4",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.6",
+            "4.8",
+            "5.1",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.3",
+        "1.5",
+        "1.6",
+        "2.4",
+        "3.1",
+        "3.2",
+        "3.3",
+        "4.1",
+        "4.6",
+        "4.8",
+        "5.1",
+        "5.3"
+      ]
+    },
+    {
+      "id": "m6_acquisition_strategy",
+      "title": "Acquisition strategy and the order of volatility",
+      "tag_ids": [
+        "forensics.acquisition.order_of_volatility",
+        "forensics.acquisition.cpu_cache_registers",
+        "forensics.acquisition.ephemeral_state",
+        "forensics.acquisition.ram",
+        "forensics.acquisition.swap_pagefile"
+      ],
+      "pages": [
+        {
+          "id": "m6_p1",
+          "title": "Order of volatility: capture what evaporates first",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Order of volatility ranks evidence by how quickly it disappears.\nGeneral rule: capture the most volatile artifacts first unless you have a compelling reason not to.\n\nPowering down a system can destroy volatile artifacts (RAM, ephemeral state)."
+            },
+            {
+              "type": "diagram",
+              "text": "Typical volatility ladder (top = most volatile):\n1) CPU cache/registers\n2) Ephemeral state (process table, ARP cache, kernel stats)\n3) RAM\n4) Swap/pagefile + temporary files\n5) Disk data\n6) Remote logs/monitoring\n7) Backups/archives"
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Why does the order of volatility matter?",
+              "options": [
+                "It improves Wi-Fi speed",
+                "It helps prevent losing evidence during acquisition",
+                "It replaces chain of custody",
+                "It makes hashes unnecessary"
+              ],
+              "correct_index": 1,
+              "explanation": "If you capture disk first and reboot, you may lose RAM/ephemeral evidence forever.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            },
+            {
+              "type": "matching",
+              "prompt": "Match the artifact to its volatility category.",
+              "left": [
+                "CPU registers/cache",
+                "RAM",
+                "Backups"
+              ],
+              "right": [
+                "Most volatile",
+                "Volatile (lost on shutdown)",
+                "Least likely to change"
+              ],
+              "correct_map": {
+                "CPU registers/cache": "Most volatile",
+                "RAM": "Volatile (lost on shutdown)",
+                "Backups": "Least likely to change"
+              },
+              "explanation": "Registers/cache change constantly; RAM disappears on power loss; backups are relatively stable.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "2.4",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.6",
+            "4.8",
+            "5.1",
+            "5.3"
+          ]
+        },
+        {
+          "id": "m6_p2",
+          "title": "What RAM and swap can reveal",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "RAM can contain:\n- encryption keys\n- in-memory malware artifacts\n- unsaved application data\n- recent commands / process details\n\nSwap/pagefile is disk-backed memory and may contain fragments of what was in RAM—useful, but still changes quickly on active systems."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: rebooting \"to stabilize\" before capturing RAM.\nRebooting is a RAM shredder."
+            }
+          ],
+          "checks": [
+            {
+              "type": "multi_select",
+              "prompt": "Which items can plausibly be found in RAM during an investigation? (Select all that apply)",
+              "options": [
+                "Encryption keys",
+                "Ephemeral application data",
+                "Factory-wiped disk sectors",
+                "Running process artifacts"
+              ],
+              "correct_indices": [
+                0,
+                1,
+                3
+              ],
+              "explanation": "RAM is rich with live state; wiped disk sectors are a different battle.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Swap/pagefile is best described as…",
+              "options": [
+                "A replacement for hashing",
+                "Disk space used to supplement physical memory",
+                "A chain-of-custody form",
+                "A cloud audit clause"
+              ],
+              "correct_index": 1,
+              "explanation": "Swap/pagefile extends RAM onto disk and can hold useful process/memory remnants.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "2.4",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.6",
+            "4.8",
+            "5.1",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.3",
+        "1.5",
+        "1.6",
+        "2.4",
+        "3.1",
+        "3.2",
+        "3.3",
+        "4.1",
+        "4.6",
+        "4.8",
+        "5.1",
+        "5.3"
+      ]
+    },
+    {
+      "id": "m7_targets",
+      "title": "Common forensic targets: disks, OS artifacts, devices, VMs, containers",
+      "tag_ids": [
+        "forensics.acquisition.disk_image.bit_by_bit",
+        "forensics.acquisition.os.windows_registry",
+        "forensics.acquisition.mobile_iot",
+        "forensics.acquisition.firmware",
+        "forensics.acquisition.vm_snapshot",
+        "forensics.acquisition.containers"
+      ],
+      "pages": [
+        {
+          "id": "m7_p1",
+          "title": "Disk imaging vs file copying",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Forensics usually requires a bit‑by‑bit disk image, not a logical file copy.\nWhy: disk images preserve structure, metadata, and remnants (deleted files, slack space).\n\nLogical copies may miss deleted artifacts and metadata changes, and can be inadmissible for legal actions."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: \"I copied the folder; that’s the evidence.\" \nYou may lose timestamps, deleted fragments, and filesystem context."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Why is a bit-by-bit image preferred over a simple file copy?",
+              "options": [
+                "It is smaller",
+                "It preserves deleted remnants and full disk structure",
+                "It avoids needing hashes",
+                "It automatically decrypts data"
+              ],
+              "correct_index": 1,
+              "explanation": "Bit-by-bit images capture everything, including deleted remnants and metadata.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill the blank: A simple file copy is often called a ______ copy.",
+              "answers": [
+                "logical"
+              ],
+              "explanation": "Logical copies capture files, not the full disk structure.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "2.4",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.6",
+            "4.8",
+            "5.1",
+            "5.3"
+          ]
+        },
+        {
+          "id": "m7_p2",
+          "title": "OS + device artifacts: registry, mobile/IoT, firmware, VMs, containers",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Targets you’ll see on the exam (and in real life):\n- Windows Registry: lots of OS activity leaves traces.\n- Mobile/IoT/embedded devices: unique data stores and app artifacts.\n- Firmware: may be relevant if firmware tampering is suspected.\n- VM snapshots: can preserve state for analysis.\n- Containers: fewer artifacts; shared resources; capturing a forensic state can be tricky."
+            },
+            {
+              "type": "example",
+              "text": "VM snapshot advantage: capture a state quickly and import into forensic tools.\nContainer challenge: designed to be ephemeral; requires extra planning and tooling."
+            }
+          ],
+          "checks": [
+            {
+              "type": "multi_select",
+              "prompt": "Which artifacts are valid forensic targets? (Select all that apply)",
+              "options": [
+                "Windows Registry",
+                "VM snapshots",
+                "Firmware",
+                "Only user documents"
+              ],
+              "correct_indices": [
+                0,
+                1,
+                2
+              ],
+              "explanation": "Forensic targets go far beyond user docs: OS, firmware, VMs, etc.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Why are containers challenging for forensics?",
+              "options": [
+                "They always store evidence permanently",
+                "They are designed to be ephemeral and share resources, leaving fewer artifacts",
+                "They automatically provide chain-of-custody logs",
+                "They prevent memory capture"
+              ],
+              "correct_index": 1,
+              "explanation": "Ephemeral design + shared resources reduce artifacts and complicate capture.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "2.4",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.6",
+            "4.8",
+            "5.1",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.3",
+        "1.5",
+        "1.6",
+        "2.4",
+        "3.1",
+        "3.2",
+        "3.3",
+        "4.1",
+        "4.6",
+        "4.8",
+        "5.1",
+        "5.3"
+      ]
+    },
+    {
+      "id": "m8_usb_blockers",
+      "title": "USB data blockers and malicious data acquisition",
+      "tag_ids": [
+        "usb.data_blocker"
+      ],
+      "pages": [
+        {
+          "id": "m8_p1",
+          "title": "Blocking data while allowing charging",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "USB data blockers prevent USB data signals from being transferred while still allowing charging.\n\nWhy it matters: untrusted chargers/cables can be used to clone data or attack a device (\"juice jacking\" style threats)."
+            },
+            {
+              "type": "example",
+              "text": "Use case: traveling staff plug phones into airport charging stations—data blockers reduce risk."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A USB data blocker is designed to…",
+              "options": [
+                "Increase transfer speed",
+                "Prevent data transfer while allowing charging",
+                "Recover deleted files",
+                "Encrypt USB sticks"
+              ],
+              "correct_index": 1,
+              "explanation": "It blocks data pins/signals, but allows power.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill the blank: USB data blockers help reduce risk from untrusted chargers and ______.",
+              "answers": [
+                "cables"
+              ],
+              "explanation": "The threat often rides on the cable/charger path.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "2.4",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.6",
+            "4.8",
+            "5.1",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.3",
+        "1.5",
+        "1.6",
+        "2.4",
+        "3.1",
+        "3.2",
+        "3.3",
+        "4.1",
+        "4.6",
+        "4.8",
+        "5.1",
+        "5.3"
+      ]
+    },
+    {
+      "id": "m9_network_evidence",
+      "title": "Network forensics: PCAPs, taps/SPAN, and secondary logs",
+      "tag_ids": [
+        "forensics.acquisition.network.pcap",
+        "forensics.acquisition.network.taps_span",
+        "forensics.acquisition.logs.secondary_sources",
+        "forensics.tools.wireshark"
+      ],
+      "pages": [
+        {
+          "id": "m9_p1",
+          "title": "Network traffic is ephemeral (so plan ahead)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Network traffic disappears unless you capture it.\nIf you don’t have packet capture, you may fall back to secondary artifacts:\n- firewall logs\n- IDS/IPS logs\n- email server logs\n- authentication logs\n- flow/metadata records"
+            },
+            {
+              "type": "trap",
+              "text": "Trap: expecting historical packets to magically exist.\nIf you didn’t capture it, you’ll mostly reconstruct from logs and metadata."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "If network traffic isn't actively captured, which artifact is often used instead?",
+              "options": [
+                "CPU registers",
+                "Firewall/IDS/authentication logs",
+                "Write blockers",
+                "Disk wear-leveling data"
+              ],
+              "correct_index": 1,
+              "explanation": "Logs and metadata often substitute when packet capture isn't available.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            },
+            {
+              "type": "multi_select",
+              "prompt": "Which are common 'secondary' network forensic sources? (Select all that apply)",
+              "options": [
+                "Firewall logs",
+                "IDS/IPS logs",
+                "ARP cache from last month",
+                "Email server logs"
+              ],
+              "correct_indices": [
+                0,
+                1,
+                3
+              ],
+              "explanation": "Logs persist; ephemeral state like ARP cache typically does not.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "2.4",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.6",
+            "4.8",
+            "5.1",
+            "5.3"
+          ]
+        },
+        {
+          "id": "m9_p2",
+          "title": "PCAP review and collection methods",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "When you do have traffic captures, packet analyzers like Wireshark help inspect packets, flows, and metadata.\n\nTraffic collection methods include taps, SPAN ports, and port mirrors to copy traffic to a collector—but this can create massive data volumes."
+            },
+            {
+              "type": "example",
+              "text": "Practical compromise: capture selectively (segments, time windows, protocols) and rely on flow data for broad visibility."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Wireshark is best described as a…",
+              "options": [
+                "Disk imager",
+                "Packet analyzer",
+                "Write blocker",
+                "Cloud audit service"
+              ],
+              "correct_index": 1,
+              "explanation": "Wireshark analyzes captured packets (PCAPs) and related traffic data.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Taps and SPAN/mirror ports are used to…",
+              "options": [
+                "Encrypt evidence",
+                "Send copies of network traffic to a collection system",
+                "Recover slack space",
+                "Create VM snapshots"
+              ],
+              "correct_index": 1,
+              "explanation": "They replicate traffic for monitoring or forensic capture.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "2.4",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.6",
+            "4.8",
+            "5.1",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.3",
+        "1.5",
+        "1.6",
+        "2.4",
+        "3.1",
+        "3.2",
+        "3.3",
+        "4.1",
+        "4.6",
+        "4.8",
+        "5.1",
+        "5.3"
+      ]
+    },
+    {
+      "id": "m10_imaging_tools",
+      "title": "Acquisition tools: dd, FTK Imager, and WinHex",
+      "tag_ids": [
+        "forensics.tools.dd",
+        "forensics.tools.ftk_imager",
+        "forensics.tools.winhex",
+        "forensics.integrity.hashing.md5"
+      ],
+      "pages": [
+        {
+          "id": "m10_p1",
+          "title": "dd: bit-by-bit imaging from the command line",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "In Linux, dd can create raw forensic images. Key parameters:\n- if= (input file/device)\n- of= (output file)\n- conv=noerror,sync (continue despite read errors)\n- bs= (block size tuning)\n\nExample imaging command:\ndd if=/dev/sda of=example.img conv=noerror,sync"
+            },
+            {
+              "type": "example",
+              "text": "Hash during imaging (pipe + tee + md5sum):\ndd if=/dev/sda bs=4k conv=sync,noerror | tee example.img | md5sum > example.md5"
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "In dd, what does if= specify?",
+              "options": [
+                "Output file",
+                "Input device/file",
+                "Hash algorithm",
+                "Blocker type"
+              ],
+              "correct_index": 1,
+              "explanation": "if= is the input (often a device like /dev/sda).",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Why is conv=noerror,sync useful during imaging?",
+              "options": [
+                "It speeds up encryption",
+                "It continues imaging even if read errors occur",
+                "It deletes slack space",
+                "It forces cloud replication"
+              ],
+              "correct_index": 1,
+              "explanation": "It attempts to keep going and keep alignment even across read errors.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "2.4",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.6",
+            "4.8",
+            "5.1",
+            "5.3"
+          ]
+        },
+        {
+          "id": "m10_p2",
+          "title": "FTK Imager and WinHex: practical tooling",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "FTK Imager is a free imaging tool that can create forensic images (raw/dd-style and other formats) and can capture live memory.\n\nWinHex is a disk editor that can also acquire raw images and its own format, and it can read/modify data from drives, memory, RAID arrays, and more."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: capturing evidence without recording case context.\nTools help, but you still need case numbers, examiner identity, and handling notes."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which tool can capture live memory in addition to drive imaging?",
+              "options": [
+                "FTK Imager",
+                "WinHex only",
+                "Wireshark",
+                "Autopsy only"
+              ],
+              "correct_index": 0,
+              "explanation": "FTK Imager supports memory capture as well as drive imaging.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "WinHex is best described as…",
+              "options": [
+                "A packet capture tool",
+                "A disk editing tool that can also acquire images",
+                "A cloud breach notification system",
+                "A hardware write blocker"
+              ],
+              "correct_index": 1,
+              "explanation": "WinHex can read/modify low-level disk/memory content and create images.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "2.4",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.6",
+            "4.8",
+            "5.1",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.3",
+        "1.5",
+        "1.6",
+        "2.4",
+        "3.1",
+        "3.2",
+        "3.3",
+        "4.1",
+        "4.6",
+        "4.8",
+        "5.1",
+        "5.3"
+      ]
+    },
+    {
+      "id": "m11_integrity",
+      "title": "Integrity validation: hashes, checksums, and copy types",
+      "tag_ids": [
+        "forensics.integrity.hashing.md5",
+        "forensics.integrity.hashing.sha1",
+        "forensics.integrity.validation.hash_compare",
+        "forensics.integrity.checksum_vs_hash"
+      ],
+      "pages": [
+        {
+          "id": "m11_p1",
+          "title": "Hash and compare: the core integrity check",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Most common integrity validation:\n1) hash the original\n2) hash the forensic image\n3) compare values\n\nIf hashes match, the image is identical.\n\nMD5 and SHA1 are considered weak against attackers, but are still used for fast hashing of forensic images when adversarial collision attacks are rarely the threat model."
+            },
+            {
+              "type": "example",
+              "text": "Hash-as-checksum: re-hash later; if the value changes, the evidence changed."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "What does a matching hash between original media and forensic image indicate?",
+              "options": [
+                "The data is encrypted",
+                "The forensic image matches the original bit-for-bit",
+                "The evidence is irrelevant",
+                "The time zone is correct"
+              ],
+              "correct_index": 1,
+              "explanation": "Hash matching is the standard integrity confirmation.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            },
+            {
+              "type": "multi_select",
+              "prompt": "Which hash algorithms are commonly mentioned for quick forensic image hashing? (Select all that apply)",
+              "options": [
+                "MD5",
+                "SHA1",
+                "bcrypt",
+                "scrypt"
+              ],
+              "correct_indices": [
+                0,
+                1
+              ],
+              "explanation": "MD5/SHA1 are common in forensics for speed, despite cryptographic weaknesses for adversarial settings.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "2.4",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.6",
+            "4.8",
+            "5.1",
+            "5.3"
+          ]
+        },
+        {
+          "id": "m11_p2",
+          "title": "Logical copy vs forensic copy",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Logical copy: copies files; does NOT preserve full disk structure.\nForensic copy (image): bit‑by‑bit; preserves deleted remnants, metadata, and timestamps.\n\nResult: hashing a logical copy and a forensic copy yields different values, and logical copies may be inadmissible when deleted data/metadata matter."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: assuming \"hashing the folder\" equals forensic soundness.\nHashing helps integrity—but only for what you actually captured."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Why can logical copies be inadmissible for some forensic/legal purposes?",
+              "options": [
+                "They are always encrypted",
+                "They can miss deleted remnants and full disk metadata/state",
+                "They are too large",
+                "They require write blockers"
+              ],
+              "correct_index": 1,
+              "explanation": "Logical copies miss critical context (deleted remnants, metadata) and may not reflect the original state.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill the blank: A forensic image captures a drive at a ______‑by‑______ level.",
+              "answers": [
+                "bit",
+                "bit"
+              ],
+              "explanation": "Forensic imaging is bit-by-bit.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "2.4",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.6",
+            "4.8",
+            "5.1",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.3",
+        "1.5",
+        "1.6",
+        "2.4",
+        "3.1",
+        "3.2",
+        "3.3",
+        "4.1",
+        "4.6",
+        "4.8",
+        "5.1",
+        "5.3"
+      ]
+    },
+    {
+      "id": "m12_preservation",
+      "title": "Preservation: write blockers, storage, and evidence handling",
+      "tag_ids": [
+        "forensics.preservation.write_blocker",
+        "forensics.preservation.evidence_storage",
+        "forensics.preservation.legal_hold_tools",
+        "forensics.chain_of_custody"
+      ],
+      "pages": [
+        {
+          "id": "m12_p1",
+          "title": "Write blockers: don’t mutate the evidence",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Write blockers (hardware or software) allow reads but prevent writes.\n\nWhy: if your tools accidentally write to the drive, opposing counsel can argue evidence was altered—wrecking credibility."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: forgetting write blockers because the exam outline is \"broad\".\nReal practitioners treat write blockers like seatbelts: you only notice when you crash."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "The main purpose of a write blocker is to…",
+              "options": [
+                "Speed up imaging",
+                "Prevent any writes/changes to the evidence media",
+                "Create MD5 hashes",
+                "Capture network traffic"
+              ],
+              "correct_index": 1,
+              "explanation": "Write blockers enforce read-only access to preserve evidence.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            },
+            {
+              "type": "multi_select",
+              "prompt": "Which items support preservation? (Select all that apply)",
+              "options": [
+                "Write blockers",
+                "Controlled evidence storage",
+                "Chain-of-custody procedures",
+                "Changing timestamps for convenience"
+              ],
+              "correct_indices": [
+                0,
+                1,
+                2
+              ],
+              "explanation": "Preservation is about preventing change; altering timestamps is the opposite.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "2.4",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.6",
+            "4.8",
+            "5.1",
+            "5.3"
+          ]
+        },
+        {
+          "id": "m12_p2",
+          "title": "Evidence storage and legal hold tooling",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Preservation isn't only technical. It includes:\n- secure evidence storage (access control, environmental protection)\n- labeling and case identifiers\n- legal hold tooling (e.g., archiving/discovery systems)\n- documented procedures"
+            },
+            {
+              "type": "example",
+              "text": "Cloud reality: some providers offer archiving/discovery tools (like email archiving) to support legal hold and e‑discovery."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which is the best example of preservation beyond technical imaging?",
+              "options": [
+                "Secure, access-controlled evidence storage",
+                "Rebooting a system repeatedly",
+                "Deleting irrelevant logs",
+                "Copy/pasting files into email"
+              ],
+              "correct_index": 0,
+              "explanation": "Preservation includes handling and storage, not just imaging.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill the blank: Evidence handling history is tracked via ______ of custody.",
+              "answers": [
+                "chain"
+              ],
+              "explanation": "Chain of custody documents evidence handling and transfer.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "2.4",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.6",
+            "4.8",
+            "5.1",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.3",
+        "1.5",
+        "1.6",
+        "2.4",
+        "3.1",
+        "3.2",
+        "3.3",
+        "4.1",
+        "4.6",
+        "4.8",
+        "5.1",
+        "5.3"
+      ]
+    },
+    {
+      "id": "m13_data_recovery",
+      "title": "Data recovery: deleted files, slack space, and SSD realities",
+      "tag_ids": [
+        "forensics.data_recovery.deleted_files",
+        "forensics.data_recovery.quick_format",
+        "forensics.data_recovery.slack_space",
+        "forensics.data_recovery.partial_overwrite",
+        "forensics.data_recovery.secure_delete",
+        "forensics.storage.ssd_wear_leveling",
+        "forensics.storage.full_disk_encryption"
+      ],
+      "pages": [
+        {
+          "id": "m13_p1",
+          "title": "Deleted doesn’t always mean gone",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Deleting a file is often nondestructive: the filesystem removes the index entry and marks space reusable.\nQuick format typically deletes the file index rather than overwriting the whole drive.\n\nRecovery then involves scanning for headers/metadata and reconstructing files/fragments."
+            },
+            {
+              "type": "example",
+              "text": "Partial overwrite example: delete 100MB file, then write 25MB file → you may still recover ~75MB of the original as fragments."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Why is file deletion often nondestructive?",
+              "options": [
+                "It overwrites the data immediately",
+                "It usually removes index references and marks space reusable",
+                "It hashes the file",
+                "It encrypts the disk"
+              ],
+              "correct_index": 1,
+              "explanation": "Many filesystems delete references first; data may remain until overwritten.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Quick formatting in Windows typically…",
+              "options": [
+                "Overwrites every sector",
+                "Deletes the file index/metadata structures",
+                "Encrypts the drive",
+                "Captures RAM"
+              ],
+              "correct_index": 1,
+              "explanation": "Quick format is largely metadata/index removal, not full overwrite.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "2.4",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.6",
+            "4.8",
+            "5.1",
+            "5.3"
+          ]
+        },
+        {
+          "id": "m13_p2",
+          "title": "Slack space, secure delete, and SSD wear leveling",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Slack space: open/unallocated space that can contain remnants of previous files.\nSecure delete tools overwrite data to reduce recovery chances.\n\nSSD/flash wear leveling complicates secure deletion: data may be moved to spare cells; old cells can retain historic data.\nFull‑disk encryption helps: even if remnants remain, they’re unreadable without the key."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: assuming one overwrite pass on an SSD guarantees eradication.\nWear leveling and spare cells can preserve remnants."
+            }
+          ],
+          "checks": [
+            {
+              "type": "multi_select",
+              "prompt": "Which statements about slack space and recovery are true? (Select all that apply)",
+              "options": [
+                "Slack space can contain remnants of previous files",
+                "Secure delete reduces recovery likelihood by overwriting",
+                "Wear leveling can make secure deletion on SSDs harder",
+                "Full-disk encryption can help mitigate leftover data"
+              ],
+              "correct_indices": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "explanation": "All are true: slack holds remnants, overwriting reduces recovery, SSDs complicate, encryption mitigates.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Why does full-disk encryption help with SSD data remnants?",
+              "options": [
+                "It makes imaging faster",
+                "Residual data is unreadable without the encryption key",
+                "It prevents chain-of-custody paperwork",
+                "It replaces hashing"
+              ],
+              "correct_index": 1,
+              "explanation": "Encryption protects confidentiality even when physical eradication is imperfect.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "2.4",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.6",
+            "4.8",
+            "5.1",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.3",
+        "1.5",
+        "1.6",
+        "2.4",
+        "3.1",
+        "3.2",
+        "3.3",
+        "4.1",
+        "4.6",
+        "4.8",
+        "5.1",
+        "5.3"
+      ]
+    },
+    {
+      "id": "m14_suites_autopsy",
+      "title": "Forensic suites and a practical Autopsy workflow",
+      "tag_ids": [
+        "forensics.tools.autopsy"
+      ],
+      "pages": [
+        {
+          "id": "m14_p1",
+          "title": "What forensic suites do",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "A forensic suite supports acquisition, analysis, and reporting in one workflow.\nExamples mentioned:\n- Commercial: FTK, EnCase\n- Open source: Autopsy\n\nTypical flow: create a case → record investigators/case details → import images/data sources → analyze artifacts → report."
+            },
+            {
+              "type": "example",
+              "text": "Example dataset used in the chapter: NIST CFReDS Rhino hunt image (disk + network traces)."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A forensic suite is best described as…",
+              "options": [
+                "Only a disk imaging tool",
+                "An end-to-end platform for acquisition, analysis, and reporting",
+                "A USB power adapter",
+                "A cloud breach notification clause"
+              ],
+              "correct_index": 1,
+              "explanation": "Suites integrate the investigative workflow, not just imaging.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill the blank: Autopsy is an ______ source forensic suite.",
+              "answers": [
+                "open"
+              ],
+              "explanation": "Autopsy is an open source suite.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "2.4",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.6",
+            "4.8",
+            "5.1",
+            "5.3"
+          ]
+        },
+        {
+          "id": "m14_p2",
+          "title": "Importing data and focusing the hunt",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Autopsy-style workflow highlights:\n- import raw disks/images/VMs\n- run ingest modules to extract artifacts\n- pivot on timelines, user activity, and suspicious files\n- keep case notes tied to evidence items"
+            },
+            {
+              "type": "trap",
+              "text": "Trap: running every ingest module blindly.\nBe deliberate—massive ingest can waste time and create noise."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "When using a suite like Autopsy, what is the first structured step?",
+              "options": [
+                "Delete irrelevant files",
+                "Create a case and record investigator/case details",
+                "Disable hashes",
+                "Turn off logs"
+              ],
+              "correct_index": 1,
+              "explanation": "Case creation and context logging comes first for traceability.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            },
+            {
+              "type": "multi_select",
+              "prompt": "Which are good practices when using forensic suites? (Select all that apply)",
+              "options": [
+                "Keep case notes tied to evidence items",
+                "Use timelines to correlate activity",
+                "Skip documentation because tools log everything",
+                "Be deliberate with ingest to reduce noise"
+              ],
+              "correct_indices": [
+                0,
+                1,
+                3
+              ],
+              "explanation": "Good forensics is documented and targeted; tools help but don’t replace practitioner discipline.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "2.4",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.6",
+            "4.8",
+            "5.1",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.3",
+        "1.5",
+        "1.6",
+        "2.4",
+        "3.1",
+        "3.2",
+        "3.3",
+        "4.1",
+        "4.6",
+        "4.8",
+        "5.1",
+        "5.3"
+      ]
+    },
+    {
+      "id": "m15_reporting_intel",
+      "title": "Reporting and the intelligence/counterintelligence angle",
+      "tag_ids": [
+        "forensics.reporting.components",
+        "forensics.reporting.repeatability",
+        "forensics.intel.forensics_role",
+        "forensics.counterintel"
+      ],
+      "pages": [
+        {
+          "id": "m15_p1",
+          "title": "Forensic reports: what they must contain",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "A solid forensic report is well organized and to the point:\n- summary of key findings\n- methods/procedures/tools used\n- limitations/assumptions\n- detailed findings with supporting evidence\n- conclusions and/or recommendations\n\nAlso: keep an auditable trail so work is repeatable."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: writing a novel.\nReports should be clear, evidence-backed, and structured for scrutiny."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which section belongs in a forensic report?",
+              "options": [
+                "Summary of key findings",
+                "A guess at attacker emotions",
+                "Unverified rumors",
+                "A list of favorite tools only"
+              ],
+              "correct_index": 0,
+              "explanation": "Reports summarize findings and show evidence + method, not speculation.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Why include limitations/assumptions in a forensic report?",
+              "options": [
+                "To hide mistakes",
+                "To clarify what the evidence can and cannot support",
+                "To avoid hashing",
+                "To change the venue"
+              ],
+              "correct_index": 1,
+              "explanation": "It’s how you prevent over-claiming and survive cross-examination.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "2.4",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.6",
+            "4.8",
+            "5.1",
+            "5.3"
+          ]
+        },
+        {
+          "id": "m15_p2",
+          "title": "Digital forensics in intelligence and counterintelligence",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Beyond legal cases and IR, forensics supports:\n- strategic intelligence: analyzing adversary tools/behaviors (APT tradecraft)\n- counterintelligence: understanding and disrupting adversary operations\n\nSame core toolkit (acquisition, analysis, integrity, reporting), often with additional advanced capabilities (e.g., deeper crypto breaking, advanced software/hardware analysis)."
+            },
+            {
+              "type": "example",
+              "text": "Think: recovered devices/systems → extract data → feed intel analysis and national defense investigations."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "In intelligence contexts, digital forensics is often used to…",
+              "options": [
+                "Only delete evidence",
+                "Analyze adversary tools/behaviors and recover data from acquired systems",
+                "Avoid documentation",
+                "Replace incident response"
+              ],
+              "correct_index": 1,
+              "explanation": "Forensics helps analyze adversary tradecraft and extract actionable data.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill the blank: Forensics supports strategic intelligence and counter______ efforts.",
+              "answers": [
+                "intelligence"
+              ],
+              "explanation": "The chapter explicitly links forensics to intelligence/counterintelligence.",
+              "objectiveIds": [
+                "1.3",
+                "1.5",
+                "1.6",
+                "2.4",
+                "3.1",
+                "3.2",
+                "3.3",
+                "4.1",
+                "4.6",
+                "4.8",
+                "5.1",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "2.4",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.6",
+            "4.8",
+            "5.1",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.3",
+        "1.5",
+        "1.6",
+        "2.4",
+        "3.1",
+        "3.2",
+        "3.3",
+        "4.1",
+        "4.6",
+        "4.8",
+        "5.1",
+        "5.3"
+      ]
+    }
+  ],
+  "objectiveIds": [
+    "1.3",
+    "1.5",
+    "1.6",
+    "2.4",
+    "3.1",
+    "3.2",
+    "3.3",
+    "4.1",
+    "4.6",
+    "4.8",
+    "5.1",
+    "5.3"
+  ]
+}

@@ -1,0 +1,501 @@
+{
+  "pack_id": "ch9",
+  "version": "1.0.0",
+  "confusion_pairs": [
+    {
+      "id": "cp_rto_rpo",
+      "title": "RTO vs RPO",
+      "a": {
+        "term": "RTO",
+        "definition": "Maximum acceptable downtime (time to restore service)."
+      },
+      "b": {
+        "term": "RPO",
+        "definition": "Maximum acceptable data loss (how far back you can roll)."
+      },
+      "bullets": [
+        "RTO is time-focused; RPO is data-loss-focused.",
+        "Short RTO usually needs hot/warm site + automation.",
+        "Short RPO usually needs frequent snapshots/replication."
+      ]
+    },
+    {
+      "id": "cp_incremental_differential",
+      "title": "Incremental vs Differential Backups",
+      "a": {
+        "term": "Incremental",
+        "definition": "Backs up changes since the last backup (full or incremental)."
+      },
+      "b": {
+        "term": "Differential",
+        "definition": "Backs up changes since the last full backup."
+      },
+      "bullets": [
+        "Incremental restores need: last full + every incremental since.",
+        "Differential restores need: last full + latest differential only.",
+        "Incremental saves space/time; differential often restores faster."
+      ]
+    },
+    {
+      "id": "cp_snapshot_backup",
+      "title": "Snapshots vs Backups",
+      "a": {
+        "term": "Snapshot",
+        "definition": "Point-in-time copy-on-write state (fast rollback, often same storage system)."
+      },
+      "b": {
+        "term": "Backup",
+        "definition": "Independent copy stored separately for recovery (often offsite/immutable)."
+      },
+      "bullets": [
+        "Snapshots are great for quick rollback, not a full disaster strategy alone.",
+        "Backups survive storage failure/ransomware better when isolated/immutable.",
+        "Best practice: snapshots for speed + backups for survivability."
+      ]
+    },
+    {
+      "id": "cp_sync_async",
+      "title": "Synchronous vs Asynchronous Replication",
+      "a": {
+        "term": "Synchronous",
+        "definition": "Writes must commit to both sites before success (near-zero data loss)."
+      },
+      "b": {
+        "term": "Asynchronous",
+        "definition": "Primary commits first; updates replicate later (some data loss possible)."
+      },
+      "bullets": [
+        "Sync replication lowers RPO but increases latency and needs strong links.",
+        "Async replication tolerates distance and latency but can lose recent writes.",
+        "Pick based on RPO/RTO and network realities."
+      ]
+    },
+    {
+      "id": "cp_hot_warm_cold",
+      "title": "Hot vs Warm vs Cold Sites",
+      "a": {
+        "term": "Hot site",
+        "definition": "Fully running duplicate environment; fastest recovery, highest cost."
+      },
+      "b": {
+        "term": "Warm/Cold sites",
+        "definition": "Warm: partially ready; Cold: space only. Slower recovery, cheaper."
+      },
+      "bullets": [
+        "Hot = minimal downtime; Warm = moderate downtime; Cold = long downtime.",
+        "Hot supports strict RTO; cold usually violates strict RTO.",
+        "Warm often needs restore + configuration before go-live."
+      ]
+    },
+    {
+      "id": "cp_ups_generator",
+      "title": "UPS vs Generator",
+      "a": {
+        "term": "UPS",
+        "definition": "Immediate short-term power + conditioning; bridges to generator."
+      },
+      "b": {
+        "term": "Generator",
+        "definition": "Longer-term backup power; has startup delay and needs fuel/maintenance."
+      },
+      "bullets": [
+        "UPS kicks in instantly; generator takes time to spin up.",
+        "UPS protects from sags/spikes; generator provides endurance.",
+        "Together they improve availability."
+      ]
+    },
+    {
+      "id": "cp_tailgating_piggybacking",
+      "title": "Tailgating vs Piggybacking",
+      "a": {
+        "term": "Tailgating",
+        "definition": "Unauthorized person follows in without consent (victim unaware)."
+      },
+      "b": {
+        "term": "Piggybacking",
+        "definition": "Authorized person knowingly lets someone in (consent)."
+      },
+      "bullets": [
+        "Both bypass physical access controls.",
+        "Mantraps/turnstiles/guards reduce both.",
+        "Training targets piggybacking; barriers target tailgating."
+      ]
+    },
+    {
+      "id": "cp_deterrence_delay_detect",
+      "title": "Deterrence vs Delay vs Detection",
+      "a": {
+        "term": "Deterrence",
+        "definition": "Discourage attempts (signage, guards, lighting)."
+      },
+      "b": {
+        "term": "Delay/Detect",
+        "definition": "Slow attackers and alert responders (locks, mantraps, alarms, sensors)."
+      },
+      "bullets": [
+        "Deterrence changes behavior; delay buys time; detection triggers response.",
+        "Strong programs combine all three.",
+        "Delay without detection is pointless; detection without response is theater."
+      ]
+    },
+    {
+      "id": "cp_tabletop_simulation_parallel",
+      "title": "Tabletop vs Simulation vs Parallel/Failover Tests",
+      "a": {
+        "term": "Tabletop",
+        "definition": "Discussion-based walk-through; low risk, validates plans and roles."
+      },
+      "b": {
+        "term": "Simulation/Parallel/Failover",
+        "definition": "Hands-on testing; higher realism (and risk), validates systems."
+      },
+      "bullets": [
+        "Tabletop is cheapest and safest; failover is most realistic.",
+        "Parallel runs DR alongside production; failover switches to DR.",
+        "Choose based on maturity and acceptable risk."
+      ]
+    }
+  ],
+  "tag_rules": {
+    "recovery.rto_rpo": {
+      "rule": "RTO = how long you can be down. RPO = how much data you can lose.",
+      "micro_example": "Payroll system: RTO 4h (must be back by noon), RPO 15m (can lose at most 15 minutes of entries).",
+      "confusion_pair_id": "cp_rto_rpo"
+    },
+    "recovery.point_in_time": {
+      "rule": "Point-in-time recovery means restoring data to an exact time (often via logs/snapshots).",
+      "micro_example": "After accidental delete at 10:12, restore database to 10:10 snapshot and replay logs.",
+      "confusion_pair_id": "none"
+    },
+    "backups.full_incremental_differential": {
+      "rule": "Know restore chains: full+incrementals vs full+latest differential.",
+      "micro_example": "If you used incrementals all week, you need Monday full + every daily incremental to restore.",
+      "confusion_pair_id": "cp_incremental_differential"
+    },
+    "backups.incremental": {
+      "rule": "Incremental = changes since last backup (full or incremental). Space-efficient, restore-chain longer.",
+      "micro_example": "Daily incrementals: Tue backup only includes changes since Monday.",
+      "confusion_pair_id": "cp_incremental_differential"
+    },
+    "backups.differential": {
+      "rule": "Differential = changes since last full. Gets larger over time, restores faster.",
+      "micro_example": "Friday differential includes all changes since Monday full.",
+      "confusion_pair_id": "cp_incremental_differential"
+    },
+    "backups.snapshot": {
+      "rule": "Snapshots are fast rollback points, but not enough alone for disaster recovery.",
+      "micro_example": "A VM snapshot helps after a bad patch; but if storage is encrypted by ransomware, snapshot may be hit too.",
+      "confusion_pair_id": "cp_snapshot_backup"
+    },
+    "virtualization.snapshots": {
+      "rule": "VM snapshots are convenient for rollback, but don’t replace backups and can impact performance if kept long.",
+      "micro_example": "Take snapshot before upgrade; delete/merge it after validation to avoid long-term delta growth.",
+      "confusion_pair_id": "cp_snapshot_backup"
+    },
+    "backups.offsite_storage": {
+      "rule": "Offsite copies protect against site disasters and many local ransomware events.",
+      "micro_example": "Keep an encrypted backup copy in a different region/cloud account.",
+      "confusion_pair_id": "none"
+    },
+    "backups.onsite_offsite": {
+      "rule": "Onsite is faster restore; offsite survives building/site loss. You typically need both.",
+      "micro_example": "NAS backup for quick restores + cloud copy for disasters.",
+      "confusion_pair_id": "none"
+    },
+    "backups.encryption": {
+      "rule": "Encrypt backups at rest and in transit; protect keys separately (key management).",
+      "micro_example": "Backups in cloud bucket are encrypted; restore requires KMS key + MFA-protected access.",
+      "confusion_pair_id": "none"
+    },
+    "key_management.backups": {
+      "rule": "Backups are only useful if you can decrypt them—treat keys as a critical dependency.",
+      "micro_example": "Store backup keys in HSM/KMS; test key recovery in DR exercises.",
+      "confusion_pair_id": "none"
+    },
+    "backups.frequency": {
+      "rule": "Backup frequency is driven by RPO and business impact, not vibes.",
+      "micro_example": "RPO 15m implies frequent snapshots/replication, not nightly backups.",
+      "confusion_pair_id": "cp_rto_rpo"
+    },
+    "backups.recovery_process": {
+      "rule": "A backup without a tested restore is an expensive wish. Validate restores regularly.",
+      "micro_example": "Quarterly: restore random server + verify application integrity and access.",
+      "confusion_pair_id": "none"
+    },
+    "recovery.restoration_order": {
+      "rule": "Restore order matters: identity/network first, then critical apps, then noncritical systems.",
+      "micro_example": "Bring up AD/DNS + core network, then payment processing, then analytics.",
+      "confusion_pair_id": "none"
+    },
+    "availability.resilience": {
+      "rule": "Resilience = keep operating and recover quickly under stress; it’s architecture + process.",
+      "micro_example": "Zone outage occurs; traffic shifts; service degrades but stays up, then recovers fully.",
+      "confusion_pair_id": "none"
+    },
+    "availability.high_availability": {
+      "rule": "HA aims to minimize downtime via redundancy/failover; it doesn’t automatically guarantee zero data loss.",
+      "micro_example": "Two web servers behind a load balancer: if one dies, users still get served.",
+      "confusion_pair_id": "none"
+    },
+    "ha.single_point_of_failure": {
+      "rule": "SPOF is any component whose failure stops the system. Remove SPOFs in critical paths.",
+      "micro_example": "One database with no replica is an SPOF; add replication + failover.",
+      "confusion_pair_id": "none"
+    },
+    "ha.load_balancing": {
+      "rule": "Load balancing spreads client requests; it improves availability and performance but needs health checks.",
+      "micro_example": "LB routes traffic away from failed node based on health checks.",
+      "confusion_pair_id": "none"
+    },
+    "ha.clustering": {
+      "rule": "Clustering coordinates multiple nodes as one service (often with shared state/failover).",
+      "micro_example": "Database cluster uses quorum; if one node fails, others keep serving.",
+      "confusion_pair_id": "none"
+    },
+    "network.multipath": {
+      "rule": "Multipath networking uses redundant network paths to avoid outages and bottlenecks.",
+      "micro_example": "Two ISPs + automatic failover routing keeps remote offices online.",
+      "confusion_pair_id": "none"
+    },
+    "site.geographic_dispersion": {
+      "rule": "Geographic dispersion reduces correlated risk (same flood/earthquake/power grid).",
+      "micro_example": "Primary in Dhaka, DR in Chattogram to avoid single regional disaster.",
+      "confusion_pair_id": "none"
+    },
+    "site.hot_warm_cold": {
+      "rule": "Hot is fastest and most expensive; warm is moderate; cold is slow and cheap.",
+      "micro_example": "Banking core needs hot site; internal wiki might tolerate cold site.",
+      "confusion_pair_id": "cp_hot_warm_cold"
+    },
+    "site.warm_site": {
+      "rule": "Warm site has partial infrastructure; expects restore/config before use.",
+      "micro_example": "Servers and network exist, but data must be restored and apps started during incident.",
+      "confusion_pair_id": "cp_hot_warm_cold"
+    },
+    "recovery.site_selection": {
+      "rule": "Pick DR site type by RTO/RPO, budget, and how critical the service is.",
+      "micro_example": "Customer checkout system: warm/hot; marketing blog: cold.",
+      "confusion_pair_id": "cp_hot_warm_cold"
+    },
+    "site.selection": {
+      "rule": "Site selection considers distance, connectivity, risk profile, and legal/compliance requirements.",
+      "micro_example": "Choose region with low flood risk and strong connectivity to primary site.",
+      "confusion_pair_id": "none"
+    },
+    "power.ups_generator": {
+      "rule": "UPS provides instant bridge power; generator provides endurance after startup delay.",
+      "micro_example": "UPS keeps servers alive for 5–15 minutes until generator stabilizes.",
+      "confusion_pair_id": "cp_ups_generator"
+    },
+    "testing.tabletop": {
+      "rule": "Tabletop exercises validate plans/roles and find process gaps with low operational risk.",
+      "micro_example": "DR team walks through ransomware scenario and identifies missing contact lists.",
+      "confusion_pair_id": "cp_tabletop_simulation_parallel"
+    },
+    "testing.simulation": {
+      "rule": "Simulations test technical execution under controlled conditions; more realistic than tabletop.",
+      "micro_example": "Simulate datacenter outage in lab; practice restore + traffic cutover.",
+      "confusion_pair_id": "cp_tabletop_simulation_parallel"
+    },
+    "testing.parallel": {
+      "rule": "Parallel testing runs DR systems alongside production without switching users; validates readiness safely.",
+      "micro_example": "Bring up DR site and run test transactions while production continues.",
+      "confusion_pair_id": "cp_tabletop_simulation_parallel"
+    },
+    "testing.failover": {
+      "rule": "Failover testing actually switches production to DR. Highest confidence, highest risk.",
+      "micro_example": "Cut traffic to DR region for 30 minutes during maintenance window.",
+      "confusion_pair_id": "cp_tabletop_simulation_parallel"
+    },
+    "response_recovery.process": {
+      "rule": "Recovery isn’t just tech: comms, ownership, and escalation paths must be defined.",
+      "micro_example": "Incident bridge call + status updates + approval to invoke DR runbook.",
+      "confusion_pair_id": "none"
+    },
+    "physical.layers.defense_in_depth": {
+      "rule": "Use layers: perimeter → entry → interior → sensitive areas. Each layer adds deterrence/delay/detection.",
+      "micro_example": "Fence + badge access + mantrap + locked server room + rack locks.",
+      "confusion_pair_id": "none"
+    },
+    "physical.deterrence_delay": {
+      "rule": "Deterrence discourages; delay buys time; detection triggers response. Combine them.",
+      "micro_example": "Bollards deter vehicle ramming; mantrap delays; alarms detect.",
+      "confusion_pair_id": "cp_deterrence_delay_detect"
+    },
+    "physical.detect": {
+      "rule": "Detection is about knowing something happened (sensors/alarms/cameras) early enough to act.",
+      "micro_example": "Door sensor triggers alarm + camera snapshot sent to security desk.",
+      "confusion_pair_id": "cp_deterrence_delay_detect"
+    },
+    "physical.prevent": {
+      "rule": "Prevent controls stop access outright (locks, access control vestibules, barriers).",
+      "micro_example": "Badge reader + locked turnstile prevents unauthorized entry.",
+      "confusion_pair_id": "none"
+    },
+    "physical.response": {
+      "rule": "Response turns detection into action: guards, dispatch, incident procedures.",
+      "micro_example": "Alarm triggers security guard dispatch and badge access is temporarily frozen.",
+      "confusion_pair_id": "none"
+    },
+    "physical.controls.bollards": {
+      "rule": "Bollards protect against vehicle threats; they’re a perimeter delay/prevent control.",
+      "micro_example": "Install bollards in front of lobby to reduce vehicle ramming risk.",
+      "confusion_pair_id": "none"
+    },
+    "physical.controls.access_control_vestibule": {
+      "rule": "Access control vestibule/mantrap limits entry to one person at a time to stop tailgating.",
+      "micro_example": "Two-door vestibule: first door locks before second opens after identity check.",
+      "confusion_pair_id": "none"
+    },
+    "physical.anti_tailgating": {
+      "rule": "Stop tailgating/piggybacking with mantraps, turnstiles, guards, and user training.",
+      "micro_example": "Employee refuses to 'hold the door' for an unknown person without a badge.",
+      "confusion_pair_id": "cp_tailgating_piggybacking"
+    },
+    "physical.controls.access_badges": {
+      "rule": "Badges are convenient but can be cloned/borrowed; combine with PIN/biometric for sensitive areas.",
+      "micro_example": "Badge + PIN required for data center; badge alone for office floor.",
+      "confusion_pair_id": "none"
+    },
+    "physical.attacks.rfid_cloning": {
+      "rule": "RFID cloning attacks copy badge IDs. Mitigate with stronger badges, encryption, and multi-factor entry.",
+      "micro_example": "Attacker scans a badge in elevator and clones it; mantrap + PIN blocks entry.",
+      "confusion_pair_id": "none"
+    },
+    "physical.controls.video_surveillance": {
+      "rule": "CCTV is detection + forensics, not prevention alone. Pair it with access controls and response.",
+      "micro_example": "CCTV shows who entered; badge logs show which credential was used.",
+      "confusion_pair_id": "none"
+    },
+    "physical.controls.cameras.motion_detection": {
+      "rule": "Motion detection reduces noise and highlights events; ensure it doesn’t become blind under heavy traffic.",
+      "micro_example": "After-hours motion alerts security; during day it records without alerting.",
+      "confusion_pair_id": "none"
+    },
+    "physical.controls.sensors": {
+      "rule": "Sensors provide detection: choose type based on environment and threat (IR, microwave, ultrasonic, pressure).",
+      "micro_example": "Pressure mat in restricted hallway triggers alarm when stepped on after hours.",
+      "confusion_pair_id": "none"
+    },
+    "physical.controls.sensors.infrared": {
+      "rule": "Infrared sensors detect heat/motion; good for after-hours but can be affected by ambient heat sources.",
+      "micro_example": "IR sensor alerts on movement in server room at night.",
+      "confusion_pair_id": "none"
+    },
+    "physical.controls.sensors.microwave": {
+      "rule": "Microwave sensors detect movement by reflected waves; can cover larger areas but may penetrate walls.",
+      "micro_example": "Warehouse perimeter uses microwave motion detection with tuned sensitivity.",
+      "confusion_pair_id": "none"
+    },
+    "physical.controls.sensors.ultrasonic": {
+      "rule": "Ultrasonic sensors use sound waves; can be sensitive to airflow and environmental noise.",
+      "micro_example": "Small equipment room uses ultrasonic sensor for intrusion detection.",
+      "confusion_pair_id": "none"
+    },
+    "physical.controls.sensors.pressure": {
+      "rule": "Pressure sensors/mats detect weight/steps; simple but can be triggered by carts or heavy objects.",
+      "micro_example": "Pressure mat alerts when someone enters a restricted corridor.",
+      "confusion_pair_id": "none"
+    },
+    "physical.controls.ids_alarms": {
+      "rule": "Intrusion detection + alarms must connect to response (dispatch). Alerts without action are useless.",
+      "micro_example": "Door forced open triggers alarm and calls security company.",
+      "confusion_pair_id": "cp_deterrence_delay_detect"
+    },
+    "physical.controls.security_guards": {
+      "rule": "Guards add deterrence and response; combine with logs and procedures for consistency.",
+      "micro_example": "Guard checks badges and escorts visitors to server room.",
+      "confusion_pair_id": "none"
+    },
+    "physical.controls.safe": {
+      "rule": "Safes protect critical media/keys. Choose rating and anchor it; access should be logged.",
+      "micro_example": "Store backup tapes in a fire-rated safe with dual control access.",
+      "confusion_pair_id": "none"
+    },
+    "physical.attacks.environmental": {
+      "rule": "Environmental attacks include fire, water, temperature, and power disruptions. Plan controls + DR.",
+      "micro_example": "HVAC failure overheats servers; sensors alert and failover triggers.",
+      "confusion_pair_id": "none"
+    },
+    "physical.attacks.brute_force": {
+      "rule": "Brute-force physical attacks target locks/doors/racks. Use strong locks, reinforced frames, and monitoring.",
+      "micro_example": "Server racks have locking doors; security monitors access logs and cameras.",
+      "confusion_pair_id": "none"
+    },
+    "physical.controls.cost_tradeoff": {
+      "rule": "Physical controls are risk-to-cost tradeoffs: spend more where impact is highest.",
+      "micro_example": "Data center gets mantrap + CCTV; office pantry just needs basic locks.",
+      "confusion_pair_id": "none"
+    },
+    "capacity_planning.people_tech_infra": {
+      "rule": "Resilience is also staffing and process: people, tech, and infrastructure capacity all matter.",
+      "micro_example": "During incident, lack of on-call staff delays recovery even if DR systems exist.",
+      "confusion_pair_id": "none"
+    },
+    "scalability.elasticity": {
+      "rule": "Scalability handles growth; elasticity auto-adjusts resources up/down with demand.",
+      "micro_example": "Auto-scaling adds instances during peak and removes them afterward.",
+      "confusion_pair_id": "none"
+    },
+    "risk.attack_surface": {
+      "rule": "Attack surface is everything that can be attacked (services, endpoints, access paths). Reduce exposure.",
+      "micro_example": "Close unused ports and remove legacy protocols to shrink attack surface.",
+      "confusion_pair_id": "none"
+    },
+    "risk.blaster_radius": {
+      "rule": "Blast radius is how far damage spreads. Segmentation and least privilege reduce it.",
+      "micro_example": "Compromised workstation can't reach payment DB due to network segmentation.",
+      "confusion_pair_id": "none"
+    },
+    "architecture.platform_diversity": {
+      "rule": "Platform diversity can reduce monoculture risk but increases operational complexity.",
+      "micro_example": "Using two hypervisors reduces single-vendor risk but needs more skills and tooling.",
+      "confusion_pair_id": "none"
+    },
+    "architecture.multicloud": {
+      "rule": "Multicloud can reduce vendor lock-in and improve resilience, but increases complexity and misconfig risk.",
+      "micro_example": "Critical service runs active-active across two clouds with consistent IAM and logging.",
+      "confusion_pair_id": "none"
+    },
+    "backups.nearline": {
+      "rule": "Nearline storage is not instant like online, but faster than offline; used for cost-effective retention.",
+      "micro_example": "Archived backups stored in nearline tier restore in hours, not seconds.",
+      "confusion_pair_id": "none"
+    },
+    "backups.storage_tiers": {
+      "rule": "Storage tiers trade cost vs speed: hot/online, warm/nearline, cold/archive.",
+      "micro_example": "Daily backups on warm tier; yearly archives on cold tier.",
+      "confusion_pair_id": "none"
+    },
+    "backups.journaling": {
+      "rule": "Journaling/log shipping enables fine-grained recovery (point-in-time) beyond basic backups.",
+      "micro_example": "Database ships transaction logs to standby so you can restore to a specific minute.",
+      "confusion_pair_id": "none"
+    },
+    "backups.replication.sync_async": {
+      "rule": "Replication choice is an RPO/RTO decision: sync for low RPO, async for distance and lower cost.",
+      "micro_example": "Sync within same metro; async across continents.",
+      "confusion_pair_id": "cp_sync_async"
+    },
+    "backups.replication.synchronous": {
+      "rule": "Synchronous replication minimizes data loss but adds latency and requires robust connectivity.",
+      "micro_example": "Writes commit only when both sites acknowledge.",
+      "confusion_pair_id": "cp_sync_async"
+    },
+    "backups.replication.asynchronous": {
+      "rule": "Asynchronous replication tolerates distance/latency but risks losing recent writes.",
+      "micro_example": "Primary acknowledges writes immediately; replica catches up shortly after.",
+      "confusion_pair_id": "cp_sync_async"
+    },
+    "confidentiality.backups": {
+      "rule": "Backups often contain the crown jewels; protect confidentiality with encryption + access controls.",
+      "micro_example": "Restrict backup operators; enable MFA and encrypt backup archives.",
+      "confusion_pair_id": "none"
+    },
+    "continuity.coop": {
+      "rule": "COOP (continuity of operations) keeps mission-critical functions running during disruption.",
+      "micro_example": "Alternate site and procedures allow payroll and emergency communications to continue.",
+      "confusion_pair_id": "none"
+    }
+  }
+}

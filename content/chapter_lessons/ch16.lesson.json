@@ -1,0 +1,3201 @@
+{
+  "pack_id": "ch16",
+  "version": "1.0.0",
+  "modules": [
+    {
+      "id": "ch16.m01",
+      "title": "Security governance and GRC",
+      "tag_ids": [
+        "governance.grc.definition",
+        "governance.corporate.board_authority",
+        "governance.structures.committees",
+        "governance.models.centralized",
+        "governance.models.decentralized",
+        "governance.structures.regulators",
+        "governance.infosec.alignment"
+      ],
+      "pages": [
+        {
+          "id": "ch16.m01.p01",
+          "title": "What governance is (and why it exists)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Governance is the set of *direction + oversight* mechanisms that keep an organization aligned to its goals while meeting obligations.\n- Corporate governance: board → CEO → executives → managers → teams.\n- GRC (Governance, Risk, Compliance): ties strategy, risk decisions, and compliance together.\nGovernance isn’t day-to-day ops; it’s accountability and direction."
+            },
+            {
+              "type": "diagram",
+              "text": "Authority cascade (simplified)\nShareholders → Board → CEO → Executives → Managers → Teams"
+            },
+            {
+              "type": "trap",
+              "text": "Trap: mixing up governance and management.\nGovernance sets direction/oversight; management runs the day-to-day work."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which statement BEST describes governance?",
+              "options": [
+                "Running daily security operations and ticket queues",
+                "Setting direction and oversight so the organization meets objectives and obligations",
+                "Installing security tools and pushing patches",
+                "Only writing incident response playbooks"
+              ],
+              "correct_index": 1,
+              "explanation": "Governance is about direction + oversight; operations and tooling are execution.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill in the blank: GRC stands for ______, ______, and ______.",
+              "answers": [
+                "Governance",
+                "Risk",
+                "Compliance"
+              ],
+              "explanation": "GRC integrates governance, risk decisions, and compliance requirements.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.2",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch16.m01.p02",
+          "title": "Security governance in practice",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Information security governance ensures security decisions align with business strategy.\n- Centralized model: one authority sets standards.\n- Decentralized model: distributed ownership but shared minimum standards.\n- Committees and regulators influence priorities and acceptable risk."
+            },
+            {
+              "type": "example",
+              "text": "Centralized: one enterprise IAM and vulnerability process.\nDecentralized: business units choose tools but must meet enterprise baselines and reporting."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: decentralization without shared standards = inconsistent controls + audit pain."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A key benefit of centralized security governance is:",
+              "options": [
+                "No need for policies",
+                "Uniform standards and consistent oversight",
+                "Eliminating third-party risk",
+                "Guaranteed compliance without monitoring"
+              ],
+              "correct_index": 1,
+              "explanation": "Centralized governance improves consistency; monitoring still matters.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            },
+            {
+              "type": "multi_select",
+              "prompt": "Which groups can shape governance expectations? (Choose TWO.)",
+              "options": [
+                "Boards/committees",
+                "Regulators",
+                "Attackers",
+                "Random end users"
+              ],
+              "correct_indices": [
+                0,
+                1
+              ],
+              "explanation": "Boards/committees set direction; regulators impose requirements.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.2",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.3",
+        "1.4",
+        "1.5",
+        "2.4",
+        "3.1",
+        "3.3",
+        "3.4",
+        "4.1",
+        "4.2",
+        "4.4",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.4",
+        "5.6",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch16.m02",
+      "title": "Policy documents and governance controls",
+      "tag_ids": [
+        "policy.documents.policy",
+        "policy.documents.standard",
+        "policy.documents.procedure",
+        "policy.documents.guideline",
+        "policy.documents.policy.approval_level",
+        "policy.framework.mandatory_vs_optional",
+        "policy.examples.aup",
+        "governance.policies",
+        "governance.infosec.enforcement.policies",
+        "policy.external_considerations.regulatory",
+        "policy.external_considerations.industry",
+        "policy.framework.overview"
+      ],
+      "pages": [
+        {
+          "id": "ch16.m02.p01",
+          "title": "Policy vs standard vs procedure vs guideline",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "A ladder from intent to execution:\n- Policy: high-level rules/intent (mandatory; leadership approved).\n- Standard: specific measurable requirements (mandatory).\n- Procedure: step-by-step instructions (mandatory).\n- Guideline: recommended best practice (optional unless referenced).\nApproval levels usually rise as you move upward (policies need higher sign-off)."
+            },
+            {
+              "type": "example",
+              "text": "Policy: “Protect company data on mobile devices.”\nStandard: “Use full-device encryption.”\nProcedure: “Enroll in MDM and verify encryption.”\nGuideline: “Prefer biometrics + strong PIN.”"
+            },
+            {
+              "type": "trap",
+              "text": "Trap: treating guidelines as enforceable rules. Guidelines are ‘should’; policies/standards are ‘must’."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which document is typically MOST detailed and step-by-step?",
+              "options": [
+                "Policy",
+                "Standard",
+                "Procedure",
+                "Guideline"
+              ],
+              "correct_index": 2,
+              "explanation": "Procedures provide step-by-step execution instructions.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            },
+            {
+              "type": "matching",
+              "prompt": "Match the document type to its best description.",
+              "left": [
+                "Policy",
+                "Standard",
+                "Procedure",
+                "Guideline"
+              ],
+              "right": [
+                "Step-by-step instructions",
+                "High-level rule/intent",
+                "Recommended best practice",
+                "Specific measurable requirements"
+              ],
+              "correct_map": {
+                "Policy": "High-level rule/intent",
+                "Standard": "Specific measurable requirements",
+                "Procedure": "Step-by-step instructions",
+                "Guideline": "Recommended best practice"
+              },
+              "explanation": "Policies set intent, standards set measurable rules, procedures implement, guidelines recommend.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.2",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch16.m02.p02",
+          "title": "Where requirements come from (and why revision matters)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Policies are shaped by internal goals and external obligations.\nExternal considerations often include regulatory/legal obligations and industry requirements.\nGovernance expects monitoring and revision as tech, threats, and laws change."
+            },
+            {
+              "type": "example",
+              "text": "An AUP can ban personal cloud storage for company files and define monitoring expectations."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: writing policies once and never revisiting them. Stale policies become audit findings."
+            }
+          ],
+          "checks": [
+            {
+              "type": "multi_select",
+              "prompt": "Which are common drivers for policy requirements? (Choose TWO.)",
+              "options": [
+                "Regulatory/legal requirements",
+                "Industry requirements",
+                "Wi‑Fi channel overlap",
+                "CPU cache size"
+              ],
+              "correct_indices": [
+                0,
+                1
+              ],
+              "explanation": "Regulatory and industry requirements strongly influence policy.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill in the blank: Policies are typically ______, while guidelines are typically ______.",
+              "answers": [
+                "mandatory",
+                "optional"
+              ],
+              "explanation": "Policies are mandatory; guidelines are typically optional.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.2",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.3",
+        "1.4",
+        "1.5",
+        "2.4",
+        "3.1",
+        "3.3",
+        "3.4",
+        "4.1",
+        "4.2",
+        "4.4",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.4",
+        "5.6",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch16.m03",
+      "title": "Change management basics",
+      "tag_ids": [
+        "change_mgmt.overview",
+        "change_mgmt.approval_controls",
+        "change_mgmt.maintenance_windows",
+        "change_mgmt.backout_plan",
+        "change_mgmt.schedule_implement",
+        "change_mgmt.sop.steps",
+        "change_mgmt.goal.availability",
+        "change_mgmt.security_vs_usability_tradeoff",
+        "change_mgmt.emergency_changes",
+        "change_mgmt.impact_analysis.dependencies"
+      ],
+      "pages": [
+        {
+          "id": "ch16.m03.p01",
+          "title": "Why change management matters",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Change management reduces outages and security regressions by forcing planning.\n- Ownership/stakeholders\n- Approval process\n- Impact analysis (especially dependencies)\nUncontrolled changes create misconfigurations and blind spots."
+            },
+            {
+              "type": "example",
+              "text": "Firewall rule changes without review can open inbound access. Change control requires review + test evidence."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: skipping change control for ‘small’ changes. Small undocumented changes cause big outages."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "What is the BEST reason to require approvals for changes?",
+              "options": [
+                "To slow down all work",
+                "To ensure changes are reviewed for risk and impact before implementation",
+                "To eliminate the need for testing",
+                "To avoid documenting the change"
+              ],
+              "correct_index": 1,
+              "explanation": "Approvals exist to ensure risk/impact review.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill in the blank: A major goal of change management is protecting system ______.",
+              "answers": [
+                "availability"
+              ],
+              "explanation": "Controlled changes protect availability by reducing unintended outages.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.2",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch16.m03.p02",
+          "title": "Backout plans, maintenance windows, emergency changes",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "A solid change record often includes test results, a backout plan, a maintenance window, and SOP implementation steps.\nEmergency changes may temporarily bypass steps, but must be documented and reviewed afterward."
+            },
+            {
+              "type": "example",
+              "text": "A backout plan might roll back to a known-good version and validate health checks."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: ‘Emergency’ becoming the default. If everything is an emergency, governance has failed."
+            }
+          ],
+          "checks": [
+            {
+              "type": "multi_select",
+              "prompt": "Which items commonly belong in a change request? (Choose TWO.)",
+              "options": [
+                "Backout plan",
+                "Maintenance window",
+                "Social media policy",
+                "Bluetooth pairing codes"
+              ],
+              "correct_indices": [
+                0,
+                1
+              ],
+              "explanation": "Backout plans and maintenance windows are core change-management elements.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "After an emergency change is complete, what should happen?",
+              "options": [
+                "Nothing—emergency changes are exempt forever",
+                "Post-implementation documentation and review",
+                "Delete logs to reduce noise",
+                "Disable change management"
+              ],
+              "correct_index": 1,
+              "explanation": "Emergency changes still need documentation and post-review.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.2",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.3",
+        "1.4",
+        "1.5",
+        "2.4",
+        "3.1",
+        "3.3",
+        "3.4",
+        "4.1",
+        "4.2",
+        "4.4",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.4",
+        "5.6",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch16.m04",
+      "title": "Change impact analysis and documentation",
+      "tag_ids": [
+        "change_mgmt.technical_implications.allow_deny",
+        "change_mgmt.technical_implications.service_restart",
+        "change_mgmt.technical_implications.dependencies",
+        "change_mgmt.impact_analysis.dependencies",
+        "change_mgmt.documentation",
+        "change_mgmt.documentation.update",
+        "change_mgmt.documentation.update_diagrams",
+        "change_mgmt.documentation.update_policies",
+        "change_mgmt.version_control"
+      ],
+      "pages": [
+        {
+          "id": "ch16.m04.p01",
+          "title": "Technical implications you must plan for",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Change control must surface technical impact:\n- Allow/deny list updates\n- Service restart requirements\n- Dependencies (APIs, DBs, identity, certificates)\nDependencies are a common ‘it worked in test’ failure point."
+            },
+            {
+              "type": "example",
+              "text": "A TLS config change can require service restarts and break a legacy client dependency."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: ignoring dependencies. Dependencies are where outages get creative."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which item is MOST likely to be missed in impact analysis but causes outages?",
+              "options": [
+                "Dependency on another service",
+                "Ticket title",
+                "Dashboard color",
+                "IPv6 usage"
+              ],
+              "correct_index": 0,
+              "explanation": "Hidden dependencies are a top cause of unexpected outages.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            },
+            {
+              "type": "multi_select",
+              "prompt": "Which are technical implications of a change? (Choose TWO.)",
+              "options": [
+                "Service restart requirements",
+                "Allow/deny list updates",
+                "Quarterly board meeting schedule",
+                "Employee commute time"
+              ],
+              "correct_indices": [
+                0,
+                1
+              ],
+              "explanation": "Service restarts and allow/deny updates are direct technical impacts.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.2",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch16.m04.p02",
+          "title": "Documentation updates and version control",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Changes must be reflected in documentation:\n- Update diagrams (network/data flow)\n- Update affected policies/procedures\n- Record in version control (who/what/when/why)\nVersion control supports audits and investigations: ‘What changed?’ becomes answerable."
+            },
+            {
+              "type": "example",
+              "text": "Add a new VPN gateway → update diagrams and runbooks → commit with a clear message and reference the change ticket."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: tribal knowledge. If documentation lives in one person’s head, the program is brittle."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Why is version control important for security documentation?",
+              "options": [
+                "Prevents users reading policies",
+                "Provides traceability for audits/investigations",
+                "Eliminates approvals",
+                "Replaces access control"
+              ],
+              "correct_index": 1,
+              "explanation": "Version control provides traceability and evidence of change.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill in the blank: After a change, update affected ______ and ______/procedures.",
+              "answers": [
+                "diagrams",
+                "policies"
+              ],
+              "explanation": "Update diagrams and affected policies/procedures.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.2",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.3",
+        "1.4",
+        "1.5",
+        "2.4",
+        "3.1",
+        "3.3",
+        "3.4",
+        "4.1",
+        "4.2",
+        "4.4",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.4",
+        "5.6",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch16.m05",
+      "title": "Personnel management and operational policy controls",
+      "tag_ids": [
+        "personnel.offboarding",
+        "access.account_lifecycle.deprovisioning",
+        "personnel.privilege_creep",
+        "personnel.separation_of_duties",
+        "personnel.two_person_control",
+        "personnel.clean_desk",
+        "personnel.nda",
+        "personnel.social_media_policy",
+        "policy.examples.aup",
+        "personnel.offboarding.exit_interview",
+        "personnel.fraud_controls",
+        "personnel.job_rotation",
+        "personnel.mandatory_vacations"
+      ],
+      "pages": [
+        {
+          "id": "ch16.m05.p01",
+          "title": "Offboarding, deprovisioning, privilege creep, fraud controls",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "People processes are security controls.\n- Offboarding + deprovisioning: remove access fast and recover assets.\n- Privilege creep: access accumulates as roles change → fix with periodic review.\n- Separation of duties + two-person control: reduce fraud/unsafe actions.\n- Job rotation and mandatory vacations can expose fraud and reduce insider risk."
+            },
+            {
+              "type": "example",
+              "text": "A user kept old admin roles after changing teams. That’s privilege creep and a breach amplifier."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: treating offboarding as ‘HR only’. Offboarding needs HR + IT + Security + managers to close accounts and rotate secrets."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Privilege creep MOST often happens when:",
+              "options": [
+                "Users never change roles",
+                "Access is regularly reviewed",
+                "Users gain new permissions but old ones are never removed",
+                "Accounts are immediately deprovisioned at termination"
+              ],
+              "correct_index": 2,
+              "explanation": "Privilege creep is accumulated access without removal.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            },
+            {
+              "type": "multi_select",
+              "prompt": "Which actions are part of effective offboarding? (Choose TWO.)",
+              "options": [
+                "Disable accounts and revoke tokens/keys",
+                "Recover devices/badges and conduct exit steps",
+                "Increase permissions temporarily",
+                "Publish credentials to a wiki"
+              ],
+              "correct_indices": [
+                0,
+                1
+              ],
+              "explanation": "Offboarding removes access and recovers assets.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.2",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch16.m05.p02",
+          "title": "Behavior policies: clean desk, NDAs, social media, AUP",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Operational policies reduce everyday leakage:\n- Clean desk: store sensitive paper securely; lock screens.\n- NDA: contractual control limiting disclosure.\n- Social media policy: reduces oversharing internal details.\n- AUP: defines acceptable system use and monitoring/enforcement expectations."
+            },
+            {
+              "type": "example",
+              "text": "Clean desk can require shredding printed drafts and storing sensitive documents in locked cabinets."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: policies without enforcement. AUPs that aren’t enforced become liabilities."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Main purpose of a clean desk policy is to:",
+              "options": [
+                "Improve Wi‑Fi coverage",
+                "Reduce physical exposure of sensitive info",
+                "Replace encryption",
+                "Eliminate access controls"
+              ],
+              "correct_index": 1,
+              "explanation": "Clean desk policies reduce physical information leakage.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            },
+            {
+              "type": "matching",
+              "prompt": "Match the control to its primary aim.",
+              "left": [
+                "NDA",
+                "Social media policy",
+                "AUP",
+                "Clean desk"
+              ],
+              "right": [
+                "Define acceptable system use",
+                "Prevent sharing confidential info",
+                "Reduce oversharing internal details",
+                "Reduce physical info leakage"
+              ],
+              "correct_map": {
+                "NDA": "Prevent sharing confidential info",
+                "Social media policy": "Reduce oversharing internal details",
+                "AUP": "Define acceptable system use",
+                "Clean desk": "Reduce physical info leakage"
+              },
+              "explanation": "Each policy targets a different leakage channel.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.2",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.3",
+        "1.4",
+        "1.5",
+        "2.4",
+        "3.1",
+        "3.3",
+        "3.4",
+        "4.1",
+        "4.2",
+        "4.4",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.4",
+        "5.6",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch16.m06",
+      "title": "Least privilege and access hygiene",
+      "tag_ids": [
+        "mitigation.least_privilege",
+        "personnel.least_privilege",
+        "personnel.privilege_creep",
+        "access.account_lifecycle.deprovisioning",
+        "change_mgmt.technical_implications.allow_deny"
+      ],
+      "pages": [
+        {
+          "id": "ch16.m06.p01",
+          "title": "Least privilege reduces blast radius",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Least privilege means users/services get only the access they need, only as long as they need it.\nIt reduces blast radius for compromised accounts and limits insider damage."
+            },
+            {
+              "type": "example",
+              "text": "Helpdesk can reset passwords but cannot grant domain admin or change firewall rules."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: granting admin rights ‘for convenience’. Convenience-driven admin rights turn minor phishing into major compromise."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Least privilege primarily helps by:",
+              "options": [
+                "Increasing number of admins",
+                "Reducing impact of account compromise",
+                "Eliminating monitoring needs",
+                "Preventing all phishing"
+              ],
+              "correct_index": 1,
+              "explanation": "Least privilege reduces the damage scope when accounts are abused.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill in the blank: Removing access promptly at departure is account ______.",
+              "answers": [
+                "deprovisioning"
+              ],
+              "explanation": "Deprovisioning prevents lingering access.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.2",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch16.m06.p02",
+          "title": "Allow/deny controls and stopping privilege creep",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Enforcement patterns:\n- Allow/deny lists for actions, apps, and network flows\n- Restrict privileged actions to approved roles\n- Regular reviews to remove stale rights\n- Strong offboarding to revoke access and rotate secrets"
+            },
+            {
+              "type": "example",
+              "text": "Only a small admin group is allowed to modify firewall rules; everyone else uses a change request."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: relying only on deny lists. Blocklists are reactive; allow lists are stricter for high-risk environments."
+            }
+          ],
+          "checks": [
+            {
+              "type": "multi_select",
+              "prompt": "Which practices support least privilege? (Choose TWO.)",
+              "options": [
+                "Periodic access reviews",
+                "Strong offboarding/deprovisioning",
+                "Give everyone local admin",
+                "Share one admin account across a team"
+              ],
+              "correct_indices": [
+                0,
+                1
+              ],
+              "explanation": "Reviews and deprovisioning support least privilege.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "In high-risk environments, which is generally stronger?",
+              "options": [
+                "Deny list only",
+                "Allow list for approved actions/apps",
+                "No lists",
+                "Open access plus logging"
+              ],
+              "correct_index": 1,
+              "explanation": "Allow lists restrict to explicitly approved actions.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.2",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.3",
+        "1.4",
+        "1.5",
+        "2.4",
+        "3.1",
+        "3.3",
+        "3.4",
+        "4.1",
+        "4.2",
+        "4.4",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.4",
+        "5.6",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch16.m07",
+      "title": "Third-party risk: selecting vendors",
+      "tag_ids": [
+        "tprm.vendor_selection.due_diligence",
+        "tprm.vendor_selection.conflict_of_interest",
+        "tprm.vendor_assessment.sensitive_info_access",
+        "tprm.vendor_assessment.right_to_audit",
+        "policy.external_considerations.regulatory",
+        "policy.external_considerations.industry"
+      ],
+      "pages": [
+        {
+          "id": "ch16.m07.p01",
+          "title": "Why third-party risk matters",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Vendors expand your attack surface. Your risk depends on their controls too.\nSelection should consider what data/systems they can access and what obligations you must meet (regulatory/industry)."
+            },
+            {
+              "type": "example",
+              "text": "A payroll vendor handling PII becomes part of your security boundary."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: ‘They’re big so they’re secure.’ You need evidence, not vibes."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Third-party risk is a concern because:",
+              "options": [
+                "Vendors never change",
+                "Vendors introduce risk outside your direct control",
+                "Third parties always reduce risk",
+                "Contracts can’t include security terms"
+              ],
+              "correct_index": 1,
+              "explanation": "Vendors can introduce risk you cannot fully control directly.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill in the blank: Investigating a vendor before signing is called ______ ______.",
+              "answers": [
+                "due",
+                "diligence"
+              ],
+              "explanation": "Due diligence is pre-contract investigation.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.2",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch16.m07.p02",
+          "title": "Due diligence, conflicts of interest, and audit rights",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Vendor selection should include:\n- Due diligence (security posture, maturity)\n- Conflict of interest checks\n- Understand sensitive access scope\n- Contract terms that allow verification where appropriate (right-to-audit)"
+            },
+            {
+              "type": "example",
+              "text": "If a vendor administers IAM, require stronger vetting and ongoing monitoring than a low-risk marketing tool."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: selecting purely on cost. Cheapest vendor can become the most expensive incident."
+            }
+          ],
+          "checks": [
+            {
+              "type": "multi_select",
+              "prompt": "Which are vendor selection activities? (Choose TWO.)",
+              "options": [
+                "Due diligence review",
+                "Conflict of interest screening",
+                "Wi‑Fi site survey",
+                "Password spraying"
+              ],
+              "correct_indices": [
+                0,
+                1
+              ],
+              "explanation": "Due diligence and conflict screening are core selection steps.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Why is a right-to-audit clause valuable?",
+              "options": [
+                "It eliminates vendor risk",
+                "It enables verification of vendor controls (within limits)",
+                "It replaces contracts",
+                "It guarantees no breaches"
+              ],
+              "correct_index": 1,
+              "explanation": "Audit rights enable verification, not guarantees.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.2",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.3",
+        "1.4",
+        "1.5",
+        "2.4",
+        "3.1",
+        "3.3",
+        "3.4",
+        "4.1",
+        "4.2",
+        "4.4",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.4",
+        "5.6",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch16.m08",
+      "title": "Third-party risk: assessing vendors and coordinating safely",
+      "tag_ids": [
+        "tprm.vendor_assessment.pen_test",
+        "tprm.vendor_assessment.right_to_audit",
+        "tprm.vendor_assessment.sensitive_info_access",
+        "tprm.vendor_monitoring.rules_of_engagement"
+      ],
+      "pages": [
+        {
+          "id": "ch16.m08.p01",
+          "title": "Assessment: evidence over promises",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Vendor assessment asks for evidence:\n- Pen test evidence (or summary + remediation)\n- Proof of controls relevant to your data access\n- Right-to-audit where required/feasible\nHigher sensitive access → higher evidence bar."
+            },
+            {
+              "type": "example",
+              "text": "If a vendor has admin access, demand proof of logging, access controls, and change control—not just marketing material."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: accepting ‘we are compliant’ without scope/date. Always ask what scope and how recent."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which is the BEST example of vendor security evidence?",
+              "options": [
+                "Marketing brochure",
+                "Pen test summary with remediation plan",
+                "Promise in an email",
+                "Unexplained screenshot"
+              ],
+              "correct_index": 1,
+              "explanation": "Pen test evidence with remediation is meaningful compared to marketing or promises.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill in the blank: The clause that enables you to verify vendor controls is right-to-______.",
+              "answers": [
+                "audit"
+              ],
+              "explanation": "Right-to-audit enables verification (within agreed limits).",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.2",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch16.m08.p02",
+          "title": "Rules of engagement for vendor testing and coordination",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Rules of engagement define how you and a vendor interact around security:\n- Allowed testing scope/timing\n- Notifications and emergency stop\n- Points of contact and escalation\nClear ROE prevents accidental outages and legal disputes."
+            },
+            {
+              "type": "example",
+              "text": "If pen testing vendor-hosted services, define the window, IP ranges, and escalation contacts."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: testing without permission. Without ROE, you can violate contracts or laws."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Why do rules of engagement matter in vendor security testing?",
+              "options": [
+                "They make policies optional",
+                "They clarify scope and prevent accidental harm/legal issues",
+                "They remove need for monitoring",
+                "They guarantee no breaches"
+              ],
+              "correct_index": 1,
+              "explanation": "ROE reduces risk and clarifies boundaries.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            },
+            {
+              "type": "multi_select",
+              "prompt": "Which items belong in rules of engagement? (Choose TWO.)",
+              "options": [
+                "Testing scope and timing",
+                "Escalation/points of contact",
+                "Employee vacation schedule",
+                "Office paint colors"
+              ],
+              "correct_indices": [
+                0,
+                1
+              ],
+              "explanation": "Scope/timing and escalation contacts are core ROE components.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.2",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.3",
+        "1.4",
+        "1.5",
+        "2.4",
+        "3.1",
+        "3.3",
+        "3.4",
+        "4.1",
+        "4.2",
+        "4.4",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.4",
+        "5.6",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch16.m09",
+      "title": "Vendor agreements and lifecycle risk",
+      "tag_ids": [
+        "tprm.agreements.sla",
+        "tprm.agreements.msa",
+        "tprm.agreements.sow_wo",
+        "tprm.agreements.mou",
+        "tprm.agreements.moa",
+        "tprm.agreements.nda",
+        "tprm.agreements.bpa",
+        "tprm.vendor_monitoring.transition_planning",
+        "tprm.winding_down.eol_eosl"
+      ],
+      "pages": [
+        {
+          "id": "ch16.m09.p01",
+          "title": "Vendor agreement types (SLA, MSA, SOW, NDA, etc.)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Key agreement types:\n- SLA: service levels (uptime, response times, penalties)\n- MSA: master terms\n- SOW/WO: specific deliverables/scope\n- NDA: confidentiality\n- MOU/MOA: cooperation terms\n- BPA: shared responsibilities\nSecurity expectations often live across MSA + SLA + SOW."
+            },
+            {
+              "type": "example",
+              "text": "MSA sets baseline legal terms; SOW defines project scope; SLA defines measurable targets; NDA protects shared info."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: assuming SLAs are only uptime. SLAs can include security targets and incident response expectations."
+            }
+          ],
+          "checks": [
+            {
+              "type": "matching",
+              "prompt": "Match the agreement to its best description.",
+              "left": [
+                "SLA",
+                "MSA",
+                "SOW/WO",
+                "NDA"
+              ],
+              "right": [
+                "Overall master terms",
+                "Protects confidential info",
+                "Defines service levels",
+                "Defines specific work/deliverables"
+              ],
+              "correct_map": {
+                "SLA": "Defines service levels",
+                "MSA": "Overall master terms",
+                "SOW/WO": "Defines specific work/deliverables",
+                "NDA": "Protects confidential info"
+              },
+              "explanation": "These acronyms show up constantly in third-party risk scenarios.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which agreement MOST directly defines uptime and response-time targets?",
+              "options": [
+                "MSA",
+                "SLA",
+                "NDA",
+                "MOU"
+              ],
+              "correct_index": 1,
+              "explanation": "SLAs define measurable service targets.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.2",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch16.m09.p02",
+          "title": "Transition planning and EOL/EOSL exits",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Vendor lifecycle risk continues through change and exit:\n- Transition planning: plan data/access changes over time\n- EOL/EOSL planning: avoid unsupported services\n- Exit steps: export data, revoke access, rotate secrets, confirm deletion where required"
+            },
+            {
+              "type": "example",
+              "text": "Replacing a SaaS tool: export data, confirm retention/deletion expectations, revoke SSO tokens/API keys, remove integrations."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: forgetting the exit. Lingering vendor access is a classic breach pathway."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Why is transition planning important in vendor monitoring?",
+              "options": [
+                "It increases Wi‑Fi speed",
+                "It helps ensure data is handled properly and access is revoked during changes",
+                "It removes contracts",
+                "It guarantees no breaches"
+              ],
+              "correct_index": 1,
+              "explanation": "Transition planning reduces residual risk during vendor changes and exits.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill in the blank: End-of-life/end-of-service-life is abbreviated ______/______.",
+              "answers": [
+                "EOL",
+                "EOSL"
+              ],
+              "explanation": "EOL/EOSL planning helps avoid running unsupported services and ensures clean transitions.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.2",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.3",
+        "1.4",
+        "1.5",
+        "2.4",
+        "3.1",
+        "3.3",
+        "3.4",
+        "4.1",
+        "4.2",
+        "4.4",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.4",
+        "5.6",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch16.m10",
+      "title": "Security compliance: reporting and monitoring",
+      "tag_ids": [
+        "compliance.requirements",
+        "compliance.reporting.internal",
+        "compliance.reporting.external",
+        "compliance.consequences.fines_sanctions",
+        "compliance.consequences.reputation",
+        "compliance.monitoring.due_diligence",
+        "compliance.monitoring.due_care",
+        "compliance.monitoring.attestation",
+        "compliance.monitoring.acknowledgment"
+      ],
+      "pages": [
+        {
+          "id": "ch16.m10.p01",
+          "title": "Compliance basics: reporting and consequences",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Compliance = meeting requirements (laws, regulations, contracts, internal mandates).\n- Internal reporting: visibility for leadership/board.\n- External reporting: regulators/customers/auditors.\nNon-compliance can mean fines/sanctions, reputational damage, and lost contracts."
+            },
+            {
+              "type": "example",
+              "text": "Failing contractual security terms can trigger penalties or customer termination."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: thinking compliance = security. Compliance is a floor; risk should drive you beyond the baseline."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which is a common consequence of non-compliance?",
+              "options": [
+                "Guaranteed immunity from lawsuits",
+                "Fines and reputational damage",
+                "Faster Wi‑Fi roaming",
+                "Automatic elimination of third-party risk"
+              ],
+              "correct_index": 1,
+              "explanation": "Non-compliance often leads to fines/sanctions and reputational harm.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill in the blank: Compliance is often described as a ______ for security.",
+              "answers": [
+                "floor"
+              ],
+              "explanation": "Compliance sets minimum requirements; risk should drive beyond that.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.2",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch16.m10.p02",
+          "title": "Due diligence vs due care vs attestation vs acknowledgment",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "- Due diligence: do your homework to understand risk and controls.\n- Due care: act responsibly based on what you know.\n- Attestation: formal statement a requirement/control is met.\n- Acknowledgment: a person confirms they understand a policy."
+            },
+            {
+              "type": "example",
+              "text": "Access reviews are due care because you’re acting on known risk (stale access)."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: relying only on annual attestations. You still need ongoing evidence and control monitoring."
+            }
+          ],
+          "checks": [
+            {
+              "type": "matching",
+              "prompt": "Match the term to the best description.",
+              "left": [
+                "Due diligence",
+                "Due care",
+                "Attestation",
+                "Acknowledgment"
+              ],
+              "right": [
+                "Do your homework to understand risk",
+                "Act responsibly to reduce known risk",
+                "Formal statement of compliance/control status",
+                "User confirms policy understanding"
+              ],
+              "correct_map": {
+                "Due diligence": "Do your homework to understand risk",
+                "Due care": "Act responsibly to reduce known risk",
+                "Attestation": "Formal statement of compliance/control status",
+                "Acknowledgment": "User confirms policy understanding"
+              },
+              "explanation": "These terms describe different parts of proving and maintaining compliance.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which term best fits: 'A signed statement that controls meet requirements'?",
+              "options": [
+                "Due diligence",
+                "Due care",
+                "Attestation",
+                "Acknowledgment"
+              ],
+              "correct_index": 2,
+              "explanation": "Attestation is a formal statement about compliance/control status.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.2",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.3",
+        "1.4",
+        "1.5",
+        "2.4",
+        "3.1",
+        "3.3",
+        "3.4",
+        "4.1",
+        "4.2",
+        "4.4",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.4",
+        "5.6",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch16.m11",
+      "title": "Frameworks: NIST CSF/RMF and ISO",
+      "tag_ids": [
+        "policy.framework.overview",
+        "frameworks.nist.csf.purpose",
+        "frameworks.nist.csf.core_functions",
+        "frameworks.nist.csf.functions",
+        "frameworks.nist.csf.communication",
+        "frameworks.nist.csf.tiers.tier1",
+        "frameworks.nist.csf.tiers.tier2",
+        "frameworks.nist.csf.tiers.tier3",
+        "frameworks.nist.csf.tiers.tier4",
+        "frameworks.nist.rmf.definition",
+        "frameworks.nist.csf.vs_rmf",
+        "frameworks.iso.27001",
+        "frameworks.iso.27002",
+        "frameworks.iso.27701",
+        "frameworks.iso.31000"
+      ],
+      "pages": [
+        {
+          "id": "ch16.m11.p01",
+          "title": "NIST CSF: purpose and core functions",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Frameworks give a shared structure for managing and communicating cyber risk.\nNIST CSF core functions: Identify, Protect, Detect, Respond, Recover."
+            },
+            {
+              "type": "example",
+              "text": "If you’re strong at Protect but weak at Detect/Respond, CSF helps you see the imbalance and plan investment."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: adopting a framework as a shelf artifact. It only matters if it changes priorities, budget, and measurement."
+            }
+          ],
+          "checks": [
+            {
+              "type": "matching",
+              "prompt": "Match the CSF function to a typical activity.",
+              "left": [
+                "Identify",
+                "Protect",
+                "Detect",
+                "Respond",
+                "Recover"
+              ],
+              "right": [
+                "Asset inventory and risk assessment",
+                "Access control and hardening",
+                "Monitoring and alerting",
+                "Containment and eradication steps",
+                "Restore services and improve resilience"
+              ],
+              "correct_map": {
+                "Identify": "Asset inventory and risk assessment",
+                "Protect": "Access control and hardening",
+                "Detect": "Monitoring and alerting",
+                "Respond": "Containment and eradication steps",
+                "Recover": "Restore services and improve resilience"
+              },
+              "explanation": "CSF functions map to lifecycle stages of managing cyber risk.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "The primary purpose of the NIST CSF is to:",
+              "options": [
+                "Replace all policies",
+                "Provide a framework to manage and communicate cybersecurity risk",
+                "Guarantee compliance",
+                "Eliminate the need for incident response"
+              ],
+              "correct_index": 1,
+              "explanation": "CSF helps manage and communicate cybersecurity risk.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.2",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch16.m11.p02",
+          "title": "CSF tiers, RMF, and ISO standards",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "CSF tiers describe maturity:\nTier 1 Partial • Tier 2 Risk informed • Tier 3 Repeatable • Tier 4 Adaptive.\nNIST RMF is a structured risk management process.\nISO standards: 27001 (ISMS requirements), 27002 (control guidance), 27701 (privacy), 31000 (risk principles)."
+            },
+            {
+              "type": "example",
+              "text": "CSF is excellent for communication; RMF is useful when you need formal risk authorization."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: CSF vs RMF as a ‘winner’. They solve different problems: CSF = outcomes language; RMF = risk process."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which CSF tier is characterized by adaptive, continuously improving practices?",
+              "options": [
+                "Tier 1",
+                "Tier 2",
+                "Tier 3",
+                "Tier 4"
+              ],
+              "correct_index": 3,
+              "explanation": "Tier 4 is adaptive and continuously improves.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            },
+            {
+              "type": "matching",
+              "prompt": "Match the ISO standard to its focus.",
+              "left": [
+                "ISO 27001",
+                "ISO 27002",
+                "ISO 27701",
+                "ISO 31000"
+              ],
+              "right": [
+                "ISMS requirements",
+                "Control guidance",
+                "Privacy extension",
+                "Risk management principles"
+              ],
+              "correct_map": {
+                "ISO 27001": "ISMS requirements",
+                "ISO 27002": "Control guidance",
+                "ISO 27701": "Privacy extension",
+                "ISO 31000": "Risk management principles"
+              },
+              "explanation": "Each ISO standard targets a specific governance/risk/security need.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.2",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.3",
+        "1.4",
+        "1.5",
+        "2.4",
+        "3.1",
+        "3.3",
+        "3.4",
+        "4.1",
+        "4.2",
+        "4.4",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.4",
+        "5.6",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch16.m12",
+      "title": "Security awareness and training programs",
+      "tag_ids": [
+        "awareness.programs.definition",
+        "awareness.training.vs_awareness",
+        "awareness.training.design",
+        "awareness.role_based_training",
+        "awareness.phishing.campaigns",
+        "awareness.phishing.simulations",
+        "awareness.anomalous_behavior",
+        "awareness.insider_threat",
+        "awareness.user_training.password_management",
+        "awareness.user_training.removable_media",
+        "awareness.reporting_monitoring",
+        "awareness.metrics.trends"
+      ],
+      "pages": [
+        {
+          "id": "ch16.m12.p01",
+          "title": "Training vs awareness (and role-based depth)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Training teaches skills people must perform; awareness keeps security top-of-mind and shapes behavior over time.\nRole-based training matters because admins/devs/executives face different risks and responsibilities."
+            },
+            {
+              "type": "example",
+              "text": "Developers need secure coding training; executives need incident decision training; all employees need phishing recognition and reporting."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: one generic training for everyone. Generic content gets ignored; role-based depth changes outcomes."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which statement BEST distinguishes training from awareness?",
+              "options": [
+                "Training is optional; awareness is mandatory",
+                "Training teaches skills; awareness reinforces attention and behavior over time",
+                "Training is for executives only",
+                "Awareness replaces policy enforcement"
+              ],
+              "correct_index": 1,
+              "explanation": "Training builds skills; awareness reinforces habits and vigilance.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill in the blank: Tailoring education to job responsibilities is ______-based training.",
+              "answers": [
+                "role"
+              ],
+              "explanation": "Role-based training matches depth to responsibilities.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.2",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch16.m12.p02",
+          "title": "Phishing, anomalous behavior, and measuring outcomes",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "High-value awareness topics: phishing recognition/reporting, anomalous behavior recognition, insider threat awareness, password management, and removable media handling.\nMeasure outcomes: reporting rate, click rate, time-to-report, and trends over time."
+            },
+            {
+              "type": "example",
+              "text": "A strong metric is ‘% of phishing simulations reported within 10 minutes’ (detection + action)."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: using phishing simulations as punishment. ‘Gotcha’ culture reduces reporting and makes you blind."
+            }
+          ],
+          "checks": [
+            {
+              "type": "multi_select",
+              "prompt": "Which are good awareness program metrics? (Choose TWO.)",
+              "options": [
+                "Reporting rate of suspicious messages",
+                "Trend of click rates over time",
+                "CPU temperature",
+                "Wi‑Fi channel utilization"
+              ],
+              "correct_indices": [
+                0,
+                1
+              ],
+              "explanation": "Reporting and trend metrics measure human-risk outcomes.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Best immediate action when an employee suspects phishing is to:",
+              "options": [
+                "Forward it to friends",
+                "Report it via the official mechanism and do not interact further",
+                "Delete it and say nothing",
+                "Reply to confirm sender identity"
+              ],
+              "correct_index": 1,
+              "explanation": "Reporting quickly helps response and protects others; interacting increases risk.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.4",
+                "1.5",
+                "2.4",
+                "3.1",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.4",
+            "3.1",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.2",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.3",
+        "1.4",
+        "1.5",
+        "2.4",
+        "3.1",
+        "3.3",
+        "3.4",
+        "4.1",
+        "4.2",
+        "4.4",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.4",
+        "5.6",
+        "5.7"
+      ]
+    }
+  ],
+  "objectiveIds": [
+    "1.1",
+    "1.3",
+    "1.4",
+    "1.5",
+    "2.4",
+    "3.1",
+    "3.3",
+    "3.4",
+    "4.1",
+    "4.2",
+    "4.4",
+    "4.6",
+    "4.7",
+    "4.8",
+    "5.1",
+    "5.2",
+    "5.3",
+    "5.4",
+    "5.6",
+    "5.7"
+  ]
+}

@@ -1,0 +1,1440 @@
+{
+  "schema_version": "secplus_game_pack_v1",
+  "pack_id": "ch10",
+  "exam": {
+    "vendor": "CompTIA",
+    "name": "Security+",
+    "code": "SY0-701",
+    "max_exam_minutes": 90
+  },
+  "chapter": {
+    "number": 10,
+    "title": "Cloud and Virtualization Security",
+    "page_range_in_user_pdf": "449-498"
+  },
+  "design_intent": {
+    "mode": [
+      "campaign",
+      "roguelike_practice"
+    ],
+    "pvp_optional": true,
+    "default_pvp_enabled": false,
+    "player_goal": "Master Cloud and Virtualization Security for SY0-701 Objectives 2.3, 3.1, 3.3, and 4.1."
+  },
+  "progression": {
+    "mastery_model": {
+      "scale": "0-100",
+      "tags_drive_mastery": true,
+      "update": "Mastery += 8 on first correct; +4 on repeat correct; -6 on wrong (floor 0)."
+    },
+    "xp_rules": {
+      "base_xp_per_correct": 10,
+      "mistake_penalty_xp": 0,
+      "streak_bonus_per_5": 15,
+      "time_bonus_threshold_seconds": 30,
+      "time_bonus_xp": 5
+    },
+    "unlock_rules": [
+      {
+        "when": "complete ch10-m1",
+        "unlock": "ch10-m2"
+      },
+      {
+        "when": "complete ch10-m2",
+        "unlock": "ch10-m3"
+      },
+      {
+        "when": "complete ch10-m3",
+        "unlock": "boss_10"
+      }
+    ]
+  },
+  "tags": {
+    "concepts": [
+      "cloud_nist_definition",
+      "cloud_essential_characteristics",
+      "ondemand_selfservice",
+      "broad_network_access",
+      "resource_pooling_multitenancy",
+      "rapid_elasticity",
+      "measured_service",
+      "cloud_benefits_agility",
+      "scalability_vertical",
+      "scalability_horizontal",
+      "elasticity_vs_scalability",
+      "cloud_roles_csp",
+      "cloud_roles_consumer",
+      "cloud_roles_broker",
+      "cloud_roles_auditor",
+      "cloud_roles_carrier",
+      "service_model_saas",
+      "service_model_paas",
+      "service_model_iaas",
+      "service_model_faas_serverless",
+      "deployment_public",
+      "deployment_private",
+      "deployment_community",
+      "deployment_hybrid",
+      "cloud_bursting",
+      "centralized_vs_decentralized",
+      "shared_responsibility_model",
+      "responsibility_matrix",
+      "third_party_vendors",
+      "audit_rights",
+      "data_sovereignty",
+      "csa_ccm",
+      "nist_sp_500_292",
+      "virtualization_concepts",
+      "hypervisor_type1",
+      "hypervisor_type2",
+      "vm_escape",
+      "resource_reuse",
+      "vm_sprawl",
+      "containerization",
+      "container_isolation",
+      "container_hardening",
+      "api_security",
+      "waf",
+      "swg",
+      "security_groups",
+      "vpc_networking",
+      "sdn",
+      "iac",
+      "microservices",
+      "secrets_management",
+      "hsm",
+      "block_storage",
+      "object_storage",
+      "storage_encryption",
+      "storage_replication_availability",
+      "casb_inline",
+      "casb_api",
+      "cloud_misconfiguration",
+      "logging_monitoring_cloud"
+    ],
+    "difficulty_scale": {
+      "1": "easy recall",
+      "2": "basic apply",
+      "3": "scenario apply",
+      "4": "mixed concept trap",
+      "5": "boss-level synthesis"
+    }
+  },
+  "trap_list": [
+    {
+      "id": "trap_elastic_vs_scale",
+      "name": "Elasticity vs Scalability",
+      "misconception": "Treating elasticity and scalability as identical.",
+      "fix": "Scalability is the ability to increase capacity; elasticity is rapid (often automatic) up/down adjustment to demand.",
+      "drill_question_ids": [
+        "ch10-q02",
+        "ch10-q03",
+        "ch10-q04"
+      ]
+    },
+    {
+      "id": "trap_block_vs_object",
+      "name": "Block Storage vs Object Storage",
+      "misconception": "Using object storage as if it were a VM disk, or block storage as a web object store.",
+      "fix": "Block storage behaves like a disk volume for VMs/databases; object storage is API-based for unstructured data at scale.",
+      "drill_question_ids": [
+        "ch10-q23",
+        "ch10-q24",
+        "ch10-q25"
+      ]
+    },
+    {
+      "id": "trap_sg_vs_waf_vs_casb",
+      "name": "Security Group vs WAF vs CASB",
+      "misconception": "Thinking these controls do the same job because they all 'filter traffic'.",
+      "fix": "Security groups filter network flows to instances; WAF inspects web app requests; CASB governs access and data policies across cloud services.",
+      "drill_question_ids": [
+        "ch10-q19",
+        "ch10-q20",
+        "ch10-q21",
+        "ch10-q22"
+      ]
+    },
+    {
+      "id": "trap_vm_escape_vs_resource_reuse",
+      "name": "VM Escape vs Resource Reuse",
+      "misconception": "Confusing isolation breakouts (VM escape) with residual-data exposure (resource reuse).",
+      "fix": "VM escape breaks the VM boundary; resource reuse exposes leftover data when resources are reallocated without proper clearing/encryption.",
+      "drill_question_ids": [
+        "ch10-q14",
+        "ch10-q15",
+        "ch10-q30"
+      ]
+    },
+    {
+      "id": "trap_iaas_vs_paas",
+      "name": "IaaS vs PaaS Responsibility",
+      "misconception": "Assuming the provider patches your guest OS in IaaS.",
+      "fix": "In IaaS, you patch the guest OS; in PaaS/SaaS, the provider manages more of the stack. Always map duties with the responsibility matrix.",
+      "drill_question_ids": [
+        "ch10-q06",
+        "ch10-q09",
+        "ch10-q10"
+      ]
+    }
+  ],
+  "missions": [
+    {
+      "id": "ch10-m1",
+      "name": "Cloud Fundamentals: Models, Roles, and Characteristics",
+      "goal": "Lock in cloud definitions, essential characteristics, service models, and deployment patterns.",
+      "mechanics": {
+        "minigame": "learn_quiz",
+        "mode": "campaign",
+        "recommended_time_min": 22,
+        "coaching_tips": [
+          "Cloud questions love subtle wording: 'scale up' vs 'scale out' vs 'elastic'.",
+          "Map every scenario to (1) service model, (2) deployment model, (3) who owns which responsibilities."
+        ],
+        "rules": {
+          "hints_per_question": 1,
+          "show_explanations": true
+        }
+      },
+      "question_ids": [
+        "ch10-q01",
+        "ch10-q02",
+        "ch10-q03",
+        "ch10-q04",
+        "ch10-q05",
+        "ch10-q06",
+        "ch10-q07",
+        "ch10-q08"
+      ],
+      "rewards": {
+        "xp": 160,
+        "loot": [
+          "badge_ch10-m1"
+        ],
+        "unlock": "ch10-m2"
+      }
+    },
+    {
+      "id": "ch10-m2",
+      "name": "Governance: Shared Responsibility, Vendors, and Data Sovereignty",
+      "goal": "Apply shared responsibility, contract/audit thinking, and location/jurisdiction constraints.",
+      "mechanics": {
+        "minigame": "learn_quiz",
+        "mode": "campaign",
+        "recommended_time_min": 20,
+        "coaching_tips": [
+          "If the question says 'IaaS', assume you patch the OS. If it says 'SaaS', assume the provider patches the app platform.",
+          "Look for contract language: audit rights, shared-responsibility clarity, and data location."
+        ],
+        "rules": {
+          "hints_per_question": 1,
+          "show_explanations": true
+        }
+      },
+      "question_ids": [
+        "ch10-q09",
+        "ch10-q10",
+        "ch10-q11",
+        "ch10-q12",
+        "ch10-q13"
+      ],
+      "rewards": {
+        "xp": 120,
+        "loot": [
+          "badge_ch10-m2"
+        ],
+        "unlock": "ch10-m3"
+      }
+    },
+    {
+      "id": "ch10-m3",
+      "name": "Cloud + Virtualization Security Controls",
+      "goal": "Recognize virtualization risks and pick the right cloud control (CASB/WAF/security groups/storage/IaC/secrets).",
+      "mechanics": {
+        "minigame": "learn_quiz",
+        "mode": "campaign",
+        "recommended_time_min": 26,
+        "coaching_tips": [
+          "Security groups control network flows; WAF inspects web app traffic; CASB governs cloud service usage.",
+          "Resource reuse + VM escape are the virtualization gotchas—think isolation and cleanup."
+        ],
+        "rules": {
+          "hints_per_question": 1,
+          "show_explanations": true
+        }
+      },
+      "question_ids": [
+        "ch10-q14",
+        "ch10-q15",
+        "ch10-q16",
+        "ch10-q17",
+        "ch10-q18",
+        "ch10-q19",
+        "ch10-q20",
+        "ch10-q21",
+        "ch10-q22",
+        "ch10-q23",
+        "ch10-q24",
+        "ch10-q25",
+        "ch10-q26",
+        "ch10-q27",
+        "ch10-q28",
+        "ch10-q29",
+        "ch10-q30"
+      ],
+      "rewards": {
+        "xp": 210,
+        "loot": [
+          "badge_ch10-m3"
+        ],
+        "unlock": "boss_10"
+      }
+    }
+  ],
+  "boss": {
+    "id": "boss_10",
+    "name": "The Hybrid Storm",
+    "premise": "Your org moves a customer portal to a hybrid cloud setup. Traffic spikes, an API key leaks, and a misconfigured rule exposes data. Choose controls and responsibilities fast.",
+    "mechanics": {
+      "minigame": "boss_gauntlet",
+      "mode": "campaign",
+      "recommended_time_min": 15,
+      "rules": {
+        "hints_per_question": 0,
+        "show_explanations": true,
+        "require_justification": true
+      }
+    },
+    "question_ids": [
+      "ch10-q03",
+      "ch10-q10",
+      "ch10-q12",
+      "ch10-q14",
+      "ch10-q20",
+      "ch10-q21",
+      "ch10-q22",
+      "ch10-q26",
+      "ch10-q27",
+      "ch10-q29"
+    ],
+    "rewards": {
+      "xp": 260,
+      "loot": [
+        "badge_boss_10",
+        "relic_cloud_hardener"
+      ]
+    }
+  },
+  "roguelike": {
+    "runset_id": "roguelike_runset_ch10",
+    "run_minutes_target": 20,
+    "structure": {
+      "acts": 3,
+      "encounters_per_act": 4,
+      "rest_sites_per_act": 1,
+      "boss_per_run": "boss_10_variant"
+    },
+    "cards": {
+      "threat_cards": [
+        {
+          "id": "threat_vm_escape",
+          "name": "VM Escape Probe",
+          "tags": [
+            "vm_escape",
+            "virtualization_concepts"
+          ]
+        },
+        {
+          "id": "threat_bucket_exposure",
+          "name": "Public Bucket Incident",
+          "tags": [
+            "cloud_misconfiguration",
+            "object_storage",
+            "data_sovereignty"
+          ]
+        },
+        {
+          "id": "threat_api_abuse",
+          "name": "API Key Abuse",
+          "tags": [
+            "api_security",
+            "secrets_management",
+            "service_model_faas_serverless"
+          ]
+        },
+        {
+          "id": "threat_sprawl",
+          "name": "Shadow VM Sprawl",
+          "tags": [
+            "vm_sprawl",
+            "logging_monitoring_cloud"
+          ]
+        }
+      ],
+      "control_cards": [
+        {
+          "id": "control_casb",
+          "name": "CASB Policy Gate",
+          "tags": [
+            "casb_inline",
+            "casb_api"
+          ]
+        },
+        {
+          "id": "control_waf",
+          "name": "WAF Shield",
+          "tags": [
+            "waf",
+            "api_security"
+          ]
+        },
+        {
+          "id": "control_sg",
+          "name": "Security Group Tightening",
+          "tags": [
+            "security_groups",
+            "vpc_networking"
+          ]
+        },
+        {
+          "id": "control_iac_guardrails",
+          "name": "IaC Guardrails",
+          "tags": [
+            "iac",
+            "cloud_misconfiguration"
+          ]
+        },
+        {
+          "id": "control_hsm",
+          "name": "HSM-backed Keys",
+          "tags": [
+            "hsm",
+            "secrets_management"
+          ]
+        }
+      ],
+      "constraint_cards": [
+        {
+          "id": "constraint_hybrid",
+          "name": "Hybrid Complexity",
+          "effect": "At least one scenario must include hybrid tradeoffs or cloud bursting decisions."
+        },
+        {
+          "id": "constraint_jurisdiction",
+          "name": "Jurisdiction Trap",
+          "effect": "At least one question must involve data sovereignty or third-party vendor governance."
+        }
+      ]
+    },
+    "question_pool_ids": "use_all_questions_in_pack"
+  },
+  "pvp": {
+    "enabled": false,
+    "fairness": {
+      "matchmaking": "match by mastery band (+/- 10 mastery points)",
+      "anti_cheat": "server timestamps + random question order"
+    },
+    "modes": [
+      {
+        "id": "duel_quickfire",
+        "name": "Quickfire Duel",
+        "description": "Both players answer the same 10 questions. Faster correct answers generate a 5s time tax on the opponent's next question.",
+        "rules": {
+          "questions": 10,
+          "time_per_question_seconds": 35,
+          "attack_on_correct_under_seconds": 20,
+          "time_tax_seconds": 5
+        }
+      }
+    ]
+  },
+  "question_bank": [
+    {
+      "id": "ch10-q01",
+      "type": "mcq",
+      "stem": "Which option best describes 'measured service' in cloud computing?",
+      "explanation": "Measured service means the provider meters resource usage (like CPU time, storage, or bandwidth) and you can monitor it—often tying usage to billing and capacity planning.",
+      "tags": [
+        "measured_service",
+        "cloud_essential_characteristics"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 35,
+      "options": {
+        "A": "Resources are pooled for many customers",
+        "B": "Usage is metered and visible to customer/provider",
+        "C": "Services are only reachable over VPN",
+        "D": "Customers must manage physical servers"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "Measured service means the provider meters resource usage (like CPU time, storage, or bandwidth) and you can monitor it—often tying usage to billing and capacity planning.",
+      "misconceptionTags": [
+        "measured_service_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch10-q02",
+      "type": "mcq",
+      "stem": "A company can automatically add 20 more web servers during peak traffic and remove them later. This is most directly an example of:",
+      "explanation": "Rapid elasticity is the ability to quickly scale resources up and down—often automatically—so capacity matches demand.",
+      "tags": [
+        "rapid_elasticity",
+        "elasticity_vs_scalability"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 35,
+      "options": {
+        "A": "Vertical scalability",
+        "B": "Rapid elasticity",
+        "C": "Data sovereignty",
+        "D": "Resource reuse"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Rapid elasticity is the ability to quickly scale resources up and down—often automatically—so capacity matches demand.",
+      "misconceptionTags": [
+        "rapid_elasticity_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch10-q03",
+      "type": "mcq",
+      "stem": "Which statement is the most accurate distinction between scalability and elasticity?",
+      "explanation": "Scalability is the capability to increase capacity (vertical or horizontal). Elasticity emphasizes automatically scaling up AND down quickly to match changing demand—especially in cloud environments.",
+      "tags": [
+        "elasticity_vs_scalability",
+        "scalability_horizontal",
+        "scalability_vertical",
+        "rapid_elasticity"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 50,
+      "options": {
+        "A": "Scalability always means shrinking resources; elasticity means growing resources",
+        "B": "Scalability is the ability to increase capacity; elasticity is rapid up/down adjustment to demand",
+        "C": "Scalability only applies to cloud; elasticity only applies on-prem",
+        "D": "They are identical terms on the exam"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "Scalability is the capability to increase capacity (vertical or horizontal).",
+      "misconceptionTags": [
+        "elasticity_vs_scalability_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch10-q04",
+      "type": "mcq",
+      "stem": "Horizontal scalability most commonly means:",
+      "explanation": "Horizontal scaling adds more instances (scale out), while vertical scaling adds more resources (CPU/RAM) to a single instance (scale up).",
+      "tags": [
+        "scalability_horizontal",
+        "scalability_vertical"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 35,
+      "options": {
+        "A": "Adding more CPU/RAM to one server",
+        "B": "Adding more servers/instances behind a load balancer",
+        "C": "Moving from public cloud to private cloud",
+        "D": "Encrypting storage volumes"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "Horizontal scaling adds more instances (scale out), while vertical scaling adds more resources (CPU/RAM) to a single instance (scale up).",
+      "misconceptionTags": [
+        "scalability_horizontal_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch10-q05",
+      "type": "mcq",
+      "stem": "In the common cloud roles model, which role acts as an intermediary to help customers pick, integrate, and manage cloud services?",
+      "explanation": "A cloud broker sits between the consumer and one or more providers, helping with selection, integration, and sometimes cost/governance.",
+      "tags": [
+        "cloud_roles_broker",
+        "third_party_vendors"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Carrier",
+        "B": "Auditor",
+        "C": "Broker",
+        "D": "Hypervisor"
+      },
+      "answer": "C",
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "A cloud broker sits between the consumer and one or more providers, helping with selection, integration, and sometimes cost/governance.",
+      "misconceptionTags": [
+        "cloud_roles_broker_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch10-q06",
+      "type": "matching",
+      "stem": "Match each cloud service model to the best example.",
+      "explanation": "SaaS = provider runs the full app for you; PaaS = provider gives a managed runtime/platform; IaaS = you manage OS and above; FaaS/serverless = you deploy functions triggered by events.",
+      "tags": [
+        "service_model_saas",
+        "service_model_paas",
+        "service_model_iaas",
+        "service_model_faas_serverless"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 70,
+      "left": [
+        "SaaS",
+        "PaaS",
+        "IaaS",
+        "FaaS"
+      ],
+      "right": [
+        "Web-based email/CRM where you just use the app",
+        "Managed app runtime (you deploy code, not servers)",
+        "Virtual machines where you manage the OS",
+        "Event-triggered functions billed per execution"
+      ],
+      "pairs": {
+        "SaaS": "Web-based email/CRM where you just use the app",
+        "PaaS": "Managed app runtime (you deploy code, not servers)",
+        "IaaS": "Virtual machines where you manage the OS",
+        "FaaS": "Event-triggered functions billed per execution"
+      },
+      "objectiveIds": [
+        "3.4"
+      ],
+      "rationaleCorrect": "SaaS = provider runs the full app for you; PaaS = provider gives a managed runtime/platform; IaaS = you manage OS and above; FaaS/serverless = you deploy functions triggered by events.",
+      "misconceptionTags": [
+        "service_model_saas_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch10-q07",
+      "type": "multi_select",
+      "stem": "Which are valid cloud deployment models? (Choose TWO.)",
+      "explanation": "Public and private are core deployment models; hybrid and community are also models. Options like 'edge' describe architectures, not deployment models.",
+      "tags": [
+        "deployment_public",
+        "deployment_private",
+        "deployment_hybrid",
+        "deployment_community"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Public cloud",
+        "B": "Edge computing",
+        "C": "Private cloud",
+        "D": "Type 1 hypervisor"
+      },
+      "answers": [
+        "A",
+        "C"
+      ],
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "Public and private are core deployment models; hybrid and community are also models.",
+      "misconceptionTags": [
+        "deployment_public_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch10-q08",
+      "type": "mcq",
+      "stem": "A company runs a private cloud but temporarily uses public cloud capacity during a seasonal spike. This is best described as:",
+      "explanation": "Cloud bursting is a hybrid pattern where you 'burst' into the public cloud for extra capacity when local/private resources are insufficient.",
+      "tags": [
+        "cloud_bursting",
+        "deployment_hybrid"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "options": {
+        "A": "Community cloud",
+        "B": "Cloud bursting",
+        "C": "Measured service",
+        "D": "Resource reuse"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "Cloud bursting is a hybrid pattern where you 'burst' into the public cloud for extra capacity when local/private resources are insufficient.",
+      "misconceptionTags": [
+        "cloud_bursting_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch10-q09",
+      "type": "mcq",
+      "stem": "Which statement best captures the shared responsibility model?",
+      "explanation": "Security responsibilities are split: the provider secures the cloud infrastructure; the customer secures what they deploy/configure in the cloud. Exact split depends on SaaS/PaaS/IaaS.",
+      "tags": [
+        "shared_responsibility_model",
+        "responsibility_matrix"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "options": {
+        "A": "The provider is responsible for everything",
+        "B": "The customer is responsible for everything",
+        "C": "Provider and customer split duties depending on the service model",
+        "D": "Only auditors define responsibilities"
+      },
+      "answer": "C",
+      "objectiveIds": [
+        "3.2"
+      ],
+      "rationaleCorrect": "Security responsibilities are split: the provider secures the cloud infrastructure; the customer secures what they deploy/configure in the cloud.",
+      "misconceptionTags": [
+        "shared_responsibility_model_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch10-q10",
+      "type": "mcq",
+      "stem": "In IaaS, who is typically responsible for patching the guest operating system inside a VM?",
+      "explanation": "In IaaS, the customer manages the OS and above (patching, hardening, apps). The provider handles the underlying physical infrastructure and usually the hypervisor layer.",
+      "tags": [
+        "service_model_iaas",
+        "shared_responsibility_model",
+        "responsibility_matrix"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "Cloud provider",
+        "B": "Customer/tenant",
+        "C": "Cloud auditor",
+        "D": "Network carrier"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "1.5"
+      ],
+      "rationaleCorrect": "In IaaS, the customer manages the OS and above (patching, hardening, apps).",
+      "misconceptionTags": [
+        "service_model_iaas_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch10-q11",
+      "type": "mcq",
+      "stem": "A healthcare organization is selecting a cloud provider. Which contract item most directly supports verification of the provider's controls over time?",
+      "explanation": "Audit rights (or access to third-party audit reports) help validate that the provider maintains required security controls and compliance.",
+      "tags": [
+        "audit_rights",
+        "third_party_vendors",
+        "csa_ccm"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "A marketing SLA with '99.9% uptime' only",
+        "B": "Audit rights / independent assessment reports",
+        "C": "Free training credits",
+        "D": "A promise to use 'military-grade encryption'"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "Audit rights (or access to third-party audit reports) help validate that the provider maintains required security controls and compliance.",
+      "misconceptionTags": [
+        "audit_rights_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch10-q12",
+      "type": "mcq",
+      "stem": "Storing EU customer data only in EU data centers to comply with law is primarily addressing:",
+      "explanation": "Data sovereignty is the legal/jurisdictional control over data based on where it is stored/processed; it often drives residency and location controls.",
+      "tags": [
+        "data_sovereignty",
+        "third_party_vendors"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 50,
+      "options": {
+        "A": "Resource reuse",
+        "B": "Data sovereignty",
+        "C": "VM escape",
+        "D": "Broad network access"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "Data sovereignty is the legal/jurisdictional control over data based on where it is stored/processed; it often drives residency and location controls.",
+      "misconceptionTags": [
+        "data_sovereignty_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch10-q13",
+      "type": "mcq",
+      "stem": "Which cloud security reference is a control framework used to assess cloud security posture and map controls?",
+      "explanation": "CSA's Cloud Controls Matrix (CCM) is a widely used control framework for cloud security assessment and mapping.",
+      "tags": [
+        "csa_ccm"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "OWASP Top 10",
+        "B": "CSA Cloud Controls Matrix (CCM)",
+        "C": "IEEE 802.11",
+        "D": "RAID 6"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "CSA's Cloud Controls Matrix (CCM) is a widely used control framework for cloud security assessment and mapping.",
+      "misconceptionTags": [
+        "csa_ccm_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch10-q14",
+      "type": "mcq",
+      "stem": "Which vulnerability specifically describes a guest VM breaking isolation to access the hypervisor or other VMs?",
+      "explanation": "VM escape is when code running inside a VM breaks out of the VM boundary to interact with the hypervisor/host or other VMs.",
+      "tags": [
+        "vm_escape",
+        "virtualization_concepts"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 50,
+      "options": {
+        "A": "Resource reuse",
+        "B": "VM escape",
+        "C": "SQL injection",
+        "D": "Smishing"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "VM escape is when code running inside a VM breaks out of the VM boundary to interact with the hypervisor/host or other VMs.",
+      "misconceptionTags": [
+        "vm_escape_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch10-q15",
+      "type": "mcq",
+      "stem": "In virtualization, 'resource reuse' risk most directly means:",
+      "explanation": "Resource reuse is the risk that leftover data remains in reallocated resources (like memory/storage blocks) and becomes accessible to another tenant if not properly cleared.",
+      "tags": [
+        "resource_reuse",
+        "storage_encryption"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 50,
+      "options": {
+        "A": "A VM can access the hypervisor",
+        "B": "A new tenant may access residual data from previously allocated resources",
+        "C": "A container image contains malware",
+        "D": "A CASB blocks API calls"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Resource reuse is the risk that leftover data remains in reallocated resources (like memory/storage blocks) and becomes accessible to another tenant if not properly cleared.",
+      "misconceptionTags": [
+        "resource_reuse_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch10-q16",
+      "type": "matching",
+      "stem": "Match hypervisor type to the best description.",
+      "explanation": "Type 1 (bare-metal) runs directly on hardware; Type 2 runs on top of a host OS.",
+      "tags": [
+        "hypervisor_type1",
+        "hypervisor_type2",
+        "virtualization_concepts"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 65,
+      "left": [
+        "Type 1",
+        "Type 2"
+      ],
+      "right": [
+        "Runs directly on physical hardware (bare-metal)",
+        "Runs as software on top of a host operating system"
+      ],
+      "pairs": {
+        "Type 1": "Runs directly on physical hardware (bare-metal)",
+        "Type 2": "Runs as software on top of a host operating system"
+      },
+      "objectiveIds": [
+        "1.5"
+      ],
+      "rationaleCorrect": "Type 1 (bare-metal) runs directly on hardware; Type 2 runs on top of a host OS.",
+      "misconceptionTags": [
+        "hypervisor_type1_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch10-q17",
+      "type": "mcq",
+      "stem": "A team has dozens of forgotten VMs running with default credentials because nobody knows who owns them. This is a classic example of:",
+      "explanation": "VM sprawl is uncontrolled growth of virtual machines/instances, often leading to unmanaged assets, insecure defaults, and higher attack surface.",
+      "tags": [
+        "vm_sprawl",
+        "cloud_misconfiguration",
+        "logging_monitoring_cloud"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "options": {
+        "A": "Cloud bursting",
+        "B": "VM sprawl",
+        "C": "Measured service",
+        "D": "Container hardening"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "2.2"
+      ],
+      "rationaleCorrect": "VM sprawl is uncontrolled growth of virtual machines/instances, often leading to unmanaged assets, insecure defaults, and higher attack surface.",
+      "misconceptionTags": [
+        "vm_sprawl_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch10-q18",
+      "type": "mcq",
+      "stem": "Which statement about containers is MOST accurate from a security perspective?",
+      "explanation": "Containers share the host kernel, so isolation is different than VMs. Hardening focuses on minimal images, patching base layers, least privilege, and strong segmentation/monitoring.",
+      "tags": [
+        "containerization",
+        "container_isolation",
+        "container_hardening"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "Containers always provide stronger isolation than VMs",
+        "B": "Containers share a host kernel; use minimal images and least privilege to reduce risk",
+        "C": "Containers eliminate the need for patching",
+        "D": "Containers cannot be network-segmented"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.4"
+      ],
+      "rationaleCorrect": "Containers share the host kernel, so isolation is different than VMs.",
+      "misconceptionTags": [
+        "containerization_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch10-q19",
+      "type": "mcq",
+      "stem": "A company wants to control and monitor access to multiple cloud apps (SaaS) and enforce DLP policies from a single point. Which solution fits best?",
+      "explanation": "A CASB (Cloud Access Security Broker) provides visibility and policy enforcement for cloud services, including access control and data protection across SaaS/PaaS/IaaS.",
+      "tags": [
+        "casb_inline",
+        "casb_api",
+        "third_party_vendors"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "CASB",
+        "B": "WAF",
+        "C": "Security group",
+        "D": "HSM"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "A CASB (Cloud Access Security Broker) provides visibility and policy enforcement for cloud services, including access control and data protection across SaaS/PaaS/IaaS.",
+      "misconceptionTags": [
+        "casb_inline_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch10-q20",
+      "type": "mcq",
+      "stem": "A CASB that integrates via provider APIs is BEST for which scenario?",
+      "explanation": "API-based CASBs are great for visibility and governance (configuration, DLP on stored data, activity logs) without forcing all traffic inline, but they may not block in real time.",
+      "tags": [
+        "casb_api",
+        "casb_inline"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "Real-time inline blocking of all traffic paths",
+        "B": "Retrospective scanning of SaaS data and configuration via APIs",
+        "C": "Encrypting a database volume",
+        "D": "Replacing the hypervisor"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "API-based CASBs are great for visibility and governance (configuration, DLP on stored data, activity logs) without forcing all traffic inline, but they may not block in real time.",
+      "misconceptionTags": [
+        "casb_api_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch10-q21",
+      "type": "mcq",
+      "stem": "Which control is primarily designed to inspect and block malicious HTTP(S) traffic aimed at a web application (e.g., SQLi/XSS patterns)?",
+      "explanation": "A WAF (Web Application Firewall) focuses on application-layer web traffic and common web attacks.",
+      "tags": [
+        "waf",
+        "api_security"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "WAF",
+        "B": "Security group",
+        "C": "SWG",
+        "D": "Hypervisor"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "A WAF (Web Application Firewall) focuses on application-layer web traffic and common web attacks.",
+      "misconceptionTags": [
+        "waf_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch10-q22",
+      "type": "mcq",
+      "stem": "A security group in a cloud VPC is best thought of as:",
+      "explanation": "Security groups are virtual firewall rules applied to instances/NICs, controlling allowed inbound/outbound traffic by protocol/port/source—an infrastructure-layer control.",
+      "tags": [
+        "security_groups",
+        "vpc_networking"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 50,
+      "options": {
+        "A": "A web application firewall",
+        "B": "A virtual firewall rule set for instance network traffic",
+        "C": "A host-based antivirus tool",
+        "D": "A CASB proxy"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "3.2"
+      ],
+      "rationaleCorrect": "Security groups are virtual firewall rules applied to instances/NICs, controlling allowed inbound/outbound traffic by protocol/port/source—an infrastructure-layer control.",
+      "misconceptionTags": [
+        "security_groups_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch10-q23",
+      "type": "mcq",
+      "stem": "Which storage type is MOST appropriate when you need a VM disk that behaves like a traditional hard drive (low-latency block device)?",
+      "explanation": "Block storage behaves like a raw disk device and is commonly used for VM volumes and databases requiring low-latency random access.",
+      "tags": [
+        "block_storage",
+        "service_model_iaas"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Object storage",
+        "B": "Block storage",
+        "C": "Tape storage",
+        "D": "DNS"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "Block storage behaves like a raw disk device and is commonly used for VM volumes and databases requiring low-latency random access.",
+      "misconceptionTags": [
+        "block_storage_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch10-q24",
+      "type": "mcq",
+      "stem": "Which storage type is MOST appropriate for storing millions of images or logs accessed via HTTP APIs, with high durability?",
+      "explanation": "Object storage is designed for unstructured data accessed via APIs, often with high durability and lifecycle policies.",
+      "tags": [
+        "object_storage",
+        "storage_replication_availability"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Object storage",
+        "B": "Block storage",
+        "C": "CPU cache",
+        "D": "HSM"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Object storage is designed for unstructured data accessed via APIs, often with high durability and lifecycle policies.",
+      "misconceptionTags": [
+        "object_storage_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch10-q25",
+      "type": "mcq",
+      "stem": "A cloud provider uses multiple facilities and replicates storage across them to reduce outage impact. This mainly supports:",
+      "explanation": "Replication across zones/regions supports availability and resilience (high availability/disaster recovery).",
+      "tags": [
+        "storage_replication_availability",
+        "deployment_public"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 40,
+      "options": {
+        "A": "Non-repudiation",
+        "B": "Availability and resilience",
+        "C": "Resource reuse",
+        "D": "Obfuscation"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "1.6"
+      ],
+      "rationaleCorrect": "Replication across zones/regions supports availability and resilience (high availability/disaster recovery).",
+      "misconceptionTags": [
+        "storage_replication_availability_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch10-q26",
+      "type": "mcq",
+      "stem": "Infrastructure as Code (IaC) most directly improves which security outcome when used well?",
+      "explanation": "IaC makes deployments repeatable and reviewable. With version control and policy checks, you reduce configuration drift and can catch risky changes before they reach production.",
+      "tags": [
+        "iac",
+        "cloud_misconfiguration",
+        "logging_monitoring_cloud"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "Eliminating the need for audits",
+        "B": "Reducing misconfiguration via repeatable, reviewable deployments",
+        "C": "Preventing all phishing attacks",
+        "D": "Replacing shared responsibility"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "3.2"
+      ],
+      "rationaleCorrect": "IaC makes deployments repeatable and reviewable.",
+      "misconceptionTags": [
+        "iac_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch10-q27",
+      "type": "mcq",
+      "stem": "A team is worried about secrets (API keys, database passwords) being embedded in code repos. What’s the BEST control to prioritize?",
+      "explanation": "Centralized secrets management (often backed by HSM/KMS) keeps keys out of code and enables rotation, access control, and auditing.",
+      "tags": [
+        "secrets_management",
+        "hsm"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "Store secrets in source code but obfuscate them",
+        "B": "Use a secrets manager/KMS (optionally HSM-backed) and rotate keys",
+        "C": "Disable logging so secrets won’t leak",
+        "D": "Use a type 2 hypervisor"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "Centralized secrets management (often backed by HSM/KMS) keeps keys out of code and enables rotation, access control, and auditing.",
+      "misconceptionTags": [
+        "secrets_management_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch10-q28",
+      "type": "mcq",
+      "stem": "A cloud environment is heavily software-defined, where network rules and routing are controlled by software rather than physical appliances. This is most closely related to:",
+      "explanation": "Software-defined networking (SDN) virtualizes and programmatically controls network behavior, common in cloud.",
+      "tags": [
+        "sdn",
+        "vpc_networking"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "SDN",
+        "B": "Object storage",
+        "C": "HSM",
+        "D": "Measuring service"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Software-defined networking (SDN) virtualizes and programmatically controls network behavior, common in cloud.",
+      "misconceptionTags": [
+        "sdn_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch10-q29",
+      "type": "mcq",
+      "stem": "In a microservices + serverless architecture, the MOST common new risk category compared to monoliths is:",
+      "explanation": "More services and APIs increase the number of identities, permissions, and endpoints—raising the chance of misconfiguration and API abuse if governance is weak.",
+      "tags": [
+        "microservices",
+        "service_model_faas_serverless",
+        "api_security",
+        "cloud_misconfiguration"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "options": {
+        "A": "Lower attack surface due to fewer components",
+        "B": "Increased API surface and identity/permission sprawl",
+        "C": "Elimination of third-party risk",
+        "D": "No need for logging"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "More services and APIs increase the number of identities, permissions, and endpoints—raising the chance of misconfiguration and API abuse if governance is weak.",
+      "misconceptionTags": [
+        "microservices_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch10-q30",
+      "type": "multi_select",
+      "stem": "Which actions help mitigate 'resource reuse' risk in multitenant environments? (Choose TWO.)",
+      "explanation": "Secure deprovisioning/zeroization and strong encryption reduce exposure of residual data when resources are reallocated.",
+      "tags": [
+        "resource_reuse",
+        "storage_encryption",
+        "resource_pooling_multitenancy"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 65,
+      "options": {
+        "A": "Encrypt storage volumes (and manage keys properly)",
+        "B": "Disable MFA",
+        "C": "Ensure resources are securely wiped/zeroized before reallocation",
+        "D": "Use smishing awareness training"
+      },
+      "answers": [
+        "A",
+        "C"
+      ],
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "Secure deprovisioning/zeroization and strong encryption reduce exposure of residual data when resources are reallocated.",
+      "misconceptionTags": [
+        "resource_reuse_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    }
+  ]
+}

@@ -1,0 +1,2348 @@
+{
+  "schema_version": "secplus_game_pack_v1",
+  "pack_id": "ch9",
+  "exam": {
+    "vendor": "CompTIA",
+    "name": "Security+",
+    "code": "SY0-701",
+    "max_exam_minutes": 90
+  },
+  "chapter": {
+    "number": 9,
+    "title": "Resilience and Physical Security",
+    "page_range_in_user_pdf": "408-448"
+  },
+  "design_intent": {
+    "player_goal": "Master resilience concepts for SY0-701: high availability, backup/recovery strategies (RTO/RPO, replication, journaling), and layered physical security controls and sensors.",
+    "mode": [
+      "campaign",
+      "roguelike_practice"
+    ],
+    "pvp_optional": true,
+    "default_pvp_enabled": false
+  },
+  "progression": {
+    "unlock_rules": [
+      {
+        "when": "complete ch9-m1",
+        "unlock": "ch9-m2"
+      },
+      {
+        "when": "complete ch9-m2",
+        "unlock": "ch9-m3"
+      },
+      {
+        "when": "complete ch9-m3",
+        "unlock": "boss_9"
+      }
+    ],
+    "xp_rules": {
+      "base_xp_per_correct": 10,
+      "time_bonus_threshold_seconds": 28,
+      "time_bonus_xp": 5,
+      "streak_bonus_per_5": 15,
+      "mistake_penalty_xp": 0
+    },
+    "mastery_model": {
+      "scale": "0-100",
+      "tags_drive_mastery": true,
+      "update": "Mastery += 8 on first correct; +4 on repeat correct; -6 on wrong (floor 0)."
+    }
+  },
+  "tags": {
+    "difficulty_scale": {
+      "1": "Recall",
+      "2": "Understand",
+      "3": "Apply",
+      "4": "Analyze",
+      "5": "Synthesize"
+    },
+    "concepts": [
+      "architecture.multicloud",
+      "architecture.platform_diversity",
+      "availability.high_availability",
+      "availability.resilience",
+      "backups.differential",
+      "backups.encryption",
+      "backups.frequency",
+      "backups.full_incremental_differential",
+      "backups.incremental",
+      "backups.journaling",
+      "backups.nearline",
+      "backups.offsite_storage",
+      "backups.onsite_offsite",
+      "backups.recovery_process",
+      "backups.replication.asynchronous",
+      "backups.replication.sync_async",
+      "backups.replication.synchronous",
+      "backups.snapshot",
+      "backups.storage_tiers",
+      "capacity_planning.people_tech_infra",
+      "confidentiality.backups",
+      "continuity.coop",
+      "ha.clustering",
+      "ha.load_balancing",
+      "ha.single_point_of_failure",
+      "key_management.backups",
+      "network.multipath",
+      "physical.anti_tailgating",
+      "physical.attacks.brute_force",
+      "physical.attacks.environmental",
+      "physical.attacks.rfid_cloning",
+      "physical.controls.access_badges",
+      "physical.controls.access_control_vestibule",
+      "physical.controls.bollards",
+      "physical.controls.cameras.motion_detection",
+      "physical.controls.cost_tradeoff",
+      "physical.controls.ids_alarms",
+      "physical.controls.safe",
+      "physical.controls.security_guards",
+      "physical.controls.sensors",
+      "physical.controls.sensors.infrared",
+      "physical.controls.sensors.microwave",
+      "physical.controls.sensors.pressure",
+      "physical.controls.sensors.ultrasonic",
+      "physical.controls.video_surveillance",
+      "physical.detect",
+      "physical.deterrence_delay",
+      "physical.layers.defense_in_depth",
+      "physical.prevent",
+      "physical.response",
+      "power.ups_generator",
+      "recovery.point_in_time",
+      "recovery.restoration_order",
+      "recovery.rto_rpo",
+      "recovery.site_selection",
+      "response_recovery.process",
+      "risk.attack_surface",
+      "risk.blaster_radius",
+      "scalability.elasticity",
+      "site.geographic_dispersion",
+      "site.hot_warm_cold",
+      "site.selection",
+      "site.warm_site",
+      "testing.exercises",
+      "testing.failover",
+      "testing.parallel",
+      "testing.simulation",
+      "testing.tabletop",
+      "virtualization.snapshots"
+    ]
+  },
+  "trap_list": [
+    {
+      "id": "trap-ch9-01",
+      "name": "Incremental vs Differential backups",
+      "misconception": "Incremental = changes since last backup; Differential = changes since last full backup.",
+      "fix": "Clarify this distinction before answering: Incremental = changes since last backup; Differential = changes since last full backup.",
+      "drill_question_ids": [
+        "ch9-q02",
+        "ch9-q25",
+        "ch9-q33"
+      ]
+    },
+    {
+      "id": "trap-ch9-02",
+      "name": "Hot vs Warm vs Cold sites",
+      "misconception": "Hot = ready + current data; Warm = gear mostly ready but needs data restore; Cold = space/utilities, slowest to recover.",
+      "fix": "Clarify this distinction before answering: Hot = ready + current data; Warm = gear mostly ready but needs data restore; Cold = space/utilities, slowest to recover.",
+      "drill_question_ids": [
+        "ch9-q03",
+        "ch9-q04",
+        "ch9-q11"
+      ]
+    },
+    {
+      "id": "trap-ch9-03",
+      "name": "Synchronous vs Asynchronous replication",
+      "misconception": "Sync = minimal data loss but higher latency; Async = lower latency but can lose recent writes.",
+      "fix": "Clarify this distinction before answering: Sync = minimal data loss but higher latency; Async = lower latency but can lose recent writes.",
+      "drill_question_ids": [
+        "ch9-q11",
+        "ch9-q28",
+        "ch9-q25"
+      ]
+    },
+    {
+      "id": "trap-ch9-04",
+      "name": "Replication vs Journaling",
+      "misconception": "Replication copies state to another system; Journaling records transactions for point-in-time replay between backups.",
+      "fix": "Clarify this distinction before answering: Replication copies state to another system; Journaling records transactions for point-in-time replay between backups.",
+      "drill_question_ids": [
+        "ch9-q09",
+        "ch9-q27",
+        "ch9-q28"
+      ]
+    },
+    {
+      "id": "trap-ch9-05",
+      "name": "Load balancing vs Clustering",
+      "misconception": "Load balancing distributes client requests; clustering coordinates nodes as one logical system/service.",
+      "fix": "Clarify this distinction before answering: Load balancing distributes client requests; clustering coordinates nodes as one logical system/service.",
+      "drill_question_ids": [
+        "ch9-q01",
+        "ch9-q21",
+        "ch9-q22"
+      ]
+    },
+    {
+      "id": "trap-ch9-06",
+      "name": "RTO vs RPO",
+      "misconception": "RTO = how fast you must restore service; RPO = how far back you can lose data (time).",
+      "fix": "Clarify this distinction before answering: RTO = how fast you must restore service; RPO = how far back you can lose data (time).",
+      "drill_question_ids": [
+        "ch9-q24",
+        "ch9-q25",
+        "ch9-q28"
+      ]
+    },
+    {
+      "id": "trap-ch9-07",
+      "name": "Deterrent vs Detective physical controls",
+      "misconception": "Fences/lighting/signage deter; cameras/sensors/alarms detect. Mix them in layers.",
+      "fix": "Clarify this distinction before answering: Fences/lighting/signage deter; cameras/sensors/alarms detect. Mix them in layers.",
+      "drill_question_ids": [
+        "ch9-q14",
+        "ch9-q17",
+        "ch9-q36"
+      ]
+    },
+    {
+      "id": "trap-ch9-08",
+      "name": "Mantrap vs Door with badge reader",
+      "misconception": "A mantrap/access-control vestibule uses interlocked doors to prevent tailgating; a single badge door doesn't.",
+      "fix": "Clarify this distinction before answering: A mantrap/access-control vestibule uses interlocked doors to prevent tailgating; a single badge door doesn't.",
+      "drill_question_ids": [
+        "ch9-q37",
+        "ch9-q20",
+        "ch9-q14"
+      ]
+    },
+    {
+      "id": "trap-ch9-09",
+      "name": "UPS vs Generator",
+      "misconception": "UPS bridges immediate short outages and conditions power; generator supplies longer-term power once started.",
+      "fix": "Clarify this distinction before answering: UPS bridges immediate short outages and conditions power; generator supplies longer-term power once started.",
+      "drill_question_ids": [
+        "ch9-q31",
+        "ch9-q15",
+        "ch9-q40"
+      ]
+    },
+    {
+      "id": "trap-ch9-10",
+      "name": "Nearline vs Online backups",
+      "misconception": "Nearline is not instant but retrievable without humans (tape robot/cold cloud). Online is immediately accessible.",
+      "fix": "Clarify this distinction before answering: Nearline is not instant but retrievable without humans (tape robot/cold cloud). Online is immediately accessible.",
+      "drill_question_ids": [
+        "ch9-q43",
+        "ch9-q33",
+        "ch9-q16"
+      ]
+    }
+  ],
+  "missions": [
+    {
+      "id": "ch9-m1",
+      "name": "Resilient Architecture Basics",
+      "goal": "Build intuition for resilience: redundancy, single points of failure, load balancing vs clustering, and site/architecture choices that keep services up.",
+      "mechanics": {
+        "mode": "campaign",
+        "minigame": "learn_quiz",
+        "recommended_time_min": 22,
+        "rules": {
+          "hints_per_question": 1,
+          "show_explanations": true
+        },
+        "coaching_tips": [
+          "Resilience is mostly about removing single points of failure and shrinking blast radius.",
+          "Load balancing distributes requests; clustering coordinates nodes to act like one system.",
+          "RTO is about downtime; RPO is about data loss (time)."
+        ]
+      },
+      "question_ids": [
+        "ch9-q01",
+        "ch9-q21",
+        "ch9-q22",
+        "ch9-q23",
+        "ch9-q24",
+        "ch9-q31",
+        "ch9-q34",
+        "ch9-q44"
+      ],
+      "rewards": {
+        "xp": 120,
+        "loot": [
+          "badge_ch9-m1"
+        ],
+        "unlock": "ch9-m2"
+      }
+    },
+    {
+      "id": "ch9-m2",
+      "name": "Backups, Replication, and Recovery",
+      "goal": "Master backup types, replication/journaling trade-offs, and recovery planning (restoration order, RTO/RPO, key management).",
+      "mechanics": {
+        "mode": "campaign",
+        "minigame": "learn_quiz",
+        "recommended_time_min": 26,
+        "rules": {
+          "hints_per_question": 1,
+          "show_explanations": true
+        },
+        "coaching_tips": [
+          "Incremental vs differential is a classic trap—anchor to 'since last backup' vs 'since last full'.",
+          "Journaling enables point‑in‑time recovery between backups; replication keeps a copy elsewhere.",
+          "Encrypt backups, but treat key management as life support—no keys, no restore."
+        ]
+      },
+      "question_ids": [
+        "ch9-q02",
+        "ch9-q05",
+        "ch9-q06",
+        "ch9-q08",
+        "ch9-q09",
+        "ch9-q11",
+        "ch9-q25",
+        "ch9-q26",
+        "ch9-q27",
+        "ch9-q28",
+        "ch9-q29",
+        "ch9-q30",
+        "ch9-q33",
+        "ch9-q42",
+        "ch9-q43"
+      ],
+      "rewards": {
+        "xp": 140,
+        "loot": [
+          "badge_ch9-m2"
+        ],
+        "unlock": "ch9-m3"
+      }
+    },
+    {
+      "id": "ch9-m3",
+      "name": "Physical Security in Layers",
+      "goal": "Learn the layered approach to facility security: deterrence, delay, detection, and response—plus sensors, cameras, and common attacks.",
+      "mechanics": {
+        "mode": "campaign",
+        "minigame": "learn_quiz",
+        "recommended_time_min": 24,
+        "rules": {
+          "hints_per_question": 1,
+          "show_explanations": true
+        },
+        "coaching_tips": [
+          "Think in layers: deter → delay → detect → respond.",
+          "Mantraps/vestibules stop tailgating. Bollards stop cars. Sensors/cameras detect.",
+          "When choices look 'human vs tech', cost and reliability often drive the answer (e.g., guards)."
+        ]
+      },
+      "question_ids": [
+        "ch9-q07",
+        "ch9-q12",
+        "ch9-q13",
+        "ch9-q14",
+        "ch9-q16",
+        "ch9-q17",
+        "ch9-q18",
+        "ch9-q19",
+        "ch9-q36",
+        "ch9-q37",
+        "ch9-q38",
+        "ch9-q39",
+        "ch9-q40",
+        "ch9-q41"
+      ],
+      "rewards": {
+        "xp": 140,
+        "loot": [
+          "badge_ch9-m3"
+        ],
+        "unlock": "boss_9"
+      }
+    }
+  ],
+  "boss": {
+    "id": "boss_9",
+    "name": "Resilience Architect Boss Fight",
+    "mechanics": {
+      "format": "timed_synthesis",
+      "time_limit_seconds_total": 900,
+      "lives": 2,
+      "total_questions": 10
+    },
+    "question_ids": [
+      "ch9-q01",
+      "ch9-q04",
+      "ch9-q09",
+      "ch9-q11",
+      "ch9-q24",
+      "ch9-q31",
+      "ch9-q33",
+      "ch9-q19",
+      "ch9-q38",
+      "ch9-q20"
+    ],
+    "rewards": {
+      "xp": 220,
+      "loot": [
+        "badge_ch9-boss"
+      ]
+    },
+    "premise": "Synthesize resilience + recovery + physical controls under time pressure. Expect trap questions and trade-off decisions."
+  },
+  "roguelike": {
+    "runset_id": "roguelike_runset_ch9",
+    "run_minutes_target": 20,
+    "question_pool_ids": "use_all_questions_in_pack",
+    "structure": {
+      "acts": 3,
+      "encounters_per_act": 4,
+      "rest_sites_per_act": 1,
+      "boss_per_run": "boss_9_variant"
+    },
+    "cards": {
+      "threat_cards": [
+        {
+          "id": "threat_regional_outage",
+          "name": "Regional Outage",
+          "tags": [
+            "site.geographic_dispersion",
+            "availability.resilience",
+            "power.ups_generator"
+          ]
+        },
+        {
+          "id": "threat_backup_corruption",
+          "name": "Backup Corruption/Ransomware",
+          "tags": [
+            "backups.encryption",
+            "backups.recovery_process",
+            "backups.onsite_offsite"
+          ]
+        },
+        {
+          "id": "threat_tailgating",
+          "name": "Tailgating Attempts",
+          "tags": [
+            "physical.anti_tailgating",
+            "physical.controls.access_control_vestibule",
+            "physical.controls.access_badges"
+          ]
+        }
+      ],
+      "control_cards": [
+        {
+          "id": "control_immutable_backups",
+          "name": "Immutable + Encrypted Backups",
+          "tags": [
+            "backups.encryption",
+            "backups.recovery_process",
+            "key_management.backups"
+          ]
+        },
+        {
+          "id": "control_multi_path",
+          "name": "Multipath Redundancy",
+          "tags": [
+            "network.multipath",
+            "ha.single_point_of_failure",
+            "availability.resilience"
+          ]
+        },
+        {
+          "id": "control_mantrap",
+          "name": "Mantrap Deployment",
+          "tags": [
+            "physical.controls.access_control_vestibule",
+            "physical.prevent"
+          ]
+        }
+      ],
+      "constraint_cards": [
+        {
+          "id": "constraint_latency_budget",
+          "name": "Latency Budget",
+          "effect": "Include at least one question that forces sync vs async replication trade-offs."
+        },
+        {
+          "id": "constraint_budget",
+          "name": "Budget Squeeze",
+          "effect": "Include at least one question where cost drives control choice (guards vs tech, hot vs warm vs cold)."
+        }
+      ]
+    }
+  },
+  "pvp": {
+    "enabled": false,
+    "fairness": {
+      "matchmaking": "match by mastery band (+/- 10 mastery points)",
+      "anti_cheat": "seeded run codes + random question order"
+    },
+    "modes": [
+      {
+        "id": "duel_seeded_run",
+        "name": "Seeded Run Duel",
+        "description": "Both players run the same seeded 12-question run. Compare score + time. (Async; share a run code.)",
+        "rules": {
+          "questions": 12,
+          "time_limit_seconds_total": 900
+        }
+      }
+    ]
+  },
+  "question_bank": [
+    {
+      "id": "ch9-q01",
+      "type": "mcq",
+      "stem": "Naomi wants cloud resources to scale with load while keeping changes transparent to users. She also wants upgrades/replacements without downtime. What should she use?",
+      "options": {
+        "A": "Load balancing",
+        "B": "Clustering",
+        "C": "Geographic diversity",
+        "D": "A hot site"
+      },
+      "answer": "A",
+      "explanation": "A load balancer distributes client requests across multiple instances, enabling horizontal scaling and allowing maintenance by draining traffic from nodes and returning it after upgrades.",
+      "tags": [
+        "ha.load_balancing",
+        "availability.resilience",
+        "scalability.elasticity"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "1.6"
+      ],
+      "rationaleCorrect": "A load balancer distributes client requests across multiple instances, enabling horizontal scaling and allowing maintenance by draining traffic from nodes and returning it after upgrades.",
+      "misconceptionTags": [
+        "ha.load_balancing_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch9-q02",
+      "type": "mcq",
+      "stem": "Rick performs a backup that captures the changes since the last full backup. What type of backup is this?",
+      "options": {
+        "A": "A new full backup",
+        "B": "A snapshot",
+        "C": "An incremental backup",
+        "D": "A differential backup"
+      },
+      "answer": "D",
+      "explanation": "Differential backups record changes since the most recent full backup. Incrementals record changes since the most recent backup of any type.",
+      "tags": [
+        "backups.full_incremental_differential",
+        "backups.differential",
+        "backups.incremental"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Differential backups record changes since the most recent full backup.",
+      "misconceptionTags": [
+        "backups.full_incremental_differential_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      }
+    },
+    {
+      "id": "ch9-q03",
+      "type": "mcq",
+      "stem": "Which recovery site has some or most systems in place but does NOT have the current data needed to immediately take over operations?",
+      "options": {
+        "A": "A hot site",
+        "B": "A warm site",
+        "C": "A cloud site",
+        "D": "A cold site"
+      },
+      "answer": "B",
+      "explanation": "Warm sites usually have hardware and connectivity ready, but need data restored/replicated before they can fully assume production operations.",
+      "tags": [
+        "site.hot_warm_cold",
+        "site.warm_site",
+        "recovery.site_selection"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "4.7"
+      ],
+      "rationaleCorrect": "Warm sites usually have hardware and connectivity ready, but need data restored/replicated before they can fully assume production operations.",
+      "misconceptionTags": [
+        "site.hot_warm_cold_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch9-q04",
+      "type": "mcq",
+      "stem": "Ben wants to test his warm site to verify it can take over operations successfully. What type of testing is this?",
+      "options": {
+        "A": "Parallel processing",
+        "B": "Simulation",
+        "C": "Failover",
+        "D": "A tabletop exercise"
+      },
+      "answer": "C",
+      "explanation": "A failover test actually shifts services to the alternate site to prove takeover works. Tabletop is discussion-only; simulation is a walk-through; parallel runs both sites simultaneously.",
+      "tags": [
+        "testing.failover",
+        "site.hot_warm_cold",
+        "availability.resilience"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "4.7"
+      ],
+      "rationaleCorrect": "A failover test actually shifts services to the alternate site to prove takeover works.",
+      "misconceptionTags": [
+        "testing.failover_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch9-q05",
+      "type": "mcq",
+      "stem": "Felix wants to clone a virtual machine while capturing a live machine's state. What should he use?",
+      "options": {
+        "A": "A full backup",
+        "B": "A snapshot",
+        "C": "A differential backup",
+        "D": "Live boot media"
+      },
+      "answer": "B",
+      "explanation": "Snapshots capture the full state of a system/VM at a point in time, often while running, enabling fast rollbacks or cloning.",
+      "tags": [
+        "backups.snapshot",
+        "virtualization.snapshots"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Snapshots capture the full state of a system/VM at a point in time, often while running, enabling fast rollbacks or cloning.",
+      "misconceptionTags": [
+        "backups.snapshot_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch9-q06",
+      "type": "mcq",
+      "stem": "After a disaster takes the datacenter offline, Sally needs to restart services safely and in the right sequence. What document is MOST critical?",
+      "options": {
+        "A": "Restoration order documentation",
+        "B": "TOTP documentation",
+        "C": "HOTP documentation",
+        "D": "Last-known good configuration documentation"
+      },
+      "answer": "A",
+      "explanation": "Restoration order defines what comes up first (e.g., identity/DNS/storage) so dependent systems can start reliably; it prevents chaos during recovery.",
+      "tags": [
+        "recovery.restoration_order",
+        "continuity.coop",
+        "response_recovery.process"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "1.6"
+      ],
+      "rationaleCorrect": "Restoration order defines what comes up first (e.g., identity/DNS/storage) so dependent systems can start reliably; it prevents chaos during recovery.",
+      "misconceptionTags": [
+        "recovery.restoration_order_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch9-q07",
+      "type": "mcq",
+      "stem": "Mike wants to stop vehicles from driving toward the entrance of his building. What control should he implement?",
+      "options": {
+        "A": "An air gap",
+        "B": "A hot aisle",
+        "C": "A robotic sentry",
+        "D": "A bollard"
+      },
+      "answer": "D",
+      "explanation": "Bollards are physical barriers that prevent or slow vehicle ramming and protect entrances/critical areas.",
+      "tags": [
+        "physical.controls.bollards",
+        "physical.deterrence_delay"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 40,
+      "objectiveIds": [
+        "1.5"
+      ],
+      "rationaleCorrect": "Bollards are physical barriers that prevent or slow vehicle ramming and protect entrances/critical areas.",
+      "misconceptionTags": [
+        "physical.controls.bollards_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      }
+    },
+    {
+      "id": "ch9-q08",
+      "type": "mcq",
+      "stem": "Alecia wants backups stored offsite to be unreadable to third parties. What should she do?",
+      "options": {
+        "A": "Hash the backup data",
+        "B": "Avoid offsite storage",
+        "C": "Employ security guards",
+        "D": "Encrypt the backup data"
+      },
+      "answer": "D",
+      "explanation": "Encryption protects confidentiality of backups at rest and in transit. Hashing provides integrity, not confidentiality.",
+      "tags": [
+        "backups.encryption",
+        "backups.onsite_offsite",
+        "confidentiality.backups"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Encryption protects confidentiality of backups at rest and in transit.",
+      "misconceptionTags": [
+        "backups.encryption_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      }
+    },
+    {
+      "id": "ch9-q09",
+      "type": "mcq",
+      "stem": "Fred needs point-in-time recovery for database transactions even if the datacenter is destroyed. With daily backups, what additional solution fits BEST?",
+      "options": {
+        "A": "Onsite journaling",
+        "B": "Onsite snapshots",
+        "C": "Offsite journaling",
+        "D": "Offsite snapshots"
+      },
+      "answer": "C",
+      "explanation": "Journaling records transactions between backups; keeping journals offsite enables point-in-time recovery even after a physical disaster at the primary site.",
+      "tags": [
+        "backups.journaling",
+        "backups.onsite_offsite",
+        "recovery.point_in_time"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "1.6"
+      ],
+      "rationaleCorrect": "Journaling records transactions between backups; keeping journals offsite enables point-in-time recovery even after a physical disaster at the primary site.",
+      "misconceptionTags": [
+        "backups.journaling_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch9-q10",
+      "type": "mcq",
+      "stem": "Ellen wants resilience for changing loads and disaster recovery. In capacity planning, what should she primarily plan for?",
+      "options": {
+        "A": "People, technology, and infrastructure",
+        "B": "A generator and a UPS",
+        "C": "RAID 0/1/5/10",
+        "D": "Incremental/differential/full backups"
+      },
+      "answer": "A",
+      "explanation": "Capacity planning for resilience is broader than gear—it includes trained staff, adequate compute/network/storage, and facilities/logistics to execute recovery.",
+      "tags": [
+        "capacity_planning.people_tech_infra",
+        "availability.resilience",
+        "continuity.coop"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "1.6"
+      ],
+      "rationaleCorrect": "Capacity planning for resilience is broader than gear—it includes trained staff, adequate compute/network/storage, and facilities/logistics to execute recovery.",
+      "misconceptionTags": [
+        "capacity_planning.people_tech_infra_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch9-q11",
+      "type": "mcq",
+      "stem": "Madhuri copies data to a secondary hot site in real time. What type of replication is this?",
+      "options": {
+        "A": "Synchronous replication",
+        "B": "Journaled replication",
+        "C": "Asynchronous replication",
+        "D": "Snapshot-based replication"
+      },
+      "answer": "A",
+      "explanation": "Synchronous replication commits writes to both sites before acknowledging success, minimizing data loss (better RPO) but adding latency and requiring strong links.",
+      "tags": [
+        "backups.replication.synchronous",
+        "backups.replication.sync_async",
+        "recovery.rto_rpo"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Synchronous replication commits writes to both sites before acknowledging success, minimizing data loss (better RPO) but adding latency and requiring strong links.",
+      "misconceptionTags": [
+        "backups.replication.synchronous_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch9-q12",
+      "type": "mcq",
+      "stem": "What is a major reason many organizations do NOT rely heavily on security guards?",
+      "options": {
+        "A": "Reliability",
+        "B": "Training",
+        "C": "Cost",
+        "D": "Social engineering"
+      },
+      "answer": "C",
+      "explanation": "Guards can be effective, but they are expensive to staff 24/7 (and still require training and management). Cost is the classic constraint.",
+      "tags": [
+        "physical.controls.security_guards",
+        "physical.controls.cost_tradeoff"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Guards can be effective, but they are expensive to staff 24/7 (and still require training and management).",
+      "misconceptionTags": [
+        "physical.controls.security_guards_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch9-q13",
+      "type": "mcq",
+      "stem": "Megan wants an inexpensive sensor to detect humans entering and moving in a secured room. What should she choose?",
+      "options": {
+        "A": "An infrared sensor",
+        "B": "A microwave sensor",
+        "C": "An ultrasonic sensor",
+        "D": "A pressure sensor"
+      },
+      "answer": "A",
+      "explanation": "Passive infrared (PIR) sensors detect changes in infrared energy—commonly used for human motion detection at low cost.",
+      "tags": [
+        "physical.controls.sensors.infrared",
+        "physical.controls.sensors",
+        "physical.detect"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 50,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Passive infrared (PIR) sensors detect changes in infrared energy—commonly used for human motion detection at low cost.",
+      "misconceptionTags": [
+        "physical.controls.sensors.infrared_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch9-q14",
+      "type": "mcq",
+      "stem": "Kathleen wants controls that deter attackers from entering a facility. Which option is NOT a common deterrent/preventive physical control?",
+      "options": {
+        "A": "Fences",
+        "B": "Lighting",
+        "C": "Platform diversity",
+        "D": "Video surveillance"
+      },
+      "answer": "C",
+      "explanation": "Platform/technology diversity is a cyber resilience concept, not a physical deterrent. Fences/lighting/cameras commonly deter or discourage entry.",
+      "tags": [
+        "physical.deterrence_delay",
+        "architecture.platform_diversity"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 50,
+      "objectiveIds": [
+        "1.5"
+      ],
+      "rationaleCorrect": "Platform/technology diversity is a cyber resilience concept, not a physical deterrent.",
+      "misconceptionTags": [
+        "physical.deterrence_delay_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch9-q15",
+      "type": "mcq",
+      "stem": "How does technology diversity improve cyber resilience?",
+      "options": {
+        "A": "A vulnerability in one vendor's product is less likely to compromise everything",
+        "B": "If a vendor fails, you don't have to replace your entire stack",
+        "C": "A single misconfiguration is less likely to impact the entire environment",
+        "D": "All of the above"
+      },
+      "answer": "D",
+      "explanation": "Diversity reduces systemic monoculture risk: vendor-wide vulnerabilities, vendor dependency, and broad blast radius from a single error are less likely to take down everything.",
+      "tags": [
+        "architecture.platform_diversity",
+        "availability.resilience",
+        "risk.blaster_radius"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "1.6"
+      ],
+      "rationaleCorrect": "Diversity reduces systemic monoculture risk: vendor-wide vulnerabilities, vendor dependency, and broad blast radius from a single error are less likely to take down everything.",
+      "misconceptionTags": [
+        "architecture.platform_diversity_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      }
+    },
+    {
+      "id": "ch9-q16",
+      "type": "mcq",
+      "stem": "Scott sends backups to a company that stores them in a secure vault. What type of backup solution is this?",
+      "options": {
+        "A": "Nearline",
+        "B": "Safe",
+        "C": "Onsite",
+        "D": "Offsite"
+      },
+      "answer": "D",
+      "explanation": "If a third party stores your backup media at another location, it's an offsite backup. A 'safe' typically refers to local secure storage.",
+      "tags": [
+        "backups.onsite_offsite",
+        "backups.offsite_storage",
+        "physical.controls.safe"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "If a third party stores your backup media at another location, it's an offsite backup.",
+      "misconceptionTags": [
+        "backups.onsite_offsite_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      }
+    },
+    {
+      "id": "ch9-q17",
+      "type": "mcq",
+      "stem": "Gabby wants to detect physical brute-force attempts (e.g., forced door entry). What is BEST suited for this?",
+      "options": {
+        "A": "Security guards",
+        "B": "Locks",
+        "C": "Access badges",
+        "D": "An intrusion detection system (IDS)"
+      },
+      "answer": "D",
+      "explanation": "Physical IDS components (door contacts, glass-break sensors, alarms) detect tampering/forced entry. Locks and badges control access; guards respond but don't reliably detect every attempt.",
+      "tags": [
+        "physical.attacks.brute_force",
+        "physical.detect",
+        "physical.controls.ids_alarms"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "1.5"
+      ],
+      "rationaleCorrect": "Physical IDS components (door contacts, glass-break sensors, alarms) detect tampering/forced entry.",
+      "misconceptionTags": [
+        "physical.attacks.brute_force_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      }
+    },
+    {
+      "id": "ch9-q18",
+      "type": "mcq",
+      "stem": "Florian wants to test high-availability designs without interrupting normal work. Which is the LEAST disruptive test?",
+      "options": {
+        "A": "A failover exercise",
+        "B": "A tabletop exercise",
+        "C": "A partial failover exercise",
+        "D": "A simulation"
+      },
+      "answer": "B",
+      "explanation": "Tabletop exercises are discussion-based and validate plans/roles without changing production traffic. Failovers and partial failovers change operations; simulations can be more involved.",
+      "tags": [
+        "testing.tabletop",
+        "testing.exercises",
+        "availability.resilience"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "4.7"
+      ],
+      "rationaleCorrect": "Tabletop exercises are discussion-based and validate plans/roles without changing production traffic.",
+      "misconceptionTags": [
+        "testing.tabletop_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch9-q19",
+      "type": "mcq",
+      "stem": "A diagram shows a small enclosed entry space with two doors where only one door can open at a time. What control is this?",
+      "options": {
+        "A": "A Faraday cage",
+        "B": "An access control vestibule",
+        "C": "A bollard",
+        "D": "An air gap"
+      },
+      "answer": "B",
+      "explanation": "Access control vestibules (mantrap-style) enforce one-person entry, prevent tailgating/piggybacking, and allow verification before granting access.",
+      "tags": [
+        "physical.controls.access_control_vestibule",
+        "physical.prevent",
+        "physical.anti_tailgating"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "1.5"
+      ],
+      "rationaleCorrect": "Access control vestibules (mantrap-style) enforce one-person entry, prevent tailgating/piggybacking, and allow verification before granting access.",
+      "misconceptionTags": [
+        "physical.controls.access_control_vestibule_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch9-q20",
+      "type": "mcq",
+      "stem": "Gurvinder chooses a redundant datacenter more than 90 miles away. Why?",
+      "options": {
+        "A": "Because it is required by law",
+        "B": "Network traffic latency concerns",
+        "C": "Geographic dispersion",
+        "D": "Geographic tax reasons"
+      },
+      "answer": "C",
+      "explanation": "Geographic dispersion reduces the chance that a single regional disaster (weather, grid, telecom) impacts all sites at once.",
+      "tags": [
+        "site.geographic_dispersion",
+        "availability.resilience",
+        "site.selection"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "1.6"
+      ],
+      "rationaleCorrect": "Geographic dispersion reduces the chance that a single regional disaster (weather, grid, telecom) impacts all sites at once.",
+      "misconceptionTags": [
+        "site.geographic_dispersion_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch9-q21",
+      "type": "mcq",
+      "stem": "Which statement is MOST accurate about load balancing vs clustering?",
+      "options": {
+        "A": "Load balancing makes many systems look like one; clustering makes one system look like many",
+        "B": "Load balancing distributes requests across multiple nodes; clustering coordinates nodes to act as a single service/system",
+        "C": "Clustering is only used in cloud environments; load balancing is only on-prem",
+        "D": "They are identical terms"
+      },
+      "answer": "B",
+      "explanation": "Load balancing spreads client load and provides redundancy. Clustering is a coordinated group of computers providing the same function as a single logical system (often with shared state/coordination).",
+      "tags": [
+        "ha.load_balancing",
+        "ha.clustering",
+        "availability.high_availability"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Load balancing spreads client load and provides redundancy.",
+      "misconceptionTags": [
+        "ha.load_balancing_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch9-q22",
+      "type": "multi_select",
+      "stem": "Which design choices directly improve resilience/high availability? (Select all that apply.)",
+      "options": {
+        "A": "Geographic dispersion of sites",
+        "B": "Redundant network paths (multipath)",
+        "C": "A single firewall in-line with no failover",
+        "D": "Load balancing across multiple app servers",
+        "E": "Synchronous replication to a secondary site",
+        "F": "Platform diversity across critical tiers"
+      },
+      "answers": [
+        "A",
+        "B",
+        "D",
+        "E",
+        "F"
+      ],
+      "explanation": "Resilience comes from reducing single points of failure and blast radius: dispersed sites, redundant paths, HA/load balancers, replication, and (sometimes) diversity. A single in-line firewall without failover is a single point of failure.",
+      "tags": [
+        "availability.resilience",
+        "ha.single_point_of_failure",
+        "site.geographic_dispersion",
+        "ha.load_balancing",
+        "backups.replication.sync_async",
+        "architecture.platform_diversity",
+        "network.multipath"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 85,
+      "objectiveIds": [
+        "3.4"
+      ],
+      "rationaleCorrect": "Resilience comes from reducing single points of failure and blast radius: dispersed sites, redundant paths, HA/load balancers, replication, and (sometimes) diversity.",
+      "misconceptionTags": [
+        "availability.resilience_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "E": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "F": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      }
+    },
+    {
+      "id": "ch9-q23",
+      "type": "mcq",
+      "stem": "A single switch connects an entire datacenter to the WAN. If that switch fails, everything goes down. What is this an example of?",
+      "options": {
+        "A": "Geographic dispersion",
+        "B": "A single point of failure",
+        "C": "Platform diversity",
+        "D": "Elasticity"
+      },
+      "answer": "B",
+      "explanation": "A single point of failure is any component whose failure stops a critical service. Resilient designs add redundancy or alternatives for these components.",
+      "tags": [
+        "ha.single_point_of_failure",
+        "availability.resilience"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "1.6"
+      ],
+      "rationaleCorrect": "A single point of failure is any component whose failure stops a critical service.",
+      "misconceptionTags": [
+        "ha.single_point_of_failure_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch9-q24",
+      "type": "mcq",
+      "stem": "RTO and RPO are often confused. Which choice correctly matches them?",
+      "options": {
+        "A": "RTO = maximum tolerable data loss; RPO = maximum tolerable downtime",
+        "B": "RTO = maximum tolerable downtime; RPO = maximum tolerable data loss (time)",
+        "C": "RTO = time to encrypt backups; RPO = time to decrypt backups",
+        "D": "RTO and RPO are the same metric"
+      },
+      "answer": "B",
+      "explanation": "Recovery Time Objective (RTO) is how quickly you must restore service. Recovery Point Objective (RPO) is how far back in time you can lose data (e.g., last 15 minutes).",
+      "tags": [
+        "recovery.rto_rpo",
+        "continuity.coop"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Recovery Time Objective (RTO) is how quickly you must restore service.",
+      "misconceptionTags": [
+        "recovery.rto_rpo_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch9-q25",
+      "type": "multi_select",
+      "stem": "Which measures primarily improve RPO (reduce data loss)? (Select all that apply.)",
+      "options": {
+        "A": "More frequent backups",
+        "B": "Synchronous replication",
+        "C": "Offsite journaling",
+        "D": "A well-documented restoration order",
+        "E": "Tabletop exercises"
+      },
+      "answers": [
+        "A",
+        "B",
+        "C"
+      ],
+      "explanation": "RPO is about how much data you can afford to lose. Frequent backups, replication, and journaling reduce the amount of data at risk. Restoration order and tabletop exercises mainly improve recovery execution/RTO.",
+      "tags": [
+        "recovery.rto_rpo",
+        "backups.frequency",
+        "backups.replication.synchronous",
+        "backups.journaling",
+        "recovery.restoration_order",
+        "testing.tabletop"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 85,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "RPO is about how much data you can afford to lose.",
+      "misconceptionTags": [
+        "recovery.rto_rpo_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "E": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch9-q26",
+      "type": "mcq",
+      "stem": "Which statement best describes a snapshot in the context of backups?",
+      "options": {
+        "A": "A snapshot always replaces the need for full backups",
+        "B": "A snapshot captures the state of a system/device at a point in time, often while running",
+        "C": "A snapshot only stores data changed since the last full backup",
+        "D": "A snapshot is the same as asynchronous replication"
+      },
+      "answer": "B",
+      "explanation": "Snapshots preserve system state at a moment in time (commonly for VMs) and allow fast rollback; they complement, not necessarily replace, other backup strategies.",
+      "tags": [
+        "backups.snapshot",
+        "virtualization.snapshots",
+        "backups.recovery_process"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Snapshots preserve system state at a moment in time (commonly for VMs) and allow fast rollback; they complement, not necessarily replace, other backup strategies.",
+      "misconceptionTags": [
+        "backups.snapshot_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch9-q27",
+      "type": "mcq",
+      "stem": "Your goal is point-in-time recovery between daily backups. Which technique is built specifically for that?",
+      "options": {
+        "A": "Snapshotting",
+        "B": "Journaling",
+        "C": "Cold sites",
+        "D": "Load balancing"
+      },
+      "answer": "B",
+      "explanation": "Journaling records changes/transactions continuously so you can replay to a specific time between backups—ideal for point-in-time recovery.",
+      "tags": [
+        "backups.journaling",
+        "recovery.point_in_time",
+        "backups.frequency"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "1.6"
+      ],
+      "rationaleCorrect": "Journaling records changes/transactions continuously so you can replay to a specific time between backups—ideal for point-in-time recovery.",
+      "misconceptionTags": [
+        "backups.journaling_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch9-q28",
+      "type": "mcq",
+      "stem": "Asynchronous replication is BEST described as:",
+      "options": {
+        "A": "Writes are acknowledged only after both sites commit the change",
+        "B": "Writes are queued and sent to the secondary site after the primary acknowledges them",
+        "C": "A record of transactions is written to an immutable journal only",
+        "D": "Copying data only once per week"
+      },
+      "answer": "B",
+      "explanation": "Async replication reduces latency compared to synchronous, but it can lose the last bit of data if the primary fails before the queue is replicated—so RPO is typically worse.",
+      "tags": [
+        "backups.replication.asynchronous",
+        "backups.replication.sync_async",
+        "recovery.rto_rpo"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Async replication reduces latency compared to synchronous, but it can lose the last bit of data if the primary fails before the queue is replicated—so RPO is typically worse.",
+      "misconceptionTags": [
+        "backups.replication.asynchronous_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch9-q29",
+      "type": "matching",
+      "stem": "Match each backup type to its BEST description.",
+      "left": [
+        "Full backup",
+        "Incremental backup",
+        "Differential backup",
+        "Snapshot"
+      ],
+      "right": [
+        "Captures the entire dataset/state at once",
+        "Captures changes since the last backup of any type",
+        "Captures changes since the last full backup",
+        "Captures point-in-time system/VM state (often live) for quick rollback"
+      ],
+      "pairs": {
+        "Full backup": "Captures the entire dataset/state at once",
+        "Incremental backup": "Captures changes since the last backup of any type",
+        "Differential backup": "Captures changes since the last full backup",
+        "Snapshot": "Captures point-in-time system/VM state (often live) for quick rollback"
+      },
+      "explanation": "Full = everything; incremental = since last backup; differential = since last full; snapshot = point-in-time state capture (commonly VMs/storage).",
+      "tags": [
+        "backups.full_incremental_differential",
+        "backups.snapshot"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 95,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Full = everything; incremental = since last backup; differential = since last full; snapshot = point-in-time state capture (commonly VMs/storage).",
+      "misconceptionTags": [
+        "backups.full_incremental_differential_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch9-q30",
+      "type": "matching",
+      "stem": "Match each recovery site type to its BEST characteristic.",
+      "left": [
+        "Hot site",
+        "Warm site",
+        "Cold site"
+      ],
+      "right": [
+        "Fully equipped and current data; can assume operations quickly",
+        "Some systems ready, but requires data restoration/replication before full operation",
+        "Facilities exist, but systems/data must be brought in (slowest)"
+      ],
+      "pairs": {
+        "Hot site": "Fully equipped and current data; can assume operations quickly",
+        "Warm site": "Some systems ready, but requires data restoration/replication before full operation",
+        "Cold site": "Facilities exist, but systems/data must be brought in (slowest)"
+      },
+      "explanation": "Hot = ready now (highest cost). Warm = partly ready. Cold = space/utilities with minimal gear (lowest cost, slowest recovery).",
+      "tags": [
+        "site.hot_warm_cold",
+        "recovery.site_selection"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 85,
+      "objectiveIds": [
+        "4.7"
+      ],
+      "rationaleCorrect": "Hot = ready now (highest cost). It aligns with the intended control outcome and avoids the common trap choices in this question.",
+      "misconceptionTags": [
+        "site.hot_warm_cold_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch9-q31",
+      "type": "mcq",
+      "stem": "Which pairing is MOST accurate for power resilience?",
+      "options": {
+        "A": "UPS = long-term power; Generator = short, immediate power",
+        "B": "UPS = immediate short-term power/conditioning; Generator = longer-term backup power",
+        "C": "UPS and generators are the same thing",
+        "D": "Generators are used only in cloud environments"
+      },
+      "answer": "B",
+      "explanation": "A UPS bridges short outages and conditions power so systems can ride through or shut down gracefully; generators provide longer-duration power once started.",
+      "tags": [
+        "power.ups_generator",
+        "availability.resilience"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "1.6"
+      ],
+      "rationaleCorrect": "A UPS bridges short outages and conditions power so systems can ride through or shut down gracefully; generators provide longer-duration power once started.",
+      "misconceptionTags": [
+        "power.ups_generator_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch9-q32",
+      "type": "multi_select",
+      "stem": "Which statements about resilience testing are correct? (Select all that apply.)",
+      "options": {
+        "A": "Tabletop exercises are discussion-based and least disruptive",
+        "B": "Failover testing actually shifts operations to an alternate site",
+        "C": "Parallel processing runs primary and alternate sites simultaneously to validate capability",
+        "D": "Simulation always requires a full production outage"
+      },
+      "answers": [
+        "A",
+        "B",
+        "C"
+      ],
+      "explanation": "Testing ranges from low-impact tabletop exercises to more invasive simulations and failovers. Parallel processing validates that an alternate site can operate while the primary still runs.",
+      "tags": [
+        "testing.tabletop",
+        "testing.failover",
+        "testing.parallel",
+        "testing.simulation"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "4.7"
+      ],
+      "rationaleCorrect": "Testing ranges from low-impact tabletop exercises to more invasive simulations and failovers.",
+      "misconceptionTags": [
+        "testing.tabletop_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch9-q33",
+      "type": "mcq",
+      "stem": "An organization keeps backups in the same building as the primary servers. A fire takes out both. Which principle was NOT satisfied?",
+      "options": {
+        "A": "Geographic dispersion/offsite storage",
+        "B": "Platform diversity",
+        "C": "Least privilege",
+        "D": "Non-repudiation"
+      },
+      "answer": "A",
+      "explanation": "Resilience requires separating critical copies from the primary site. Offsite backups (ideally geographically dispersed) prevent a single disaster from destroying both primary data and backups.",
+      "tags": [
+        "backups.onsite_offsite",
+        "site.geographic_dispersion",
+        "availability.resilience"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "1.6"
+      ],
+      "rationaleCorrect": "Resilience requires separating critical copies from the primary site.",
+      "misconceptionTags": [
+        "backups.onsite_offsite_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch9-q34",
+      "type": "mcq",
+      "stem": "Which is a realistic downside of multicloud designs?",
+      "options": {
+        "A": "Reduced operational complexity",
+        "B": "Single-vendor lock-in",
+        "C": "More inconsistent tooling/policies and a larger attack surface to manage",
+        "D": "Eliminates the need for backups"
+      },
+      "answer": "C",
+      "explanation": "Multicloud can reduce single-provider dependency and improve resilience, but it increases operational complexity, policy drift risk, and integration/security overhead.",
+      "tags": [
+        "architecture.multicloud",
+        "availability.resilience",
+        "risk.attack_surface"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "1.6"
+      ],
+      "rationaleCorrect": "Multicloud can reduce single-provider dependency and improve resilience, but it increases operational complexity, policy drift risk, and integration/security overhead.",
+      "misconceptionTags": [
+        "architecture.multicloud_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch9-q35",
+      "type": "mcq",
+      "stem": "Continuity of operations (COOP) is BEST described as:",
+      "options": {
+        "A": "A method to prevent phishing",
+        "B": "Ensuring business operations continue during and after disruptions",
+        "C": "A form of disk encryption",
+        "D": "A physical fence design guideline"
+      },
+      "answer": "B",
+      "explanation": "COOP focuses on planning and capabilities so essential functions keep running (or resume quickly) despite incidents, outages, or disasters.",
+      "tags": [
+        "continuity.coop",
+        "availability.resilience"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 50,
+      "objectiveIds": [
+        "4.7"
+      ],
+      "rationaleCorrect": "COOP focuses on planning and capabilities so essential functions keep running (or resume quickly) despite incidents, outages, or disasters.",
+      "misconceptionTags": [
+        "continuity.coop_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch9-q36",
+      "type": "mcq",
+      "stem": "Physical security is commonly designed in layers. Which ordering best matches the 'deter/delay/detect/respond' concept?",
+      "options": {
+        "A": "Detect → Deter → Respond → Delay",
+        "B": "Deter → Delay → Detect → Respond",
+        "C": "Delay → Respond → Deter → Detect",
+        "D": "Respond → Detect → Delay → Deter"
+      },
+      "answer": "B",
+      "explanation": "Good physical security discourages entry (deter), slows attackers (delay), notices intrusion (detect), then triggers people/processes to act (respond).",
+      "tags": [
+        "physical.layers.defense_in_depth",
+        "physical.deterrence_delay",
+        "physical.detect",
+        "physical.response"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "1.5"
+      ],
+      "rationaleCorrect": "Good physical security discourages entry (deter), slows attackers (delay), notices intrusion (detect), then triggers people/processes to act (respond).",
+      "misconceptionTags": [
+        "physical.layers.defense_in_depth_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch9-q37",
+      "type": "mcq",
+      "stem": "Which control MOST directly helps prevent tailgating into a secure area?",
+      "options": {
+        "A": "Better lighting",
+        "B": "Access control vestibule (mantrap)",
+        "C": "A bollard",
+        "D": "A UPS"
+      },
+      "answer": "B",
+      "explanation": "Mantraps/vestibules use interlocked doors and authentication to control one-person entry, reducing tailgating/piggybacking.",
+      "tags": [
+        "physical.controls.access_control_vestibule",
+        "physical.anti_tailgating",
+        "physical.prevent"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 50,
+      "objectiveIds": [
+        "1.5"
+      ],
+      "rationaleCorrect": "Mantraps/vestibules use interlocked doors and authentication to control one-person entry, reducing tailgating/piggybacking.",
+      "misconceptionTags": [
+        "physical.controls.access_control_vestibule_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch9-q38",
+      "type": "matching",
+      "stem": "Match each sensor type to the MOST typical use case.",
+      "left": [
+        "Infrared (PIR)",
+        "Microwave",
+        "Ultrasonic",
+        "Pressure"
+      ],
+      "right": [
+        "Detect human motion via heat/IR changes",
+        "Detect movement via reflected radio waves (Doppler effect)",
+        "Detect movement via reflected high-frequency sound waves",
+        "Detect weight/force on a mat or floor panel"
+      ],
+      "pairs": {
+        "Infrared (PIR)": "Detect human motion via heat/IR changes",
+        "Microwave": "Detect movement via reflected radio waves (Doppler effect)",
+        "Ultrasonic": "Detect movement via reflected high-frequency sound waves",
+        "Pressure": "Detect weight/force on a mat or floor panel"
+      },
+      "explanation": "PIR sees IR changes (often humans); microwave uses RF reflection; ultrasonic uses sound reflection; pressure sensors detect force/weight.",
+      "tags": [
+        "physical.controls.sensors.infrared",
+        "physical.controls.sensors.microwave",
+        "physical.controls.sensors.ultrasonic",
+        "physical.controls.sensors.pressure",
+        "physical.detect"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 95,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "PIR sees IR changes (often humans); microwave uses RF reflection; ultrasonic uses sound reflection; pressure sensors detect force/weight.",
+      "misconceptionTags": [
+        "physical.controls.sensors.infrared_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch9-q39",
+      "type": "mcq",
+      "stem": "Why do many motion-activated camera systems keep a short video buffer even before motion is detected?",
+      "options": {
+        "A": "To reduce encryption overhead",
+        "B": "To capture the moments leading up to an event",
+        "C": "To defeat RFID cloning attacks",
+        "D": "To increase RPO"
+      },
+      "answer": "B",
+      "explanation": "Buffered recording preserves context—what happened immediately before motion triggers—so investigators see the full sequence, not just after detection.",
+      "tags": [
+        "physical.controls.video_surveillance",
+        "physical.controls.cameras.motion_detection",
+        "physical.detect"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Buffered recording preserves context—what happened immediately before motion triggers—so investigators see the full sequence, not just after detection.",
+      "misconceptionTags": [
+        "physical.controls.video_surveillance_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch9-q40",
+      "type": "mcq",
+      "stem": "An attacker reads an employee's badge signal and replays it to unlock a door. What attack is this?",
+      "options": {
+        "A": "RFID cloning",
+        "B": "Journaling",
+        "C": "Synchronous replication",
+        "D": "Bollarding"
+      },
+      "answer": "A",
+      "explanation": "RFID cloning copies or emulates badge signals to impersonate a legitimate credential and bypass physical access controls.",
+      "tags": [
+        "physical.attacks.rfid_cloning",
+        "physical.controls.access_badges"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "RFID cloning copies or emulates badge signals to impersonate a legitimate credential and bypass physical access controls.",
+      "misconceptionTags": [
+        "physical.attacks.rfid_cloning_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch9-q41",
+      "type": "multi_select",
+      "stem": "Which are examples of environmental threats to physical facilities? (Select all that apply.)",
+      "options": {
+        "A": "Fire",
+        "B": "Flooding",
+        "C": "Excessive heat/humidity",
+        "D": "SQL injection",
+        "E": "Power loss"
+      },
+      "answers": [
+        "A",
+        "B",
+        "C",
+        "E"
+      ],
+      "explanation": "Environmental threats include fire, water, temperature/humidity issues, and power disruptions. SQL injection is a software attack, not a physical environmental threat.",
+      "tags": [
+        "physical.attacks.environmental",
+        "availability.resilience",
+        "power.ups_generator"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "3.4"
+      ],
+      "rationaleCorrect": "Environmental threats include fire, water, temperature/humidity issues, and power disruptions.",
+      "misconceptionTags": [
+        "physical.attacks.environmental_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "E": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      }
+    },
+    {
+      "id": "ch9-q42",
+      "type": "mcq",
+      "stem": "Which statement about securing backups is MOST accurate?",
+      "options": {
+        "A": "Encryption is optional because backups are not sensitive",
+        "B": "If you lose the encryption keys, you may permanently lose access to backups",
+        "C": "Hashing backups is enough to keep them confidential",
+        "D": "Offsite storage automatically makes backups secure"
+      },
+      "answer": "B",
+      "explanation": "Encrypting backups is best practice, but key management is critical—no keys, no restore. Hashes provide integrity, not confidentiality.",
+      "tags": [
+        "backups.encryption",
+        "key_management.backups",
+        "backups.recovery_process"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "Encrypting backups is best practice, but key management is critical—no keys, no restore.",
+      "misconceptionTags": [
+        "backups.encryption_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch9-q43",
+      "type": "mcq",
+      "stem": "A company wants backups that are cheap per TB and can be retrieved without a human handling tapes, but not instantly. What term matches this?",
+      "options": {
+        "A": "Inline",
+        "B": "Nearline",
+        "C": "Hot site",
+        "D": "Clustering"
+      },
+      "answer": "B",
+      "explanation": "Nearline storage isn't immediately available but can be retrieved in a reasonable time, often automatically (e.g., tape robots or cold cloud tiers with delayed retrieval).",
+      "tags": [
+        "backups.nearline",
+        "backups.storage_tiers"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Nearline storage isn't immediately available but can be retrieved in a reasonable time, often automatically (e.g., tape robots or cold cloud tiers with delayed retrieval).",
+      "misconceptionTags": [
+        "backups.nearline_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch9-q44",
+      "type": "mcq",
+      "stem": "You are asked to ensure a single severed network cable doesn't cut off a critical service. Which design choice fits BEST?",
+      "options": {
+        "A": "Multipath / multiple network paths",
+        "B": "A cold site",
+        "C": "An access badge",
+        "D": "A snapshot"
+      },
+      "answer": "A",
+      "explanation": "Multipath designs provide redundant connectivity so a single cable/device failure doesn't eliminate network access—reducing single points of failure.",
+      "tags": [
+        "network.multipath",
+        "ha.single_point_of_failure",
+        "availability.resilience"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "3.4"
+      ],
+      "rationaleCorrect": "Multipath designs provide redundant connectivity so a single cable/device failure doesn't eliminate network access—reducing single points of failure.",
+      "misconceptionTags": [
+        "network.multipath_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "type": "mcq",
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "rationaleCorrect": "Hot sites minimize startup time because compute, network, and processes are already staged.",
+      "rationaleIncorrect": {
+        "A": "Cold sites have the longest startup and restoration timeline.",
+        "B": "Warm sites improve readiness but still require activation work.",
+        "D": "Single-site operations increase downtime exposure.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "site_type_confusion",
+        "rto_underestimation"
+      ],
+      "id": "ch9_obj34_q01",
+      "stem": "Which facility strategy provides the shortest recovery time objective for critical workloads?",
+      "explanation": "Hot sites are pre-provisioned and ready to run, giving the fastest failover.",
+      "tags": [
+        "resilience",
+        "hot_site",
+        "rto"
+      ],
+      "objectiveIds": [
+        "3.4"
+      ],
+      "options": {
+        "A": "Cold site with no active infrastructure",
+        "B": "Warm site with delayed data synchronization",
+        "C": "Hot site with near-real-time readiness",
+        "D": "Single primary site with nightly backups"
+      },
+      "answer": "C"
+    },
+    {
+      "type": "mcq",
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "rationaleCorrect": "Clean agents suppress fire effectively while avoiding water/foam residue on systems.",
+      "rationaleIncorrect": {
+        "A": "Water can suppress fire but may damage sensitive electronic systems.",
+        "B": "Foam is not ideal as a primary suppression design for server environments.",
+        "D": "Ventilation alone does not provide fire suppression.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "fire_control_mismatch",
+        "equipment_residue_risk"
+      ],
+      "id": "ch9_obj34_q02",
+      "stem": "Which environmental control most directly reduces server damage from fire while minimizing equipment residue?",
+      "explanation": "Clean-agent suppression is designed for electronics-sensitive areas.",
+      "tags": [
+        "environmental_controls",
+        "fire_suppression",
+        "resilience"
+      ],
+      "objectiveIds": [
+        "3.4"
+      ],
+      "options": {
+        "A": "Water sprinkler only",
+        "B": "Portable foam extinguishers as primary suppression",
+        "C": "Clean-agent fire suppression for data center zones",
+        "D": "Open-air ventilation with no suppression"
+      },
+      "answer": "C"
+    },
+    {
+      "type": "multi_select",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "Independent power and geographic separation reduce correlated failure risk.",
+      "rationaleIncorrect": {
+        "A": "Single providers create a single point of failure.",
+        "B": "Correct: independent power feeds reduce outage likelihood.",
+        "C": "Co-locating in same hazard zone undermines continuity planning.",
+        "D": "Correct: distributed locations improve survivability."
+      },
+      "misconceptionTags": [
+        "single_path_dependency",
+        "geographic_correlation_risk"
+      ],
+      "id": "ch9_obj34_q03",
+      "stem": "Which design choices improve resilience in facility architecture? (Choose TWO.)",
+      "explanation": "Resilience improves when critical dependencies are redundant and geographically risk-aware.",
+      "tags": [
+        "resilience",
+        "redundancy",
+        "facility_design"
+      ],
+      "objectiveIds": [
+        "3.4"
+      ],
+      "options": {
+        "A": "Single upstream ISP for simplicity",
+        "B": "Dual power feeds with independent paths",
+        "C": "Place primary and backup sites in same floodplain",
+        "D": "Use separated availability zones or regions"
+      },
+      "answers": [
+        "B",
+        "D"
+      ]
+    },
+    {
+      "type": "scenario_mcq",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "UPS provides immediate temporary power and conditions incoming power quality.",
+      "rationaleIncorrect": {
+        "A": "Credential policy does not address power continuity.",
+        "C": "Reboot settings do not solve power interruption itself.",
+        "D": "Log location is unrelated to power stabilization.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "power_continuity_gap",
+        "generator_start_delay"
+      ],
+      "id": "ch9_obj34_q04",
+      "stem": "A branch office experiences brief utility dips that reboot network gear before the generator starts. What control closes this gap?",
+      "explanation": "UPS systems bridge short outages and power fluctuations before generator takeover.",
+      "tags": [
+        "ups",
+        "generator",
+        "availability"
+      ],
+      "objectiveIds": [
+        "3.4"
+      ],
+      "options": {
+        "A": "Increase password complexity",
+        "B": "Install UPS capacity for critical network and compute devices",
+        "C": "Disable automatic reboot",
+        "D": "Move logs to local disk"
+      },
+      "answer": "B"
+    },
+    {
+      "type": "scenario_mcq",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "If both sites share the same hazard zone, a single event can impact both.",
+      "rationaleIncorrect": {
+        "A": "Password controls are unrelated to shared flood exposure.",
+        "C": "Scan frequency does not address site location risk.",
+        "D": "Tokenization does not mitigate physical hazard co-location.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "dr_distance_misjudgment",
+        "hazard_zone_overlap"
+      ],
+      "id": "ch9_obj34_q05",
+      "stem": "A company stores primary and DR infrastructure in buildings two blocks apart near the same river. Which risk is most important?",
+      "explanation": "Physical proximity can create shared hazard exposure and simultaneous outage.",
+      "tags": [
+        "business_continuity",
+        "geographic_risk",
+        "dr_design"
+      ],
+      "objectiveIds": [
+        "3.4"
+      ],
+      "options": {
+        "A": "Insufficient password history",
+        "B": "Correlated regional hazard risk",
+        "C": "Too many vulnerability scans",
+        "D": "Overuse of tokenization"
+      },
+      "answer": "B"
+    },
+    {
+      "type": "scenario_mcq",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "A 4-hour replication window cannot satisfy a 15-minute maximum data-loss objective.",
+      "rationaleIncorrect": {
+        "A": "RTO measures time to restore service, not allowable data loss window.",
+        "C": "MTTR may matter, but the direct mismatch here is RPO versus replication cadence.",
+        "D": "Credential rotation does not solve recovery point misalignment.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "rpo_rto_mixup",
+        "replication_cadence_gap"
+      ],
+      "id": "ch9_obj34_q06",
+      "stem": "A service has an RPO of 15 minutes but current replication occurs every 4 hours. What is the issue?",
+      "explanation": "Replication interval must align with target recovery point or data-loss tolerance is exceeded.",
+      "tags": [
+        "rpo",
+        "replication",
+        "resilience_metrics"
+      ],
+      "objectiveIds": [
+        "3.4"
+      ],
+      "options": {
+        "A": "RTO is too low",
+        "B": "Replication frequency is insufficient for the RPO target",
+        "C": "MTTR is too high by definition",
+        "D": "The issue is only password rotation"
+      },
+      "answer": "B"
+    },
+    {
+      "type": "matching",
+      "difficulty": 3,
+      "estimated_seconds": 90,
+      "rationaleCorrect": "Site strategies differ primarily by readiness level and failover effort.",
+      "rationaleIncorrect": {
+        "Hot site": "Hot sites have highest readiness and cost profile.",
+        "Warm site": "Warm sites need additional activation and data sync steps.",
+        "Cold site": "Cold sites prioritize cost over rapid recovery.",
+        "Active-active": "Active-active supports continuous service across locations."
+      },
+      "misconceptionTags": [
+        "site_model_blur",
+        "cost_vs_recovery_tradeoff"
+      ],
+      "id": "ch9_obj34_q07",
+      "stem": "Match each resiliency site model to the best description.",
+      "explanation": "Correct site model selection balances cost, readiness, and recovery expectations.",
+      "tags": [
+        "hot_warm_cold",
+        "dr_models",
+        "resilience"
+      ],
+      "objectiveIds": [
+        "3.4"
+      ],
+      "left": [
+        "Hot site",
+        "Warm site",
+        "Cold site",
+        "Active-active"
+      ],
+      "right": [
+        "Fully provisioned and ready for rapid failover",
+        "Partially provisioned with moderate activation time",
+        "Minimal infrastructure; highest setup time after outage",
+        "Concurrent production across multiple locations"
+      ],
+      "pairs": {
+        "Hot site": "Fully provisioned and ready for rapid failover",
+        "Warm site": "Partially provisioned with moderate activation time",
+        "Cold site": "Minimal infrastructure; highest setup time after outage",
+        "Active-active": "Concurrent production across multiple locations"
+      }
+    },
+    {
+      "type": "mcq",
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "rationaleCorrect": "RPO defines how far back in time recovered data can be without unacceptable loss.",
+      "rationaleIncorrect": {
+        "A": "RTO tracks time to restore functionality, not data-loss tolerance.",
+        "C": "MTBF estimates reliability intervals, not recovery data tolerance.",
+        "D": "Uptime percentage is a service-level outcome, not a point-in-time data-loss metric.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "rpo_rto_mixup",
+        "metric_misclassification"
+      ],
+      "id": "ch9_obj34_q08",
+      "stem": "Which metric measures the maximum tolerable data loss after a disruption?",
+      "explanation": "RPO measures allowable data loss, while RTO measures restoration time.",
+      "tags": [
+        "rpo",
+        "rto",
+        "resilience_metrics"
+      ],
+      "objectiveIds": [
+        "3.4"
+      ],
+      "options": {
+        "A": "RTO",
+        "B": "RPO",
+        "C": "MTBF",
+        "D": "SLA uptime percentage"
+      },
+      "answer": "B"
+    },
+    {
+      "type": "multi_select",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "Monitoring plus airflow design lowers thermal and moisture-induced outage risks.",
+      "rationaleIncorrect": {
+        "A": "Correct: telemetry provides early warning before failure.",
+        "B": "Open-air cooling is uncontrolled and introduces contamination/humidity variability.",
+        "C": "Correct: aisle containment improves predictable thermal management.",
+        "D": "Poor placement increases environmental and physical hazard exposure."
+      },
+      "misconceptionTags": [
+        "environmental_controls_overlooked",
+        "improper_facility_practice"
+      ],
+      "id": "ch9_obj34_q09",
+      "stem": "Which controls reduce environmental risk in a server facility? (Choose TWO.)",
+      "explanation": "Environmental telemetry and controlled airflow/humidity reduce overheating and moisture-related failures.",
+      "tags": [
+        "environmental_monitoring",
+        "hvac",
+        "resilience"
+      ],
+      "objectiveIds": [
+        "3.4"
+      ],
+      "options": {
+        "A": "Temperature and humidity monitoring with alerting",
+        "B": "Unmanaged open windows for cooling",
+        "C": "Documented hot/cold aisle containment strategy",
+        "D": "Stacking network switches on carpet near water lines"
+      },
+      "answers": [
+        "A",
+        "C"
+      ]
+    },
+    {
+      "type": "mcq",
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "rationaleCorrect": "Exercises expose gaps before real incidents and improve response confidence.",
+      "rationaleIncorrect": {
+        "A": "Inventory remains essential for scope and impact assessment.",
+        "C": "Monitoring and testing are complementary, not substitutes.",
+        "D": "Post-test lessons are a core output, not optional.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "plan_without_testing",
+        "resilience_overconfidence"
+      ],
+      "id": "ch9_obj34_q10",
+      "stem": "What is the strongest reason to test business continuity and disaster recovery plans on a schedule?",
+      "explanation": "Testing validates assumptions, reveals dependencies, and ensures teams can execute under pressure.",
+      "tags": [
+        "bcdr",
+        "resilience_testing",
+        "operations_readiness"
+      ],
+      "objectiveIds": [
+        "3.4"
+      ],
+      "options": {
+        "A": "To reduce need for asset inventory",
+        "B": "To confirm plans and roles work as designed in realistic conditions",
+        "C": "To eliminate the need for monitoring",
+        "D": "To avoid documenting lessons learned"
+      },
+      "answer": "B"
+    }
+  ]
+}

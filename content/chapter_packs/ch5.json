@@ -1,0 +1,1704 @@
+{
+  "schema_version": "secplus_game_pack_v1",
+  "pack_id": "ch5",
+  "exam": {
+    "vendor": "CompTIA",
+    "name": "Security+",
+    "code": "SY0-701",
+    "max_exam_minutes": 90
+  },
+  "chapter": {
+    "number": 5,
+    "title": "Security Assessment and Testing",
+    "page_range_in_user_pdf": "162-231"
+  },
+  "design_intent": {
+    "mode": [
+      "campaign",
+      "roguelike_practice"
+    ],
+    "pvp_optional": true,
+    "default_pvp_enabled": false,
+    "player_goal": "Master vulnerability management, CVE/CVSS/SCAP, and security assessment & testing patterns for SY0-701 objectives 4.3, 4.4, 4.8, 5.3, and 5.5."
+  },
+  "progression": {
+    "xp_rules": {
+      "base_xp_per_correct": 10,
+      "streak_bonus_per_5": 15,
+      "time_bonus_threshold_seconds": 30,
+      "time_bonus_xp": 5,
+      "mistake_penalty_xp": 0
+    },
+    "mastery_model": {
+      "scale": "0-100",
+      "update": "Mastery += 8 on first correct; +4 on repeat correct; -6 on wrong (floor 0).",
+      "tags_drive_mastery": true
+    },
+    "unlock_rules": [
+      {
+        "unlock": "ch5-m2",
+        "when": "complete ch5-m1"
+      },
+      {
+        "unlock": "ch5-m3",
+        "when": "complete ch5-m2"
+      },
+      {
+        "unlock": "boss_5",
+        "when": "complete ch5-m3"
+      }
+    ]
+  },
+  "tags": {
+    "concepts": [
+      "vuln_mgmt.lifecycle",
+      "vuln_scan.targets",
+      "vuln_scan.frequency",
+      "vuln_scan.credentialed",
+      "vuln_scan.intrusive",
+      "vuln_scan.perspective",
+      "vuln_scan.agent_based",
+      "vuln_scan.maintenance",
+      "vuln_scan.fp_fn",
+      "cve",
+      "cvss.base",
+      "cvss.severity_scale",
+      "scap",
+      "remediation.options",
+      "remediation.validation",
+      "risk.context",
+      "assessment.vuln_scan_vs_pentest",
+      "assessment.audit_attestation",
+      "pentest.roe",
+      "pentest.knowledge_levels",
+      "pentest.recon",
+      "pentest.post_exploitation",
+      "pentest.reporting",
+      "threat_hunting",
+      "third_party_risk.assessment",
+      "assessment.internal_external"
+    ],
+    "difficulty_scale": {
+      "1": "Recall",
+      "2": "Understand",
+      "3": "Apply",
+      "4": "Analyze",
+      "5": "Synthesize"
+    }
+  },
+  "trap_list": [
+    {
+      "id": "trap-ch5-01",
+      "name": "Vulnerability scan vs Pen test vs Threat hunting",
+      "misconception": "Scans find known issues fast; pen tests prove real-world exploit paths; hunting looks for active/adaptive adversaries in telemetry.",
+      "fix": "Clarify this distinction before answering: Scans find known issues fast; pen tests prove real-world exploit paths; hunting looks for active/adaptive adversaries in telemetry.",
+      "drill_question_ids": [
+        "ch5-q01",
+        "ch5-q17",
+        "ch5-q20",
+        "ch5-q25"
+      ]
+    },
+    {
+      "id": "trap-ch5-02",
+      "name": "CVE vs CVSS vs CPE vs SCAP",
+      "misconception": "CVE names a vuln; CVSS scores severity; CPE names the product/platform; SCAP is the automation ‘toolbox’ that ties standards together.",
+      "fix": "Clarify this distinction before answering: CVE names a vuln; CVSS scores severity; CPE names the product/platform; SCAP is the automation ‘toolbox’ that ties standards together.",
+      "drill_question_ids": [
+        "ch5-q09",
+        "ch5-q10",
+        "ch5-q11",
+        "ch5-q13"
+      ]
+    },
+    {
+      "id": "trap-ch5-03",
+      "name": "Credentialed vs non-credentialed scans",
+      "misconception": "Credentialed scans log in (better accuracy, fewer blind spots); non-credentialed scans view the target from outside.",
+      "fix": "Clarify this distinction before answering: Credentialed scans log in (better accuracy, fewer blind spots); non-credentialed scans view the target from outside.",
+      "drill_question_ids": [
+        "ch5-q03",
+        "ch5-q06",
+        "ch5-q22"
+      ]
+    },
+    {
+      "id": "trap-ch5-04",
+      "name": "Intrusive / dangerous plugins",
+      "misconception": "Some checks can crash services. Validate in a test window or isolated environment before running in production.",
+      "fix": "Clarify this distinction before answering: Some checks can crash services. Validate in a test window or isolated environment before running in production.",
+      "drill_question_ids": [
+        "ch5-q04",
+        "ch5-q23"
+      ]
+    },
+    {
+      "id": "trap-ch5-05",
+      "name": "Internal vs external scan perspective",
+      "misconception": "Internal sees what an insider/lateral attacker could see; external sees what the internet sees (often required for compliance).",
+      "fix": "Clarify this distinction before answering: Internal sees what an insider/lateral attacker could see; external sees what the internet sees (often required for compliance).",
+      "drill_question_ids": [
+        "ch5-q06",
+        "ch5-q25"
+      ]
+    },
+    {
+      "id": "trap-ch5-06",
+      "name": "False positives and false negatives",
+      "misconception": "FP wastes time; FN hides real risk. Always validate high-impact findings before closing tickets.",
+      "fix": "Clarify this distinction before answering: FP wastes time; FN hides real risk. Always validate high-impact findings before closing tickets.",
+      "drill_question_ids": [
+        "ch5-q07",
+        "ch5-q08"
+      ]
+    },
+    {
+      "id": "trap-ch5-07",
+      "name": "CVSS is not the whole risk picture",
+      "misconception": "A high CVSS with no exposure may be lower priority than a medium score on a public-facing, critical system.",
+      "fix": "Clarify this distinction before answering: A high CVSS with no exposure may be lower priority than a medium score on a public-facing, critical system.",
+      "drill_question_ids": [
+        "ch5-q12",
+        "ch5-q16",
+        "ch5-q26"
+      ]
+    },
+    {
+      "id": "trap-ch5-08",
+      "name": "Rules of engagement (RoE) isn’t paperwork",
+      "misconception": "RoE is how you prevent accidental outages and legal messes: scope, timing, authorization, comms, and success criteria.",
+      "fix": "Clarify this distinction before answering: RoE is how you prevent accidental outages and legal messes: scope, timing, authorization, comms, and success criteria.",
+      "drill_question_ids": [
+        "ch5-q17",
+        "ch5-q19",
+        "ch5-q27"
+      ]
+    }
+  ],
+  "missions": [
+    {
+      "id": "ch5-m1",
+      "name": "Vulnerability Scanning: Do It Without Breaking Stuff",
+      "goal": "Pick scan targets, choose scan configurations, set scan frequency, and interpret scan results (including false positives/negatives).",
+      "mechanics": {
+        "minigame": "learn_quiz",
+        "mode": "campaign",
+        "recommended_time_min": 20,
+        "coaching_tips": [
+          "Scan targets should come from your asset inventory: if you don't know what you own, you can't secure it.",
+          "Credentialed scans usually produce better findings, but always use least-privilege accounts.",
+          "Treat intrusive/dangerous plugins like power tools: test first, schedule carefully."
+        ],
+        "rules": {
+          "hints_per_question": 1,
+          "show_explanations": true
+        }
+      },
+      "question_ids": [
+        "ch5-q01",
+        "ch5-q02",
+        "ch5-q03",
+        "ch5-q04",
+        "ch5-q05",
+        "ch5-q06",
+        "ch5-q07",
+        "ch5-q08",
+        "ch5-q22",
+        "ch5-q23"
+      ],
+      "rewards": {
+        "xp": 140,
+        "loot": [
+          "badge_ch5-m1"
+        ],
+        "unlock": "ch5-m2"
+      }
+    },
+    {
+      "id": "ch5-m2",
+      "name": "Prioritize Like a Pro: CVE/CVSS + Business Context",
+      "goal": "Use CVE/CVSS and SCAP concepts, then apply real-world context (exposure, compensating controls, criticality) to decide what to fix first.",
+      "mechanics": {
+        "minigame": "learn_quiz",
+        "mode": "campaign",
+        "recommended_time_min": 22,
+        "coaching_tips": [
+          "CVE is the name; CVSS is the severity score; your business context decides urgency.",
+          "Always validate the highest-impact findings before you burn time on massive remediation.",
+          "Verification (rescan/retest) is where you catch 'paper fixes'."
+        ],
+        "rules": {
+          "hints_per_question": 1,
+          "show_explanations": true
+        }
+      },
+      "question_ids": [
+        "ch5-q09",
+        "ch5-q10",
+        "ch5-q11",
+        "ch5-q12",
+        "ch5-q13",
+        "ch5-q14",
+        "ch5-q15",
+        "ch5-q16",
+        "ch5-q21",
+        "ch5-q26"
+      ],
+      "rewards": {
+        "xp": 160,
+        "loot": [
+          "badge_ch5-m2"
+        ],
+        "unlock": "ch5-m3"
+      }
+    },
+    {
+      "id": "ch5-m3",
+      "name": "Assessment & Testing: Pen Tests, Audits, and Third-Party Risk",
+      "goal": "Choose the right assessment type, define rules of engagement, perform recon safely, and understand audit/attestation and third-party risk needs.",
+      "mechanics": {
+        "minigame": "learn_quiz",
+        "mode": "campaign",
+        "recommended_time_min": 20,
+        "coaching_tips": [
+          "RoE is your safety rails: scope, timing, authorization, comms, and escalation.",
+          "Audits are evidence of control/compliance; pen tests are adversarial impact proof.",
+          "Third-party risk is not vibes — ask for evidence, contracts, and access boundaries."
+        ],
+        "rules": {
+          "hints_per_question": 1,
+          "show_explanations": true
+        }
+      },
+      "question_ids": [
+        "ch5-q17",
+        "ch5-q18",
+        "ch5-q19",
+        "ch5-q20",
+        "ch5-q27",
+        "ch5-q28",
+        "ch5-q24",
+        "ch5-q25"
+      ],
+      "rewards": {
+        "xp": 160,
+        "loot": [
+          "badge_ch5-m3"
+        ],
+        "unlock": "boss_5"
+      }
+    }
+  ],
+  "boss": {
+    "id": "boss_5",
+    "name": "Boss Fight: Assessment Orchestrator",
+    "premise": "Mixed scenarios: pick the right assessment, avoid unsafe testing, and prioritize remediation using CVSS plus context.",
+    "mechanics": {
+      "format": "timed_synthesis",
+      "total_questions": 10,
+      "time_limit_seconds_total": 900,
+      "lives": 2
+    },
+    "question_ids": [
+      "ch5-q03",
+      "ch5-q04",
+      "ch5-q06",
+      "ch5-q12",
+      "ch5-q13",
+      "ch5-q16",
+      "ch5-q17",
+      "ch5-q19",
+      "ch5-q27",
+      "ch5-q28"
+    ],
+    "rewards": {
+      "xp": 340,
+      "loot": [
+        "title_ch5_cleared",
+        "unlock_roguelike_runset_ch5"
+      ]
+    }
+  },
+  "roguelike": {
+    "runset_id": "roguelike_runset_ch5",
+    "run_minutes_target": 18,
+    "structure": {
+      "acts": 3,
+      "encounters_per_act": 4,
+      "rest_sites_per_act": 1,
+      "boss_per_run": "boss_5_variant"
+    },
+    "cards": {
+      "threat_cards": [
+        {
+          "id": "threat_ransomware_wave",
+          "name": "Ransomware Wave",
+          "tags": [
+            "vuln_scan.targets",
+            "remediation.validation"
+          ]
+        },
+        {
+          "id": "threat_supply_chain",
+          "name": "Supply-Chain Surprise",
+          "tags": [
+            "risk.context",
+            "vuln_scan.maintenance"
+          ]
+        },
+        {
+          "id": "threat_shadow_it",
+          "name": "Shadow IT Sprawl",
+          "tags": [
+            "vuln_scan.targets",
+            "vuln_scan.frequency"
+          ]
+        }
+      ],
+      "constraint_cards": [
+        {
+          "id": "constraint_outage_risk",
+          "name": "Outage Risk",
+          "effect": "Inject one decision about intrusive/dangerous checks or maintenance windows this act."
+        },
+        {
+          "id": "constraint_compliance",
+          "name": "Compliance Heat",
+          "effect": "At least one question focuses on audit/attestation/external scanning requirements."
+        }
+      ],
+      "control_cards": [
+        {
+          "id": "control_segmentation",
+          "name": "Segmentation",
+          "tags": [
+            "remediation.options",
+            "risk.context"
+          ]
+        },
+        {
+          "id": "control_patch_window",
+          "name": "Patch Window Discipline",
+          "tags": [
+            "vuln_mgmt.lifecycle",
+            "remediation.validation"
+          ]
+        },
+        {
+          "id": "control_roe",
+          "name": "RoE Tightening",
+          "tags": [
+            "pentest.roe",
+            "pentest.recon"
+          ]
+        }
+      ]
+    },
+    "question_pool_ids": "use_all_questions_in_pack"
+  },
+  "pvp": {
+    "enabled": false,
+    "modes": [
+      {
+        "id": "duel_quickfire",
+        "name": "Quickfire Duel",
+        "description": "Both players answer the same 10 questions. Faster correct answers generate a 5s time tax on the opponent's next question.",
+        "rules": {
+          "questions": 10,
+          "time_per_question_seconds": 35,
+          "attack_on_correct_under_seconds": 20,
+          "time_tax_seconds": 5
+        }
+      }
+    ],
+    "fairness": {
+      "matchmaking": "match by mastery band (+/- 10 mastery points)",
+      "anti_cheat": "server timestamps + random question order"
+    }
+  },
+  "question_bank": [
+    {
+      "id": "ch5-q01",
+      "type": "mcq",
+      "stem": "Which activity best describes the FIRST step of a vulnerability management life cycle?",
+      "options": {
+        "A": "Run exploitation attempts to confirm impact",
+        "B": "Identify and detect vulnerabilities in assets",
+        "C": "Apply compensating controls and document exceptions",
+        "D": "Publish the executive report"
+      },
+      "answer": "B",
+      "explanation": "A typical vulnerability management flow starts by identifying/detecting issues (often via scanning), then validating findings, remediating, and verifying the fix.",
+      "tags": [
+        "vuln_mgmt.lifecycle"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "1.3"
+      ],
+      "rationaleCorrect": "A typical vulnerability management flow starts by identifying/detecting issues (often via scanning), then validating findings, remediating, and verifying the fix.",
+      "misconceptionTags": [
+        "vuln_mgmt.lifecycle_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch5-q02",
+      "type": "multi_select",
+      "stem": "Which assets are common vulnerability scan targets in an enterprise environment? (Select all that apply.)",
+      "options": {
+        "A": "Servers",
+        "B": "Workstations/endpoints",
+        "C": "Network devices",
+        "D": "Mobile devices",
+        "E": "Printers/IoT",
+        "F": "Only publicly-facing web servers"
+      },
+      "answers": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "explanation": "Scan targets include servers, endpoints, network gear, mobile/IoT—basically anything that runs code or exposes services. Limiting scans only to public web servers leaves huge blind spots.",
+      "tags": [
+        "vuln_scan.targets"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "3.2"
+      ],
+      "rationaleCorrect": "Scan targets include servers, endpoints, network gear, mobile/IoT—basically anything that runs code or exposes services.",
+      "misconceptionTags": [
+        "vuln_scan.targets_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "E": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "F": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch5-q03",
+      "type": "mcq",
+      "stem": "A security team wants more accurate vulnerability scan results with fewer blind spots. What scan approach most directly improves depth of findings?",
+      "options": {
+        "A": "External, non-credentialed scanning",
+        "B": "Credentialed scanning using least-privilege accounts",
+        "C": "Running scans less frequently",
+        "D": "Only scanning during business hours"
+      },
+      "answer": "B",
+      "explanation": "Credentialed scans authenticate to the target, allowing checks that can’t be done from the outside (patch level, local config, installed packages). Use least-privilege to reduce risk.",
+      "tags": [
+        "vuln_scan.credentialed"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Credentialed scans authenticate to the target, allowing checks that can’t be done from the outside (patch level, local config, installed packages).",
+      "misconceptionTags": [
+        "vuln_scan.credentialed_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch5-q04",
+      "type": "mcq",
+      "stem": "A vulnerability scanner offers “dangerous” or “intrusive” plugins. What is the safest operational practice before enabling them broadly?",
+      "options": {
+        "A": "Enable them on production during peak hours for realism",
+        "B": "Test them first in an isolated/test environment or maintenance window",
+        "C": "Disable all plugins permanently",
+        "D": "Run them only from an external perspective"
+      },
+      "answer": "B",
+      "explanation": "Intrusive checks can crash services or cause outages. Validate the impact in a test environment and schedule carefully (maintenance windows) before production use.",
+      "tags": [
+        "vuln_scan.intrusive"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "1.3"
+      ],
+      "rationaleCorrect": "Intrusive checks can crash services or cause outages.",
+      "misconceptionTags": [
+        "vuln_scan.intrusive_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch5-q05",
+      "type": "mcq",
+      "stem": "Which factor should MOST influence vulnerability scan frequency?",
+      "options": {
+        "A": "Only the scanner vendor’s default schedule",
+        "B": "Business needs, threat landscape, and regulatory requirements",
+        "C": "The number of analysts on the team",
+        "D": "The age of the network cabling"
+      },
+      "answer": "B",
+      "explanation": "Scan frequency is a risk decision. Higher exposure, tighter compliance requirements, or an active threat landscape usually means scanning more often.",
+      "tags": [
+        "vuln_scan.frequency",
+        "risk.context"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Scan frequency is a risk decision. It aligns with the intended control outcome and avoids the common trap choices in this question.",
+      "misconceptionTags": [
+        "vuln_scan.frequency_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch5-q06",
+      "type": "mcq",
+      "stem": "An organization must meet PCI DSS requirements for external vulnerability scanning. Which approach best matches that requirement?",
+      "options": {
+        "A": "Internal scan from a workstation inside the LAN",
+        "B": "External scan performed by an approved scanning vendor (ASV)",
+        "C": "A penetration test with no written authorization",
+        "D": "Only scanning source code with SAST tools"
+      },
+      "answer": "B",
+      "explanation": "PCI DSS external scanning is typically performed from an external perspective and often requires an Approved Scanning Vendor (ASV) to satisfy compliance.",
+      "tags": [
+        "vuln_scan.perspective",
+        "assessment.audit_attestation"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "PCI DSS external scanning is typically performed from an external perspective and often requires an Approved Scanning Vendor (ASV) to satisfy compliance.",
+      "misconceptionTags": [
+        "vuln_scan.perspective_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch5-q07",
+      "type": "mcq",
+      "stem": "A scan report flags a vulnerability, but after verification the system is not actually affected. What is this result?",
+      "options": {
+        "A": "True positive",
+        "B": "True negative",
+        "C": "False positive",
+        "D": "False negative"
+      },
+      "answer": "C",
+      "explanation": "False positive = the scanner reports an issue that isn’t real. It burns analyst time, so validation steps matter—especially for high-impact findings.",
+      "tags": [
+        "vuln_scan.fp_fn"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 40,
+      "objectiveIds": [
+        "1.3"
+      ],
+      "rationaleCorrect": "False positive = the scanner reports an issue that isn’t real.",
+      "misconceptionTags": [
+        "vuln_scan.fp_fn_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch5-q08",
+      "type": "mcq",
+      "stem": "A real vulnerability exists on a server, but the scanner fails to detect it. What is this result?",
+      "options": {
+        "A": "True positive",
+        "B": "True negative",
+        "C": "False positive",
+        "D": "False negative"
+      },
+      "answer": "D",
+      "explanation": "False negative = a real issue is missed. It’s more dangerous than a false positive because it creates a false sense of safety.",
+      "tags": [
+        "vuln_scan.fp_fn"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 40,
+      "objectiveIds": [
+        "1.3"
+      ],
+      "rationaleCorrect": "False negative = a real issue is missed.",
+      "misconceptionTags": [
+        "vuln_scan.fp_fn_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      }
+    },
+    {
+      "id": "ch5-q09",
+      "type": "mcq",
+      "stem": "What does a CVE primarily provide?",
+      "options": {
+        "A": "A numeric severity score for a vulnerability",
+        "B": "A standardized identifier/name for a publicly known vulnerability",
+        "C": "A product naming convention",
+        "D": "A compliance framework for audits"
+      },
+      "answer": "B",
+      "explanation": "CVE = identifier. It’s how everyone refers to the same vulnerability without ambiguity. Scoring/severity is handled by CVSS.",
+      "tags": [
+        "cve"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 50,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "CVE = identifier. It aligns with the intended control outcome and avoids the common trap choices in this question.",
+      "misconceptionTags": [
+        "cve_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch5-q10",
+      "type": "mcq",
+      "stem": "Which statement best describes CVSS?",
+      "options": {
+        "A": "A product naming scheme used by scanners",
+        "B": "A scoring system that rates vulnerability severity using metrics",
+        "C": "A legal document authorizing penetration testing",
+        "D": "A protocol for sharing threat intelligence"
+      },
+      "answer": "B",
+      "explanation": "CVSS is a standardized way to score severity (base/temporal/environmental). It helps prioritize—but should be combined with business context.",
+      "tags": [
+        "cvss.base",
+        "risk.context"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "2.1"
+      ],
+      "rationaleCorrect": "CVSS is a standardized way to score severity (base/temporal/environmental).",
+      "misconceptionTags": [
+        "cvss.base_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch5-q11",
+      "type": "mcq",
+      "stem": "In the CVSS base metrics, which Attack Complexity values are valid?",
+      "options": {
+        "A": "High and Low",
+        "B": "Critical and Medium",
+        "C": "Easy and Hard",
+        "D": "Internal and External"
+      },
+      "answer": "A",
+      "explanation": "CVSS Attack Complexity is typically Low or High. It’s part of exploitability in the base score.",
+      "tags": [
+        "cvss.base"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "2.2"
+      ],
+      "rationaleCorrect": "CVSS Attack Complexity is typically Low or High.",
+      "misconceptionTags": [
+        "cvss.base_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch5-q12",
+      "type": "mcq",
+      "stem": "A CVSS base score of 9.4 maps to which qualitative severity rating?",
+      "options": {
+        "A": "Low",
+        "B": "Medium",
+        "C": "High",
+        "D": "Critical"
+      },
+      "answer": "D",
+      "explanation": "Common qualitative mapping: 9.0–10.0 = Critical, 7.0–8.9 = High, 4.0–6.9 = Medium, 0.0–3.9 = Low.",
+      "tags": [
+        "cvss.severity_scale"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "1.3"
+      ],
+      "rationaleCorrect": "Common qualitative mapping: 9.0–10.0 = Critical, 7.0–8.9 = High, 4.0–6.9 = Medium, 0.0–3.9 = Low.",
+      "misconceptionTags": [
+        "cvss.severity_scale_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      }
+    },
+    {
+      "id": "ch5-q13",
+      "type": "matching",
+      "stem": "Match each SCAP component to what it standardizes.",
+      "explanation": "SCAP ties together standards: CPE for platform naming, CVE for vuln IDs, CVSS for scoring, OVAL for test definitions, and XCCDF for configuration/compliance checklists.",
+      "tags": [
+        "scap"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 80,
+      "left": [
+        "CPE",
+        "CVE",
+        "CVSS",
+        "OVAL",
+        "XCCDF"
+      ],
+      "right": [
+        "Product/platform naming",
+        "Vulnerability naming",
+        "Severity scoring",
+        "Security checks/tests definitions",
+        "Configuration/compliance benchmarks"
+      ],
+      "pairs": {
+        "CPE": "Product/platform naming",
+        "CVE": "Vulnerability naming",
+        "CVSS": "Severity scoring",
+        "OVAL": "Security checks/tests definitions",
+        "XCCDF": "Configuration/compliance benchmarks"
+      },
+      "objectiveIds": [
+        "5.4"
+      ],
+      "rationaleCorrect": "SCAP ties together standards: CPE for platform naming, CVE for vuln IDs, CVSS for scoring, OVAL for test definitions, and XCCDF for configuration/compliance checklists.",
+      "misconceptionTags": [
+        "scap_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch5-q14",
+      "type": "multi_select",
+      "stem": "Which are common remediation options after a confirmed vulnerability finding? (Select all that apply.)",
+      "options": {
+        "A": "Apply a patch/update",
+        "B": "Disable/remove the vulnerable service",
+        "C": "Add compensating controls (e.g., segmentation)",
+        "D": "Ignore it and delete the ticket",
+        "E": "Document an exception with risk acceptance"
+      },
+      "answers": [
+        "A",
+        "B",
+        "C",
+        "E"
+      ],
+      "explanation": "Remediation can be patching, removing the exposure, adding compensating controls, or formally accepting risk via exception—never by silently ignoring the issue.",
+      "tags": [
+        "remediation.options",
+        "risk.context"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "1.3"
+      ],
+      "rationaleCorrect": "Remediation can be patching, removing the exposure, adding compensating controls, or formally accepting risk via exception—never by silently ignoring the issue.",
+      "misconceptionTags": [
+        "remediation.options_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "E": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      }
+    },
+    {
+      "id": "ch5-q15",
+      "type": "mcq",
+      "stem": "After a fix is deployed, what step best confirms the vulnerability is actually resolved?",
+      "options": {
+        "A": "Close the ticket immediately",
+        "B": "Verify by rescanning / retesting and confirming evidence",
+        "C": "Wait one week and assume it’s fixed",
+        "D": "Only update the asset inventory"
+      },
+      "answer": "B",
+      "explanation": "Verification matters. Rescan or retest (and confirm evidence) so you don’t ship ‘paper fixes’ that leave exposure behind.",
+      "tags": [
+        "remediation.validation",
+        "vuln_mgmt.lifecycle"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "4.2"
+      ],
+      "rationaleCorrect": "Verification matters. It aligns with the intended control outcome and avoids the common trap choices in this question.",
+      "misconceptionTags": [
+        "remediation.validation_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch5-q16",
+      "type": "mcq",
+      "stem": "A team chooses to delay patching a high-severity vulnerability because the affected system is isolated with strict network segmentation and no internet access. Which concept best explains the decision?",
+      "options": {
+        "A": "They are calculating asset depreciation",
+        "B": "They are applying business context and compensating controls",
+        "C": "They are performing passive reconnaissance",
+        "D": "They are increasing attack surface"
+      },
+      "answer": "B",
+      "explanation": "CVSS is a starting point. Exposure, segmentation, and compensating controls can change real-world risk and therefore prioritization.",
+      "tags": [
+        "risk.context",
+        "remediation.options"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "1.3"
+      ],
+      "rationaleCorrect": "CVSS is a starting point. It aligns with the intended control outcome and avoids the common trap choices in this question.",
+      "misconceptionTags": [
+        "risk.context_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch5-q17",
+      "type": "mcq",
+      "stem": "Which item is MOST likely to be explicitly defined in a penetration test Rules of Engagement (RoE) document?",
+      "options": {
+        "A": "The CVSS base score for every finding",
+        "B": "Scope boundaries, timing windows, and communication/escalation procedures",
+        "C": "The exact exploit code to be used",
+        "D": "The organization’s full source code repository"
+      },
+      "answer": "B",
+      "explanation": "RoE is the contract for safe/authorized testing: scope, timing, authorized techniques, reporting, comms, and escalation to avoid outages and legal issues.",
+      "tags": [
+        "pentest.roe"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "RoE is the contract for safe/authorized testing: scope, timing, authorized techniques, reporting, comms, and escalation to avoid outages and legal issues.",
+      "misconceptionTags": [
+        "pentest.roe_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch5-q18",
+      "type": "matching",
+      "stem": "Match each penetration test knowledge level to what the tester knows upfront.",
+      "explanation": "Black box = outsider view; gray box = partial knowledge; white box = full knowledge and often deeper coverage.",
+      "tags": [
+        "pentest.knowledge_levels"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 65,
+      "left": [
+        "Black box",
+        "Gray box",
+        "White box"
+      ],
+      "right": [
+        "No internal knowledge; acts like an outsider",
+        "Partial knowledge/limited credentials",
+        "Full knowledge (architecture, code, credentials)"
+      ],
+      "pairs": {
+        "Black box": "No internal knowledge; acts like an outsider",
+        "Gray box": "Partial knowledge/limited credentials",
+        "White box": "Full knowledge (architecture, code, credentials)"
+      },
+      "objectiveIds": [
+        "3.1"
+      ],
+      "rationaleCorrect": "Black box = outsider view; gray box = partial knowledge; white box = full knowledge and often deeper coverage.",
+      "misconceptionTags": [
+        "pentest.knowledge_levels_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch5-q19",
+      "type": "multi_select",
+      "stem": "Which activities commonly fall under reconnaissance during a penetration test? (Select all that apply.)",
+      "options": {
+        "A": "Passive OSINT collection",
+        "B": "Port/service discovery",
+        "C": "Phishing employees without approval",
+        "D": "DNS enumeration",
+        "E": "Identifying public IP ranges and exposed services"
+      },
+      "answers": [
+        "A",
+        "B",
+        "D",
+        "E"
+      ],
+      "explanation": "Recon includes OSINT and technical discovery like port scanning and enumeration—BUT social engineering (like phishing) must be explicitly authorized in RoE.",
+      "tags": [
+        "pentest.recon",
+        "pentest.roe"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 85,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "Recon includes OSINT and technical discovery like port scanning and enumeration—BUT social engineering (like phishing) must be explicitly authorized in RoE.",
+      "misconceptionTags": [
+        "pentest.recon_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "E": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      }
+    },
+    {
+      "id": "ch5-q20",
+      "type": "mcq",
+      "stem": "Which statement best distinguishes an audit from a penetration test?",
+      "options": {
+        "A": "Audits are always performed externally; pen tests are internal only",
+        "B": "Audits focus on compliance/control evidence; pen tests focus on adversarial exploitation paths",
+        "C": "Audits do not require documentation; pen tests do",
+        "D": "Pen tests only check policies; audits only test networks"
+      },
+      "answer": "B",
+      "explanation": "Audits typically assess whether controls and processes meet requirements (evidence-based). Pen tests attempt to emulate an attacker to prove exploit chains and impact.",
+      "tags": [
+        "assessment.audit_attestation",
+        "assessment.vuln_scan_vs_pentest"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "Audits typically assess whether controls and processes meet requirements (evidence-based).",
+      "misconceptionTags": [
+        "assessment.audit_attestation_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch5-q21",
+      "type": "mcq",
+      "stem": "Which outcome is MOST appropriate at the end of a vulnerability scan program cycle?",
+      "options": {
+        "A": "A list of guesses with no validation",
+        "B": "A prioritized remediation plan tied to risk and tracked to closure",
+        "C": "Only a raw scanner export file",
+        "D": "A ban on future scanning"
+      },
+      "answer": "B",
+      "explanation": "Good vuln management converts findings into prioritized, tracked remediation (with validation and verification). Data without action is just noise.",
+      "tags": [
+        "vuln_mgmt.lifecycle",
+        "pentest.reporting"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "5.2"
+      ],
+      "rationaleCorrect": "Good vuln management converts findings into prioritized, tracked remediation (with validation and verification).",
+      "misconceptionTags": [
+        "vuln_mgmt.lifecycle_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch5-q22",
+      "type": "mcq",
+      "stem": "Why is scanner maintenance (including frequent plugin/signature updates) critical?",
+      "options": {
+        "A": "It reduces the need for asset inventories",
+        "B": "It allows detection of newly disclosed vulnerabilities and reduces missed findings",
+        "C": "It prevents the need for patching endpoints",
+        "D": "It guarantees zero false positives"
+      },
+      "answer": "B",
+      "explanation": "Scanners rely on updated plugins/signatures to detect new CVEs and improve checks. Stale scanners miss modern issues.",
+      "tags": [
+        "vuln_scan.maintenance"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Scanners rely on updated plugins/signatures to detect new CVEs and improve checks.",
+      "misconceptionTags": [
+        "vuln_scan.maintenance_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch5-q23",
+      "type": "mcq",
+      "stem": "A company deploys agents on endpoints that continuously check for missing patches and misconfigurations, even when devices are off-network. Which scan model is this?",
+      "options": {
+        "A": "External perspective scanning",
+        "B": "Agent-based scanning",
+        "C": "Intrusive plugin scanning",
+        "D": "Black-box penetration testing"
+      },
+      "answer": "B",
+      "explanation": "Agent-based scanning can operate continuously and off-network (depending on design), and often provides deeper local visibility than pure network scans.",
+      "tags": [
+        "vuln_scan.agent_based"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "3.4"
+      ],
+      "rationaleCorrect": "Agent-based scanning can operate continuously and off-network (depending on design), and often provides deeper local visibility than pure network scans.",
+      "misconceptionTags": [
+        "vuln_scan.agent_based_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch5-q24",
+      "type": "multi_select",
+      "stem": "Which items are typically part of a strong penetration test deliverable/report? (Select all that apply.)",
+      "options": {
+        "A": "Executive summary in business language",
+        "B": "Technical details and proof-of-exploit/evidence",
+        "C": "Clear remediation recommendations",
+        "D": "A promise that the org is now 'unhackable'",
+        "E": "Scope and methodology used"
+      },
+      "answers": [
+        "A",
+        "B",
+        "C",
+        "E"
+      ],
+      "explanation": "Good reports translate technical findings into risk and actions: executive summary, evidence, scope/methods, and remediation steps. No report can guarantee perfect security.",
+      "tags": [
+        "pentest.reporting"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Good reports translate technical findings into risk and actions: executive summary, evidence, scope/methods, and remediation steps.",
+      "misconceptionTags": [
+        "pentest.reporting_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "E": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      }
+    },
+    {
+      "id": "ch5-q25",
+      "type": "mcq",
+      "stem": "Which activity best represents threat hunting (as opposed to scanning)?",
+      "options": {
+        "A": "Running a weekly credentialed vulnerability scan",
+        "B": "Investigating logs/telemetry to proactively search for signs of compromise without a specific alert",
+        "C": "Calculating CVSS scores for new CVEs",
+        "D": "Updating scanner plugins"
+      },
+      "answer": "B",
+      "explanation": "Threat hunting is analyst-driven and telemetry-focused: you proactively look for adversary behavior and anomalies, not just known vuln signatures.",
+      "tags": [
+        "threat_hunting"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "2.1"
+      ],
+      "rationaleCorrect": "Threat hunting is analyst-driven and telemetry-focused: you proactively look for adversary behavior and anomalies, not just known vuln signatures.",
+      "misconceptionTags": [
+        "threat_hunting_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch5-q26",
+      "type": "mcq",
+      "stem": "A scan uses an internal perspective and finds many more issues than the external scan. What is the BEST explanation?",
+      "options": {
+        "A": "Internal scans always use CVSS and external scans never do",
+        "B": "Internal perspective often sees additional services, trust relationships, and east-west exposure not visible from the internet",
+        "C": "External scans are illegal",
+        "D": "Internal scans can’t produce false positives"
+      },
+      "answer": "B",
+      "explanation": "Internal scanning often reveals lateral movement paths and internal-only services. External scanning shows what an internet attacker sees. Both views matter.",
+      "tags": [
+        "vuln_scan.perspective"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "4.3"
+      ],
+      "rationaleCorrect": "Internal scanning often reveals lateral movement paths and internal-only services.",
+      "misconceptionTags": [
+        "vuln_scan.perspective_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch5-q27",
+      "type": "mcq",
+      "stem": "In the context of audits and assessments, what does 'attestation' most commonly mean?",
+      "options": {
+        "A": "A penetration test performed with no scope limits",
+        "B": "A formal assertion/report (often by an independent party) that controls/processes meet stated criteria",
+        "C": "A CVSS score assigned to every vulnerability",
+        "D": "A vulnerability scan that uses intrusive plug-ins"
+      },
+      "answer": "B",
+      "explanation": "Attestation is about providing formal assurance—often via independent assessment—used in audit/assessment programs and third-party risk conversations.",
+      "tags": [
+        "assessment.audit_attestation",
+        "third_party_risk.assessment"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "Attestation is about providing formal assurance—often via independent assessment—used in audit/assessment programs and third-party risk conversations.",
+      "misconceptionTags": [
+        "assessment.audit_attestation_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch5-q28",
+      "type": "multi_select",
+      "stem": "Which items are commonly assessed when managing third-party risk? (Select all that apply.)",
+      "options": {
+        "A": "Security controls and compliance evidence (e.g., audit reports/attestations)",
+        "B": "Contract/SLA obligations and right-to-audit language",
+        "C": "Vendor access pathways and data handling practices",
+        "D": "The vendor’s favorite programming language"
+      },
+      "answers": [
+        "A",
+        "B",
+        "C"
+      ],
+      "explanation": "Third-party risk assessment looks at what the vendor can access, how they protect your data, and what evidence/attestation/audit artifacts back up their claims—plus contractual controls.",
+      "tags": [
+        "third_party_risk.assessment",
+        "assessment.internal_external"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 85,
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "Third-party risk assessment looks at what the vendor can access, how they protect your data, and what evidence/attestation/audit artifacts back up their claims—plus contractual controls.",
+      "misconceptionTags": [
+        "third_party_risk.assessment_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "type": "mcq",
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "rationaleCorrect": "The key difference is discovery breadth versus exploit validation depth.",
+      "rationaleIncorrect": {
+        "A": "Methodology and objective differ significantly.",
+        "C": "Both can combine automation and manual analysis.",
+        "D": "Scanning applies to digital assets across environments.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "scan_vs_pentest_confusion",
+        "assessment_method_blur"
+      ],
+      "id": "ch5_obj55_q01",
+      "stem": "Which statement best distinguishes a vulnerability scan from a penetration test?",
+      "explanation": "Scans identify potential weaknesses broadly, while penetration tests validate exploitability in context.",
+      "tags": [
+        "assessment_types",
+        "vulnerability_scan",
+        "penetration_test"
+      ],
+      "objectiveIds": [
+        "5.5"
+      ],
+      "options": {
+        "A": "Both are identical and only differ by report format",
+        "B": "Vulnerability scans discover potential issues; penetration tests validate practical exploitation paths",
+        "C": "Penetration tests are automated; scans are fully manual",
+        "D": "Scans are only for physical environments"
+      },
+      "answer": "B"
+    },
+    {
+      "type": "mcq",
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "rationaleCorrect": "Type II extends beyond design and measures how controls actually performed over time.",
+      "rationaleIncorrect": {
+        "A": "That describes Type I scope, not Type II operational evidence.",
+        "C": "Attestation does not guarantee zero vulnerabilities.",
+        "D": "That objective aligns with financial statement audits, not SOC 2 trust criteria.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "type1_type2_mixup",
+        "attestation_scope_confusion"
+      ],
+      "id": "ch5_obj55_q02",
+      "stem": "A SOC 2 Type II report primarily provides evidence of what?",
+      "explanation": "Type II evaluates control design and operating effectiveness over a defined period.",
+      "tags": [
+        "soc2",
+        "attestation",
+        "audit"
+      ],
+      "objectiveIds": [
+        "5.5"
+      ],
+      "options": {
+        "A": "Only that controls were designed at one point in time",
+        "B": "That controls operated effectively over a review period",
+        "C": "That no vulnerabilities exist in the environment",
+        "D": "That financial statements are free of material error"
+      },
+      "answer": "B"
+    },
+    {
+      "type": "multi_select",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "Authoritative, reproducible evidence supports consistent assessor conclusions.",
+      "rationaleIncorrect": {
+        "A": "Correct: sourced logs provide traceable operational evidence.",
+        "B": "Unsourced screenshots are weak and hard to verify.",
+        "C": "Correct: scoped exports are testable and repeatable.",
+        "D": "Verbal claims alone are insufficient for formal assurance."
+      },
+      "misconceptionTags": [
+        "evidence_strength_misread",
+        "anecdotal_evidence_reliance"
+      ],
+      "id": "ch5_obj55_q03",
+      "stem": "What qualities make audit evidence strong? (Choose TWO.)",
+      "explanation": "Audit-quality evidence should be reliable and reproducible, not anecdotal.",
+      "tags": [
+        "audit_evidence",
+        "assessment_quality",
+        "compliance"
+      ],
+      "objectiveIds": [
+        "5.5"
+      ],
+      "options": {
+        "A": "Time-bounded logs from authoritative systems",
+        "B": "Unsigned screenshots with no source context",
+        "C": "Reproducible configuration exports tied to scope",
+        "D": "Informal verbal confirmation from one engineer"
+      },
+      "answers": [
+        "A",
+        "C"
+      ]
+    },
+    {
+      "type": "scenario_mcq",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "Configuration plus operational logs demonstrates both intended control and actual execution.",
+      "rationaleIncorrect": {
+        "A": "Policy intent without evidence of operation is insufficient.",
+        "C": "Historical slides are not current control evidence.",
+        "D": "Unverified notes are not auditable artifacts.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "policy_equals_proof",
+        "evidence_quality_gap"
+      ],
+      "id": "ch5_obj55_q04",
+      "stem": "A regulator requests proof that MFA is enforced for all privileged users. What is the most defensible evidence set?",
+      "explanation": "Assurance should include configuration evidence plus sampled operational logs that demonstrate enforcement.",
+      "tags": [
+        "regulatory_audit",
+        "mfa",
+        "evidence_collection"
+      ],
+      "objectiveIds": [
+        "5.5"
+      ],
+      "options": {
+        "A": "Policy statement only",
+        "B": "Config export plus sampled authentication logs for privileged accounts",
+        "C": "A presentation slide from last year",
+        "D": "Developer note saying \"MFA is enabled\""
+      },
+      "answer": "B"
+    },
+    {
+      "type": "scenario_mcq",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "Auditable closure combines remediation traceability with verification that risk is actually reduced.",
+      "rationaleIncorrect": {
+        "A": "Status changes alone do not prove control efficacy.",
+        "C": "Verbal assurance is not durable evidence.",
+        "D": "Deleting history undermines governance and auditability.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "ticket_closed_equals_fixed",
+        "verification_omission"
+      ],
+      "id": "ch5_obj55_q05",
+      "stem": "An external assessment found critical exposure that was marked resolved. Auditors ask for closure proof. What should be provided?",
+      "explanation": "Closure requires corrective action evidence and independent verification (for example, retest results).",
+      "tags": [
+        "finding_remediation",
+        "audit_followup",
+        "evidence"
+      ],
+      "objectiveIds": [
+        "5.5"
+      ],
+      "options": {
+        "A": "Only the ticket status set to closed",
+        "B": "POA&M updates plus retest evidence confirming fix effectiveness",
+        "C": "Verbal assurance from manager",
+        "D": "Delete old findings to reduce confusion"
+      },
+      "answer": "B"
+    },
+    {
+      "type": "scenario_mcq",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "Independent attestations map control operation to recognized criteria and reporting expectations.",
+      "rationaleIncorrect": {
+        "A": "Self-authored descriptions are not independent assurance.",
+        "C": "One technical artifact alone may not satisfy broad trust/compliance expectations.",
+        "D": "Pentests are valuable but not equivalent to full attestation frameworks.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "assessment_output_mismatch",
+        "assurance_scope_gap"
+      ],
+      "id": "ch5_obj55_q06",
+      "stem": "A SaaS provider needs independent assurance for customer trust reviews. Which assessment output is most aligned?",
+      "explanation": "A third-party attestation such as SOC 2 provides structured external assurance for control environments.",
+      "tags": [
+        "third_party_assurance",
+        "attestation",
+        "customer_trust"
+      ],
+      "objectiveIds": [
+        "5.5"
+      ],
+      "options": {
+        "A": "Internal wiki page describing controls",
+        "B": "Independent SOC 2 assessment report",
+        "C": "Unscoped vulnerability scan summary only",
+        "D": "Single penetration test with no control mapping"
+      },
+      "answer": "B"
+    },
+    {
+      "type": "matching",
+      "difficulty": 3,
+      "estimated_seconds": 90,
+      "rationaleCorrect": "Choosing the right assessment type prevents false confidence and improves assurance quality.",
+      "rationaleIncorrect": {
+        "Vulnerability scan": "Scanning is breadth-oriented and not full exploit simulation.",
+        "Penetration test": "Pen tests focus on exploit realism and impact pathways.",
+        "Control audit": "Audits evaluate criteria alignment and evidence-backed control operation.",
+        "Tabletop exercise": "Tabletops assess people/process readiness, not exploitability."
+      },
+      "misconceptionTags": [
+        "assessment_purpose_confusion",
+        "method_selection_errors"
+      ],
+      "id": "ch5_obj55_q07",
+      "stem": "Match each assessment approach to the primary purpose.",
+      "explanation": "Different assessments answer different risk and assurance questions.",
+      "tags": [
+        "assessment_methods",
+        "audit",
+        "security_testing"
+      ],
+      "objectiveIds": [
+        "5.5"
+      ],
+      "left": [
+        "Vulnerability scan",
+        "Penetration test",
+        "Control audit",
+        "Tabletop exercise"
+      ],
+      "right": [
+        "Identify potential weaknesses at scale",
+        "Validate exploitable attack paths",
+        "Evaluate control design/operation against criteria",
+        "Practice decision-making and response coordination"
+      ],
+      "pairs": {
+        "Vulnerability scan": "Identify potential weaknesses at scale",
+        "Penetration test": "Validate exploitable attack paths",
+        "Control audit": "Evaluate control design/operation against criteria",
+        "Tabletop exercise": "Practice decision-making and response coordination"
+      }
+    },
+    {
+      "type": "mcq",
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "rationaleCorrect": "Internal audit creates governance feedback loops by assessing control implementation objectively.",
+      "rationaleIncorrect": {
+        "A": "Audit complements monitoring; it does not replace it.",
+        "C": "Findings require tracking and remediation discipline.",
+        "D": "No assessment can guarantee incident elimination.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "audit_role_misread",
+        "assurance_vs_prevention"
+      ],
+      "id": "ch5_obj55_q08",
+      "stem": "What is the primary objective of internal security audits?",
+      "explanation": "Internal audits provide independent internal assurance and identify improvement opportunities before external review.",
+      "tags": [
+        "internal_audit",
+        "assurance",
+        "continuous_improvement"
+      ],
+      "objectiveIds": [
+        "5.5"
+      ],
+      "options": {
+        "A": "To replace all technical monitoring controls",
+        "B": "To provide independent assessment of control effectiveness and compliance posture",
+        "C": "To eliminate need for remediation tracking",
+        "D": "To prevent all incidents permanently"
+      },
+      "answer": "B"
+    },
+    {
+      "type": "multi_select",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "Assessment value depends on evidence-backed findings and accountable remediation follow-through.",
+      "rationaleIncorrect": {
+        "A": "Correct: prioritization supports efficient risk reduction.",
+        "B": "Without ownership and tracking, findings rarely close effectively.",
+        "C": "Correct: owners and due dates operationalize remediation.",
+        "D": "History retention supports trend analysis and accountability."
+      },
+      "misconceptionTags": [
+        "findings_without_followthrough",
+        "assessment_as_checkbox"
+      ],
+      "id": "ch5_obj55_q09",
+      "stem": "Which outputs are expected from a well-run assessment cycle? (Choose TWO.)",
+      "explanation": "A useful cycle produces prioritized findings and actionable remediation tracking.",
+      "tags": [
+        "assessment_lifecycle",
+        "reporting",
+        "remediation"
+      ],
+      "objectiveIds": [
+        "5.5"
+      ],
+      "options": {
+        "A": "Risk-ranked findings tied to evidence",
+        "B": "Untracked recommendations with no owners",
+        "C": "Documented remediation plan with owners and due dates",
+        "D": "Immediate deletion of prior findings history"
+      },
+      "answers": [
+        "A",
+        "C"
+      ]
+    },
+    {
+      "type": "scenario_mcq",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "Findings should capture criteria, condition, impact, and tracked remediation ownership.",
+      "rationaleIncorrect": {
+        "A": "Documented policy alone does not prove control operation.",
+        "C": "Retroactive changes hide risk and undermine trust.",
+        "D": "Deleting evidence worsens governance and may violate retention requirements.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "policy_equals_execution",
+        "finding_suppression"
+      ],
+      "id": "ch5_obj55_q10",
+      "stem": "During an assessment, auditors find policy requires quarterly access reviews but records show no reviews for two quarters. What is the correct treatment?",
+      "explanation": "A mismatch between policy and operation is a control deficiency requiring documented finding and corrective action.",
+      "tags": [
+        "control_deficiency",
+        "audit_findings",
+        "access_review"
+      ],
+      "objectiveIds": [
+        "5.5"
+      ],
+      "options": {
+        "A": "Ignore because policy exists",
+        "B": "Record as finding, assess risk, and assign corrective action plan",
+        "C": "Rewrite policy date retroactively",
+        "D": "Delete old logs and restart schedule"
+      },
+      "answer": "B"
+    }
+  ]
+}

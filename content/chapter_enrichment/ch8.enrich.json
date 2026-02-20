@@ -1,0 +1,383 @@
+{
+  "pack_id": "ch8",
+  "version": "1.0.0",
+  "confusion_pairs": [
+    {
+      "id": "cp_authn_authz",
+      "title": "Authentication vs Authorization",
+      "a": {
+        "term": "Authentication (AuthN)",
+        "definition": "Proves who you are (identity verification)."
+      },
+      "b": {
+        "term": "Authorization (AuthZ)",
+        "definition": "Determines what you can do (permissions/rights)."
+      },
+      "bullets": [
+        "AuthN happens first; AuthZ uses the identity result to decide access.",
+        "AuthN uses factors (password/OTP/biometric); AuthZ uses policies/roles/ACLs.",
+        "Failure modes: wrong password = AuthN fail; 'access denied' = AuthZ fail."
+      ]
+    },
+    {
+      "id": "cp_aaa",
+      "title": "Identification/Authentication/Authorization vs Accounting (AAA)",
+      "a": {
+        "term": "AAA",
+        "definition": "A framework: AuthN + AuthZ + Accounting, often used in network access control."
+      },
+      "b": {
+        "term": "Just login",
+        "definition": "Only proves identity; doesn't cover permissions or logging."
+      },
+      "bullets": [
+        "Authentication: who you are; Authorization: what you're allowed; Accounting: what you did (logs/records).",
+        "AAA is commonly implemented with RADIUS/TACACS+ in network environments.",
+        "Accounting is critical for audits, forensics, and billing/chargeback."
+      ]
+    },
+    {
+      "id": "cp_saml_oidc",
+      "title": "SAML vs OpenID Connect",
+      "a": {
+        "term": "SAML",
+        "definition": "XML-based federation commonly used for enterprise SSO, especially browser-based apps."
+      },
+      "b": {
+        "term": "OpenID Connect (OIDC)",
+        "definition": "Identity layer on top of OAuth 2.0 using JSON/JWT, common for modern web/mobile."
+      },
+      "bullets": [
+        "SAML uses XML assertions; OIDC uses JSON/JWT ID tokens.",
+        "SAML is older/enterprise-heavy; OIDC is modern/mobile-friendly.",
+        "Both support SSO; OIDC typically feels simpler for APIs and apps."
+      ]
+    },
+    {
+      "id": "cp_oauth_oidc",
+      "title": "OAuth vs OpenID Connect",
+      "a": {
+        "term": "OAuth 2.0",
+        "definition": "Authorization framework: grants a client access to resources (scopes) without sharing the user password."
+      },
+      "b": {
+        "term": "OpenID Connect",
+        "definition": "Adds authentication: provides an ID token asserting who the user is."
+      },
+      "bullets": [
+        "OAuth answers: 'Can this app access X?' (AuthZ).",
+        "OIDC answers: 'Who is the user?' (AuthN) + can still use OAuth for access.",
+        "If you need login/identity, use OIDC; if you only need delegated API access, OAuth is enough."
+      ]
+    },
+    {
+      "id": "cp_ldap_ad",
+      "title": "LDAP vs Active Directory",
+      "a": {
+        "term": "LDAP",
+        "definition": "Protocol for querying/modifying directory services (users, groups, attributes)."
+      },
+      "b": {
+        "term": "Active Directory (AD)",
+        "definition": "Microsoft directory service that uses LDAP plus many other components (Kerberos, Group Policy, domain services)."
+      },
+      "bullets": [
+        "LDAP is a protocol; AD is a directory service product/ecosystem.",
+        "AD commonly uses LDAP for directory queries and Kerberos for authentication.",
+        "Not all LDAP directories are AD; but AD exposes LDAP."
+      ]
+    },
+    {
+      "id": "cp_radius_tacacs",
+      "title": "RADIUS vs TACACS+",
+      "a": {
+        "term": "RADIUS",
+        "definition": "AAA protocol often used for network access (VPN/Wi‑Fi/802.1X); combines AuthN+AuthZ."
+      },
+      "b": {
+        "term": "TACACS+",
+        "definition": "AAA protocol commonly used for device administration (routers/switches); separates AuthN, AuthZ, Accounting."
+      },
+      "bullets": [
+        "RADIUS is common for user network access; TACACS+ is common for admin access to network devices.",
+        "TACACS+ can separate AuthN vs AuthZ decisions; RADIUS typically bundles them.",
+        "Operationally: TACACS+ is great for granular command authorization."
+      ]
+    },
+    {
+      "id": "cp_totp_hotp",
+      "title": "TOTP vs HOTP",
+      "a": {
+        "term": "TOTP",
+        "definition": "Time-based one-time password; code changes with time window."
+      },
+      "b": {
+        "term": "HOTP",
+        "definition": "Counter-based one-time password; code changes when counter increments."
+      },
+      "bullets": [
+        "TOTP expires quickly (time window).",
+        "HOTP can remain valid until used (counter sync matters).",
+        "Both are OTP; both can be phished if not combined with anti-phishing controls."
+      ]
+    },
+    {
+      "id": "cp_far_frr",
+      "title": "FAR vs FRR (Biometrics)",
+      "a": {
+        "term": "FAR",
+        "definition": "False Acceptance Rate: attacker is wrongly accepted (security risk)."
+      },
+      "b": {
+        "term": "FRR",
+        "definition": "False Rejection Rate: legitimate user is wrongly rejected (usability risk)."
+      },
+      "bullets": [
+        "Lower FAR = stronger security; lower FRR = better user experience.",
+        "Tuning thresholds usually trades off FAR vs FRR.",
+        "CER/EER is where FAR equals FRR (a quick quality indicator)."
+      ]
+    },
+    {
+      "id": "cp_rbac_abac",
+      "title": "RBAC vs ABAC",
+      "a": {
+        "term": "RBAC",
+        "definition": "Role-Based Access Control: permissions are granted to roles; users get roles."
+      },
+      "b": {
+        "term": "ABAC",
+        "definition": "Attribute-Based Access Control: policies evaluate attributes (user/resource/environment) to decide access."
+      },
+      "bullets": [
+        "RBAC is simpler to manage for stable job roles.",
+        "ABAC is powerful for dynamic context (device posture, location, time).",
+        "ABAC policies can get complex; RBAC can explode in number of roles."
+      ]
+    },
+    {
+      "id": "cp_dac_mac",
+      "title": "DAC vs MAC",
+      "a": {
+        "term": "DAC",
+        "definition": "Discretionary Access Control: the owner decides who gets access (often via ACLs)."
+      },
+      "b": {
+        "term": "MAC",
+        "definition": "Mandatory Access Control: access is enforced by system policy/labels; users cannot override."
+      },
+      "bullets": [
+        "DAC is flexible but easier to misconfigure.",
+        "MAC is strict and policy-driven (good for high security environments).",
+        "MAC often uses labels/classifications; DAC often uses owner-managed permissions."
+      ]
+    }
+  ],
+  "tag_rules": {
+    "authn_vs_authz": {
+      "rule": "AuthN proves identity; AuthZ grants permissions. If login works but access is denied, it's an AuthZ issue.",
+      "micro_example": "You log in successfully (AuthN), but the app says “You do not have permission” to view admin page (AuthZ).",
+      "confusion_pair_id": "cp_authn_authz"
+    },
+    "aaa.basics": {
+      "rule": "AAA = Authentication + Authorization + Accounting; think 'login + permissions + logging'.",
+      "micro_example": "Wi‑Fi uses a backend AAA server so users authenticate, get VLAN/ACL, and actions get logged.",
+      "confusion_pair_id": "cp_aaa"
+    },
+    "aaa.accounting": {
+      "rule": "Accounting is the ‘paper trail’: who did what, when, from where—used for audits and incident response.",
+      "micro_example": "VPN login is successful, and the system logs session start/end time and bytes transferred.",
+      "confusion_pair_id": "cp_aaa"
+    },
+    "iam.identity.claims": {
+      "rule": "A claim is a statement about a subject (user/device), like email, role, or group membership.",
+      "micro_example": "An ID token contains the claim “email=ibrahim@example.com” and “role=analyst”.",
+      "confusion_pair_id": "none"
+    },
+    "iam.attributes_vs_traits": {
+      "rule": "Attributes are identity data points (department, clearance); traits are characteristics often used in behavior/biometrics contexts.",
+      "micro_example": "Attribute: department=IT. Trait: typing cadence pattern used for continuous auth.",
+      "confusion_pair_id": "none"
+    },
+    "iam.identity_proofing": {
+      "rule": "Identity proofing establishes that a real person matches the claimed identity before issuing credentials.",
+      "micro_example": "Before issuing a smart card, HR checks government ID + verifies employment records.",
+      "confusion_pair_id": "none"
+    },
+    "accounts.types": {
+      "rule": "Account types differ by risk: user, admin, service, shared/guest. Higher privilege = tighter controls.",
+      "micro_example": "A service account runs backups; it should have just enough permissions for backups, nothing else.",
+      "confusion_pair_id": "none"
+    },
+    "accounts.provisioning_deprovisioning": {
+      "rule": "Provision fast, deprovision faster: orphaned accounts are a common breach path.",
+      "micro_example": "Employee leaves Friday; disable account + revoke tokens + remove from groups the same day.",
+      "confusion_pair_id": "none"
+    },
+    "access_control.models": {
+      "rule": "Access control models define how decisions are made: DAC/MAC/RBAC/ABAC/rule-based/time-of-day.",
+      "micro_example": "A policy engine checks role + device compliance + time window before granting access.",
+      "confusion_pair_id": "none"
+    },
+    "access_control.dac": {
+      "rule": "DAC = resource owner decides access; flexible, but mistakes and over-sharing are common.",
+      "micro_example": "A file owner grants read access to ‘Everyone’—convenient, but risky.",
+      "confusion_pair_id": "cp_dac_mac"
+    },
+    "access_control.mac": {
+      "rule": "MAC = centralized policy/labels enforce access; users cannot override labels.",
+      "micro_example": "‘Secret’ document can only be opened by users with Secret clearance label.",
+      "confusion_pair_id": "cp_dac_mac"
+    },
+    "access_control.rbac": {
+      "rule": "RBAC = roles bundle permissions; assign roles to users, not permissions directly.",
+      "micro_example": "Role ‘Helpdesk’ can reset passwords; role ‘HR’ can view payroll.",
+      "confusion_pair_id": "cp_rbac_abac"
+    },
+    "access_control.abac": {
+      "rule": "ABAC evaluates attributes (user/resource/environment). Great for conditional access and zero trust.",
+      "micro_example": "Allow access if user.department=Finance AND device.compliant=true AND location=HQ.",
+      "confusion_pair_id": "cp_rbac_abac"
+    },
+    "access_control.rule_based": {
+      "rule": "Rule-based access uses explicit rules (if/then) often tied to network or policy engines.",
+      "micro_example": "IF source IP in admin subnet THEN allow SSH; ELSE deny.",
+      "confusion_pair_id": "none"
+    },
+    "access_control.time_of_day": {
+      "rule": "Time-of-day controls restrict access to defined windows to reduce exposure.",
+      "micro_example": "Admins can log into production only between 09:00–18:00 with MFA.",
+      "confusion_pair_id": "none"
+    },
+    "access_control.least_privilege": {
+      "rule": "Least privilege: give the minimum rights needed for the task; reduce blast radius.",
+      "micro_example": "A report viewer gets read-only access to one dashboard, not full database admin.",
+      "confusion_pair_id": "none"
+    },
+    "pam.tools": {
+      "rule": "PAM centralizes privileged access: vault, rotate secrets, session recording, approval workflows.",
+      "micro_example": "Admins check out a password from a vault; it auto-rotates after use.",
+      "confusion_pair_id": "none"
+    },
+    "pam.jit_ephemeral": {
+      "rule": "Just-in-time (JIT) privileges grant admin rights temporarily, then auto-expire.",
+      "micro_example": "Engineer gets 30-minute sudo access for a hotfix; access is removed automatically.",
+      "confusion_pair_id": "none"
+    },
+    "sso.basics": {
+      "rule": "SSO reduces password sprawl: one identity login gives access to many apps via tokens/assertions.",
+      "micro_example": "Login to identity provider once; then open Jira, Confluence, and email without re-entering password.",
+      "confusion_pair_id": "none"
+    },
+    "federation.basics": {
+      "rule": "Federation lets different domains/orgs trust each other’s identity assertions for SSO.",
+      "micro_example": "Your company trusts a partner IdP so partner users can access a shared portal.",
+      "confusion_pair_id": "none"
+    },
+    "federation.saml": {
+      "rule": "SAML uses XML assertions for enterprise SSO; common in browser-based corporate apps.",
+      "micro_example": "A SaaS app accepts a SAML assertion stating user=alice and groups=HR.",
+      "confusion_pair_id": "cp_saml_oidc"
+    },
+    "federation.openid_connect": {
+      "rule": "OIDC provides authentication using ID tokens (JWT) on top of OAuth 2.0; modern app-friendly.",
+      "micro_example": "Mobile app receives an OIDC ID token after login and uses it to create a session.",
+      "confusion_pair_id": "cp_saml_oidc"
+    },
+    "federation.oauth": {
+      "rule": "OAuth is delegated authorization (scopes), not authentication by itself.",
+      "micro_example": "A photo-printing app gets access to your photo library via OAuth scopes without your password.",
+      "confusion_pair_id": "cp_oauth_oidc"
+    },
+    "federation.attestation": {
+      "rule": "Federation relies on trust: you accept identity assertions from an IdP based on agreed policies and keys.",
+      "micro_example": "A partner IdP signs tokens with its private key; you validate signature before trusting claims.",
+      "confusion_pair_id": "none"
+    },
+    "directory.ldap": {
+      "rule": "LDAP is the protocol for directory queries; it can back auth and authorization decisions.",
+      "micro_example": "App queries LDAP: ‘Which groups is user bob in?’ then decides access.",
+      "confusion_pair_id": "cp_ldap_ad"
+    },
+    "directory.active_directory": {
+      "rule": "Active Directory is Microsoft’s directory ecosystem; it exposes LDAP but also uses Kerberos and Group Policy.",
+      "micro_example": "User logs into Windows domain (Kerberos), and apps query AD via LDAP for groups.",
+      "confusion_pair_id": "cp_ldap_ad"
+    },
+    "authn.passwords.best_practices": {
+      "rule": "Prefer long passphrases, unique per service, and resist reuse; rotate only when compromised or policy requires.",
+      "micro_example": "Use a 4–5 word passphrase and store it in a password manager; don’t reuse across sites.",
+      "confusion_pair_id": "none"
+    },
+    "authn.passwords.policy_settings": {
+      "rule": "Strong password policy balances length, complexity, lockout, and MFA; avoid lockout settings that enable easy DoS.",
+      "micro_example": "Policy: 14+ chars, MFA enabled, lockout after 10 attempts with backoff.",
+      "confusion_pair_id": "none"
+    },
+    "authn.password_managers": {
+      "rule": "Password managers reduce reuse and enable long unique passwords; protect the vault with strong MFA.",
+      "micro_example": "Vault generates 24-char unique passwords; unlock requires a master passphrase + OTP.",
+      "confusion_pair_id": "none"
+    },
+    "authn.passwordless": {
+      "rule": "Passwordless uses cryptographic keys (e.g., FIDO2/WebAuthn). Harder to phish than passwords/OTP.",
+      "micro_example": "Security key signs a challenge; server verifies public key—no password sent.",
+      "confusion_pair_id": "none"
+    },
+    "authn.mfa.factors": {
+      "rule": "MFA factors: something you know, have, are. True MFA uses at least two categories.",
+      "micro_example": "Password (know) + authenticator app (have) = MFA.",
+      "confusion_pair_id": "none"
+    },
+    "authn.mfa.implementations": {
+      "rule": "MFA implementation quality matters: push can be fatigue-attacked; phishing-resistant MFA is strongest.",
+      "micro_example": "Push prompts get spammed; switch to FIDO2 security keys for critical admins.",
+      "confusion_pair_id": "none"
+    },
+    "authn.otp.totp_hotp": {
+      "rule": "TOTP is time-based; HOTP is counter-based. Both are OTP and both can be phished.",
+      "micro_example": "Authenticator app shows a new code every 30 seconds (TOTP).",
+      "confusion_pair_id": "cp_totp_hotp"
+    },
+    "authn.otp.attacks": {
+      "rule": "OTP can be intercepted/phished (real-time proxies) and SMS can be SIM-swapped.",
+      "micro_example": "Attacker runs a fake login page that asks for the OTP and replays it immediately.",
+      "confusion_pair_id": "none"
+    },
+    "authn.biometrics.basics": {
+      "rule": "Biometrics are ‘something you are’. They’re convenient, but need fallback and liveness checks.",
+      "micro_example": "Fingerprint unlocks laptop; if sensor fails, fallback to PIN + MFA.",
+      "confusion_pair_id": "none"
+    },
+    "authn.biometrics.far_frr": {
+      "rule": "FAR is security risk (wrong accept); FRR is usability risk (wrong reject). Tuning is a tradeoff.",
+      "micro_example": "Lower threshold reduces FRR but may increase FAR; pick based on risk level.",
+      "confusion_pair_id": "cp_far_frr"
+    },
+    "filesystem.permissions.linux": {
+      "rule": "Linux permissions use owner/group/others with rwx bits; mis-set permissions cause data exposure.",
+      "micro_example": "chmod 640: owner read/write, group read, others none.",
+      "confusion_pair_id": "none"
+    },
+    "filesystem.permissions.windows": {
+      "rule": "Windows uses NTFS ACLs (deny/allow, inheritance). Explicit deny usually overrides allow.",
+      "micro_example": "A folder inherits read permissions; you add an explicit deny for a specific user.",
+      "confusion_pair_id": "none"
+    },
+    "netauth.kerberos": {
+      "rule": "Kerberos uses tickets and a KDC for authentication; common in AD domains.",
+      "micro_example": "User gets a TGT, then requests a service ticket to access a file server.",
+      "confusion_pair_id": "none"
+    },
+    "netauth.radius": {
+      "rule": "RADIUS provides AAA for network access (VPN/Wi‑Fi/802.1X).",
+      "micro_example": "Wi‑Fi controller queries RADIUS; RADIUS returns accept + VLAN assignment.",
+      "confusion_pair_id": "cp_radius_tacacs"
+    },
+    "netauth.tacacs_plus": {
+      "rule": "TACACS+ is often used for network device admin; can authorize commands and record sessions.",
+      "micro_example": "Router admin access is granted, and commands are authorized per admin role.",
+      "confusion_pair_id": "cp_radius_tacacs"
+    }
+  }
+}

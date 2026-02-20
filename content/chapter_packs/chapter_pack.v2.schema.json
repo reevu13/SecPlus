@@ -1,0 +1,787 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "secplus.chapter_pack.v2.schema.json",
+  "title": "SecPlus Chapter Pack v2",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "pack_id",
+    "exam",
+    "chapter",
+    "design_intent",
+    "progression",
+    "tags",
+    "trap_list",
+    "missions",
+    "boss",
+    "roguelike",
+    "pvp",
+    "question_bank"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string"
+    },
+    "pack_id": {
+      "type": "string"
+    },
+    "exam": {
+      "type": "object",
+      "required": [
+        "vendor",
+        "name",
+        "code",
+        "max_exam_minutes"
+      ],
+      "properties": {
+        "vendor": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "max_exam_minutes": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false
+    },
+    "chapter": {
+      "type": "object",
+      "required": [
+        "number",
+        "title",
+        "page_range_in_user_pdf"
+      ],
+      "properties": {
+        "number": {
+          "type": "number"
+        },
+        "title": {
+          "type": "string"
+        },
+        "page_range_in_user_pdf": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "design_intent": {
+      "type": "object",
+      "required": [
+        "mode",
+        "pvp_optional",
+        "default_pvp_enabled",
+        "player_goal"
+      ],
+      "properties": {
+        "mode": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "pvp_optional": {
+          "type": "boolean"
+        },
+        "default_pvp_enabled": {
+          "type": "boolean"
+        },
+        "player_goal": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "progression": {
+      "type": "object",
+      "required": [
+        "xp_rules",
+        "mastery_model",
+        "unlock_rules"
+      ],
+      "properties": {
+        "xp_rules": {
+          "type": "object",
+          "required": [
+            "base_xp_per_correct",
+            "streak_bonus_per_5",
+            "time_bonus_threshold_seconds",
+            "time_bonus_xp",
+            "mistake_penalty_xp"
+          ],
+          "properties": {
+            "base_xp_per_correct": {
+              "type": "number"
+            },
+            "streak_bonus_per_5": {
+              "type": "number"
+            },
+            "time_bonus_threshold_seconds": {
+              "type": "number"
+            },
+            "time_bonus_xp": {
+              "type": "number"
+            },
+            "mistake_penalty_xp": {
+              "type": "number"
+            }
+          },
+          "additionalProperties": false
+        },
+        "mastery_model": {
+          "type": "object",
+          "required": [
+            "scale",
+            "update",
+            "tags_drive_mastery"
+          ],
+          "properties": {
+            "scale": {
+              "type": "string"
+            },
+            "update": {
+              "type": "string"
+            },
+            "tags_drive_mastery": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
+        },
+        "unlock_rules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "unlock",
+              "when"
+            ],
+            "properties": {
+              "unlock": {
+                "type": "string"
+              },
+              "when": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "tags": {
+      "type": "object",
+      "required": [
+        "concepts",
+        "difficulty_scale"
+      ],
+      "properties": {
+        "concepts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "difficulty_scale": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "trap_list": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "misconception",
+          "fix",
+          "drill_question_ids"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "misconception": {
+            "type": "string"
+          },
+          "fix": {
+            "type": "string"
+          },
+          "drill_question_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "missions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "goal",
+          "mechanics",
+          "question_ids",
+          "rewards"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "goal": {
+            "type": "string"
+          },
+          "mechanics": {
+            "type": "object",
+            "required": [
+              "minigame"
+            ],
+            "properties": {
+              "minigame": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": true
+          },
+          "question_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rewards": {
+            "type": "object",
+            "required": [
+              "xp",
+              "loot"
+            ],
+            "properties": {
+              "xp": {
+                "type": "number"
+              },
+              "loot": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "unlock": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "boss": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "premise",
+        "mechanics",
+        "question_ids",
+        "rewards"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "premise": {
+          "type": "string"
+        },
+        "mechanics": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "question_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rewards": {
+          "type": "object",
+          "required": [
+            "xp",
+            "loot"
+          ],
+          "properties": {
+            "xp": {
+              "type": "number"
+            },
+            "loot": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "roguelike": {
+      "type": "object",
+      "required": [
+        "runset_id",
+        "run_minutes_target",
+        "structure",
+        "cards",
+        "question_pool_ids"
+      ],
+      "properties": {
+        "runset_id": {
+          "type": "string"
+        },
+        "run_minutes_target": {
+          "type": "number"
+        },
+        "structure": {
+          "type": "object",
+          "required": [
+            "acts",
+            "encounters_per_act",
+            "rest_sites_per_act",
+            "boss_per_run"
+          ],
+          "properties": {
+            "acts": {
+              "type": "number"
+            },
+            "encounters_per_act": {
+              "type": "number"
+            },
+            "rest_sites_per_act": {
+              "type": "number"
+            },
+            "boss_per_run": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "cards": {
+          "type": "object",
+          "required": [
+            "threat_cards",
+            "constraint_cards",
+            "control_cards"
+          ],
+          "properties": {
+            "threat_cards": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "id",
+                  "name",
+                  "tags"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "tags": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "constraint_cards": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "id",
+                  "name",
+                  "effect"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "effect": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "control_cards": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "id",
+                  "name",
+                  "tags"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "tags": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "question_pool_ids": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "pvp": {
+      "type": "object",
+      "required": [
+        "enabled",
+        "modes",
+        "fairness"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "modes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "name",
+              "description",
+              "rules"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "rules": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "fairness": {
+          "type": "object",
+          "required": [
+            "matchmaking",
+            "anti_cheat"
+          ],
+          "properties": {
+            "matchmaking": {
+              "type": "string"
+            },
+            "anti_cheat": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "question_bank": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "stem",
+          "explanation",
+          "tags",
+          "estimated_seconds",
+          "objectiveIds",
+          "rationaleCorrect",
+          "rationaleIncorrect",
+          "misconceptionTags"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "mcq",
+              "multi_select",
+              "matching",
+              "ordering",
+              "scenario_mcq"
+            ],
+            "default": "mcq"
+          },
+          "legacyType": {
+            "type": "string"
+          },
+          "stem": {
+            "type": "string"
+          },
+          "hints": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 3,
+            "default": []
+          },
+          "explanation": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "difficulty": {
+            "type": "integer",
+            "enum": [1, 2, 3, 4, 5],
+            "default": 3
+          },
+          "estimated_seconds": {
+            "type": "number"
+          },
+          "options": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "answer": {
+            "type": "string"
+          },
+          "answers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "left": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "right": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "pairs": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "correct_order": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "objectiveIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^\\d+\\.\\d+$"
+            },
+            "minItems": 1,
+            "default": []
+          },
+          "rationaleCorrect": {
+            "type": "string",
+            "minLength": 40,
+            "default": ""
+          },
+          "rationaleIncorrect": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "default": {}
+          },
+          "misconceptionTags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "default": []
+          },
+          "sourceRef": {
+            "type": "object",
+            "required": [
+              "outlineId"
+            ],
+            "properties": {
+              "outlineId": {
+                "type": "string"
+              },
+              "href": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "mcq"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "options",
+                "answer"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "scenario_mcq"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "options",
+                "answer"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "multi_select"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "options",
+                "answers"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "matching"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "left",
+                "right",
+                "pairs"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "ordering"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "items",
+                "correct_order"
+              ]
+            }
+          }
+        ],
+        "additionalProperties": false
+      }
+    },
+    "objectiveIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^\\d+\\.\\d+$"
+      },
+      "minItems": 0,
+      "default": []
+    }
+  },
+  "additionalProperties": false
+}

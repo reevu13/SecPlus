@@ -1,0 +1,35 @@
+{
+  "generated_at": "2026-02-15T02:43:48.448Z",
+  "dry_run": false,
+  "patch_file": "content/_reports/objective_backfill_patch.json",
+  "totals": {
+    "patchEntries": 793,
+    "uniquePatchTargets": 793,
+    "duplicates": 0,
+    "invalidEntries": 0,
+    "missingTargets": 0,
+    "questionObjectiveIdsUpdated": 1,
+    "packsTouched": 1,
+    "lessonsTouched": 1
+  },
+  "lessonUpdates": {
+    "lessonObjectiveIdsUpdated": 1,
+    "moduleObjectiveIdsUpdated": 11,
+    "pageObjectiveIdsUpdated": 25,
+    "checkObjectiveIdsUpdated": 25
+  },
+  "duplicates": [],
+  "invalidEntries": [],
+  "missingTargets": [],
+  "touchedPackFiles": [
+    "ch4.json"
+  ],
+  "touchedLessonFiles": [
+    "ch4.lesson.json"
+  ],
+  "explicitCoverage": {
+    "totalQuestions": 813,
+    "untaggedQuestions": 0,
+    "missingObjectiveIds": []
+  }
+}

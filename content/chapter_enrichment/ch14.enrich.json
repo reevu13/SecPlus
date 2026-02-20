@@ -1,0 +1,658 @@
+{
+  "pack_id": "ch14",
+  "version": "1.0.0",
+  "confusion_pairs": [
+    {
+      "id": "ch14.cp1",
+      "title": "Incident vs Event",
+      "a": {
+        "term": "Event",
+        "definition": "Any observable occurrence in a system or network (a log entry, an alert, a connection)."
+      },
+      "b": {
+        "term": "Incident",
+        "definition": "An event (or series of events) that violates policy, impacts security, or requires response actions."
+      },
+      "bullets": [
+        "Events are constant; incidents are the subset that matter.",
+        "An IDS alert is an event; confirmed malware execution is an incident.",
+        "Treating every event as an incident causes alert fatigue."
+      ]
+    },
+    {
+      "id": "ch14.cp2",
+      "title": "Policy vs Standard vs Procedure",
+      "a": {
+        "term": "Policy",
+        "definition": "High-level, management-approved statements of intent (the 'what' and 'why')."
+      },
+      "b": {
+        "term": "Standard/Procedure",
+        "definition": "Standards set specific mandatory requirements; procedures give step-by-step 'how' to do the work."
+      },
+      "bullets": [
+        "Policy: 'Logs must be retained.' Standard: 'Retain auth logs 365 days.' Procedure: 'How to configure log rotation and archiving.'",
+        "Policies change slowly; procedures evolve fastest.",
+        "Audit finds missing standards/procedures even if policy exists."
+      ]
+    },
+    {
+      "id": "ch14.cp3",
+      "title": "Tabletop Exercise vs Simulation",
+      "a": {
+        "term": "Tabletop",
+        "definition": "Discussion-based walkthrough of an incident using a scenario; validates roles, decisions, and communication."
+      },
+      "b": {
+        "term": "Simulation",
+        "definition": "Hands-on or realistic drill that triggers tools/processes as if the incident is happening (often with injected artifacts)."
+      },
+      "bullets": [
+        "Tabletop tests thinking and coordination; simulation tests execution under pressure.",
+        "Simulations expose tooling gaps (missing logs, bad alert tuning) faster.",
+        "Run tabletop first, then graduate to simulations."
+      ]
+    },
+    {
+      "id": "ch14.cp4",
+      "title": "Business Continuity vs Disaster Recovery",
+      "a": {
+        "term": "Business Continuity (BCP)",
+        "definition": "How the business keeps operating at an acceptable level during disruption."
+      },
+      "b": {
+        "term": "Disaster Recovery (DR)",
+        "definition": "How IT restores systems, data, and infrastructure after a major disruption."
+      },
+      "bullets": [
+        "BCP is business-first; DR is IT restoration-focused.",
+        "BCP may use workarounds; DR rebuilds/recovers the tech stack.",
+        "Both should align to RTO/RPO targets (time and data loss tolerances)."
+      ]
+    },
+    {
+      "id": "ch14.cp5",
+      "title": "SIEM vs SOAR",
+      "a": {
+        "term": "SIEM",
+        "definition": "Collects/aggregates logs, correlates signals, and alerts/reporting for detection and investigation."
+      },
+      "b": {
+        "term": "SOAR",
+        "definition": "Orchestrates and automates response workflows (playbooks), often consuming SIEM alerts."
+      },
+      "bullets": [
+        "SIEM helps you *see*; SOAR helps you *do*.",
+        "SOAR is only as good as the detections feeding it (garbage alerts → automated garbage).",
+        "Typical flow: sources → SIEM correlation → alert → SOAR playbook → ticket/containment."
+      ]
+    },
+    {
+      "id": "ch14.cp6",
+      "title": "Log Aggregation vs Correlation",
+      "a": {
+        "term": "Log aggregation",
+        "definition": "Centralizing and storing logs from many sources in one place."
+      },
+      "b": {
+        "term": "Correlation",
+        "definition": "Linking multiple events together to identify a meaningful pattern (often across sources/time)."
+      },
+      "bullets": [
+        "Aggregation is necessary but not sufficient for detection.",
+        "Correlation answers 'these events together mean something' (e.g., impossible travel + failed logins + new admin group).",
+        "Poor correlation rules = noisy alerts and missed incidents."
+      ]
+    },
+    {
+      "id": "ch14.cp7",
+      "title": "Containment vs Isolation",
+      "a": {
+        "term": "Containment",
+        "definition": "Limit damage/spread while preserving evidence and business function as much as possible."
+      },
+      "b": {
+        "term": "Isolation",
+        "definition": "Cut a system off from the network/resources to stop active harm, often more disruptive."
+      },
+      "bullets": [
+        "Containment can be 'surgical' (block C2 domain); isolation is 'amputate the limb'.",
+        "Isolation can destroy volatile evidence if done badly; plan it.",
+        "Use segmentation/quarantine as middle-ground containment options."
+      ]
+    },
+    {
+      "id": "ch14.cp8",
+      "title": "Allow list vs Deny list",
+      "a": {
+        "term": "Allow list",
+        "definition": "Only explicitly approved items are permitted; everything else is blocked by default."
+      },
+      "b": {
+        "term": "Deny list",
+        "definition": "Explicitly blocked items are denied; everything else is allowed by default."
+      },
+      "bullets": [
+        "Allow lists reduce unknown risk but require maintenance and change control.",
+        "Deny lists are easier to start with but are always behind (new bad stuff appears).",
+        "For high-risk environments, prefer allow listing."
+      ]
+    },
+    {
+      "id": "ch14.cp9",
+      "title": "NetFlow vs sFlow",
+      "a": {
+        "term": "NetFlow/IPFIX",
+        "definition": "Flow records about conversations (5‑tuple, bytes, time) exported from network devices."
+      },
+      "b": {
+        "term": "sFlow",
+        "definition": "Sampling-based traffic monitoring exporting selected packet/flow samples instead of every flow."
+      },
+      "bullets": [
+        "NetFlow/IPFIX gives richer per-flow records; sFlow trades detail for scalability via sampling.",
+        "Sampling can miss short-lived events; tune sampling rates to your risk tolerance.",
+        "Both help you see 'who talked to whom' even when payloads are encrypted."
+      ]
+    },
+    {
+      "id": "ch14.cp10",
+      "title": "Kill Chain vs MITRE ATT&CK",
+      "a": {
+        "term": "Cyber Kill Chain",
+        "definition": "A staged model of an attack from recon through actions on objectives; used to find breakpoints."
+      },
+      "b": {
+        "term": "MITRE ATT&CK",
+        "definition": "A detailed matrix of adversary tactics/techniques used to map detections, threats, and controls."
+      },
+      "bullets": [
+        "Kill chain is a high-level narrative; ATT&CK is a granular catalog.",
+        "Use kill chain for strategy; use ATT&CK for detection engineering and coverage gaps.",
+        "Both help prioritize controls that disrupt common attacker behaviors."
+      ]
+    }
+  ],
+  "tag_rules": {
+    "attack_frameworks.diamond_model": {
+      "rule": "Use the Diamond Model to describe an intrusion using four nodes: adversary, infrastructure, capability, victim.",
+      "micro_example": "Example: Adversary uses phishing (capability) from VPS IPs (infrastructure) against HR (victim).",
+      "confusion_pair_id": "ch14.cp10"
+    },
+    "attack_frameworks.kill_chain": {
+      "rule": "Treat attacks as stages; disrupt the chain early to reduce impact.",
+      "micro_example": "Example: Block delivery (email filtering) or stop exploitation (patching) before C2 happens.",
+      "confusion_pair_id": "ch14.cp10"
+    },
+    "attack_frameworks.mitre_attack": {
+      "rule": "Map detections and mitigations to ATT&CK tactics/techniques to find coverage gaps.",
+      "micro_example": "Example: Detect 'Valid Accounts' by alerting on impossible travel + new admin group adds.",
+      "confusion_pair_id": "ch14.cp10"
+    },
+    "benchmarks.logging_baselines": {
+      "rule": "Baseline normal behavior first; alerts should fire on meaningful deviation, not on 'everything'.",
+      "micro_example": "Example: CPU at 90% is normal on backup night—alert only when it happens out of cycle.",
+      "confusion_pair_id": "none"
+    },
+    "incident_response.basics.incident_vs_event": {
+      "rule": "An incident is an event that matters enough to require response; don’t panic at every log line.",
+      "micro_example": "Example: 1 failed login = event; 500 failed logins + successful admin login = incident.",
+      "confusion_pair_id": "ch14.cp1"
+    },
+    "incident_response.cycle.analysis": {
+      "rule": "Analysis is separating 'noise' from 'attack' and scoping what’s affected.",
+      "micro_example": "Example: Confirm if the alert is a false positive; identify impacted hosts and accounts.",
+      "confusion_pair_id": "none"
+    },
+    "incident_response.cycle.containment": {
+      "rule": "Containment limits damage and spread while keeping evidence and operations in mind.",
+      "micro_example": "Example: Block C2 domains and quarantine endpoints instead of nuking everything.",
+      "confusion_pair_id": "ch14.cp7"
+    },
+    "incident_response.cycle.detection": {
+      "rule": "Detection is spotting the signal: alerts, anomalies, and indicators that something is wrong.",
+      "micro_example": "Example: SIEM flags impossible travel + concurrent sessions for a privileged user.",
+      "confusion_pair_id": "none"
+    },
+    "incident_response.cycle.eradication": {
+      "rule": "Eradication removes the root cause (malware, accounts, persistence) after you understand scope.",
+      "micro_example": "Example: Remove persistence, reset creds, patch the exploited service, and kill backdoors.",
+      "confusion_pair_id": "none"
+    },
+    "incident_response.cycle.lessons_learned": {
+      "rule": "Lessons learned turns pain into process: document, fix gaps, tune alerts, update playbooks.",
+      "micro_example": "Example: Add missing logs, adjust thresholds, and update the contact/approval chain.",
+      "confusion_pair_id": "none"
+    },
+    "incident_response.cycle.preparation": {
+      "rule": "Preparation is where you win: playbooks, tools, access, logging, and training before the incident.",
+      "micro_example": "Example: Pre-stage IR kits, contacts, and an isolation procedure so you’re not improvising.",
+      "confusion_pair_id": "none"
+    },
+    "incident_response.cycle.recovery": {
+      "rule": "Recovery safely returns systems to production with monitoring for re‑infection.",
+      "micro_example": "Example: Restore from clean backups, re-enable services gradually, and watch for beaconing.",
+      "confusion_pair_id": "none"
+    },
+    "incident_response.exercises.simulation": {
+      "rule": "Simulations test execution: tools, logging, and muscle memory under realistic conditions.",
+      "micro_example": "Example: Inject a fake C2 beacon and verify the team can detect, isolate, and ticket it.",
+      "confusion_pair_id": "ch14.cp3"
+    },
+    "incident_response.exercises.tabletop": {
+      "rule": "Tabletops test decisions and communication without touching production systems.",
+      "micro_example": "Example: Walk through ransomware response: who approves isolation, who talks to customers?",
+      "confusion_pair_id": "ch14.cp3"
+    },
+    "incident_response.plans.business_continuity": {
+      "rule": "BCP is about keeping the business running during disruption—even with workarounds.",
+      "micro_example": "Example: Manual order-taking while the e-commerce platform is down.",
+      "confusion_pair_id": "ch14.cp4"
+    },
+    "incident_response.plans.communication": {
+      "rule": "Communications plans prevent chaos: define who says what, to whom, and when.",
+      "micro_example": "Example: Internal update cadence + external statement templates + legal review path.",
+      "confusion_pair_id": "none"
+    },
+    "incident_response.plans.disaster_recovery": {
+      "rule": "DR is about restoring IT services and data after a major outage or destructive incident.",
+      "micro_example": "Example: Rebuild from IaC, restore backups, validate integrity, then cut traffic back.",
+      "confusion_pair_id": "ch14.cp4"
+    },
+    "incident_response.plans.stakeholder_management": {
+      "rule": "Stakeholders need accurate, timely updates; manage expectations and approvals explicitly.",
+      "micro_example": "Example: Execs get impact + options; IT gets tasks; legal/comms gets messaging control.",
+      "confusion_pair_id": "none"
+    },
+    "incident_response.policy.policy_vs_standard_vs_procedure": {
+      "rule": "Policy is the 'what/why'; standards and procedures are the enforceable 'how'.",
+      "micro_example": "Example: Policy says 'retain logs'; a standard sets retention days; procedure configures it.",
+      "confusion_pair_id": "ch14.cp2"
+    },
+    "incident_response.policy.purpose": {
+      "rule": "IR policy exists to set authority, scope, and expectations for responding to incidents.",
+      "micro_example": "Example: Policy defines when to involve legal, when to preserve evidence, and who leads.",
+      "confusion_pair_id": "ch14.cp2"
+    },
+    "incident_response.team.comms_pr": {
+      "rule": "Comms/PR manages external messaging to customers, media, and partners.",
+      "micro_example": "Example: Legal approves external disclosures; infosec directs containment; IT restores systems.",
+      "confusion_pair_id": "none"
+    },
+    "incident_response.team.hr": {
+      "rule": "HR handles employee-related incidents, policy violations, and insider procedures.",
+      "micro_example": "Example: Legal approves external disclosures; infosec directs containment; IT restores systems.",
+      "confusion_pair_id": "none"
+    },
+    "incident_response.team.infosec": {
+      "rule": "Infosec leads technical security investigation and coordination.",
+      "micro_example": "Example: Legal approves external disclosures; infosec directs containment; IT restores systems.",
+      "confusion_pair_id": "none"
+    },
+    "incident_response.team.law_enforcement": {
+      "rule": "Law enforcement engagement is for criminal cases; coordinate via legal.",
+      "micro_example": "Example: Legal approves external disclosures; infosec directs containment; IT restores systems.",
+      "confusion_pair_id": "none"
+    },
+    "incident_response.team.legal": {
+      "rule": "Legal guides liability, evidence handling, and disclosure requirements.",
+      "micro_example": "Example: Legal approves external disclosures; infosec directs containment; IT restores systems.",
+      "confusion_pair_id": "none"
+    },
+    "incident_response.team.management_lead": {
+      "rule": "Management lead provides authority, prioritization, and resource decisions.",
+      "micro_example": "Example: Legal approves external disclosures; infosec directs containment; IT restores systems.",
+      "confusion_pair_id": "none"
+    },
+    "incident_response.team.technical_experts": {
+      "rule": "Technical SMEs (network/app/cloud) execute deep fixes and forensics.",
+      "micro_example": "Example: Legal approves external disclosures; infosec directs containment; IT restores systems.",
+      "confusion_pair_id": "none"
+    },
+    "incident_response.training.programs": {
+      "rule": "Train regularly so response is a practiced routine, not a panic improvisation.",
+      "micro_example": "Example: Quarterly drills + annual refresh of tooling and contact lists.",
+      "confusion_pair_id": "none"
+    },
+    "investigation.automated_reports_dashboards": {
+      "rule": "Dashboards speed triage, but always drill down to raw evidence before declaring victory.",
+      "micro_example": "Example: A chart shows spikes; pivot to the underlying events and affected assets.",
+      "confusion_pair_id": "none"
+    },
+    "investigation.metadata.email": {
+      "rule": "Email metadata helps trace sender, route, and spoofing patterns.",
+      "micro_example": "Example: Compare 'Received:' hops, SPF/DKIM results, and sending IP reputation.",
+      "confusion_pair_id": "none"
+    },
+    "investigation.metadata.file_exif": {
+      "rule": "EXIF/file metadata can reveal origin, timestamps, device info, and tampering clues.",
+      "micro_example": "Example: Photo EXIF shows GPS coords or camera model; file times mismatch may indicate staging.",
+      "confusion_pair_id": "none"
+    },
+    "investigation.metadata.mobile": {
+      "rule": "Mobile metadata includes app events, location signals, and device state useful for IR.",
+      "micro_example": "Example: App install timestamps + MDM compliance logs + last known location.",
+      "confusion_pair_id": "none"
+    },
+    "investigation.metadata.web": {
+      "rule": "Web metadata (headers, logs) helps reconstruct sessions and identify malicious requests.",
+      "micro_example": "Example: User-agent anomalies + referrers + suspicious POSTs in access logs.",
+      "confusion_pair_id": "none"
+    },
+    "investigation.packet_capture": {
+      "rule": "Packet capture is the ground truth for network behavior—use it when logs aren’t enough.",
+      "micro_example": "Example: Confirm beaconing to a C2 IP even if the endpoint logs are missing.",
+      "confusion_pair_id": "none"
+    },
+    "investigation.vulnerability_scans": {
+      "rule": "Vulnerability scans reveal exposed weaknesses; use them to confirm likely entry points.",
+      "micro_example": "Example: Scan shows unpatched VPN appliance CVE that matches attacker technique.",
+      "confusion_pair_id": "none"
+    },
+    "logging.linux.journald_journalctl": {
+      "rule": "On systemd Linux, journald stores logs; journalctl is how you query them.",
+      "micro_example": "Example: 'journalctl -u sshd --since today' to review SSH auth events.",
+      "confusion_pair_id": "none"
+    },
+    "logging.protocols.nxlog": {
+      "rule": "NXLog is a flexible log forwarder/collector that can translate formats and ship to SIEMs.",
+      "micro_example": "Example: Convert Windows Event Log to syslog/JSON and forward securely.",
+      "confusion_pair_id": "none"
+    },
+    "logging.protocols.rsyslog": {
+      "rule": "rsyslog is a common Linux syslog daemon for receiving/forwarding and filtering logs.",
+      "micro_example": "Example: Use rsyslog rules to forward auth.log and firewall logs to the SIEM.",
+      "confusion_pair_id": "none"
+    },
+    "logging.protocols.syslog": {
+      "rule": "Syslog is the standard log transport format for many network/security devices.",
+      "micro_example": "Example: Firewalls send syslog to a central collector/SIEM.",
+      "confusion_pair_id": "none"
+    },
+    "logging.protocols.syslog_ng": {
+      "rule": "syslog-ng is an enhanced syslog daemon with richer filtering/parsing options.",
+      "micro_example": "Example: Parse JSON logs and route by facility/severity to different destinations.",
+      "confusion_pair_id": "none"
+    },
+    "logging.retention.lifecycle": {
+      "rule": "Retention is a lifecycle: collect → store → rotate → archive → dispose, aligned to policy and law.",
+      "micro_example": "Example: Keep hot logs 30 days, archive 365 days, then destroy securely.",
+      "confusion_pair_id": "none"
+    },
+    "logging.sources.application": {
+      "rule": "Application logs show app errors, auth events, and business actions.",
+      "micro_example": "Example: Combine firewall + endpoint + auth logs to validate a suspected compromise.",
+      "confusion_pair_id": "none"
+    },
+    "logging.sources.endpoint": {
+      "rule": "Endpoint logs show process execution, installs, and security agent events.",
+      "micro_example": "Example: Combine firewall + endpoint + auth logs to validate a suspected compromise.",
+      "confusion_pair_id": "none"
+    },
+    "logging.sources.firewall": {
+      "rule": "Firewall logs show allowed/blocked connections and policy hits.",
+      "micro_example": "Example: Combine firewall + endpoint + auth logs to validate a suspected compromise.",
+      "confusion_pair_id": "none"
+    },
+    "logging.sources.ids_ips": {
+      "rule": "IDS/IPS logs show detections, signatures, and blocked/alerted traffic.",
+      "micro_example": "Example: Combine firewall + endpoint + auth logs to validate a suspected compromise.",
+      "confusion_pair_id": "none"
+    },
+    "logging.sources.linux_auth_logs": {
+      "rule": "Linux auth logs track sudo/ssh logins and authentication events.",
+      "micro_example": "Example: Combine firewall + endpoint + auth logs to validate a suspected compromise.",
+      "confusion_pair_id": "none"
+    },
+    "logging.sources.network": {
+      "rule": "Network device logs show routing/switching events and anomalies.",
+      "micro_example": "Example: Combine firewall + endpoint + auth logs to validate a suspected compromise.",
+      "confusion_pair_id": "none"
+    },
+    "logging.sources.windows_security_log": {
+      "rule": "Windows Security Log tracks auth, privilege use, and auditing events.",
+      "micro_example": "Example: Combine firewall + endpoint + auth logs to validate a suspected compromise.",
+      "confusion_pair_id": "none"
+    },
+    "logging.tools.event_viewer": {
+      "rule": "Event Viewer is the native tool to review Windows Event Logs; know where Security events live.",
+      "micro_example": "Example: Filter Security log for failed logons (4625) and privilege use.",
+      "confusion_pair_id": "none"
+    },
+    "logging.tools.grep_tail": {
+      "rule": "grep/tail are fast triage tools for text logs—use them to slice big files quickly.",
+      "micro_example": "Example: 'tail -f /var/log/auth.log | grep sshd' during an active incident.",
+      "confusion_pair_id": "none"
+    },
+    "mitigation.allow_list": {
+      "rule": "Allow listing is default-deny: only known-good apps/paths are allowed to run.",
+      "micro_example": "Example: Only signed corporate apps run; unknown binaries are blocked.",
+      "confusion_pair_id": "ch14.cp8"
+    },
+    "mitigation.cert_update_revoke": {
+      "rule": "Update/revoke certificates when keys may be compromised; trust can’t be assumed.",
+      "micro_example": "Example: Revoke a stolen device cert and push a new one via PKI/MDM.",
+      "confusion_pair_id": "none"
+    },
+    "mitigation.configuration_changes": {
+      "rule": "Configuration changes can eradicate persistence and close exploited paths—track and approve them.",
+      "micro_example": "Example: Disable vulnerable service, rotate keys, and enforce MFA on admin accounts.",
+      "confusion_pair_id": "none"
+    },
+    "mitigation.containment_vs_isolation": {
+      "rule": "Containment limits spread; isolation is the hard cutoff—pick the least disruptive option that stops harm.",
+      "micro_example": "Example: Block C2 (containment) vs unplug host from network (isolation).",
+      "confusion_pair_id": "ch14.cp7"
+    },
+    "mitigation.content_url_filtering": {
+      "rule": "Content/URL filtering blocks known-bad categories/domains and reduces drive-by risk.",
+      "micro_example": "Example: Block newly-registered domains and malware hosting categories.",
+      "confusion_pair_id": "none"
+    },
+    "mitigation.deny_list": {
+      "rule": "Deny listing blocks known-bad items, but new/renamed malware slips through.",
+      "micro_example": "Example: Blocking hash X helps today; attacker recompiles and bypasses tomorrow.",
+      "confusion_pair_id": "ch14.cp8"
+    },
+    "mitigation.dlp_changes": {
+      "rule": "DLP changes reduce data exfil during/after an incident by tightening controls and rules.",
+      "micro_example": "Example: Block uploads to personal cloud storage for high-risk groups temporarily.",
+      "confusion_pair_id": "none"
+    },
+    "mitigation.firewall_rules": {
+      "rule": "Firewall rule changes are fast containment—block IOCs, restrict ports, and tighten egress.",
+      "micro_example": "Example: Block outbound to C2 IPs/domains and limit SMB east-west.",
+      "confusion_pair_id": "none"
+    },
+    "mitigation.isolation": {
+      "rule": "Isolation cuts a system off to stop harm fast—plan it to avoid losing evidence.",
+      "micro_example": "Example: EDR network isolate a host, then collect memory/disk before reimaging.",
+      "confusion_pair_id": "ch14.cp7"
+    },
+    "mitigation.mdm_actions": {
+      "rule": "MDM actions enforce mobile security: lock, wipe, remove apps, force updates, or restrict features.",
+      "micro_example": "Example: Selective wipe corporate container after a BYOD employee leaves.",
+      "confusion_pair_id": "none"
+    },
+    "mitigation.monitoring_validation": {
+      "rule": "After containment/eradication, validate with monitoring that the threat didn’t come back.",
+      "micro_example": "Example: Watch for repeated beaconing or re-created scheduled tasks over 72 hours.",
+      "confusion_pair_id": "none"
+    },
+    "mitigation.quarantine": {
+      "rule": "Quarantine is a containment middle-ground: restrict access while keeping minimal connectivity for remediation.",
+      "micro_example": "Example: Put a host in a remediation VLAN that only reaches patch/AV servers.",
+      "confusion_pair_id": "ch14.cp7"
+    },
+    "mitigation.segmentation": {
+      "rule": "Segmentation reduces blast radius by limiting lateral movement with network boundaries.",
+      "micro_example": "Example: Separate user VLANs from server VLANs; require firewall rules between them.",
+      "confusion_pair_id": "ch14.cp7"
+    },
+    "monitoring.resources.applications": {
+      "rule": "Monitor application behavior and logs (errors, auth, transactions, API abuse).",
+      "micro_example": "Example: Spike in 500 errors + unusual POSTs may indicate exploitation.",
+      "confusion_pair_id": "none"
+    },
+    "monitoring.resources.infrastructure": {
+      "rule": "Monitor infrastructure components (network devices, hypervisors, storage, identity services).",
+      "micro_example": "Example: Firewall rule changes or VPN auth failures can be early warning signals.",
+      "confusion_pair_id": "none"
+    },
+    "monitoring.resources.systems": {
+      "rule": "Monitor systems health and security signals (CPU, disk, auth, processes).",
+      "micro_example": "Example: Sudden CPU spikes + new scheduled tasks can indicate compromise.",
+      "confusion_pair_id": "none"
+    },
+    "network_flows.ipfix": {
+      "rule": "IPFIX is the IETF standard flow export format (NetFlow-like, extensible).",
+      "micro_example": "Example: Export IPFIX from routers to your collector for long-term traffic baselining.",
+      "confusion_pair_id": "ch14.cp9"
+    },
+    "network_flows.netflow": {
+      "rule": "NetFlow summarizes traffic as flows (who/what/when/how much) without full payloads.",
+      "micro_example": "Example: Detect a workstation sending 10GB to an unknown ASN overnight.",
+      "confusion_pair_id": "ch14.cp9"
+    },
+    "network_flows.sampling_limitations": {
+      "rule": "Sampling trades accuracy for performance; tune rates so you don’t miss short-lived attacks.",
+      "micro_example": "Example: A brief beacon every 5 minutes may vanish in aggressive sampling.",
+      "confusion_pair_id": "ch14.cp9"
+    },
+    "network_flows.sflow": {
+      "rule": "sFlow uses sampling to scale traffic visibility—great at high speeds, less detailed for short events.",
+      "micro_example": "Example: Use sFlow on core switches where full NetFlow export is too heavy.",
+      "confusion_pair_id": "ch14.cp9"
+    },
+    "rca.event_analysis": {
+      "rule": "Event analysis reconstructs timelines to understand what happened and what triggered it.",
+      "micro_example": "Example: Sequence: phishing email → login → privilege escalation → exfil attempt.",
+      "confusion_pair_id": "none"
+    },
+    "rca.fishbone_diagram": {
+      "rule": "Fishbone (Ishikawa) diagrams categorize causes (people, process, tech, environment) to find roots.",
+      "micro_example": "Example: Incident causes grouped into training gaps, tooling gaps, and policy gaps.",
+      "confusion_pair_id": "none"
+    },
+    "rca.five_whys": {
+      "rule": "Five Whys drills down from symptom to root cause by repeatedly asking 'why?'.",
+      "micro_example": "Example: Outage → why? Disk full → why? Logs not rotated → why? No retention standard.",
+      "confusion_pair_id": "none"
+    },
+    "siem.basics.alerting": {
+      "rule": "Alerting notifies responders of high-signal events; quality beats quantity.",
+      "micro_example": "Example: Page only when confidence or business impact is high.",
+      "confusion_pair_id": "ch14.cp5"
+    },
+    "siem.basics.archiving": {
+      "rule": "Archiving preserves logs for investigations, compliance, and long-tail threats.",
+      "micro_example": "Example: Move old logs to cheaper storage while keeping them searchable.",
+      "confusion_pair_id": "ch14.cp5"
+    },
+    "siem.basics.correlation": {
+      "rule": "Correlation links multiple events into a higher-confidence detection.",
+      "micro_example": "Example: Impossible travel + MFA push fatigue + new admin group add = high severity.",
+      "confusion_pair_id": "ch14.cp6"
+    },
+    "siem.basics.definition": {
+      "rule": "A SIEM centralizes logs and security signals for correlation, alerting, and investigation.",
+      "micro_example": "Example: Ingest firewall + endpoint + auth logs, then alert on suspicious patterns.",
+      "confusion_pair_id": "ch14.cp5"
+    },
+    "siem.basics.log_aggregation": {
+      "rule": "Aggregation is centralized log collection—do it before you try to detect anything fancy.",
+      "micro_example": "Example: Forward syslog + Windows events into one searchable index.",
+      "confusion_pair_id": "ch14.cp6"
+    },
+    "siem.basics.packet_capture_input": {
+      "rule": "Some SIEMs ingest packet/flow data as context; it complements logs when endpoints lie or go dark.",
+      "micro_example": "Example: Flow shows outbound beacons even when host logs are wiped.",
+      "confusion_pair_id": "ch14.cp5"
+    },
+    "siem.basics.reporting": {
+      "rule": "Reporting turns raw events into metrics and stories for stakeholders.",
+      "micro_example": "Example: Weekly top alerts, mean time to respond, and trending attack techniques.",
+      "confusion_pair_id": "ch14.cp5"
+    },
+    "siem.dashboard.alert_tuning": {
+      "rule": "Alert tuning cuts noise: adjust rules, thresholds, and suppressions until alerts are actionable.",
+      "micro_example": "Example: Suppress known scanner IPs; tighten thresholds; add allow list exceptions.",
+      "confusion_pair_id": "ch14.cp5"
+    },
+    "siem.dashboard.sensors": {
+      "rule": "Sensors are your inputs; missing coverage equals blind spots.",
+      "micro_example": "Example: No DNS logs? You’ll miss lots of phishing/malware resolution signals.",
+      "confusion_pair_id": "ch14.cp5"
+    },
+    "siem.dashboard.thresholds_sensitivity": {
+      "rule": "Sensitivity is a trade: higher sensitivity finds more but creates more false positives.",
+      "micro_example": "Example: Lower brute-force threshold catches attacks early but pages you for user typos.",
+      "confusion_pair_id": "ch14.cp5"
+    },
+    "siem.dashboard.trends": {
+      "rule": "Trends show whether your situation is improving or drifting into chaos.",
+      "micro_example": "Example: Rising impossible-travel alerts after a VPN rollout signals policy mismatch or abuse.",
+      "confusion_pair_id": "ch14.cp5"
+    },
+    "siem.integration.cloud_saas": {
+      "rule": "Cloud/SaaS integrations extend SIEM visibility beyond on-prem (IdP, email, IaaS audit logs).",
+      "micro_example": "Example: Ingest Azure AD sign-in logs + O365 audit events + cloud firewall logs.",
+      "confusion_pair_id": "ch14.cp5"
+    },
+    "siem.terms.sim_sem": {
+      "rule": "SIM = log collection/management; SEM = real-time security monitoring—modern SIEMs blend both.",
+      "micro_example": "Example: Store logs for months (SIM) and alert on anomalies today (SEM).",
+      "confusion_pair_id": "ch14.cp5"
+    },
+    "soar.platforms": {
+      "rule": "SOAR automates response playbooks—use it to speed containment while keeping approvals sane.",
+      "micro_example": "Example: Auto-create ticket, enrich with WHOIS, and quarantine endpoint after analyst approval.",
+      "confusion_pair_id": "ch14.cp5"
+    },
+    "threat_hunting.ioc.account_lockout": {
+      "rule": "Account lockouts can signal brute force, password spraying, or misconfigured automation.",
+      "micro_example": "Example: Multiple lockouts across many users from one IP = password spray clue.",
+      "confusion_pair_id": "none"
+    },
+    "threat_hunting.ioc.blocked_content": {
+      "rule": "Blocked content events can reveal malware/phishing attempts that were stopped—or repeated probing.",
+      "micro_example": "Example: Web filter blocks downloads of 'invoice.exe' repeatedly from one host.",
+      "confusion_pair_id": "none"
+    },
+    "threat_hunting.ioc.concurrent_sessions": {
+      "rule": "Concurrent sessions for one account may indicate credential theft or shared accounts.",
+      "micro_example": "Example: Same user logged in from VPN and overseas IP at the same time.",
+      "confusion_pair_id": "none"
+    },
+    "threat_hunting.ioc.impossible_travel": {
+      "rule": "Impossible travel is a strong identity anomaly: the same account appears in far locations too quickly.",
+      "micro_example": "Example: Sign-in from Dhaka then Frankfurt 10 minutes later = investigate.",
+      "confusion_pair_id": "none"
+    },
+    "threat_hunting.ioc.missing_logs": {
+      "rule": "Missing logs can be a detection itself: attackers delete logs or disable forwarders.",
+      "micro_example": "Example: Endpoint stops sending logs right before a suspicious admin login.",
+      "confusion_pair_id": "none"
+    },
+    "threat_hunting.ioc.out_of_cycle_logging": {
+      "rule": "Out-of-cycle logging (events at odd times) can signal scheduled tasks, persistence, or abuse.",
+      "micro_example": "Example: Admin actions at 3:17 AM when the team is asleep.",
+      "confusion_pair_id": "none"
+    },
+    "threat_hunting.ioc.published_documented": {
+      "rule": "Published/documented indicators are known IOCs/techniques from intel feeds—use them, but verify.",
+      "micro_example": "Example: Feed flags domain X; confirm your logs show connections before blocking broadly.",
+      "confusion_pair_id": "none"
+    },
+    "threat_hunting.ioc.resource_consumption": {
+      "rule": "Unexpected CPU/disk/network spikes can indicate crypto-mining, exfiltration, or malware activity.",
+      "micro_example": "Example: Endpoint uploads gigabytes overnight while CPU pegs at 95%.",
+      "confusion_pair_id": "none"
+    },
+    "threat_hunting.ioc.resource_inaccessibility": {
+      "rule": "Sudden resource inaccessibility can indicate ransomware, DoS, or account permission abuse.",
+      "micro_example": "Example: Many files become unreadable and extensions change = ransomware suspicion.",
+      "confusion_pair_id": "none"
+    }
+  }
+}

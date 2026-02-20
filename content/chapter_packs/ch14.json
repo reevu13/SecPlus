@@ -1,0 +1,2956 @@
+{
+  "schema_version": "1.0.0",
+  "pack_id": "ch14",
+  "exam": {
+    "vendor": "CompTIA",
+    "name": "Security+",
+    "code": "SY0-701",
+    "max_exam_minutes": 90
+  },
+  "chapter": {
+    "number": 14,
+    "title": "Monitoring and Incident Response",
+    "page_range_in_user_pdf": "668-716"
+  },
+  "design_intent": {
+    "mode": [
+      "campaign",
+      "roguelike",
+      "drill"
+    ],
+    "pvp_optional": true,
+    "default_pvp_enabled": false,
+    "player_goal": "Build monitoring visibility (logs, flows, metadata) and run clean incident response: detect, analyze, contain, eradicate, recover, and improve."
+  },
+  "progression": {
+    "xp_rules": {
+      "base_xp_per_correct": 10,
+      "streak_bonus_per_5": 5,
+      "time_bonus_threshold_seconds": 55,
+      "time_bonus_xp": 3,
+      "mistake_penalty_xp": 2
+    },
+    "mastery_model": {
+      "scale": "0-5",
+      "update": "tag_mastery_decay_resistant",
+      "tags_drive_mastery": true
+    },
+    "unlock_rules": [
+      {
+        "unlock": "boss",
+        "when": "complete_all_missions"
+      },
+      {
+        "unlock": "roguelike",
+        "when": "defeat_boss_once"
+      },
+      {
+        "unlock": "pvp",
+        "when": "reach_mastery_3_on_8_tags"
+      }
+    ]
+  },
+  "tags": {
+    "concepts": [
+      "attack_frameworks.diamond_model",
+      "attack_frameworks.kill_chain",
+      "attack_frameworks.mitre_attack",
+      "benchmarks.logging_baselines",
+      "incident_response.basics.incident_vs_event",
+      "incident_response.cycle.analysis",
+      "incident_response.cycle.containment",
+      "incident_response.cycle.detection",
+      "incident_response.cycle.eradication",
+      "incident_response.cycle.lessons_learned",
+      "incident_response.cycle.preparation",
+      "incident_response.cycle.recovery",
+      "incident_response.exercises.simulation",
+      "incident_response.exercises.tabletop",
+      "incident_response.plans.business_continuity",
+      "incident_response.plans.communication",
+      "incident_response.plans.disaster_recovery",
+      "incident_response.plans.stakeholder_management",
+      "incident_response.policy.policy_vs_standard_vs_procedure",
+      "incident_response.policy.purpose",
+      "incident_response.team.comms_pr",
+      "incident_response.team.hr",
+      "incident_response.team.infosec",
+      "incident_response.team.law_enforcement",
+      "incident_response.team.legal",
+      "incident_response.team.management_lead",
+      "incident_response.team.technical_experts",
+      "incident_response.training.programs",
+      "investigation.automated_reports_dashboards",
+      "investigation.metadata.email",
+      "investigation.metadata.file_exif",
+      "investigation.metadata.mobile",
+      "investigation.metadata.web",
+      "investigation.packet_capture",
+      "investigation.vulnerability_scans",
+      "logging.linux.journald_journalctl",
+      "logging.protocols.nxlog",
+      "logging.protocols.rsyslog",
+      "logging.protocols.syslog",
+      "logging.protocols.syslog_ng",
+      "logging.retention.lifecycle",
+      "logging.sources.application",
+      "logging.sources.endpoint",
+      "logging.sources.firewall",
+      "logging.sources.ids_ips",
+      "logging.sources.linux_auth_logs",
+      "logging.sources.network",
+      "logging.sources.windows_security_log",
+      "logging.tools.event_viewer",
+      "logging.tools.grep_tail",
+      "mitigation.allow_list",
+      "mitigation.cert_update_revoke",
+      "mitigation.configuration_changes",
+      "mitigation.containment_vs_isolation",
+      "mitigation.content_url_filtering",
+      "mitigation.deny_list",
+      "mitigation.dlp_changes",
+      "mitigation.firewall_rules",
+      "mitigation.isolation",
+      "mitigation.mdm_actions",
+      "mitigation.monitoring_validation",
+      "mitigation.quarantine",
+      "mitigation.segmentation",
+      "monitoring.resources.applications",
+      "monitoring.resources.infrastructure",
+      "monitoring.resources.systems",
+      "network_flows.ipfix",
+      "network_flows.netflow",
+      "network_flows.sampling_limitations",
+      "network_flows.sflow",
+      "rca.event_analysis",
+      "rca.fishbone_diagram",
+      "rca.five_whys",
+      "siem.basics.alerting",
+      "siem.basics.archiving",
+      "siem.basics.correlation",
+      "siem.basics.definition",
+      "siem.basics.log_aggregation",
+      "siem.basics.packet_capture_input",
+      "siem.basics.reporting",
+      "siem.dashboard.alert_tuning",
+      "siem.dashboard.sensors",
+      "siem.dashboard.thresholds_sensitivity",
+      "siem.dashboard.trends",
+      "siem.integration.cloud_saas",
+      "siem.terms.sim_sem",
+      "soar.platforms",
+      "threat_hunting.ioc.account_lockout",
+      "threat_hunting.ioc.blocked_content",
+      "threat_hunting.ioc.concurrent_sessions",
+      "threat_hunting.ioc.impossible_travel",
+      "threat_hunting.ioc.missing_logs",
+      "threat_hunting.ioc.out_of_cycle_logging",
+      "threat_hunting.ioc.published_documented",
+      "threat_hunting.ioc.resource_consumption",
+      "threat_hunting.ioc.resource_inaccessibility"
+    ],
+    "difficulty_scale": {
+      "1": "Recall",
+      "2": "Basic application",
+      "3": "Scenario reasoning",
+      "4": "Trap-heavy / multi-concept",
+      "5": "Boss-level synthesis"
+    }
+  },
+  "trap_list": [
+    {
+      "id": "ch14.trap.event_vs_incident",
+      "name": "Event ≠ incident",
+      "misconception": "Every alert or log entry means you have an incident.",
+      "fix": "An event is any observable occurrence; an incident is when events represent a policy/security violation that requires response.",
+      "drill_question_ids": [
+        "ch14.q001",
+        "ch14.q004"
+      ]
+    },
+    {
+      "id": "ch14.trap.containment_vs_eradication",
+      "name": "Containment ≠ eradication",
+      "misconception": "Blocking C2 traffic means the system is clean.",
+      "fix": "Containment stops spread/damage; eradication removes artifacts (often via rebuild/restore).",
+      "drill_question_ids": [
+        "ch14.q005",
+        "ch14.q006",
+        "ch14.q059"
+      ]
+    },
+    {
+      "id": "ch14.trap.tabletop_vs_simulation",
+      "name": "Tabletop ≠ simulation",
+      "misconception": "Any practice run is a simulation.",
+      "fix": "Tabletops are discussion-based; simulations are operational and must be clearly labeled to avoid real-world actions.",
+      "drill_question_ids": [
+        "ch14.q009",
+        "ch14.q010"
+      ]
+    },
+    {
+      "id": "ch14.trap.policy_standard_procedure",
+      "name": "Policy vs standard vs procedure",
+      "misconception": "Policies are detailed step lists.",
+      "fix": "Policy sets intent; standards specify required controls; procedures are step-by-step implementation.",
+      "drill_question_ids": [
+        "ch14.q011"
+      ]
+    },
+    {
+      "id": "ch14.trap.alert_tuning",
+      "name": "Tuning ≠ turning off detection",
+      "misconception": "The fix for alert fatigue is to disable correlation or stop logging.",
+      "fix": "Tune thresholds/filters to reduce noise while preserving visibility and real detections.",
+      "drill_question_ids": [
+        "ch14.q028",
+        "ch14.q029",
+        "ch14.q030"
+      ]
+    },
+    {
+      "id": "ch14.trap_flow_vs_pcap",
+      "name": "Flow ≠ packet capture",
+      "misconception": "NetFlow/sFlow gives you the same evidence as full packets.",
+      "fix": "Flow records summarize who/when/how much; packet capture provides payload-level detail.",
+      "drill_question_ids": [
+        "ch14.q040",
+        "ch14.q041"
+      ]
+    },
+    {
+      "id": "ch14.trap_linux_log_locations",
+      "name": "Linux auth logs: know the files",
+      "misconception": "All Linux distributions store auth logs in the same path.",
+      "fix": "Common auth/security logs include /var/log/auth.log and /var/log/secure; syslog message files vary by distro (/var/log/syslog vs /var/log/messages).",
+      "drill_question_ids": [
+        "ch14.q037",
+        "ch14.q038"
+      ]
+    },
+    {
+      "id": "ch14.trap_quarantine",
+      "name": "Quarantine isn’t deletion",
+      "misconception": "Quarantined malware is 'gone' and risk-free.",
+      "fix": "Quarantine isolates a file but still leaves it present for investigation; validate controls and monitor.",
+      "drill_question_ids": [
+        "ch14.q057"
+      ]
+    },
+    {
+      "id": "ch14.trap_isolation_vs_segmentation",
+      "name": "Isolation vs segmentation",
+      "misconception": "Network segmentation and isolating a host are the same action.",
+      "fix": "Isolation removes a host from the network; segmentation is architectural separation that limits lateral movement across zones.",
+      "drill_question_ids": [
+        "ch14.q058",
+        "ch14.q068"
+      ]
+    }
+  ],
+  "missions": [
+    {
+      "id": "ch14.m1",
+      "name": "Event or Incident?",
+      "goal": "Learn the incident response cycle and when an event becomes an incident.",
+      "mechanics": {
+        "minigame": "triage_sorter",
+        "twist": "You must decide fast: ignore, investigate, or declare incident."
+      },
+      "question_ids": [
+        "ch14.q001",
+        "ch14.q002",
+        "ch14.q003",
+        "ch14.q004",
+        "ch14.q005",
+        "ch14.q006",
+        "ch14.q007"
+      ],
+      "rewards": {
+        "xp": 240,
+        "loot": [
+          "Sticker: Six-Step Loop",
+          "Card: Incident vs Event"
+        ]
+      }
+    },
+    {
+      "id": "ch14.m2",
+      "name": "War Room Setup",
+      "goal": "Assemble the incident response team and the plans that keep humans coordinated.",
+      "mechanics": {
+        "minigame": "role_assignment",
+        "twist": "Comms mistakes cost points."
+      },
+      "question_ids": [
+        "ch14.q008",
+        "ch14.q009",
+        "ch14.q010",
+        "ch14.q011",
+        "ch14.q012",
+        "ch14.q013",
+        "ch14.q014"
+      ],
+      "rewards": {
+        "xp": 250,
+        "loot": [
+          "Badge: Calm Communicator",
+          "Card: Policy-Standard-Procedure"
+        ]
+      }
+    },
+    {
+      "id": "ch14.m3",
+      "name": "Hunt the Indicators",
+      "goal": "Recognize common IoCs and use them to drive detection and analysis.",
+      "mechanics": {
+        "minigame": "ioc_spotter",
+        "twist": "Some indicators are decoys; watch the definitions."
+      },
+      "question_ids": [
+        "ch14.q015",
+        "ch14.q016",
+        "ch14.q017",
+        "ch14.q018",
+        "ch14.q019",
+        "ch14.q020",
+        "ch14.q022"
+      ],
+      "rewards": {
+        "xp": 220,
+        "loot": [
+          "Sticker: IoC Radar",
+          "Card: Indicator Cheatsheet"
+        ]
+      }
+    },
+    {
+      "id": "ch14.m4",
+      "name": "Adversary Map Room",
+      "goal": "Use common frameworks and monitoring categories to communicate what’s happening.",
+      "mechanics": {
+        "minigame": "framework_mapper"
+      },
+      "question_ids": [
+        "ch14.q021",
+        "ch14.q035",
+        "ch14.q023",
+        "ch14.q024",
+        "ch14.q025",
+        "ch14.q026",
+        "ch14.q027"
+      ],
+      "rewards": {
+        "xp": 260,
+        "loot": [
+          "Map: ATT&CK Matrix Mini",
+          "Card: Monitoring Categories"
+        ]
+      }
+    },
+    {
+      "id": "ch14.m5",
+      "name": "Signal-to-Noise Fight Club",
+      "goal": "Work SIEM basics: correlation, dashboards, thresholds, alert tuning, and alert fatigue.",
+      "mechanics": {
+        "minigame": "alert_tuner",
+        "twist": "Too strict misses incidents; too loose burns analysts."
+      },
+      "question_ids": [
+        "ch14.q028",
+        "ch14.q029",
+        "ch14.q030",
+        "ch14.q031",
+        "ch14.q032"
+      ],
+      "rewards": {
+        "xp": 240,
+        "loot": [
+          "Tool: Tuning Wrench",
+          "Card: Correlation Patterns"
+        ]
+      }
+    },
+    {
+      "id": "ch14.m6",
+      "name": "Evidence Plumbing",
+      "goal": "Build reliable log and telemetry pipelines (syslog, journald, flows) and retention habits.",
+      "mechanics": {
+        "minigame": "pipeline_builder",
+        "twist": "Sampling and retention constraints change outcomes."
+      },
+      "question_ids": [
+        "ch14.q033",
+        "ch14.q040",
+        "ch14.q041",
+        "ch14.q042",
+        "ch14.q043",
+        "ch14.q047",
+        "ch14.q049"
+      ],
+      "rewards": {
+        "xp": 270,
+        "loot": [
+          "Blueprint: Log Pipeline",
+          "Card: Flow vs Packet Capture"
+        ]
+      }
+    }
+  ],
+  "boss": {
+    "id": "ch14.boss",
+    "name": "Boss: The Silent Flood",
+    "premise": "Alerts are screaming, logs are disappearing, and sensitive data may be leaking. Use monitoring data to declare the incident, contain it without blinding yourself, and pick mitigations that actually shrink the blast radius.",
+    "mechanics": {
+      "phase_1": "Triage noisy alerts and tune thresholds without turning visibility off.",
+      "phase_2": "Contain and isolate affected systems while preserving evidence (logs/metadata/flows).",
+      "phase_3": "Apply targeted mitigations (DLP/cert fixes/config changes) and plan automated response."
+    },
+    "question_ids": [
+      "ch14.q017",
+      "ch14.q028",
+      "ch14.q029",
+      "ch14.q041",
+      "ch14.q049",
+      "ch14.q057",
+      "ch14.q059",
+      "ch14.q061",
+      "ch14.q062",
+      "ch14.q064",
+      "ch14.q067"
+    ],
+    "rewards": {
+      "xp": 700,
+      "loot": [
+        "Trophy: Incident Commander",
+        "Relic: Noise-to-Signal Lens"
+      ]
+    }
+  },
+  "roguelike": {
+    "runset_id": "ch14.runset",
+    "run_minutes_target": 18,
+    "structure": {
+      "acts": 3,
+      "encounters_per_act": 4,
+      "rest_sites_per_act": 1,
+      "boss_per_run": "ch14.boss"
+    },
+    "cards": {
+      "threat_cards": [
+        {
+          "id": "ch14.t1",
+          "name": "Impossible Travel Spike",
+          "tags": [
+            "threat_hunting.ioc.impossible_travel"
+          ]
+        },
+        {
+          "id": "ch14.t2",
+          "name": "Log Wiper",
+          "tags": [
+            "threat_hunting.ioc.missing_logs",
+            "logging.retention.lifecycle"
+          ]
+        },
+        {
+          "id": "ch14.t3",
+          "name": "Alert Storm",
+          "tags": [
+            "siem.dashboard.thresholds_sensitivity",
+            "siem.dashboard.alert_tuning"
+          ]
+        },
+        {
+          "id": "ch14.t4",
+          "name": "Stealth Exfil",
+          "tags": [
+            "investigation.metadata.web",
+            "mitigation.dlp_changes"
+          ]
+        },
+        {
+          "id": "ch14.t5",
+          "name": "Sampling Blindspot",
+          "tags": [
+            "network_flows.sampling_limitations"
+          ]
+        }
+      ],
+      "constraint_cards": [
+        {
+          "id": "ch14.c1",
+          "name": "Legal Hold",
+          "effect": "Retention must preserve evidence; deletion/quarantine choices have consequences."
+        },
+        {
+          "id": "ch14.c2",
+          "name": "Storage Pressure",
+          "effect": "High log volume forces prioritization and smarter filters."
+        },
+        {
+          "id": "ch14.c3",
+          "name": "Distributed Cloud Footprint",
+          "effect": "Some data only exists in remote regions; deploy sensors/agents wisely."
+        }
+      ],
+      "control_cards": [
+        {
+          "id": "ch14.k1",
+          "name": "Threshold Tuning",
+          "tags": [
+            "siem.dashboard.alert_tuning"
+          ]
+        },
+        {
+          "id": "ch14.k2",
+          "name": "Central Syslog",
+          "tags": [
+            "logging.protocols.syslog",
+            "logging.protocols.rsyslog"
+          ]
+        },
+        {
+          "id": "ch14.k3",
+          "name": "Isolation Switch",
+          "tags": [
+            "mitigation.isolation"
+          ]
+        },
+        {
+          "id": "ch14.k4",
+          "name": "App Allow List",
+          "tags": [
+            "mitigation.allow_list"
+          ]
+        },
+        {
+          "id": "ch14.k5",
+          "name": "SOAR Playbook",
+          "tags": [
+            "soar.platforms"
+          ]
+        }
+      ]
+    },
+    "question_pool_ids": "ch14.pool.core"
+  },
+  "pvp": {
+    "enabled": true,
+    "modes": [
+      {
+        "id": "ch14.pvp1",
+        "name": "Triage Duel",
+        "description": "Race to classify events, spot IoCs, and declare the incident at the right time.",
+        "rules": {
+          "rounds": 6,
+          "time_limit_seconds": 80,
+          "scoring": "correct - time_penalty",
+          "tiebreaker": "higher_avg_difficulty"
+        }
+      },
+      {
+        "id": "ch14.pvp2",
+        "name": "Containment Chess",
+        "description": "Pick mitigations that contain damage without destroying evidence or visibility.",
+        "rules": {
+          "rounds": 5,
+          "time_limit_seconds": 95,
+          "scoring": "correct + speed_bonus"
+        }
+      }
+    ],
+    "fairness": {
+      "matchmaking": "mmr_weighted_by_tag_mastery",
+      "anti_cheat": "server_side_timer_and_randomized_question_order"
+    }
+  },
+  "question_bank": [
+    {
+      "id": "ch14.q001",
+      "type": "mcq",
+      "stem": "Which statement best distinguishes an event from a security incident in most security programs?",
+      "options": {
+        "A": "An event is any observable occurrence; an incident is a violation of policy/procedure or security practice.",
+        "B": "An event always requires incident response; an incident is always benign.",
+        "C": "An event is a confirmed compromise; an incident is an unverified alert.",
+        "D": "An event is limited to malware; an incident is limited to insiders."
+      },
+      "answer": "A",
+      "explanation": "An event is simply something observable (logs, alerts, behavior). A security incident is when those events represent a policy/security violation. The trap is assuming every alert/event is automatically an incident that triggers full IR.",
+      "tags": [
+        "incident_response.basics.incident_vs_event"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 35,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "An event is simply something observable (logs, alerts, behavior).",
+      "misconceptionTags": [
+        "incident_response.basics.incident_vs_event_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q002",
+      "type": "mcq",
+      "stem": "The Security+ incident response cycle shown in the chapter lists Recovery → ? → Detection → Analysis → Containment → Eradication. What phase is missing?",
+      "options": {
+        "A": "Planning",
+        "B": "Reporting",
+        "C": "Monitoring",
+        "D": "Preparation"
+      },
+      "answer": "D",
+      "explanation": "The cycle begins with Preparation (tools, team, training, plans) before Detection/Analysis. The trap choices are real activities (reporting/monitoring), but they aren’t the named phase in the six-step cycle.",
+      "tags": [
+        "incident_response.cycle.preparation",
+        "incident_response.cycle.detection"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 30,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "The cycle begins with Preparation (tools, team, training, plans) before Detection/Analysis.",
+      "misconceptionTags": [
+        "incident_response.cycle.preparation_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      }
+    },
+    {
+      "id": "ch14.q003",
+      "type": "ordering",
+      "stem": "Put the following incident response phases in the correct order (Security+ six-step cycle):",
+      "items": [
+        "Recovery",
+        "Analysis",
+        "Containment",
+        "Preparation",
+        "Eradication",
+        "Detection"
+      ],
+      "correct_order": [
+        "Preparation",
+        "Detection",
+        "Analysis",
+        "Containment",
+        "Eradication",
+        "Recovery"
+      ],
+      "explanation": "Security+ uses Preparation → Detection → Analysis → Containment → Eradication → Recovery. The common trap is swapping containment/eradication or placing recovery before eradication.",
+      "tags": [
+        "incident_response.cycle.preparation",
+        "incident_response.cycle.detection",
+        "incident_response.cycle.analysis",
+        "incident_response.cycle.containment",
+        "incident_response.cycle.eradication",
+        "incident_response.cycle.recovery"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "Security+ uses Preparation → Detection → Analysis → Containment → Eradication → Recovery.",
+      "misconceptionTags": [
+        "incident_response.cycle.preparation_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch14.q004",
+      "type": "mcq",
+      "stem": "Which incident response phase focuses on reviewing events and indicators of compromise (IoCs) to decide whether an incident should be declared?",
+      "options": {
+        "A": "Preparation",
+        "B": "Detection",
+        "C": "Eradication",
+        "D": "Recovery"
+      },
+      "answer": "B",
+      "explanation": "Detection is where events are reviewed and IoCs/log analysis are used to determine that an incident exists. The trap is confusing detection with analysis; analysis is deeper once you already suspect/declare an incident.",
+      "tags": [
+        "incident_response.cycle.detection",
+        "threat_hunting.ioc.published_documented"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 40,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "Detection is where events are reviewed and IoCs/log analysis are used to determine that an incident exists.",
+      "misconceptionTags": [
+        "incident_response.cycle.detection_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q005",
+      "type": "mcq",
+      "stem": "Your IR team blocks the attacker’s command-and-control traffic and isolates affected hosts, but does not yet rebuild systems. Which phase is this primarily?",
+      "options": {
+        "A": "Containment",
+        "B": "Eradication",
+        "C": "Recovery",
+        "D": "Lessons learned"
+      },
+      "answer": "A",
+      "explanation": "Containment is about stopping further damage/spread (often via isolation/quarantine and rule changes). Eradication is removing artifacts—often by rebuild/restore. The trap is thinking 'stop the attacker' equals 'eradication'.",
+      "tags": [
+        "incident_response.cycle.containment",
+        "mitigation.isolation",
+        "mitigation.containment_vs_isolation"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "Containment is about stopping further damage/spread (often via isolation/quarantine and rule changes).",
+      "misconceptionTags": [
+        "incident_response.cycle.containment_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q006",
+      "type": "mcq",
+      "stem": "Why do incident responders often prefer rebuilding/restoring from known-good backups during eradication instead of just deleting suspected tools?",
+      "options": {
+        "A": "Backups are always faster than deleting files.",
+        "B": "It’s hard to prove a compromised system is fully cleaned; rebuild/restore gives higher confidence.",
+        "C": "Deleting tools invalidates forensic evidence.",
+        "D": "Rebuilding is required for compliance audits."
+      },
+      "answer": "B",
+      "explanation": "Eradication aims for high confidence the artifacts are gone. Deleting a few tools doesn’t prove persistence isn’t hiding elsewhere, so rebuild/restore is common. The trap is assuming it’s about speed or compliance; it’s about assurance.",
+      "tags": [
+        "incident_response.cycle.eradication",
+        "incident_response.cycle.recovery"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "Eradication aims for high confidence the artifacts are gone.",
+      "misconceptionTags": [
+        "incident_response.cycle.eradication_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q007",
+      "type": "mcq",
+      "stem": "After recovery, your team performs a review to bake improvements into future preparedness. What activity is this?",
+      "options": {
+        "A": "Threat hunting",
+        "B": "Lessons learned",
+        "C": "Containment",
+        "D": "Alert tuning"
+      },
+      "answer": "B",
+      "explanation": "Lessons learned feeds improvements back into Preparation (processes, configs, permissions, etc.). The trap is confusing it with alert tuning, which is a narrower SIEM activity that may be an outcome of lessons learned.",
+      "tags": [
+        "incident_response.cycle.lessons_learned",
+        "incident_response.cycle.preparation"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 35,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "Lessons learned feeds improvements back into Preparation (processes, configs, permissions, etc.).",
+      "misconceptionTags": [
+        "incident_response.cycle.lessons_learned_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q008",
+      "type": "mcq",
+      "stem": "On a typical incident response team, who acts as the primary conduit to senior management and makes organization-level decisions during emergencies?",
+      "options": {
+        "A": "Communications/PR staff",
+        "B": "Information security analyst",
+        "C": "Management/organizational leadership member",
+        "D": "Technical SME (sysadmin/dev)"
+      },
+      "answer": "C",
+      "explanation": "The chapter notes a management/leadership member to make decisions and interface with senior leadership. The trap is picking PR, who handles messaging but isn’t usually empowered to make emergency business decisions.",
+      "tags": [
+        "incident_response.team.management_lead",
+        "incident_response.team.comms_pr"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 40,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "The chapter notes a management/leadership member to make decisions and interface with senior leadership.",
+      "misconceptionTags": [
+        "incident_response.team.management_lead_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q009",
+      "type": "mcq",
+      "stem": "Ben gathers the IR team and talks through a breach scenario, discussing roles and what steps they would take. What exercise type is this?",
+      "options": {
+        "A": "Tabletop exercise",
+        "B": "Simulation",
+        "C": "Fail-over exercise",
+        "D": "Penetration test"
+      },
+      "answer": "A",
+      "explanation": "Tabletops are discussion-based walk-throughs of the plan. Simulations are more operational/active. The trap is thinking any practice is a simulation; tabletop is specifically the talk-through format.",
+      "tags": [
+        "incident_response.exercises.tabletop",
+        "incident_response.exercises.simulation"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 35,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "Tabletops are discussion-based walk-throughs of the plan.",
+      "misconceptionTags": [
+        "incident_response.exercises.tabletop_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q010",
+      "type": "mcq",
+      "stem": "During an incident response simulation, what practice helps prevent participants from taking real-world actions outside the exercise environment?",
+      "options": {
+        "A": "Send all alerts at maximum sensitivity.",
+        "B": "Start every call/text/email with 'This is an exercise' (or similar cue).",
+        "C": "Disable logging to reduce noise.",
+        "D": "Use only agentless tools."
+      },
+      "answer": "B",
+      "explanation": "Simulations should be controlled; explicitly flagging communications as an exercise prevents accidental real actions. The trap is thinking tuning sensitivity or tooling choice solves the human risk.",
+      "tags": [
+        "incident_response.exercises.simulation",
+        "incident_response.training.programs"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "Simulations should be controlled; explicitly flagging communications as an exercise prevents accidental real actions.",
+      "misconceptionTags": [
+        "incident_response.exercises.simulation_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q011",
+      "type": "mcq",
+      "stem": "Which statement best captures the policy/standard/procedure relationship described in the chapter?",
+      "options": {
+        "A": "Policies provide detailed step-by-step tasks; procedures provide high-level intent.",
+        "B": "Standards are slow to change; policies change weekly.",
+        "C": "Policies are high-level intent; standards derive authority from policy; procedures implement standards.",
+        "D": "Guidelines are mandatory; procedures are optional."
+      },
+      "answer": "C",
+      "explanation": "Policy = management intent (why/what). Standards = specific required controls (what exactly). Procedures = how to do it. The trap is swapping the level of detail or treating guidelines as mandatory.",
+      "tags": [
+        "incident_response.policy.policy_vs_standard_vs_procedure",
+        "incident_response.policy.purpose"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 50,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "Policy = management intent (why/what). It aligns with the intended control outcome and avoids the common trap choices in this question.",
+      "misconceptionTags": [
+        "incident_response.policy.policy_vs_standard_vs_procedure_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q012",
+      "type": "mcq",
+      "stem": "Why are incident response communication plans considered critical?",
+      "options": {
+        "A": "They ensure every incident is reported to law enforcement.",
+        "B": "Poor or missing communication can worsen incidents and damage reputation; plans define roles and messaging control.",
+        "C": "They replace technical containment steps.",
+        "D": "They eliminate the need for stakeholder management."
+      },
+      "answer": "B",
+      "explanation": "Communication failures make incidents worse; plans define who speaks, to whom, and with what tone/content. The trap is assuming comms plans are only about law enforcement or that they replace technical response.",
+      "tags": [
+        "incident_response.plans.communication",
+        "incident_response.team.comms_pr"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "Communication failures make incidents worse; plans define who speaks, to whom, and with what tone/content.",
+      "misconceptionTags": [
+        "incident_response.plans.communication_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q013",
+      "type": "mcq",
+      "stem": "Stakeholder management plans in incident response primarily focus on:",
+      "options": {
+        "A": "Configuring syslog collectors",
+        "B": "Prioritizing who needs communications/support and how they can provide input",
+        "C": "Replacing disaster recovery planning",
+        "D": "Defining malware signatures"
+      },
+      "answer": "B",
+      "explanation": "Stakeholder plans define interested parties (internal/external), prioritization, support, and interaction paths. The trap is confusing it with communication tooling (syslog) or DR planning.",
+      "tags": [
+        "incident_response.plans.stakeholder_management",
+        "incident_response.plans.communication"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 50,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "Stakeholder plans define interested parties (internal/external), prioritization, support, and interaction paths.",
+      "misconceptionTags": [
+        "incident_response.plans.stakeholder_management_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q014",
+      "type": "multi_select",
+      "stem": "Select ALL statements that correctly describe business continuity (BC) vs disaster recovery (DR) plans in the incident response context:",
+      "options": {
+        "A": "BC focuses on keeping the organization functional during incidents (alternate systems/offloading).",
+        "B": "DR focuses on restoration/continuation when disasters damage facilities/infrastructure or prevent normal operations.",
+        "C": "BC is only for natural disasters; DR is only for cyber incidents.",
+        "D": "BC and DR are identical documents by definition."
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "BC is about continuing operations despite disruption; DR is about restoring/continuing after disasters impacting facilities/infrastructure. The trap answers try to force rigid scopes (cyber vs natural) or claim they’re identical.",
+      "tags": [
+        "incident_response.plans.business_continuity",
+        "incident_response.plans.disaster_recovery"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "BC is about continuing operations despite disruption; DR is about restoring/continuing after disasters impacting facilities/infrastructure.",
+      "misconceptionTags": [
+        "incident_response.plans.business_continuity_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q015",
+      "type": "mcq",
+      "stem": "Threat hunting primarily supports which incident response phases by proactively looking for indicators of compromise (IoCs)?",
+      "options": {
+        "A": "Preparation and Recovery",
+        "B": "Detection and Analysis",
+        "C": "Containment and Eradication",
+        "D": "Eradication and Lessons learned"
+      },
+      "answer": "B",
+      "explanation": "Threat hunting looks for IoCs to identify and understand compromise—squarely in Detection/Analysis. The trap is thinking hunting is 'prevention' (Preparation) or 'cleanup' (Eradication).",
+      "tags": [
+        "threat_hunting.ioc.account_lockout",
+        "incident_response.cycle.detection",
+        "incident_response.cycle.analysis"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "Threat hunting looks for IoCs to identify and understand compromise—squarely in Detection/Analysis.",
+      "misconceptionTags": [
+        "threat_hunting.ioc.account_lockout_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q016",
+      "type": "mcq",
+      "stem": "A user logs in from Dhaka and then 15 minutes later successfully logs in from Berlin. Which indicator is this?",
+      "options": {
+        "A": "Concurrent session usage",
+        "B": "Impossible travel",
+        "C": "Blocked content",
+        "D": "Out-of-cycle logging"
+      },
+      "answer": "B",
+      "explanation": "Impossible travel indicates logins from locations too far apart for the time gap—often stolen credentials. The trap is concurrent sessions; that’s about multiple simultaneous sessions, not geographic/time feasibility.",
+      "tags": [
+        "threat_hunting.ioc.impossible_travel"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 30,
+      "objectiveIds": [
+        "2.1"
+      ],
+      "rationaleCorrect": "Impossible travel indicates logins from locations too far apart for the time gap—often stolen credentials.",
+      "misconceptionTags": [
+        "threat_hunting.ioc.impossible_travel_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q017",
+      "type": "mcq",
+      "stem": "During threat hunting you discover security logs are missing from a server that previously had normal logging. What is the most likely explanation per the chapter?",
+      "options": {
+        "A": "Logs are never stored locally on servers.",
+        "B": "An attacker wiped logs to hide actions.",
+        "C": "The system is fully patched.",
+        "D": "The SIEM automatically deletes all logs immediately."
+      },
+      "answer": "B",
+      "explanation": "Missing logs can indicate tampering—attackers may wipe logs to hide evidence. The trap is blaming normal retention/centralization without checking context; centralization helps precisely because attackers can wipe local logs.",
+      "tags": [
+        "threat_hunting.ioc.missing_logs",
+        "siem.basics.log_aggregation",
+        "logging.retention.lifecycle"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "2.1"
+      ],
+      "rationaleCorrect": "Missing logs can indicate tampering—attackers may wipe logs to hide evidence.",
+      "misconceptionTags": [
+        "threat_hunting.ioc.missing_logs_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q018",
+      "type": "mcq",
+      "stem": "A nightly backup job suddenly runs at 10 a.m. and generates logs at an unusual time. Which indicator should you flag?",
+      "options": {
+        "A": "Resource inaccessibility",
+        "B": "Out-of-cycle logging",
+        "C": "Published/documented indicator",
+        "D": "Blocked content"
+      },
+      "answer": "B",
+      "explanation": "Out-of-cycle logging is when normally scheduled/cyclic activity occurs at an unusual time. The trap is resource inaccessibility; that’s about something being unavailable, not timing anomalies.",
+      "tags": [
+        "threat_hunting.ioc.out_of_cycle_logging"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 40,
+      "objectiveIds": [
+        "2.1"
+      ],
+      "rationaleCorrect": "Out-of-cycle logging is when normally scheduled/cyclic activity occurs at an unusual time.",
+      "misconceptionTags": [
+        "threat_hunting.ioc.out_of_cycle_logging_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q019",
+      "type": "mcq",
+      "stem": "Multiple users report account lockouts after repeated failed logins overnight. Which common IoC does this most strongly suggest?",
+      "options": {
+        "A": "DNS poisoning",
+        "B": "Brute-force credential attempts",
+        "C": "Certificate pinning failure",
+        "D": "Data archiving"
+      },
+      "answer": "B",
+      "explanation": "Account lockouts often result from brute-force attempts or repeated incorrect password use by attackers. The trap is unrelated technical jargon (DNS/certs) that doesn’t map to the indicator described.",
+      "tags": [
+        "threat_hunting.ioc.account_lockout"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 40,
+      "objectiveIds": [
+        "2.1"
+      ],
+      "rationaleCorrect": "Account lockouts often result from brute-force attempts or repeated incorrect password use by attackers.",
+      "misconceptionTags": [
+        "threat_hunting.ioc.account_lockout_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q020",
+      "type": "mcq",
+      "stem": "The exam outline lists 'published/documented' as an indicator type. What does it refer to?",
+      "options": {
+        "A": "Indicators found only in internal logs",
+        "B": "IoCs that are discovered and distributed via threat feeds or published documentation",
+        "C": "Indicators created by vulnerability scanners",
+        "D": "Indicators generated only by SIEM dashboards"
+      },
+      "answer": "B",
+      "explanation": "Published/documented IoCs are those described externally (threat intel feeds, published reports). The trap is confusing data sources (scanners/SIEM) with the concept of published IoCs.",
+      "tags": [
+        "threat_hunting.ioc.published_documented"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "2.1"
+      ],
+      "rationaleCorrect": "Published/documented IoCs are those described externally (threat intel feeds, published reports).",
+      "misconceptionTags": [
+        "threat_hunting.ioc.published_documented_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q021",
+      "type": "mcq",
+      "stem": "What is the primary purpose of MITRE ATT&CK in incident response and threat analysis?",
+      "options": {
+        "A": "To encrypt logs using TLS",
+        "B": "To provide a common knowledgebase of adversary tactics and techniques across the threat life cycle",
+        "C": "To replace SIEM correlation rules",
+        "D": "To generate packet captures from routers"
+      },
+      "answer": "B",
+      "explanation": "ATT&CK is a structured knowledgebase of adversary behavior (tactics/techniques) used for modeling, detection mapping, and communication. The trap is thinking it’s an operational tool like SIEM or packet capture.",
+      "tags": [
+        "attack_frameworks.mitre_attack",
+        "incident_response.cycle.analysis"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 50,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "ATT&CK is a structured knowledgebase of adversary behavior (tactics/techniques) used for modeling, detection mapping, and communication.",
+      "misconceptionTags": [
+        "attack_frameworks.mitre_attack_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q022",
+      "type": "multi_select",
+      "stem": "Which of the following are indicators of compromise (IoCs) explicitly called out in the chapter’s threat hunting section? (Select ALL that apply.)",
+      "options": {
+        "A": "Concurrent session usage",
+        "B": "Blocked content",
+        "C": "Resource consumption",
+        "D": "Resource inaccessibility",
+        "E": "Impossible travel",
+        "F": "Dark mode enabled"
+      },
+      "answers": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "explanation": "IoCs listed include concurrent sessions, blocked content, resource consumption, resource inaccessibility, and impossible travel. The trap is choosing irrelevant UI settings.",
+      "tags": [
+        "threat_hunting.ioc.concurrent_sessions",
+        "threat_hunting.ioc.blocked_content",
+        "threat_hunting.ioc.resource_consumption",
+        "threat_hunting.ioc.resource_inaccessibility",
+        "threat_hunting.ioc.impossible_travel"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "2.1"
+      ],
+      "rationaleCorrect": "IoCs listed include concurrent sessions, blocked content, resource consumption, resource inaccessibility, and impossible travel.",
+      "misconceptionTags": [
+        "threat_hunting.ioc.concurrent_sessions_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "E": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "F": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q023",
+      "type": "multi_select",
+      "stem": "The Security+ outline in the chapter highlights monitoring of which computing resource categories? (Select ALL that apply.)",
+      "options": {
+        "A": "Systems",
+        "B": "Applications",
+        "C": "Infrastructure",
+        "D": "Only databases"
+      },
+      "answers": [
+        "A",
+        "B",
+        "C"
+      ],
+      "explanation": "The chapter calls out systems, applications, and infrastructure monitoring. The trap is narrowing monitoring to a single asset type like databases.",
+      "tags": [
+        "monitoring.resources.systems",
+        "monitoring.resources.applications",
+        "monitoring.resources.infrastructure"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "The chapter calls out systems, applications, and infrastructure monitoring.",
+      "misconceptionTags": [
+        "monitoring.resources.systems_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q024",
+      "type": "mcq",
+      "stem": "Which description best matches a SIEM (Security Information and Event Management) system?",
+      "options": {
+        "A": "A tool that only scans for missing patches once per month",
+        "B": "A platform that collects/aggregates logs from many sources and performs correlation/analysis with alerting and reporting",
+        "C": "A protocol used to transport logs over UDP",
+        "D": "A firewall feature that blocks malware automatically"
+      },
+      "answer": "B",
+      "explanation": "SIEMs ingest diverse data sources (logs, sometimes packet capture), correlate events, and alert/report. The trap is confusing SIEM with a protocol (syslog) or a single control like a firewall.",
+      "tags": [
+        "logging.sources.application",
+        "siem.basics.correlation",
+        "siem.basics.definition",
+        "siem.basics.log_aggregation"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "4.2"
+      ],
+      "rationaleCorrect": "SIEMs ingest diverse data sources (logs, sometimes packet capture), correlate events, and alert/report.",
+      "misconceptionTags": [
+        "logging.sources.application_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q025",
+      "type": "mcq",
+      "stem": "You encounter a vendor marketing a 'SIM' product and another calling theirs 'SEM'. What does the chapter say about these terms today?",
+      "options": {
+        "A": "SIM and SEM are unrelated to SIEM.",
+        "B": "SIM/SEM are older/narrower terms; the market converged and SIEM is now the common umbrella term.",
+        "C": "SIM means packet capture; SEM means NetFlow.",
+        "D": "SIM is only for Linux; SEM is only for Windows."
+      },
+      "answer": "B",
+      "explanation": "SIM/SEM show up as legacy or narrower labels, but SIEM is the common modern term due to market convergence. The trap answers invent platform/protocol meanings.",
+      "tags": [
+        "siem.terms.sim_sem",
+        "siem.basics.definition"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "4.7"
+      ],
+      "rationaleCorrect": "SIM/SEM show up as legacy or narrower labels, but SIEM is the common modern term due to market convergence.",
+      "misconceptionTags": [
+        "siem.terms.sim_sem_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q026",
+      "type": "mcq",
+      "stem": "Why are SIEM dashboards useful to analysts?",
+      "options": {
+        "A": "They provide a high-level visual view to spot patterns, trends, and likely problems quickly.",
+        "B": "They automatically eradicate malware.",
+        "C": "They replace incident response plans.",
+        "D": "They guarantee zero false positives."
+      },
+      "answer": "A",
+      "explanation": "Dashboards visualize key signals so analysts can rapidly notice abnormal patterns/trends. The trap is assuming dashboards are automatic remediation or perfect detection.",
+      "tags": [
+        "siem.dashboard.trends",
+        "siem.basics.alerting"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 35,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "Dashboards visualize key signals so analysts can rapidly notice abnormal patterns/trends.",
+      "misconceptionTags": [
+        "siem.dashboard.trends_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q027",
+      "type": "mcq",
+      "stem": "In SIEM architecture, sensors are commonly used to:",
+      "options": {
+        "A": "Encrypt disk volumes on endpoints",
+        "B": "Gather additional data (often via agents/VMs/devices) and forward/preprocess it for SIEM ingestion",
+        "C": "Replace firewall rule sets",
+        "D": "Perform only vulnerability scans"
+      },
+      "answer": "B",
+      "explanation": "Sensors/agents collect and forward (sometimes preprocess) data, especially in remote/cloud sites. The trap is confusing sensors with unrelated controls like encryption or firewalling.",
+      "tags": [
+        "siem.dashboard.sensors",
+        "siem.basics.log_aggregation"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 50,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Sensors/agents collect and forward (sometimes preprocess) data, especially in remote/cloud sites.",
+      "misconceptionTags": [
+        "siem.dashboard.sensors_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q028",
+      "type": "mcq",
+      "stem": "Your SIEM generates thousands of alerts for the same low-impact event. What configuration approach does the chapter emphasize to reduce noise and avoid alert fatigue?",
+      "options": {
+        "A": "Increase retention to 1 year",
+        "B": "Set thresholds/filters and manage sensitivity so alerts trigger only when they matter",
+        "C": "Disable all correlation",
+        "D": "Stop centralizing logs"
+      },
+      "answer": "B",
+      "explanation": "Thresholds, filtering, and sensitivity settings reduce noise so alerts are meaningful—preventing alert fatigue. The trap is thinking more retention helps, or turning off correlation/logging (which hurts detection).",
+      "tags": [
+        "siem.dashboard.thresholds_sensitivity",
+        "siem.dashboard.alert_tuning"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "4.7"
+      ],
+      "rationaleCorrect": "Thresholds, filtering, and sensitivity settings reduce noise so alerts are meaningful—preventing alert fatigue.",
+      "misconceptionTags": [
+        "siem.dashboard.thresholds_sensitivity_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q029",
+      "type": "mcq",
+      "stem": "Alert tuning is best described as:",
+      "options": {
+        "A": "Deleting all alerts older than 30 days",
+        "B": "Modifying alert logic/thresholds to alarm only on important events, removing noise and false positives without hiding real issues",
+        "C": "Adding more sensors to generate more alerts",
+        "D": "Replacing a SIEM with syslog"
+      },
+      "answer": "B",
+      "explanation": "Alert tuning targets false positives and noise while preserving detection. The trap is equating tuning with deleting history or just generating more alerts.",
+      "tags": [
+        "siem.dashboard.alert_tuning",
+        "siem.dashboard.thresholds_sensitivity"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "4.3"
+      ],
+      "rationaleCorrect": "Alert tuning targets false positives and noise while preserving detection.",
+      "misconceptionTags": [
+        "siem.dashboard.alert_tuning_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q030",
+      "type": "mcq",
+      "stem": "What is the primary risk of alert fatigue in a SIEM deployment?",
+      "options": {
+        "A": "Packet captures become smaller",
+        "B": "Analysts stop responding, so real incidents can be missed or ignored",
+        "C": "Flow records become encrypted",
+        "D": "Benchmarks cannot be applied"
+      },
+      "answer": "B",
+      "explanation": "Too many noisy alerts cause desensitization; then real high-impact alerts get missed. The trap answers are unrelated technical side-effects.",
+      "tags": [
+        "siem.dashboard.alert_tuning",
+        "siem.basics.alerting"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 40,
+      "objectiveIds": [
+        "4.4"
+      ],
+      "rationaleCorrect": "Too many noisy alerts cause desensitization; then real high-impact alerts get missed.",
+      "misconceptionTags": [
+        "siem.dashboard.alert_tuning_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q031",
+      "type": "mcq",
+      "stem": "Why is correlation a key SIEM capability during investigations?",
+      "options": {
+        "A": "It compresses log files for archiving.",
+        "B": "It links related data points (time, systems, users, etc.) to build a fuller picture of an event/incident.",
+        "C": "It replaces the need for log integrity checks.",
+        "D": "It forces all devices to use the same OS."
+      },
+      "answer": "B",
+      "explanation": "Correlation ties multiple data points together across sources to support analysis. The trap is confusing correlation with storage/formatting or assuming it guarantees integrity.",
+      "tags": [
+        "siem.basics.correlation",
+        "incident_response.cycle.analysis"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "Correlation ties multiple data points together across sources to support analysis.",
+      "misconceptionTags": [
+        "siem.basics.correlation_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q032",
+      "type": "mcq",
+      "stem": "Which SIEM data input can provide raw network traffic details useful for incident analysis, especially when correlated with IDS/IPS and firewall logs?",
+      "options": {
+        "A": "Packet capture",
+        "B": "Password policy",
+        "C": "CPU benchmark score",
+        "D": "Printer logs only"
+      },
+      "answer": "A",
+      "explanation": "The chapter notes packet capture as a SIEM input for deep network analysis and correlation. The trap is confusing operational policies/benchmarks with investigative data.",
+      "tags": [
+        "siem.basics.packet_capture_input",
+        "investigation.packet_capture"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 50,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "The chapter notes packet capture as a SIEM input for deep network analysis and correlation.",
+      "misconceptionTags": [
+        "siem.basics.packet_capture_input_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q033",
+      "type": "mcq",
+      "stem": "Which of the following are examples of centralized logging tools mentioned that can aggregate logs even without a full SIEM?",
+      "options": {
+        "A": "syslog-ng and rsyslog",
+        "B": "WPA3 and RADIUS",
+        "C": "SSH and TLS",
+        "D": "NAT and PAT"
+      },
+      "answer": "A",
+      "explanation": "syslog-ng and rsyslog are cited as centralized logging solutions. The trap answers list networking/security protocols that aren’t logging aggregators.",
+      "tags": [
+        "logging.protocols.syslog_ng",
+        "logging.protocols.rsyslog",
+        "siem.basics.log_aggregation"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 40,
+      "objectiveIds": [
+        "4.7"
+      ],
+      "rationaleCorrect": "syslog-ng and rsyslog are cited as centralized logging solutions.",
+      "misconceptionTags": [
+        "logging.protocols.syslog_ng_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q034",
+      "type": "mcq",
+      "stem": "Which log source is most directly useful to determine what traffic was blocked or allowed at the network boundary?",
+      "options": {
+        "A": "Firewall logs",
+        "B": "Application logs",
+        "C": "Email metadata",
+        "D": "File EXIF metadata"
+      },
+      "answer": "A",
+      "explanation": "Firewall logs record allowed/blocked connections (and in NGFW/UTM, sometimes app-layer details). The trap is picking metadata, which is useful but not for boundary allow/deny decisions.",
+      "tags": [
+        "incident_response.cycle.analysis",
+        "logging.sources.firewall",
+        "logging.sources.network"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 30,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "Firewall logs record allowed/blocked connections (and in NGFW/UTM, sometimes app-layer details).",
+      "misconceptionTags": [
+        "incident_response.cycle.analysis_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q035",
+      "type": "matching",
+      "stem": "Match the threat analysis framework to the best description:",
+      "left": [
+        "Cyber Kill Chain",
+        "Diamond Model of Intrusion Analysis",
+        "MITRE ATT&CK"
+      ],
+      "right": [
+        "Focuses on stages from recon to actions on objectives",
+        "Models intrusion as relationships among adversary, capability, infrastructure, and victim",
+        "Knowledgebase of tactics/techniques used by adversaries"
+      ],
+      "pairs": {
+        "Cyber Kill Chain": "Focuses on stages from recon to actions on objectives",
+        "Diamond Model of Intrusion Analysis": "Models intrusion as relationships among adversary, capability, infrastructure, and victim",
+        "MITRE ATT&CK": "Knowledgebase of tactics/techniques used by adversaries"
+      },
+      "explanation": "Kill chain = staged attack lifecycle; Diamond Model = relationship model (adversary/capability/infrastructure/victim); ATT&CK = tactics/techniques knowledgebase. Trap: mixing 'stages' with 'knowledgebase' and 'relationship model'.",
+      "tags": [
+        "attack_frameworks.kill_chain",
+        "attack_frameworks.diamond_model",
+        "attack_frameworks.mitre_attack"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 85,
+      "objectiveIds": [
+        "2.2"
+      ],
+      "rationaleCorrect": "Kill chain = staged attack lifecycle; Diamond Model = relationship model (adversary/capability/infrastructure/victim); ATT&CK = tactics/techniques knowledgebase.",
+      "misconceptionTags": [
+        "attack_frameworks.kill_chain_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch14.q036",
+      "type": "mcq",
+      "stem": "On a Windows endpoint, which built-in tool is commonly used to view local security logs (including successful/failed logins)?",
+      "options": {
+        "A": "Event Viewer",
+        "B": "journalctl",
+        "C": "syslog-ng",
+        "D": "NetFlow collector"
+      },
+      "answer": "A",
+      "explanation": "Windows Event Viewer is the standard local log viewer. The trap is picking Linux tools (journalctl) or network telemetry (NetFlow).",
+      "tags": [
+        "logging.sources.endpoint",
+        "logging.sources.windows_security_log",
+        "logging.tools.event_viewer"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 30,
+      "objectiveIds": [
+        "4.7"
+      ],
+      "rationaleCorrect": "Windows Event Viewer is the standard local log viewer.",
+      "misconceptionTags": [
+        "logging.sources.endpoint_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q037",
+      "type": "multi_select",
+      "stem": "On Linux systems, where are authentication/security logs commonly stored (as noted in the chapter)? (Select ALL that apply.)",
+      "options": {
+        "A": "/var/log/auth.log",
+        "B": "/var/log/secure",
+        "C": "C:\\Windows\\System32\\LogFiles\\Security",
+        "D": "/var/log/boot.ini"
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "The chapter notes /var/log/auth.log and /var/log/secure as common auth/security log locations. The trap options are Windows paths or unrelated files.",
+      "tags": [
+        "logging.sources.linux_auth_logs"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "4.7"
+      ],
+      "rationaleCorrect": "The chapter notes /var/log/auth.log and /var/log/secure as common auth/security log locations.",
+      "misconceptionTags": [
+        "logging.sources.linux_auth_logs_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q038",
+      "type": "mcq",
+      "stem": "The chapter notes that Debian/Ubuntu commonly store many syslog messages in one file, while Red Hat uses another. Which pairing is correct?",
+      "options": {
+        "A": "Debian/Ubuntu: /var/log/messages ; Red Hat: /var/log/syslog",
+        "B": "Debian/Ubuntu: /var/log/syslog ; Red Hat: /var/log/messages",
+        "C": "Debian/Ubuntu: /var/log/auth.log ; Red Hat: /var/log/secure",
+        "D": "Debian/Ubuntu: /etc/passwd ; Red Hat: /etc/shadow"
+      },
+      "answer": "B",
+      "explanation": "Debian/Ubuntu often use /var/log/syslog, while Red Hat uses /var/log/messages for similar syslog content. The trap is swapping them or confusing with auth logs.",
+      "tags": [
+        "logging.sources.linux_auth_logs",
+        "logging.retention.lifecycle"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "3.1"
+      ],
+      "rationaleCorrect": "Debian/Ubuntu often use /var/log/syslog, while Red Hat uses /var/log/messages for similar syslog content.",
+      "misconceptionTags": [
+        "logging.sources.linux_auth_logs_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q039",
+      "type": "mcq",
+      "stem": "IDS/IPS logs are most valuable for incident response because they:",
+      "options": {
+        "A": "Show application license checks",
+        "B": "Provide insight into detected attack traffic (and blocked traffic for IPS)",
+        "C": "Store GPS coordinates of photos",
+        "D": "Only show successful logins"
+      },
+      "answer": "B",
+      "explanation": "IDS/IPS logs capture detection of attack patterns; IPS also blocks. The trap answers describe other log types/metadata.",
+      "tags": [
+        "logging.sources.ids_ips",
+        "incident_response.cycle.detection"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 40,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "IDS/IPS logs capture detection of attack patterns; IPS also blocks.",
+      "misconceptionTags": [
+        "logging.sources.ids_ips_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q040",
+      "type": "mcq",
+      "stem": "You need to know which hosts talked to which destinations, when, and how much data was transferred—but you do NOT need packet contents. What telemetry is best?",
+      "options": {
+        "A": "Packet capture",
+        "B": "NetFlow/sFlow flow records",
+        "C": "Windows Event Viewer",
+        "D": "File metadata"
+      },
+      "answer": "B",
+      "explanation": "Flow data is like phone records: who/when/how much, not what was said. The trap is packet capture, which includes content and is heavier.",
+      "tags": [
+        "network_flows.netflow",
+        "network_flows.sflow",
+        "network_flows.sampling_limitations"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 50,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Flow data is like phone records: who/when/how much, not what was said.",
+      "misconceptionTags": [
+        "network_flows.netflow_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q041",
+      "type": "mcq",
+      "stem": "What is a primary concern with flow data like sFlow/NetFlow in busy networks, as described in the chapter?",
+      "options": {
+        "A": "Flow data always contains full packet payloads.",
+        "B": "Flow tracking can consume resources, so flows are often sampled (e.g., 10:1 or 1000:1), losing some detail.",
+        "C": "Flow data cannot show source/destination.",
+        "D": "Flows only work on Wi‑Fi networks."
+      },
+      "answer": "B",
+      "explanation": "High-volume flow tracking is expensive, so sampling is common, reducing resolution. The trap is thinking flows have payloads or can’t show endpoints; they do show endpoints, just not content.",
+      "tags": [
+        "network_flows.sampling_limitations",
+        "network_flows.sflow",
+        "network_flows.netflow"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "High-volume flow tracking is expensive, so sampling is common, reducing resolution.",
+      "misconceptionTags": [
+        "network_flows.sampling_limitations_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q042",
+      "type": "mcq",
+      "stem": "IPFIX is best described as:",
+      "options": {
+        "A": "A proprietary Cisco replacement for syslog",
+        "B": "An open standard based on NetFlow v9 that many vendors support",
+        "C": "A Windows-only logging API",
+        "D": "A method for embedding metadata into images"
+      },
+      "answer": "B",
+      "explanation": "The chapter describes IPFIX as an open standard based on NetFlow v9. The trap is calling it proprietary or confusing it with unrelated logging/metadata concepts.",
+      "tags": [
+        "network_flows.ipfix",
+        "network_flows.netflow"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "4.7"
+      ],
+      "rationaleCorrect": "The chapter describes IPFIX as an open standard based on NetFlow v9.",
+      "misconceptionTags": [
+        "network_flows.ipfix_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q043",
+      "type": "mcq",
+      "stem": "Traditional Linux logs are commonly sent to centralized collectors using which protocol?",
+      "options": {
+        "A": "syslog",
+        "B": "NetFlow",
+        "C": "RDP",
+        "D": "802.1X"
+      },
+      "answer": "A",
+      "explanation": "syslog is the traditional Linux log transport to collectors. The trap is NetFlow (network telemetry) or unrelated protocols.",
+      "tags": [
+        "logging.protocols.syslog",
+        "siem.basics.log_aggregation"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 30,
+      "objectiveIds": [
+        "4.7"
+      ],
+      "rationaleCorrect": "syslog is the traditional Linux log transport to collectors.",
+      "misconceptionTags": [
+        "logging.protocols.syslog_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q044",
+      "type": "mcq",
+      "stem": "Which feature set is associated with rsyslog as described in the chapter?",
+      "options": {
+        "A": "Extremely high message rates, TLS-secured logging, TCP-based messages, and multiple backend database options",
+        "B": "Only UDP, no encryption, and no filtering",
+        "C": "Only collects Windows Event Logs via SMB",
+        "D": "Captures full packet payloads for SIEM ingestion"
+      },
+      "answer": "A",
+      "explanation": "rsyslog is highlighted as fast and capable (TLS, TCP, high throughput, DB backends). The trap is confusing it with packet capture or assuming it’s limited/insecure like old syslog defaults.",
+      "tags": [
+        "logging.protocols.rsyslog",
+        "logging.protocols.syslog"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "4.7"
+      ],
+      "rationaleCorrect": "rsyslog is highlighted as fast and capable (TLS, TCP, high throughput, DB backends).",
+      "misconceptionTags": [
+        "logging.protocols.rsyslog_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q045",
+      "type": "mcq",
+      "stem": "syslog-ng is described as providing which improvements over basic syslog?",
+      "options": {
+        "A": "Enhanced filtering, direct logging to databases, and TCP+TLS support",
+        "B": "Wireless encryption for WPA3",
+        "C": "A replacement for incident response policies",
+        "D": "An IPS signature engine"
+      },
+      "answer": "A",
+      "explanation": "syslog-ng adds filtering, DB targets, and secure transport options. The trap answers confuse logging with wireless security, policy, or IDS/IPS signatures.",
+      "tags": [
+        "logging.protocols.syslog_ng",
+        "logging.protocols.syslog"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "syslog-ng adds filtering, DB targets, and secure transport options.",
+      "misconceptionTags": [
+        "logging.protocols.syslog_ng_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q046",
+      "type": "mcq",
+      "stem": "NXLog is best described as:",
+      "options": {
+        "A": "A network flow standard",
+        "B": "An open-source/commercial log centralization tool that can parse/generate common formats and forward to SIEM/analysis tools",
+        "C": "A malware family detector",
+        "D": "A Windows service that disables journald"
+      },
+      "answer": "B",
+      "explanation": "The chapter notes NXLog as a log aggregation/centralization tool with format handling and SIEM forwarding. The trap is confusing it with flow protocols or endpoint security.",
+      "tags": [
+        "logging.protocols.nxlog",
+        "siem.basics.log_aggregation"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "4.7"
+      ],
+      "rationaleCorrect": "The chapter notes NXLog as a log aggregation/centralization tool with format handling and SIEM forwarding.",
+      "misconceptionTags": [
+        "logging.protocols.nxlog_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q047",
+      "type": "mcq",
+      "stem": "On systemd-based Linux systems, which command is used to view the systemd journal (journald) entries?",
+      "options": {
+        "A": "eventvwr.msc",
+        "B": "journalctl",
+        "C": "ipfix",
+        "D": "netstat -j"
+      },
+      "answer": "B",
+      "explanation": "journalctl queries the systemd journal. The trap is picking Windows tools or unrelated commands/standards.",
+      "tags": [
+        "logging.linux.journald_journalctl"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 30,
+      "objectiveIds": [
+        "4.7"
+      ],
+      "rationaleCorrect": "journalctl queries the systemd journal. It aligns with the intended control outcome and avoids the common trap choices in this question.",
+      "misconceptionTags": [
+        "logging.linux.journald_journalctl_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q048",
+      "type": "mcq",
+      "stem": "What does the journalctl -b option do (per the chapter’s description)?",
+      "options": {
+        "A": "Shows only entries since the last boot",
+        "B": "Backs up the journal to a remote syslog server",
+        "C": "Blocks suspicious processes",
+        "D": "Displays only authentication failures"
+      },
+      "answer": "A",
+      "explanation": "-b filters the journal to the current boot. The trap is reading '-b' as 'backup' or conflating filtering with blocking.",
+      "tags": [
+        "logging.linux.journald_journalctl"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 40,
+      "objectiveIds": [
+        "4.7"
+      ],
+      "rationaleCorrect": "-b filters the journal to the current boot.",
+      "misconceptionTags": [
+        "logging.linux.journald_journalctl_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q049",
+      "type": "multi_select",
+      "stem": "Which factors does the chapter say you should consider when deciding log retention periods? (Select ALL that apply.)",
+      "options": {
+        "A": "Operational needs and likely scenarios where logs are required",
+        "B": "Legal/compliance requirements",
+        "C": "Whether users prefer dark mode",
+        "D": "Hardware cost and potential legal challenges of retaining discoverable logs"
+      },
+      "answers": [
+        "A",
+        "B",
+        "D"
+      ],
+      "explanation": "Retention planning involves operations, scenarios, legal/compliance, storage cost, and even legal discovery concerns. The trap is irrelevant UI preferences.",
+      "tags": [
+        "logging.retention.lifecycle",
+        "siem.basics.archiving"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Retention planning involves operations, scenarios, legal/compliance, storage cost, and even legal discovery concerns.",
+      "misconceptionTags": [
+        "logging.retention.lifecycle_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      }
+    },
+    {
+      "id": "ch14.q050",
+      "type": "mcq",
+      "stem": "In incident investigations, metadata is best described as:",
+      "options": {
+        "A": "Data about other data (file attributes, headers, embedded properties, etc.)",
+        "B": "A synonym for encrypted payloads",
+        "C": "A type of malware signature",
+        "D": "Only GPS coordinates"
+      },
+      "answer": "A",
+      "explanation": "Metadata is data about data (headers, timestamps, attributes, embedded fields). The trap is narrowing it to just GPS or confusing it with encryption/signatures.",
+      "tags": [
+        "investigation.metadata.file_exif",
+        "investigation.metadata.email"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 35,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Metadata is data about data (headers, timestamps, attributes, embedded fields).",
+      "misconceptionTags": [
+        "investigation.metadata.file_exif_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q051",
+      "type": "mcq",
+      "stem": "Which information is commonly found in email metadata (headers) that can help an investigation?",
+      "options": {
+        "A": "The full content of every attachment after decryption",
+        "B": "Sender/recipient, send time, transit systems, and antispam markings",
+        "C": "NetFlow sampling rate",
+        "D": "CPU temperature history"
+      },
+      "answer": "B",
+      "explanation": "Email headers include routing and sender/recipient details and other marks added en route. The trap is assuming headers contain decrypted attachment contents or unrelated system metrics.",
+      "tags": [
+        "investigation.metadata.email"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "4.7"
+      ],
+      "rationaleCorrect": "Email headers include routing and sender/recipient details and other marks added en route.",
+      "misconceptionTags": [
+        "investigation.metadata.email_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q052",
+      "type": "mcq",
+      "stem": "Why does the chapter call mobile metadata particularly powerful for investigations?",
+      "options": {
+        "A": "It always includes root passwords",
+        "B": "It often contains rich geospatial data (GPS, cell tower info) alongside call/SMS/data usage records",
+        "C": "It replaces packet capture",
+        "D": "It cannot be falsified"
+      },
+      "answer": "B",
+      "explanation": "Mobile devices record location-rich telemetry (GPS/cell towers) plus usage records. The trap is claiming it’s infallible or a total replacement for other data sources.",
+      "tags": [
+        "investigation.metadata.mobile"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 50,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Mobile devices record location-rich telemetry (GPS/cell towers) plus usage records.",
+      "misconceptionTags": [
+        "investigation.metadata.mobile_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q053",
+      "type": "mcq",
+      "stem": "Alyssa wants to know when and with what device a photo was taken (and possibly GPS). Where is this most likely found?",
+      "options": {
+        "A": "In EXIF/file metadata",
+        "B": "In NetFlow records",
+        "C": "In firewall logs",
+        "D": "In an IPS signature"
+      },
+      "answer": "A",
+      "explanation": "Photo metadata (EXIF) often includes camera model, timestamps, and sometimes GPS. The trap is choosing network telemetry or security device logs that don’t describe the file’s creation attributes.",
+      "tags": [
+        "investigation.metadata.file_exif"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 35,
+      "objectiveIds": [
+        "4.7"
+      ],
+      "rationaleCorrect": "Photo metadata (EXIF) often includes camera model, timestamps, and sometimes GPS.",
+      "misconceptionTags": [
+        "investigation.metadata.file_exif_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q054",
+      "type": "mcq",
+      "stem": "Which data source from the chapter can help identify if vulnerable services or configurations exist and support an investigation with scanning results?",
+      "options": {
+        "A": "Vulnerability scans",
+        "B": "Sentiment analysis",
+        "C": "Keyboard layout settings",
+        "D": "Photo EXIF"
+      },
+      "answer": "A",
+      "explanation": "Vulnerability scan outputs are called out as investigation-supporting data sources. The trap is confusing SIEM 'sentiment analysis' (possible feature) with vulnerability evidence.",
+      "tags": [
+        "investigation.vulnerability_scans",
+        "investigation.automated_reports_dashboards"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Vulnerability scan outputs are called out as investigation-supporting data sources.",
+      "misconceptionTags": [
+        "investigation.vulnerability_scans_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q055",
+      "type": "mcq",
+      "stem": "How do benchmarks help with monitoring and incident response beyond secure configuration?",
+      "options": {
+        "A": "They can require logging settings (central logging, alert levels, critical event logging) to ensure useful evidence exists.",
+        "B": "They replace the need for SIEM tools.",
+        "C": "They only apply to routers and switches.",
+        "D": "They encrypt logs by default."
+      },
+      "answer": "A",
+      "explanation": "Benchmarks often include required logging configurations to ensure meaningful logs exist for security operations. The trap is assuming benchmarks are a replacement for monitoring tooling or automatically encrypt everything.",
+      "tags": [
+        "benchmarks.logging_baselines",
+        "monitoring.resources.systems"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "4.7"
+      ],
+      "rationaleCorrect": "Benchmarks often include required logging configurations to ensure meaningful logs exist for security operations.",
+      "misconceptionTags": [
+        "benchmarks.logging_baselines_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q056",
+      "type": "mcq",
+      "stem": "Selah wants users to install ONLY security-approved applications. Which control best matches that goal?",
+      "options": {
+        "A": "Application deny list",
+        "B": "Application allow list",
+        "C": "SIEM dashboard",
+        "D": "NetFlow sampling"
+      },
+      "answer": "B",
+      "explanation": "Allow lists (whitelisting) permit only approved applications; deny lists block known-bad but allow everything else. The trap is choosing deny list, which is weaker for strict control.",
+      "tags": [
+        "mitigation.allow_list",
+        "mitigation.deny_list"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 40,
+      "objectiveIds": [
+        "4.7"
+      ],
+      "rationaleCorrect": "Allow lists (whitelisting) permit only approved applications; deny lists block known-bad but allow everything else.",
+      "misconceptionTags": [
+        "mitigation.allow_list_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q057",
+      "type": "mcq",
+      "stem": "Why does the chapter caution that 'quarantine' is useful but not risk-free?",
+      "options": {
+        "A": "Quarantine permanently destroys evidence.",
+        "B": "Quarantine can retain access for investigation, but it still leaves the malicious file on the system (even if isolated).",
+        "C": "Quarantine forces a system reboot.",
+        "D": "Quarantine disables all network segmentation."
+      },
+      "answer": "B",
+      "explanation": "Quarantine preserves files for investigation and avoids accidental mass deletion, but the file still exists (in a safe zone), which can be a risk if isolation fails. The trap is thinking quarantine is equivalent to secure deletion.",
+      "tags": [
+        "mitigation.quarantine",
+        "mitigation.monitoring_validation"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Quarantine preserves files for investigation and avoids accidental mass deletion, but the file still exists (in a safe zone), which can be a risk if isolation fails.",
+      "misconceptionTags": [
+        "mitigation.quarantine_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q058",
+      "type": "mcq",
+      "stem": "Mark unplugs a compromised system from the network and labels it 'do not reconnect'. How is this best described?",
+      "options": {
+        "A": "Containment",
+        "B": "Isolation",
+        "C": "Segmentation",
+        "D": "Zoning"
+      },
+      "answer": "B",
+      "explanation": "Physically removing network connectivity is isolation (taking it away from the network). Containment can be done while leaving it online (e.g., firewalling), and segmentation is architectural separation. Trap: mixing these three.",
+      "tags": [
+        "mitigation.isolation",
+        "mitigation.containment_vs_isolation",
+        "mitigation.segmentation"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 40,
+      "objectiveIds": [
+        "4.7"
+      ],
+      "rationaleCorrect": "Physically removing network connectivity is isolation (taking it away from the network).",
+      "misconceptionTags": [
+        "mitigation.isolation_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q059",
+      "type": "mcq",
+      "stem": "Hitesh needs to keep an infected system online for investigation but prevent further malicious activity. Which approach best fits?",
+      "options": {
+        "A": "Isolation",
+        "B": "Containment",
+        "C": "Eradication",
+        "D": "Disaster recovery"
+      },
+      "answer": "B",
+      "explanation": "Containment limits impact while leaving the system in place (e.g., network rules, restricting traffic). Isolation removes it from the network. The trap is 'eradication'—that’s removal/rebuild, not controlled containment.",
+      "tags": [
+        "incident_response.cycle.containment",
+        "mitigation.containment_vs_isolation"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "Containment limits impact while leaving the system in place (e.g., network rules, restricting traffic).",
+      "misconceptionTags": [
+        "incident_response.cycle.containment_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q060",
+      "type": "mcq",
+      "stem": "Which of the following is NOT a typical root cause analysis (RCA) method listed in the chapter?",
+      "options": {
+        "A": "Root/branch review",
+        "B": "Five whys",
+        "C": "Event analysis",
+        "D": "Diagramming (fishbone cause-and-effect)"
+      },
+      "answer": "A",
+      "explanation": "The chapter lists five whys, event analysis, and diagramming (fishbone) as common RCA techniques. 'Root/branch review' is the odd one out and a trap term.",
+      "tags": [
+        "rca.five_whys",
+        "rca.event_analysis",
+        "rca.fishbone_diagram"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "The chapter lists five whys, event analysis, and diagramming (fishbone) as common RCA techniques.",
+      "misconceptionTags": [
+        "rca.five_whys_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q061",
+      "type": "mcq",
+      "stem": "A data loss prevention (DLP) system starts triggering on outbound uploads of source code to a personal cloud drive. Which mitigation action from the chapter best matches a quick response to reduce immediate exposure while you investigate?",
+      "options": {
+        "A": "Increase NetFlow sampling",
+        "B": "Adjust DLP rules/policies to block or quarantine that data movement",
+        "C": "Disable logging",
+        "D": "Run a disaster recovery failover"
+      },
+      "answer": "B",
+      "explanation": "DLP rule changes can directly block or contain sensitive data movement while investigation continues. The trap is thinking network telemetry (NetFlow) is a mitigation, or that DR is the right first move for data exfil controls.",
+      "tags": [
+        "mitigation.dlp_changes",
+        "incident_response.cycle.containment"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "DLP rule changes can directly block or contain sensitive data movement while investigation continues.",
+      "misconceptionTags": [
+        "mitigation.dlp_changes_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q062",
+      "type": "mcq",
+      "stem": "An attacker used a stolen TLS certificate to impersonate a service. Which mitigation action from the chapter is most appropriate?",
+      "options": {
+        "A": "Rotate syslog files",
+        "B": "Revoke/replace the certificate and update trust stores as needed",
+        "C": "Increase SIEM dashboard brightness",
+        "D": "Switch from NetFlow to sFlow"
+      },
+      "answer": "B",
+      "explanation": "Certificate update/revocation is the targeted mitigation when certs are compromised or misused. The trap options are unrelated logging/telemetry tasks.",
+      "tags": [
+        "mitigation.cert_update_revoke",
+        "incident_response.cycle.containment"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 50,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "Certificate update/revocation is the targeted mitigation when certs are compromised or misused.",
+      "misconceptionTags": [
+        "mitigation.cert_update_revoke_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q063",
+      "type": "multi_select",
+      "stem": "Which of the following are mitigation techniques listed in the chapter’s mitigation techniques section? (Select ALL that apply.)",
+      "options": {
+        "A": "Allow list / deny list",
+        "B": "Isolation / quarantine",
+        "C": "Segmentation",
+        "D": "Content/URL filtering changes",
+        "E": "MDM actions (policy/compliance/remote actions)",
+        "F": "Quantum key distribution"
+      },
+      "answers": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "explanation": "The chapter’s mitigation techniques list includes allow/deny lists, isolation/quarantine, segmentation, content filtering changes, and MDM actions (among others). The trap is introducing unrelated cryptography topics.",
+      "tags": [
+        "mitigation.allow_list",
+        "mitigation.deny_list",
+        "mitigation.isolation",
+        "mitigation.quarantine",
+        "mitigation.segmentation",
+        "mitigation.content_url_filtering",
+        "mitigation.mdm_actions"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "The chapter’s mitigation techniques list includes allow/deny lists, isolation/quarantine, segmentation, content filtering changes, and MDM actions (among others).",
+      "misconceptionTags": [
+        "mitigation.allow_list_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "E": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "F": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q064",
+      "type": "mcq",
+      "stem": "What is a core value proposition of a SOAR platform in security operations?",
+      "options": {
+        "A": "It replaces the need for incident response phases.",
+        "B": "It automates orchestration and response workflows (often using playbooks) across tools like SIEM, ticketing, EDR, and firewalls.",
+        "C": "It is the protocol used for syslog over UDP.",
+        "D": "It is identical to NetFlow sampling."
+      },
+      "answer": "B",
+      "explanation": "SOAR focuses on orchestrating and automating response steps (playbooks) across multiple security tools. The trap is confusing it with SIEM (monitoring/correlation) or with log/flow protocols.",
+      "tags": [
+        "soar.platforms",
+        "siem.basics.alerting",
+        "incident_response.cycle.containment"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "4.7"
+      ],
+      "rationaleCorrect": "SOAR focuses on orchestrating and automating response steps (playbooks) across multiple security tools.",
+      "misconceptionTags": [
+        "soar.platforms_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q065",
+      "type": "mcq",
+      "stem": "Why do organizations generate automated reports and dashboards for security operations?",
+      "options": {
+        "A": "To eliminate the need for log retention",
+        "B": "To summarize important signals and support faster decision-making, trending, and compliance reporting",
+        "C": "To store packet payloads forever",
+        "D": "To replace vulnerability scanning"
+      },
+      "answer": "B",
+      "explanation": "Automated reports/dashboards help summarize posture, trends, and compliance evidence. The trap is thinking reporting removes the need for raw log retention or other data sources.",
+      "tags": [
+        "investigation.automated_reports_dashboards",
+        "siem.basics.reporting"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 50,
+      "objectiveIds": [
+        "4.7"
+      ],
+      "rationaleCorrect": "Automated reports/dashboards help summarize posture, trends, and compliance evidence.",
+      "misconceptionTags": [
+        "investigation.automated_reports_dashboards_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q066",
+      "type": "mcq",
+      "stem": "On Linux, which command combination is most appropriate to quickly watch new log entries as they are appended to a file?",
+      "options": {
+        "A": "grep -R /",
+        "B": "tail -f /var/log/syslog (or similar log file)",
+        "C": "chmod 777 /var/log",
+        "D": "route -n"
+      },
+      "answer": "B",
+      "explanation": "tail -f follows a growing log file in real time; grep is for searching patterns, not streaming new lines. The trap is choosing dangerous permissions changes or unrelated network commands.",
+      "tags": [
+        "logging.tools.grep_tail"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 40,
+      "objectiveIds": [
+        "4.7"
+      ],
+      "rationaleCorrect": "tail -f follows a growing log file in real time; grep is for searching patterns, not streaming new lines.",
+      "misconceptionTags": [
+        "logging.tools.grep_tail_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q067",
+      "type": "mcq",
+      "stem": "During containment, your team changes firewall rules, disables a risky service, and tightens IAM permissions. In the chapter’s mitigation list, this is best categorized as:",
+      "options": {
+        "A": "Configuration changes",
+        "B": "Sentiment analysis",
+        "C": "Metadata enrichment",
+        "D": "Archiving"
+      },
+      "answer": "A",
+      "explanation": "Firewall rule edits, service disablement, and permission hardening are configuration changes used to mitigate ongoing risk. The trap is confusing mitigation categories with analytics/metadata activities.",
+      "tags": [
+        "mitigation.configuration_changes",
+        "mitigation.firewall_rules"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "Firewall rule edits, service disablement, and permission hardening are configuration changes used to mitigate ongoing risk.",
+      "misconceptionTags": [
+        "mitigation.configuration_changes_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch14.q068",
+      "type": "matching",
+      "stem": "Match the mitigation action to the best description:",
+      "left": [
+        "Allow list",
+        "Deny list",
+        "Isolation",
+        "Segmentation"
+      ],
+      "right": [
+        "Block known-bad items but allow everything else",
+        "Permit only explicitly approved items",
+        "Remove a host/system from network access",
+        "Architectural separation to limit lateral movement"
+      ],
+      "pairs": {
+        "Allow list": "Permit only explicitly approved items",
+        "Deny list": "Block known-bad items but allow everything else",
+        "Isolation": "Remove a host/system from network access",
+        "Segmentation": "Architectural separation to limit lateral movement"
+      },
+      "explanation": "Allow list is strict 'only approved'; deny list is 'block bad, allow rest'. Isolation disconnects; segmentation is structural separation to reduce blast radius/lateral movement. Trap: mixing isolation with segmentation and swapping allow/deny semantics.",
+      "tags": [
+        "mitigation.allow_list",
+        "mitigation.deny_list",
+        "mitigation.isolation",
+        "mitigation.segmentation"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 85,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "Allow list is strict 'only approved'; deny list is 'block bad, allow rest'.",
+      "misconceptionTags": [
+        "mitigation.allow_list_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch14.q069",
+      "type": "matching",
+      "stem": "Match the incident response team role to the primary responsibility described in the chapter:",
+      "left": [
+        "Information security",
+        "Technical experts (admins/devs)",
+        "Legal",
+        "Human resources",
+        "Law enforcement"
+      ],
+      "right": [
+        "Provide security analysis and coordinate security controls",
+        "Fix/restore systems and provide deep technical context",
+        "Advise on liability, regulatory duties, and evidence handling",
+        "Handle employee-related issues and internal policy impacts",
+        "Investigate criminal activity and pursue offenders"
+      ],
+      "pairs": {
+        "Information security": "Provide security analysis and coordinate security controls",
+        "Technical experts (admins/devs)": "Fix/restore systems and provide deep technical context",
+        "Legal": "Advise on liability, regulatory duties, and evidence handling",
+        "Human resources": "Handle employee-related issues and internal policy impacts",
+        "Law enforcement": "Investigate criminal activity and pursue offenders"
+      },
+      "explanation": "IR is multidisciplinary: security analysts, technical SMEs, legal/HR, and sometimes law enforcement. Trap: assuming IR is purely technical or that PR/legal/HR are optional afterthoughts.",
+      "tags": [
+        "incident_response.team.infosec",
+        "incident_response.team.technical_experts",
+        "incident_response.team.legal",
+        "incident_response.team.hr",
+        "incident_response.team.law_enforcement"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 90,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "IR is multidisciplinary: security analysts, technical SMEs, legal/HR, and sometimes law enforcement.",
+      "misconceptionTags": [
+        "incident_response.team.infosec_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch14.q070",
+      "type": "mcq",
+      "stem": "Which statement best describes why SIEM deployments often include sensors/agents in remote or cloud locations?",
+      "options": {
+        "A": "Sensors prevent all attacks by themselves.",
+        "B": "Sensors help collect/normalize data close to the source and forward it reliably to a central SIEM.",
+        "C": "Sensors are required only for journald logs.",
+        "D": "Sensors replace packet capture."
+      },
+      "answer": "B",
+      "explanation": "Sensors/agents gather and sometimes preprocess/normalize data in distributed environments so the central SIEM still has visibility. The trap is believing sensors are magic prevention or single-purpose.",
+      "tags": [
+        "siem.dashboard.sensors",
+        "siem.integration.cloud_saas",
+        "monitoring.resources.infrastructure"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Sensors/agents gather and sometimes preprocess/normalize data in distributed environments so the central SIEM still has visibility.",
+      "misconceptionTags": [
+        "siem.dashboard.sensors_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "type": "scenario_mcq",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "SOAR playbooks orchestrate repeatable multi-tool response and reduce response latency.",
+      "rationaleIncorrect": {
+        "A": "Manual-only response is slower and less consistent at scale.",
+        "C": "Archiving without action does not mitigate active threats.",
+        "D": "Single-analyst dependency is fragile and not orchestration.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "manual_response_bias",
+        "automation_value_undervalued"
+      ],
+      "id": "ch14_obj47_scn01",
+      "stem": "The SOC manually blocks malicious IPs across three tools, causing delays. What is the best orchestration improvement?",
+      "explanation": "Automated enrichment and response playbooks reduce manual handoffs and improve consistency across controls.",
+      "tags": [
+        "automation",
+        "orchestration",
+        "soar"
+      ],
+      "objectiveIds": [
+        "4.7"
+      ],
+      "options": {
+        "A": "Keep manual updates to avoid tool integration risk",
+        "B": "Implement a SOAR playbook to validate indicators and push coordinated blocks",
+        "C": "Disable blocking and only archive incidents",
+        "D": "Assign one analyst to all shifts for continuity"
+      },
+      "answer": "B"
+    },
+    {
+      "type": "scenario_mcq",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "Orchestrated workflows provide consistency, traceability, and controlled automation across response platforms.",
+      "rationaleIncorrect": {
+        "A": "Uncoordinated scripts increase error risk and reduce governance.",
+        "C": "Manual re-entry is slow and error-prone.",
+        "D": "Disabling detection sacrifices visibility and containment capability.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "script_sprawl",
+        "orchestration_without_governance"
+      ],
+      "id": "ch14_obj47_scn02",
+      "stem": "Phishing investigations require analysts to copy indicators between email, endpoint, and firewall consoles. What automation pattern is most appropriate?",
+      "explanation": "A workflow that extracts indicators once and distributes validated actions across integrated tools is the core orchestration pattern.",
+      "tags": [
+        "automation",
+        "workflow_orchestration",
+        "incident_response"
+      ],
+      "objectiveIds": [
+        "4.7"
+      ],
+      "options": {
+        "A": "Use independent scripts with no shared state or approvals",
+        "B": "Build an orchestrated workflow with enrichment, approval gates, and multi-tool actions",
+        "C": "Require analysts to retype indicators manually for each tool",
+        "D": "Disable endpoint detection to reduce alert volume"
+      },
+      "answer": "B"
+    }
+  ]
+}

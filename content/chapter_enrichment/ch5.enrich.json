@@ -1,0 +1,359 @@
+{
+  "pack_id": "ch5",
+  "version": "1.0.0",
+  "confusion_pairs": [
+    {
+      "id": "cp_vuln_scan_vs_pentest",
+      "title": "Vulnerability scan vs Penetration test",
+      "a": {
+        "term": "Vulnerability scan",
+        "definition": "Use when the scenario aligns with vulnerability scan."
+      },
+      "b": {
+        "term": "Penetration test",
+        "definition": "Use when the scenario aligns with penetration test."
+      },
+      "bullets": [
+        "A scan finds known weaknesses broadly; a pentest attempts to exploit weaknesses to prove impact.",
+        "If the question says 'prove/validate impact' → pentest. If it says 'identify missing patches/find CVEs at scale' → vuln scan.",
+        "Scanner flags SMBv1 on many hosts. Pentester uses SMBv1 weakness to gain access and pivot to a file server."
+      ]
+    },
+    {
+      "id": "cp_assessment_vs_audit",
+      "title": "Security assessment vs Security audit",
+      "a": {
+        "term": "Security assessment",
+        "definition": "Use when the scenario aligns with security assessment."
+      },
+      "b": {
+        "term": "Security audit",
+        "definition": "Use when the scenario aligns with security audit."
+      },
+      "bullets": [
+        "Assessment = evaluate and improve; audit = verify against a standard/policy (often for compliance).",
+        "If it’s about improvement/recommendations → assessment. If it’s about evidence + compliance checking → audit.",
+        "Assessment: review controls and propose hardening. Audit: check if controls meet ISO/PCI requirements and collect evidence."
+      ]
+    },
+    {
+      "id": "cp_false_positive_vs_false_negative",
+      "title": "False positive vs False negative",
+      "a": {
+        "term": "False positive",
+        "definition": "Use when the scenario aligns with false positive."
+      },
+      "b": {
+        "term": "False negative",
+        "definition": "Use when the scenario aligns with false negative."
+      },
+      "bullets": [
+        "False positive = alert says 'bad' but it's fine; false negative = alert misses something real.",
+        "‘Noise/too many alerts’ → false positives. ‘Missed attack’ → false negatives.",
+        "IDS flags normal backup traffic as exfiltration (FP). IDS fails to flag real command-and-control traffic (FN)."
+      ]
+    },
+    {
+      "id": "cp_sast_vs_dast",
+      "title": "SAST (Static Application Security Testing) vs DAST (Dynamic Application Security Testing)",
+      "a": {
+        "term": "SAST (Static Application Security Testing)",
+        "definition": "Use when the scenario aligns with sast (static application security testing)."
+      },
+      "b": {
+        "term": "DAST (Dynamic Application Security Testing)",
+        "definition": "Use when the scenario aligns with dast (dynamic application security testing)."
+      },
+      "bullets": [
+        "SAST checks code without running it; DAST tests a running app from the outside.",
+        "If it mentions 'source code/compile time/CI pipeline' → SAST. If it mentions 'running web app/proxy/fuzz requests' → DAST.",
+        "SAST finds hardcoded API keys in code. DAST finds SQL injection by sending payloads to the live site."
+      ]
+    },
+    {
+      "id": "cp_active_vs_passive_scanning",
+      "title": "Active scanning vs Passive scanning",
+      "a": {
+        "term": "Active scanning",
+        "definition": "Use when the scenario aligns with active scanning."
+      },
+      "b": {
+        "term": "Passive scanning",
+        "definition": "Use when the scenario aligns with passive scanning."
+      },
+      "bullets": [
+        "Active scanning sends probes to hosts; passive scanning observes existing traffic/logs without probing.",
+        "If it 'touches' systems with probes → active. If it 'listens/monitors' → passive.",
+        "Active: Nmap port scan. Passive: network sensor detects open services based on traffic patterns."
+      ]
+    },
+    {
+      "id": "cp_credentialed_vs_noncredentialed_scan",
+      "title": "Credentialed scan vs Non-credentialed scan",
+      "a": {
+        "term": "Credentialed scan",
+        "definition": "Use when the scenario aligns with credentialed scan."
+      },
+      "b": {
+        "term": "Non-credentialed scan",
+        "definition": "Use when the scenario aligns with non-credentialed scan."
+      },
+      "bullets": [
+        "Credentialed scan logs in for deeper visibility; non-credentialed scans from outside with limited visibility.",
+        "If it mentions 'agent/SSH/WinRM/AD creds' → credentialed. If it mentions 'external view' → non-credentialed.",
+        "Credentialed scan checks missing patches via OS queries. Non-credentialed scan only sees exposed ports/banners."
+      ]
+    },
+    {
+      "id": "cp_black_box_vs_white_box",
+      "title": "Black-box test vs White-box test",
+      "a": {
+        "term": "Black-box test",
+        "definition": "Use when the scenario aligns with black-box test."
+      },
+      "b": {
+        "term": "White-box test",
+        "definition": "Use when the scenario aligns with white-box test."
+      },
+      "bullets": [
+        "Black-box = no internal knowledge; white-box = full internal knowledge (code/diagrams/credentials).",
+        "‘No knowledge like an attacker’ → black-box. ‘Full code/architecture access’ → white-box.",
+        "Black-box: test public endpoints only. White-box: review code + configs + internal APIs."
+      ]
+    },
+    {
+      "id": "cp_baseline_vs_benchmark",
+      "title": "Baseline vs Benchmark",
+      "a": {
+        "term": "Baseline",
+        "definition": "Use when the scenario aligns with baseline."
+      },
+      "b": {
+        "term": "Benchmark",
+        "definition": "Use when the scenario aligns with benchmark."
+      },
+      "bullets": [
+        "Baseline = your known-good normal state; benchmark = a reference standard (vendor/industry).",
+        "‘What’s normal for us?’ → baseline. ‘Best practice/hardening standard?’ → benchmark.",
+        "Baseline: normal CPU is 10–20% for this server. Benchmark: CIS hardening checklist for Windows."
+      ]
+    },
+    {
+      "id": "cp_vulnerability_vs_exploit",
+      "title": "Vulnerability vs Exploit",
+      "a": {
+        "term": "Vulnerability",
+        "definition": "Use when the scenario aligns with vulnerability."
+      },
+      "b": {
+        "term": "Exploit",
+        "definition": "Use when the scenario aligns with exploit."
+      },
+      "bullets": [
+        "Vulnerability = the weakness; exploit = the method/code that uses the weakness.",
+        "If it’s ‘a flaw’ → vulnerability. If it’s ‘how attackers use it’ → exploit.",
+        "Vuln: unpatched RCE bug. Exploit: payload that triggers the bug to run attacker commands."
+      ]
+    },
+    {
+      "id": "cp_patch_management_vs_vulnerability_management",
+      "title": "Patch management vs Vulnerability management",
+      "a": {
+        "term": "Patch management",
+        "definition": "Use when the scenario aligns with patch management."
+      },
+      "b": {
+        "term": "Vulnerability management",
+        "definition": "Use when the scenario aligns with vulnerability management."
+      },
+      "bullets": [
+        "Patch management is applying updates; vulnerability management is the full cycle: discover → prioritize → remediate → verify.",
+        "If it focuses on updating systems → patch mgmt. If it includes scanning, triage, risk ranking, verification → vuln mgmt.",
+        "Vuln mgmt finds critical CVEs, prioritizes internet-facing servers, patches, then rescans to confirm closure."
+      ]
+    },
+    {
+      "id": "cp_code_review_vs_configuration_review",
+      "title": "Code review vs Configuration review",
+      "a": {
+        "term": "Code review",
+        "definition": "Use when the scenario aligns with code review."
+      },
+      "b": {
+        "term": "Configuration review",
+        "definition": "Use when the scenario aligns with configuration review."
+      },
+      "bullets": [
+        "Code review targets application logic; configuration review targets system/app settings and hardening.",
+        "If it mentions ‘functions, input validation, source code’ → code review. If it mentions ‘settings, policies, hardening’ → config review.",
+        "Code review finds missing output encoding (XSS risk). Config review finds TLS 1.0 enabled on the web server."
+      ]
+    },
+    {
+      "id": "cp_qualitative_vs_quantitative_risk",
+      "title": "Qualitative risk analysis vs Quantitative risk analysis",
+      "a": {
+        "term": "Qualitative risk analysis",
+        "definition": "Use when the scenario aligns with qualitative risk analysis."
+      },
+      "b": {
+        "term": "Quantitative risk analysis",
+        "definition": "Use when the scenario aligns with quantitative risk analysis."
+      },
+      "bullets": [
+        "Qualitative uses labels (High/Med/Low); quantitative uses numbers (money, probability) like ALE/SLE/ARO.",
+        "If it’s ‘rank/prioritize quickly’ → qualitative. If it’s ‘dollar impact/expected loss’ → quantitative.",
+        "Qualitative: ransomware risk = High. Quantitative: ALE = SLE × ARO = $50k × 0.4 = $20k/year."
+      ]
+    },
+    {
+      "id": "cp_bug_bounty_vs_pentest",
+      "title": "Bug bounty vs Penetration test",
+      "a": {
+        "term": "Bug bounty",
+        "definition": "Use when the scenario aligns with bug bounty."
+      },
+      "b": {
+        "term": "Penetration test",
+        "definition": "Use when the scenario aligns with penetration test."
+      },
+      "bullets": [
+        "Bug bounty is open/continuous external discovery (varies by researcher); pentest is scoped, time-boxed, and deliverable-driven.",
+        "If it’s ‘public program, rewards, many researchers’ → bug bounty. If it’s ‘contracted, scoped engagement’ → pentest.",
+        "Bug bounty researcher reports IDOR for reward. Pentest team maps full attack chain and produces a formal report."
+      ]
+    }
+  ],
+  "tag_rules": {
+    "vuln_mgmt.lifecycle": {
+      "rule": "Vuln management includes patching, but also triage and verification.",
+      "micro_example": "‘Apply updates’ is patch mgmt; ‘scan → prioritize → fix → rescan’ is vuln mgmt.",
+      "confusion_pair_id": "cp_patch_management_vs_vulnerability_management"
+    },
+    "vuln_scan.targets": {
+      "rule": "Scan = breadth + known issues. Pentest = depth + proven impact.",
+      "micro_example": "Scan lists 200 findings; pentest shows 1–2 real paths to compromise.",
+      "confusion_pair_id": "cp_vuln_scan_vs_pentest"
+    },
+    "vuln_scan.frequency": {
+      "rule": "Vuln management includes patching, but also triage and verification.",
+      "micro_example": "‘Apply updates’ is patch mgmt; ‘scan → prioritize → fix → rescan’ is vuln mgmt.",
+      "confusion_pair_id": "cp_patch_management_vs_vulnerability_management"
+    },
+    "vuln_scan.credentialed": {
+      "rule": "Credentials buy visibility.",
+      "micro_example": "Credentialed finds missing local patches; non-credentialed mostly finds exposed services.",
+      "confusion_pair_id": "cp_credentialed_vs_noncredentialed_scan"
+    },
+    "vuln_scan.intrusive": {
+      "rule": "Active pokes. Passive watches.",
+      "micro_example": "Active scans can disrupt fragile systems; passive scans are stealthier but slower to reveal gaps.",
+      "confusion_pair_id": "cp_active_vs_passive_scanning"
+    },
+    "vuln_scan.perspective": {
+      "rule": "Black-box simulates outsiders; white-box accelerates deep finding.",
+      "micro_example": "White-box gets to 'root cause' faster because you can inspect internals.",
+      "confusion_pair_id": "cp_black_box_vs_white_box"
+    },
+    "vuln_scan.agent_based": {
+      "rule": "Credentials buy visibility.",
+      "micro_example": "Credentialed finds missing local patches; non-credentialed mostly finds exposed services.",
+      "confusion_pair_id": "cp_credentialed_vs_noncredentialed_scan"
+    },
+    "vuln_scan.maintenance": {
+      "rule": "Vuln management includes patching, but also triage and verification.",
+      "micro_example": "‘Apply updates’ is patch mgmt; ‘scan → prioritize → fix → rescan’ is vuln mgmt.",
+      "confusion_pair_id": "cp_patch_management_vs_vulnerability_management"
+    },
+    "vuln_scan.fp_fn": {
+      "rule": "False positives waste time; false negatives lose wars.",
+      "micro_example": "Tuning reduces FPs; coverage improvements reduce FNs.",
+      "confusion_pair_id": "cp_false_positive_vs_false_negative"
+    },
+    "cve": {
+      "rule": "Vuln is the hole. Exploit is the crowbar.",
+      "micro_example": "CVE describes the hole; PoC shows the crowbar works.",
+      "confusion_pair_id": "cp_vulnerability_vs_exploit"
+    },
+    "cvss.base": {
+      "rule": "Qualitative ranks. Quantitative counts.",
+      "micro_example": "Quantitative outputs expected annual loss; qualitative outputs priority buckets.",
+      "confusion_pair_id": "cp_qualitative_vs_quantitative_risk"
+    },
+    "cvss.severity_scale": {
+      "rule": "Qualitative ranks. Quantitative counts.",
+      "micro_example": "Quantitative outputs expected annual loss; qualitative outputs priority buckets.",
+      "confusion_pair_id": "cp_qualitative_vs_quantitative_risk"
+    },
+    "scap": {
+      "rule": "Baseline = your normal. Benchmark = the standard.",
+      "micro_example": "Baseline says what changed; benchmark says what should change.",
+      "confusion_pair_id": "cp_baseline_vs_benchmark"
+    },
+    "remediation.options": {
+      "rule": "Vuln management includes patching, but also triage and verification.",
+      "micro_example": "‘Apply updates’ is patch mgmt; ‘scan → prioritize → fix → rescan’ is vuln mgmt.",
+      "confusion_pair_id": "cp_patch_management_vs_vulnerability_management"
+    },
+    "remediation.validation": {
+      "rule": "Scan = breadth + known issues. Pentest = depth + proven impact.",
+      "micro_example": "Scan lists 200 findings; pentest shows 1–2 real paths to compromise.",
+      "confusion_pair_id": "cp_vuln_scan_vs_pentest"
+    },
+    "risk.context": {
+      "rule": "Qualitative ranks. Quantitative counts.",
+      "micro_example": "Quantitative outputs expected annual loss; qualitative outputs priority buckets.",
+      "confusion_pair_id": "cp_qualitative_vs_quantitative_risk"
+    },
+    "assessment.vuln_scan_vs_pentest": {
+      "rule": "Scan = breadth + known issues. Pentest = depth + proven impact.",
+      "micro_example": "Scan lists 200 findings; pentest shows 1–2 real paths to compromise.",
+      "confusion_pair_id": "cp_vuln_scan_vs_pentest"
+    },
+    "assessment.audit_attestation": {
+      "rule": "Assessment improves. Audit proves.",
+      "micro_example": "Assessment recommends MFA; audit checks evidence that MFA is enabled for admins.",
+      "confusion_pair_id": "cp_assessment_vs_audit"
+    },
+    "pentest.roe": {
+      "rule": "Bounty is continuous and crowd-driven; pentest is scoped and report-driven.",
+      "micro_example": "Bug bounty finds one bug; pentest maps and proves an end-to-end compromise path.",
+      "confusion_pair_id": "cp_bug_bounty_vs_pentest"
+    },
+    "pentest.knowledge_levels": {
+      "rule": "Black-box simulates outsiders; white-box accelerates deep finding.",
+      "micro_example": "White-box gets to 'root cause' faster because you can inspect internals.",
+      "confusion_pair_id": "cp_black_box_vs_white_box"
+    },
+    "pentest.recon": {
+      "rule": "Active pokes. Passive watches.",
+      "micro_example": "Active scans can disrupt fragile systems; passive scans are stealthier but slower to reveal gaps.",
+      "confusion_pair_id": "cp_active_vs_passive_scanning"
+    },
+    "pentest.post_exploitation": {
+      "rule": "Vuln is the hole. Exploit is the crowbar.",
+      "micro_example": "CVE describes the hole; PoC shows the crowbar works.",
+      "confusion_pair_id": "cp_vulnerability_vs_exploit"
+    },
+    "pentest.reporting": {
+      "rule": "Bounty is continuous and crowd-driven; pentest is scoped and report-driven.",
+      "micro_example": "Bug bounty finds one bug; pentest maps and proves an end-to-end compromise path.",
+      "confusion_pair_id": "cp_bug_bounty_vs_pentest"
+    },
+    "threat_hunting": {
+      "rule": "False positives waste time; false negatives lose wars.",
+      "micro_example": "Tuning reduces FPs; coverage improvements reduce FNs.",
+      "confusion_pair_id": "cp_false_positive_vs_false_negative"
+    },
+    "third_party_risk.assessment": {
+      "rule": "Assessment improves. Audit proves.",
+      "micro_example": "Assessment recommends MFA; audit checks evidence that MFA is enabled for admins.",
+      "confusion_pair_id": "cp_assessment_vs_audit"
+    },
+    "assessment.internal_external": {
+      "rule": "Black-box simulates outsiders; white-box accelerates deep finding.",
+      "micro_example": "White-box gets to 'root cause' faster because you can inspect internals.",
+      "confusion_pair_id": "cp_black_box_vs_white_box"
+    }
+  }
+}

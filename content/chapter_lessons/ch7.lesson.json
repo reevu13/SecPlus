@@ -1,0 +1,3224 @@
+{
+  "pack_id": "ch7",
+  "version": "1.0.0",
+  "modules": [
+    {
+      "id": "ch7-m01",
+      "title": "Crypto basics: what it is (and isn’t)",
+      "tag_ids": [
+        "crypto.goals",
+        "obfuscation"
+      ],
+      "pages": [
+        {
+          "id": "ch7-m01-p01",
+          "title": "What cryptography does",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Cryptography is the toolbox we use to protect information by transforming it in a controlled way."
+            },
+            {
+              "type": "explain",
+              "text": "It’s not just “secret codes.” In Security+, crypto shows up in Wi‑Fi, VPNs, web browsing (TLS/HTTPS), password storage (hashing), digital certificates, and more."
+            },
+            {
+              "type": "explain",
+              "text": "Crypto usually aims for one or more of these outcomes: keep data private, detect tampering, prove identity, and prevent someone from denying they sent something."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which statement best describes cryptography in a security context?",
+              "options": [
+                "A way to hide files so nobody can find them",
+                "A set of techniques to protect data using math-based transformations and keys",
+                "A method that guarantees data can never be stolen",
+                "A replacement for access control and logging"
+              ],
+              "correct_index": 1,
+              "explanation": "Cryptography uses algorithms + keys to protect data (privacy, integrity, identity). It reduces risk, but doesn’t eliminate it and doesn’t replace other controls.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch7-m01-p02",
+          "title": "Encryption vs encoding vs obfuscation",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Encryption: reversible only with the right key. Goal: security."
+            },
+            {
+              "type": "explain",
+              "text": "Encoding: reversible without a secret key (Base64, URL encoding). Goal: compatibility/transport, not security."
+            },
+            {
+              "type": "explain",
+              "text": "Obfuscation: makes something harder to understand (like mangled code or packed malware). It slows analysis but isn’t strong protection by itself."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Base64 is best described as…",
+              "options": [
+                "Encryption",
+                "Encoding",
+                "Hashing",
+                "Steganography"
+              ],
+              "correct_index": 1,
+              "explanation": "Base64 changes representation so systems can transport data safely, but anyone can reverse it—no secret key involved.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.6",
+        "2.2",
+        "3.1",
+        "3.3",
+        "4.2",
+        "4.3",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.4",
+        "5.6",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch7-m02",
+      "title": "Steganography and watermarking",
+      "tag_ids": [
+        "steganography",
+        "crypto.goals"
+      ],
+      "pages": [
+        {
+          "id": "ch7-m02-p01",
+          "title": "Steganography: hiding data inside data",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Steganography hides a secret message inside another file (often an image/audio/video). The goal is stealth: make the communication look normal."
+            },
+            {
+              "type": "explain",
+              "text": "A common trick is changing tiny, hard-to-notice bits (least significant bits) so the picture looks the same to humans but carries hidden data."
+            },
+            {
+              "type": "explain",
+              "text": "A key difference: encryption hides meaning; steganography hides existence. You can do both together (encrypt the message, then hide it)."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "What’s the best one-line distinction?",
+              "options": [
+                "Encryption hides existence; steganography hides meaning",
+                "Encryption hides meaning; steganography hides existence",
+                "Steganography is the same thing as hashing",
+                "Steganography only applies to passwords"
+              ],
+              "correct_index": 1,
+              "explanation": "Encryption scrambles content so it can’t be understood without a key. Steganography tries to avoid detection by hiding the message inside something else.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch7-m02-p02",
+          "title": "Watermarking as “friendly stego”",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Digital watermarking is steganography used for legitimate purposes: embed ownership or tracking info inside media."
+            },
+            {
+              "type": "explain",
+              "text": "If a leaked copy appears, the watermark can prove it’s your content and sometimes trace which recipient leaked it."
+            },
+            {
+              "type": "explain",
+              "text": "On the exam, remember: watermarking is about intellectual property and tracking copies, not about confidentiality."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A publisher embeds an invisible identifier into each customer’s PDF to trace leaks. This is:",
+              "options": [
+                "Obfuscation",
+                "Watermarking (steganography)",
+                "Key stretching",
+                "HMAC"
+              ],
+              "correct_index": 1,
+              "explanation": "Watermarking is a steganographic technique: hide identifying data inside the media to prove ownership or trace distribution.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.6",
+        "2.2",
+        "3.1",
+        "3.3",
+        "4.2",
+        "4.3",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.4",
+        "5.6",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch7-m03",
+      "title": "Goals of cryptography (Conf/Int/Auth/Non‑rep)",
+      "tag_ids": [
+        "crypto.goals",
+        "digital_signatures",
+        "hashing.basics"
+      ],
+      "pages": [
+        {
+          "id": "ch7-m03-p01",
+          "title": "The 4 crypto goals you must memorize",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Security+ loves these four goals:"
+            },
+            {
+              "type": "explain",
+              "text": "1) Confidentiality: only authorized people can read data. 2) Integrity: detect unwanted changes. 3) Authentication: prove identity. 4) Non‑repudiation: prove who sent something so they can’t deny it later."
+            },
+            {
+              "type": "explain",
+              "text": "Not every crypto system provides all goals. For example, symmetric encryption is great for confidentiality but not non‑repudiation."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which goal is mainly about preventing someone from denying they sent a message?",
+              "options": [
+                "Confidentiality",
+                "Integrity",
+                "Non-repudiation",
+                "Availability"
+              ],
+              "correct_index": 2,
+              "explanation": "Non‑repudiation uses mechanisms like digital signatures so a sender can’t credibly deny authorship later.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch7-m03-p02",
+          "title": "Match goals to tools",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Confidentiality → encryption (symmetric/asymmetric)."
+            },
+            {
+              "type": "explain",
+              "text": "Integrity → hashes, HMAC, digital signatures (hash + signing)."
+            },
+            {
+              "type": "explain",
+              "text": "Authentication → challenge-response, certificates, digital signatures."
+            },
+            {
+              "type": "explain",
+              "text": "Non‑repudiation → digital signatures (asymmetric crypto) + key control."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which tool best provides integrity for a file you download?",
+              "options": [
+                "A hash value (e.g., SHA-256) from a trusted source",
+                "Base64 encoding",
+                "A Caesar cipher",
+                "A wildcard certificate"
+              ],
+              "correct_index": 0,
+              "explanation": "If you can trust the published hash, recomputing it locally verifies the file wasn’t changed (integrity).",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.6",
+        "2.2",
+        "3.1",
+        "3.3",
+        "4.2",
+        "4.3",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.4",
+        "5.6",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch7-m04",
+      "title": "Protecting data: at rest vs transit vs use",
+      "tag_ids": [
+        "crypto.goals"
+      ],
+      "pages": [
+        {
+          "id": "ch7-m04-p01",
+          "title": "Data at rest, in transit, in use",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Data at rest: stored (disk, USB, backups, cloud storage)."
+            },
+            {
+              "type": "explain",
+              "text": "Data in transit (aka “on the wire”): moving over a network."
+            },
+            {
+              "type": "explain",
+              "text": "Data in use: being processed in memory/CPU (hardest state to protect; relies on system protections and sometimes specialized tech)."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "“Data on the wire” is another name for:",
+              "options": [
+                "Data at rest",
+                "Data in transit",
+                "Data in use",
+                "Data in escrow"
+              ],
+              "correct_index": 1,
+              "explanation": "“On the wire” refers to data traveling across network links.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch7-m04-p02",
+          "title": "Encryption choices for data at rest",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Full-disk encryption (FDE): encrypts the whole drive (OS + files). Great for lost/stolen devices, but once booted the data is available to the running OS."
+            },
+            {
+              "type": "explain",
+              "text": "Partition/volume/file encryption: more targeted control (encrypt only what you need)."
+            },
+            {
+              "type": "explain",
+              "text": "Database encryption: can encrypt whole DB (like TDE) or specific columns/records for fine-grained protection."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which option is best described as “encrypt the entire drive automatically, including OS files”?",
+              "options": [
+                "Column-level encryption",
+                "Full-disk encryption (FDE)",
+                "HMAC",
+                "Certificate pinning"
+              ],
+              "correct_index": 1,
+              "explanation": "FDE protects an entire disk. It’s especially valuable for laptops and removable systems that might be stolen.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.6",
+        "2.2",
+        "3.1",
+        "3.3",
+        "4.2",
+        "4.3",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.4",
+        "5.6",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch7-m05",
+      "title": "Crypto vocabulary + Kerckhoffs + cipher basics",
+      "tag_ids": [
+        "crypto.goals",
+        "crypto.symmetric",
+        "crypto.asymmetric"
+      ],
+      "pages": [
+        {
+          "id": "ch7-m05-p01",
+          "title": "Plaintext, ciphertext, keys, algorithms",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Plaintext: the original readable message. Ciphertext: the scrambled output."
+            },
+            {
+              "type": "explain",
+              "text": "Algorithm (cipher): the rules that transform plaintext↔ciphertext. Key: the secret (or partially secret) value that personalizes the algorithm."
+            },
+            {
+              "type": "explain",
+              "text": "A cryptosystem is the whole package: algorithms, keys, software/hardware, procedures, and people."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "In a modern cryptosystem, the main secret you must protect is usually:",
+              "options": [
+                "The algorithm’s existence",
+                "The ciphertext",
+                "The key material",
+                "The fact that encryption was used"
+              ],
+              "correct_index": 2,
+              "explanation": "Modern crypto assumes algorithms are public and tested. Security comes primarily from protecting the keys.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch7-m05-p02",
+          "title": "Kerckhoffs’ principle (the enemy knows the system)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Kerckhoffs’ principle: a cryptosystem should stay secure even if attackers know everything about it except the key."
+            },
+            {
+              "type": "explain",
+              "text": "Translation: don’t rely on “nobody knows how our encryption works.” That’s security through obscurity—and it breaks when the secret leaks."
+            },
+            {
+              "type": "explain",
+              "text": "Cipher suite: the specific set of algorithms + key sizes used (common in TLS)."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Kerckhoffs’ principle mainly warns against relying on:",
+              "options": [
+                "Salting",
+                "Security through obscurity",
+                "Key escrow",
+                "Certificate revocation"
+              ],
+              "correct_index": 1,
+              "explanation": "A strong system remains secure even when its design is public; the key must be the protected element.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch7-m05-p03",
+          "title": "Block vs stream ciphers (quick intuition)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Block ciphers encrypt fixed-size chunks (blocks). Think: “batch processing.” AES is commonly used as a block cipher."
+            },
+            {
+              "type": "explain",
+              "text": "Stream ciphers encrypt a continuous stream, producing a keystream combined with plaintext bit-by-bit/byte-by-byte."
+            },
+            {
+              "type": "explain",
+              "text": "For the exam, know the difference at a high level; you usually won’t be asked to implement modes of operation."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which is the simplest correct statement?",
+              "options": [
+                "Block ciphers work on fixed-size blocks; stream ciphers work on a continuous stream",
+                "Stream ciphers always use public keys",
+                "Block ciphers are only used for hashing",
+                "Stream ciphers cannot be used for confidentiality"
+              ],
+              "correct_index": 0,
+              "explanation": "Block vs stream is about how data is processed. Both can provide confidentiality when used correctly.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.6",
+        "2.2",
+        "3.1",
+        "3.3",
+        "4.2",
+        "4.3",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.4",
+        "5.6",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch7-m06",
+      "title": "Symmetric cryptography: fast confidentiality",
+      "tag_ids": [
+        "crypto.symmetric",
+        "crypto.aes",
+        "crypto.des_3des",
+        "crypto.goals"
+      ],
+      "pages": [
+        {
+          "id": "ch7-m06-p01",
+          "title": "Symmetric crypto: shared secret key",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Symmetric encryption uses one shared secret key for both encryption and decryption."
+            },
+            {
+              "type": "explain",
+              "text": "It’s fast and great for bulk data (files, disk encryption, VPN payloads)."
+            },
+            {
+              "type": "explain",
+              "text": "But it has a key distribution problem: both sides must get the same secret key securely first."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Symmetric encryption is usually preferred for bulk data mainly because it is:",
+              "options": [
+                "Scalable without coordination",
+                "Faster than asymmetric encryption",
+                "Able to provide non-repudiation",
+                "Keyless"
+              ],
+              "correct_index": 1,
+              "explanation": "Symmetric algorithms are computationally efficient, so they’re used for large volumes of data once a key is established.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch7-m06-p02",
+          "title": "DES, 3DES, AES — what to remember",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "DES: 56-bit key; considered insecure today (brute force is practical for well-funded attackers)."
+            },
+            {
+              "type": "explain",
+              "text": "3DES: runs DES three times to strengthen it, but it’s also considered obsolete and being phased out."
+            },
+            {
+              "type": "explain",
+              "text": "AES: modern standard (selected by NIST). Widely used in Wi‑Fi, TLS, file/disk encryption, and more."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which symmetric algorithm is the modern widely used standard?",
+              "options": [
+                "DES",
+                "3DES",
+                "AES",
+                "RSA"
+              ],
+              "correct_index": 2,
+              "explanation": "AES is the modern symmetric standard. DES/3DES are legacy; RSA is asymmetric.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch7-m06-p03",
+          "title": "Why symmetric crypto doesn’t give non-repudiation",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "If Alice and Bob share the same secret key, either of them could have created a given ciphertext."
+            },
+            {
+              "type": "explain",
+              "text": "That means you can’t prove to a third party who sent the message—both had the same key."
+            },
+            {
+              "type": "explain",
+              "text": "Non‑repudiation needs asymmetric crypto (unique private keys) plus proper key control."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Why can’t symmetric crypto provide non-repudiation?",
+              "options": [
+                "Because symmetric crypto is too slow",
+                "Because both parties share the same key, so authorship can’t be proven",
+                "Because symmetric crypto can’t provide confidentiality",
+                "Because symmetric crypto requires certificates"
+              ],
+              "correct_index": 1,
+              "explanation": "Shared keys mean shared capability—so authorship cannot be uniquely attributed.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.6",
+        "2.2",
+        "3.1",
+        "3.3",
+        "4.2",
+        "4.3",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.4",
+        "5.6",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch7-m07",
+      "title": "Key management + Diffie–Hellman + PFS",
+      "tag_ids": [
+        "key_management.basics",
+        "key_management.key_escrow",
+        "key_management.split_knowledge",
+        "crypto.key_exchange",
+        "crypto.pfs"
+      ],
+      "pages": [
+        {
+          "id": "ch7-m07-p01",
+          "title": "Key management: the boring part that breaks systems",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Key management is everything around the key: creation, distribution, storage, rotation, backup, destruction, recovery, and (sometimes) escrow."
+            },
+            {
+              "type": "explain",
+              "text": "Classic rule: don’t store the encryption key on the same system as the encrypted data. That’s like locking your door and taping the key to it."
+            },
+            {
+              "type": "explain",
+              "text": "High-risk keys may require split knowledge: two people each hold part of the key so no single person can misuse it."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Best practice for protecting stored encrypted data is:",
+              "options": [
+                "Store the key next to the encrypted file for convenience",
+                "Never store the encryption key on the same system as the encrypted data",
+                "Publish the key so everyone can verify encryption",
+                "Only rotate keys when users forget passwords"
+              ],
+              "correct_index": 1,
+              "explanation": "Separating key material from encrypted data reduces the chance that one compromise yields both data and key.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch7-m07-p02",
+          "title": "Key exchange options (how do we share the secret?)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Out-of-band exchange: share the key via a separate secure method (in person, phone, courier, HSM transfer)."
+            },
+            {
+              "type": "explain",
+              "text": "Hybrid approach: use asymmetric crypto to authenticate and securely exchange a symmetric session key, then use symmetric crypto for the actual data."
+            },
+            {
+              "type": "explain",
+              "text": "This is how many secure protocols work in practice: “asymmetric to start, symmetric to go fast.”"
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A common real-world pattern is:",
+              "options": [
+                "Use symmetric crypto to exchange the symmetric key",
+                "Use asymmetric crypto to exchange a symmetric session key, then encrypt data symmetrically",
+                "Never use symmetric crypto over networks",
+                "Use hashes to encrypt the entire file"
+              ],
+              "correct_index": 1,
+              "explanation": "Asymmetric crypto helps bootstrap trust and key exchange; symmetric crypto handles bulk encryption efficiently.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch7-m07-p03",
+          "title": "Diffie–Hellman and perfect forward secrecy",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Diffie–Hellman (DH) is a key exchange method that lets two parties derive a shared secret over an untrusted network."
+            },
+            {
+              "type": "explain",
+              "text": "In modern protocols, ephemeral DH (like DHE/ECDHE) supports Perfect Forward Secrecy (PFS): even if a long-term key is stolen later, past sessions stay protected."
+            },
+            {
+              "type": "explain",
+              "text": "Exam link: PFS shows up with TLS and with anonymity tech like Tor."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Perfect Forward Secrecy (PFS) mainly means:",
+              "options": [
+                "All traffic is encrypted with AES only",
+                "Past session data remains safe even if a long-term key is later compromised",
+                "Keys never expire",
+                "Encryption works without keys"
+              ],
+              "correct_index": 1,
+              "explanation": "PFS uses ephemeral session keys so compromise of a long-term key doesn’t unlock old captured traffic.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.6",
+        "2.2",
+        "3.1",
+        "3.3",
+        "4.2",
+        "4.3",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.4",
+        "5.6",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch7-m08",
+      "title": "Asymmetric cryptography: scaling + signatures",
+      "tag_ids": [
+        "crypto.asymmetric",
+        "crypto.key_exchange",
+        "pki.overview"
+      ],
+      "pages": [
+        {
+          "id": "ch7-m08-p01",
+          "title": "Asymmetric crypto: public + private key pair",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Asymmetric crypto uses a key pair: a public key (share it) and a private key (protect it)."
+            },
+            {
+              "type": "explain",
+              "text": "If you encrypt with someone’s public key, only their private key can decrypt. If you sign with your private key, others verify with your public key."
+            },
+            {
+              "type": "explain",
+              "text": "Asymmetric crypto scales well: you don’t need a unique shared secret for every pair of users."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "If Alice wants confidentiality when sending Bob a message using asymmetric crypto, she should encrypt using:",
+              "options": [
+                "Alice’s private key",
+                "Alice’s public key",
+                "Bob’s public key",
+                "Bob’s private key"
+              ],
+              "correct_index": 2,
+              "explanation": "Encrypting with Bob’s public key ensures only Bob (with the private key) can decrypt.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch7-m08-p02",
+          "title": "RSA vs ECC in one breath",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "RSA security is tied to the difficulty of factoring large numbers. ECC (Elliptic Curve Cryptography) uses math on elliptic curves."
+            },
+            {
+              "type": "explain",
+              "text": "ECC can achieve similar security with much shorter keys (useful when performance, bandwidth, or power matters)."
+            },
+            {
+              "type": "explain",
+              "text": "Bigger keys increase security but also increase computational cost: classic security-vs-performance tradeoff."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Why might an organization prefer ECC over RSA?",
+              "options": [
+                "ECC provides non-repudiation but RSA cannot",
+                "ECC can provide strong security with smaller key sizes (often faster/leaner)",
+                "ECC is symmetric and therefore faster than RSA",
+                "ECC eliminates the need for certificates"
+              ],
+              "correct_index": 1,
+              "explanation": "ECC often achieves equivalent security with smaller keys, which can be efficient for constrained devices and some protocols.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch7-m08-p03",
+          "title": "Where asymmetric crypto is used in practice",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Asymmetric crypto is slower, so it’s usually used for: key exchange, digital signatures, and small amounts of data."
+            },
+            {
+              "type": "explain",
+              "text": "After key exchange, symmetric encryption handles the heavy lifting (bulk data)."
+            },
+            {
+              "type": "explain",
+              "text": "This is why you’ll see RSA/ECDHE in TLS handshakes, but AES for the data channel."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "In TLS, asymmetric crypto is commonly used primarily to:",
+              "options": [
+                "Encrypt every byte of the web page body",
+                "Perform key exchange/authentication, then switch to symmetric session encryption",
+                "Replace hashing functions",
+                "Prevent phishing emails"
+              ],
+              "correct_index": 1,
+              "explanation": "TLS typically uses asymmetric mechanisms to establish trust and session keys, then uses symmetric encryption for efficient bulk transfer.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.6",
+        "2.2",
+        "3.1",
+        "3.3",
+        "4.2",
+        "4.3",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.4",
+        "5.6",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch7-m09",
+      "title": "Hashing: integrity and message digests",
+      "tag_ids": [
+        "hashing.basics",
+        "hashing.sha_family",
+        "hashing.md5",
+        "crypto.attacks.collision"
+      ],
+      "pages": [
+        {
+          "id": "ch7-m09-p01",
+          "title": "Hashing: one-way fingerprints",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "A hash function takes input data and produces a fixed-length output (message digest)."
+            },
+            {
+              "type": "explain",
+              "text": "Good hashes are: deterministic (same input → same output), one-way (can’t feasibly reverse), and collision-resistant (hard to find two inputs with the same hash)."
+            },
+            {
+              "type": "explain",
+              "text": "Hashing is used for integrity checks and for secure password storage (when combined with salt and slow algorithms)."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which statement is true about cryptographic hashes?",
+              "options": [
+                "They are designed to be reversible with a key",
+                "Two different inputs should not realistically produce the same output (collision resistance)",
+                "They are mainly used to encrypt data in transit",
+                "They always provide non-repudiation"
+              ],
+              "correct_index": 1,
+              "explanation": "Hashes are one-way and should resist collisions; they support integrity and password storage.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch7-m09-p02",
+          "title": "SHA family and MD5: what’s safe?",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "SHA (SHA‑2, SHA‑3) is the modern family used for integrity and many security systems."
+            },
+            {
+              "type": "explain",
+              "text": "MD5 is broken for collision resistance. That makes it a bad choice for integrity assurance in security-critical contexts."
+            },
+            {
+              "type": "explain",
+              "text": "Exam habit: if you see MD5 offered for “strong integrity,” treat it as suspect unless the scenario says “legacy/compatibility.”"
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which hash function is generally considered unsuitable for collision-resistant security use today?",
+              "options": [
+                "SHA-256",
+                "SHA-3",
+                "MD5",
+                "HMAC-SHA256"
+              ],
+              "correct_index": 2,
+              "explanation": "MD5 has known collision weaknesses and is not considered secure for many integrity-critical uses.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.6",
+        "2.2",
+        "3.1",
+        "3.3",
+        "4.2",
+        "4.3",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.4",
+        "5.6",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch7-m10",
+      "title": "Digital signatures and HMAC",
+      "tag_ids": [
+        "digital_signatures",
+        "hashing.hmac",
+        "crypto.goals"
+      ],
+      "pages": [
+        {
+          "id": "ch7-m10-p01",
+          "title": "Digital signatures: hash + sign",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "A digital signature usually works like this: hash the message → encrypt the hash with the sender’s private key → attach signature."
+            },
+            {
+              "type": "explain",
+              "text": "Anyone can verify the signature using the sender’s public key and by hashing the message themselves."
+            },
+            {
+              "type": "explain",
+              "text": "Digital signatures provide integrity, authentication, and non‑repudiation (but not confidentiality unless you also encrypt the message)."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A digital signature primarily provides:",
+              "options": [
+                "Confidentiality only",
+                "Integrity + authentication + non-repudiation",
+                "Availability",
+                "Steganography"
+              ],
+              "correct_index": 1,
+              "explanation": "Signatures prove who signed and whether content changed. They don’t hide the message unless combined with encryption.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch7-m10-p02",
+          "title": "Which key do I use? (the exam loves this)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Confidentiality (encrypt for Bob): use Bob’s public key → Bob decrypts with Bob’s private key."
+            },
+            {
+              "type": "explain",
+              "text": "Signing (prove Alice wrote it): Alice signs with Alice’s private key → anyone verifies with Alice’s public key."
+            },
+            {
+              "type": "explain",
+              "text": "If you mix these up, you lose points. A quick memory hack: “Public locks, private proves.”"
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Mike receives a digitally signed message from David. Which key does Mike use to verify the signature?",
+              "options": [
+                "David’s public key",
+                "David’s private key",
+                "Mike’s public key",
+                "Mike’s private key"
+              ],
+              "correct_index": 0,
+              "explanation": "Verification uses the signer’s public key (David’s public key).",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch7-m10-p03",
+          "title": "HMAC: integrity + authentication, but not non-repudiation",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "HMAC combines a hash with a shared secret key."
+            },
+            {
+              "type": "explain",
+              "text": "It can prove the message wasn’t changed and that it came from “someone who knows the shared key.”"
+            },
+            {
+              "type": "explain",
+              "text": "But it cannot provide non‑repudiation because both parties share the same HMAC key."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Why doesn’t HMAC provide non-repudiation?",
+              "options": [
+                "Because it uses SHA algorithms",
+                "Because it is too slow",
+                "Because both parties share the same secret key and could generate the same HMAC",
+                "Because it requires certificates"
+              ],
+              "correct_index": 2,
+              "explanation": "Non‑repudiation requires a unique private key per signer. Shared secrets can’t uniquely attribute authorship.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.6",
+        "2.2",
+        "3.1",
+        "3.3",
+        "4.2",
+        "4.3",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.4",
+        "5.6",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch7-m11",
+      "title": "PKI and certificates: CA/RA, X.509, wildcards",
+      "tag_ids": [
+        "pki.overview",
+        "pki.ca_ra",
+        "pki.csr_x509"
+      ],
+      "pages": [
+        {
+          "id": "ch7-m11-p01",
+          "title": "PKI: the trust system for public keys",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Public keys must be trusted, not just shared. PKI (Public Key Infrastructure) solves that by using digital certificates."
+            },
+            {
+              "type": "explain",
+              "text": "A certificate binds a public key to an identity (person, server, organization) and is signed by a trusted Certificate Authority (CA)."
+            },
+            {
+              "type": "explain",
+              "text": "If you trust the CA, you can trust certificates it issues—this creates a trust hierarchy."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A digital certificate mainly exists to:",
+              "options": [
+                "Encrypt all web traffic automatically",
+                "Bind a public key to an identity using a trusted signature",
+                "Replace passwords entirely",
+                "Eliminate the need for encryption keys"
+              ],
+              "correct_index": 1,
+              "explanation": "Certificates are identity bindings for public keys, backed by a CA’s signature.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch7-m11-p02",
+          "title": "CA vs RA (who does what?)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "CA (Certificate Authority): issues certificates and signs them."
+            },
+            {
+              "type": "explain",
+              "text": "RA (Registration Authority): helps verify identities before issuance (often on behalf of a CA)."
+            },
+            {
+              "type": "explain",
+              "text": "Browsers/OSes ship with a list of trusted root CAs, so users don’t have to manually trust each one."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A Registration Authority (RA) primarily helps by:",
+              "options": [
+                "Encrypting traffic between clients and servers",
+                "Verifying identities prior to certificate issuance",
+                "Hashing passwords for storage",
+                "Performing frequency analysis attacks"
+              ],
+              "correct_index": 1,
+              "explanation": "RAs assist with identity validation; they typically don’t issue certificates themselves.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch7-m11-p03",
+          "title": "X.509: what’s inside a certificate?",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "X.509 certificates include fields like: issuer (who signed it), subject (who it’s for), validity period, serial number, and the subject’s public key."
+            },
+            {
+              "type": "explain",
+              "text": "Certificates may cover people, servers, email addresses, and code-signing identities."
+            },
+            {
+              "type": "explain",
+              "text": "Always check: validity dates and the subject name (CN/SAN) match what you think you’re talking to."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which certificate field tells you who issued (signed) the certificate?",
+              "options": [
+                "Subject",
+                "Issuer",
+                "Serial number",
+                "Common Name (CN)"
+              ],
+              "correct_index": 1,
+              "explanation": "The issuer identifies the CA that issued and signed the certificate.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch7-m11-p04",
+          "title": "Wildcard certificates (and the one-level trap)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Wildcard certs use * to cover many subdomains (e.g., *.example.com covers mail.example.com and www.example.com)."
+            },
+            {
+              "type": "explain",
+              "text": "Exam trap: wildcard is typically only for one subdomain level; it won’t cover deep levels like a.b.example.com."
+            },
+            {
+              "type": "explain",
+              "text": "Wildcards are convenient but can widen blast radius if a private key is compromised."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A wildcard certificate for *.example.com usually does NOT cover:",
+              "options": [
+                "mail.example.com",
+                "www.example.com",
+                "a.b.example.com",
+                "api.example.com"
+              ],
+              "correct_index": 2,
+              "explanation": "Wildcard certs generally cover only one subdomain level (one dot) below the domain.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.6",
+        "2.2",
+        "3.1",
+        "3.3",
+        "4.2",
+        "4.3",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.4",
+        "5.6",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch7-m12",
+      "title": "Certificate lifecycle: enrollment, revocation, pinning, formats",
+      "tag_ids": [
+        "pki.revocation.crl",
+        "pki.revocation.ocsp",
+        "pki.revocation.stapling",
+        "cert_pinning"
+      ],
+      "pages": [
+        {
+          "id": "ch7-m12-p01",
+          "title": "Enrollment and validation (getting a cert)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Enrollment is the process of proving identity to a CA to obtain a certificate."
+            },
+            {
+              "type": "explain",
+              "text": "The CA must validate that the requester is allowed to represent the identity (domain/org/person). If validation is weak, attackers can get fake certs."
+            },
+            {
+              "type": "explain",
+              "text": "When you receive a certificate, you validate the CA signature and check it hasn’t been revoked."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Before trusting a certificate, a client should always:",
+              "options": [
+                "Assume it’s valid if it has a lock icon",
+                "Verify the CA signature and check revocation status",
+                "Encrypt it with AES",
+                "Convert it to Base64"
+              ],
+              "correct_index": 1,
+              "explanation": "Trust requires verification: CA signature + validity + revocation checks.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch7-m12-p02",
+          "title": "Revocation: CRL vs OCSP vs stapling",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "CRL: a downloadable list of revoked certificate serial numbers. Downside: delay/latency and periodic downloads."
+            },
+            {
+              "type": "explain",
+              "text": "OCSP: real-time status query (good / revoked / unknown). Less latency, but adds network lookups."
+            },
+            {
+              "type": "explain",
+              "text": "OCSP stapling: the web server “staples” a fresh OCSP response to the handshake so clients don’t all query the CA."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which approach reduces client-to-CA OCSP traffic by having the server present status proof?",
+              "options": [
+                "CRL",
+                "OCSP stapling",
+                "Key escrow",
+                "Frequency analysis"
+              ],
+              "correct_index": 1,
+              "explanation": "Stapling attaches a CA-signed OCSP response to the handshake, so clients can validate status without calling the OCSP server.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch7-m12-p03",
+          "title": "Certificate pinning (when ‘surprise cert’ is a red flag)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Certificate pinning makes a client remember which certificate/public key it expects for a site."
+            },
+            {
+              "type": "explain",
+              "text": "If the certificate changes unexpectedly, the client can warn/block—useful against some man-in-the-middle scenarios."
+            },
+            {
+              "type": "explain",
+              "text": "Trade-off: pinning can cause outages if you rotate certificates and clients don’t update properly."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Certificate pinning mainly helps detect:",
+              "options": [
+                "A user forgetting a password",
+                "An unexpected certificate/public key change for a site",
+                "A weak hash algorithm like MD5",
+                "A downgrade to WPA2"
+              ],
+              "correct_index": 1,
+              "explanation": "Pinning ties a site to a known certificate/key and flags unexpected changes.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch7-m12-p04",
+          "title": "Certificate file formats (high-level)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Certificates come in several formats. You don’t need all details, but recognize common ones:"
+            },
+            {
+              "type": "explain",
+              "text": "DER: common binary. PEM: text (Base64 with header/footer). PFX/P12: often bundles cert + private key (Windows). P7B: often chain without private key."
+            },
+            {
+              "type": "explain",
+              "text": "Exam mindset: formats matter for compatibility and for whether the private key is included."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which format commonly contains both certificate and private key (often used on Windows)?",
+              "options": [
+                "DER",
+                "PEM",
+                "PFX/P12",
+                "P7B"
+              ],
+              "correct_index": 2,
+              "explanation": "PFX/P12 is commonly used to transport/import a certificate together with its private key (protected with a password).",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.6",
+        "2.2",
+        "3.1",
+        "3.3",
+        "4.2",
+        "4.3",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.4",
+        "5.6",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch7-m13",
+      "title": "Cryptographic attacks + password-hash defenses",
+      "tag_ids": [
+        "crypto.attacks.collision",
+        "crypto.attacks.birthday",
+        "crypto.attacks.downgrade",
+        "hashing.basics"
+      ],
+      "pages": [
+        {
+          "id": "ch7-m13-p01",
+          "title": "Classic crypto attacks you’ll see in objectives",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Brute force: try every key. Guaranteed in theory, but time explodes with key length."
+            },
+            {
+              "type": "explain",
+              "text": "Frequency analysis: exploit patterns in languages/ciphertext (more relevant to simple/legacy ciphers)."
+            },
+            {
+              "type": "explain",
+              "text": "Chosen-plaintext: attacker can obtain ciphertext for plaintexts they choose, helping recover keys. Related-key: compares outputs under keys with known relationship."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which attack is basically “try every possible key until it works”?",
+              "options": [
+                "Frequency analysis",
+                "Brute force",
+                "OCSP stapling",
+                "Certificate pinning"
+              ],
+              "correct_index": 1,
+              "explanation": "Brute force is exhaustive key search. Strong keys make it impractical.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch7-m13-p02",
+          "title": "Collision and birthday attacks (hash-focused)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Collision attack: find two different inputs that produce the same hash output."
+            },
+            {
+              "type": "explain",
+              "text": "Birthday attack: uses probability to find collisions faster than naïvely expected (the ‘birthday paradox’ effect)."
+            },
+            {
+              "type": "explain",
+              "text": "Exam tip: collisions are why broken hashes like MD5 are dangerous for integrity and signatures."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A birthday attack primarily targets:",
+              "options": [
+                "Symmetric encryption key exchange",
+                "Cryptographic hashes and collision probability",
+                "OCSP response caching",
+                "Steganography tools"
+              ],
+              "correct_index": 1,
+              "explanation": "Birthday attacks are about collision probability in hash functions.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch7-m13-p03",
+          "title": "Rainbow tables, salting, and key stretching",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Rainbow tables precompute hashes of common passwords. If your database stores unsalted fast hashes, attackers can match quickly."
+            },
+            {
+              "type": "explain",
+              "text": "Salting: add a random value per password before hashing so identical passwords don’t share the same hash and rainbow tables become far less useful."
+            },
+            {
+              "type": "explain",
+              "text": "Key stretching (PBKDF2, bcrypt, scrypt, Argon2): deliberately slow hashing with many iterations to make guessing expensive."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "The best defense against rainbow table attacks is primarily:",
+              "options": [
+                "Base64 encoding",
+                "Salting + slow key stretching algorithms",
+                "Using DES",
+                "Certificate pinning"
+              ],
+              "correct_index": 1,
+              "explanation": "Salting defeats precomputed tables; key stretching makes each guess costly.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch7-m13-p04",
+          "title": "Human error: the silent cryptographic exploit",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Real systems fail when people slip: sending one message encrypted and another in clear, reusing keys forever, mishandling backups, or exposing private keys."
+            },
+            {
+              "type": "explain",
+              "text": "If attackers get both plaintext and ciphertext for similar messages, they can learn patterns and reduce uncertainty."
+            },
+            {
+              "type": "explain",
+              "text": "Operational security (policies + tooling) matters as much as the math."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which issue is primarily a “people/process” crypto weakness?",
+              "options": [
+                "Brute-forcing a 256-bit key",
+                "Accidentally sending the same message once encrypted and once unencrypted",
+                "Using SHA-256 for integrity",
+                "Using ECC with short keys"
+              ],
+              "correct_index": 1,
+              "explanation": "Leaks and inconsistent practice can hand attackers the clues they need, even if the algorithms are solid.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.6",
+        "2.2",
+        "3.1",
+        "3.3",
+        "4.2",
+        "4.3",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.4",
+        "5.6",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch7-m14",
+      "title": "Modern and emerging crypto topics (Tor, blockchain, quantum)",
+      "tag_ids": [
+        "tor_dark_web",
+        "crypto.pfs",
+        "crypto.attacks.downgrade"
+      ],
+      "pages": [
+        {
+          "id": "ch7-m14-p01",
+          "title": "Downgrade attacks (force weaker crypto)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "A downgrade attack tries to push two systems into using weaker security than they’re capable of (weaker cipher suite, older protocol version)."
+            },
+            {
+              "type": "explain",
+              "text": "Defense: disable legacy protocols/ciphers, enforce strong minimum versions, use secure defaults."
+            },
+            {
+              "type": "explain",
+              "text": "In TLS terms: don’t allow fallback to weak suites ‘for compatibility’ unless you truly must."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A downgrade attack attempts to:",
+              "options": [
+                "Increase key length",
+                "Force the use of weaker encryption/protocol settings",
+                "Replace encryption with hashing",
+                "Hide data inside images"
+              ],
+              "correct_index": 1,
+              "explanation": "Downgrade attacks exploit compatibility fallbacks to reduce security.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch7-m14-p02",
+          "title": "Tor + Dark Web + Perfect Forward Secrecy",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Tor routes traffic through multiple relays, wrapping it in layers of encryption (like an onion)."
+            },
+            {
+              "type": "explain",
+              "text": "Relays only learn what they must: where traffic came from and where to send it next—not the full path. PFS helps protect past sessions."
+            },
+            {
+              "type": "explain",
+              "text": "Tor enables anonymous browsing and hosting of anonymous services often associated with the Dark Web (used for both legitimate privacy and criminal activity)."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Tor’s layered encryption and relay design is most closely tied to which concept?",
+              "options": [
+                "Key escrow",
+                "Perfect forward secrecy + multi-hop routing",
+                "Certificate pinning",
+                "HMAC non-repudiation"
+              ],
+              "correct_index": 1,
+              "explanation": "Tor uses layered encryption across relays; PFS helps limit damage if keys are later compromised.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch7-m14-p03",
+          "title": "Blockchain: an immutable distributed ledger",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Blockchain is a shared ledger replicated across many systems. Records are chained so changes are detectable (tamper-evident)."
+            },
+            {
+              "type": "explain",
+              "text": "It’s not magic: it’s a trade-off system that uses cryptography + consensus to make history hard to rewrite."
+            },
+            {
+              "type": "explain",
+              "text": "Exam-level: know ‘distributed’ and ‘immutable/tamper-evident’ and that crypto enables integrity of the chain."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A blockchain is best described as:",
+              "options": [
+                "A central database controlled by one server",
+                "A distributed ledger designed to be tamper-evident/immutable",
+                "A method for encrypting email",
+                "A type of symmetric cipher"
+              ],
+              "correct_index": 1,
+              "explanation": "Blockchains replicate and chain records so unauthorized changes are extremely difficult and detectable.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch7-m14-p04",
+          "title": "Specialized cryptography: lightweight + homomorphic + quantum",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Lightweight cryptography: designed for low-power or constrained devices (smartcards, sensors, satellites)."
+            },
+            {
+              "type": "explain",
+              "text": "Homomorphic encryption: allows computation on encrypted data so you can get results without seeing raw data."
+            },
+            {
+              "type": "explain",
+              "text": "Quantum computing: may threaten current public-key schemes; it’s an emerging driver for “post-quantum” cryptography."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Homomorphic encryption is valuable because it allows:",
+              "options": [
+                "Encrypting without keys",
+                "Computation on encrypted data without decrypting first",
+                "Perfect anonymity on all networks",
+                "Hash reversal using GPUs"
+              ],
+              "correct_index": 1,
+              "explanation": "Homomorphic encryption preserves the ability to compute while keeping underlying data encrypted.",
+              "objectiveIds": [
+                "1.1",
+                "1.6",
+                "2.2",
+                "3.1",
+                "3.3",
+                "4.2",
+                "4.3",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.6",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.6",
+            "2.2",
+            "3.1",
+            "3.3",
+            "4.2",
+            "4.3",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.6",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.6",
+        "2.2",
+        "3.1",
+        "3.3",
+        "4.2",
+        "4.3",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.4",
+        "5.6",
+        "5.7"
+      ]
+    }
+  ],
+  "objectiveIds": [
+    "1.1",
+    "1.6",
+    "2.2",
+    "3.1",
+    "3.3",
+    "4.2",
+    "4.3",
+    "4.6",
+    "4.7",
+    "4.8",
+    "5.1",
+    "5.2",
+    "5.3",
+    "5.4",
+    "5.6",
+    "5.7"
+  ]
+}

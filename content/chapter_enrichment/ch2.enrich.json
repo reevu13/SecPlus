@@ -1,0 +1,143 @@
+{
+  "pack_id": "sec701_ch2_pack_v1",
+  "version": "1.0.0",
+  "confusion_pairs": [
+    {
+      "id": "vector_vs_surface",
+      "title": "Threat Vector vs Attack Surface",
+      "a": {
+        "term": "Attack Surface",
+        "definition": "What can be attacked (exposed systems, ports, services)."
+      },
+      "b": {
+        "term": "Threat Vector",
+        "definition": "How the attacker gets in (phishing, USB, wireless, supply chain)."
+      },
+      "bullets": [
+        "Surface = targetable exposure; vector = path of entry.",
+        "A USB drop is a vector; the endpoint is the surface.",
+        "Vectors exploit the existing surface."
+      ]
+    },
+    {
+      "id": "internal_vs_external",
+      "title": "Internal vs External Threat Actors",
+      "a": {
+        "term": "Internal",
+        "definition": "Actor already has authorized access or is inside the org."
+      },
+      "b": {
+        "term": "External",
+        "definition": "Actor operates outside the organization."
+      },
+      "bullets": [
+        "Insiders often need less initial access work.",
+        "External actors rely more on vectors for entry.",
+        "Motivation can be similar across both."
+      ]
+    },
+    {
+      "id": "osint_vs_closed",
+      "title": "OSINT vs Closed/Proprietary Intel",
+      "a": {
+        "term": "OSINT",
+        "definition": "Publicly available intelligence sources."
+      },
+      "b": {
+        "term": "Closed/Proprietary",
+        "definition": "Paid, vendor, or government-curated intel feeds."
+      },
+      "bullets": [
+        "OSINT is open but can be noisy.",
+        "Closed intel often has higher curation and context.",
+        "Both should be scored for confidence."
+      ]
+    },
+    {
+      "id": "stix_vs_taxii",
+      "title": "STIX vs TAXII",
+      "a": {
+        "term": "STIX",
+        "definition": "Structured threat intel format/language."
+      },
+      "b": {
+        "term": "TAXII",
+        "definition": "Transport protocol for exchanging intel."
+      },
+      "bullets": [
+        "STIX describes the data; TAXII moves it.",
+        "Think STIX = schema, TAXII = delivery.",
+        "They are commonly used together."
+      ]
+    },
+    {
+      "id": "hacktivist_vs_nation_state",
+      "title": "Hacktivist vs Nation-State",
+      "a": {
+        "term": "Hacktivist",
+        "definition": "Ideology-driven, activism-focused attacks."
+      },
+      "b": {
+        "term": "Nation-State/APT",
+        "definition": "Well-resourced, persistent, strategic campaigns."
+      },
+      "bullets": [
+        "Hacktivists seek visibility; APTs seek long-term advantage.",
+        "Nation-state actors are typically more resourced.",
+        "Both can target critical infrastructure but motives differ."
+      ]
+    }
+  ],
+  "tag_rules": {
+    "vector_message": {
+      "rule": "Message-based vectors include email/SMS/IM/voice social engineering.",
+      "micro_example": "A phishing email is a message-based vector.",
+      "confusion_pair_id": "vector_vs_surface"
+    },
+    "vector_supply_chain": {
+      "rule": "Supply chain attacks abuse vendors, MSPs, or update mechanisms.",
+      "micro_example": "Compromised software update server delivers malware.",
+      "confusion_pair_id": "vector_vs_surface"
+    },
+    "vector_removable": {
+      "rule": "Removable media vectors include USB drops and external drives.",
+      "micro_example": "An infected USB left in a parking lot is removable media.",
+      "confusion_pair_id": "vector_vs_surface"
+    },
+    "actor_insider": {
+      "rule": "Insider threats already have authorized access.",
+      "micro_example": "A disgruntled admin exporting customer data is insider.",
+      "confusion_pair_id": "internal_vs_external"
+    },
+    "actor_nation_state": {
+      "rule": "Nation-state actors are highly resourced and persistent.",
+      "micro_example": "A multi-month espionage campaign suggests APT.",
+      "confusion_pair_id": "hacktivist_vs_nation_state"
+    },
+    "actor_orgcrime": {
+      "rule": "Organized crime focuses on profit-driven cybercrime.",
+      "micro_example": "Ransomware deployed for payout is organized crime.",
+      "confusion_pair_id": "hacktivist_vs_nation_state"
+    },
+    "ti_osint": {
+      "rule": "OSINT is public intel; verify confidence before use.",
+      "micro_example": "A public GitHub repo with IoCs is OSINT.",
+      "confusion_pair_id": "osint_vs_closed"
+    },
+    "ti_closed": {
+      "rule": "Closed intel is paid or curated by vendors/government.",
+      "micro_example": "A vendor feed with attribution and scoring is closed.",
+      "confusion_pair_id": "osint_vs_closed"
+    },
+    "ti_stix_taxii": {
+      "rule": "STIX is the format; TAXII is the transport.",
+      "micro_example": "Your SIEM ingests STIX over TAXII.",
+      "confusion_pair_id": "stix_vs_taxii"
+    },
+    "ti_confidence": {
+      "rule": "Confidence scoring rates how timely, accurate, and relevant intel is.",
+      "micro_example": "Low-confidence intel gets extra verification before action.",
+      "confusion_pair_id": "osint_vs_closed"
+    }
+  }
+}

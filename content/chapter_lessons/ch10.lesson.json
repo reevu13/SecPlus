@@ -1,0 +1,2462 @@
+{
+  "pack_id": "ch10",
+  "version": "1.0.0",
+  "modules": [
+    {
+      "id": "ch10-m01",
+      "title": "Exploring the cloud: definition + characteristics",
+      "tag_ids": [
+        "cloud_nist_definition",
+        "cloud_essential_characteristics",
+        "resource_pooling_multitenancy",
+        "ondemand_selfservice",
+        "broad_network_access",
+        "measured_service",
+        "rapid_elasticity",
+        "elasticity_vs_scalability",
+        "scalability_vertical",
+        "scalability_horizontal",
+        "cloud_benefits_agility"
+      ],
+      "pages": [
+        {
+          "id": "ch10-m01-p01",
+          "title": "What “cloud” really means",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Cloud computing is a way to rent computing over a network instead of owning it. A provider runs the datacenters and you consume compute, storage, and networking on demand."
+            },
+            {
+              "type": "explain",
+              "text": "A key idea is *resource pooling*: many customers share a large pool of hardware. That shared-customer model is called *multitenancy*. Good cloud design isolates tenants so one customer can’t see another’s data."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which statement best captures the core idea of cloud computing?",
+              "options": [
+                "Renting computing resources over a network from a provider",
+                "Buying servers and placing them in a provider’s building",
+                "Using only thin clients instead of PCs",
+                "Running everything on a single mainframe"
+              ],
+              "correct_index": 0,
+              "explanation": "Cloud computing is primarily about on‑demand consumption of provider-hosted resources over a network.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "In a multitenant cloud, what is being shared?",
+              "options": [
+                "A pool of physical infrastructure used by multiple customers",
+                "Only the operating system installed on your VM",
+                "Your encryption keys with other organizations",
+                "Your administrative accounts with other customers"
+              ],
+              "correct_index": 0,
+              "explanation": "Multitenancy means multiple customers run workloads on shared underlying hardware with isolation between them.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "2.2",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.4",
+            "4.6",
+            "5.3"
+          ]
+        },
+        {
+          "id": "ch10-m01-p02",
+          "title": "Essential characteristics (the exam loves these)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Cloud services are designed to be: on‑demand (self‑service), reachable over the network, and measured (you’re billed by usage)."
+            },
+            {
+              "type": "explain",
+              "text": "Two closely related terms: *scalability* is the ability to grow capacity; *elasticity* is scaling up and down automatically to match demand and cost."
+            },
+            {
+              "type": "explain",
+              "text": "Scaling can be vertical (bigger server) or horizontal (more servers). Horizontal scaling is often the cloud’s superpower."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "What’s the best one-line difference between scalability and elasticity?",
+              "options": [
+                "Scalability grows capacity; elasticity grows and shrinks capacity as demand changes",
+                "Scalability is only horizontal; elasticity is only vertical",
+                "Elasticity is manual; scalability is automatic",
+                "They are identical terms on the exam"
+              ],
+              "correct_index": 0,
+              "explanation": "Scalability focuses on growth; elasticity adds the idea of contraction when demand drops.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Horizontal scaling usually means…",
+              "options": [
+                "Adding more servers/instances to share the load",
+                "Adding more RAM to an existing server",
+                "Switching to a faster CPU in the same machine",
+                "Replacing on-prem hardware with SaaS"
+              ],
+              "correct_index": 0,
+              "explanation": "Horizontal scaling increases capacity by adding instances, not upgrading a single machine.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "2.2",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.4",
+            "4.6",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "1.6",
+        "2.2",
+        "3.2",
+        "3.3",
+        "3.4",
+        "4.1",
+        "4.4",
+        "4.6",
+        "5.3"
+      ]
+    },
+    {
+      "id": "ch10-m02",
+      "title": "Cloud roles and service models (XaaS)",
+      "tag_ids": [
+        "cloud_roles_csp",
+        "cloud_roles_consumer",
+        "cloud_roles_broker",
+        "cloud_roles_auditor",
+        "cloud_roles_carrier",
+        "service_model_iaas",
+        "service_model_paas",
+        "service_model_saas",
+        "service_model_faas_serverless"
+      ],
+      "pages": [
+        {
+          "id": "ch10-m02-p01",
+          "title": "Cloud roles: who does what",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Cloud environments involve multiple roles. The *cloud service provider (CSP)* runs the infrastructure and delivers services."
+            },
+            {
+              "type": "explain",
+              "text": "The *consumer* uses those services. A *broker* helps consumers pick/manage services. A *carrier* provides the network path. An *auditor* independently evaluates security and compliance."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which cloud role is responsible for delivering the cloud service?",
+              "options": [
+                "Cloud service provider",
+                "Cloud consumer",
+                "Cloud auditor",
+                "Cloud carrier"
+              ],
+              "correct_index": 0,
+              "explanation": "The provider operates the datacenters and delivers the service.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which role independently assesses security or compliance?",
+              "options": [
+                "Cloud auditor",
+                "Cloud broker",
+                "Cloud carrier",
+                "Cloud consumer"
+              ],
+              "correct_index": 0,
+              "explanation": "Auditors perform independent evaluation/assurance.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "2.2",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.4",
+            "4.6",
+            "5.3"
+          ]
+        },
+        {
+          "id": "ch10-m02-p02",
+          "title": "Service models: IaaS vs PaaS vs SaaS vs FaaS",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Service models describe *how much the provider manages* for you."
+            },
+            {
+              "type": "explain",
+              "text": "*IaaS*: you rent virtual servers, storage, and networking. You secure the OS and anything above it."
+            },
+            {
+              "type": "explain",
+              "text": "*PaaS*: the provider also manages the OS/runtime platform; you focus on your code and data."
+            },
+            {
+              "type": "explain",
+              "text": "*SaaS*: you use a complete application; you mainly control your data and app configuration."
+            },
+            {
+              "type": "explain",
+              "text": "*FaaS / serverless*: you upload small functions; execution infrastructure is hidden from you."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "In which model do customers typically manage the guest OS security patches?",
+              "options": [
+                "IaaS",
+                "SaaS",
+                "FaaS",
+                "None of the above"
+              ],
+              "correct_index": 0,
+              "explanation": "In IaaS, the customer is responsible for the guest OS and above.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which model is most accurately described as 'serverless'?",
+              "options": [
+                "FaaS",
+                "IaaS",
+                "SaaS",
+                "Community cloud"
+              ],
+              "correct_index": 0,
+              "explanation": "FaaS is commonly called serverless because the server layer is abstracted away from customers.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "2.2",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.4",
+            "4.6",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "1.6",
+        "2.2",
+        "3.2",
+        "3.3",
+        "3.4",
+        "4.1",
+        "4.4",
+        "4.6",
+        "5.3"
+      ]
+    },
+    {
+      "id": "ch10-m03",
+      "title": "Cloud deployment models and hybrid considerations",
+      "tag_ids": [
+        "deployment_public",
+        "deployment_private",
+        "deployment_community",
+        "deployment_hybrid",
+        "cloud_bursting",
+        "centralized_vs_decentralized"
+      ],
+      "pages": [
+        {
+          "id": "ch10-m03-p01",
+          "title": "Deployment models: public, private, community, hybrid",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "*Public cloud*: multitenant infrastructure open to many customers."
+            },
+            {
+              "type": "explain",
+              "text": "*Private cloud*: cloud infrastructure for a single customer (may be on‑prem or hosted)."
+            },
+            {
+              "type": "explain",
+              "text": "*Community cloud*: shared by organizations with common needs (e.g., sector/regulatory)."
+            },
+            {
+              "type": "explain",
+              "text": "*Hybrid cloud*: connects two or more clouds/on‑prem environments into one operating model."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which deployment model is *dedicated to one customer*?",
+              "options": [
+                "Private cloud",
+                "Public cloud",
+                "Community cloud",
+                "Hybrid cloud"
+              ],
+              "correct_index": 0,
+              "explanation": "Private clouds are provisioned for a single customer.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which model requires a unifying approach to tie multiple environments together?",
+              "options": [
+                "Hybrid cloud",
+                "Public cloud",
+                "Private cloud",
+                "SaaS"
+              ],
+              "correct_index": 0,
+              "explanation": "Hybrid combines multiple environments into one operational approach.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "2.2",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.4",
+            "4.6",
+            "5.3"
+          ]
+        },
+        {
+          "id": "ch10-m03-p02",
+          "title": "Hybrid reasons: bursting + decentralization",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "*Cloud bursting* is a hybrid strategy: run mostly in a private environment, but use public cloud capacity when demand spikes."
+            },
+            {
+              "type": "explain",
+              "text": "Hybrid and multicloud can also reduce single points of failure by moving from a centralized architecture to a more decentralized one—at the cost of more complexity."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Cloud bursting is best described as…",
+              "options": [
+                "Using public cloud to handle overflow demand beyond private capacity",
+                "Moving everything to SaaS permanently",
+                "Running only edge devices with no cloud",
+                "Using containers instead of VMs"
+              ],
+              "correct_index": 0,
+              "explanation": "Bursting means temporarily using public cloud resources when demand exceeds private capacity.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "A key security tradeoff of decentralizing across providers is…",
+              "options": [
+                "Reduced single points of failure but higher management complexity",
+                "Guaranteed lower costs with no downside",
+                "Eliminating the need for IAM",
+                "Making auditing unnecessary"
+              ],
+              "correct_index": 0,
+              "explanation": "Decentralization can improve resilience but usually increases operational complexity.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "2.2",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.4",
+            "4.6",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "1.6",
+        "2.2",
+        "3.2",
+        "3.3",
+        "3.4",
+        "4.1",
+        "4.4",
+        "4.6",
+        "5.3"
+      ]
+    },
+    {
+      "id": "ch10-m04",
+      "title": "Shared responsibility model and responsibility matrix",
+      "tag_ids": [
+        "shared_responsibility_model",
+        "responsibility_matrix",
+        "audit_rights",
+        "third_party_vendors"
+      ],
+      "pages": [
+        {
+          "id": "ch10-m04-p01",
+          "title": "Shared responsibility: the core cloud security idea",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Cloud security is a division of labor. Providers always handle physical datacenter + hardware security."
+            },
+            {
+              "type": "explain",
+              "text": "Responsibility shifts higher in the stack depending on IaaS/PaaS/SaaS. In IaaS you own OS/app security; in SaaS the provider owns most operational security."
+            },
+            {
+              "type": "explain",
+              "text": "Treat this as a *responsibility matrix*: explicitly document who does what."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which layer is *always* the cloud provider’s responsibility in valid cloud services?",
+              "options": [
+                "Physical datacenter and hardware",
+                "Customer IAM policy",
+                "Customer application code",
+                "Customer data classification"
+              ],
+              "correct_index": 0,
+              "explanation": "If the customer runs the datacenter/hardware, it’s not cloud in the usual definition.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "In general, which model places the most operational security burden on the provider?",
+              "options": [
+                "SaaS",
+                "IaaS",
+                "Private cloud only",
+                "On-premises"
+              ],
+              "correct_index": 0,
+              "explanation": "SaaS providers manage the application stack; customers mainly manage data use and access configuration.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "2.2",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.4",
+            "4.6",
+            "5.3"
+          ]
+        },
+        {
+          "id": "ch10-m04-p02",
+          "title": "Responsibility matrix: don’t guess—write it down",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Compliance and audits get messy if responsibilities are vague. Write down who patches what, who monitors what, who responds to incidents, and how evidence is collected."
+            },
+            {
+              "type": "explain",
+              "text": "Cloud contracts should clarify audit rights and expectations, especially when third parties are involved."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Why is documenting a responsibility matrix especially important?",
+              "options": [
+                "It reduces gaps during compliance and incident response",
+                "It eliminates the need for encryption",
+                "It guarantees zero downtime",
+                "It replaces security awareness training"
+              ],
+              "correct_index": 0,
+              "explanation": "A written matrix prevents 'we thought you handled it' failures.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which contract item best supports security governance in the cloud?",
+              "options": [
+                "Right-to-audit language",
+                "A promise that breaches never happen",
+                "No logging requirement",
+                "No SLA terms"
+              ],
+              "correct_index": 0,
+              "explanation": "Audit rights and evidence access are key governance items.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "2.2",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.4",
+            "4.6",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "1.6",
+        "2.2",
+        "3.2",
+        "3.3",
+        "3.4",
+        "4.1",
+        "4.4",
+        "4.6",
+        "5.3"
+      ]
+    },
+    {
+      "id": "ch10-m05",
+      "title": "Cloud governance frameworks (NIST/CSA) and vendor oversight",
+      "tag_ids": [
+        "csa_ccm",
+        "nist_sp_500_292",
+        "third_party_vendors",
+        "audit_rights"
+      ],
+      "pages": [
+        {
+          "id": "ch10-m05-p01",
+          "title": "Reference architectures and control maps",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Cloud has standards and reference docs to keep you sane. NIST SP 500‑292 provides a cloud reference architecture to describe components and relationships."
+            },
+            {
+              "type": "explain",
+              "text": "The Cloud Security Alliance (CSA) publishes the Cloud Controls Matrix (CCM), a control catalog that helps map cloud controls to common compliance frameworks."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which document helps map cloud security controls to many regulatory standards?",
+              "options": [
+                "CSA Cloud Controls Matrix (CCM)",
+                "NIST SP 500-292 only",
+                "PCI DSS only",
+                "ISO 27001 only"
+              ],
+              "correct_index": 0,
+              "explanation": "CSA CCM is designed for control mapping across standards.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "NIST SP 500-292 is best described as…",
+              "options": [
+                "A cloud reference architecture",
+                "A malware analysis guide",
+                "A Wi‑Fi encryption standard",
+                "A password policy template"
+              ],
+              "correct_index": 0,
+              "explanation": "It provides a reference architecture for cloud computing.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "2.2",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.4",
+            "4.6",
+            "5.3"
+          ]
+        },
+        {
+          "id": "ch10-m05-p02",
+          "title": "Vendor governance + auditability",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Cloud environments usually mean third‑party vendors. Governance includes vetting vendors, monitoring stability, and managing your cloud portfolio."
+            },
+            {
+              "type": "explain",
+              "text": "Auditability matters: contracts should address reporting, evidence access, and how you validate provider controls (including third‑party controls)."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Cloud governance primarily helps organizations…",
+              "options": [
+                "Select, manage, and monitor cloud vendor relationships",
+                "Replace all security controls with CASB",
+                "Avoid writing policies",
+                "Eliminate the need for incident response"
+              ],
+              "correct_index": 0,
+              "explanation": "Governance guides vendor selection and ongoing oversight.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Auditability is best supported by…",
+              "options": [
+                "Contract terms granting audit rights and evidence access",
+                "Avoiding logs to save cost",
+                "Using only public cloud",
+                "Disabling provider APIs"
+              ],
+              "correct_index": 0,
+              "explanation": "You need contractual and technical mechanisms to obtain assurance evidence.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "2.2",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.4",
+            "4.6",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "1.6",
+        "2.2",
+        "3.2",
+        "3.3",
+        "3.4",
+        "4.1",
+        "4.4",
+        "4.6",
+        "5.3"
+      ]
+    },
+    {
+      "id": "ch10-m06",
+      "title": "Edge and fog computing (concept + security impact)",
+      "tag_ids": [
+        "cloud_benefits_agility",
+        "microservices",
+        "api_security",
+        "logging_monitoring_cloud"
+      ],
+      "pages": [
+        {
+          "id": "ch10-m06-p01",
+          "title": "Edge and fog computing: when cloud is too far away",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Sometimes sensors are remote or links are unreliable. Sending raw data back to the cloud can be slow or impossible."
+            },
+            {
+              "type": "explain",
+              "text": "*Edge computing* pushes some processing to devices at the network edge. *Fog computing* uses nearby gateways to preprocess/aggregate before sending data onward."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Edge computing primarily exists to…",
+              "options": [
+                "Process data closer to the source when connectivity/latency is a problem",
+                "Replace encryption with speed",
+                "Eliminate the need for networks",
+                "Guarantee compliance automatically"
+              ],
+              "correct_index": 0,
+              "explanation": "Edge/fog approaches reduce bandwidth and latency by processing near sensors.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Fog computing commonly relies on…",
+              "options": [
+                "Gateway devices near sensors",
+                "Hypervisor escape tools",
+                "Wi‑Fi SAE handshakes",
+                "SaaS-only apps"
+              ],
+              "correct_index": 0,
+              "explanation": "Fog uses nearby gateway devices as intermediate compute nodes.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "2.2",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.4",
+            "4.6",
+            "5.3"
+          ]
+        },
+        {
+          "id": "ch10-m06-p02",
+          "title": "Security implications of edge/fog",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "More locations = more attack surface: physical tampering, weak patching, and exposed interfaces."
+            },
+            {
+              "type": "explain",
+              "text": "Treat edge nodes like production systems: strong IAM, secure updates, encryption, logging, and segmentation back to core services."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A key security challenge introduced by edge/fog is…",
+              "options": [
+                "Expanded attack surface across many distributed devices",
+                "Guaranteed lower risk than centralized cloud",
+                "No need for monitoring",
+                "No requirement for authentication"
+              ],
+              "correct_index": 0,
+              "explanation": "Distributed devices are harder to patch, monitor, and physically protect.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which control most directly helps limit damage if an edge node is compromised?",
+              "options": [
+                "Network segmentation",
+                "Unlimited shared credentials",
+                "Disabling logs",
+                "Storing keys in plaintext"
+              ],
+              "correct_index": 0,
+              "explanation": "Segmentation limits lateral movement from compromised edge systems.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "2.2",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.4",
+            "4.6",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "1.6",
+        "2.2",
+        "3.2",
+        "3.3",
+        "3.4",
+        "4.1",
+        "4.4",
+        "4.6",
+        "5.3"
+      ]
+    },
+    {
+      "id": "ch10-m07",
+      "title": "Virtualization foundations and hypervisors",
+      "tag_ids": [
+        "virtualization_concepts",
+        "hypervisor_type1",
+        "hypervisor_type2"
+      ],
+      "pages": [
+        {
+          "id": "ch10-m07-p01",
+          "title": "Virtualization basics and isolation",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Virtualization lets one physical host run multiple virtual machines (VMs). The hypervisor provides each VM the illusion of a separate computer and enforces isolation."
+            },
+            {
+              "type": "explain",
+              "text": "Isolation matters operationally (VMs shouldn’t interfere) and for security (one VM shouldn’t access another’s memory/disk)."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "What component enforces isolation between virtual machines?",
+              "options": [
+                "Hypervisor",
+                "Guest OS",
+                "User account",
+                "Web application firewall"
+              ],
+              "correct_index": 0,
+              "explanation": "The hypervisor controls resource access and isolation between VMs.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Virtualization is best described as…",
+              "options": [
+                "Running multiple virtual systems on shared physical hardware",
+                "Only using containers with no OS",
+                "A way to encrypt all data automatically",
+                "A replacement for networking"
+              ],
+              "correct_index": 0,
+              "explanation": "Virtualization is the abstraction of physical resources to host multiple virtual machines.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "2.2",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.4",
+            "4.6",
+            "5.3"
+          ]
+        },
+        {
+          "id": "ch10-m07-p02",
+          "title": "Type I vs Type II hypervisors",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "*Type I (bare‑metal)* hypervisors run directly on hardware and host guest OSes—common in datacenters."
+            },
+            {
+              "type": "explain",
+              "text": "*Type II* hypervisors run on top of a host OS—common on desktops/laptops for dev/test, but usually less efficient."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which hypervisor type is most common in datacenter virtualization?",
+              "options": [
+                "Type I (bare-metal)",
+                "Type II (hosted)",
+                "Neither is used in datacenters",
+                "Only containers are used"
+              ],
+              "correct_index": 0,
+              "explanation": "Type I hypervisors are designed for datacenter efficiency and scale.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "A Type II hypervisor runs…",
+              "options": [
+                "On top of a host operating system",
+                "Directly on hardware with no OS",
+                "Inside a container",
+                "Only in SaaS"
+              ],
+              "correct_index": 0,
+              "explanation": "Type II hypervisors are hosted by a conventional OS.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "2.2",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.4",
+            "4.6",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "1.6",
+        "2.2",
+        "3.2",
+        "3.3",
+        "3.4",
+        "4.1",
+        "4.4",
+        "4.6",
+        "5.3"
+      ]
+    },
+    {
+      "id": "ch10-m08",
+      "title": "Virtualization security: VM escape, sprawl, resource reuse",
+      "tag_ids": [
+        "vm_escape",
+        "vm_sprawl",
+        "resource_reuse"
+      ],
+      "pages": [
+        {
+          "id": "ch10-m08-p01",
+          "title": "VM escape: the nightmare scenario",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "A VM escape occurs when an attacker in one VM breaks out of isolation and reaches the host or other VMs."
+            },
+            {
+              "type": "explain",
+              "text": "This is why hypervisor hardening, patching, and strict separation of security zones matter in virtualized environments."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "VM escape means…",
+              "options": [
+                "A process in a VM breaks isolation and accesses host/other VMs",
+                "A VM reboots unexpectedly",
+                "A user forgets their password",
+                "A container image is too large"
+              ],
+              "correct_index": 0,
+              "explanation": "Escape attacks violate the hypervisor isolation boundary.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "What is primarily responsible for preventing VM escape attacks?",
+              "options": [
+                "Hypervisor",
+                "Guest OS firewall rules",
+                "User training",
+                "Browser settings"
+              ],
+              "correct_index": 0,
+              "explanation": "The hypervisor boundary is what escape attacks attempt to break.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "2.2",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.4",
+            "4.6",
+            "5.3"
+          ]
+        },
+        {
+          "id": "ch10-m08-p02",
+          "title": "VM sprawl and resource reuse",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "*VM sprawl* happens when teams create instances and forget them—costs rise and unpatched systems accumulate."
+            },
+            {
+              "type": "explain",
+              "text": "*Resource reuse* is a provider risk: hardware reassigned between customers must be properly wiped or the next tenant might see leftovers."
+            },
+            {
+              "type": "explain",
+              "text": "Good hygiene: asset inventory, deprovisioning workflows, patch management, and secure wiping/crypto erasure."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "VM sprawl most directly increases risk by…",
+              "options": [
+                "Leaving unmanaged/forgotten instances unpatched over time",
+                "Preventing multitenancy from working",
+                "Forcing all services into SaaS",
+                "Eliminating the need for monitoring"
+              ],
+              "correct_index": 0,
+              "explanation": "Forgotten instances become vulnerable and are often missed by scans/patch cycles.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Resource reuse risk occurs when…",
+              "options": [
+                "Hardware is reassigned and data remnants aren’t removed",
+                "Users share passwords voluntarily",
+                "Security groups block all traffic",
+                "A VPC is created"
+              ],
+              "correct_index": 0,
+              "explanation": "If data is not properly removed before reassignment, another tenant may see remnants.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "2.2",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.4",
+            "4.6",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "1.6",
+        "2.2",
+        "3.2",
+        "3.3",
+        "3.4",
+        "4.1",
+        "4.4",
+        "4.6",
+        "5.3"
+      ]
+    },
+    {
+      "id": "ch10-m09",
+      "title": "Containerization security",
+      "tag_ids": [
+        "containerization",
+        "container_isolation",
+        "container_hardening"
+      ],
+      "pages": [
+        {
+          "id": "ch10-m09-p01",
+          "title": "Containers: app-level virtualization",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Containers package an application and its dependencies, but they share the host kernel. They’re lighter than VMs, but isolation is different and must be enforced carefully."
+            },
+            {
+              "type": "explain",
+              "text": "Think of containers as 'application isolation' while VMs are closer to 'machine isolation'."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Containers primarily provide…",
+              "options": [
+                "Application-level virtualization",
+                "Full hardware virtualization",
+                "A replacement for encryption",
+                "A physical perimeter"
+              ],
+              "correct_index": 0,
+              "explanation": "Containers virtualize at the application level, sharing the host kernel.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "A major security consideration of containers is…",
+              "options": [
+                "Enforcing isolation since the kernel is shared",
+                "They cannot be monitored",
+                "They can’t be patched",
+                "They always prevent malware"
+              ],
+              "correct_index": 0,
+              "explanation": "Shared-kernel designs require careful isolation and hardening.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "2.2",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.4",
+            "4.6",
+            "5.3"
+          ]
+        },
+        {
+          "id": "ch10-m09-p02",
+          "title": "Container hardening in practice",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Hardening tactics include using minimal container host OSes, segmenting containers by risk/purpose, and using container-focused vulnerability tools."
+            },
+            {
+              "type": "explain",
+              "text": "Rule of thumb: treat containers like VMs—patch, monitor, restrict access, and limit what they can reach."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which is a reasonable container-hardening recommendation?",
+              "options": [
+                "Use minimal container host OS and segment containers by risk",
+                "Run all containers as root with full network access",
+                "Disable vulnerability scanning to reduce noise",
+                "Store secrets inside container images"
+              ],
+              "correct_index": 0,
+              "explanation": "Reducing attack surface and segmenting by risk are standard hardening moves.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Why is 'treat containers like VMs' good advice?",
+              "options": [
+                "They still run code and can be attacked; you must patch/monitor/isolate them",
+                "Containers are always more secure than VMs",
+                "Containers are offline by default",
+                "Containers don’t require access control"
+              ],
+              "correct_index": 0,
+              "explanation": "Containers are still compute workloads and must be secured.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "2.2",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.4",
+            "4.6",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "1.6",
+        "2.2",
+        "3.2",
+        "3.3",
+        "3.4",
+        "4.1",
+        "4.4",
+        "4.6",
+        "5.3"
+      ]
+    },
+    {
+      "id": "ch10-m10",
+      "title": "Cloud storage security",
+      "tag_ids": [
+        "block_storage",
+        "object_storage",
+        "storage_encryption",
+        "storage_replication_availability",
+        "cloud_misconfiguration"
+      ],
+      "pages": [
+        {
+          "id": "ch10-m10-p01",
+          "title": "Block vs object storage (and why you care)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Cloud storage commonly comes as *block storage* (virtual disks attached to VMs) and *object storage* (files stored as objects in buckets via web/API)."
+            },
+            {
+              "type": "explain",
+              "text": "Block is usually preallocated (you pay for allocated size). Object is usually pay-for-what-you-use and often cheaper."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which storage type is commonly accessed as objects in buckets via API/web?",
+              "options": [
+                "Object storage",
+                "Block storage",
+                "RAM disk",
+                "Swap"
+              ],
+              "correct_index": 0,
+              "explanation": "Object storage stores independent objects in buckets.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "A typical billing difference is…",
+              "options": [
+                "Block storage is often billed for allocated capacity; object storage for used capacity",
+                "Object storage is always billed per allocated TB",
+                "Block storage is always free",
+                "They are billed identically in all providers"
+              ],
+              "correct_index": 0,
+              "explanation": "Block is often preallocated; object is more consumption-based.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "2.2",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.4",
+            "4.6",
+            "5.3"
+          ]
+        },
+        {
+          "id": "ch10-m10-p02",
+          "title": "Storage security: permissions, replication, encryption",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Three big cloud storage security moves: (1) set permissions carefully (especially buckets), (2) plan for durability/availability with replication, and (3) encrypt sensitive data (file-level or disk-level)."
+            },
+            {
+              "type": "explain",
+              "text": "Misconfigured object storage permissions are a classic real-world breach pattern."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "The most common cloud storage “oops” that causes data exposure is…",
+              "options": [
+                "Misconfigured access permissions on storage",
+                "Too much encryption",
+                "Too many backups",
+                "Using VPCs"
+              ],
+              "correct_index": 0,
+              "explanation": "Permissions mistakes (especially in object storage) frequently lead to unintended public exposure.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which control best protects confidentiality of sensitive cloud data at rest?",
+              "options": [
+                "Encryption",
+                "Horizontal scaling",
+                "Public subnets",
+                "Disabling logging"
+              ],
+              "correct_index": 0,
+              "explanation": "Encryption protects data at rest (when implemented and keyed properly).",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "2.2",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.4",
+            "4.6",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "1.6",
+        "2.2",
+        "3.2",
+        "3.3",
+        "3.4",
+        "4.1",
+        "4.4",
+        "4.6",
+        "5.3"
+      ]
+    },
+    {
+      "id": "ch10-m11",
+      "title": "Cloud networking security: security groups and VPCs",
+      "tag_ids": [
+        "sdn",
+        "security_groups",
+        "waf",
+        "vpc_networking",
+        "swg"
+      ],
+      "pages": [
+        {
+          "id": "ch10-m11-p01",
+          "title": "Cloud networking: SDN/SDV and security groups",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Cloud networking is software-defined: you create and modify networks through APIs (SDN). Visibility into virtual traffic is also software-defined (SDV)."
+            },
+            {
+              "type": "explain",
+              "text": "Security groups are provider-managed firewall-like rules applied to cloud resources. They commonly operate at the network layer, like a traditional firewall."
+            },
+            {
+              "type": "explain",
+              "text": "Providers may also offer WAFs (web application firewalls) at higher layers for HTTP(S) traffic."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Security groups function most similarly to…",
+              "options": [
+                "Network-layer firewalls",
+                "Password managers",
+                "Antivirus on endpoints",
+                "Physical locks"
+              ],
+              "correct_index": 0,
+              "explanation": "Security groups implement firewall-style rules at the network layer.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "A WAF is most associated with protecting…",
+              "options": [
+                "Web applications (HTTP/S traffic)",
+                "Disk encryption keys",
+                "Physical building access",
+                "Wi‑Fi handshakes"
+              ],
+              "correct_index": 0,
+              "explanation": "WAFs inspect web application traffic at higher OSI layers.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "2.2",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.4",
+            "4.6",
+            "5.3"
+          ]
+        },
+        {
+          "id": "ch10-m11-p02",
+          "title": "VPCs and segmentation",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "A Virtual Private Cloud (VPC) lets you segment cloud networks into subnets, similar to on-prem segmentation."
+            },
+            {
+              "type": "explain",
+              "text": "Segmentation isolates systems of different trust levels. Combine VPC/subnets with security groups to limit lateral movement."
+            },
+            {
+              "type": "explain",
+              "text": "Secure web gateways (SWGs) and other controls may be used to manage user access to external web resources."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A VPC is primarily used to…",
+              "options": [
+                "Create segmented virtual networks in the cloud",
+                "Encrypt storage volumes",
+                "Patch hypervisors",
+                "Generate OTP codes"
+              ],
+              "correct_index": 0,
+              "explanation": "VPCs provide a virtual network boundary and segmentation tools.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Segmentation primarily helps by…",
+              "options": [
+                "Limiting communication between systems of different security levels",
+                "Removing the need for authentication",
+                "Making all services public",
+                "Preventing outages automatically"
+              ],
+              "correct_index": 0,
+              "explanation": "Segmentation reduces blast radius and limits lateral movement.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "2.2",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.4",
+            "4.6",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "1.6",
+        "2.2",
+        "3.2",
+        "3.3",
+        "3.4",
+        "4.1",
+        "4.4",
+        "4.6",
+        "5.3"
+      ]
+    },
+    {
+      "id": "ch10-m12",
+      "title": "DevOps automation: IaC, microservices, serverless, secrets",
+      "tag_ids": [
+        "iac",
+        "microservices",
+        "service_model_faas_serverless",
+        "api_security",
+        "secrets_management",
+        "hsm"
+      ],
+      "pages": [
+        {
+          "id": "ch10-m12-p01",
+          "title": "DevOps + Infrastructure as Code (IaC)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "DevOps reduces hand-offs by combining development and operations with automation. Faster delivery requires stronger automation guardrails."
+            },
+            {
+              "type": "explain",
+              "text": "Infrastructure as Code (IaC) means describing infrastructure in files (often JSON/YAML) or code that calls cloud APIs. It improves repeatability, but mistakes can replicate fast—so reviews and validation are critical."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which is NOT an example of infrastructure as code?",
+              "options": [
+                "Using a web UI to manually provision resources",
+                "Defining infrastructure in JSON",
+                "Defining infrastructure in YAML",
+                "Writing code that calls a cloud provider API"
+              ],
+              "correct_index": 0,
+              "explanation": "IaC is about defining/provisioning through code/config files, not manual clicking.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "A major benefit of IaC is…",
+              "options": [
+                "Repeatable, automated provisioning",
+                "Eliminating the need for security groups",
+                "Preventing all misconfigurations",
+                "Replacing backups"
+              ],
+              "correct_index": 0,
+              "explanation": "IaC makes deployments consistent and repeatable when implemented with good controls.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "2.2",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.4",
+            "4.6",
+            "5.3"
+          ]
+        },
+        {
+          "id": "ch10-m12-p02",
+          "title": "Microservices, serverless, and secrets management",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Microservices split an app into small services that communicate (often via APIs/events). Serverless/FaaS is a common execution model for microservices."
+            },
+            {
+              "type": "explain",
+              "text": "APIs become a major attack surface: authenticate, authorize, validate inputs, and log. Protect keys and tokens using secrets management."
+            },
+            {
+              "type": "explain",
+              "text": "HSMs can generate/manage cryptographic keys without exposing them to humans, offering strong key protection when configured correctly."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Microservices architectures often increase the importance of…",
+              "options": [
+                "API security",
+                "Physical locks",
+                "Tape backups only",
+                "Air-gapped networks for everything"
+              ],
+              "correct_index": 0,
+              "explanation": "Microservices rely on APIs/events, making API security critical.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "An HSM is best described as…",
+              "options": [
+                "A device/service for secure key management and cryptographic operations",
+                "A tool for scanning containers",
+                "A type of hypervisor",
+                "A web proxy for filtering URLs"
+              ],
+              "correct_index": 0,
+              "explanation": "HSMs manage keys and perform crypto operations securely.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "2.2",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.4",
+            "4.6",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "1.6",
+        "2.2",
+        "3.2",
+        "3.3",
+        "3.4",
+        "4.1",
+        "4.4",
+        "4.6",
+        "5.3"
+      ]
+    },
+    {
+      "id": "ch10-m13",
+      "title": "Cloud security issues and controls: sovereignty, CASB, monitoring",
+      "tag_ids": [
+        "data_sovereignty",
+        "casb_inline",
+        "casb_api",
+        "cloud_misconfiguration",
+        "logging_monitoring_cloud"
+      ],
+      "pages": [
+        {
+          "id": "ch10-m13-p01",
+          "title": "Cloud security issues: availability + data sovereignty",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Cloud gives geographic diversity, but high availability isn’t always automatic—you may need to configure or purchase HA options."
+            },
+            {
+              "type": "explain",
+              "text": "Data sovereignty means data stored/processed in other jurisdictions may be subject to those countries’ laws. Many providers let you choose regions to control where data lives."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Why can cloud services still require explicit high availability configuration?",
+              "options": [
+                "Base services may not include HA by default",
+                "Cloud always guarantees 100% uptime",
+                "HA violates multitenancy",
+                "HA only applies to on‑prem"
+              ],
+              "correct_index": 0,
+              "explanation": "Cloud often offers HA options, but you must select/configure them.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Data sovereignty concerns arise because…",
+              "options": [
+                "Data may be stored/processed in jurisdictions with different laws",
+                "Encryption is not allowed in the cloud",
+                "SaaS cannot be audited",
+                "Hypervisors cannot be patched"
+              ],
+              "correct_index": 0,
+              "explanation": "Cross-border storage/processing can trigger legal and regulatory obligations.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "2.2",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.4",
+            "4.6",
+            "5.3"
+          ]
+        },
+        {
+          "id": "ch10-m13-p02",
+          "title": "CASB + logging/monitoring to tame multicloud",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "CASBs (Cloud Access Security Brokers) sit between users and cloud services to enforce policies and monitor activity."
+            },
+            {
+              "type": "explain",
+              "text": "Two common approaches: inline CASB (traffic flows through it) and API-based CASB (talks to providers via APIs)."
+            },
+            {
+              "type": "explain",
+              "text": "Cloud misconfigurations are a top risk. Strong logging/monitoring helps detect drift, abuse, and policy violations early."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A CASB primarily helps organizations…",
+              "options": [
+                "Enforce policies consistently across many cloud services",
+                "Replace all IAM systems",
+                "Eliminate the need for audits",
+                "Prevent VM escape attacks"
+              ],
+              "correct_index": 0,
+              "explanation": "CASBs are policy enforcement/visibility tools between users and cloud services.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "If you want a CASB approach that interacts with providers directly, choose…",
+              "options": [
+                "API-based CASB",
+                "Inline CASB only",
+                "A hypervisor",
+                "A WAF"
+              ],
+              "correct_index": 0,
+              "explanation": "API-based CASBs integrate with providers via APIs rather than inline traffic routing.",
+              "objectiveIds": [
+                "1.1",
+                "1.5",
+                "1.6",
+                "2.2",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.1",
+                "4.4",
+                "4.6",
+                "5.3"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "2.2",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.4",
+            "4.6",
+            "5.3"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.5",
+        "1.6",
+        "2.2",
+        "3.2",
+        "3.3",
+        "3.4",
+        "4.1",
+        "4.4",
+        "4.6",
+        "5.3"
+      ]
+    }
+  ],
+  "objectiveIds": [
+    "1.1",
+    "1.5",
+    "1.6",
+    "2.2",
+    "3.2",
+    "3.3",
+    "3.4",
+    "4.1",
+    "4.4",
+    "4.6",
+    "5.3"
+  ]
+}

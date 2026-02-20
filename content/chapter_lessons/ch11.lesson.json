@@ -1,0 +1,1914 @@
+{
+  "pack_id": "ch11",
+  "version": "1.0.0",
+  "modules": [
+    {
+      "id": "ch11-m01",
+      "title": "Endpoint security basics and why endpoints break",
+      "tag_ids": [
+        "os_vulnerabilities",
+        "hardware_vulnerabilities",
+        "misconfiguration",
+        "insecure_defaults",
+        "attack_footprint",
+        "configuration"
+      ],
+      "pages": [
+        {
+          "id": "ch11-m01-p01",
+          "title": "What counts as an endpoint (and why attackers love them)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "An endpoint is any device that sits at the “edge” of your network and does work for a user or a process: laptops, desktops, phones/tablets, kiosks, point‑of‑sale terminals, and often even “smart” devices and embedded controllers.\n\nEndpoints are messy compared to servers:\n- They outnumber everything else.\n- They change networks constantly (home Wi‑Fi, office LAN, coffee shop).\n- Users click things, plug things in, and install things.\n- They carry sensitive data (browser sessions, cached creds, documents).\n\nSo endpoint security is about shrinking the attack footprint (attack surface) and making compromise harder, noisier, and easier to recover from."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which statement best explains why endpoint security is often harder than server security?",
+              "options": [
+                "Endpoints are always physically secured in a datacenter.",
+                "Endpoints are fewer in number and are managed by one admin.",
+                "Endpoints are controlled by users and appear in many network contexts.",
+                "Endpoints do not store sensitive information."
+              ],
+              "correct_index": 2,
+              "explanation": "Endpoints are numerous, user‑driven, and move between networks, which increases exposure and inconsistency.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        },
+        {
+          "id": "ch11-m01-p02",
+          "title": "OS-based vulnerabilities: the boring stuff that gets you owned",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Operating system (OS) vulnerabilities are weaknesses in the OS itself or how it’s configured. Common causes:\n- Unpatched systems (known CVEs).\n- Unnecessary services running (more code, more bugs).\n- Weak local policies (passwords, permissions, auditing).\n- Excessive privileges (users running as local admin).\n\nA useful mental model:\nMore features + more services + more privileges = bigger attack footprint."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which action most directly reduces an endpoint’s attack footprint?",
+              "options": [
+                "Enable additional services to support more apps.",
+                "Disable unnecessary services and remove unused software.",
+                "Allow all inbound ports so tools can connect.",
+                "Give users local admin rights to avoid support tickets."
+              ],
+              "correct_index": 1,
+              "explanation": "Removing unnecessary software and disabling services reduces exposed code paths and listening services, shrinking the attack footprint.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        },
+        {
+          "id": "ch11-m01-p03",
+          "title": "Hardware vulnerabilities: firmware, legacy, and end-of-life pain",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Hardware vulnerabilities include flaws in firmware and components, plus the risks of devices that are old or unsupported.\n\nKey terms:\n- Firmware: low‑level code (UEFI/BIOS, device firmware). If it’s vulnerable, it can be compromised “below” the OS.\n- Legacy hardware: older tech that may lack modern security features.\n- End‑of‑life (EOL): vendor no longer provides updates. That’s a permanent security debt.\n\nWhen you can’t patch (EOL/legacy), you lean on compensating controls: segmentation, strict access, monitoring, and limited functionality."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A device is end-of-life (EOL). What is the most accurate security implication?",
+              "options": [
+                "It becomes automatically secure because it stops changing.",
+                "The vendor may stop providing patches, increasing long-term risk.",
+                "It can’t be attacked because it is “unsupported.”",
+                "EOL only affects performance, not security."
+              ],
+              "correct_index": 1,
+              "explanation": "EOL often means no more security updates, so risk accumulates over time unless you add compensating controls or replace it.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        },
+        {
+          "id": "ch11-m01-p04",
+          "title": "Misconfiguration and insecure defaults: the free wins for attackers",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Misconfiguration happens when systems are set up in unsafe ways: default passwords, overly permissive shares, exposed management ports, weak policies, or “temporary” exceptions that become permanent.\n\nInsecure defaults are especially dangerous because attackers assume they exist:\n- Default credentials\n- Default open services/ports\n- Default weak settings\n\nThe fix is boring but powerful: secure configuration + enforcement (baselines, policies, drift detection)."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "What is the best example of an insecure default?",
+              "options": [
+                "A device requires MFA for admin login.",
+                "A router shipped with admin/admin credentials enabled.",
+                "A laptop uses full-disk encryption.",
+                "A server has logging enabled by default."
+              ],
+              "correct_index": 1,
+              "explanation": "Default credentials are a classic insecure default and are heavily abused at scale.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.4",
+        "2.3",
+        "3.1",
+        "4.1",
+        "4.2",
+        "4.4"
+      ]
+    },
+    {
+      "id": "ch11-m02",
+      "title": "Boot integrity: secure boot, measured boot, trusted boot",
+      "tag_ids": [
+        "uefi",
+        "secure_boot",
+        "measured_boot",
+        "trusted_boot",
+        "hardware_root_of_trust",
+        "tpm",
+        "remote_attestation"
+      ],
+      "pages": [
+        {
+          "id": "ch11-m02-p01",
+          "title": "Why boot security matters",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "If an attacker owns the boot process, they can load malware before the OS, hide from many tools, and persist through re-installs.\n\nBoot security tries to ensure:\n1) Only approved boot components load.\n2) The boot chain can be measured/verified.\n3) The system can prove its boot state to others (attestation)."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Boot-level malware is especially dangerous because it can…",
+              "options": [
+                "only run after the OS fully loads.",
+                "persist below the OS and evade many security tools.",
+                "be removed by uninstalling a browser extension.",
+                "affect only user documents, not the system."
+              ],
+              "correct_index": 1,
+              "explanation": "Bootkits/rootkits can run before the OS and hide, making them hard to detect and remove.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        },
+        {
+          "id": "ch11-m02-p02",
+          "title": "UEFI Secure Boot: allow only signed/known-good bootloaders",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "UEFI Secure Boot checks digital signatures in the boot chain (firmware → bootloader → drivers). If a component isn’t signed by a trusted key (or isn’t on an allowed list), it won’t load.\n\nThink of Secure Boot as: “validate first, then run.”\n\nWhat it helps against:\n- Unsigned or tampered bootloaders\n- Some bootkits\n\nWhat it does NOT solve by itself:\n- Vulnerabilities in signed components\n- Attacks after the OS loads"
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Secure Boot primarily aims to ensure that…",
+              "options": [
+                "all network traffic is encrypted.",
+                "only trusted/signed boot components are allowed to run.",
+                "users cannot install applications.",
+                "patches are applied automatically."
+              ],
+              "correct_index": 1,
+              "explanation": "Secure Boot validates signatures in the boot chain to prevent untrusted boot components from loading.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        },
+        {
+          "id": "ch11-m02-p03",
+          "title": "Measured Boot: record what happened, then verify later",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Measured Boot doesn’t necessarily block boot components. Instead, it *measures* (hashes) components during startup and stores those measurements (commonly using TPM Platform Configuration Registers, PCRs).\n\nThink of Measured Boot as: “hash as you go.”\n\nWhy it’s useful:\n- You get evidence of what actually loaded.\n- That evidence can be used for remote attestation.\n\nSecure Boot = prevent untrusted load.\nMeasured Boot = create a tamper-evident startup record."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which statement best distinguishes measured boot from secure boot?",
+              "options": [
+                "Measured boot blocks unsigned components; secure boot only logs them.",
+                "Measured boot records hashes of boot components; secure boot validates signatures before loading.",
+                "Measured boot requires no hardware support; secure boot requires a TPM.",
+                "Measured boot encrypts the disk; secure boot encrypts memory."
+              ],
+              "correct_index": 1,
+              "explanation": "Measured boot measures (hashes) components, while secure boot validates trusted signatures/keys before allowing them to load.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        },
+        {
+          "id": "ch11-m02-p04",
+          "title": "Trusted Boot and remote attestation",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Trusted Boot is the OS-side continuation of boot integrity: the operating system verifies key startup components as the system boots.\n\nRemote attestation is when a device proves its boot state to another system (for example, a network access control system) before getting access. The attestation uses measured values (like TPM PCRs) to show “I booted in a known-good state.”\n\nExam vibe:\n- Secure/Measured/Trusted boot are a chain.\n- Attestation is about proving that chain to someone else."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Remote attestation is best described as…",
+              "options": [
+                "a method to scan a network for open ports.",
+                "a device proving its boot or integrity state to another system.",
+                "a process for wiping a drive securely.",
+                "a way to encrypt email messages."
+              ],
+              "correct_index": 1,
+              "explanation": "Attestation is about proving system integrity (often via measured boot values) to a remote verifier.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.4",
+        "2.3",
+        "3.1",
+        "4.1",
+        "4.2",
+        "4.4"
+      ]
+    },
+    {
+      "id": "ch11-m03",
+      "title": "Hardware-backed keys: TPM, enclaves, HSM, and KMS",
+      "tag_ids": [
+        "tpm",
+        "binding",
+        "sealing",
+        "puf",
+        "secure_enclave",
+        "hsm",
+        "kms",
+        "key_management",
+        "hardware_root_of_trust"
+      ],
+      "pages": [
+        {
+          "id": "ch11-m03-p01",
+          "title": "TPM: tiny chip, big trust",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "A Trusted Platform Module (TPM) is a hardware component designed to securely generate, store, and use cryptographic keys.\n\nWhy it matters:\n- Keys stored in a TPM are harder to steal than keys stored on disk.\n- TPM can “lock” key usage to a specific device state (via PCR measurements).\n\nEndpoints commonly use TPMs for things like full‑disk encryption key protection and secure boot measurements."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "What is a key advantage of storing encryption keys in a TPM?",
+              "options": [
+                "It makes the key easier to copy between devices.",
+                "It increases key theft resistance compared to storing keys on disk.",
+                "It automatically patches the OS.",
+                "It prevents all malware."
+              ],
+              "correct_index": 1,
+              "explanation": "TPMs protect keys in hardware, reducing the chance that a file theft leads to key theft.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        },
+        {
+          "id": "ch11-m03-p02",
+          "title": "Binding vs sealing (TPM jargon that shows up on exams)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Two TPM concepts you’ll see:\n- Binding: encrypting data to a TPM‑protected key so only that TPM can decrypt it.\n- Sealing: encrypting data so it can *only* be decrypted when the system is in a specific state (for example, known‑good boot measurements).\n\nShortcut:\nBinding = “this device”.\nSealing = “this device + this state”."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Sealing is different from binding because sealing…",
+              "options": [
+                "requires no cryptography.",
+                "ties key use to a specific platform state (e.g., PCR measurements).",
+                "allows any TPM to decrypt the data.",
+                "is only used for email security."
+              ],
+              "correct_index": 1,
+              "explanation": "Sealing ties the release/use of secrets to a measured/verified state, not just the device identity.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        },
+        {
+          "id": "ch11-m03-p03",
+          "title": "PUFs and hardware root of trust",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "A hardware root of trust is a minimal set of hardware/firmware you trust to start secure operations (like verifying boot components).\n\nA Physical Unclonable Function (PUF) uses tiny manufacturing variations to create a device-unique “fingerprint.” That can help create device‑specific keys without storing them in the same way a disk file stores them.\n\nPUF = device uniqueness in silicon.\nRoot of trust = the first trusted building block."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A Physical Unclonable Function (PUF) is mainly used to…",
+              "options": [
+                "measure network latency.",
+                "provide a device-unique hardware fingerprint for keying/identity.",
+                "wipe disks securely.",
+                "detect phishing emails."
+              ],
+              "correct_index": 1,
+              "explanation": "PUFs exploit hardware uniqueness to support identity/keying without relying only on stored secrets.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        },
+        {
+          "id": "ch11-m03-p04",
+          "title": "Secure enclaves and secure elements (especially on mobile)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "A secure enclave (or secure element) is an isolated hardware area that can store and use keys separately from the main CPU. It’s designed so even if the main OS is compromised, keys are harder to extract.\n\nYou’ll see similar ideas across platforms:\n- Mobile secure elements / enclaves\n- Trusted execution environments\n\nExam takeaway: enclave/secure element = hardware-isolated key operations."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which description best matches a secure enclave?",
+              "options": [
+                "A software-only encryption library.",
+                "A hardware-isolated area for key storage and cryptographic operations.",
+                "A network firewall rule set.",
+                "A log collection server."
+              ],
+              "correct_index": 1,
+              "explanation": "A secure enclave/secure element is hardware isolation for sensitive key operations.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        },
+        {
+          "id": "ch11-m03-p05",
+          "title": "HSM vs KMS vs TPM: don’t mix these up",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "These terms look similar but serve different scopes:\n- TPM: endpoint device chip used for local integrity + key protection.\n- HSM (Hardware Security Module): dedicated hardware for high-value key operations (often in datacenters) with strong tamper resistance.\n- KMS (Key Management System): a system/service that manages key lifecycle—creation, rotation, access control, auditing—often using HSMs underneath.\n\nShort rule:\nTPM = device.\nHSM = hardened crypto appliance.\nKMS = key lifecycle management layer."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which option best describes a Key Management System (KMS)?",
+              "options": [
+                "A chip soldered onto a laptop motherboard.",
+                "A service that manages key lifecycle (creation, rotation, access, auditing).",
+                "A tool that only blocks malicious IP addresses.",
+                "A method for degaussing tapes."
+              ],
+              "correct_index": 1,
+              "explanation": "A KMS manages keys as an operational system: creation, rotation, permissions, auditing, and often integration with HSMs.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.4",
+        "2.3",
+        "3.1",
+        "4.1",
+        "4.2",
+        "4.4"
+      ]
+    },
+    {
+      "id": "ch11-m04",
+      "title": "Malware detection on endpoints: AV, EDR, XDR, sandboxes",
+      "tag_ids": [
+        "antimalware",
+        "signature_detection",
+        "heuristic_detection",
+        "polymorphism",
+        "packing_obfuscation",
+        "sandboxing",
+        "edr",
+        "xdr",
+        "ioc",
+        "anomaly_detection"
+      ],
+      "pages": [
+        {
+          "id": "ch11-m04-p01",
+          "title": "Antivirus vs antimalware and the detection triangle",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "“Antivirus” and “antimalware” are often used interchangeably now. Modern tools typically combine:\n- Signature detection: match known byte patterns / hashes.\n- Heuristic detection: look for suspicious traits/behaviors.\n- Behavioral/anomaly detection: notice “this system is acting weird.”\n\nSignature = great for known threats.\nHeuristics/anomaly = helps with new or modified threats."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Signature-based detection is strongest when…",
+              "options": [
+                "malware is brand-new and never seen before.",
+                "the threat matches a known pattern/hash in the vendor database.",
+                "the attacker uses packing to change malware appearance every time.",
+                "network traffic is fully encrypted."
+              ],
+              "correct_index": 1,
+              "explanation": "Signatures work best for known, previously observed threats.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        },
+        {
+          "id": "ch11-m04-p02",
+          "title": "Evasion: polymorphism and packing/obfuscation",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Attackers try to evade signatures:\n- Polymorphism: the malware changes its code appearance each time (same behavior, different bytes).\n- Packing/obfuscation: compress/encrypt/wrap code so the real payload is hidden until runtime.\n\nThis is why heuristic and behavior-based detection matter: they focus on what the program *does*, not only what it *looks like*."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Packing is primarily used by malware authors to…",
+              "options": [
+                "make the malware easier to analyze.",
+                "hide or transform malware code to evade simple signature detection.",
+                "replace the need for command-and-control (C2).",
+                "securely store encryption keys in hardware."
+              ],
+              "correct_index": 1,
+              "explanation": "Packing/obfuscation changes appearance and hides payloads, complicating signature detection.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        },
+        {
+          "id": "ch11-m04-p03",
+          "title": "Sandboxing: detonate safely to learn behavior",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "A sandbox is an isolated environment where suspicious code is executed to observe behavior without risking the real system.\n\nSandboxing helps because:\n- You can see actions (file changes, registry edits, network calls).\n- You can generate indicators of compromise (IOCs) for future blocking.\n- You can study unknown samples safely."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Why is sandboxing useful in malware defense?",
+              "options": [
+                "It prevents users from clicking links.",
+                "It runs suspicious code in isolation to observe behavior and reduce risk.",
+                "It guarantees that malware can never reach the network.",
+                "It replaces patching and hardening."
+              ],
+              "correct_index": 1,
+              "explanation": "Sandboxing isolates execution so defenders can observe behavior while limiting damage.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        },
+        {
+          "id": "ch11-m04-p04",
+          "title": "Allow lists and block lists (application control)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Allow listing (deny-by-default): only approved applications can run.\nBlock listing (allow-by-default): everything can run except known bad items.\n\nSecurity tradeoff:\n- Allow list is stronger but needs maintenance/ops maturity.\n- Block list is easier but weaker against new threats.\n\nExam shortcut:\nAllow list = more secure, more admin work.\nBlock list = less secure, less admin work."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which approach is generally more secure but more operationally demanding?",
+              "options": [
+                "Block listing (deny known bad).",
+                "Allow listing (allow known good).",
+                "Disabling logging.",
+                "Allowing unsigned drivers."
+              ],
+              "correct_index": 1,
+              "explanation": "Allow listing is deny-by-default and is typically stronger, but requires more planning and ongoing maintenance.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        },
+        {
+          "id": "ch11-m04-p05",
+          "title": "EDR vs XDR: scope of detection and response",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "EDR (Endpoint Detection and Response) focuses on endpoint telemetry: processes, file activity, memory, log events, and endpoint response actions (isolate host, kill process, quarantine file).\n\nXDR (Extended Detection and Response) expands visibility beyond endpoints into other domains (network, identity, cloud, email) and correlates events across them.\n\nEDR = endpoints.\nXDR = endpoints + more + correlation."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "XDR differs from EDR primarily by…",
+              "options": [
+                "removing the need for logs.",
+                "extending detection/response beyond endpoints to multiple security domains.",
+                "only working on mobile devices.",
+                "being a type of full-disk encryption."
+              ],
+              "correct_index": 1,
+              "explanation": "XDR extends beyond endpoints and correlates signals across multiple security areas.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.4",
+        "2.3",
+        "3.1",
+        "4.1",
+        "4.2",
+        "4.4"
+      ]
+    },
+    {
+      "id": "ch11-m05",
+      "title": "Host-based defenses: firewalls, HIPS/HIDS, and DLP",
+      "tag_ids": [
+        "host_firewall",
+        "hips",
+        "hids",
+        "network_defense",
+        "dlp"
+      ],
+      "pages": [
+        {
+          "id": "ch11-m05-p01",
+          "title": "Host-based firewall: your last local line of defense",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "A host-based firewall runs on the endpoint itself and enforces inbound/outbound rules for that single machine.\n\nWhy it’s valuable:\n- Works even when the device is off-network or roaming.\n- Can block unwanted inbound connections to exposed services.\n- Can restrict outbound connections (useful against malware calling home)."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "What’s a key benefit of a host-based firewall compared to only using a network firewall?",
+              "options": [
+                "It protects the entire organization with one rule set.",
+                "It can still protect a roaming laptop off the corporate network.",
+                "It replaces encryption requirements.",
+                "It prevents misconfiguration of servers."
+              ],
+              "correct_index": 1,
+              "explanation": "A host-based firewall travels with the endpoint and can enforce policy even when the device isn’t behind the corporate perimeter.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        },
+        {
+          "id": "ch11-m05-p02",
+          "title": "HIPS vs HIDS: prevention vs detection",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Host-based Intrusion Prevention System (HIPS):\n- Detects suspicious activity *and can block it* (prevention).\n\nHost-based Intrusion Detection System (HIDS):\n- Detects suspicious activity *but does not block*; it alerts/logs (detection).\n\nExam shortcut:\nIPS = can stop traffic/actions.\nIDS = can only detect/alert."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which capability is unique to a HIPS compared to a HIDS?",
+              "options": [
+                "Generating alerts/logs.",
+                "Blocking suspicious activity in real time.",
+                "Collecting system events.",
+                "Detecting malware signatures."
+              ],
+              "correct_index": 1,
+              "explanation": "HIPS includes prevention—blocking actions—while HIDS is detection/alerting only.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        },
+        {
+          "id": "ch11-m05-p03",
+          "title": "DLP on endpoints: stopping data leaving the building",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Data Loss Prevention (DLP) tools try to prevent sensitive data from being exposed or exfiltrated.\n\nEndpoint DLP examples:\n- Block copying sensitive files to USB storage.\n- Detect and stop uploading regulated data to cloud drives.\n- Prevent emailing files containing specific patterns (PII, PCI).\n\nDLP is about *data rules*, not malware rules."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Endpoint DLP is primarily focused on…",
+              "options": [
+                "preventing all phishing emails from arriving.",
+                "controlling sensitive data movement and preventing unauthorized disclosure.",
+                "patching operating systems automatically.",
+                "detecting open ports on a network."
+              ],
+              "correct_index": 1,
+              "explanation": "DLP focuses on policy controls for data handling and exfiltration prevention.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.4",
+        "2.3",
+        "3.1",
+        "4.1",
+        "4.2",
+        "4.4"
+      ]
+    },
+    {
+      "id": "ch11-m06",
+      "title": "Hardening fundamentals: shrink the attack surface",
+      "tag_ids": [
+        "hardening",
+        "secure_baseline",
+        "cis_benchmarks",
+        "insecure_defaults",
+        "attack_footprint",
+        "configuration",
+        "configuration_enforcement"
+      ],
+      "pages": [
+        {
+          "id": "ch11-m06-p01",
+          "title": "Hardening = fewer ways to fail",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Hardening is reducing risk by adjusting settings, removing unnecessary components, and locking down behavior.\n\nCommon hardening actions called out in Security+ objectives:\n- Encrypt data (where appropriate)\n- Install endpoint protection\n- Use host-based firewall / HIPS\n- Disable unused ports/protocols/services\n- Change default passwords\n- Remove unnecessary software\n\nThe core idea is “least functionality”: if you don’t need it, don’t run it."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which phrase best captures the goal of hardening?",
+              "options": [
+                "Add as many features as possible.",
+                "Reduce attack surface and remove unnecessary exposure.",
+                "Make passwords easier to remember.",
+                "Disable monitoring to improve performance."
+              ],
+              "correct_index": 1,
+              "explanation": "Hardening reduces exposed services/features and strengthens configuration to lower risk.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        },
+        {
+          "id": "ch11-m06-p02",
+          "title": "Secure baselines: a known-good starting point",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "A secure baseline is a standard configuration you apply to similar systems (like “Windows 11 laptop baseline” or “Linux web server baseline”).\n\nBenefits:\n- Consistency at scale\n- Faster deployment\n- Easier audits/compliance\n- Easier incident response (you know what “normal” looks like)\n\nBaselines are usually built from best-practice guides (like CIS Benchmarks) and then adapted to business needs."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Why do organizations use secure baselines?",
+              "options": [
+                "To ensure every system is configured differently for uniqueness.",
+                "To standardize secure settings and reduce configuration drift.",
+                "To avoid patching.",
+                "To allow all ports by default."
+              ],
+              "correct_index": 1,
+              "explanation": "Baselines standardize configuration so you can manage and audit security consistently.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        },
+        {
+          "id": "ch11-m06-p03",
+          "title": "CIS Benchmarks: practical hardening checklists",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "CIS Benchmarks are widely used hardening guides. They describe recommended settings, why they matter, and how to apply/audit them.\n\nSecurity+ doesn’t expect you to memorize every setting. It *does* expect you to understand:\n- What hardening is\n- That benchmarks/baselines exist\n- That baselines can be compared and enforced"
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "CIS Benchmarks are best described as…",
+              "options": [
+                "a malware signature database.",
+                "hardening guides that recommend secure configuration settings.",
+                "a network scanning protocol.",
+                "a method for disk destruction."
+              ],
+              "correct_index": 1,
+              "explanation": "CIS Benchmarks are configuration hardening guides.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.4",
+        "2.3",
+        "3.1",
+        "4.1",
+        "4.2",
+        "4.4"
+      ]
+    },
+    {
+      "id": "ch11-m07",
+      "title": "OS hardening and configuration enforcement at scale",
+      "tag_ids": [
+        "group_policy",
+        "security_compliance_toolkit",
+        "selinux",
+        "mac",
+        "configuration_enforcement",
+        "secure_baseline",
+        "patch_management"
+      ],
+      "pages": [
+        {
+          "id": "ch11-m07-p01",
+          "title": "Windows hardening: Group Policy + baselines",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Windows environments often use Group Policy to push security settings (password policy, firewall rules, auditing, restrictions) to machines in a domain.\n\nMicrosoft also provides security baselines and tools to compare policies against a baseline (useful for audits and drift).\n\nPractical mental model:\nGroup Policy = apply settings centrally.\nBaseline tools = compare/validate settings centrally."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "In a Windows domain, which tool is commonly used to centrally enforce security settings?",
+              "options": [
+                "Group Policy",
+                "Degaussing",
+                "Sandboxing",
+                "A PUF"
+              ],
+              "correct_index": 0,
+              "explanation": "Group Policy is a standard way to centrally configure and enforce Windows settings across domain-joined systems.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        },
+        {
+          "id": "ch11-m07-p02",
+          "title": "Linux hardening: SELinux and Mandatory Access Control (MAC)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "SELinux (Security-Enhanced Linux) adds Mandatory Access Control (MAC) on top of traditional permissions.\n\nMAC means policies define what actions processes can take, even if the user/owner permissions would normally allow it.\n\nWhy it’s valuable:\n- Limits damage from compromised services\n- Enforces least privilege at the process/resource level"
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "SELinux is primarily associated with which security model?",
+              "options": [
+                "Discretionary access control (DAC)",
+                "Mandatory access control (MAC)",
+                "Role-based access control (RBAC) only",
+                "Network-based access control (NAC)"
+              ],
+              "correct_index": 1,
+              "explanation": "SELinux implements MAC-style policy enforcement on Linux systems.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        },
+        {
+          "id": "ch11-m07-p03",
+          "title": "Configuration enforcement: stop drift, fix drift",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Configuration enforcement means:\n1) Monitor for changes away from the approved baseline.\n2) Alert and/or automatically revert the change.\n\nIt prevents “drift,” where systems slowly diverge from secure configurations because of manual tweaks, troubleshooting exceptions, or untracked changes.\n\nIn big environments, enforcement is the only way baselines stay real."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Configuration enforcement primarily helps prevent…",
+              "options": [
+                "malware signatures from updating.",
+                "configuration drift away from an approved baseline.",
+                "users from changing wallpapers.",
+                "encryption keys from being created."
+              ],
+              "correct_index": 1,
+              "explanation": "Enforcement monitors and corrects deviations from approved configuration baselines.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.4",
+        "2.3",
+        "3.1",
+        "4.1",
+        "4.2",
+        "4.4"
+      ]
+    },
+    {
+      "id": "ch11-m08",
+      "title": "Patching, patch management, and legacy realities",
+      "tag_ids": [
+        "patching",
+        "patch_management",
+        "eol",
+        "legacy_hardware",
+        "firmware",
+        "compensating_controls"
+      ],
+      "pages": [
+        {
+          "id": "ch11-m08-p01",
+          "title": "Patching: the cheapest risk reduction you’ll ever get",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Patching is applying updates that fix vulnerabilities or bugs. For Security+ purposes:\n- Unpatched systems are low-hanging fruit.\n- Patch management is the *process* of doing patching safely at scale.\n\nA sane patch process usually includes:\ninventory → test → staged rollout → verify → report/track."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Patch management differs from patching because patch management…",
+              "options": [
+                "means never applying patches.",
+                "includes process steps like testing, rollout planning, and tracking at scale.",
+                "only applies to mobile phones.",
+                "is the same as encryption."
+              ],
+              "correct_index": 1,
+              "explanation": "Patch management is the controlled operational process around patching, especially in enterprise environments.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        },
+        {
+          "id": "ch11-m08-p02",
+          "title": "Firmware patching: don’t forget the layer below the OS",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Firmware (UEFI/BIOS, device firmware) can have vulnerabilities too. Firmware compromise can be stealthy and persistent.\n\nFirmware patching is often slower/harder because:\n- Updates are vendor-specific\n- Failures can brick devices\n- Organizations hesitate without strong change control\n\nBut ignoring firmware updates is a gift to attackers."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Why are firmware vulnerabilities especially concerning?",
+              "options": [
+                "Firmware only affects graphics quality.",
+                "Firmware compromise can persist below the OS and be harder to detect.",
+                "Firmware cannot be updated.",
+                "Firmware vulnerabilities only impact routers, not endpoints."
+              ],
+              "correct_index": 1,
+              "explanation": "Firmware sits below the OS; compromise can persist and evade typical OS-level controls.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        },
+        {
+          "id": "ch11-m08-p03",
+          "title": "When you can’t patch: compensating controls",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Legacy/EOL systems often can’t be patched (or patching would break the business process).\n\nCompensating controls are “plan B” protections, such as:\n- Network segmentation / isolation\n- Strict allow listing\n- Extra monitoring (EDR, logging)\n- Limited access (jump hosts, MFA, least privilege)\n- Virtual patching via IPS/WAF (where applicable)\n\nReality: compensating controls buy time; replacement is still the real fix."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "What is a compensating control for an unpatchable legacy system?",
+              "options": [
+                "Disable encryption to improve performance.",
+                "Isolate the system on a segmented network with strict access controls.",
+                "Give all users admin rights so they can work around issues.",
+                "Expose management interfaces to the internet for convenience."
+              ],
+              "correct_index": 1,
+              "explanation": "Segmentation and strict access control can reduce exposure when you can’t patch—but it doesn’t eliminate the need to modernize.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.4",
+        "2.3",
+        "3.1",
+        "4.1",
+        "4.2",
+        "4.4"
+      ]
+    },
+    {
+      "id": "ch11-m09",
+      "title": "Endpoint encryption: FDE, secure erase, crypto erase, destruction",
+      "tag_ids": [
+        "full_disk_encryption",
+        "tpm",
+        "key_management",
+        "secure_erase",
+        "crypto_erase",
+        "physical_destruction",
+        "data_remanence",
+        "wear_leveling",
+        "sanitization"
+      ],
+      "pages": [
+        {
+          "id": "ch11-m09-p01",
+          "title": "Full-disk encryption (FDE) and when it protects you",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Full-disk encryption (FDE) encrypts the entire drive, protecting data at rest—especially if a device is lost or stolen.\n\nWith TPM-backed FDE (like common laptop setups), a key benefit is that the disk unlock key is hardware-protected.\n\nSecurity+ style question pattern:\n“When is the system least vulnerable to data theft?”\nAnswer is usually: when it’s powered off (data at rest, encrypted, keys not in RAM)."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A laptop uses TPM-backed full-disk encryption. When is it least vulnerable to data theft from the drive?",
+              "options": [
+                "When it is powered off.",
+                "When it is logged in and running.",
+                "While the disk is unlocked and mounted.",
+                "When the user is browsing the web."
+              ],
+              "correct_index": 0,
+              "explanation": "FDE is strongest when the device is off and the disk is locked; keys are not active in memory and data remains encrypted at rest.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        },
+        {
+          "id": "ch11-m09-p02",
+          "title": "Data remanence and why deletion isn’t deletion",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Data remanence is residual data left on storage media after “deletion” or formatting. Filesystem deletes usually remove pointers, not the underlying bits.\n\nSSD and flash complicate wiping because of wear leveling: the device remaps writes internally, so overwriting the “same block” may not overwrite the original physical cells.\n\nSo sanitization strategies differ by media type."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Why can SSDs make traditional overwrite-based wiping less reliable?",
+              "options": [
+                "SSDs do not store data as bits.",
+                "Wear leveling can remap writes so old data may remain in other cells.",
+                "SSDs always degauss themselves.",
+                "SSDs cannot be encrypted."
+              ],
+              "correct_index": 1,
+              "explanation": "Wear leveling can prevent direct overwrites of the original physical storage locations, leaving remnants.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        },
+        {
+          "id": "ch11-m09-p03",
+          "title": "Secure erase, crypto erase, and physical destruction",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Common end-of-life sanitization methods:\n- Secure erase: a device/drive feature designed to erase data (often more SSD-friendly than overwrites).\n- Crypto erase: destroy the encryption keys so the encrypted data becomes unreadable (fast and effective when strong encryption was used).\n- Physical destruction: shred/crush/incinerate to ensure media cannot be read.\n\nPick based on: media type, sensitivity, compliance requirements, and reuse plans."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Crypto erase is best described as…",
+              "options": [
+                "physically shredding the drive.",
+                "destroying the encryption keys so encrypted data becomes unrecoverable.",
+                "overwriting every sector with zeros multiple times.",
+                "copying data to a backup server."
+              ],
+              "correct_index": 1,
+              "explanation": "Crypto erase works by destroying keys, making the encrypted data effectively useless.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.4",
+        "2.3",
+        "3.1",
+        "4.1",
+        "4.2",
+        "4.4"
+      ]
+    },
+    {
+      "id": "ch11-m10",
+      "title": "Special endpoints: embedded systems, RTOS, ICS/SCADA, and IoT",
+      "tag_ids": [
+        "embedded_systems",
+        "rtos",
+        "ics_scada",
+        "plc",
+        "rtu",
+        "iot_security",
+        "compensating_controls",
+        "legacy_hardware",
+        "eol"
+      ],
+      "pages": [
+        {
+          "id": "ch11-m10-p01",
+          "title": "Embedded systems: endpoints that don’t look like computers",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Embedded systems are specialized computing components inside larger devices: VoIP phones, printers, cameras, smart meters, medical devices, industrial controllers.\n\nThey often have:\n- Long lifecycles\n- Limited compute/power/storage\n- Vendor-specific patching (or no patching)\n- Hard-to-replace deployment contexts\n\nThat combination makes them security “hard mode.”"
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which is a common characteristic of embedded systems?",
+              "options": [
+                "Short lifecycles and frequent upgrades.",
+                "Unlimited compute and storage like desktops.",
+                "Long lifecycles and limited resources.",
+                "No network connectivity ever."
+              ],
+              "correct_index": 2,
+              "explanation": "Embedded systems often have constrained resources and long service lives, creating patching and management challenges.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        },
+        {
+          "id": "ch11-m10-p02",
+          "title": "RTOS: real-time constraints change the security game",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "An RTOS (Real-Time Operating System) is designed for systems that must respond within strict timing constraints (industrial control, medical, automotive).\n\nSecurity challenges:\n- Updates may be risky or impossible due to uptime requirements.\n- Limited resources can restrict security tooling.\n- Availability requirements are extreme.\n\nYou often rely on segmentation, strong access control, and monitoring."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Why can securing RTOS-based devices be more difficult than securing desktops?",
+              "options": [
+                "RTOS devices are always offline.",
+                "Real-time availability and resource constraints can limit patching and security tooling.",
+                "RTOS devices cannot run any code.",
+                "RTOS systems are immune to vulnerabilities."
+              ],
+              "correct_index": 1,
+              "explanation": "Strict timing/availability requirements and limited resources often restrict patching and defensive tooling.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        },
+        {
+          "id": "ch11-m10-p03",
+          "title": "ICS/SCADA: PLCs, RTUs, and the cost of downtime",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Industrial Control Systems (ICS) / SCADA manage physical processes. Common components:\n- PLCs (Programmable Logic Controllers): control machinery.\n- RTUs (Remote Terminal Units): gather data and control remote equipment.\n\nICS priorities often put availability first. That doesn’t mean “ignore security,” but it changes how you apply it:\n- Strong network segmentation\n- Strict access paths (jump hosts)\n- Monitoring and controlled change windows\n- Compensating controls for legacy devices"
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "In an ICS/SCADA environment, which control is often most practical for legacy controllers?",
+              "options": [
+                "Frequent OS reinstalls.",
+                "Strict network segmentation and controlled access paths.",
+                "Letting controllers browse the internet for updates.",
+                "Disabling logging."
+              ],
+              "correct_index": 1,
+              "explanation": "Segmentation and controlled access reduce exposure when patching/modernizing is hard.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        },
+        {
+          "id": "ch11-m10-p04",
+          "title": "IoT security: default creds, patching, and where you put the thing",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "IoT devices are often embedded devices with networking. Common failures:\n- Default passwords\n- No patching process\n- Weak update channels\n- Poor inventory (you forget what you own)\n\nPractical controls:\n- Inventory/enumerate devices\n- Change defaults immediately\n- Segment IoT networks\n- Limit outbound traffic\n- Monitor and replace EOL devices"
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "What is the best “first day” security step for a newly deployed IoT device?",
+              "options": [
+                "Expose its admin interface to the internet for remote management.",
+                "Leave default credentials to avoid lockouts.",
+                "Change default credentials and place it on a segmented network.",
+                "Disable encryption to reduce CPU usage."
+              ],
+              "correct_index": 2,
+              "explanation": "Changing defaults and segmenting IoT reduces the easiest paths to compromise.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.4",
+        "2.3",
+        "3.1",
+        "4.1",
+        "4.2",
+        "4.4"
+      ]
+    },
+    {
+      "id": "ch11-m11",
+      "title": "Lifecycle: inventory, enumeration, decommissioning, and sanitization",
+      "tag_ids": [
+        "asset_inventory",
+        "enumeration",
+        "decommissioning",
+        "sanitization",
+        "degaussing",
+        "secure_erase",
+        "physical_destruction",
+        "certificate_of_destruction",
+        "data_remanence"
+      ],
+      "pages": [
+        {
+          "id": "ch11-m11-p01",
+          "title": "Asset inventory and enumeration: you can’t secure what you can’t see",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Asset inventory is your tracked list of devices, owners, locations, and classifications.\n\nEnumeration is the act of discovering assets (often via scanning) to find what exists in reality—including the “forgotten” or rogue devices that aren’t in inventory.\n\nInventory = what you think you have.\nEnumeration = what you actually have."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Enumeration is most accurately described as…",
+              "options": [
+                "destroying media at end of life.",
+                "discovering assets (often by scanning) to identify what exists in the environment.",
+                "rotating encryption keys.",
+                "blocking network traffic using a firewall."
+              ],
+              "correct_index": 1,
+              "explanation": "Enumeration is associated with scanning/discovery to find assets and reconcile them with inventory.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        },
+        {
+          "id": "ch11-m11-p02",
+          "title": "Decommissioning: retire devices without leaking data",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Decommissioning is the controlled process of removing a device from service safely.\n\nA solid decommissioning workflow includes:\n- Confirm retention/compliance requirements\n- Backup/transfer needed data\n- Remove credentials/certificates/keys\n- Sanitize media appropriately\n- Document chain of custody and disposal"
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which step is most important before disposing of a device that stored sensitive data?",
+              "options": [
+                "Disable the screen saver.",
+                "Sanitize the storage media using an appropriate method.",
+                "Increase CPU performance mode.",
+                "Turn off the host firewall."
+              ],
+              "correct_index": 1,
+              "explanation": "Sanitization prevents data remanence leaks when devices are reused, sold, or destroyed.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        },
+        {
+          "id": "ch11-m11-p03",
+          "title": "Sanitization methods: wiping, degaussing, destruction, and proof",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Sanitization options vary:\n- Wiping/overwriting: common for HDDs (less reliable for SSDs because of wear leveling).\n- Degaussing: uses strong electromagnetic fields to scramble magnetic media (tapes, some HDDs).\n- Secure erase: drive-level erase feature (often better for SSDs).\n- Crypto erase: destroy encryption keys.\n- Physical destruction: shred/crush for highest assurance.\n\nOrganizations often require certificates of destruction from vendors as proof of proper disposal."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Degaussing is primarily effective for…",
+              "options": [
+                "magnetic media like tapes (and certain magnetic drives).",
+                "SSDs and flash drives.",
+                "cloud storage buckets.",
+                "encrypted email messages."
+              ],
+              "correct_index": 0,
+              "explanation": "Degaussing scrambles magnetic patterns, making it suitable for magnetic media like tapes; it’s not a universal solution for SSD/flash.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        },
+        {
+          "id": "ch11-m11-p04",
+          "title": "Retention and disposal: security meets law and business reality",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Retention policies define how long data or devices must be kept (legal, regulatory, or business needs).\n\nDisposal must respect retention:\n- Some media can’t be destroyed yet (legal hold).\n- Some data must be retained in specific forms.\n- After retention ends, disposal must be timely and documented.\n\nEndpoint security isn’t just tools—it’s lifecycle discipline."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Why must disposal procedures be linked to retention policies?",
+              "options": [
+                "Retention policies improve Wi‑Fi speed.",
+                "You may be required to keep certain data/media for compliance or legal reasons before disposal.",
+                "Retention prevents malware.",
+                "Disposal always happens immediately after purchase."
+              ],
+              "correct_index": 1,
+              "explanation": "Retention requirements can legally or operationally require keeping data/media until a defined time, affecting when and how you can dispose.",
+              "objectiveIds": [
+                "1.4",
+                "2.3",
+                "3.1",
+                "4.1",
+                "4.2",
+                "4.4"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.4",
+            "2.3",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.4"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.4",
+        "2.3",
+        "3.1",
+        "4.1",
+        "4.2",
+        "4.4"
+      ]
+    }
+  ],
+  "objectiveIds": [
+    "1.4",
+    "2.3",
+    "3.1",
+    "4.1",
+    "4.2",
+    "4.4"
+  ]
+}

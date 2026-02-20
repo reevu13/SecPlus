@@ -1,0 +1,113 @@
+{
+  "pack_id": "ch3",
+  "version": "1.0.0",
+  "confusion_pairs": [
+    {
+      "id": "cp.worm_vs_virus",
+      "title": "Worm vs Virus",
+      "a": { "term": "Worm", "definition": "Self-spreading malware that propagates automatically without user action (e.g., exploiting services, file shares, vulnerable devices)." },
+      "b": { "term": "Virus", "definition": "Malware that replicates after being activated; commonly needs a user action or infection mechanism (e.g., running a file, opening a macro, inserting media)." },
+      "bullets": [
+        "Worm: propagation is the headline feature; Virus: replication after activation is the feature.",
+        "Worms can spread network-wide very quickly with no clicks; viruses often need a trigger/event.",
+        "Worm outbreaks = “it spread by itself”; virus incidents = “someone executed/opened something (or the system auto-activated it).”"
+      ]
+    },
+    {
+      "id": "cp.trojan_vs_worm",
+      "title": "Trojan vs Worm",
+      "a": { "term": "Trojan", "definition": "Malware disguised as legitimate software; typically relies on user execution/installation." },
+      "b": { "term": "Worm", "definition": "Self-spreading malware that propagates without user interaction." },
+      "bullets": [
+        "Trojan: social engineering + disguise; Worm: automated spread.",
+        "Trojan installs because you ran it; Worm spreads because something was exposed/vulnerable.",
+        "Trojan is a delivery method; payload can be RAT/spyware/ransomware."
+      ]
+    },
+    {
+      "id": "cp.spyware_vs_keylogger",
+      "title": "Spyware vs Keylogger",
+      "a": { "term": "Spyware", "definition": "Malware primarily intended to gather information (browsing, files, system details), possibly using many delivery methods." },
+      "b": { "term": "Keylogger", "definition": "Malware or device that captures keystrokes/inputs to steal credentials and sensitive data." },
+      "bullets": [
+        "Keylogger is often a *subset/tool* of spyware, but spyware is broader than keystrokes.",
+        "Keylogger gives “passwords typed”; spyware can give “everything about the user/system.”",
+        "Mitigation focus: MFA helps against keylogging credential theft; anti-spyware/EDR helps against both."
+      ]
+    },
+    {
+      "id": "cp.rootkit_vs_trojan",
+      "title": "Rootkit vs Trojan",
+      "a": { "term": "Rootkit", "definition": "Backdoor-focused malware designed to hide and persist (e.g., hooking, boot/MBR infection); makes the local system untrustworthy." },
+      "b": { "term": "Trojan", "definition": "Disguised program that gets you to install/run it; may *deliver* other malware (including rootkits)." },
+      "bullets": [
+        "Trojan is how you get infected; Rootkit is what makes infection hard to detect/remove.",
+        "Rootkits emphasize stealth + privileged persistence; Trojans emphasize deception at install-time.",
+        "Remediation: rootkits often justify rebuild/restore; Trojans may be cleaned if fully detected."
+      ]
+    },
+    {
+      "id": "cp.fileless_vs_traditional",
+      "title": "Fileless malware vs Traditional on-disk malware",
+      "a": { "term": "Fileless malware", "definition": "Runs primarily in memory, often leveraging scripts (e.g., PowerShell) and persistence tricks like Registry entries; may leave minimal disk artifacts." },
+      "b": { "term": "On-disk malware", "definition": "Stores its primary executable(s) on disk and is detected via file signatures/hashes more directly." },
+      "bullets": [
+        "Fileless: behavior/EDR detection matters; On-disk: signature/hash detection is often stronger.",
+        "Fileless often exploits browsers/plugins or scripts; traditional malware often drops binaries.",
+        "Fileless persistence can be Registry keys/scheduled tasks; traditional persistence is often startup files/services."
+      ]
+    }
+  ],
+  "tag_rules": {
+    "malware.ransomware": {
+      "rule": "If the system is locked/encrypted *and* a payment demand appears, assume ransomware; the best recovery story is clean restore from offline/immutable backups.",
+      "micro_example": "Files turn into *.locked and a note says “Pay 0.5 BTC for the key.” Restore from last known-good backup + patch the entry path.",
+      "confusion_pair_id": "cp.fileless_vs_traditional"
+    },
+    "malware.trojan": {
+      "rule": "If it looks legit and needs the user to run/install it, think Trojan (often a delivery wrapper for something worse).",
+      "micro_example": "“Invoice.pdf.exe” is opened, a fake viewer flashes, and a hidden service appears afterward.",
+      "confusion_pair_id": "cp.trojan_vs_worm"
+    },
+    "malware.worm": {
+      "rule": "If it spreads without clicks, it’s probably a worm—patch/exploit containment and segmentation matter more than user training in that moment.",
+      "micro_example": "A vulnerable service is exploited and suddenly 200 hosts are infected within minutes.",
+      "confusion_pair_id": "cp.worm_vs_virus"
+    },
+    "malware.spyware": {
+      "rule": "Spyware is defined by intent: information gathering. Delivery can look like a Trojan, worm, or ‘legit’ browser add-on.",
+      "micro_example": "A browser extension silently records browsing and uploads screenshots to a remote server.",
+      "confusion_pair_id": "cp.spyware_vs_keylogger"
+    },
+    "malware.bloatware": {
+      "rule": "Bloatware isn’t always malicious, but it increases attack surface (extra code, calls home, vulnerabilities). Treat it like risk you can remove.",
+      "micro_example": "A preinstalled OEM updater runs as admin and later gets exploited via a known CVE.",
+      "confusion_pair_id": ""
+    },
+    "malware.virus": {
+      "rule": "Virus = trigger + payload + replication after activation; usually needs an infection mechanism (macro, attachment, media).",
+      "micro_example": "A macro document runs when opened and drops code that infects other documents.",
+      "confusion_pair_id": "cp.worm_vs_virus"
+    },
+    "malware.fileless": {
+      "rule": "No file on disk doesn’t mean no malware: look for unusual scripting (PowerShell), memory injection, and persistence via Registry/scheduled tasks.",
+      "micro_example": "EDR flags PowerShell downloading code; a Registry run key appears; disk scan finds nothing.",
+      "confusion_pair_id": "cp.fileless_vs_traditional"
+    },
+    "malware.keylogger": {
+      "rule": "Keylogger risk = credential theft; MFA reduces impact, and physical inspections matter for hardware keyloggers.",
+      "micro_example": "User reports account takeover after typing passwords on a shared PC; MFA blocks the attacker’s login.",
+      "confusion_pair_id": "cp.spyware_vs_keylogger"
+    },
+    "malware.logicbomb": {
+      "rule": "Logic bombs live inside legitimate code and wait for a condition (date, user, event). Detection is mostly code review/integrity controls.",
+      "micro_example": "On ‘termination_date’, a hidden function deletes customer records.",
+      "confusion_pair_id": ""
+    },
+    "malware.rootkit": {
+      "rule": "If you can’t trust the host to tell the truth, treat it like a rootkit: validate from trusted media and strongly consider rebuild/restore.",
+      "micro_example": "Local AV says “clean,” but trusted boot media finds hidden drivers and altered boot components.",
+      "confusion_pair_id": "cp.rootkit_vs_trojan"
+    }
+  }
+}

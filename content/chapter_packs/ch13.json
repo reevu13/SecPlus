@@ -1,0 +1,2286 @@
+{
+  "schema_version": "1.0.0",
+  "pack_id": "ch13",
+  "exam": {
+    "vendor": "CompTIA",
+    "name": "Security+",
+    "code": "SY0-701",
+    "max_exam_minutes": 90
+  },
+  "chapter": {
+    "number": 13,
+    "title": "Wireless and Mobile Security",
+    "page_range_in_user_pdf": "626-667"
+  },
+  "design_intent": {
+    "mode": [
+      "campaign",
+      "roguelike",
+      "drill"
+    ],
+    "pvp_optional": true,
+    "default_pvp_enabled": false,
+    "player_goal": "Secure wireless and mobile endpoints by selecting the right protocols, authentication, and device-management controls."
+  },
+  "progression": {
+    "xp_rules": {
+      "base_xp_per_correct": 10,
+      "streak_bonus_per_5": 5,
+      "time_bonus_threshold_seconds": 55,
+      "time_bonus_xp": 3,
+      "mistake_penalty_xp": 2
+    },
+    "mastery_model": {
+      "scale": "0-5",
+      "update": "tag_mastery_decay_resistant",
+      "tags_drive_mastery": true
+    },
+    "unlock_rules": [
+      {
+        "unlock": "boss",
+        "when": "complete_all_missions"
+      },
+      {
+        "unlock": "roguelike",
+        "when": "defeat_boss_once"
+      },
+      {
+        "unlock": "pvp",
+        "when": "reach_mastery_3_on_8_tags"
+      }
+    ]
+  },
+  "tags": {
+    "concepts": [
+      "bluetooth.attacks.bluejacking",
+      "bluetooth.attacks.bluesnarfing",
+      "bluetooth.attacks.impersonation_bia",
+      "bluetooth.security_modes",
+      "mobile.deployment.byod",
+      "mobile.deployment.cobo",
+      "mobile.deployment.cope",
+      "mobile.deployment.cyod",
+      "mobile.hardening.basic_controls",
+      "mobile.mdm.app_management",
+      "mobile.mdm.containerization",
+      "mobile.mdm.content_management",
+      "mobile.mdm.full_device_encryption",
+      "mobile.mdm.geofencing",
+      "mobile.mdm.geolocation",
+      "mobile.mdm.mdm_uem",
+      "mobile.mdm.remote_wipe",
+      "mobile.mdm.selective_wipe",
+      "mobile.privacy.geotagging",
+      "mobile.vuln.jailbreaking",
+      "mobile.vuln.sideloading",
+      "wifi.ap_security",
+      "wifi.bands.2_4ghz",
+      "wifi.channel_planning",
+      "wifi.controller_security",
+      "wifi.controls.protected_mgmt_frames",
+      "wifi.heatmap",
+      "wifi.identifiers.ssid",
+      "wifi.security.ccmp_aes",
+      "wifi.security.owe_enhanced_open",
+      "wifi.security.wpa2_enterprise",
+      "wifi.security.wpa2_personal",
+      "wifi.security.wpa3_enterprise_192bit",
+      "wifi.security.wpa3_personal_pfs",
+      "wifi.security.wpa3_personal_sae",
+      "wifi.site_survey",
+      "wifi.threats.deauth_disassoc",
+      "wifi.threats.evil_twin",
+      "wifi.threats.jamming",
+      "wifi.threats.rogue_ap",
+      "wireless.auth.8021x",
+      "wireless.auth.eap",
+      "wireless.auth.eap_fast",
+      "wireless.auth.eap_peap",
+      "wireless.auth.eap_tls",
+      "wireless.auth.eap_ttls",
+      "wireless.auth.open_captive_portal",
+      "wireless.auth.psk",
+      "wireless.auth.radius",
+      "wireless.auth.radius_federation",
+      "wireless.connectivity.bluetooth",
+      "wireless.connectivity.cellular",
+      "wireless.connectivity.gps",
+      "wireless.connectivity.nfc",
+      "wireless.connectivity.rfid",
+      "wireless.connectivity.wifi",
+      "wireless.models.broadcast",
+      "wireless.models.mesh",
+      "wireless.models.point_to_multipoint",
+      "wireless.models.point_to_point",
+      "wireless.tools.wids_wips",
+      "wireless.tools.wifi_analyzer"
+    ],
+    "difficulty_scale": {
+      "1": "Recall",
+      "2": "Basic application",
+      "3": "Scenario reasoning",
+      "4": "Trap-heavy / multi-concept",
+      "5": "Boss-level synthesis"
+    }
+  },
+  "trap_list": [
+    {
+      "id": "ch13.trap.evil_twin_vs_rogue",
+      "name": "Evil twin ≠ rogue AP",
+      "misconception": "Any unauthorized AP is an evil twin.",
+      "fix": "Evil twin imitates a trusted SSID to lure clients; a rogue AP is simply unauthorized (may or may not imitate).",
+      "drill_question_ids": [
+        "ch13.q007",
+        "ch13.q008",
+        "ch13.q009"
+      ]
+    },
+    {
+      "id": "ch13.trap.deauth_vs_jam",
+      "name": "Deauth is not jamming",
+      "misconception": "Wi‑Fi disconnects must be RF jamming.",
+      "fix": "Deauth/disassoc uses spoofed management frames; jamming is RF interference. PMF helps deauth, not RF jamming.",
+      "drill_question_ids": [
+        "ch13.q012",
+        "ch13.q013",
+        "ch13.q014",
+        "ch13.q015"
+      ]
+    },
+    {
+      "id": "ch13.trap.bluejacking_vs_bluesnarfing",
+      "name": "Bluetooth spam vs Bluetooth theft",
+      "misconception": "Bluejacking and bluesnarfing are the same.",
+      "fix": "Bluejacking = unsolicited messages; bluesnarfing = unauthorized data access.",
+      "drill_question_ids": [
+        "ch13.q010"
+      ]
+    },
+    {
+      "id": "ch13.trap.wpa3_more_than_encryption",
+      "name": "WPA3 is more than ‘stronger encryption’",
+      "misconception": "WPA3 is basically WPA2 with bigger keys.",
+      "fix": "WPA3 adds SAE, requires PMF, and can provide PFS; Enterprise can add 192‑bit mode and stronger key management.",
+      "drill_question_ids": [
+        "ch13.q013",
+        "ch13.q028",
+        "ch13.q029",
+        "ch13.q030",
+        "ch13.q031",
+        "ch13.q032"
+      ]
+    },
+    {
+      "id": "ch13.trap.personal_vs_enterprise",
+      "name": "PSK networks don’t identify users",
+      "misconception": "WPA2‑Personal provides per-user accountability.",
+      "fix": "PSK uses a shared secret; Enterprise uses 802.1X + RADIUS + EAP for per-user/device identity and policy.",
+      "drill_question_ids": [
+        "ch13.q025",
+        "ch13.q026",
+        "ch13.q035",
+        "ch13.q036"
+      ]
+    },
+    {
+      "id": "ch13.trap.eap_cert_requirements",
+      "name": "EAP methods differ by certificate needs",
+      "misconception": "All EAP methods require client certificates.",
+      "fix": "EAP‑TLS requires client certs; PEAP/TTLS typically use server cert + TLS tunnel; FAST focuses on roaming reauth efficiency.",
+      "drill_question_ids": [
+        "ch13.q037",
+        "ch13.q038",
+        "ch13.q039",
+        "ch13.q040",
+        "ch13.q041"
+      ]
+    },
+    {
+      "id": "ch13.trap.byod_vs_cope_cyod",
+      "name": "Ownership drives control",
+      "misconception": "BYOD, CYOD, COPE are the same in practice.",
+      "fix": "BYOD is user-owned/user-controlled; CYOD/COPE are org-owned and easier to standardize and enforce.",
+      "drill_question_ids": [
+        "ch13.q043",
+        "ch13.q044",
+        "ch13.q045"
+      ]
+    },
+    {
+      "id": "ch13.trap.geolocation_vs_geofencing",
+      "name": "Location vs location-based policy",
+      "misconception": "Geolocation and geofencing are identical.",
+      "fix": "Geolocation finds a device; geofencing applies rules when crossing boundaries (block, wipe, restrict).",
+      "drill_question_ids": [
+        "ch13.q050",
+        "ch13.q051"
+      ]
+    },
+    {
+      "id": "ch13.trap_remote_wipe_not_magic",
+      "name": "Remote wipe isn’t guaranteed",
+      "misconception": "Remote wipe alone prevents data loss after theft.",
+      "fix": "Remote wipe needs connectivity; use FDE + strong unlock so offline theft is still resisted.",
+      "drill_question_ids": [
+        "ch13.q047",
+        "ch13.q048"
+      ]
+    }
+  ],
+  "missions": [
+    {
+      "id": "ch13.m1",
+      "name": "Radio Zoo 101",
+      "goal": "Identify major wireless technologies and how they behave.",
+      "mechanics": {
+        "minigame": "signal_identification",
+        "twist": "Fast recall rounds."
+      },
+      "question_ids": [
+        "ch13.q001",
+        "ch13.q002",
+        "ch13.q003",
+        "ch13.q004",
+        "ch13.q005",
+        "ch13.q006"
+      ],
+      "rewards": {
+        "xp": 220,
+        "loot": [
+          "Sticker: 2.4 GHz Jungle",
+          "Card: Wireless Models"
+        ]
+      }
+    },
+    {
+      "id": "ch13.m2",
+      "name": "Rogues & Ghosts",
+      "goal": "Spot common wireless and mobile attack patterns.",
+      "mechanics": {
+        "minigame": "threat_spotting",
+        "hazard": "Believable decoys."
+      },
+      "question_ids": [
+        "ch13.q007",
+        "ch13.q008",
+        "ch13.q009",
+        "ch13.q010",
+        "ch13.q011",
+        "ch13.q012",
+        "ch13.q013",
+        "ch13.q014",
+        "ch13.q015",
+        "ch13.q016",
+        "ch13.q017"
+      ],
+      "rewards": {
+        "xp": 330,
+        "loot": [
+          "Charm: PMF Shield",
+          "Card: Deauth Window"
+        ]
+      }
+    },
+    {
+      "id": "ch13.m3",
+      "name": "Map the Air",
+      "goal": "Plan coverage and reduce interference with surveys, heatmaps, and channels.",
+      "mechanics": {
+        "minigame": "heatmap_tactics",
+        "rule": "1/6/11 matters."
+      },
+      "question_ids": [
+        "ch13.q018",
+        "ch13.q019",
+        "ch13.q020",
+        "ch13.q021",
+        "ch13.q022"
+      ],
+      "rewards": {
+        "xp": 260,
+        "loot": [
+          "Blueprint: Site Survey Kit",
+          "Card: 1/6/11"
+        ]
+      }
+    },
+    {
+      "id": "ch13.m4",
+      "name": "WPA Forge",
+      "goal": "Choose the right Wi‑Fi security standard and explain why.",
+      "mechanics": {
+        "minigame": "protocol_choice",
+        "boss_hint": "Management frames matter."
+      },
+      "question_ids": [
+        "ch13.q023",
+        "ch13.q024",
+        "ch13.q025",
+        "ch13.q026",
+        "ch13.q027",
+        "ch13.q028",
+        "ch13.q029",
+        "ch13.q030",
+        "ch13.q031",
+        "ch13.q032"
+      ],
+      "rewards": {
+        "xp": 380,
+        "loot": [
+          "Relic: SAE Anvil",
+          "Card: CCMP vs Legacy"
+        ]
+      }
+    },
+    {
+      "id": "ch13.m5",
+      "name": "Auth Labyrinth",
+      "goal": "Build enterprise authentication using 802.1X, RADIUS, and EAP.",
+      "mechanics": {
+        "minigame": "handshake_builder",
+        "modifier": "Mutual auth bonus."
+      },
+      "question_ids": [
+        "ch13.q033",
+        "ch13.q034",
+        "ch13.q035",
+        "ch13.q036",
+        "ch13.q037",
+        "ch13.q038",
+        "ch13.q039",
+        "ch13.q040",
+        "ch13.q041",
+        "ch13.q042"
+      ],
+      "rewards": {
+        "xp": 400,
+        "loot": [
+          "Badge: RADIUS Whisperer",
+          "Card: EAP Matrix"
+        ]
+      }
+    },
+    {
+      "id": "ch13.m6",
+      "name": "Pocket Kingdoms",
+      "goal": "Select sane mobile deployment and MDM/UEM controls that survive theft and user behavior.",
+      "mechanics": {
+        "minigame": "policy_hardening",
+        "constraint": "Assume users will sideload."
+      },
+      "question_ids": [
+        "ch13.q043",
+        "ch13.q044",
+        "ch13.q045",
+        "ch13.q046",
+        "ch13.q047",
+        "ch13.q048",
+        "ch13.q049",
+        "ch13.q050",
+        "ch13.q051",
+        "ch13.q052"
+      ],
+      "rewards": {
+        "xp": 430,
+        "loot": [
+          "Tool: Selective Wipe Remote",
+          "Card: Geofence"
+        ],
+        "unlock": "boss"
+      }
+    }
+  ],
+  "boss": {
+    "id": "ch13.boss",
+    "name": "Boss: The Phantom SSID",
+    "premise": "A roaming employee keeps getting compromised. Diagnose the wireless threat, pick the right Wi‑Fi protections, and lock down mobile controls fast.",
+    "mechanics": {
+      "phase_1": "Detect/contain rogue or evil twin behavior.",
+      "phase_2": "Harden Wi‑Fi auth/encryption to remove easy wins.",
+      "phase_3": "Apply device controls that still help when the device goes offline."
+    },
+    "question_ids": [
+      "ch13.q009",
+      "ch13.q012",
+      "ch13.q013",
+      "ch13.q028",
+      "ch13.q037",
+      "ch13.q046",
+      "ch13.q047",
+      "ch13.q048",
+      "ch13.q050"
+    ],
+    "rewards": {
+      "xp": 650,
+      "loot": [
+        "Trophy: Air Marshal",
+        "Relic: Zero‑Trust Roamer"
+      ]
+    }
+  },
+  "roguelike": {
+    "runset_id": "ch13.runset",
+    "run_minutes_target": 18,
+    "structure": {
+      "acts": 3,
+      "encounters_per_act": 4,
+      "rest_sites_per_act": 1,
+      "boss_per_run": "ch13.boss"
+    },
+    "cards": {
+      "threat_cards": [
+        {
+          "id": "ch13.t1",
+          "name": "Evil Twin Lure",
+          "tags": [
+            "wifi.threats.evil_twin"
+          ]
+        },
+        {
+          "id": "ch13.t2",
+          "name": "Deauth Storm",
+          "tags": [
+            "wifi.threats.deauth_disassoc"
+          ]
+        },
+        {
+          "id": "ch13.t3",
+          "name": "Bluetooth Data Grab",
+          "tags": [
+            "bluetooth.attacks.bluesnarfing"
+          ]
+        },
+        {
+          "id": "ch13.t4",
+          "name": "Lost Device Offline",
+          "tags": [
+            "mobile.mdm.remote_wipe",
+            "mobile.mdm.full_device_encryption"
+          ]
+        }
+      ],
+      "constraint_cards": [
+        {
+          "id": "ch13.c1",
+          "name": "Crowded 2.4 GHz",
+          "effect": "Channel overlap causes drops; prioritize survey + clean channel plan."
+        },
+        {
+          "id": "ch13.c2",
+          "name": "Legacy Clients",
+          "effect": "Some clients can’t do WPA3; design the safest workable transition."
+        },
+        {
+          "id": "ch13.c3",
+          "name": "Users Will Root",
+          "effect": "Assume sideloading/jailbreaking attempts; enforce compliance actions."
+        }
+      ],
+      "control_cards": [
+        {
+          "id": "ch13.k1",
+          "name": "Protected Management Frames",
+          "tags": [
+            "wifi.controls.protected_mgmt_frames"
+          ]
+        },
+        {
+          "id": "ch13.k2",
+          "name": "802.1X + RADIUS",
+          "tags": [
+            "wireless.auth.8021x",
+            "wireless.auth.radius"
+          ]
+        },
+        {
+          "id": "ch13.k3",
+          "name": "Work Container",
+          "tags": [
+            "mobile.mdm.containerization"
+          ]
+        },
+        {
+          "id": "ch13.k4",
+          "name": "Selective Wipe",
+          "tags": [
+            "mobile.mdm.selective_wipe"
+          ]
+        }
+      ]
+    },
+    "question_pool_ids": "ch13.pool.core"
+  },
+  "pvp": {
+    "enabled": true,
+    "modes": [
+      {
+        "id": "ch13.pvp1",
+        "name": "SSID Duel",
+        "description": "Race to harden a wireless deployment with minimal downtime.",
+        "rules": {
+          "rounds": 6,
+          "time_limit_seconds": 75,
+          "scoring": "correct - time_penalty",
+          "tiebreaker": "higher_avg_difficulty"
+        }
+      },
+      {
+        "id": "ch13.pvp2",
+        "name": "MDM Lockdown Sprint",
+        "description": "Pick the best device controls for a theft/jailbreak scenario.",
+        "rules": {
+          "rounds": 5,
+          "time_limit_seconds": 90,
+          "scoring": "correct + speed_bonus"
+        }
+      }
+    ],
+    "fairness": {
+      "matchmaking": "mmr_weighted_by_tag_mastery",
+      "anti_cheat": "server_side_timer_and_randomized_question_order"
+    }
+  },
+  "question_bank": [
+    {
+      "id": "ch13.q001",
+      "type": "mcq",
+      "stem": "Why should cellular data be treated as an untrusted network path?",
+      "options": {
+        "A": "Cellular cannot be encrypted",
+        "B": "Your org controls carrier infrastructure",
+        "C": "The carrier operates the network outside your control boundary",
+        "D": "Cellular only supports IPv6"
+      },
+      "answer": "C",
+      "explanation": "Carrier-managed networks sit outside your administrative control, so treat them like external networks. Trap: encryption exists, but control boundary is the issue.",
+      "tags": [
+        "wireless.connectivity.cellular"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Carrier-managed networks sit outside your administrative control, so treat them like external networks.",
+      "misconceptionTags": [
+        "wireless.connectivity.cellular_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q002",
+      "type": "mcq",
+      "stem": "What is a core security challenge unique to Wi‑Fi versus wired links?",
+      "options": {
+        "A": "Wi‑Fi cannot authenticate users",
+        "B": "RF signals can leak beyond the physical space you control",
+        "C": "Wi‑Fi cannot be encrypted",
+        "D": "Wi‑Fi requires line of sight"
+      },
+      "answer": "B",
+      "explanation": "Wi‑Fi broadcasts RF energy that often travels past walls, creating exposure. Trap: Wi‑Fi supports strong auth/encryption (WPA2/WPA3); leakage is the unique problem.",
+      "tags": [
+        "wireless.connectivity.wifi"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "1.5"
+      ],
+      "rationaleCorrect": "Wi‑Fi broadcasts RF energy that often travels past walls, creating exposure.",
+      "misconceptionTags": [
+        "wireless.connectivity.wifi_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q003",
+      "type": "mcq",
+      "stem": "Bluetooth is MOST commonly used for:",
+      "options": {
+        "A": "Long-range site-to-site links",
+        "B": "Low‑power short‑range device connections",
+        "C": "Satellite navigation broadcasts",
+        "D": "High-range inventory tags"
+      },
+      "answer": "B",
+      "explanation": "Bluetooth is built for short-range, low-power device-to-device connections. Trap: confusing it with Wi‑Fi (bandwidth) or GPS (broadcast).",
+      "tags": [
+        "wireless.connectivity.bluetooth",
+        "wireless.models.point_to_point"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "4.5"
+      ],
+      "rationaleCorrect": "Bluetooth is built for short-range, low-power device-to-device connections.",
+      "misconceptionTags": [
+        "wireless.connectivity.bluetooth_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q004",
+      "type": "matching",
+      "stem": "Match RFID tag types to how they get power.",
+      "left": [
+        "Active tag",
+        "Semi‑active tag",
+        "Passive tag"
+      ],
+      "right": [
+        "Battery powered and transmits",
+        "Battery for circuits, reader triggers transmission",
+        "No battery; powered by reader"
+      ],
+      "pairs": {
+        "Active tag": "Battery powered and transmits",
+        "Semi‑active tag": "Battery for circuits, reader triggers transmission",
+        "Passive tag": "No battery; powered by reader"
+      },
+      "explanation": "RFID tags differ mainly by how they are powered and when they transmit. Trap: semi‑active still needs the reader to trigger transmission.",
+      "tags": [
+        "wireless.connectivity.rfid"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "4.5"
+      ],
+      "rationaleCorrect": "RFID tags differ mainly by how they are powered and when they transmit.",
+      "misconceptionTags": [
+        "wireless.connectivity.rfid_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch13.q005",
+      "type": "mcq",
+      "stem": "Near‑field communication (NFC) is MOST associated with:",
+      "options": {
+        "A": "Very short range tap‑to‑pay interactions",
+        "B": "Hundreds of meters of tag range",
+        "C": "Line-of-sight optical networking",
+        "D": "Replacing WPA3 authentication"
+      },
+      "answer": "A",
+      "explanation": "NFC is designed for very short-range interactions (payments/badges). Trap: mixing it up with longer‑range RFID or Wi‑Fi.",
+      "tags": [
+        "wireless.connectivity.nfc"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "4.5"
+      ],
+      "rationaleCorrect": "NFC is designed for very short-range interactions (payments/badges).",
+      "misconceptionTags": [
+        "wireless.connectivity.nfc_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q006",
+      "type": "matching",
+      "stem": "Match the wireless model to a typical example.",
+      "left": [
+        "Point‑to‑point",
+        "Point‑to‑multipoint",
+        "Broadcast",
+        "Mesh"
+      ],
+      "right": [
+        "Bluetooth headset ↔ phone",
+        "Wi‑Fi AP serving many clients",
+        "GPS satellite signals",
+        "IoT nodes relaying traffic"
+      ],
+      "pairs": {
+        "Point‑to‑point": "Bluetooth headset ↔ phone",
+        "Point‑to‑multipoint": "Wi‑Fi AP serving many clients",
+        "Broadcast": "GPS satellite signals",
+        "Mesh": "IoT nodes relaying traffic"
+      },
+      "explanation": "Models describe who communicates with whom. Trap: calling infrastructure Wi‑Fi “broadcast”; it’s centered on an AP (multipoint).",
+      "tags": [
+        "wireless.models.point_to_point",
+        "wireless.models.point_to_multipoint",
+        "wireless.models.broadcast",
+        "wireless.models.mesh",
+        "wireless.connectivity.gps"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 90,
+      "objectiveIds": [
+        "3.2"
+      ],
+      "rationaleCorrect": "Models describe who communicates with whom.",
+      "misconceptionTags": [
+        "wireless.models.point_to_point_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch13.q007",
+      "type": "mcq",
+      "stem": "What is an evil twin?",
+      "options": {
+        "A": "A legitimate WPA3 access point",
+        "B": "An unauthorized AP plugged into your switch",
+        "C": "A malicious AP imitating a trusted SSID to lure clients",
+        "D": "A WLAN controller scan feature"
+      },
+      "answer": "C",
+      "explanation": "Evil twin = fake AP that mimics a real network to capture traffic/credentials. Trap: rogue AP is unauthorized but not necessarily imitating.",
+      "tags": [
+        "wifi.threats.evil_twin",
+        "wifi.identifiers.ssid"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "Evil twin = fake AP that mimics a real network to capture traffic/credentials.",
+      "misconceptionTags": [
+        "wifi.threats.evil_twin_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q008",
+      "type": "mcq",
+      "stem": "What is a rogue access point?",
+      "options": {
+        "A": "A fake AP that must mimic an SSID",
+        "B": "An unauthorized AP, malicious or accidental",
+        "C": "An AP that only uses 2.4 GHz",
+        "D": "An AP a controller can never detect"
+      },
+      "answer": "B",
+      "explanation": "Rogue AP = not authorized; can be employee-installed or attacker-installed. Trap: evil twin is a special case focused on imitation.",
+      "tags": [
+        "wifi.threats.rogue_ap"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "Rogue AP = not authorized; can be employee-installed or attacker-installed.",
+      "misconceptionTags": [
+        "wifi.threats.rogue_ap_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q009",
+      "type": "scenario_mcq",
+      "stem": "Your WLAN team finds an unknown SSID in the building. What BEST helps determine whether it is actually connected to your corporate wired network?",
+      "options": {
+        "A": "Check only the SSID name",
+        "B": "Correlate wireless discovery with switch logs/MAC tables to confirm a wired uplink",
+        "C": "Disable WPA3 everywhere",
+        "D": "Increase AP transmit power"
+      },
+      "answer": "B",
+      "explanation": "Combine wireless scanning with wired evidence to prove whether the device is on your infrastructure. Trap: power changes may affect signal, not provenance.",
+      "tags": [
+        "wireless.tools.wids_wips",
+        "wifi.threats.rogue_ap"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 95,
+      "objectiveIds": [
+        "3.2"
+      ],
+      "rationaleCorrect": "Combine wireless scanning with wired evidence to prove whether the device is on your infrastructure.",
+      "misconceptionTags": [
+        "wireless.tools.wids_wips_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q010",
+      "type": "mcq",
+      "stem": "Which Bluetooth attack focuses on unauthorized access to device data (contacts/files)?",
+      "options": {
+        "A": "Bluejacking",
+        "B": "Bluesnarfing",
+        "C": "Wardriving",
+        "D": "Evil twin"
+      },
+      "answer": "B",
+      "explanation": "Bluesnarfing = data theft. Trap: bluejacking is unsolicited messages (annoying, not necessarily data theft).",
+      "tags": [
+        "bluetooth.attacks.bluesnarfing",
+        "bluetooth.attacks.bluejacking"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Bluesnarfing = data theft. It aligns with the intended control outcome and avoids the common trap choices in this question.",
+      "misconceptionTags": [
+        "bluetooth.attacks.bluesnarfing_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q011",
+      "type": "mcq",
+      "stem": "Bluetooth impersonation attacks (BIAs) are MOST associated with:",
+      "options": {
+        "A": "Mandatory 192-bit encryption",
+        "B": "Mutual-auth/downgrade/role-switch weaknesses in the protocol",
+        "C": "Reprogrammable RFID tags",
+        "D": "Wi‑Fi channel overlap"
+      },
+      "answer": "B",
+      "explanation": "BIAs exploit protocol weaknesses (mutual auth gaps, downgrade/role abuse). Trap: it’s not just “weak PINs.”",
+      "tags": [
+        "bluetooth.attacks.impersonation_bia",
+        "bluetooth.security_modes"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "4.5"
+      ],
+      "rationaleCorrect": "BIAs exploit protocol weaknesses (mutual auth gaps, downgrade/role abuse).",
+      "misconceptionTags": [
+        "bluetooth.attacks.impersonation_bia_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q012",
+      "type": "scenario_mcq",
+      "stem": "A laptop keeps getting kicked off Wi‑Fi, then reconnects to a stronger AP with the same SSID. What attack chain is MOST likely?",
+      "options": {
+        "A": "Deauth/disassoc frames force reconnect, then an evil twin lures the client",
+        "B": "RFID cloning then GPS spoofing",
+        "C": "Captive portal then DKIM signing",
+        "D": "Infrared interception then NFC replay"
+      },
+      "answer": "A",
+      "explanation": "Deauth creates a reconnect window; an evil twin with the same SSID wins the reconnection. Trap: other options mash unrelated tech.",
+      "tags": [
+        "wifi.threats.deauth_disassoc",
+        "wifi.threats.evil_twin"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 100,
+      "objectiveIds": [
+        "2.2"
+      ],
+      "rationaleCorrect": "Deauth creates a reconnect window; an evil twin with the same SSID wins the reconnection.",
+      "misconceptionTags": [
+        "wifi.threats.deauth_disassoc_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q013",
+      "type": "mcq",
+      "stem": "Which WPA3 feature MOST directly helps prevent spoofed deauthentication attacks?",
+      "options": {
+        "A": "CCMP",
+        "B": "Protected management frames (PMF)",
+        "C": "PSK",
+        "D": "Captive portals"
+      },
+      "answer": "B",
+      "explanation": "PMF protects management frames, reducing spoofed deauth/disassoc attacks. Trap: CCMP encrypts data frames, not the management frame problem.",
+      "tags": [
+        "wifi.controls.protected_mgmt_frames",
+        "wifi.security.wpa3_personal_sae"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "1.3"
+      ],
+      "rationaleCorrect": "PMF protects management frames, reducing spoofed deauth/disassoc attacks.",
+      "misconceptionTags": [
+        "wifi.controls.protected_mgmt_frames_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q014",
+      "type": "mcq",
+      "stem": "Difference between a Wi‑Fi deauther and a Wi‑Fi jammer?",
+      "options": {
+        "A": "Deauther uses RF noise; jammer uses deauth frames",
+        "B": "Deauther uses protocol management frames; jammer uses RF interference",
+        "C": "Jammer only works on 5 GHz",
+        "D": "They are the same thing"
+      },
+      "answer": "B",
+      "explanation": "Deauth = frame spoofing; jamming = RF interference. Trap: treating every disconnect as jamming.",
+      "tags": [
+        "wifi.threats.deauth_disassoc",
+        "wifi.threats.jamming"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "5.2"
+      ],
+      "rationaleCorrect": "Deauth = frame spoofing; jamming = RF interference.",
+      "misconceptionTags": [
+        "wifi.threats.deauth_disassoc_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q015",
+      "type": "mcq",
+      "stem": "Which statement about wireless jamming is MOST accurate?",
+      "options": {
+        "A": "It can only be intentional",
+        "B": "It is always legal if you own the building",
+        "C": "It is RF interference and can be malicious or accidental",
+        "D": "WPA3 encryption prevents it"
+      },
+      "answer": "C",
+      "explanation": "Jamming is interference in the RF band; it can be accidental or malicious. Trap: encryption can’t fix a radio that can’t talk.",
+      "tags": [
+        "wifi.threats.jamming",
+        "wifi.channel_planning"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "Jamming is interference in the RF band; it can be accidental or malicious.",
+      "misconceptionTags": [
+        "wifi.threats.jamming_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q016",
+      "type": "mcq",
+      "stem": "What is sideloading on a mobile device?",
+      "options": {
+        "A": "Installing only from the official store",
+        "B": "Installing apps from outside the official store (files/USB/other channels)",
+        "C": "Factory resetting the device",
+        "D": "Authenticating to Wi‑Fi using 802.1X"
+      },
+      "answer": "B",
+      "explanation": "Sideloading bypasses the official store’s vetting and often bypasses policy controls. Trap: jailbreaking is privilege escalation; sideloading is an install path.",
+      "tags": [
+        "mobile.vuln.sideloading"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Sideloading bypasses the official store’s vetting and often bypasses policy controls.",
+      "misconceptionTags": [
+        "mobile.vuln.sideloading_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q017",
+      "type": "mcq",
+      "stem": "Jailbreaking/rooting MOST closely resembles:",
+      "options": {
+        "A": "Privilege escalation to gain admin/root control",
+        "B": "DDoS against the app store",
+        "C": "Captive portal phishing",
+        "D": "Wi‑Fi channel overlap"
+      },
+      "answer": "A",
+      "explanation": "Jailbreaking exploits OS weaknesses to gain elevated privileges. Trap: confusing it with sideloading.",
+      "tags": [
+        "mobile.vuln.jailbreaking"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "4.5"
+      ],
+      "rationaleCorrect": "Jailbreaking exploits OS weaknesses to gain elevated privileges.",
+      "misconceptionTags": [
+        "mobile.vuln.jailbreaking_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q018",
+      "type": "mcq",
+      "stem": "Primary purpose of a wireless site survey?",
+      "options": {
+        "A": "Generate client certificates",
+        "B": "Map RF environment/obstacles to plan AP placement and channels",
+        "C": "Apply MDM policies",
+        "D": "Prevent Bluetooth pairing"
+      },
+      "answer": "B",
+      "explanation": "Site surveys measure real RF conditions to design coverage/performance. Trap: assuming you can design purely from floor plans.",
+      "tags": [
+        "wifi.site_survey",
+        "wifi.channel_planning"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "3.4"
+      ],
+      "rationaleCorrect": "Site surveys measure real RF conditions to design coverage/performance.",
+      "misconceptionTags": [
+        "wifi.site_survey_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q019",
+      "type": "mcq",
+      "stem": "A wireless heatmap is MOST useful for showing:",
+      "options": {
+        "A": "Account lockout rates",
+        "B": "Signal strength/coverage across a space",
+        "C": "Which EAP method is configured",
+        "D": "Bluetooth contact lists"
+      },
+      "answer": "B",
+      "explanation": "Heatmaps visualize where coverage is strong/weak to guide placement and tuning. Trap: it’s not an auth report.",
+      "tags": [
+        "wifi.heatmap"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 50,
+      "objectiveIds": [
+        "4.5"
+      ],
+      "rationaleCorrect": "Heatmaps visualize where coverage is strong/weak to guide placement and tuning.",
+      "misconceptionTags": [
+        "wifi.heatmap_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q020",
+      "type": "mcq",
+      "stem": "On 2.4 GHz Wi‑Fi, which channel set is commonly chosen to minimize overlap?",
+      "options": {
+        "A": "1,2,3",
+        "B": "4,8,12",
+        "C": "1,6,11",
+        "D": "5,10,15"
+      },
+      "answer": "C",
+      "explanation": "2.4 GHz channels overlap; 1/6/11 minimize adjacent-channel interference. Trap: consecutive channels overlap heavily.",
+      "tags": [
+        "wifi.channel_planning",
+        "wifi.bands.2_4ghz"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "4.5"
+      ],
+      "rationaleCorrect": "2.4 GHz channels overlap; 1/6/11 minimize adjacent-channel interference.",
+      "misconceptionTags": [
+        "wifi.channel_planning_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q021",
+      "type": "scenario_mcq",
+      "stem": "In an enterprise WLAN, the controller detects adjacent-channel interference between APs. What is a LIKELY automated response?",
+      "options": {
+        "A": "Disable encryption on both APs",
+        "B": "Adjust channel assignments and/or transmit power to reduce overlap",
+        "C": "Randomize the SSID on one AP",
+        "D": "Force clients to use Bluetooth"
+      },
+      "answer": "B",
+      "explanation": "WLAN controllers often manage channels and power to mitigate interference while keeping coverage. Trap: SSID changes don’t solve RF physics.",
+      "tags": [
+        "wifi.controller_security",
+        "wifi.channel_planning"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 85,
+      "objectiveIds": [
+        "4.5"
+      ],
+      "rationaleCorrect": "WLAN controllers often manage channels and power to mitigate interference while keeping coverage.",
+      "misconceptionTags": [
+        "wifi.controller_security_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q022",
+      "type": "mcq",
+      "stem": "Wi‑Fi analyzer tools are MOST often used to:",
+      "options": {
+        "A": "Build heatmaps and identify nearby networks/channels",
+        "B": "Create DKIM signatures",
+        "C": "Encrypt RFID tags",
+        "D": "Replace the need for site surveys"
+      },
+      "answer": "A",
+      "explanation": "Analyzers support surveying/heatmaps/troubleshooting by measuring RF and network presence. Trap: they’re part of site surveys, not a replacement.",
+      "tags": [
+        "wireless.tools.wifi_analyzer",
+        "wifi.site_survey",
+        "wifi.heatmap"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "4.5"
+      ],
+      "rationaleCorrect": "Analyzers support surveying/heatmaps/troubleshooting by measuring RF and network presence.",
+      "misconceptionTags": [
+        "wireless.tools.wifi_analyzer_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q023",
+      "type": "mcq",
+      "stem": "Best practice for securing WLAN controllers and APs?",
+      "options": {
+        "A": "Keep default admin credentials",
+        "B": "Isolate management access (mgmt VLAN) and patch regularly",
+        "C": "Enable insecure legacy protocols by default",
+        "D": "Disable logging to save space"
+      },
+      "answer": "B",
+      "explanation": "Harden controllers/APs like any network device: change defaults, segment management, patch, and log. Trap: convenience-driven defaults.",
+      "tags": [
+        "wifi.controller_security",
+        "wifi.ap_security"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "4.2"
+      ],
+      "rationaleCorrect": "Harden controllers/APs like any network device: change defaults, segment management, patch, and log.",
+      "misconceptionTags": [
+        "wifi.controller_security_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q024",
+      "type": "multi_select",
+      "stem": "Which actions improve AP security? (Choose TWO.)",
+      "options": {
+        "A": "Disable unnecessary/insecure services",
+        "B": "Restrict admin access to a management network/VLAN",
+        "C": "Hide the SSID to prevent attacks",
+        "D": "Use only 2.4 GHz for simplicity"
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "Hardening = reduce attack surface and protect management access. Trap: SSID hiding is weak security-through-obscurity.",
+      "tags": [
+        "wifi.ap_security",
+        "wifi.controller_security"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "Hardening = reduce attack surface and protect management access.",
+      "misconceptionTags": [
+        "wifi.ap_security_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q025",
+      "type": "mcq",
+      "stem": "WPA2‑Personal is BEST described as:",
+      "options": {
+        "A": "Per-user creds via RADIUS",
+        "B": "Shared preshared key (PSK) model",
+        "C": "Client-certificate-only authentication",
+        "D": "Open network with OWE"
+      },
+      "answer": "B",
+      "explanation": "WPA2‑Personal uses a shared passphrase (PSK). Trap: per-user identity requires Enterprise (802.1X).",
+      "tags": [
+        "wifi.security.wpa2_personal",
+        "wireless.auth.psk"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "4.5"
+      ],
+      "rationaleCorrect": "WPA2‑Personal uses a shared passphrase (PSK).",
+      "misconceptionTags": [
+        "wifi.security.wpa2_personal_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q026",
+      "type": "mcq",
+      "stem": "WPA2‑Enterprise relies on which components?",
+      "options": {
+        "A": "PSK + SAE",
+        "B": "802.1X + RADIUS + EAP",
+        "C": "OWE + captive portal",
+        "D": "WEP + TKIP"
+      },
+      "answer": "B",
+      "explanation": "Enterprise Wi‑Fi uses 802.1X access control, RADIUS AAA, and EAP methods. Trap: SAE is WPA3‑Personal.",
+      "tags": [
+        "wifi.security.wpa2_enterprise",
+        "wireless.auth.8021x",
+        "wireless.auth.radius",
+        "wireless.auth.eap"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "4.5"
+      ],
+      "rationaleCorrect": "Enterprise Wi‑Fi uses 802.1X access control, RADIUS AAA, and EAP methods.",
+      "misconceptionTags": [
+        "wifi.security.wpa2_enterprise_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q027",
+      "type": "mcq",
+      "stem": "WPA2 introduced CCMP primarily to provide:",
+      "options": {
+        "A": "AES-based Wi‑Fi frame encryption",
+        "B": "Captive portals",
+        "C": "RF interference mitigation",
+        "D": "Device geolocation"
+      },
+      "answer": "A",
+      "explanation": "CCMP (AES) protects confidentiality/integrity of Wi‑Fi traffic. Trap: it’s not an access portal feature.",
+      "tags": [
+        "wifi.security.ccmp_aes"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "4.5"
+      ],
+      "rationaleCorrect": "CCMP (AES) protects confidentiality/integrity of Wi‑Fi traffic.",
+      "misconceptionTags": [
+        "wifi.security.ccmp_aes_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q028",
+      "type": "mcq",
+      "stem": "WPA3‑Personal replaces WPA2‑PSK auth with:",
+      "options": {
+        "A": "SAE",
+        "B": "CCMP",
+        "C": "WPS",
+        "D": "TKIP"
+      },
+      "answer": "A",
+      "explanation": "WPA3‑Personal uses SAE for password-based authentication. Trap: CCMP is encryption (still used); WPS/TKIP are legacy.",
+      "tags": [
+        "wifi.security.wpa3_personal_sae"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "4.5"
+      ],
+      "rationaleCorrect": "WPA3‑Personal uses SAE for password-based authentication.",
+      "misconceptionTags": [
+        "wifi.security.wpa3_personal_sae_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q029",
+      "type": "mcq",
+      "stem": "Key security benefit of SAE is that it:",
+      "options": {
+        "A": "Eliminates encryption",
+        "B": "Slows/limits password guessing and resists offline attacks",
+        "C": "Prevents all RF jamming",
+        "D": "Hides the SSID"
+      },
+      "answer": "B",
+      "explanation": "SAE makes guessing harder (especially offline/rapid guessing). Trap: it doesn’t stop RF-layer jamming.",
+      "tags": [
+        "wifi.security.wpa3_personal_sae"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "4.5"
+      ],
+      "rationaleCorrect": "SAE makes guessing harder (especially offline/rapid guessing).",
+      "misconceptionTags": [
+        "wifi.security.wpa3_personal_sae_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q030",
+      "type": "mcq",
+      "stem": "Perfect forward secrecy (PFS) in WPA3‑Personal means:",
+      "options": {
+        "A": "A leaked key decrypts all prior sessions",
+        "B": "Past traffic remains protected even if the password is later compromised",
+        "C": "SSID is hidden",
+        "D": "Evil twins can’t exist"
+      },
+      "answer": "B",
+      "explanation": "PFS uses ephemeral keys so later compromise doesn’t decrypt old sessions. Trap: PFS protects confidentiality, not SSID spoofing.",
+      "tags": [
+        "wifi.security.wpa3_personal_pfs"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "4.5"
+      ],
+      "rationaleCorrect": "PFS uses ephemeral keys so later compromise doesn’t decrypt old sessions.",
+      "misconceptionTags": [
+        "wifi.security.wpa3_personal_pfs_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q031",
+      "type": "mcq",
+      "stem": "WPA3‑Enterprise adds which notable option?",
+      "options": {
+        "A": "Mandatory captive portal",
+        "B": "Optional 192‑bit security mode + stronger key management",
+        "C": "Backward-compatible WEP",
+        "D": "No RADIUS required"
+      },
+      "answer": "B",
+      "explanation": "WPA3‑Enterprise can operate in a 192-bit mode and strengthens crypto/key management. Trap: Enterprise still uses 802.1X/RADIUS.",
+      "tags": [
+        "wifi.security.wpa3_enterprise_192bit",
+        "wireless.auth.radius"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "4.5"
+      ],
+      "rationaleCorrect": "WPA3‑Enterprise can operate in a 192-bit mode and strengthens crypto/key management.",
+      "misconceptionTags": [
+        "wifi.security.wpa3_enterprise_192bit_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q032",
+      "type": "mcq",
+      "stem": "Wi‑Fi Enhanced Open primarily uses:",
+      "options": {
+        "A": "OWE",
+        "B": "SAE",
+        "C": "WPS",
+        "D": "TKIP"
+      },
+      "answer": "A",
+      "explanation": "Enhanced Open uses OWE to provide encryption without a shared password. Trap: SAE is WPA3‑Personal (password).",
+      "tags": [
+        "wifi.security.owe_enhanced_open"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "4.5"
+      ],
+      "rationaleCorrect": "Enhanced Open uses OWE to provide encryption without a shared password.",
+      "misconceptionTags": [
+        "wifi.security.owe_enhanced_open_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q033",
+      "type": "mcq",
+      "stem": "A captive portal is used to:",
+      "options": {
+        "A": "Encrypt Wi‑Fi frames with AES",
+        "B": "Redirect users to a login/terms page before allowing access",
+        "C": "Replace RADIUS in enterprises",
+        "D": "Prevent deauth attacks"
+      },
+      "answer": "B",
+      "explanation": "Captive portals gate access via a web page (common for guests). Trap: they don’t inherently encrypt Wi‑Fi traffic.",
+      "tags": [
+        "wireless.auth.open_captive_portal"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "Captive portals gate access via a web page (common for guests).",
+      "misconceptionTags": [
+        "wireless.auth.open_captive_portal_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q034",
+      "type": "mcq",
+      "stem": "Biggest weakness of open Wi‑Fi even with a captive portal is that:",
+      "options": {
+        "A": "Users cannot connect",
+        "B": "Wi‑Fi layer traffic is not encrypted",
+        "C": "It forces EAP‑TLS",
+        "D": "It blocks HTTPS"
+      },
+      "answer": "B",
+      "explanation": "Captive portals control access but don’t provide link-layer encryption. Trap: “portal = secure.”",
+      "tags": [
+        "wireless.auth.open_captive_portal",
+        "wireless.connectivity.wifi"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "Captive portals control access but don’t provide link-layer encryption.",
+      "misconceptionTags": [
+        "wireless.auth.open_captive_portal_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q035",
+      "type": "mcq",
+      "stem": "802.1X is BEST described as:",
+      "options": {
+        "A": "A Wi‑Fi encryption algorithm",
+        "B": "Port-based network access control used on wired and wireless",
+        "C": "A Bluetooth mode",
+        "D": "A GPS hardening method"
+      },
+      "answer": "B",
+      "explanation": "802.1X is access control at the port/AP level, commonly backed by RADIUS. Trap: confusing it with encryption (AES/CCMP).",
+      "tags": [
+        "wireless.auth.8021x"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "802.1X is access control at the port/AP level, commonly backed by RADIUS.",
+      "misconceptionTags": [
+        "wireless.auth.8021x_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q036",
+      "type": "mcq",
+      "stem": "In enterprise Wi‑Fi, EAP is MOST often used to:",
+      "options": {
+        "A": "Carry authentication methods inside 802.1X to RADIUS",
+        "B": "Select RF channels",
+        "C": "Encrypt RFID tags",
+        "D": "Provide geofencing"
+      },
+      "answer": "A",
+      "explanation": "EAP provides the authentication method inside 802.1X conversations (often ending at RADIUS). Trap: EAP is auth, not RF engineering.",
+      "tags": [
+        "wireless.auth.eap",
+        "wireless.auth.radius",
+        "wireless.auth.8021x"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "4.5"
+      ],
+      "rationaleCorrect": "EAP provides the authentication method inside 802.1X conversations (often ending at RADIUS).",
+      "misconceptionTags": [
+        "wireless.auth.eap_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q037",
+      "type": "matching",
+      "stem": "Match each EAP method to its hallmark trait.",
+      "left": [
+        "PEAP",
+        "EAP‑TLS",
+        "EAP‑TTLS",
+        "EAP‑FAST"
+      ],
+      "right": [
+        "Server cert + TLS tunnel around inner auth",
+        "Mutual cert auth (client + server certs)",
+        "TLS tunnel often without client cert requirement",
+        "Faster roaming reauth (reuses established secrets)"
+      ],
+      "pairs": {
+        "PEAP": "Server cert + TLS tunnel around inner auth",
+        "EAP‑TLS": "Mutual cert auth (client + server certs)",
+        "EAP‑TTLS": "TLS tunnel often without client cert requirement",
+        "EAP‑FAST": "Faster roaming reauth (reuses established secrets)"
+      },
+      "explanation": "Core differences: certificate requirements and tunneling behavior. Trap: assuming all EAP methods require client certificates (EAP‑TLS does; PEAP/TTLS often don’t).",
+      "tags": [
+        "wireless.auth.eap_peap",
+        "wireless.auth.eap_tls",
+        "wireless.auth.eap_ttls",
+        "wireless.auth.eap_fast"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 115,
+      "objectiveIds": [
+        "4.5"
+      ],
+      "rationaleCorrect": "Core differences: certificate requirements and tunneling behavior.",
+      "misconceptionTags": [
+        "wireless.auth.eap_peap_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch13.q038",
+      "type": "mcq",
+      "stem": "PEAP improves authentication security primarily by:",
+      "options": {
+        "A": "Sending passwords in cleartext",
+        "B": "Using a server cert and tunneling EAP inside TLS",
+        "C": "Removing the need for RADIUS",
+        "D": "Disabling encryption for visibility"
+      },
+      "answer": "B",
+      "explanation": "PEAP uses TLS to protect inner authentication and authenticate the server. Trap: disabling encryption is not a security plan.",
+      "tags": [
+        "wireless.auth.eap_peap"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "4.5"
+      ],
+      "rationaleCorrect": "PEAP uses TLS to protect inner authentication and authenticate the server.",
+      "misconceptionTags": [
+        "wireless.auth.eap_peap_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q039",
+      "type": "mcq",
+      "stem": "EAP‑TLS is considered strong because it:",
+      "options": {
+        "A": "Avoids certificates entirely",
+        "B": "Uses client and server certificates for mutual authentication",
+        "C": "Is identical to WPA2‑PSK",
+        "D": "Only works on open guest networks"
+      },
+      "answer": "B",
+      "explanation": "EAP‑TLS provides mutual certificate-based authentication. Trap: it’s strong but can be operationally heavy (cert lifecycle).",
+      "tags": [
+        "wireless.auth.eap_tls"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "4.5"
+      ],
+      "rationaleCorrect": "EAP‑TLS provides mutual certificate-based authentication.",
+      "misconceptionTags": [
+        "wireless.auth.eap_tls_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q040",
+      "type": "mcq",
+      "stem": "Why choose EAP‑TTLS over EAP‑TLS?",
+      "options": {
+        "A": "TTLS requires client certs on every device",
+        "B": "TTLS can avoid client certificates while still using a TLS tunnel",
+        "C": "TTLS eliminates Wi‑Fi encryption",
+        "D": "TTLS is for Bluetooth pairing"
+      },
+      "answer": "B",
+      "explanation": "EAP‑TTLS can reduce client certificate management while still tunneling authentication in TLS. Trap: client-cert-heavy is EAP‑TLS.",
+      "tags": [
+        "wireless.auth.eap_ttls"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "5.2"
+      ],
+      "rationaleCorrect": "EAP‑TTLS can reduce client certificate management while still tunneling authentication in TLS.",
+      "misconceptionTags": [
+        "wireless.auth.eap_ttls_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q041",
+      "type": "mcq",
+      "stem": "EAP‑FAST was designed largely to:",
+      "options": {
+        "A": "Encrypt GPS signals",
+        "B": "Speed roaming reauthentication",
+        "C": "Replace WPA3",
+        "D": "Prevent RFID rewriting"
+      },
+      "answer": "B",
+      "explanation": "EAP‑FAST focuses on faster (re)authentication during roaming. Trap: it’s an auth method, not a Wi‑Fi security standard.",
+      "tags": [
+        "wireless.auth.eap_fast"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "4.5"
+      ],
+      "rationaleCorrect": "EAP‑FAST focuses on faster (re)authentication during roaming.",
+      "misconceptionTags": [
+        "wireless.auth.eap_fast_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q042",
+      "type": "mcq",
+      "stem": "What does RADIUS federation between organizations mean?",
+      "options": {
+        "A": "No authentication for visitors",
+        "B": "Visitors authenticate using their home credentials via a trust relationship",
+        "C": "One shared PSK for all orgs",
+        "D": "All traffic must use a captive portal"
+      },
+      "answer": "B",
+      "explanation": "Federation enables cross-org authentication using home identities (trust chain). Trap: shared PSKs destroy accountability.",
+      "tags": [
+        "wireless.auth.radius_federation",
+        "wireless.auth.radius"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 85,
+      "objectiveIds": [
+        "4.5"
+      ],
+      "rationaleCorrect": "Federation enables cross-org authentication using home identities (trust chain).",
+      "misconceptionTags": [
+        "wireless.auth.radius_federation_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q043",
+      "type": "mcq",
+      "stem": "In a BYOD model:",
+      "options": {
+        "A": "The org owns/maintains the device",
+        "B": "The user owns the device; org control is limited compared to corporate-owned models",
+        "C": "Personal use is forbidden",
+        "D": "Security is guaranteed to be stronger"
+      },
+      "answer": "B",
+      "explanation": "BYOD increases flexibility but reduces enforcement and standardization. Trap: assuming ownership doesn’t affect control.",
+      "tags": [
+        "mobile.deployment.byod"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "4.5"
+      ],
+      "rationaleCorrect": "BYOD increases flexibility but reduces enforcement and standardization.",
+      "misconceptionTags": [
+        "mobile.deployment.byod_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q044",
+      "type": "mcq",
+      "stem": "CYOD (Choose Your Own Device) usually means:",
+      "options": {
+        "A": "User buys any device they want",
+        "B": "Org owns the device, user chooses from approved options",
+        "C": "Org-owned business-only device",
+        "D": "Unmanaged devices used only for Wi‑Fi"
+      },
+      "answer": "B",
+      "explanation": "CYOD keeps ownership/maintenance with the org while offering approved choice. Trap: confusing with BYOD.",
+      "tags": [
+        "mobile.deployment.cyod"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "4.5"
+      ],
+      "rationaleCorrect": "CYOD keeps ownership/maintenance with the org while offering approved choice.",
+      "misconceptionTags": [
+        "mobile.deployment.cyod_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q045",
+      "type": "mcq",
+      "stem": "COPE (Corporate-Owned, Personally Enabled) is:",
+      "options": {
+        "A": "User-owned with no corporate controls",
+        "B": "Org-owned/managed, but personal use is allowed",
+        "C": "Org-owned and business-only",
+        "D": "A VPN type"
+      },
+      "answer": "B",
+      "explanation": "COPE = strong management plus permitted personal use. Trap: COBO is business-only.",
+      "tags": [
+        "mobile.deployment.cope",
+        "mobile.deployment.cobo"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "1.3"
+      ],
+      "rationaleCorrect": "COPE = strong management plus permitted personal use.",
+      "misconceptionTags": [
+        "mobile.deployment.cope_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q046",
+      "type": "scenario_mcq",
+      "stem": "You allow BYOD but must keep corporate documents from mixing with personal apps. Best control?",
+      "options": {
+        "A": "Biometrics",
+        "B": "Full-device encryption",
+        "C": "Containerization (managed work container/apps)",
+        "D": "Channel planning"
+      },
+      "answer": "C",
+      "explanation": "Containerization isolates business apps/data from personal apps on the same device. Trap: FDE helps theft risk, but doesn’t enforce separation of contexts.",
+      "tags": [
+        "mobile.mdm.containerization",
+        "mobile.deployment.byod"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 85,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Containerization isolates business apps/data from personal apps on the same device.",
+      "misconceptionTags": [
+        "mobile.mdm.containerization_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q047",
+      "type": "mcq",
+      "stem": "Strongest baseline protection for data at rest on a stolen phone is:",
+      "options": {
+        "A": "Push notifications",
+        "B": "Full-device encryption (FDE) with strong unlock",
+        "C": "Captive portal",
+        "D": "SSID hiding"
+      },
+      "answer": "B",
+      "explanation": "FDE protects data at rest even if the device is offline; pair it with a strong unlock. Trap: remote wipe is great but not guaranteed to execute.",
+      "tags": [
+        "mobile.mdm.full_device_encryption",
+        "mobile.hardening.basic_controls"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "FDE protects data at rest even if the device is offline; pair it with a strong unlock.",
+      "misconceptionTags": [
+        "mobile.mdm.full_device_encryption_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q048",
+      "type": "mcq",
+      "stem": "Why might remote wipe fail to protect data after theft?",
+      "options": {
+        "A": "The device must receive the command; attackers can isolate it (airplane mode/RF shielding)",
+        "B": "Remote wipe works only over Bluetooth",
+        "C": "WPA3 blocks remote wipe",
+        "D": "Remote wipe disables encryption"
+      },
+      "answer": "A",
+      "explanation": "Remote wipe requires connectivity. A thief can isolate the device quickly, so you still need FDE and strong unlock. Trap: assuming wipe always works.",
+      "tags": [
+        "mobile.mdm.remote_wipe"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Remote wipe requires connectivity. It aligns with the intended control outcome and avoids the common trap choices in this question.",
+      "misconceptionTags": [
+        "mobile.mdm.remote_wipe_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q049",
+      "type": "multi_select",
+      "stem": "Which are common MDM/UEM capabilities? (Choose THREE.)",
+      "options": {
+        "A": "Application management (deploy/block)",
+        "B": "Content management for corporate data",
+        "C": "Geofencing/location-based policy",
+        "D": "Eliminate RF interference between APs"
+      },
+      "answers": [
+        "A",
+        "B",
+        "C"
+      ],
+      "explanation": "MDM/UEM commonly manages apps/content and can enforce location-based rules like geofencing. Trap: RF interference is a WLAN engineering issue, not MDM.",
+      "tags": [
+        "mobile.mdm.mdm_uem",
+        "mobile.mdm.app_management",
+        "mobile.mdm.content_management",
+        "mobile.mdm.geofencing"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 95,
+      "objectiveIds": [
+        "5.2"
+      ],
+      "rationaleCorrect": "MDM/UEM commonly manages apps/content and can enforce location-based rules like geofencing.",
+      "misconceptionTags": [
+        "mobile.mdm.mdm_uem_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q050",
+      "type": "scenario_mcq",
+      "stem": "Tablets must work only inside a facility; outside the boundary they must block corporate access. Best feature?",
+      "options": {
+        "A": "Geolocation",
+        "B": "Geofencing",
+        "C": "WPA2‑Personal",
+        "D": "Bluetooth pairing"
+      },
+      "answer": "B",
+      "explanation": "Geofencing applies rules based on crossing a defined boundary. Trap: geolocation tells you where the device is, but doesn’t enforce boundary policy by itself.",
+      "tags": [
+        "mobile.mdm.geofencing",
+        "mobile.mdm.geolocation"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 85,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "Geofencing applies rules based on crossing a defined boundary.",
+      "misconceptionTags": [
+        "mobile.mdm.geofencing_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q051",
+      "type": "mcq",
+      "stem": "Geolocation in mobile security is used to:",
+      "options": {
+        "A": "Determine device location using signals (GPS/Wi‑Fi/cellular/Bluetooth)",
+        "B": "Encrypt Wi‑Fi frames",
+        "C": "Replace screen locks",
+        "D": "Authenticate email senders"
+      },
+      "answer": "A",
+      "explanation": "Geolocation finds where a device is and can support location-aware controls. Trap: location is context, not authentication by itself.",
+      "tags": [
+        "mobile.mdm.geolocation"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Geolocation finds where a device is and can support location-aware controls.",
+      "misconceptionTags": [
+        "mobile.mdm.geolocation_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch13.q052",
+      "type": "mcq",
+      "stem": "Why do organizations disable photo/document geotagging via policy?",
+      "options": {
+        "A": "To increase Wi‑Fi throughput",
+        "B": "To reduce privacy/sensitive-location leakage",
+        "C": "To ensure WPA3 works",
+        "D": "To speed remote wipe"
+      },
+      "answer": "B",
+      "explanation": "Geotagging can leak sensitive locations (facilities, travel patterns, homes). Trap: it’s a privacy/data exposure issue, not performance.",
+      "tags": [
+        "mobile.privacy.geotagging"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "Geotagging can leak sensitive locations (facilities, travel patterns, homes).",
+      "misconceptionTags": [
+        "mobile.privacy.geotagging_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "type": "scenario_mcq",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "Capability-level control in MDM changes enterprise enforcement behavior immediately and consistently.",
+      "rationaleIncorrect": {
+        "A": "Unrestricted sideloading increases malware ingress paths.",
+        "C": "Removing telemetry weakens visibility and detection.",
+        "D": "Awareness helps but does not enforce technical policy at scale.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "policy_without_enforcement",
+        "sideloading_risk_underestimated"
+      ],
+      "id": "ch13_obj45_scn01",
+      "stem": "A surge of malicious mobile apps is bypassing existing controls. Security wants one enterprise capability change with immediate impact. What is best?",
+      "explanation": "Tightening MDM application control policies and enforcing compliant app sources directly reduces mobile threat exposure.",
+      "tags": [
+        "enterprise_capability",
+        "mdm",
+        "mobile_security"
+      ],
+      "objectiveIds": [
+        "4.5"
+      ],
+      "options": {
+        "A": "Allow sideloading for all users to improve flexibility",
+        "B": "Enforce managed app store allowlists and block unapproved installs via MDM",
+        "C": "Disable device telemetry collection",
+        "D": "Rely only on user awareness emails"
+      },
+      "answer": "B"
+    },
+    {
+      "type": "scenario_mcq",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "Certificate and posture-based admission control is a direct enterprise capability improvement for access enforcement.",
+      "rationaleIncorrect": {
+        "A": "Guidance without technical enforcement cannot guarantee compliance.",
+        "C": "Shared keys reduce device trust granularity and revocation control.",
+        "D": "Turning off logs weakens operational security and investigation.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "credential_only_wifi_control",
+        "admission_control_gap"
+      ],
+      "id": "ch13_obj45_scn02",
+      "stem": "Wireless users in sensitive areas should only connect with approved managed devices. Which capability update best enforces this?",
+      "explanation": "Combining NAC posture checks with certificate-based onboarding modifies enterprise access capability to enforce trusted device posture.",
+      "tags": [
+        "enterprise_capability",
+        "wireless_control",
+        "nac"
+      ],
+      "objectiveIds": [
+        "4.5"
+      ],
+      "options": {
+        "A": "Publish stronger password guidance only",
+        "B": "Require device certificates and NAC posture checks before WLAN access",
+        "C": "Share one pre-shared key across all device types",
+        "D": "Disable wireless logging to reduce storage use"
+      },
+      "answer": "B"
+    }
+  ]
+}

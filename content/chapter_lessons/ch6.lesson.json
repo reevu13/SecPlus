@@ -1,0 +1,672 @@
+{
+  "pack_id": "sec701_ch6_pack_v1",
+  "version": "1.0.0",
+  "modules": [
+    {
+      "id": "ch6-mod01",
+      "title": "Chapter 6 — Application Security",
+      "tag_ids": [
+        "sdlc",
+        "devsecops",
+        "secure_coding"
+      ],
+      "pages": [
+        {
+          "id": "ch6-p01",
+          "title": "Chapter 6 — Application Security",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "# Chapter 6 — Application Security\n\nThis lesson is meant to be *bookless*: read the mini-notes, then clear the checkpoint questions. Treat it like a game run: **understand → recall → apply**.\n\n**Win condition:** you can explain each concept in 1–2 sentences and pick the right control in a scenario."
+            },
+            {
+              "type": "explain",
+              "text": "## 1) Secure SDLC & DevSecOps (aka “shift left”)\n\nSecurity is cheapest when you catch issues **before** code ships. In practice that means:\n- define security requirements early\n- threat model during design\n- automate tests in CI/CD\n- stop bad builds with guardrails\n\n**Rule of thumb:** *Earlier fixes cost less. Later fixes break more things.*"
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "In a secure SDLC, when is it typically cheapest to fix security requirements and design flaws?",
+              "options": [
+                "After deployment, during maintenance",
+                "During requirements and design",
+                "During incident response after a breach",
+                "At decommissioning"
+              ],
+              "correct_index": 1,
+              "explanation": "Fixing security early prevents insecure architecture from being built. ‘Shift left’ = catch it in requirements/design, not after release.",
+              "objectiveIds": [
+                "2.3",
+                "2.4",
+                "4.1",
+                "4.3",
+                "4.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.3",
+            "2.4",
+            "4.1",
+            "4.3",
+            "4.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "2.3",
+        "2.4",
+        "4.1",
+        "4.3",
+        "4.7"
+      ]
+    },
+    {
+      "id": "ch6-mod02",
+      "title": "Testing toolbox: SAST, DAST, fuzzing",
+      "tag_ids": [
+        "sast",
+        "static_analysis",
+        "secure_coding",
+        "fuzzing",
+        "input_validation"
+      ],
+      "pages": [
+        {
+          "id": "ch6-p02",
+          "title": "Testing toolbox: SAST, DAST, fuzzing",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "## 2) Testing toolbox: SAST, DAST, fuzzing\n\nThink of testing like different camera angles:\n- **SAST**: reads your source code (finds patterns like hardcoded secrets, risky functions).\n- **DAST**: attacks the running app from the outside (finds runtime issues like broken auth paths).\n- **Fuzzing**: throws lots of weird inputs to crash or misbehave the app.\n\n**Trap:** client-side validation is not security. Attackers bypass browsers."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which testing method analyzes source code without running the application?",
+              "options": [
+                "DAST",
+                "SAST",
+                "Packet capture",
+                "Load testing"
+              ],
+              "correct_index": 1,
+              "explanation": "SAST = static analysis of code; DAST tests a running application.",
+              "objectiveIds": [
+                "2.3",
+                "2.4",
+                "4.1",
+                "4.3",
+                "4.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "You want to discover input handling bugs by sending lots of malformed data to a program. What technique is this?",
+              "options": [
+                "Fuzzing",
+                "Code signing",
+                "Sandboxing",
+                "Integrity monitoring"
+              ],
+              "correct_index": 0,
+              "explanation": "Fuzzing stresses parsers and input handling with unexpected data to trigger crashes or logic errors.",
+              "objectiveIds": [
+                "2.3",
+                "2.4",
+                "4.1",
+                "4.3",
+                "4.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.3",
+            "2.4",
+            "4.1",
+            "4.3",
+            "4.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "2.3",
+        "2.4",
+        "4.1",
+        "4.3",
+        "4.7"
+      ]
+    },
+    {
+      "id": "ch6-mod03",
+      "title": "Input validation & the injection family",
+      "tag_ids": [
+        "sql_injection",
+        "injection",
+        "secure_database_access",
+        "command_injection",
+        "input_validation"
+      ],
+      "pages": [
+        {
+          "id": "ch6-p03",
+          "title": "Input validation & the injection family",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "## 3) Input validation & the injection family\n\nThe #1 app-sec mindset: **all input is hostile**.\n\nIf user-controlled data gets interpreted as *code* or *commands*, you get **injection** (SQL/command/LDAP/XML, etc.).\n\n**Defense stack:** allow-lists (preferred) → server-side validation → parameterized queries → escaping/encoding where appropriate."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which control most directly prevents SQL injection in database queries?",
+              "options": [
+                "Client-side input validation only",
+                "Parameterized queries / prepared statements",
+                "Disabling TLS",
+                "Using longer URLs"
+              ],
+              "correct_index": 1,
+              "explanation": "Prepared statements separate code from data, preventing attacker input from becoming part of the SQL syntax.",
+              "objectiveIds": [
+                "2.3",
+                "2.4",
+                "4.1",
+                "4.3",
+                "4.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "An attacker injects OS commands into a web form field that the server passes into a shell. This is best described as:",
+              "options": [
+                "Command injection",
+                "Cross-site request forgery",
+                "Clickjacking",
+                "Session replay"
+              ],
+              "correct_index": 0,
+              "explanation": "Command injection happens when untrusted input is executed by the operating system shell/interpreter.",
+              "objectiveIds": [
+                "2.3",
+                "2.4",
+                "4.1",
+                "4.3",
+                "4.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.3",
+            "2.4",
+            "4.1",
+            "4.3",
+            "4.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "2.3",
+        "2.4",
+        "4.1",
+        "4.3",
+        "4.7"
+      ]
+    },
+    {
+      "id": "ch6-mod04",
+      "title": "Web attacks: XSS vs CSRF vs SSRF (don’t mix them)",
+      "tag_ids": [
+        "xss",
+        "output_encoding",
+        "csrf",
+        "cookies",
+        "cookie_samesite",
+        "ssrf",
+        "api_security"
+      ],
+      "pages": [
+        {
+          "id": "ch6-p04",
+          "title": "Web attacks: XSS vs CSRF vs SSRF (don’t mix them)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "## 4) Web attacks: XSS vs CSRF vs SSRF (don’t mix them)\n\nThese three are exam classics:\n- **XSS**: attacker’s script runs in *victim’s browser* (steals tokens, modifies page).\n- **CSRF**: victim’s browser is tricked into sending a request *they didn’t intend* (uses existing login cookies).\n- **SSRF**: server makes requests *on behalf of attacker* (often to internal services/metadata).\n\n**Speed rules:**\n- “script runs in browser” → XSS\n- “browser sends unwanted request” → CSRF\n- “server fetches internal URL” → SSRF"
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A malicious script runs in the victim’s browser because user input was not properly output-encoded. What attack is this?",
+              "options": [
+                "XSS",
+                "CSRF",
+                "SSRF",
+                "DNS poisoning"
+              ],
+              "correct_index": 0,
+              "explanation": "That’s cross-site scripting: the attacker’s code executes in the victim’s browser context.",
+              "objectiveIds": [
+                "2.3",
+                "2.4",
+                "4.1",
+                "4.3",
+                "4.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "A victim is logged into a bank. Visiting an attacker site causes the victim’s browser to submit a money-transfer request using existing cookies. What attack is this?",
+              "options": [
+                "XSS",
+                "CSRF",
+                "SSRF",
+                "Clickjacking"
+              ],
+              "correct_index": 1,
+              "explanation": "CSRF abuses the victim’s authenticated session; defenses include CSRF tokens and SameSite cookies.",
+              "objectiveIds": [
+                "2.3",
+                "2.4",
+                "4.1",
+                "4.3",
+                "4.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "A web app fetches a URL provided by the user; an attacker uses it to reach internal cloud metadata endpoints. What is this?",
+              "options": [
+                "CSRF",
+                "SSRF",
+                "XSS",
+                "ARP spoofing"
+              ],
+              "correct_index": 1,
+              "explanation": "SSRF is when the server is tricked into making network requests to attacker-chosen targets, often internal-only.",
+              "objectiveIds": [
+                "2.3",
+                "2.4",
+                "4.1",
+                "4.3",
+                "4.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.3",
+            "2.4",
+            "4.1",
+            "4.3",
+            "4.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "2.3",
+        "2.4",
+        "4.1",
+        "4.3",
+        "4.7"
+      ]
+    },
+    {
+      "id": "ch6-mod05",
+      "title": "Sessions & cookies (how logins get stolen)",
+      "tag_ids": [
+        "cookie_httponly",
+        "cookies",
+        "xss",
+        "cookie_samesite",
+        "csrf"
+      ],
+      "pages": [
+        {
+          "id": "ch6-p05",
+          "title": "Sessions & cookies (how logins get stolen)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "## 5) Sessions & cookies (how logins get stolen)\n\nSessions are often represented by cookies/tokens. Defenders harden them with:\n- **HttpOnly** cookie: JS can’t read it (helps vs token theft via XSS)\n- **Secure** cookie: only sent over HTTPS\n- **SameSite** cookie: reduces CSRF risk\n\n**Trap:** None of these fixes a broken login system by itself, but they reduce common attack paths."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which cookie attribute most directly helps prevent JavaScript from reading the session cookie?",
+              "options": [
+                "Secure",
+                "HttpOnly",
+                "SameSite",
+                "Path"
+              ],
+              "correct_index": 1,
+              "explanation": "HttpOnly blocks access from client-side JavaScript, reducing cookie theft via XSS.",
+              "objectiveIds": [
+                "2.3",
+                "2.4",
+                "4.1",
+                "4.3",
+                "4.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which cookie attribute helps reduce CSRF by limiting cross-site cookie sending?",
+              "options": [
+                "HttpOnly",
+                "Secure",
+                "SameSite",
+                "Domain"
+              ],
+              "correct_index": 2,
+              "explanation": "SameSite reduces cross-site request cookie inclusion, which is the core CSRF trick.",
+              "objectiveIds": [
+                "2.3",
+                "2.4",
+                "4.1",
+                "4.3",
+                "4.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.3",
+            "2.4",
+            "4.1",
+            "4.3",
+            "4.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "2.3",
+        "2.4",
+        "4.1",
+        "4.3",
+        "4.7"
+      ]
+    },
+    {
+      "id": "ch6-mod06",
+      "title": "Authorization bugs: IDOR & path traversal",
+      "tag_ids": [
+        "idor",
+        "authorization",
+        "path_traversal",
+        "input_validation"
+      ],
+      "pages": [
+        {
+          "id": "ch6-p06",
+          "title": "Authorization bugs: IDOR & path traversal",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "## 6) Authorization bugs: IDOR & path traversal\n\nTwo very exam-friendly mistakes:\n- **IDOR** (Insecure Direct Object Reference): user changes an ID in a URL/body and accesses someone else’s data.\n- **Path traversal**: `../../` tricks your app into reading files outside the intended directory.\n\n**Rule:** *AuthZ must be enforced on the server for every object, every time.*"
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A user changes `invoiceId=1001` to `invoiceId=1002` and can view another customer’s invoice. What vulnerability is this?",
+              "options": [
+                "IDOR",
+                "Buffer overflow",
+                "Clickjacking",
+                "Session replay"
+              ],
+              "correct_index": 0,
+              "explanation": "IDOR is an authorization failure: the app trusts user-supplied object identifiers without verifying access rights.",
+              "objectiveIds": [
+                "2.3",
+                "2.4",
+                "4.1",
+                "4.3",
+                "4.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "An attacker requests `/download?file=../../../../etc/passwd` to read system files. What attack is this?",
+              "options": [
+                "SQL injection",
+                "Path traversal",
+                "CSRF",
+                "SSRF"
+              ],
+              "correct_index": 1,
+              "explanation": "Path traversal escapes the intended directory using relative path sequences like ../.",
+              "objectiveIds": [
+                "2.3",
+                "2.4",
+                "4.1",
+                "4.3",
+                "4.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.3",
+            "2.4",
+            "4.1",
+            "4.3",
+            "4.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "2.3",
+        "2.4",
+        "4.1",
+        "4.3",
+        "4.7"
+      ]
+    },
+    {
+      "id": "ch6-mod07",
+      "title": "Memory & concurrency bugs (the low-level pain)",
+      "tag_ids": [
+        "buffer_overflow",
+        "race_condition",
+        "toctou"
+      ],
+      "pages": [
+        {
+          "id": "ch6-p07",
+          "title": "Memory & concurrency bugs (the low-level pain)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "## 7) Memory & concurrency bugs (the low-level pain)\n\nThese show up more in C/C++ style software, but Security+ wants the concepts:\n- **Buffer overflow**: writing past a buffer’s bounds (can crash or enable code execution).\n- **Race condition / TOCTOU**: timing issue—state changes between check and use.\n\n**Rule:** *Bounds checking and safe APIs beat heroics.*"
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Writing more data than a fixed-size buffer can hold is an example of:",
+              "options": [
+                "Buffer overflow",
+                "CSRF",
+                "Session hijacking",
+                "Clickjacking"
+              ],
+              "correct_index": 0,
+              "explanation": "A buffer overflow occurs when data exceeds buffer boundaries, potentially overwriting memory.",
+              "objectiveIds": [
+                "2.3",
+                "2.4",
+                "4.1",
+                "4.3",
+                "4.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "A program checks file permissions, then later opens the file; an attacker swaps the file between those steps. This is best described as:",
+              "options": [
+                "SQL injection",
+                "TOCTOU race condition",
+                "XSS",
+                "DNS spoofing"
+              ],
+              "correct_index": 1,
+              "explanation": "TOCTOU (time-of-check to time-of-use) is a race where assumptions change between validation and action.",
+              "objectiveIds": [
+                "2.3",
+                "2.4",
+                "4.1",
+                "4.3",
+                "4.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.3",
+            "2.4",
+            "4.1",
+            "4.3",
+            "4.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "2.3",
+        "2.4",
+        "4.1",
+        "4.3",
+        "4.7"
+      ]
+    },
+    {
+      "id": "ch6-mod08",
+      "title": "Supply chain & deployment defenses",
+      "tag_ids": [
+        "code_signing",
+        "integrity",
+        "software_composition_analysis",
+        "package_monitoring",
+        "supply_chain",
+        "sandboxing",
+        "least_privilege",
+        "waf",
+        "web_security_controls"
+      ],
+      "pages": [
+        {
+          "id": "ch6-p08",
+          "title": "Supply chain & deployment defenses",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "## 8) Supply chain & deployment defenses\n\nEven perfect code can be ruined by compromised dependencies or updates.\nKey defenses:\n- **Code signing**: proves updates/releases come from the real publisher.\n- **Software composition analysis (SCA)**: finds vulnerable third‑party libraries.\n- **Sandboxing**: limits blast radius when something goes wrong.\n- **WAF**: blocks common web attacks at the edge (not a cure-all).\n\n**Rule:** *Trust, but verify—and limit the damage when trust fails.*"
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "What security control helps verify that a software update truly came from the vendor and was not modified?",
+              "options": [
+                "Code signing",
+                "Phishing simulation",
+                "Port knocking",
+                "Screen locking"
+              ],
+              "correct_index": 0,
+              "explanation": "Code signing uses digital signatures to validate publisher identity and integrity of code/updates.",
+              "objectiveIds": [
+                "2.3",
+                "2.4",
+                "4.1",
+                "4.3",
+                "4.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which approach focuses on detecting vulnerable third-party libraries used by your application?",
+              "options": [
+                "DAST",
+                "Software composition analysis (SCA)",
+                "Full disk encryption",
+                "Bluejacking"
+              ],
+              "correct_index": 1,
+              "explanation": "SCA inventories dependencies and flags known vulnerable versions (CVE-driven).",
+              "objectiveIds": [
+                "2.3",
+                "2.4",
+                "4.1",
+                "4.3",
+                "4.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "What is the primary goal of sandboxing an application component?",
+              "options": [
+                "Increase code readability",
+                "Limit what the component can access if compromised",
+                "Guarantee no vulnerabilities exist",
+                "Replace authentication"
+              ],
+              "correct_index": 1,
+              "explanation": "Sandboxing restricts permissions/resources to reduce blast radius if a process is exploited.",
+              "objectiveIds": [
+                "2.3",
+                "2.4",
+                "4.1",
+                "4.3",
+                "4.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "A WAF is most accurately described as:",
+              "options": [
+                "A control that blocks common web attack patterns at the edge",
+                "A replacement for secure coding",
+                "A tool to sign software updates",
+                "A password manager"
+              ],
+              "correct_index": 0,
+              "explanation": "A Web Application Firewall filters/blocks suspicious HTTP traffic; it helps, but doesn’t replace fixing the app.",
+              "objectiveIds": [
+                "2.3",
+                "2.4",
+                "4.1",
+                "4.3",
+                "4.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.3",
+            "2.4",
+            "4.1",
+            "4.3",
+            "4.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "2.3",
+        "2.4",
+        "4.1",
+        "4.3",
+        "4.7"
+      ]
+    }
+  ],
+  "objectiveIds": [
+    "2.3",
+    "2.4",
+    "4.1",
+    "4.3",
+    "4.7"
+  ]
+}

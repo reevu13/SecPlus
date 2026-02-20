@@ -1,0 +1,15 @@
+{
+  "exam_code": "SY0-701",
+  "version": "1.0.0",
+  "total_questions": 90,
+  "duration_minutes": 90,
+  "min_scenario_questions": 15,
+  "min_interactive_questions": 10,
+  "domain_weights": [
+    { "domain_id": "1.0", "weight": 0.12 },
+    { "domain_id": "2.0", "weight": 0.22 },
+    { "domain_id": "3.0", "weight": 0.18 },
+    { "domain_id": "4.0", "weight": 0.28 },
+    { "domain_id": "5.0", "weight": 0.20 }
+  ]
+}

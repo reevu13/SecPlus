@@ -1,0 +1,2823 @@
+{
+  "schema_version": "1.0.0",
+  "pack_id": "ch17",
+  "exam": {
+    "vendor": "CompTIA",
+    "name": "Security+",
+    "code": "SY0-701",
+    "max_exam_minutes": 90
+  },
+  "chapter": {
+    "number": 17,
+    "title": "Risk Management and Privacy",
+    "page_range_in_user_pdf": "815-855"
+  },
+  "design_intent": {
+    "mode": [
+      "campaign",
+      "roguelike",
+      "drill"
+    ],
+    "pvp_optional": true,
+    "default_pvp_enabled": false,
+    "player_goal": "Build a risk-driven security program: identify risks, assess and analyze them, choose treatments, track them, and avoid privacy landmines."
+  },
+  "progression": {
+    "xp_rules": {
+      "base_xp_per_correct": 10,
+      "mistake_penalty_xp": 2,
+      "streak_bonus_per_5": 5,
+      "time_bonus_threshold_seconds": 60,
+      "time_bonus_xp": 3
+    },
+    "mastery_model": {
+      "scale": "0-5",
+      "update": "tag_mastery_decay_resistant",
+      "tags_drive_mastery": true
+    },
+    "unlock_rules": [
+      {
+        "unlock": "boss",
+        "when": "complete_all_missions"
+      },
+      {
+        "unlock": "roguelike",
+        "when": "defeat_boss_once"
+      },
+      {
+        "unlock": "pvp",
+        "when": "reach_mastery_3_on_7_tags"
+      }
+    ]
+  },
+  "tags": {
+    "concepts": [
+      "bia.definition",
+      "bia.metrics.mtbf",
+      "bia.metrics.mttr",
+      "bia.metrics.rpo",
+      "bia.metrics.rto",
+      "bia.redundancy",
+      "bia.single_point_of_failure",
+      "classification.business.confidential",
+      "classification.business.critical",
+      "classification.business.private",
+      "classification.business.public",
+      "classification.business.restricted",
+      "classification.business.sensitive",
+      "classification.govt.confidential",
+      "classification.govt.secret",
+      "classification.govt.top_secret",
+      "classification.govt.unclassified",
+      "data_roles.data_controller",
+      "data_roles.data_custodian",
+      "data_roles.data_owner",
+      "data_roles.data_processor",
+      "data_roles.data_steward",
+      "data_roles.data_subject",
+      "drp.activation_trigger",
+      "drp.definition",
+      "drp.disaster_types",
+      "drp.site_risk_assessment",
+      "pet.anonymization",
+      "pet.data_masking",
+      "pet.deidentification",
+      "pet.hashing",
+      "pet.obfuscation",
+      "pet.overview",
+      "pet.pseudonymization",
+      "pet.rainbow_table_attack",
+      "pet.tokenization",
+      "privacy.breach_notification",
+      "privacy.breach_notification.jurisdiction_variance",
+      "privacy.breach_notification.legal_counsel",
+      "privacy.data_inventory",
+      "privacy.data_readability.human",
+      "privacy.data_readability.nonhuman",
+      "privacy.data_types.financial",
+      "privacy.data_types.intellectual_property",
+      "privacy.data_types.legal_info",
+      "privacy.data_types.phi",
+      "privacy.data_types.pii",
+      "privacy.data_types.regulated_info",
+      "privacy.dpo",
+      "privacy.jurisdiction.global",
+      "privacy.jurisdiction.local",
+      "privacy.jurisdiction.national",
+      "privacy.jurisdiction.regional",
+      "privacy.legal_implications",
+      "privacy.lifecycle.data_minimization",
+      "privacy.lifecycle.overview",
+      "privacy.lifecycle.purpose_limitation",
+      "privacy.lifecycle.retention",
+      "privacy.lifecycle.secure_destruction",
+      "privacy.notice",
+      "privacy.overview",
+      "privacy.right_to_be_forgotten",
+      "privacy.right_to_be_forgotten.conditions",
+      "privacy.right_to_be_forgotten.implementation_challenges",
+      "privacy.terms_statements",
+      "risk.analysis.overview",
+      "risk.analysis.qualitative",
+      "risk.analysis.quantitative",
+      "risk.assessment.ad_hoc",
+      "risk.assessment.continuous",
+      "risk.assessment.impact_magnitude",
+      "risk.assessment.likelihood",
+      "risk.assessment.one_time",
+      "risk.assessment.probability",
+      "risk.assessment.recurring",
+      "risk.assessment.severity_formula",
+      "risk.basics.cia_impact",
+      "risk.basics.risk_definition",
+      "risk.basics.risk_intersection",
+      "risk.basics.threat",
+      "risk.basics.vulnerability",
+      "risk.erm.overview",
+      "risk.identification.external",
+      "risk.identification.internal",
+      "risk.identification.ip_theft",
+      "risk.identification.legacy_systems",
+      "risk.identification.multiparty",
+      "risk.identification.process",
+      "risk.identification.software_licensing",
+      "risk.management.acceptance",
+      "risk.management.acceptance.exception",
+      "risk.management.acceptance.exemption",
+      "risk.management.avoidance",
+      "risk.management.mitigation",
+      "risk.management.overview",
+      "risk.management.tradeoffs",
+      "risk.management.transference",
+      "risk.matrix.heat_map",
+      "risk.quant.ale",
+      "risk.quant.aro",
+      "risk.quant.av",
+      "risk.quant.ef",
+      "risk.quant.example.dos_email",
+      "risk.quant.probability_vs_aro",
+      "risk.quant.sle",
+      "risk.register.definition",
+      "risk.register.elements.kri",
+      "risk.register.elements.risk_owner",
+      "risk.register.elements.risk_threshold",
+      "risk.reporting.ad_hoc",
+      "risk.reporting.audience_tailoring",
+      "risk.reporting.dashboard",
+      "risk.reporting.event_reports",
+      "risk.reporting.overview",
+      "risk.reporting.regular_updates",
+      "risk.reporting.trend_analysis",
+      "risk.tracking.inherent",
+      "risk.tracking.kri",
+      "risk.tracking.residual",
+      "risk.tracking.risk_appetite",
+      "risk.tracking.risk_owner",
+      "risk.tracking.risk_threshold",
+      "risk.tracking.risk_tolerance",
+      "supply_chain.cloud_providers",
+      "supply_chain.hardware_authenticity",
+      "supply_chain.vendor_due_diligence"
+    ],
+    "difficulty_scale": {
+      "1": "Recall",
+      "2": "Basic application",
+      "3": "Scenario reasoning",
+      "4": "Trap-heavy / multi-concept",
+      "5": "Boss-level synthesis"
+    }
+  },
+  "trap_list": [
+    {
+      "id": "ch17.trap.threat_vs_vulnerability",
+      "name": "Threat vs Vulnerability",
+      "misconception": "A threat and a vulnerability are the same thing.",
+      "fix": "Threat = something that could cause harm; Vulnerability = a weakness. Risk is the intersection of the two.",
+      "drill_question_ids": [
+        "ch17.q001",
+        "ch17.q002",
+        "ch17.q003",
+        "ch17.q004"
+      ]
+    },
+    {
+      "id": "ch17.trap.likelihood_vs_impact",
+      "name": "Likelihood vs Impact",
+      "misconception": "High likelihood automatically means high severity.",
+      "fix": "Severity combines likelihood (probability) AND impact (magnitude). A frequent but low-impact event may be lower priority than a rare catastrophe.",
+      "drill_question_ids": [
+        "ch17.q011",
+        "ch17.q022"
+      ]
+    },
+    {
+      "id": "ch17.trap.aro_vs_probability",
+      "name": "ARO vs Probability",
+      "misconception": "ARO is a percentage chance like probability.",
+      "fix": "ARO is the expected frequency per year (e.g., 0.5 times/year). Probability/likelihood can be expressed in different ways, but ARO is a yearly rate for ALE math.",
+      "drill_question_ids": [
+        "ch17.q019",
+        "ch17.q020"
+      ]
+    },
+    {
+      "id": "ch17.trap.ef_vs_likelihood",
+      "name": "Exposure Factor Isn’t Likelihood",
+      "misconception": "Exposure factor is how likely the event is to occur.",
+      "fix": "EF is how much of the asset is lost when the event happens (a damage percentage). Likelihood/probability/ARO are about how often it happens.",
+      "drill_question_ids": [
+        "ch17.q018",
+        "ch17.q021"
+      ]
+    },
+    {
+      "id": "ch17.trap.sle_vs_ale",
+      "name": "SLE vs ALE",
+      "misconception": "SLE and ALE are interchangeable.",
+      "fix": "SLE = loss per event; ALE = expected loss per year (SLE×ARO).",
+      "drill_question_ids": [
+        "ch17.q018",
+        "ch17.q019"
+      ]
+    },
+    {
+      "id": "ch17.trap.acceptance_vs_neglect",
+      "name": "Risk Acceptance vs Neglect",
+      "misconception": "Risk acceptance means doing nothing because you’re busy.",
+      "fix": "Acceptance is a deliberate, analyzed decision. Neglect is unmanaged risk. Document acceptance, including exceptions/exemptions when applicable.",
+      "drill_question_ids": [
+        "ch17.q027",
+        "ch17.q028",
+        "ch17.q029"
+      ]
+    },
+    {
+      "id": "ch17.trap.appetite_tolerance_threshold",
+      "name": "Appetite vs Tolerance vs Threshold",
+      "misconception": "Appetite, tolerance, and threshold are synonyms.",
+      "fix": "Appetite = broad willingness to accept risk; Tolerance = capacity to withstand; Threshold = boundary/trigger that demands action.",
+      "drill_question_ids": [
+        "ch17.q032",
+        "ch17.q040"
+      ]
+    },
+    {
+      "id": "ch17.trap.rto_vs_rpo",
+      "name": "RTO vs RPO (and MTTR)",
+      "misconception": "RTO and RPO both mean 'how fast to recover'.",
+      "fix": "RTO = max downtime; RPO = max data loss (time). MTTR is average repair time and must typically be <= RTO.",
+      "drill_question_ids": [
+        "ch17.q045",
+        "ch17.q046",
+        "ch17.q047"
+      ]
+    },
+    {
+      "id": "ch17.trap.controller_vs_processor",
+      "name": "Controller vs Processor vs Custodian",
+      "misconception": "The party holding the data is always the controller.",
+      "fix": "Controller decides purpose/means; Processor acts for the controller; Custodian safeguards data without controller authority.",
+      "drill_question_ids": [
+        "ch17.q054",
+        "ch17.q055",
+        "ch17.q063"
+      ]
+    },
+    {
+      "id": "ch17.trap.hashing_vs_anonymization",
+      "name": "Hashing Isn’t Magic Anonymization",
+      "misconception": "Hashed data can’t be reversed, so it’s always anonymous.",
+      "fix": "Hashes can be matched via rainbow tables or brute-force when inputs are guessable. Use salting, tokenization, masking, or stronger privacy techniques as appropriate.",
+      "drill_question_ids": [
+        "ch17.q060",
+        "ch17.q065"
+      ]
+    }
+  ],
+  "missions": [
+    {
+      "id": "ch17.m1",
+      "name": "Risk Basics & Identification",
+      "goal": "Separate threats from vulnerabilities, then find the real risks hiding in systems, vendors, and legacy tech.",
+      "mechanics": {
+        "minigame": "risk_radar",
+        "twist": "Threat-only answers are decoys."
+      },
+      "question_ids": [
+        "ch17.q001",
+        "ch17.q002",
+        "ch17.q003",
+        "ch17.q004",
+        "ch17.q005",
+        "ch17.q006",
+        "ch17.q007",
+        "ch17.q008",
+        "ch17.q009",
+        "ch17.q010"
+      ],
+      "rewards": {
+        "xp": 420,
+        "loot": [
+          "Card: 'Risk Intersection'",
+          "Sticker: 'Spot the Weakness'"
+        ]
+      }
+    },
+    {
+      "id": "ch17.m2",
+      "name": "Assess & Analyze",
+      "goal": "Turn messy uncertainty into priorities using assessment types and qualitative vs quantitative analysis.",
+      "mechanics": {
+        "minigame": "matrix_maker",
+        "twist": "Math traps: EF vs ARO vs probability."
+      },
+      "question_ids": [
+        "ch17.q011",
+        "ch17.q012",
+        "ch17.q013",
+        "ch17.q014",
+        "ch17.q015",
+        "ch17.q016",
+        "ch17.q017",
+        "ch17.q018",
+        "ch17.q019",
+        "ch17.q020",
+        "ch17.q021",
+        "ch17.q022"
+      ],
+      "rewards": {
+        "xp": 520,
+        "loot": [
+          "Card: 'SLE/ALE Slide Rule'",
+          "Relic: 'Heat Map Marker'"
+        ]
+      }
+    },
+    {
+      "id": "ch17.m3",
+      "name": "Treat the Risk",
+      "goal": "Pick the right strategy—mitigate, avoid, transfer, accept—and track what’s left.",
+      "mechanics": {
+        "minigame": "strategy_picker",
+        "twist": "Acceptance must be deliberate, not neglect."
+      },
+      "question_ids": [
+        "ch17.q023",
+        "ch17.q024",
+        "ch17.q025",
+        "ch17.q026",
+        "ch17.q027",
+        "ch17.q028",
+        "ch17.q029",
+        "ch17.q030",
+        "ch17.q031",
+        "ch17.q032",
+        "ch17.q061"
+      ],
+      "rewards": {
+        "xp": 480,
+        "loot": [
+          "Card: 'Mitigate'",
+          "Card: 'Transfer'"
+        ]
+      }
+    },
+    {
+      "id": "ch17.m4",
+      "name": "Register & Report",
+      "goal": "Build a usable risk register and deliver reporting that executives can actually read.",
+      "mechanics": {
+        "minigame": "register_builder",
+        "twist": "Audience mismatch penalizes score."
+      },
+      "question_ids": [
+        "ch17.q033",
+        "ch17.q034",
+        "ch17.q035",
+        "ch17.q036",
+        "ch17.q037",
+        "ch17.q038",
+        "ch17.q039",
+        "ch17.q040"
+      ],
+      "rewards": {
+        "xp": 360,
+        "loot": [
+          "Card: 'Risk Register'",
+          "Sticker: 'Dashboard Whisperer'"
+        ]
+      }
+    },
+    {
+      "id": "ch17.m5",
+      "name": "DRP & BIA Essentials",
+      "goal": "Plan recovery like you mean it: know what breaks business, what must come back first, and what metrics rule the timeline.",
+      "mechanics": {
+        "minigame": "recovery_race",
+        "twist": "RTO/RPO swaps are instant faceplants."
+      },
+      "question_ids": [
+        "ch17.q041",
+        "ch17.q042",
+        "ch17.q043",
+        "ch17.q044",
+        "ch17.q045",
+        "ch17.q046",
+        "ch17.q047",
+        "ch17.q048"
+      ],
+      "rewards": {
+        "xp": 420,
+        "loot": [
+          "Card: 'RTO/RPO Compass'",
+          "Relic: 'SPOF Detector'"
+        ]
+      }
+    },
+    {
+      "id": "ch17.m6",
+      "name": "Privacy & Data Roles",
+      "goal": "Inventory data, classify it, and know who is responsible for what under privacy frameworks.",
+      "mechanics": {
+        "minigame": "data_map",
+        "twist": "Controller vs processor mix-ups trigger traps."
+      },
+      "question_ids": [
+        "ch17.q049",
+        "ch17.q050",
+        "ch17.q051",
+        "ch17.q052",
+        "ch17.q053",
+        "ch17.q054",
+        "ch17.q055",
+        "ch17.q056",
+        "ch17.q063"
+      ],
+      "rewards": {
+        "xp": 480,
+        "loot": [
+          "Card: 'Data Inventory'",
+          "Card: 'Controller vs Processor'"
+        ]
+      }
+    },
+    {
+      "id": "ch17.m7",
+      "name": "Lifecycle, PETs & Notifications",
+      "goal": "Minimize data, limit purpose, retain correctly, destroy safely, and survive breach notifications across jurisdictions.",
+      "mechanics": {
+        "minigame": "privacy_pipeline",
+        "twist": "Hashing isn’t anonymization—rainbow tables lurk."
+      },
+      "question_ids": [
+        "ch17.q057",
+        "ch17.q058",
+        "ch17.q059",
+        "ch17.q060",
+        "ch17.q062",
+        "ch17.q064",
+        "ch17.q065"
+      ],
+      "rewards": {
+        "xp": 420,
+        "loot": [
+          "Card: 'Minimize & Destroy'",
+          "Trophy: 'Privacy Practicalist'"
+        ]
+      }
+    }
+  ],
+  "boss": {
+    "id": "ch17.boss",
+    "name": "Boss: The Risk Register from Hell",
+    "premise": "A leadership team wants numbers, a regulator wants notifications, and IT wants to keep the legacy system. Build a defensible risk posture: quantify losses, pick treatments, write the register, and avoid privacy violations.",
+    "mechanics": {
+      "phase_1": "Identify the real risk (threat+vulnerability) and categorize internal/external/multiparty sources.",
+      "phase_2": "Run qualitative + quantitative analysis (SLE/ALE), then choose a treatment strategy aligned to appetite/tolerance/threshold.",
+      "phase_3": "Finalize risk register fields (owner/KRIs/threshold) and handle privacy roles and breach notification decisions with counsel."
+    },
+    "question_ids": [
+      "ch17.q004",
+      "ch17.q018",
+      "ch17.q019",
+      "ch17.q026",
+      "ch17.q030",
+      "ch17.q032",
+      "ch17.q034",
+      "ch17.q045",
+      "ch17.q053",
+      "ch17.q064"
+    ],
+    "rewards": {
+      "xp": 780,
+      "loot": [
+        "Trophy: 'Risk Wrangler'",
+        "Relic: 'Privacy Shield'"
+      ]
+    }
+  },
+  "roguelike": {
+    "runset_id": "ch17.runset",
+    "run_minutes_target": 19,
+    "structure": {
+      "acts": 3,
+      "encounters_per_act": 4,
+      "rest_sites_per_act": 1,
+      "boss_per_run": "ch17.boss"
+    },
+    "cards": {
+      "threat_cards": [
+        {
+          "id": "ch17.t1",
+          "name": "Unpatchable Legacy Server",
+          "tags": [
+            "risk.identification.legacy_systems",
+            "risk.management.mitigation"
+          ]
+        },
+        {
+          "id": "ch17.t2",
+          "name": "Vendor Data Spill",
+          "tags": [
+            "privacy.breach_notification",
+            "supply_chain.vendor_due_diligence"
+          ]
+        },
+        {
+          "id": "ch17.t3",
+          "name": "Hardware Supply Chain Tamper",
+          "tags": [
+            "supply_chain.hardware_authenticity",
+            "risk.identification.external"
+          ]
+        },
+        {
+          "id": "ch17.t4",
+          "name": "License Audit Surprise",
+          "tags": [
+            "risk.identification.software_licensing",
+            "risk.reporting.ad_hoc"
+          ]
+        },
+        {
+          "id": "ch17.t5",
+          "name": "Hash Lookup Leak",
+          "tags": [
+            "pet.hashing",
+            "pet.rainbow_table_attack"
+          ]
+        }
+      ],
+      "constraint_cards": [
+        {
+          "id": "ch17.c1",
+          "name": "Executive Attention Span",
+          "effect": "Dashboards and heat maps are weighted; verbose register-only thinking is penalized."
+        },
+        {
+          "id": "ch17.c2",
+          "name": "Budget Ceiling",
+          "effect": "Transference and acceptance questions appear more often; justify decisions with appetite/tolerance/threshold."
+        },
+        {
+          "id": "ch17.c3",
+          "name": "Multi-Jurisdiction Chaos",
+          "effect": "Privacy and notification obligations appear more often; consult-counsel cues are rewarded."
+        }
+      ],
+      "control_cards": [
+        {
+          "id": "ch17.k1",
+          "name": "Heat Map Marker",
+          "tags": [
+            "risk.matrix.heat_map",
+            "risk.analysis.qualitative"
+          ]
+        },
+        {
+          "id": "ch17.k2",
+          "name": "SLE/ALE Slide Rule",
+          "tags": [
+            "risk.quant.sle",
+            "risk.quant.ale",
+            "risk.analysis.quantitative"
+          ]
+        },
+        {
+          "id": "ch17.k3",
+          "name": "Risk Register",
+          "tags": [
+            "risk.register.definition",
+            "risk.register.elements.kri"
+          ]
+        },
+        {
+          "id": "ch17.k4",
+          "name": "BIA Compass",
+          "tags": [
+            "bia.metrics.rto",
+            "bia.metrics.rpo",
+            "bia.single_point_of_failure"
+          ]
+        },
+        {
+          "id": "ch17.k5",
+          "name": "Data Inventory Map",
+          "tags": [
+            "privacy.data_inventory",
+            "data_roles.data_controller",
+            "classification.business.sensitive"
+          ]
+        }
+      ]
+    },
+    "question_pool_ids": "ch17.pool.core"
+  },
+  "pvp": {
+    "enabled": false,
+    "modes": [
+      {
+        "id": "ch17.pvp1",
+        "name": "Risk Duel",
+        "description": "Rapid-fire: identify the best risk treatment or privacy role for a scenario.",
+        "rules": {
+          "rounds": 8,
+          "time_per_round_seconds": 25,
+          "scoring": "Correct + speed bonus; wrong triggers a trap card."
+        }
+      }
+    ],
+    "fairness": {
+      "matchmaking": "Tag-mastery weighted matchmaking (avoid stomps).",
+      "anti_cheat": "Server-side timing and randomized option order; replay detection for identical patterns."
+    }
+  },
+  "question_bank": [
+    {
+      "id": "ch17.q001",
+      "type": "mcq",
+      "stem": "In risk management, what creates a risk?",
+      "options": {
+        "A": "Any threat, even without vulnerabilities",
+        "B": "Any vulnerability, even without threats",
+        "C": "A threat exploiting a vulnerability",
+        "D": "Any event that causes impact"
+      },
+      "answer": "C",
+      "explanation": "Why correct: Risk exists where a relevant threat meets a vulnerability that the threat could exploit. Trap to avoid: Threats without a matching weakness, or weaknesses with no realistic threat, aren’t risks yet.",
+      "tags": [
+        "risk.basics.risk_intersection",
+        "risk.basics.risk_definition"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 35,
+      "objectiveIds": [
+        "5.2"
+      ],
+      "rationaleCorrect": "Why correct: Risk exists where a relevant threat meets a vulnerability that the threat could exploit.",
+      "misconceptionTags": [
+        "risk.basics.risk_intersection_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q002",
+      "type": "mcq",
+      "stem": "Which term best describes a possible event that could adversely impact confidentiality, integrity, or availability?",
+      "options": {
+        "A": "Threat",
+        "B": "Vulnerability",
+        "C": "Control",
+        "D": "Exposure factor"
+      },
+      "answer": "A",
+      "explanation": "Why correct: A threat is a possible event that can cause harm to CIA. Trap to avoid: Vulnerabilities are weaknesses; don’t swap the nouns.",
+      "tags": [
+        "risk.basics.threat",
+        "risk.basics.cia_impact"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 25,
+      "objectiveIds": [
+        "2.1"
+      ],
+      "rationaleCorrect": "Why correct: A threat is a possible event that can cause harm to CIA.",
+      "misconceptionTags": [
+        "risk.basics.threat_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q003",
+      "type": "mcq",
+      "stem": "A missing security patch on a server is best described as a:",
+      "options": {
+        "A": "Threat",
+        "B": "Vulnerability",
+        "C": "Residual risk",
+        "D": "Risk appetite"
+      },
+      "answer": "B",
+      "explanation": "Why correct: A missing patch is a weakness that can be exploited. Trap to avoid: The attacker/tool is the threat; the missing patch is the weakness.",
+      "tags": [
+        "risk.basics.vulnerability",
+        "risk.identification.process"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 25,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Why correct: A missing patch is a weakness that can be exploited.",
+      "misconceptionTags": [
+        "risk.basics.vulnerability_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q004",
+      "type": "scenario_mcq",
+      "stem": "Your vulnerability scan shows SSH (TCP/22) exposed to the internet. Attackers actively brute-force SSH passwords. What is the 'risk' here?",
+      "options": {
+        "A": "The existence of attackers",
+        "B": "The exposed SSH service",
+        "C": "Attackers plus the exposed SSH weakness",
+        "D": "The organization’s risk appetite"
+      },
+      "answer": "C",
+      "explanation": "Why correct: Risk is the combination of a relevant threat (attackers) and a vulnerability (exposed service/weak auth). Trap to avoid: Picking only threat or only vulnerability misses the 'intersection' idea.",
+      "tags": [
+        "risk.basics.risk_intersection",
+        "risk.basics.threat",
+        "risk.basics.vulnerability"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 50,
+      "objectiveIds": [
+        "2.1"
+      ],
+      "rationaleCorrect": "Why correct: Risk is the combination of a relevant threat (attackers) and a vulnerability (exposed service/weak auth).",
+      "misconceptionTags": [
+        "risk.basics.risk_intersection_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q005",
+      "type": "mcq",
+      "stem": "Which risk category originates from within the organization (e.g., mistakes by authorized users, equipment failures)?",
+      "options": {
+        "A": "External",
+        "B": "Internal",
+        "C": "Multiparty",
+        "D": "Strategic"
+      },
+      "answer": "B",
+      "explanation": "Why correct: Internal risks originate inside the organization (people/process/technology). Trap to avoid: External risks come from outside actors or events.",
+      "tags": [
+        "risk.identification.internal",
+        "risk.identification.process"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 30,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Why correct: Internal risks originate inside the organization (people/process/technology).",
+      "misconceptionTags": [
+        "risk.identification.internal_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q006",
+      "type": "mcq",
+      "stem": "A power outage affecting all buildings on a city block is an example of:",
+      "options": {
+        "A": "External risk",
+        "B": "Internal risk",
+        "C": "Multiparty risk",
+        "D": "Legacy risk"
+      },
+      "answer": "C",
+      "explanation": "Why correct: Multiparty risks impact more than one organization at the same time. Trap to avoid: It’s external too, but the defining feature is 'multi-org impact'.",
+      "tags": [
+        "risk.identification.multiparty"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 30,
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "Why correct: Multiparty risks impact more than one organization at the same time.",
+      "misconceptionTags": [
+        "risk.identification.multiparty_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q007",
+      "type": "mcq",
+      "stem": "Legacy systems create special risk primarily because they often:",
+      "options": {
+        "A": "Have no business value",
+        "B": "Cannot be monitored",
+        "C": "Do not receive security updates (unpatchable vulnerabilities)",
+        "D": "Always contain PII"
+      },
+      "answer": "C",
+      "explanation": "Why correct: Legacy systems are often unpatchable and require extraordinary protective measures. Trap to avoid: The problem isn’t that they always have PII; it’s the lack of updates.",
+      "tags": [
+        "risk.identification.legacy_systems"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 35,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Why correct: Legacy systems are often unpatchable and require extraordinary protective measures.",
+      "misconceptionTags": [
+        "risk.identification.legacy_systems_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q008",
+      "type": "mcq",
+      "stem": "A company’s secret formula that gives it a competitive advantage is best categorized as:",
+      "options": {
+        "A": "Regulated information",
+        "B": "Intellectual property / trade secret",
+        "C": "Public data",
+        "D": "Legal information"
+      },
+      "answer": "B",
+      "explanation": "Why correct: Trade secrets are a form of intellectual property and represent IP theft risk. Trap to avoid: Regulated information is defined by laws/regulations, not competitive advantage.",
+      "tags": [
+        "risk.identification.ip_theft",
+        "privacy.data_types.intellectual_property"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 25,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "Why correct: Trade secrets are a form of intellectual property and represent IP theft risk.",
+      "misconceptionTags": [
+        "risk.identification.ip_theft_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q009",
+      "type": "mcq",
+      "stem": "Running licensed software beyond the permitted user count is primarily a:",
+      "options": {
+        "A": "Software compliance/licensing risk",
+        "B": "Multiparty risk",
+        "C": "Residual risk",
+        "D": "Quantitative risk"
+      },
+      "answer": "A",
+      "explanation": "Why correct: Violating license terms creates financial/legal exposure (software compliance/licensing risk). Trap to avoid: Don’t confuse the analysis method (quant/qual) with the risk type.",
+      "tags": [
+        "risk.identification.software_licensing"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 30,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Why correct: Violating license terms creates financial/legal exposure (software compliance/licensing risk).",
+      "misconceptionTags": [
+        "risk.identification.software_licensing_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q010",
+      "type": "multi_select",
+      "stem": "Which of the following are examples of external risks? (Select all that apply.)",
+      "options": {
+        "A": "Cybersecurity adversaries",
+        "B": "Natural disasters",
+        "C": "Equipment failure inside a data center",
+        "D": "Malicious code introduced from outside",
+        "E": "User accidentally deletes files"
+      },
+      "answers": [
+        "A",
+        "B",
+        "D"
+      ],
+      "explanation": "Why correct: External risks come from outside the organization: adversaries, malware, disasters. Trap to avoid: Internal mistakes and internal equipment failures are internal risks.",
+      "tags": [
+        "risk.identification.external",
+        "risk.identification.internal"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Why correct: External risks come from outside the organization: adversaries, malware, disasters.",
+      "misconceptionTags": [
+        "risk.identification.external_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "E": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q011",
+      "type": "mcq",
+      "stem": "Risk assessment combines which two factors to determine severity?",
+      "options": {
+        "A": "Asset value and exposure factor",
+        "B": "Likelihood and impact",
+        "C": "Threat and control strength",
+        "D": "Inherent risk and residual risk"
+      },
+      "answer": "B",
+      "explanation": "Why correct: Severity conceptually combines probability/likelihood and magnitude/impact. Trap to avoid: AV/EF are parts of quantitative analysis, not the general definition.",
+      "tags": [
+        "risk.assessment.likelihood",
+        "risk.assessment.impact_magnitude",
+        "risk.assessment.severity_formula"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 25,
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "Why correct: Severity conceptually combines probability/likelihood and magnitude/impact.",
+      "misconceptionTags": [
+        "risk.assessment.likelihood_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q012",
+      "type": "mcq",
+      "stem": "A risk assessment conducted in response to a new technology implementation is most likely:",
+      "options": {
+        "A": "Recurring",
+        "B": "Continuous",
+        "C": "Ad hoc",
+        "D": "Expansionary"
+      },
+      "answer": "C",
+      "explanation": "Why correct: Ad hoc assessments are performed due to a specific event like a new project/technology. Trap to avoid: Expansionary is a risk appetite type, not an assessment type.",
+      "tags": [
+        "risk.assessment.ad_hoc",
+        "risk.assessment.one_time"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 30,
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "Why correct: Ad hoc assessments are performed due to a specific event like a new project/technology.",
+      "misconceptionTags": [
+        "risk.assessment.ad_hoc_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q013",
+      "type": "mcq",
+      "stem": "A quarterly enterprise-wide risk review is best described as:",
+      "options": {
+        "A": "One-time",
+        "B": "Recurring",
+        "C": "Ad hoc",
+        "D": "Qualitative"
+      },
+      "answer": "B",
+      "explanation": "Why correct: Recurring assessments are performed at regular intervals like quarterly/annually. Trap to avoid: Qualitative describes analysis style, not scheduling.",
+      "tags": [
+        "risk.assessment.recurring"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 25,
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "Why correct: Recurring assessments are performed at regular intervals like quarterly/annually.",
+      "misconceptionTags": [
+        "risk.assessment.recurring_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q014",
+      "type": "mcq",
+      "stem": "Automated systems that constantly scan for new threats and changes support which assessment type?",
+      "options": {
+        "A": "One-time",
+        "B": "Ad hoc",
+        "C": "Recurring",
+        "D": "Continuous"
+      },
+      "answer": "D",
+      "explanation": "Why correct: Continuous risk assessments involve ongoing monitoring and analysis. Trap to avoid: Recurring is periodic; continuous is ongoing.",
+      "tags": [
+        "risk.assessment.continuous"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 25,
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "Why correct: Continuous risk assessments involve ongoing monitoring and analysis.",
+      "misconceptionTags": [
+        "risk.assessment.continuous_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      }
+    },
+    {
+      "id": "ch17.q015",
+      "type": "mcq",
+      "stem": "Quantitative risk analysis is characterized by:",
+      "options": {
+        "A": "Subjective Low/Medium/High ratings only",
+        "B": "Numeric data enabling straightforward prioritization",
+        "C": "Avoiding calculations like SLE/ALE",
+        "D": "Only analyzing reputational damage"
+      },
+      "answer": "B",
+      "explanation": "Why correct: Quantitative analysis uses numeric data (e.g., dollars, frequencies). Trap to avoid: Qualitative uses categories and expert judgment.",
+      "tags": [
+        "risk.analysis.quantitative",
+        "risk.analysis.overview"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 30,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "Why correct: Quantitative analysis uses numeric data (e.g., dollars, frequencies).",
+      "misconceptionTags": [
+        "risk.analysis.quantitative_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q016",
+      "type": "mcq",
+      "stem": "Qualitative risk analysis is most useful when:",
+      "options": {
+        "A": "All impacts are easily expressed in dollars",
+        "B": "You need strict numeric prioritization",
+        "C": "You’re evaluating hard-to-quantify impacts like reputation",
+        "D": "You already know ARO and EF"
+      },
+      "answer": "C",
+      "explanation": "Why correct: Qualitative approaches handle intangible impacts using subjective categories. Trap to avoid: ARO/EF are quantitative terms; don’t force everything into math.",
+      "tags": [
+        "risk.analysis.qualitative",
+        "risk.assessment.impact_magnitude"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 35,
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "Why correct: Qualitative approaches handle intangible impacts using subjective categories.",
+      "misconceptionTags": [
+        "risk.analysis.qualitative_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q017",
+      "type": "ordering",
+      "stem": "Put the core quantitative risk analysis steps in the correct order (simplified).",
+      "items": [
+        "Determine asset value (AV)",
+        "Determine annualized rate of occurrence (ARO)",
+        "Determine exposure factor (EF)",
+        "Calculate single loss expectancy (SLE)",
+        "Calculate annualized loss expectancy (ALE)"
+      ],
+      "correct_order": [
+        "Determine asset value (AV)",
+        "Determine annualized rate of occurrence (ARO)",
+        "Determine exposure factor (EF)",
+        "Calculate single loss expectancy (SLE)",
+        "Calculate annualized loss expectancy (ALE)"
+      ],
+      "explanation": "Why correct: The common flow is AV → ARO → EF → SLE (AV×EF) → ALE (SLE×ARO). Trap to avoid: People often swap EF with probability/ARO or reverse SLE/ALE.",
+      "tags": [
+        "risk.analysis.quantitative",
+        "risk.quant.av",
+        "risk.quant.aro",
+        "risk.quant.ef",
+        "risk.quant.sle",
+        "risk.quant.ale"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "4.2"
+      ],
+      "rationaleCorrect": "Why correct: The common flow is AV → ARO → EF → SLE (AV×EF) → ALE (SLE×ARO).",
+      "misconceptionTags": [
+        "risk.analysis.quantitative_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch17.q018",
+      "type": "scenario_mcq",
+      "stem": "An asset is valued at $50,000. A risk would damage 40% of its value. What is the SLE?",
+      "options": {
+        "A": "$20,000",
+        "B": "$50,000",
+        "C": "$125,000",
+        "D": "$2,000"
+      },
+      "answer": "A",
+      "explanation": "Why correct: SLE = AV × EF = 50,000 × 0.40 = 20,000. Trap to avoid: Don’t multiply by ARO; that’s for ALE.",
+      "tags": [
+        "risk.quant.sle",
+        "risk.quant.av",
+        "risk.quant.ef"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Why correct: SLE = AV × EF = 50,000 × 0.40 = 20,000.",
+      "misconceptionTags": [
+        "risk.quant.sle_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q019",
+      "type": "scenario_mcq",
+      "stem": "Using the previous scenario (SLE $20,000), the event is expected to occur 0.5 times per year. What is the ALE?",
+      "options": {
+        "A": "$10,000",
+        "B": "$20,000",
+        "C": "$40,000",
+        "D": "$1,000"
+      },
+      "answer": "A",
+      "explanation": "Why correct: ALE = SLE × ARO = 20,000 × 0.5 = 10,000. Trap to avoid: ARO is frequency per year, not a percent you add or subtract.",
+      "tags": [
+        "risk.quant.ale",
+        "risk.quant.aro",
+        "risk.quant.sle"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Why correct: ALE = SLE × ARO = 20,000 × 0.5 = 10,000.",
+      "misconceptionTags": [
+        "risk.quant.ale_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q020",
+      "type": "mcq",
+      "stem": "In quantitative risk terms, the annualized rate of occurrence (ARO) is:",
+      "options": {
+        "A": "The % of damage to an asset",
+        "B": "The expected number of times a risk occurs per year",
+        "C": "The cost of a control",
+        "D": "The remaining risk after controls"
+      },
+      "answer": "B",
+      "explanation": "Why correct: ARO is the expected frequency of occurrence in a year. Trap to avoid: Exposure factor (EF) is the % damage; residual risk is what remains after controls.",
+      "tags": [
+        "risk.quant.aro",
+        "risk.quant.probability_vs_aro"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 30,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Why correct: ARO is the expected frequency of occurrence in a year.",
+      "misconceptionTags": [
+        "risk.quant.aro_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q021",
+      "type": "mcq",
+      "stem": "The exposure factor (EF) represents:",
+      "options": {
+        "A": "How often a risk occurs per year",
+        "B": "The percentage of asset value lost per event",
+        "C": "The organization’s tolerance for risk",
+        "D": "The likelihood attackers exist"
+      },
+      "answer": "B",
+      "explanation": "Why correct: EF is the percent of damage/impact to the asset when the event happens. Trap to avoid: People confuse EF with probability; EF is 'how bad', not 'how often'.",
+      "tags": [
+        "risk.quant.ef",
+        "risk.assessment.impact_magnitude"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 30,
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "Why correct: EF is the percent of damage/impact to the asset when the event happens.",
+      "misconceptionTags": [
+        "risk.quant.ef_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q022",
+      "type": "scenario_mcq",
+      "stem": "A qualitative risk matrix shows 'stolen unencrypted device' in the High probability / High impact quadrant. What should that primarily do for you?",
+      "options": {
+        "A": "Provide exact dollar losses",
+        "B": "Prioritize this risk above Low/Low risks",
+        "C": "Compute ALE automatically",
+        "D": "Prove regulatory compliance"
+      },
+      "answer": "B",
+      "explanation": "Why correct: Qualitative matrices prioritize attention based on category placement. Trap to avoid: They don’t produce exact dollars like quantitative analysis.",
+      "tags": [
+        "risk.analysis.qualitative",
+        "risk.matrix.heat_map"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Why correct: Qualitative matrices prioritize attention based on category placement.",
+      "misconceptionTags": [
+        "risk.analysis.qualitative_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q023",
+      "type": "mcq",
+      "stem": "Which risk management strategy reduces the probability and/or impact through security controls?",
+      "options": {
+        "A": "Avoidance",
+        "B": "Acceptance",
+        "C": "Mitigation",
+        "D": "Transference"
+      },
+      "answer": "C",
+      "explanation": "Why correct: Mitigation applies controls to lower likelihood and/or impact. Trap to avoid: Avoidance eliminates the activity; transference shifts impact; acceptance is a conscious 'do nothing more'.",
+      "tags": [
+        "risk.management.mitigation",
+        "risk.management.overview"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 25,
+      "objectiveIds": [
+        "5.2"
+      ],
+      "rationaleCorrect": "Why correct: Mitigation applies controls to lower likelihood and/or impact.",
+      "misconceptionTags": [
+        "risk.management.mitigation_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q024",
+      "type": "scenario_mcq",
+      "stem": "You purchase a DDoS mitigation service that prevents attack traffic from reaching your network. This is primarily an example of:",
+      "options": {
+        "A": "Risk avoidance",
+        "B": "Risk mitigation",
+        "C": "Risk acceptance",
+        "D": "Risk transference"
+      },
+      "answer": "B",
+      "explanation": "Why correct: A mitigation service reduces probability/impact of the DDoS risk. Trap to avoid: Insurance is transference; shutting down the site is avoidance.",
+      "tags": [
+        "risk.management.mitigation",
+        "risk.management.tradeoffs"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 40,
+      "objectiveIds": [
+        "5.2"
+      ],
+      "rationaleCorrect": "Why correct: A mitigation service reduces probability/impact of the DDoS risk.",
+      "misconceptionTags": [
+        "risk.management.mitigation_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q025",
+      "type": "scenario_mcq",
+      "stem": "Leadership decides to stop offering a product feature that requires storing sensitive personal data. Which strategy is this?",
+      "options": {
+        "A": "Mitigation",
+        "B": "Avoidance",
+        "C": "Transference",
+        "D": "Acceptance"
+      },
+      "answer": "B",
+      "explanation": "Why correct: Avoidance changes business practices so the risk can’t materialize for that activity. Trap to avoid: Mitigation would keep the feature and add controls.",
+      "tags": [
+        "risk.management.avoidance",
+        "risk.management.tradeoffs"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 35,
+      "objectiveIds": [
+        "5.2"
+      ],
+      "rationaleCorrect": "Why correct: Avoidance changes business practices so the risk can’t materialize for that activity.",
+      "misconceptionTags": [
+        "risk.management.avoidance_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q026",
+      "type": "scenario_mcq",
+      "stem": "The company buys a cyber insurance policy to cover breach recovery costs. Which strategy is being used?",
+      "options": {
+        "A": "Mitigation",
+        "B": "Avoidance",
+        "C": "Transference",
+        "D": "Acceptance"
+      },
+      "answer": "C",
+      "explanation": "Why correct: Insurance shifts some financial impact to another party (transference). Trap to avoid: Insurance doesn’t stop the breach; it shifts cost after the fact.",
+      "tags": [
+        "risk.management.transference"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 30,
+      "objectiveIds": [
+        "5.2"
+      ],
+      "rationaleCorrect": "Why correct: Insurance shifts some financial impact to another party (transference).",
+      "misconceptionTags": [
+        "risk.management.transference_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q027",
+      "type": "scenario_mcq",
+      "stem": "After analyzing cost vs expected impact, your org chooses to take no further action and continues operating. This is:",
+      "options": {
+        "A": "Risk acceptance",
+        "B": "Risk avoidance",
+        "C": "Risk mitigation",
+        "D": "Risk elimination"
+      },
+      "answer": "A",
+      "explanation": "Why correct: Risk acceptance is a deliberate, analyzed decision to take no additional action. Trap to avoid: Unanalyzed 'shrugging' is unmanaged risk, not acceptance.",
+      "tags": [
+        "risk.management.acceptance"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 40,
+      "objectiveIds": [
+        "5.2"
+      ],
+      "rationaleCorrect": "Why correct: Risk acceptance is a deliberate, analyzed decision to take no additional action.",
+      "misconceptionTags": [
+        "risk.management.acceptance_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q028",
+      "type": "mcq",
+      "stem": "Which statement best distinguishes risk acceptance from unmanaged risk?",
+      "options": {
+        "A": "Acceptance requires a vulnerability scan first",
+        "B": "Acceptance is always the cheapest option",
+        "C": "Acceptance is a conscious decision backed by analysis",
+        "D": "Acceptance eliminates the risk"
+      },
+      "answer": "C",
+      "explanation": "Why correct: Acceptance is deliberate and reasoned; unmanaged risk is neglect. Trap to avoid: Acceptance never eliminates the risk; it tolerates it.",
+      "tags": [
+        "risk.management.acceptance",
+        "risk.management.overview"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "5.2"
+      ],
+      "rationaleCorrect": "Why correct: Acceptance is deliberate and reasoned; unmanaged risk is neglect.",
+      "misconceptionTags": [
+        "risk.management.acceptance_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q029",
+      "type": "mcq",
+      "stem": "An exception in the context of risk acceptance is best described as:",
+      "options": {
+        "A": "A control that blocks a threat",
+        "B": "A grant to deviate from policy because mitigation cost is too high",
+        "C": "A metric used to track risk",
+        "D": "A replacement for insurance"
+      },
+      "answer": "B",
+      "explanation": "Why correct: Exceptions allow a specific policy deviation when the organization knowingly accepts the risk. Trap to avoid: It’s not a control and not a metric.",
+      "tags": [
+        "risk.management.acceptance.exception",
+        "risk.management.acceptance"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "5.2"
+      ],
+      "rationaleCorrect": "Why correct: Exceptions allow a specific policy deviation when the organization knowingly accepts the risk.",
+      "misconceptionTags": [
+        "risk.management.acceptance.exception_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q030",
+      "type": "mcq",
+      "stem": "Which term describes the original level of risk before controls are implemented?",
+      "options": {
+        "A": "Residual risk",
+        "B": "Inherent risk",
+        "C": "Risk threshold",
+        "D": "Risk tolerance"
+      },
+      "answer": "B",
+      "explanation": "Why correct: Inherent risk exists before controls; residual risk is what remains after controls. Trap to avoid: Threshold and tolerance are decision boundaries/capacity, not 'before/after'.",
+      "tags": [
+        "risk.tracking.inherent",
+        "risk.tracking.residual"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 30,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Why correct: Inherent risk exists before controls; residual risk is what remains after controls.",
+      "misconceptionTags": [
+        "risk.tracking.inherent_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q031",
+      "type": "mcq",
+      "stem": "Key Risk Indicators (KRIs) are used to:",
+      "options": {
+        "A": "Encrypt regulated data",
+        "B": "Provide early warning of increasing risk levels",
+        "C": "Calculate SLE directly",
+        "D": "Replace incident response"
+      },
+      "answer": "B",
+      "explanation": "Why correct: KRIs are metrics that signal rising risk and help track mitigation effectiveness. Trap to avoid: They don’t directly calculate SLE and don’t replace response plans.",
+      "tags": [
+        "risk.tracking.kri",
+        "risk.tracking.residual"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 35,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "Why correct: KRIs are metrics that signal rising risk and help track mitigation effectiveness.",
+      "misconceptionTags": [
+        "risk.tracking.kri_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q032",
+      "type": "mcq",
+      "stem": "Risk appetite is best described as:",
+      "options": {
+        "A": "A specific numeric boundary that triggers action",
+        "B": "The organization’s ability to withstand disruption",
+        "C": "The overall level of risk the organization is willing to accept",
+        "D": "The residual risk after controls"
+      },
+      "answer": "C",
+      "explanation": "Why correct: Risk appetite is the broad willingness to accept risk as a cost of doing business. Trap to avoid: The specific boundary is the risk threshold; tolerance is ability to withstand.",
+      "tags": [
+        "risk.tracking.risk_appetite",
+        "risk.tracking.risk_threshold",
+        "risk.tracking.risk_tolerance"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 35,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Why correct: Risk appetite is the broad willingness to accept risk as a cost of doing business.",
+      "misconceptionTags": [
+        "risk.tracking.risk_appetite_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q033",
+      "type": "mcq",
+      "stem": "Which tool is the primary mechanism used to track risks facing an organization?",
+      "options": {
+        "A": "Threat model",
+        "B": "Risk register",
+        "C": "Data inventory",
+        "D": "Incident log"
+      },
+      "answer": "B",
+      "explanation": "Why correct: A risk register records and tracks risks, owners, indicators, and thresholds. Trap to avoid: A data inventory tracks data locations/types, not risks.",
+      "tags": [
+        "risk.register.definition"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 25,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "Why correct: A risk register records and tracks risks, owners, indicators, and thresholds.",
+      "misconceptionTags": [
+        "risk.register.definition_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q034",
+      "type": "multi_select",
+      "stem": "Which elements are specifically called out as common risk register data? (Select all that apply.)",
+      "options": {
+        "A": "Risk owner",
+        "B": "Risk threshold information",
+        "C": "Key Risk Indicators (KRIs)",
+        "D": "Encryption key length",
+        "E": "DNS records"
+      },
+      "answers": [
+        "A",
+        "B",
+        "C"
+      ],
+      "explanation": "Why correct: Risk owner, risk threshold, and KRIs are highlighted as common risk register elements. Trap to avoid: Technical config details like DNS are not core register fields.",
+      "tags": [
+        "risk.register.elements.risk_owner",
+        "risk.register.elements.risk_threshold",
+        "risk.register.elements.kri"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 40,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Why correct: Risk owner, risk threshold, and KRIs are highlighted as common risk register elements.",
+      "misconceptionTags": [
+        "risk.register.elements.risk_owner_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "E": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q035",
+      "type": "mcq",
+      "stem": "A risk matrix (heat map) is commonly used to:",
+      "options": {
+        "A": "Store audit evidence",
+        "B": "Provide too much detail for executives",
+        "C": "Summarize risks quickly for leadership focus",
+        "D": "Replace the risk register"
+      },
+      "answer": "C",
+      "explanation": "Why correct: Heat maps summarize risks to help senior leaders focus quickly. Trap to avoid: They complement, not replace, the full risk register.",
+      "tags": [
+        "risk.matrix.heat_map",
+        "risk.register.definition"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 35,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Why correct: Heat maps summarize risks to help senior leaders focus quickly.",
+      "misconceptionTags": [
+        "risk.matrix.heat_map_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q036",
+      "type": "mcq",
+      "stem": "Who is responsible for managing and monitoring a given risk and implementing necessary actions?",
+      "options": {
+        "A": "Risk auditor",
+        "B": "Risk owner",
+        "C": "Data custodian",
+        "D": "Data subject"
+      },
+      "answer": "B",
+      "explanation": "Why correct: The risk owner is responsible for the risk’s monitoring and response activities. Trap to avoid: Data roles relate to privacy; don’t mix domains.",
+      "tags": [
+        "risk.tracking.risk_owner"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 25,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "Why correct: The risk owner is responsible for the risk’s monitoring and response activities.",
+      "misconceptionTags": [
+        "risk.tracking.risk_owner_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q037",
+      "type": "mcq",
+      "stem": "Which reporting type typically uses visual aids like charts/graphs, often near real time, to summarize risk status?",
+      "options": {
+        "A": "Regular updates",
+        "B": "Dashboard reporting",
+        "C": "Ad hoc reports",
+        "D": "Event reports"
+      },
+      "answer": "B",
+      "explanation": "Why correct: Dashboards visualize risk metrics (often real time) for quick monitoring. Trap to avoid: Regular updates may be written; ad hoc is on demand.",
+      "tags": [
+        "risk.reporting.dashboard",
+        "risk.reporting.overview"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 25,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Why correct: Dashboards visualize risk metrics (often real time) for quick monitoring.",
+      "misconceptionTags": [
+        "risk.reporting.dashboard_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q038",
+      "type": "mcq",
+      "stem": "A report produced in response to a sudden major incident and requested immediately by leadership is most likely:",
+      "options": {
+        "A": "Regular update",
+        "B": "Dashboard report",
+        "C": "Ad hoc report",
+        "D": "Trend analysis"
+      },
+      "answer": "C",
+      "explanation": "Why correct: Ad hoc reports are produced as needed for specific situations requiring immediate attention. Trap to avoid: Trend analysis looks at historical patterns over time.",
+      "tags": [
+        "risk.reporting.ad_hoc",
+        "risk.reporting.audience_tailoring"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 35,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "Why correct: Ad hoc reports are produced as needed for specific situations requiring immediate attention.",
+      "misconceptionTags": [
+        "risk.reporting.ad_hoc_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q039",
+      "type": "mcq",
+      "stem": "Which reporting form focuses on analyzing historical data to identify patterns over time?",
+      "options": {
+        "A": "Risk trend analysis",
+        "B": "Risk event report",
+        "C": "Regular updates",
+        "D": "Risk register"
+      },
+      "answer": "A",
+      "explanation": "Why correct: Trend analysis looks at historical patterns and helps forecast or understand evolution. Trap to avoid: Event reports document specific incidents.",
+      "tags": [
+        "risk.reporting.trend_analysis"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 30,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Why correct: Trend analysis looks at historical patterns and helps forecast or understand evolution.",
+      "misconceptionTags": [
+        "risk.reporting.trend_analysis_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q040",
+      "type": "scenario_mcq",
+      "stem": "Executives want a high-level summary tied to risk appetite and thresholds, while the risk team needs detailed metrics. What’s the best practice?",
+      "options": {
+        "A": "Use one report format for everyone",
+        "B": "Tailor reporting format and detail to the audience",
+        "C": "Only deliver heat maps",
+        "D": "Only deliver raw logs"
+      },
+      "answer": "B",
+      "explanation": "Why correct: Risk reports should be tailored: leadership gets concise context; risk teams get detail. Trap to avoid: One-size-fits-all reports either overwhelm leaders or starve analysts.",
+      "tags": [
+        "risk.reporting.audience_tailoring",
+        "risk.reporting.overview",
+        "risk.tracking.risk_appetite",
+        "risk.tracking.risk_threshold"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Why correct: Risk reports should be tailored: leadership gets concise context; risk teams get detail.",
+      "misconceptionTags": [
+        "risk.reporting.audience_tailoring_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q041",
+      "type": "mcq",
+      "stem": "Disaster recovery planning (DRP) primarily focuses on:",
+      "options": {
+        "A": "Preventing all disasters",
+        "B": "Recovering operations as quickly as possible after disruptions",
+        "C": "Encrypting all data at rest",
+        "D": "Replacing incident response"
+      },
+      "answer": "B",
+      "explanation": "Why correct: DRP develops plans to restore operations quickly after a disaster disrupts business. Trap to avoid: DRP complements prevention and IR; it’s about recovery.",
+      "tags": [
+        "drp.definition"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 30,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "Why correct: DRP develops plans to restore operations quickly after a disaster disrupts business.",
+      "misconceptionTags": [
+        "drp.definition_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q042",
+      "type": "mcq",
+      "stem": "From a DRP perspective, a 'disaster' is best defined as:",
+      "options": {
+        "A": "Only natural events like hurricanes",
+        "B": "Any event that can disrupt an organization’s business",
+        "C": "Any cybersecurity incident",
+        "D": "A power outage lasting more than 1 hour"
+      },
+      "answer": "B",
+      "explanation": "Why correct: DRP treats any business-disrupting event (natural or human-made) as a disaster. Trap to avoid: It’s broader than natural disasters and broader than cyber-only incidents.",
+      "tags": [
+        "drp.disaster_types",
+        "drp.activation_trigger"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 35,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "Why correct: DRP treats any business-disrupting event (natural or human-made) as a disaster.",
+      "misconceptionTags": [
+        "drp.disaster_types_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q043",
+      "type": "mcq",
+      "stem": "Site risk assessments in DRP are used to:",
+      "options": {
+        "A": "Identify and prioritize facility risks from internal/external disasters",
+        "B": "Determine the ARO for phishing",
+        "C": "Classify data as public/private",
+        "D": "Calculate MTBF for cloud providers"
+      },
+      "answer": "A",
+      "explanation": "Why correct: Site risk assessments identify and prioritize facility disaster risks (human-made and environmental, internal and external). Trap to avoid: Don’t confuse DRP site assessments with quantitative cyber risk math.",
+      "tags": [
+        "drp.site_risk_assessment",
+        "drp.disaster_types"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 35,
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "Why correct: Site risk assessments identify and prioritize facility disaster risks (human-made and environmental, internal and external).",
+      "misconceptionTags": [
+        "drp.site_risk_assessment_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q044",
+      "type": "mcq",
+      "stem": "The business impact analysis (BIA) is designed to:",
+      "options": {
+        "A": "Replace the risk register",
+        "B": "Identify mission-essential functions and critical supporting systems",
+        "C": "Compute GDPR fines",
+        "D": "Perform vulnerability scanning"
+      },
+      "answer": "B",
+      "explanation": "Why correct: BIA identifies mission-essential functions and the systems supporting them. Trap to avoid: It’s about operational criticality, not scanning or fines.",
+      "tags": [
+        "bia.definition"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 35,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Why correct: BIA identifies mission-essential functions and the systems supporting them.",
+      "misconceptionTags": [
+        "bia.definition_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q045",
+      "type": "matching",
+      "stem": "Match the BIA metric to its meaning.",
+      "left": [
+        "MTBF",
+        "MTTR",
+        "RTO",
+        "RPO"
+      ],
+      "right": [
+        "Expected time between failures",
+        "Average time to restore after failure",
+        "Max tolerable downtime before unacceptable damage",
+        "Max tolerable data loss during outage"
+      ],
+      "pairs": {
+        "MTBF": "Expected time between failures",
+        "MTTR": "Average time to restore after failure",
+        "RTO": "Max tolerable downtime before unacceptable damage",
+        "RPO": "Max tolerable data loss during outage"
+      },
+      "explanation": "Why correct: MTBF measures reliability; MTTR repair time; RTO downtime tolerance; RPO data-loss tolerance. Trap to avoid: The classic trap is swapping RTO (time) with RPO (data).",
+      "tags": [
+        "bia.metrics.mtbf",
+        "bia.metrics.mttr",
+        "bia.metrics.rto",
+        "bia.metrics.rpo"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 85,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "Why correct: MTBF measures reliability; MTTR repair time; RTO downtime tolerance; RPO data-loss tolerance.",
+      "misconceptionTags": [
+        "bia.metrics.mtbf_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch17.q046",
+      "type": "scenario_mcq",
+      "stem": "A database must be restored within 2 hours to avoid unacceptable business damage. Which metric is this?",
+      "options": {
+        "A": "MTBF",
+        "B": "MTTR",
+        "C": "RTO",
+        "D": "RPO"
+      },
+      "answer": "C",
+      "explanation": "Why correct: RTO is the maximum tolerable downtime before unacceptable damage. Trap to avoid: MTTR is average repair time; it must be less than the RTO to meet expectations.",
+      "tags": [
+        "bia.metrics.rto",
+        "bia.metrics.mttr",
+        "bia.definition"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 35,
+      "objectiveIds": [
+        "5.5"
+      ],
+      "rationaleCorrect": "Why correct: RTO is the maximum tolerable downtime before unacceptable damage.",
+      "misconceptionTags": [
+        "bia.metrics.rto_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q047",
+      "type": "scenario_mcq",
+      "stem": "The business can tolerate losing up to 15 minutes of transaction data during a major outage. Which metric is this?",
+      "options": {
+        "A": "MTBF",
+        "B": "MTTR",
+        "C": "RTO",
+        "D": "RPO"
+      },
+      "answer": "D",
+      "explanation": "Why correct: RPO is the maximum tolerable data loss measured in time. Trap to avoid: Don’t confuse with RTO, which is downtime tolerance.",
+      "tags": [
+        "bia.metrics.rpo"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 35,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "Why correct: RPO is the maximum tolerable data loss measured in time.",
+      "misconceptionTags": [
+        "bia.metrics.rpo_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      }
+    },
+    {
+      "id": "ch17.q048",
+      "type": "mcq",
+      "stem": "A device that, if it fails, causes an outage because there is no alternative is called a:",
+      "options": {
+        "A": "Residual risk",
+        "B": "Single point of failure",
+        "C": "KRI",
+        "D": "Risk threshold"
+      },
+      "answer": "B",
+      "explanation": "Why correct: A single point of failure is a component whose failure causes an outage. Trap to avoid: A KRI is a metric; threshold is a boundary; residual risk is post-controls.",
+      "tags": [
+        "bia.single_point_of_failure",
+        "bia.redundancy"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 25,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Why correct: A single point of failure is a component whose failure causes an outage.",
+      "misconceptionTags": [
+        "bia.single_point_of_failure_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q049",
+      "type": "mcq",
+      "stem": "Why are privacy breaches a major concern for organizations?",
+      "options": {
+        "A": "They only impact individuals, not organizations",
+        "B": "They can cause reputational damage, fines, and competitive loss of IP",
+        "C": "They are always solved by encryption",
+        "D": "They do not trigger legal obligations"
+      },
+      "answer": "B",
+      "explanation": "Why correct: Privacy breaches harm individuals and can create organizational consequences: reputation, fines, and business harm. Trap to avoid: Encryption helps but doesn’t erase legal/reporting duties.",
+      "tags": [
+        "privacy.overview",
+        "privacy.legal_implications"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 35,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "Why correct: Privacy breaches harm individuals and can create organizational consequences: reputation, fines, and business harm.",
+      "misconceptionTags": [
+        "privacy.overview_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q050",
+      "type": "mcq",
+      "stem": "A privacy notice is primarily used to:",
+      "options": {
+        "A": "Encrypt personal data",
+        "B": "Outline an organization’s privacy commitments",
+        "C": "Replace terms of service",
+        "D": "Serve as a risk register"
+      },
+      "answer": "B",
+      "explanation": "Why correct: A privacy notice codifies privacy practices/commitments; some laws may require it. Trap to avoid: It’s not a technical control like encryption.",
+      "tags": [
+        "privacy.notice",
+        "privacy.terms_statements"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 25,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "Why correct: A privacy notice codifies privacy practices/commitments; some laws may require it.",
+      "misconceptionTags": [
+        "privacy.notice_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q051",
+      "type": "multi_select",
+      "stem": "Which data types should be included in a data inventory? (Select all that apply.)",
+      "options": {
+        "A": "PII",
+        "B": "PHI",
+        "C": "Financial information",
+        "D": "Intellectual property (trade secrets)",
+        "E": "Legal information",
+        "F": "Regulated information"
+      },
+      "answers": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "explanation": "Why correct: A data inventory should include all sensitive/personal information types the org stores/processes/transmits. Trap to avoid: The trap is thinking only 'PII' belongs—inventory is broader.",
+      "tags": [
+        "privacy.data_inventory",
+        "privacy.data_types.pii",
+        "privacy.data_types.phi",
+        "privacy.data_types.financial",
+        "privacy.data_types.intellectual_property",
+        "privacy.data_types.legal_info",
+        "privacy.data_types.regulated_info"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "Why correct: A data inventory should include all sensitive/personal information types the org stores/processes/transmits.",
+      "misconceptionTags": [
+        "privacy.data_inventory_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "E": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "F": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      }
+    },
+    {
+      "id": "ch17.q052",
+      "type": "mcq",
+      "stem": "The exam emphasizes that data inventories should include both human-readable and non-human-readable data because:",
+      "options": {
+        "A": "Binary files are never sensitive",
+        "B": "Non-human-readable data can still contain sensitive information like PII",
+        "C": "Only printed documents need classification",
+        "D": "Hashing makes data readable"
+      },
+      "answer": "B",
+      "explanation": "Why correct: PII is still PII even if stored in binary formats that require software to interpret. Trap to avoid: Don’t mistake 'hard to read' for 'not sensitive'.",
+      "tags": [
+        "privacy.data_readability.human",
+        "privacy.data_readability.nonhuman",
+        "privacy.data_inventory"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 35,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "Why correct: PII is still PII even if stored in binary formats that require software to interpret.",
+      "misconceptionTags": [
+        "privacy.data_readability.human_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q053",
+      "type": "mcq",
+      "stem": "Which set best matches common business classification labels referenced in objectives (examples)?",
+      "options": {
+        "A": "Top Secret, Secret, Confidential, Unclassified",
+        "B": "Public, Private, Sensitive, Confidential, Critical, Restricted",
+        "C": "Gold, Silver, Bronze, Public",
+        "D": "Red, Amber, Green, Blue"
+      },
+      "answer": "B",
+      "explanation": "Why correct: CompTIA lists common business labels like Public/Private/Sensitive/Confidential/Critical/Restricted. Trap to avoid: Government labels are different and not typically used by businesses.",
+      "tags": [
+        "classification.business.public",
+        "classification.business.private",
+        "classification.business.sensitive",
+        "classification.business.confidential",
+        "classification.business.critical",
+        "classification.business.restricted"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 30,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "Why correct: CompTIA lists common business labels like Public/Private/Sensitive/Confidential/Critical/Restricted.",
+      "misconceptionTags": [
+        "classification.business.public_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q054",
+      "type": "mcq",
+      "stem": "In GDPR terminology, which role determines the reasons and methods for processing personal data?",
+      "options": {
+        "A": "Data processor",
+        "B": "Data controller",
+        "C": "Data custodian",
+        "D": "Data subject"
+      },
+      "answer": "B",
+      "explanation": "Why correct: The controller determines purpose and means of processing; processors act on controller’s behalf. Trap to avoid: Custodians safeguard data; subjects are the individuals.",
+      "tags": [
+        "data_roles.data_controller",
+        "data_roles.data_processor",
+        "data_roles.data_subject"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 35,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "Why correct: The controller determines purpose and means of processing; processors act on controller’s behalf.",
+      "misconceptionTags": [
+        "data_roles.data_controller_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q055",
+      "type": "mcq",
+      "stem": "A cloud payment service handling card data on behalf of a retailer is best described as the retailer’s:",
+      "options": {
+        "A": "Data controller",
+        "B": "Data subject",
+        "C": "Data processor",
+        "D": "Data steward"
+      },
+      "answer": "C",
+      "explanation": "Why correct: The service processes data on behalf of the controller (retailer) → it’s a processor. Trap to avoid: The controller is the entity deciding why/how the data is processed.",
+      "tags": [
+        "data_roles.data_processor",
+        "data_roles.data_controller"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "Why correct: The service processes data on behalf of the controller (retailer) → it’s a processor.",
+      "misconceptionTags": [
+        "data_roles.data_processor_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q056",
+      "type": "mcq",
+      "stem": "Under GDPR, the individual who leads an organization’s privacy efforts is the:",
+      "options": {
+        "A": "Chief risk officer",
+        "B": "Data protection officer (DPO)",
+        "C": "Data custodian",
+        "D": "Data owner"
+      },
+      "answer": "B",
+      "explanation": "Why correct: GDPR formalizes the Data Protection Officer role and requires autonomy to carry out duties. Trap to avoid: Don’t confuse with data owner/controller roles.",
+      "tags": [
+        "privacy.dpo",
+        "privacy.legal_implications"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 30,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "Why correct: GDPR formalizes the Data Protection Officer role and requires autonomy to carry out duties.",
+      "misconceptionTags": [
+        "privacy.dpo_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q057",
+      "type": "mcq",
+      "stem": "Data minimization means an organization should:",
+      "options": {
+        "A": "Collect everything; delete later",
+        "B": "Collect the smallest amount of data necessary for business needs",
+        "C": "Encrypt all data instead of minimizing",
+        "D": "Store data forever for analytics"
+      },
+      "answer": "B",
+      "explanation": "Why correct: Minimization is collecting only what you need; less data retained means less risk. Trap to avoid: Encryption doesn’t justify hoarding data.",
+      "tags": [
+        "privacy.lifecycle.data_minimization",
+        "privacy.lifecycle.overview"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 30,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "Why correct: Minimization is collecting only what you need; less data retained means less risk.",
+      "misconceptionTags": [
+        "privacy.lifecycle.data_minimization_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q058",
+      "type": "mcq",
+      "stem": "Purpose limitation requires that data be used:",
+      "options": {
+        "A": "Only for the purpose originally collected and consented to",
+        "B": "For any business purpose once collected",
+        "C": "Only after hashing",
+        "D": "Only when stored on-prem"
+      },
+      "answer": "A",
+      "explanation": "Why correct: Purpose limitation restricts use to the originally agreed purpose. Trap to avoid: A common trap is 'we already have it, so we can use it for marketing'.",
+      "tags": [
+        "privacy.lifecycle.purpose_limitation"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 35,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "Why correct: Purpose limitation restricts use to the originally agreed purpose.",
+      "misconceptionTags": [
+        "privacy.lifecycle.purpose_limitation_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q059",
+      "type": "multi_select",
+      "stem": "Under GDPR, which are valid reasons an individual may request erasure (right to be forgotten)? (Select all that apply.)",
+      "options": {
+        "A": "Data no longer needed for its original purpose",
+        "B": "Individual withdraws consent",
+        "C": "Data was unlawfully processed",
+        "D": "Organization prefers to keep it for convenience",
+        "E": "There is a legal obligation to erase the data"
+      },
+      "answers": [
+        "A",
+        "B",
+        "C",
+        "E"
+      ],
+      "explanation": "Why correct: GDPR erasure triggers include no longer needed, consent withdrawn, unlawful processing, and legal obligation (among others). Trap to avoid: Keeping data 'for convenience' is the opposite of minimization/retention discipline.",
+      "tags": [
+        "privacy.right_to_be_forgotten",
+        "privacy.right_to_be_forgotten.conditions"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "Why correct: GDPR erasure triggers include no longer needed, consent withdrawn, unlawful processing, and legal obligation (among others).",
+      "misconceptionTags": [
+        "privacy.right_to_be_forgotten_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "E": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      }
+    },
+    {
+      "id": "ch17.q060",
+      "type": "scenario_mcq",
+      "stem": "You hash customer IDs in a dataset, but an attacker can compute hashes of all possible IDs and match them. What attack is this?",
+      "options": {
+        "A": "Pass-the-hash",
+        "B": "Rainbow table attack",
+        "C": "Token replay",
+        "D": "Side-channel attack"
+      },
+      "answer": "B",
+      "explanation": "Why correct: Rainbow table attacks precompute candidate hashes and compare them to hashed values in a dataset. Trap to avoid: Hashing isn’t encryption; if the input space is guessable, hashing can be reversed by lookup.",
+      "tags": [
+        "pet.hashing",
+        "pet.rainbow_table_attack",
+        "pet.obfuscation"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "2.2"
+      ],
+      "rationaleCorrect": "Why correct: Rainbow table attacks precompute candidate hashes and compare them to hashed values in a dataset.",
+      "misconceptionTags": [
+        "pet.hashing_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch17.q061",
+      "type": "matching",
+      "stem": "Match the risk management strategy to the best example.",
+      "left": [
+        "Mitigation",
+        "Avoidance",
+        "Transference",
+        "Acceptance"
+      ],
+      "right": [
+        "Add controls to reduce likelihood/impact",
+        "Stop the risky activity entirely",
+        "Buy insurance to shift financial impact",
+        "Deliberately take no further action after analysis"
+      ],
+      "pairs": {
+        "Mitigation": "Add controls to reduce likelihood/impact",
+        "Avoidance": "Stop the risky activity entirely",
+        "Transference": "Buy insurance to shift financial impact",
+        "Acceptance": "Deliberately take no further action after analysis"
+      },
+      "explanation": "Why correct: Mitigate=controls, Avoid=change business to eliminate risk, Transfer=shift impact, Accept=conscious no-additional-action. Trap to avoid: A frequent trap is calling insurance 'mitigation' or calling neglect 'acceptance'.",
+      "tags": [
+        "risk.management.mitigation",
+        "risk.management.avoidance",
+        "risk.management.transference",
+        "risk.management.acceptance"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "5.2"
+      ],
+      "rationaleCorrect": "Why correct: Mitigate=controls, Avoid=change business to eliminate risk, Transfer=shift impact, Accept=conscious no-additional-action.",
+      "misconceptionTags": [
+        "risk.management.mitigation_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch17.q062",
+      "type": "ordering",
+      "stem": "Order the privacy information life cycle phases as discussed in the chapter (high level).",
+      "items": [
+        "Collect (minimize)",
+        "Use (purpose limitation)",
+        "Retain (as long as necessary)",
+        "Dispose (secure destruction)"
+      ],
+      "correct_order": [
+        "Collect (minimize)",
+        "Use (purpose limitation)",
+        "Retain (as long as necessary)",
+        "Dispose (secure destruction)"
+      ],
+      "explanation": "Why correct: Privacy controls apply end-to-end: minimize collection, restrict use, time-box retention, destroy securely. Trap to avoid: People often forget the 'end of life' piece and keep data forever.",
+      "tags": [
+        "privacy.lifecycle.overview",
+        "privacy.lifecycle.data_minimization",
+        "privacy.lifecycle.purpose_limitation",
+        "privacy.lifecycle.retention",
+        "privacy.lifecycle.secure_destruction"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "Why correct: Privacy controls apply end-to-end: minimize collection, restrict use, time-box retention, destroy securely.",
+      "misconceptionTags": [
+        "privacy.lifecycle.overview_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch17.q063",
+      "type": "matching",
+      "stem": "Match the privacy/data role to its definition.",
+      "left": [
+        "Data subject",
+        "Data controller",
+        "Data processor",
+        "Data steward",
+        "Data custodian"
+      ],
+      "right": [
+        "Individual whose personal data is processed",
+        "Entity deciding purpose and methods of processing",
+        "Service provider processing on behalf of controller",
+        "Person delegated to carry out controller intent",
+        "Team responsible for secure safekeeping (no controller authority)"
+      ],
+      "pairs": {
+        "Data subject": "Individual whose personal data is processed",
+        "Data controller": "Entity deciding purpose and methods of processing",
+        "Data processor": "Service provider processing on behalf of controller",
+        "Data steward": "Person delegated to carry out controller intent",
+        "Data custodian": "Team responsible for secure safekeeping (no controller authority)"
+      },
+      "explanation": "Why correct: Controller decides; processor executes for controller; stewards implement controller intent; custodians safeguard; subjects are the people. Trap to avoid: The trap is swapping controller vs processor or steward vs custodian.",
+      "tags": [
+        "data_roles.data_subject",
+        "data_roles.data_controller",
+        "data_roles.data_processor",
+        "data_roles.data_steward",
+        "data_roles.data_custodian"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 95,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "Why correct: Controller decides; processor executes for controller; stewards implement controller intent; custodians safeguard; subjects are the people.",
+      "misconceptionTags": [
+        "data_roles.data_subject_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch17.q064",
+      "type": "ordering",
+      "stem": "During a privacy-related breach, order the immediate organizational actions in a reasonable sequence consistent with the chapter’s guidance.",
+      "items": [
+        "Activate incident response plan",
+        "Notify key personnel / escalate serious incidents",
+        "Determine breach notification obligations (jurisdiction/industry)",
+        "Notify affected parties and regulators as required",
+        "Consult legal counsel"
+      ],
+      "correct_order": [
+        "Activate incident response plan",
+        "Notify key personnel / escalate serious incidents",
+        "Consult legal counsel",
+        "Determine breach notification obligations (jurisdiction/industry)",
+        "Notify affected parties and regulators as required"
+      ],
+      "explanation": "Why correct: The chapter stresses immediate IR activation and the complexity of overlapping notification laws—legal counsel is critical early. Trap to avoid: Don’t jump straight to public notification without coordinating IR and legal assessment.",
+      "tags": [
+        "privacy.breach_notification",
+        "privacy.breach_notification.legal_counsel",
+        "privacy.breach_notification.jurisdiction_variance"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "Why correct: The chapter stresses immediate IR activation and the complexity of overlapping notification laws—legal counsel is critical early.",
+      "misconceptionTags": [
+        "privacy.breach_notification_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch17.q065",
+      "type": "multi_select",
+      "stem": "Which techniques are explicitly presented as tools for data obfuscation / privacy enhancement in the chapter? (Select all that apply.)",
+      "options": {
+        "A": "Hashing",
+        "B": "Tokenization",
+        "C": "Data masking",
+        "D": "Rainbow tables",
+        "E": "Token replay"
+      },
+      "answers": [
+        "A",
+        "B",
+        "C"
+      ],
+      "explanation": "Why correct: The chapter lists hashing, tokenization, and data masking as obfuscation tools; rainbow tables are an attack on hashes. Trap to avoid: Rainbow tables are a threat, not a protection.",
+      "tags": [
+        "pet.obfuscation",
+        "pet.hashing",
+        "pet.tokenization",
+        "pet.data_masking",
+        "pet.rainbow_table_attack"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "Why correct: The chapter lists hashing, tokenization, and data masking as obfuscation tools; rainbow tables are an attack on hashes.",
+      "misconceptionTags": [
+        "pet.obfuscation_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "E": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    }
+  ]
+}

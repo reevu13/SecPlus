@@ -1,0 +1,158 @@
+{
+  "pack_id": "ch4",
+  "version": "1.0.0",
+  "confusion_pairs": [
+    {
+      "id": "cp-spear-vs-whale",
+      "title": "Spear phishing vs Whaling",
+      "a": { "term": "Spear phishing", "definition": "Targeted phishing aimed at specific individuals or teams with customized context." },
+      "b": { "term": "Whaling", "definition": "Targeted phishing aimed at senior executives (CEO/CFO), often involving urgent approvals or money." },
+      "bullets": [
+        "Audience: specific staff/team vs executives",
+        "Common lure: internal context vs urgent high-impact requests",
+        "Exam clue: CEO/CFO mentioned → whaling"
+      ]
+    },
+    {
+      "id": "cp-typo-vs-pharm",
+      "title": "Typosquatting vs Pharming",
+      "a": { "term": "Typosquatting", "definition": "Relies on user mistyping a URL and landing on a lookalike domain." },
+      "b": { "term": "Pharming", "definition": "Redirects users by altering name resolution (hosts file/DNS) or malware, even if URL was typed correctly." },
+      "bullets": [
+        "Trigger: user typo vs DNS/hosts manipulation",
+        "Victim behavior: mistake required vs no mistake required",
+        "Defense: register typo domains vs secure DNS/endpoints"
+      ]
+    },
+    {
+      "id": "cp-bf-vs-spray",
+      "title": "Brute force vs Password spraying",
+      "a": { "term": "Brute force", "definition": "Try many password guesses until one succeeds (often focused on a single account/target)." },
+      "b": { "term": "Password spraying", "definition": "Try one/few common passwords across many accounts to avoid lockout controls." },
+      "bullets": [
+        "Pattern: many passwords → one account vs few passwords → many accounts",
+        "Lockouts: brute force triggers lockouts faster; spraying is designed to dodge them",
+        "Exam clue: 'common password across many users' → spraying"
+      ]
+    },
+    {
+      "id": "cp-online-vs-offline",
+      "title": "Online vs Offline password cracking",
+      "a": { "term": "Online attack", "definition": "Guesses are tried against a live login system with defenses (rate limits, lockouts, MFA)." },
+      "b": { "term": "Offline attack", "definition": "Attacker cracks stolen hashes locally; typically faster and stealthier than online guessing." },
+      "bullets": [
+        "Defenses: online has lockouts/rate limits; offline usually does not",
+        "Speed: offline often faster if hashes are obtained",
+        "Detection: online creates auth logs; offline may not"
+      ]
+    },
+    {
+      "id": "cp-misinfo-vs-disinfo",
+      "title": "Misinformation vs Disinformation",
+      "a": { "term": "Misinformation", "definition": "False information spread without intent to mislead (often accidental)." },
+      "b": { "term": "Disinformation", "definition": "False information spread intentionally to mislead or manipulate." },
+      "bullets": [
+        "Key difference: intent",
+        "Both can amplify via social media dynamics",
+        "Response: use TRUST (Tell/Ready/Understand/Strategize/Track)"
+      ]
+    }
+  ],
+  "tag_rules": {
+    "se_authority": {
+      "rule": "If a request leans on role/title (“I’m the boss/IT/government”), treat it as untrusted until verified via a known channel.",
+      "micro_example": "Caller: “I’m HR—send employee SSNs now.” You: “I’ll call HR using the internal directory number.”",
+      "confusion_pair_id": ""
+    },
+    "se_intimidation": {
+      "rule": "Threats (“you’ll be fired/arrested”) are a red flag. Real processes don’t require panic compliance.",
+      "micro_example": "Email: “Pay now or legal action.” You: report it; verify via official vendor contact.",
+      "confusion_pair_id": ""
+    },
+    "se_social_proof": {
+      "rule": "‘Everyone already did it’ is social proof bait. Verify independently; don’t follow the crowd.",
+      "micro_example": "Message: “All Finance clicked this link.” You: ask Finance lead via Teams, not the email link.",
+      "confusion_pair_id": ""
+    },
+    "se_urgency": {
+      "rule": "Urgency is used to shut down thinking. Slow down, verify, then act.",
+      "micro_example": "CEO ‘needs gift cards in 10 minutes’: verify with a call-back and approval workflow.",
+      "confusion_pair_id": ""
+    },
+    "phishing": {
+      "rule": "Phishing tries to steal creds/info using deceptive messages—verify links and requests before acting.",
+      "micro_example": "Email login prompt → open the site by typing the known URL, not clicking.",
+      "confusion_pair_id": ""
+    },
+    "spear_phishing": {
+      "rule": "Customization (names, projects, teams) is a spear-phish tell—treat it as higher risk, not more trustworthy.",
+      "micro_example": "Invoice mentions your real vendor + project code → still verify via procurement system.",
+      "confusion_pair_id": "cp-spear-vs-whale"
+    },
+    "whaling": {
+      "rule": "Executive-targeted, high-impact requests are whaling—use strict verification and dual-approval.",
+      "micro_example": "CFO email: “Wire funds now” → call CFO via known number + require second approver.",
+      "confusion_pair_id": "cp-spear-vs-whale"
+    },
+    "pretexting": {
+      "rule": "A believable story is not evidence. Verification beats storytelling every time.",
+      "micro_example": "‘Vendor tech support’ wants remote access → verify ticket + vendor contact + scope.",
+      "confusion_pair_id": ""
+    },
+    "bec": {
+      "rule": "BEC is email-driven fraud using legit-looking sender identities. Defend with MFA + training + payment verification controls.",
+      "micro_example": "New bank account details via email → verify by phone with vendor’s known number before paying.",
+      "confusion_pair_id": ""
+    },
+    "typosquatting": {
+      "rule": "Typosquatting depends on human typing errors—watch domains carefully and use bookmarks/password managers.",
+      "micro_example": "paypaI.com (capital i) vs paypal.com → don’t trust; retype official URL.",
+      "confusion_pair_id": "cp-typo-vs-pharm"
+    },
+    "pharming": {
+      "rule": "Pharming can redirect you even when you type the correct URL—protect endpoints/DNS and watch certificate warnings.",
+      "micro_example": "Correct URL but ‘certificate mismatch’ appears → stop; suspect DNS/hosts compromise.",
+      "confusion_pair_id": "cp-typo-vs-pharm"
+    },
+    "password_spraying": {
+      "rule": "Spraying = few common passwords across many users to dodge lockouts; detect with unusual low-frequency attempts across accounts.",
+      "micro_example": "One password attempted across 200 users overnight → spraying pattern.",
+      "confusion_pair_id": "cp-bf-vs-spray"
+    },
+    "brute_force": {
+      "rule": "Brute force = many guesses until success; stop with MFA, rate limiting, lockouts, and strong passwords.",
+      "micro_example": "1 account gets 5,000 password attempts → brute force.",
+      "confusion_pair_id": "cp-bf-vs-spray"
+    },
+    "online_vs_offline": {
+      "rule": "Online attacks hit the login system; offline cracking happens after hashes are stolen—prevent hash theft and use strong hashing + salts.",
+      "micro_example": "Stolen /etc/shadow dumped → attacker cracks offline with tools locally.",
+      "confusion_pair_id": "cp-online-vs-offline"
+    },
+    "rainbow_tables": {
+      "rule": "Rainbow tables speed up cracking by looking up precomputed hashes—salts/peppers and strong hashing reduce their usefulness.",
+      "micro_example": "Unsalted MD5 hashes → rainbow tables become highly effective.",
+      "confusion_pair_id": ""
+    },
+    "hashing_basics": {
+      "rule": "Hashes are one-way; attackers crack by guessing plaintext and matching hashes, not by reversing.",
+      "micro_example": "Guess ‘Password123!’ → hash it → compare to stolen hash list.",
+      "confusion_pair_id": ""
+    },
+    "salts_peppers": {
+      "rule": "Salt/pepper adds extra data before hashing so identical passwords don’t share the same hash, breaking precomputed lookup value.",
+      "micro_example": "Same password across users → different hashes due to unique salts.",
+      "confusion_pair_id": ""
+    },
+    "mdm": {
+      "rule": "Disinformation is intentional deception; misinformation can be accidental. Use TRUST to respond as an organization.",
+      "micro_example": "False rumor spreads online → publish verified facts + coordinate comms using TRUST steps.",
+      "confusion_pair_id": "cp-misinfo-vs-disinfo"
+    },
+    "trust_model": {
+      "rule": "TRUST = Tell, Ready, Understand, Strategize, Track. It’s your response playbook to MDM campaigns.",
+      "micro_example": "Tell the facts publicly, ready internal comms team, assess narrative, plan response, track impact.",
+      "confusion_pair_id": ""
+    }
+  }
+}

@@ -1,0 +1,14 @@
+# Source material is local-only. Never commit EPUBs.
+content/source/
+
+# Never commit extracted source text.
+content/_source_text/
+
+# Temporary extraction outputs.
+content/_extract_tmp/
+content/_epub_extract/
+content/source_extracted/
+content/tmp/
+content/_tmp/
+node_modules
+.next

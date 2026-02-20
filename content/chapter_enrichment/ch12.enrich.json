@@ -1,0 +1,459 @@
+{
+  "pack_id": "ch12",
+  "version": "1.0.0",
+  "confusion_pairs": [
+    {
+      "id": "cp.fail_open_vs_fail_closed",
+      "title": "Fail-open vs Fail-closed",
+      "a": {
+        "term": "Fail-open",
+        "definition": "If the security device fails, traffic continues to flow (availability wins, security visibility/control may drop)."
+      },
+      "b": {
+        "term": "Fail-closed",
+        "definition": "If the device fails, traffic is blocked (security wins, availability may drop)."
+      },
+      "bullets": [
+        "Fail-open preserves business continuity but can create an unprotected window.",
+        "Fail-closed preserves enforcement but can cause outages if the device is a chokepoint.",
+        "Choose based on business impact: which failure hurts more—downtime or reduced security?",
+        "Inline devices may support fail-open bypass, but not all failures trigger it."
+      ]
+    },
+    {
+      "id": "cp.air_gap_vs_vlan",
+      "title": "Air gap vs VLAN segmentation",
+      "a": {
+        "term": "Air gap (physical isolation)",
+        "definition": "No network path exists between systems; data movement requires physical transfer."
+      },
+      "b": {
+        "term": "VLAN (logical segmentation)",
+        "definition": "Software-defined separation of broadcast domains on shared switching infrastructure."
+      },
+      "bullets": [
+        "Air gaps stop remote access by design; VLANs still rely on correct configs and enforcement.",
+        "Air gaps raise operational friction; VLANs scale and are easier to manage.",
+        "VLAN attacks target misconfigurations (e.g., trunking/VLAN hopping); air gaps are bypassed via removable media.",
+        "Use air gaps for 'cannot ever leak' zones; use VLANs for most enterprise segmentation."
+      ]
+    },
+    {
+      "id": "cp.sdn_vs_sdwan",
+      "title": "SDN vs SD-WAN",
+      "a": {
+        "term": "SDN",
+        "definition": "Centralized software control of network behavior (usually inside a datacenter/campus) via controllers."
+      },
+      "b": {
+        "term": "SD-WAN",
+        "definition": "Software-defined overlay for wide-area connectivity that can blend MPLS/4G/5G/broadband with policy-based routing."
+      },
+      "bullets": [
+        "SDN is about controlling switching/routing inside a network; SD-WAN is about stitching sites together efficiently.",
+        "SDN often drives micro-segmentation and dynamic policy; SD-WAN drives path selection and resilience across links.",
+        "SD-WAN is a common building block inside SASE deployments."
+      ]
+    },
+    {
+      "id": "cp.sase_vs_vpn",
+      "title": "SASE vs Traditional VPN",
+      "a": {
+        "term": "SASE",
+        "definition": "A cloud-delivered model combining SD-WAN + secure access (e.g., ZTNA/Zero Trust) + security services (firewall, CASB, etc.)."
+      },
+      "b": {
+        "term": "Traditional VPN",
+        "definition": "Creates an encrypted tunnel to a trusted network; typically focuses on transport rather than full security stack."
+      },
+      "bullets": [
+        "VPN gives connectivity; SASE gives connectivity + policy enforcement + security inspection at scale.",
+        "SASE aims to secure users/devices wherever they are, not just when they 'dial in'.",
+        "VPNs can be part of SASE, but SASE adds identity-aware policy and cloud security controls."
+      ]
+    },
+    {
+      "id": "cp.ipsec_vpn_vs_tls_vpn",
+      "title": "IPSec VPN vs TLS (SSL) VPN",
+      "a": {
+        "term": "IPSec VPN",
+        "definition": "Layer 3 VPN using IPSec; supports tunnel/transport modes and is common for site-to-site and broader traffic types."
+      },
+      "b": {
+        "term": "TLS (SSL) VPN",
+        "definition": "VPN that uses TLS; can be portal-based (browser) or full tunnel, often easier for remote access without heavy client config."
+      },
+      "bullets": [
+        "IPSec is great for network-layer tunneling; TLS VPN is great for user/app access and clientless portals.",
+        "TLS VPNs can segment access per application more granularly; IPSec often feels like 'you are on the network'.",
+        "On exams and in the wild, 'SSL VPN' usually means modern TLS."
+      ]
+    },
+    {
+      "id": "cp.full_tunnel_vs_split_tunnel",
+      "title": "Full-tunnel vs Split-tunnel VPN",
+      "a": {
+        "term": "Full-tunnel",
+        "definition": "All traffic goes through the VPN tunnel, including general Internet traffic."
+      },
+      "b": {
+        "term": "Split-tunnel",
+        "definition": "Only traffic destined for the remote trusted network goes through the VPN; other traffic goes directly to the Internet."
+      },
+      "bullets": [
+        "Full tunnel improves security/monitoring but increases bandwidth load on the VPN site.",
+        "Split tunnel reduces bandwidth cost but exposes non-corporate traffic to untrusted networks and reduces visibility.",
+        "Coffee-shop Wi‑Fi + split tunnel is a classic 'leak my traffic' combo."
+      ]
+    },
+    {
+      "id": "cp.ids_vs_ips",
+      "title": "IDS vs IPS",
+      "a": {
+        "term": "IDS",
+        "definition": "Detects suspicious traffic/behavior and alerts; typically passive (tap/SPAN) and cannot block."
+      },
+      "b": {
+        "term": "IPS",
+        "definition": "Detects and actively blocks/controls traffic; must be inline to stop packets."
+      },
+      "bullets": [
+        "Inline placement enables prevention but introduces a potential point of failure.",
+        "Passive monitoring avoids outages but only gives visibility and alerts.",
+        "Both can be signature-based or anomaly-based; prevention is the differentiator."
+      ]
+    },
+    {
+      "id": "cp.ngfw_vs_utm",
+      "title": "NGFW vs UTM",
+      "a": {
+        "term": "NGFW",
+        "definition": "Next-generation firewall with deep inspection and app awareness (Layer 7 features) in addition to Layer 4 controls."
+      },
+      "b": {
+        "term": "UTM",
+        "definition": "Unified threat management: an all-in-one security box (firewall + IDS/IPS + filtering + more), often aimed at simpler deployments."
+      },
+      "bullets": [
+        "NGFW is often higher throughput and more specialized; UTM is broader and more 'out-of-box'.",
+        "UTM is common in small/mid orgs; NGFW often needs more tuning and expertise.",
+        "Markets blur, but exam intent: NGFW = app-aware firewalling; UTM = combined security suite."
+      ]
+    },
+    {
+      "id": "cp.forward_proxy_vs_reverse_proxy",
+      "title": "Forward proxy vs Reverse proxy",
+      "a": {
+        "term": "Forward proxy",
+        "definition": "Sits in front of clients; forwards client requests to servers, can anonymize and enforce outbound policy."
+      },
+      "b": {
+        "term": "Reverse proxy",
+        "definition": "Sits in front of servers; receives client requests and forwards to backend servers, often for caching/load balancing."
+      },
+      "bullets": [
+        "Forward proxy = controls users going out; reverse proxy = protects and scales services coming in.",
+        "Forward proxies help with web filtering and egress control; reverse proxies help with performance and shielding origin servers.",
+        "Both can cache and apply policy—direction of who they represent is the key."
+      ]
+    },
+    {
+      "id": "cp.dnssec_vs_dns_filtering",
+      "title": "DNSSEC vs DNS filtering",
+      "a": {
+        "term": "DNSSEC",
+        "definition": "Authenticates DNS data using digital signatures to prevent tampering (integrity/origin), not confidentiality."
+      },
+      "b": {
+        "term": "DNS filtering",
+        "definition": "Blocks/redirects queries to known-bad domains using blocklists, reputation feeds, and policy rules."
+      },
+      "bullets": [
+        "DNSSEC answers 'is this DNS answer authentic?'; DNS filtering answers 'should we allow this domain?'",
+        "DNSSEC can stop poisoning; DNS filtering can stop users reaching phishing/malware domains quickly.",
+        "They complement each other—different problems."
+      ]
+    },
+    {
+      "id": "cp.domain_hijacking_vs_dns_poisoning",
+      "title": "Domain hijacking vs DNS poisoning",
+      "a": {
+        "term": "Domain hijacking",
+        "definition": "Attacker takes control of a domain’s registration/account and changes records at the source."
+      },
+      "b": {
+        "term": "DNS poisoning (cache poisoning)",
+        "definition": "Attacker injects false DNS answers so victims resolve a domain to attacker-controlled IPs."
+      },
+      "bullets": [
+        "Hijacking changes the truth at the registrar/authoritative source; poisoning tricks resolvers/caches about the truth.",
+        "Hijacking affects everyone resolving the domain; poisoning may affect only specific networks/caches.",
+        "DNSSEC helps against poisoning; registrar security controls help against hijacking."
+      ]
+    },
+    {
+      "id": "cp.acl_vs_firewall_rules",
+      "title": "Network ACLs vs Firewall rules",
+      "a": {
+        "term": "Network ACL",
+        "definition": "Permit/deny rules on network devices (routers/switches/cloud VPCs) controlling traffic flows, often stateless and order-based."
+      },
+      "b": {
+        "term": "Firewall rules",
+        "definition": "Policy rules on a firewall appliance/host that may be stateful, application-aware, and tied to security zones."
+      },
+      "bullets": [
+        "ACLs are a blunt traffic filter; firewalls are a more complete security control (often stateful).",
+        "ACLs commonly live 'inside' network fabric; firewalls commonly live at trust boundaries/DMZ edges.",
+        "Both are rule lists—context (state/app awareness/placement) is what changes their power."
+      ]
+    }
+  ],
+  "tag_rules": {
+    "network.attack_surface": {
+      "rule": "Attack surface = every place an attacker can touch: services, ports, management interfaces, exposed features.",
+      "micro_example": "You scan your public IPs and list open ports + admin panels. That list is your external attack surface.",
+      "confusion_pair_id": "none"
+    },
+    "network.security_zones": {
+      "rule": "Security zones separate trust/sensitivity levels; crossing zones should force controls and logging.",
+      "micro_example": "DMZ web server zone is isolated from the internal database zone with firewall rules in between.",
+      "confusion_pair_id": "none"
+    },
+    "network.device_placement": {
+      "rule": "Where you place devices (border, DC edge, between VLANs) decides what they can see and protect.",
+      "micro_example": "Put an IPS inline at the DC border to block inbound exploits; put sensors on taps for visibility.",
+      "confusion_pair_id": "none"
+    },
+    "network.connectivity": {
+      "rule": "Connectivity planning is security planning: redundancy, provider features, medium, and path diversity matter.",
+      "micro_example": "Two different ISPs on physically separate paths prevents a single fiber cut taking you offline.",
+      "confusion_pair_id": "none"
+    },
+    "network.failure_modes.fail_open": {
+      "rule": "Fail-open means 'keep traffic flowing' when the device dies—great for uptime, risky for enforcement.",
+      "micro_example": "Inline IPS power failure → bypass engages → traffic flows but you lose prevention/inspection.",
+      "confusion_pair_id": "cp.fail_open_vs_fail_closed"
+    },
+    "network.failure_modes.fail_closed": {
+      "rule": "Fail-closed means 'block traffic' when the device dies—great for control, brutal for availability.",
+      "micro_example": "Firewall crash → no packets pass → business outage, but nothing sneaks through uninspected.",
+      "confusion_pair_id": "cp.fail_open_vs_fail_closed"
+    },
+    "network.physical_isolation.air_gap": {
+      "rule": "Air gap = no network link. It’s the nuclear option for stopping remote access.",
+      "micro_example": "A classified workstation has zero network cables/Wi‑Fi. Data moves only via approved removable media.",
+      "confusion_pair_id": "cp.air_gap_vs_vlan"
+    },
+    "network.logical_segmentation.vlan": {
+      "rule": "VLANs segment at Layer 2 using tags; security depends on correct configuration and enforcement.",
+      "micro_example": "Guest Wi‑Fi VLAN can’t reach the internal admin VLAN; traffic must cross a firewall/router with rules.",
+      "confusion_pair_id": "cp.air_gap_vs_vlan"
+    },
+    "network.high_availability": {
+      "rule": "High availability designs remove single points of failure and allow maintenance without downtime.",
+      "micro_example": "Two web servers behind a load balancer keep the site up during patching or a node failure.",
+      "confusion_pair_id": "none"
+    },
+    "network.sdn": {
+      "rule": "SDN centralizes control of network behavior; it can enable dynamic segmentation and quarantine.",
+      "micro_example": "Controller detects a risky device and pushes a rule to isolate it into a quarantine segment.",
+      "confusion_pair_id": "cp.sdn_vs_sdwan"
+    },
+    "network.sdwan": {
+      "rule": "SD-WAN uses overlays + policy routing across WAN links to improve resilience and control cost.",
+      "micro_example": "Video calls use the lowest-latency link; bulk backups use cheaper broadband overnight.",
+      "confusion_pair_id": "cp.sdn_vs_sdwan"
+    },
+    "network.sase": {
+      "rule": "SASE = cloud-delivered secure access: SD-WAN + Zero Trust + security services for users anywhere.",
+      "micro_example": "Remote users connect to nearest SASE PoP; web traffic is inspected and policy-enforced in the cloud.",
+      "confusion_pair_id": "cp.sase_vs_vpn"
+    },
+    "network.segmentation": {
+      "rule": "Segmentation limits blast radius: compromise one zone, don’t get the whole kingdom.",
+      "micro_example": "HR workstations can’t talk to finance databases except through a specific app gateway.",
+      "confusion_pair_id": "none"
+    },
+    "network.screened_subnet.dmz": {
+      "rule": "A screened subnet (DMZ) hosts less-trusted, Internet-facing services while shielding the private network.",
+      "micro_example": "Public web server sits in DMZ; only HTTP/HTTPS inbound and only DB port outbound to internal DB.",
+      "confusion_pair_id": "none"
+    },
+    "network.traffic.east_west": {
+      "rule": "East‑west traffic = lateral traffic inside the datacenter; treat it as untrusted in Zero Trust designs.",
+      "micro_example": "A compromised app server tries to reach other servers laterally—microsegmentation blocks it.",
+      "confusion_pair_id": "none"
+    },
+    "zero_trust.overview": {
+      "rule": "Zero Trust assumes no implicit trust: verify every request continuously using identity + device + context.",
+      "micro_example": "User logs in from a new country on an unmanaged laptop → extra MFA or access denied.",
+      "confusion_pair_id": "none"
+    },
+    "zero_trust.control_plane": {
+      "rule": "Control plane = the brains: adaptive identity, threat scope reduction, policy decisions and execution.",
+      "micro_example": "Policy Engine checks SIEM + IAM + device posture; Policy Admin issues a session token or kills the session.",
+      "confusion_pair_id": "none"
+    },
+    "zero_trust.data_plane": {
+      "rule": "Data plane = where traffic flows: subjects/systems access resources through enforcement points and zones.",
+      "micro_example": "A device’s request passes through a Policy Enforcement Point before it can reach the enterprise resource.",
+      "confusion_pair_id": "none"
+    },
+    "network.nac": {
+      "rule": "NAC decides who gets on the network and where they land (normal VLAN vs quarantine) based on posture/policy.",
+      "micro_example": "Unpatched laptop connects → NAC drops it into remediation VLAN until updates + AV are compliant.",
+      "confusion_pair_id": "none"
+    },
+    "network.8021x_eap": {
+      "rule": "802.1X is port-based authentication using EAP—no creds, no network access.",
+      "micro_example": "A switch port stays 'unauthorized' until the supplicant authenticates via RADIUS using EAP.",
+      "confusion_pair_id": "none"
+    },
+    "network.port_security": {
+      "rule": "Port security limits MAC addresses per switch port to reduce spoofing and CAM table overflow shenanigans.",
+      "micro_example": "User port allows 1 MAC; plugging a rogue switch with many devices triggers a violation and shuts the port.",
+      "confusion_pair_id": "none"
+    },
+    "network.stp_loop_prevention": {
+      "rule": "Loop prevention (STP/BPDU protections) stops Layer 2 loops from melting your network into a broadcast storm.",
+      "micro_example": "Someone plugs both ends of a cable into switches → STP blocks one port to break the loop.",
+      "confusion_pair_id": "none"
+    },
+    "network.dhcp_snooping": {
+      "rule": "DHCP snooping blocks rogue DHCP servers and can validate DHCP message integrity on switch ports.",
+      "micro_example": "Attacker runs DHCP server on a user port → switch drops offers because only uplink is 'trusted'.",
+      "confusion_pair_id": "none"
+    },
+    "vpn.ipsec": {
+      "rule": "IPSec is a suite for encrypting/authenticating IP traffic; commonly used for site-to-site VPN tunnels.",
+      "micro_example": "Branch router builds an IPSec tunnel to HQ so internal subnets route securely over the Internet.",
+      "confusion_pair_id": "cp.ipsec_vpn_vs_tls_vpn"
+    },
+    "vpn.tls_vpn": {
+      "rule": "TLS VPNs secure access using TLS; can be clientless portals or full tunnels and often allow app-level segmentation.",
+      "micro_example": "User hits a web portal, authenticates, and accesses internal apps without a full network-layer tunnel.",
+      "confusion_pair_id": "cp.ipsec_vpn_vs_tls_vpn"
+    },
+    "vpn.tunnel.full": {
+      "rule": "Full-tunnel sends everything through VPN: more security visibility, more bandwidth/latency cost.",
+      "micro_example": "Remote laptop routes all Internet browsing via corporate proxy through the VPN for inspection.",
+      "confusion_pair_id": "cp.full_tunnel_vs_split_tunnel"
+    },
+    "vpn.tunnel.split": {
+      "rule": "Split-tunnel sends only corporate-destined traffic through VPN: saves bandwidth, leaks visibility and raises risk.",
+      "micro_example": "Teams traffic goes through VPN, but general web browsing goes direct—untrusted Wi‑Fi can sniff metadata.",
+      "confusion_pair_id": "cp.full_tunnel_vs_split_tunnel"
+    },
+    "appliance.jump_server": {
+      "rule": "Jump servers (jump boxes) are hardened, monitored stepping-stones for admin access across zones.",
+      "micro_example": "Admins RDP/SSH into the jump box, then manage servers in a restricted management VLAN with full audit logs.",
+      "confusion_pair_id": "none"
+    },
+    "appliance.load_balancer": {
+      "rule": "Load balancers spread traffic across servers for performance and availability; algorithms matter.",
+      "micro_example": "Round-robin for simplicity; least-connection when session load varies; sticky sessions when state is local.",
+      "confusion_pair_id": "none"
+    },
+    "appliance.proxy": {
+      "rule": "Proxies relay requests and can filter, cache, and enforce policy—know whether they represent clients or servers.",
+      "micro_example": "A forward proxy blocks gambling sites for users; a reverse proxy fronts web servers and caches static content.",
+      "confusion_pair_id": "cp.forward_proxy_vs_reverse_proxy"
+    },
+    "appliance.web_filter": {
+      "rule": "Web filters block/allow by URL/content category/reputation, via centralized proxy or endpoint agents.",
+      "micro_example": "Marketing can access social media; everyone else gets blocked by category rule + reputation feed.",
+      "confusion_pair_id": "none"
+    },
+    "appliance.dlp": {
+      "rule": "DLP watches for sensitive data leaving controlled boundaries and can block, alert, or force encryption.",
+      "micro_example": "User tries emailing a file with credit card numbers → gateway blocks and notifies security.",
+      "confusion_pair_id": "none"
+    },
+    "appliance.ids_ips": {
+      "rule": "IDS alerts; IPS blocks. Placement (tap vs inline) decides whether you can prevent or only detect.",
+      "micro_example": "Passive sensor sees exploit attempts; inline IPS drops the malicious packets before they reach the server.",
+      "confusion_pair_id": "cp.ids_vs_ips"
+    },
+    "firewall.types": {
+      "rule": "Firewall type choice changes what you can stop: packet filters vs stateful vs app-aware NGFW vs WAF/UTM.",
+      "micro_example": "A WAF blocks SQLi patterns; an NGFW spots risky app traffic on allowed ports; UTM bundles many controls.",
+      "confusion_pair_id": "cp.ngfw_vs_utm"
+    },
+    "firewall.rules": {
+      "rule": "Firewall rules are explicit allow/deny decisions by source/destination/protocol/port—default-deny beats wishful thinking.",
+      "micro_example": "ALLOW TCP 443 to DMZ web server; DENY all other inbound. Log denies for investigation.",
+      "confusion_pair_id": "none"
+    },
+    "network.acl": {
+      "rule": "ACLs are ordered permit/deny rules on network devices and cloud networks—fast, blunt, and easy to misorder.",
+      "micro_example": "Rule 10 allow SSH to admin subnet; Rule 30 deny ICMP from Internet; later rules never match if earlier matches.",
+      "confusion_pair_id": "cp.acl_vs_firewall_rules"
+    },
+    "deception.honeypot_honeynet": {
+      "rule": "Honeypots/honeynets lure attackers into monitored traps so you can learn their tools and paths.",
+      "micro_example": "A fake vulnerable SSH server logs every command an attacker types and every file they drop.",
+      "confusion_pair_id": "none"
+    },
+    "deception.honeyfile_honeytoken": {
+      "rule": "Honeyfiles/honeytokens are tripwires: if accessed or exfiltrated, assume breach and investigate hard.",
+      "micro_example": "A 'Payroll_2026.xlsx' honeyfile is opened; the alert fires because only attackers should touch it.",
+      "confusion_pair_id": "none"
+    },
+    "management.out_of_band": {
+      "rule": "Out-of-band management keeps admin interfaces off the regular data network—attackers can’t easily reach them.",
+      "micro_example": "Switch console is only reachable from a management VLAN via a jump server, not from user VLANs.",
+      "confusion_pair_id": "none"
+    },
+    "dns.security_dnssec": {
+      "rule": "DNSSEC authenticates DNS answers with signatures so clients can detect tampering/poisoning.",
+      "micro_example": "Resolver verifies the signed DNS record chain before trusting the IP for a banking domain.",
+      "confusion_pair_id": "cp.dnssec_vs_dns_filtering"
+    },
+    "dns.filtering": {
+      "rule": "DNS filtering blocks known-bad domains fast, often by returning a safe redirect instead of the real IP.",
+      "micro_example": "User clicks phishing link → DNS filter returns internal warning page instead of attacker site.",
+      "confusion_pair_id": "cp.dnssec_vs_dns_filtering"
+    },
+    "email.security_spf_dkim_dmarc": {
+      "rule": "SPF says who may send, DKIM proves a message wasn’t altered, DMARC tells receivers what to do when checks fail.",
+      "micro_example": "DMARC policy set to quarantine: emails failing SPF/DKIM land in spam; reports help tune before reject.",
+      "confusion_pair_id": "none"
+    },
+    "tls.ephemeral_pfs": {
+      "rule": "Use ephemeral keys in TLS to get perfect forward secrecy: one stolen key shouldn't unlock past sessions.",
+      "micro_example": "Attacker later steals a server key, but past TLS sessions stay safe because each session used unique ephemeral keys.",
+      "confusion_pair_id": "none"
+    },
+    "monitoring.snmp_traps": {
+      "rule": "SNMP traps are device-to-manager alerts triggered by events (link down, auth failure, restarts, etc.).",
+      "micro_example": "Router interface goes down → it sends a linkDown trap so monitoring can alert the on-call team.",
+      "confusion_pair_id": "none"
+    },
+    "monitoring.file_integrity": {
+      "rule": "File integrity monitoring detects unexpected changes to critical files—great signal, noisy if poorly tuned.",
+      "micro_example": "Tripwire flags a changed /etc/ssh/sshd_config outside of patch windows → investigate for tampering.",
+      "confusion_pair_id": "none"
+    },
+    "attacks.on_path_ssl_stripping": {
+      "rule": "On-path attacks reroute traffic through the attacker; SSL stripping downgrades HTTPS protection to read/alter data.",
+      "micro_example": "Rogue Wi‑Fi AP intercepts the initial HTTP request and keeps the victim on HTTP to steal session cookies.",
+      "confusion_pair_id": "none"
+    },
+    "attacks.dns": {
+      "rule": "DNS attacks include domain hijacking, poisoning/cache poisoning, and URL redirection via hosts file tricks.",
+      "micro_example": "Victim resolves a real domain to attacker IP due to poisoned cache, or registrar account takeover changes records.",
+      "confusion_pair_id": "cp.domain_hijacking_vs_dns_poisoning"
+    },
+    "attacks.credential_replay": {
+      "rule": "Credential replay reuses captured auth material (hashes/tokens) to impersonate a user—encryption + session IDs reduce it.",
+      "micro_example": "Attacker captures a session token and replays it; modern defenses bind tokens to TLS/session/device context.",
+      "confusion_pair_id": "none"
+    },
+    "attacks.ddos": {
+      "rule": "DDoS overwhelms a target using many sources; reflected/amplified attacks weaponize legitimate services.",
+      "micro_example": "Spoofed DNS query triggers large replies to the victim (reflection + amplification) until the link saturates.",
+      "confusion_pair_id": "none"
+    }
+  }
+}

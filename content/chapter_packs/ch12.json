@@ -1,0 +1,2376 @@
+{
+  "schema_version": "secplus_game_pack_v1",
+  "pack_id": "ch12",
+  "exam": {
+    "vendor": "CompTIA",
+    "name": "Security+",
+    "code": "SY0-701",
+    "max_exam_minutes": 90
+  },
+  "chapter": {
+    "number": 12,
+    "title": "Network Security",
+    "page_range_in_user_pdf": "TBD"
+  },
+  "design_intent": {
+    "mode": [
+      "campaign",
+      "roguelike_practice"
+    ],
+    "pvp_optional": true,
+    "default_pvp_enabled": false,
+    "player_goal": "Build a defensible network by shrinking the attack surface, carving zones, enforcing access, and surviving noisy adversaries."
+  },
+  "progression": {
+    "xp_rules": {
+      "base_xp_per_correct": 10,
+      "streak_bonus_per_5": 15,
+      "time_bonus_threshold_seconds": 30,
+      "time_bonus_xp": 5,
+      "mistake_penalty_xp": 0
+    },
+    "mastery_model": {
+      "scale": "0-100",
+      "update": "Mastery += 8 on first correct; +4 on repeat correct; -6 on wrong (floor 0).",
+      "tags_drive_mastery": true
+    },
+    "unlock_rules": [
+      {
+        "unlock": "ch12.m2",
+        "when": "complete ch12.m1"
+      },
+      {
+        "unlock": "ch12.m3",
+        "when": "complete ch12.m2"
+      },
+      {
+        "unlock": "ch12.m4",
+        "when": "complete ch12.m3"
+      },
+      {
+        "unlock": "ch12.m5",
+        "when": "complete ch12.m4"
+      },
+      {
+        "unlock": "ch12.m6",
+        "when": "complete ch12.m5"
+      },
+      {
+        "unlock": "ch12.boss",
+        "when": "complete ch12.m6"
+      }
+    ]
+  },
+  "tags": {
+    "concepts": [
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]",
+      "[object Object]"
+    ],
+    "difficulty_scale": {
+      "1": "easy recall",
+      "2": "basic apply",
+      "3": "scenario apply",
+      "4": "mixed concept trap",
+      "5": "boss-level synthesis"
+    }
+  },
+  "trap_list": [],
+  "missions": [
+    {
+      "id": "ch12.m1",
+      "name": "Map the Terrain",
+      "goal": "Attack surface, security zones, device placement, failure modes, and basic segmentation.",
+      "mechanics": {
+        "minigame": "learn_quiz",
+        "mode": "campaign",
+        "recommended_time_min": 20,
+        "rules": {
+          "hints_per_question": 1,
+          "show_explanations": true
+        }
+      },
+      "question_ids": [
+        "ch12.q001",
+        "ch12.q002",
+        "ch12.q003",
+        "ch12.q004",
+        "ch12.q005",
+        "ch12.q006",
+        "ch12.q007",
+        "ch12.q008",
+        "ch12.q009",
+        "ch12.q010"
+      ],
+      "rewards": {
+        "xp": 150,
+        "loot": [
+          "badge_ch12_m1"
+        ],
+        "unlock": "ch12.m2"
+      }
+    },
+    {
+      "id": "ch12.m2",
+      "name": "Software-Defined Reality",
+      "goal": "SDN/SD-WAN/SASE and the Zero Trust worldview.",
+      "mechanics": {
+        "minigame": "learn_quiz",
+        "mode": "campaign",
+        "recommended_time_min": 20,
+        "rules": {
+          "hints_per_question": 1,
+          "show_explanations": true
+        }
+      },
+      "question_ids": [
+        "ch12.q011",
+        "ch12.q012",
+        "ch12.q013",
+        "ch12.q014",
+        "ch12.q015",
+        "ch12.q016",
+        "ch12.q017",
+        "ch12.q018"
+      ],
+      "rewards": {
+        "xp": 160,
+        "loot": [
+          "badge_ch12_m2"
+        ],
+        "unlock": "ch12.m3"
+      }
+    },
+    {
+      "id": "ch12.m3",
+      "name": "Gatekeepers at Layer 2",
+      "goal": "NAC, 802.1X, and switch-level protections that stop \"plug-and-pwn\".",
+      "mechanics": {
+        "minigame": "learn_quiz",
+        "mode": "campaign",
+        "recommended_time_min": 20,
+        "rules": {
+          "hints_per_question": 1,
+          "show_explanations": true
+        }
+      },
+      "question_ids": [
+        "ch12.q019",
+        "ch12.q020",
+        "ch12.q021",
+        "ch12.q022",
+        "ch12.q023",
+        "ch12.q024",
+        "ch12.q025"
+      ],
+      "rewards": {
+        "xp": 170,
+        "loot": [
+          "badge_ch12_m3"
+        ],
+        "unlock": "ch12.m4"
+      }
+    },
+    {
+      "id": "ch12.m4",
+      "name": "Tunnels and Tradeoffs",
+      "goal": "VPN fundamentals, IPsec vs TLS VPNs, and full vs split tunneling decisions.",
+      "mechanics": {
+        "minigame": "learn_quiz",
+        "mode": "campaign",
+        "recommended_time_min": 20,
+        "rules": {
+          "hints_per_question": 1,
+          "show_explanations": true
+        }
+      },
+      "question_ids": [
+        "ch12.q026",
+        "ch12.q027",
+        "ch12.q028",
+        "ch12.q029",
+        "ch12.q030",
+        "ch12.q031",
+        "ch12.q032"
+      ],
+      "rewards": {
+        "xp": 180,
+        "loot": [
+          "badge_ch12_m4"
+        ],
+        "unlock": "ch12.m5"
+      }
+    },
+    {
+      "id": "ch12.m5",
+      "name": "Appliance Arsenal",
+      "goal": "Jump servers, load balancers, proxies, web filtering, DLP, IDS/IPS.",
+      "mechanics": {
+        "minigame": "learn_quiz",
+        "mode": "campaign",
+        "recommended_time_min": 20,
+        "rules": {
+          "hints_per_question": 1,
+          "show_explanations": true
+        }
+      },
+      "question_ids": [
+        "ch12.q033",
+        "ch12.q034",
+        "ch12.q035",
+        "ch12.q036",
+        "ch12.q037",
+        "ch12.q038",
+        "ch12.q039",
+        "ch12.q040",
+        "ch12.q041",
+        "ch12.q042"
+      ],
+      "rewards": {
+        "xp": 190,
+        "loot": [
+          "badge_ch12_m5"
+        ],
+        "unlock": "ch12.m6"
+      }
+    },
+    {
+      "id": "ch12.m6",
+      "name": "Control, Visibility, and Deception",
+      "goal": "Firewalls, ACLs, deception tech, and security telemetry.",
+      "mechanics": {
+        "minigame": "learn_quiz",
+        "mode": "campaign",
+        "recommended_time_min": 20,
+        "rules": {
+          "hints_per_question": 1,
+          "show_explanations": true
+        }
+      },
+      "question_ids": [
+        "ch12.q043",
+        "ch12.q044",
+        "ch12.q045",
+        "ch12.q046",
+        "ch12.q047",
+        "ch12.q048",
+        "ch12.q049",
+        "ch12.q050",
+        "ch12.q051",
+        "ch12.q052",
+        "ch12.q053"
+      ],
+      "rewards": {
+        "xp": 200,
+        "loot": [
+          "badge_ch12_m6"
+        ],
+        "unlock": "ch12.boss"
+      }
+    }
+  ],
+  "boss": {
+    "id": "ch12.boss",
+    "name": "Boss: The Noise Hydra",
+    "premise": "On-path tricks, DNS misdirection, credential replay, and DDoS chaos—spot the pattern and pick the right control.",
+    "mechanics": {
+      "format": "timed_synthesis",
+      "total_questions": 7,
+      "time_limit_seconds_total": 900,
+      "lives": 2
+    },
+    "question_ids": [
+      "ch12.q054",
+      "ch12.q055",
+      "ch12.q056",
+      "ch12.q057",
+      "ch12.q058",
+      "ch12.q059",
+      "ch12.q060"
+    ],
+    "rewards": {
+      "xp": 350,
+      "loot": [
+        "title_ch12_cleared"
+      ]
+    }
+  },
+  "roguelike": {
+    "runset_id": "ch12_runset",
+    "run_minutes_target": 45,
+    "structure": {
+      "acts": 3,
+      "encounters_per_act": 3,
+      "rest_sites_per_act": 1,
+      "boss_per_run": "1"
+    },
+    "cards": {
+      "threat_cards": [],
+      "constraint_cards": [
+        {
+          "id": "ch12_constraint_no_hints",
+          "name": "No Hints",
+          "effect": "Disable hints and require concise justification for full points."
+        }
+      ],
+      "control_cards": []
+    },
+    "question_pool_ids": "use_all_questions_in_pack"
+  },
+  "pvp": {
+    "enabled": false,
+    "modes": [
+      {
+        "id": "seeded_run",
+        "name": "Seeded Run",
+        "description": "Share a seed and run the same question plan asynchronously.",
+        "rules": {
+          "seed_shared": true,
+          "hints": false,
+          "scoring": "accuracy_time"
+        }
+      }
+    ],
+    "fairness": {
+      "matchmaking": "same_seed",
+      "anti_cheat": "local_timing_and_seed_replay"
+    }
+  },
+  "question_bank": [
+    {
+      "id": "ch12.q001",
+      "type": "mcq",
+      "stem": "In network security design, what does \"attack surface\" mean?",
+      "explanation": "Attack surface is the total set of exposed entry/exit points (interfaces, services, users, paths). The trap is narrowing it to just ports or internet-facing hosts—those are common parts, not the whole surface.",
+      "tags": [
+        "network.attack_surface"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "All vulnerabilities found in a single application",
+        "B": "All points where an attacker could try to enter or extract data from a system/network",
+        "C": "Only internet-facing IP addresses",
+        "D": "Only open TCP ports discovered by a scanner"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "2.2"
+      ],
+      "rationaleCorrect": "Attack surface is the total set of exposed entry/exit points (interfaces, services, users, paths).",
+      "misconceptionTags": [
+        "network.attack_surface_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q002",
+      "type": "mcq",
+      "stem": "You place an intrusion prevention system (IPS) so it can actively block malicious traffic. Which placement is required?",
+      "explanation": "An IPS must be inline to stop packets before they reach the target. The trap is confusing IDS-style monitoring (out-of-band via SPAN/TAP) with prevention/blocking.",
+      "tags": [
+        "network.device_placement",
+        "appliance.ids_ips"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Out-of-band on a SPAN/mirror port",
+        "B": "Inline in the traffic path",
+        "C": "On a separate management VLAN only",
+        "D": "Behind the client on the endpoint"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "5.2"
+      ],
+      "rationaleCorrect": "An IPS must be inline to stop packets before they reach the target.",
+      "misconceptionTags": [
+        "network.device_placement_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q003",
+      "type": "mcq",
+      "stem": "A security device is configured to allow traffic if it fails (to keep the business running). This is an example of:",
+      "explanation": "Fail-open prioritizes availability by letting traffic pass on failure. The trap is mixing it up with fail-closed (blocks on failure) or with high availability failover (a different concept).",
+      "tags": [
+        "network.failure_modes.fail_open",
+        "network.high_availability"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 40,
+      "options": {
+        "A": "Fail-closed",
+        "B": "Fail-secure",
+        "C": "Fail-open",
+        "D": "Failover clustering"
+      },
+      "answer": "C",
+      "objectiveIds": [
+        "4.3"
+      ],
+      "rationaleCorrect": "Fail-open prioritizes availability by letting traffic pass on failure.",
+      "misconceptionTags": [
+        "network.failure_modes.fail_open_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q004",
+      "type": "mcq",
+      "stem": "Which failure mode best protects confidentiality and integrity but risks availability if the device breaks?",
+      "explanation": "Fail-closed blocks traffic when the device fails, reducing exposure at the cost of downtime. The trap is thinking active/active or round-robin are “failure modes”—they’re load-balancing/HA designs.",
+      "tags": [
+        "network.failure_modes.fail_closed",
+        "network.high_availability"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 40,
+      "options": {
+        "A": "Fail-open",
+        "B": "Fail-closed",
+        "C": "Active/active",
+        "D": "Round-robin"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.3"
+      ],
+      "rationaleCorrect": "Fail-closed blocks traffic when the device fails, reducing exposure at the cost of downtime.",
+      "misconceptionTags": [
+        "network.failure_modes.fail_closed_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q005",
+      "type": "mcq",
+      "stem": "Why is a \"screened subnet\" (DMZ) commonly used?",
+      "explanation": "A DMZ puts internet-facing services in a buffer zone with restricted access to internal networks. The trap is assuming a DMZ is an encryption feature or a replacement for segmentation—it’s a specific zone design.",
+      "tags": [
+        "network.screened_subnet.dmz",
+        "network.security_zones",
+        "network.segmentation"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "options": {
+        "A": "To eliminate the need for firewalls",
+        "B": "To host public-facing services while reducing direct exposure of the internal network",
+        "C": "To encrypt all traffic to the internet",
+        "D": "To replace VLAN segmentation"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.3"
+      ],
+      "rationaleCorrect": "A DMZ puts internet-facing services in a buffer zone with restricted access to internal networks.",
+      "misconceptionTags": [
+        "network.screened_subnet.dmz_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q006",
+      "type": "mcq",
+      "stem": "VLAN-based segmentation primarily operates at which OSI layer?",
+      "explanation": "VLAN tagging and switching are Layer-2 concepts. The trap is picking Layer 3 because routing can enforce inter-VLAN policy, but the VLAN itself is a Layer-2 segmentation mechanism.",
+      "tags": [
+        "network.logical_segmentation.vlan",
+        "network.segmentation"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 35,
+      "options": {
+        "A": "Layer 1 (Physical)",
+        "B": "Layer 2 (Data Link)",
+        "C": "Layer 3 (Network)",
+        "D": "Layer 7 (Application)"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "1.5"
+      ],
+      "rationaleCorrect": "VLAN tagging and switching are Layer-2 concepts.",
+      "misconceptionTags": [
+        "network.logical_segmentation.vlan_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q007",
+      "type": "mcq",
+      "stem": "An \"air gap\" provides security mainly by:",
+      "explanation": "An air gap removes network connectivity, reducing remote attack paths. The trap is treating it like a crypto or filtering control—those still assume connectivity exists.",
+      "tags": [
+        "network.physical_isolation.air_gap"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 40,
+      "options": {
+        "A": "Encrypting traffic with stronger ciphers",
+        "B": "Physically isolating systems so remote network access paths don’t exist",
+        "C": "Hiding systems behind NAT",
+        "D": "Using DNS filtering to block domains"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "1.5"
+      ],
+      "rationaleCorrect": "An air gap removes network connectivity, reducing remote attack paths.",
+      "misconceptionTags": [
+        "network.physical_isolation.air_gap_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q008",
+      "type": "mcq",
+      "stem": "Which statement about security zones is MOST accurate?",
+      "explanation": "Zones are a trust/policy concept: you separate and control traffic based on required protections. The trap is equating a zone with a single VLAN; VLANs can implement zones, but zones can span multiple technologies.",
+      "tags": [
+        "network.security_zones",
+        "network.segmentation"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 50,
+      "options": {
+        "A": "Zones are only for firewalls; switches can’t enforce them",
+        "B": "Zones group systems by trust level and required controls",
+        "C": "Zones eliminate the need for monitoring",
+        "D": "Zones are the same thing as a single VLAN"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.4"
+      ],
+      "rationaleCorrect": "Zones are a trust/policy concept: you separate and control traffic based on required protections.",
+      "misconceptionTags": [
+        "network.security_zones_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q009",
+      "type": "mcq",
+      "stem": "Why is east-west traffic a common blind spot in traditional perimeter-focused security?",
+      "explanation": "East-west traffic is lateral movement inside internal environments; perimeter tools may miss it. The trap is assuming encryption or protocol type makes it unmonitorable—visibility depends on placement and telemetry.",
+      "tags": [
+        "network.traffic.east_west",
+        "network.device_placement"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "It uses only UDP, which can’t be monitored",
+        "B": "It never crosses internal network boundaries",
+        "C": "It often stays inside data centers/cloud, bypassing perimeter controls that watch north-south traffic",
+        "D": "It is always encrypted end-to-end"
+      },
+      "answer": "C",
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "East-west traffic is lateral movement inside internal environments; perimeter tools may miss it.",
+      "misconceptionTags": [
+        "network.traffic.east_west_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q010",
+      "type": "mcq",
+      "stem": "Which is the BEST reason to choose a secure protocol (e.g., SSH) over an insecure one (e.g., Telnet)?",
+      "explanation": "Secure protocols add cryptographic protections (confidentiality/integrity, and often authentication). The trap is “security through obscurity” (nonstandard ports) or assuming unrelated benefits like performance or phishing prevention.",
+      "tags": [
+        "network.connectivity"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Secure protocols use nonstandard ports that scanners can’t find",
+        "B": "Secure protocols provide confidentiality and integrity protections",
+        "C": "Secure protocols always improve performance",
+        "D": "Secure protocols prevent all phishing attacks"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "3.1"
+      ],
+      "rationaleCorrect": "Secure protocols add cryptographic protections (confidentiality/integrity, and often authentication).",
+      "misconceptionTags": [
+        "network.connectivity_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q011",
+      "type": "mcq",
+      "stem": "Software-defined networking (SDN) is best described as:",
+      "explanation": "SDN centralizes control (control plane) and programs forwarding devices (data plane). The trap is confusing SDN with SD-WAN, VPNs, or NGFW inspection—they’re different tools.",
+      "tags": [
+        "network.sdn"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 55,
+      "options": {
+        "A": "Replacing IP with a new protocol",
+        "B": "Separating the control plane from the data plane so a controller can program network behavior",
+        "C": "A VPN that encrypts all WAN links",
+        "D": "A firewall that inspects at Layer 7"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "SDN centralizes control (control plane) and programs forwarding devices (data plane).",
+      "misconceptionTags": [
+        "network.sdn_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q012",
+      "type": "mcq",
+      "stem": "What is a common SD-WAN security advantage compared to unmanaged multi-link WANs?",
+      "explanation": "SD-WAN adds centralized control and dynamic path selection (often with integrated security options). The trap is absolute claims like “guarantees encryption” or “eliminates firewalls.”",
+      "tags": [
+        "network.sdwan",
+        "network.connectivity"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "It guarantees end-to-end encryption without configuration",
+        "B": "It centrally enforces policy and can dynamically steer traffic across links based on conditions",
+        "C": "It eliminates the need for any firewalls",
+        "D": "It prevents DDoS attacks by default"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.3"
+      ],
+      "rationaleCorrect": "SD-WAN adds centralized control and dynamic path selection (often with integrated security options).",
+      "misconceptionTags": [
+        "network.sdwan_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q013",
+      "type": "mcq",
+      "stem": "SASE is BEST thought of as:",
+      "explanation": "SASE converges WAN connectivity and security services delivered from the cloud (closer to users). The trap is picturing it as a single box or confusing it with a basic segmentation technology.",
+      "tags": [
+        "network.sase"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 50,
+      "options": {
+        "A": "A hardware appliance installed in each branch",
+        "B": "A cloud-delivered bundle of networking and security controls for user-to-resource access",
+        "C": "A replacement for DNS",
+        "D": "A type of VLAN"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "SASE converges WAN connectivity and security services delivered from the cloud (closer to users).",
+      "misconceptionTags": [
+        "network.sase_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q014",
+      "type": "mcq",
+      "stem": "Zero Trust is MOST aligned with which idea?",
+      "explanation": "Zero Trust assumes breach and removes implicit trust; access is continuously evaluated. The trap is the old perimeter mindset: “inside is trusted.”",
+      "tags": [
+        "zero_trust.overview"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Trust internal networks by default",
+        "B": "Implicit trust based on location (inside = safe)",
+        "C": "Continuous verification and least privilege based on identity, device, and context",
+        "D": "Rely exclusively on perimeter firewalls"
+      },
+      "answer": "C",
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "Zero Trust assumes breach and removes implicit trust; access is continuously evaluated.",
+      "misconceptionTags": [
+        "zero_trust.overview_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q015",
+      "type": "mcq",
+      "stem": "In Zero Trust architectures, which component typically MAKES the access decision?",
+      "explanation": "The policy engine evaluates inputs (identity, posture, risk) and decides allow/deny. The trap is confusing decision-making (policy engine) with enforcement (PEP).",
+      "tags": [
+        "zero_trust.control_plane"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 55,
+      "options": {
+        "A": "Policy engine",
+        "B": "Policy enforcement point (PEP)",
+        "C": "Layer-2 switch",
+        "D": "DNS resolver"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "The policy engine evaluates inputs (identity, posture, risk) and decides allow/deny.",
+      "misconceptionTags": [
+        "zero_trust.control_plane_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q016",
+      "type": "mcq",
+      "stem": "In Zero Trust, the policy enforcement point (PEP) primarily:",
+      "explanation": "The PEP is where the decision is applied—blocking, allowing, or shaping access. The trap is mixing it with unrelated security services (DNSSEC, email, etc.).",
+      "tags": [
+        "zero_trust.data_plane"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 50,
+      "options": {
+        "A": "Signs DNS zones",
+        "B": "Enforces the allow/deny decision on actual traffic or session establishment",
+        "C": "Generates phishing emails",
+        "D": "Performs Layer-1 encryption"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.3"
+      ],
+      "rationaleCorrect": "The PEP is where the decision is applied—blocking, allowing, or shaping access.",
+      "misconceptionTags": [
+        "zero_trust.data_plane_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q017",
+      "type": "multi_select",
+      "stem": "Which of the following are typical signals a Zero Trust control plane might use to decide access? (Choose TWO.)",
+      "explanation": "Zero Trust decisions are context-rich: identity plus device/posture are core inputs. The trap options are irrelevant physical branding details that don’t inform real access risk.",
+      "tags": [
+        "zero_trust.control_plane",
+        "zero_trust.overview"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "User identity and authentication strength",
+        "B": "Endpoint posture (patch level, EDR status)",
+        "C": "Cable type used in the switch",
+        "D": "The brand of the router chassis"
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "Zero Trust decisions are context-rich: identity plus device/posture are core inputs.",
+      "misconceptionTags": [
+        "zero_trust.control_plane_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q018",
+      "type": "multi_select",
+      "stem": "Which statements describe segmentation benefits? (Choose TWO.)",
+      "explanation": "Segmentation limits lateral movement and supports policy boundaries. The trap is absolute guarantees (“cannot spread”) or thinking segmentation replaces authentication—it complements it.",
+      "tags": [
+        "network.segmentation",
+        "network.security_zones",
+        "network.traffic.east_west"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 65,
+      "options": {
+        "A": "Reduces blast radius by limiting lateral movement",
+        "B": "Eliminates the need for authentication",
+        "C": "Enables applying different policies to different zones/workloads",
+        "D": "Guarantees malware cannot spread"
+      },
+      "answers": [
+        "A",
+        "C"
+      ],
+      "objectiveIds": [
+        "4.3"
+      ],
+      "rationaleCorrect": "Segmentation limits lateral movement and supports policy boundaries.",
+      "misconceptionTags": [
+        "network.segmentation_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q019",
+      "type": "mcq",
+      "stem": "What is the primary goal of Network Access Control (NAC)?",
+      "explanation": "NAC controls network entry by evaluating who/what is connecting and whether it meets policy. The trap is confusing NAC with unrelated services like load balancing, DNSSEC, or email crypto.",
+      "tags": [
+        "network.nac"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 50,
+      "options": {
+        "A": "Balance HTTP load across servers",
+        "B": "Decide whether and how an endpoint may connect based on identity and posture",
+        "C": "Provide DNS integrity signatures",
+        "D": "Encrypt emails with S/MIME"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "NAC controls network entry by evaluating who/what is connecting and whether it meets policy.",
+      "misconceptionTags": [
+        "network.nac_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q020",
+      "type": "mcq",
+      "stem": "A guest laptop connects to a corporate switchport but is placed into a restricted network until it meets patch policy. NAC is performing:",
+      "explanation": "Quarantine/remediation limits access until the endpoint complies. The trap choices are unrelated network features or web/DNS protections.",
+      "tags": [
+        "network.nac",
+        "network.security_zones"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "options": {
+        "A": "Quarantine/remediation",
+        "B": "Route aggregation",
+        "C": "DNSSEC validation",
+        "D": "HSTS enforcement"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "4.3"
+      ],
+      "rationaleCorrect": "Quarantine/remediation limits access until the endpoint complies.",
+      "misconceptionTags": [
+        "network.nac_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q021",
+      "type": "mcq",
+      "stem": "Which NAC approach typically provides the richest endpoint posture data?",
+      "explanation": "Agent-based NAC can directly inspect endpoint posture (patches, AV/EDR, config). The trap is thinking “agentless” is stronger—agentless is useful but generally less detailed.",
+      "tags": [
+        "network.nac"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Agentless NAC",
+        "B": "Agent-based NAC",
+        "C": "Air-gapped NAC",
+        "D": "Reverse proxy NAC"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Agent-based NAC can directly inspect endpoint posture (patches, AV/EDR, config).",
+      "misconceptionTags": [
+        "network.nac_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q022",
+      "type": "mcq",
+      "stem": "802.1X is best described as:",
+      "explanation": "802.1X controls access to a port (wired/wireless) using EAP for authentication. The trap is mixing it up with routing, DNS, or attack techniques.",
+      "tags": [
+        "network.8021x_eap",
+        "network.nac"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 55,
+      "options": {
+        "A": "A routing protocol for WAN links",
+        "B": "Port-based network access control using EAP authentication",
+        "C": "A method for DNS filtering",
+        "D": "A DDoS amplification technique"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "802.1X controls access to a port (wired/wireless) using EAP for authentication.",
+      "misconceptionTags": [
+        "network.8021x_eap_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q023",
+      "type": "mcq",
+      "stem": "On a managed switch, port security that limits learned MAC addresses is MOST directly intended to mitigate:",
+      "explanation": "MAC flooding aims to overflow the CAM table so the switch floods traffic like a hub; port security can limit/lock MAC learning. The trap options are web/email/DNS topics.",
+      "tags": [
+        "network.port_security"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 55,
+      "options": {
+        "A": "SSL stripping",
+        "B": "CAM table overflow / MAC flooding",
+        "C": "DNSSEC key rollover",
+        "D": "SPF failures"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.3"
+      ],
+      "rationaleCorrect": "MAC flooding aims to overflow the CAM table so the switch floods traffic like a hub; port security can limit/lock MAC learning.",
+      "misconceptionTags": [
+        "network.port_security_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q024",
+      "type": "mcq",
+      "stem": "Spanning Tree Protocol (STP) is primarily used to:",
+      "explanation": "STP blocks redundant Layer-2 paths to prevent loops and storms. The trap is associating STP with encryption/authentication or VPN tunneling.",
+      "tags": [
+        "network.stp_loop_prevention",
+        "network.segmentation"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 50,
+      "options": {
+        "A": "Encrypt Layer-2 frames",
+        "B": "Prevent switching loops that can cause broadcast storms",
+        "C": "Authenticate email senders",
+        "D": "Create IPsec tunnels"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.3"
+      ],
+      "rationaleCorrect": "STP blocks redundant Layer-2 paths to prevent loops and storms.",
+      "misconceptionTags": [
+        "network.stp_loop_prevention_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q025",
+      "type": "mcq",
+      "stem": "DHCP snooping on a switch helps prevent:",
+      "explanation": "DHCP snooping marks trusted ports for DHCP offers and blocks rogue DHCP responses elsewhere. The trap is confusing network-layer control-plane protections with web/email features.",
+      "tags": [
+        "network.dhcp_snooping",
+        "attacks.on_path_ssl_stripping"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "Rogue DHCP servers handing out malicious gateway/DNS settings",
+        "B": "TLS downgrade attacks",
+        "C": "Load balancer session persistence",
+        "D": "DMARC policy failures"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "DHCP snooping marks trusted ports for DHCP offers and blocks rogue DHCP responses elsewhere.",
+      "misconceptionTags": [
+        "network.dhcp_snooping_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q026",
+      "type": "mcq",
+      "stem": "Which statement about a VPN is MOST accurate?",
+      "explanation": "VPNs create logical tunnels; most modern VPNs encrypt, but \"VPN\" itself doesn’t guarantee it without the right protocol/config. The trap is assuming VPN is synonymous with encryption.",
+      "tags": [
+        "vpn.ipsec",
+        "vpn.tls_vpn",
+        "network.connectivity"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "A VPN always provides encryption",
+        "B": "A VPN is a virtual tunnel; encryption depends on the VPN technology/configuration",
+        "C": "A VPN is the same thing as a VLAN",
+        "D": "A VPN only works over MPLS"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.3"
+      ],
+      "rationaleCorrect": "VPNs create logical tunnels; most modern VPNs encrypt, but \"VPN\" itself doesn’t guarantee it without the right protocol/config.",
+      "misconceptionTags": [
+        "vpn.ipsec_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q027",
+      "type": "mcq",
+      "stem": "IPsec is commonly associated with which OSI layer?",
+      "explanation": "IPsec operates at the Network layer (Layer 3), protecting IP packets. The trap is confusing it with TLS (higher-layer) or with VLANs (Layer 2).",
+      "tags": [
+        "vpn.ipsec"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 40,
+      "options": {
+        "A": "Layer 2",
+        "B": "Layer 3",
+        "C": "Layer 5",
+        "D": "Layer 7"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.3"
+      ],
+      "rationaleCorrect": "IPsec operates at the Network layer (Layer 3), protecting IP packets.",
+      "misconceptionTags": [
+        "vpn.ipsec_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q028",
+      "type": "mcq",
+      "stem": "Compared to IPsec, a TLS/SSL VPN is often preferred for remote users because it:",
+      "explanation": "TLS VPNs are commonly easier for remote access (clientless portals or simple clients) and traverse NAT/firewalls well. The trap is thinking TLS VPNs avoid certificates/MFA—many deployments use both.",
+      "tags": [
+        "vpn.tls_vpn",
+        "network.connectivity"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "options": {
+        "A": "Requires no certificates",
+        "B": "Can be delivered through a browser or lightweight client and works well through NAT/firewalls",
+        "C": "Only works on internal networks",
+        "D": "Cannot be multi-factor authenticated"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "TLS VPNs are commonly easier for remote access (clientless portals or simple clients) and traverse NAT/firewalls well.",
+      "misconceptionTags": [
+        "vpn.tls_vpn_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q029",
+      "type": "mcq",
+      "stem": "In IPsec, which protocol provides confidentiality via encryption?",
+      "explanation": "ESP provides encryption (confidentiality) and can provide integrity/authentication. AH provides integrity/authentication but not encryption. The trap is mixing AH and ESP or confusing with unrelated acronyms.",
+      "tags": [
+        "vpn.ipsec"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 55,
+      "options": {
+        "A": "AH",
+        "B": "ESP",
+        "C": "EAP",
+        "D": "SPF"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.3"
+      ],
+      "rationaleCorrect": "ESP provides encryption (confidentiality) and can provide integrity/authentication.",
+      "misconceptionTags": [
+        "vpn.ipsec_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q030",
+      "type": "mcq",
+      "stem": "IPsec tunnel mode is MOST appropriate when:",
+      "explanation": "Tunnel mode encapsulates the full original packet—ideal for site-to-site and gateway-to-gateway VPNs. The trap is choosing host-to-host protection (more aligned with transport mode).",
+      "tags": [
+        "vpn.ipsec"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "options": {
+        "A": "Protecting traffic between two hosts directly end-to-end without changing the IP header",
+        "B": "Connecting two networks (site-to-site) so the entire original packet is encapsulated",
+        "C": "Authenticating Wi-Fi users",
+        "D": "Filtering DNS queries by category"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.3"
+      ],
+      "rationaleCorrect": "Tunnel mode encapsulates the full original packet—ideal for site-to-site and gateway-to-gateway VPNs.",
+      "misconceptionTags": [
+        "vpn.ipsec_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q031",
+      "type": "mcq",
+      "stem": "Which VPN model typically connects two office networks together permanently?",
+      "explanation": "Site-to-site VPNs link networks (branch ↔ HQ, partner ↔ partner). The trap is confusing “split tunnel” (a routing choice) with “site-to-site” (a topology/usage model).",
+      "tags": [
+        "vpn.ipsec",
+        "vpn.tls_vpn"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Remote-access VPN",
+        "B": "Site-to-site VPN",
+        "C": "Split-tunnel VPN",
+        "D": "Clientless TLS VPN"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "Site-to-site VPNs link networks (branch ↔ HQ, partner ↔ partner).",
+      "misconceptionTags": [
+        "vpn.ipsec_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q032",
+      "type": "mcq",
+      "stem": "A security team requires that ALL user traffic (including internet browsing) traverse corporate inspection tools while on VPN. Which configuration supports this?",
+      "explanation": "Full tunneling forces all traffic through the VPN so corporate controls can inspect/enforce policy. The trap is split tunneling, which improves performance but bypasses central inspection for some traffic.",
+      "tags": [
+        "vpn.tunnel.full",
+        "vpn.tunnel.split"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "Split tunneling",
+        "B": "Full tunneling",
+        "C": "DHCP snooping",
+        "D": "DMZ routing"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Full tunneling forces all traffic through the VPN so corporate controls can inspect/enforce policy.",
+      "misconceptionTags": [
+        "vpn.tunnel.full_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q033",
+      "type": "mcq",
+      "stem": "Why is a jump server (bastion host) used for administration?",
+      "explanation": "A jump server reduces attack paths by forcing admin access through a controlled chokepoint. The trap is assuming it replaces authentication controls (it should strengthen them).",
+      "tags": [
+        "appliance.jump_server",
+        "management.out_of_band"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 65,
+      "options": {
+        "A": "To speed up DNS responses via caching",
+        "B": "To centralize and harden administrative access while improving monitoring/logging",
+        "C": "To replace the need for MFA",
+        "D": "To detect malware via signature scanning of packets"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "A jump server reduces attack paths by forcing admin access through a controlled chokepoint.",
+      "misconceptionTags": [
+        "appliance.jump_server_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q034",
+      "type": "mcq",
+      "stem": "A load balancer’s virtual IP (VIP) is:",
+      "explanation": "Clients hit the VIP; the load balancer forwards to pool members per algorithm/health checks. The trap is confusing VIPs with DNS, VPN endpoints, or monitoring receivers.",
+      "tags": [
+        "appliance.load_balancer",
+        "network.high_availability"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "options": {
+        "A": "The public IP of the DNS server",
+        "B": "The address clients connect to, which the load balancer then distributes to backend servers",
+        "C": "A VPN tunnel endpoint only",
+        "D": "An SNMP trap receiver"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.4"
+      ],
+      "rationaleCorrect": "Clients hit the VIP; the load balancer forwards to pool members per algorithm/health checks.",
+      "misconceptionTags": [
+        "appliance.load_balancer_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q035",
+      "type": "mcq",
+      "stem": "Which load-balancing design provides redundancy without requiring both units to actively serve traffic?",
+      "explanation": "Active/passive keeps a standby ready to take over if the active unit fails. The trap is mixing topology (active/passive vs active/active) with algorithms (round-robin) or VPN terms.",
+      "tags": [
+        "appliance.load_balancer",
+        "network.high_availability"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "options": {
+        "A": "Active/active",
+        "B": "Active/passive",
+        "C": "Round-robin",
+        "D": "Split tunneling"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "3.4"
+      ],
+      "rationaleCorrect": "Active/passive keeps a standby ready to take over if the active unit fails.",
+      "misconceptionTags": [
+        "appliance.load_balancer_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q036",
+      "type": "mcq",
+      "stem": "Which load-balancing algorithm is MOST appropriate when you want to favor the least-busy server at the moment?",
+      "explanation": "Least-connections steers new sessions to servers with fewer active connections. The trap is assuming round-robin is “balanced” under uneven request cost; it ignores current load.",
+      "tags": [
+        "appliance.load_balancer"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 50,
+      "options": {
+        "A": "Round-robin",
+        "B": "Least connections",
+        "C": "Source IP hash",
+        "D": "Random"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.3"
+      ],
+      "rationaleCorrect": "Least-connections steers new sessions to servers with fewer active connections.",
+      "misconceptionTags": [
+        "appliance.load_balancer_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q037",
+      "type": "mcq",
+      "stem": "A web app breaks unless a user’s session always returns to the same backend server. Which load-balancer feature solves this?",
+      "explanation": "Persistence (sticky sessions) keeps a client bound to a backend. The trap is picking controls that operate in totally different layers (DHCP/DNS/failure modes).",
+      "tags": [
+        "appliance.load_balancer"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 55,
+      "options": {
+        "A": "Sticky sessions (persistence)",
+        "B": "DHCP snooping",
+        "C": "DNSSEC",
+        "D": "Fail-closed"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Persistence (sticky sessions) keeps a client bound to a backend.",
+      "misconceptionTags": [
+        "appliance.load_balancer_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q038",
+      "type": "mcq",
+      "stem": "A forward proxy is MOST commonly used to:",
+      "explanation": "Forward proxies sit in front of clients to enforce browsing policy, filtering, and logging. The trap is confusing it with a reverse proxy (which protects servers/apps).",
+      "tags": [
+        "appliance.proxy",
+        "appliance.web_filter"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "Protect a public web app from attackers",
+        "B": "Control and monitor user web access to external sites",
+        "C": "Replace the need for routing",
+        "D": "Sign outgoing email with DKIM"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "Forward proxies sit in front of clients to enforce browsing policy, filtering, and logging.",
+      "misconceptionTags": [
+        "appliance.proxy_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q039",
+      "type": "mcq",
+      "stem": "A reverse proxy is MOST commonly used to:",
+      "explanation": "Reverse proxies sit in front of servers/apps to terminate connections, apply security controls, and hide backend details. The trap is mixing it with unrelated L2/L3 management features.",
+      "tags": [
+        "appliance.proxy",
+        "firewall.types"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "Hide and protect internal web servers while presenting a single public-facing endpoint",
+        "B": "Assign IP addresses via DHCP",
+        "C": "Prevent Layer-2 switching loops",
+        "D": "Provide SNMP traps"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Reverse proxies sit in front of servers/apps to terminate connections, apply security controls, and hide backend details.",
+      "misconceptionTags": [
+        "appliance.proxy_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q040",
+      "type": "multi_select",
+      "stem": "Which are common web filtering decision inputs? (Choose TWO.)",
+      "explanation": "Web filters typically use reputation/category databases and content controls. The trap options are legitimate networking concepts, but they’re not used to decide web access policy.",
+      "tags": [
+        "appliance.web_filter",
+        "dns.filtering"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "URL/category reputation",
+        "B": "Content inspection (keywords/file types)",
+        "C": "STP root bridge ID",
+        "D": "IPsec ESP sequence numbers"
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Web filters typically use reputation/category databases and content controls.",
+      "misconceptionTags": [
+        "appliance.web_filter_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q041",
+      "type": "multi_select",
+      "stem": "A DLP solution might take which actions when it detects sensitive data leaving the organization? (Choose TWO.)",
+      "explanation": "DLP can block/quarantine exfiltration and can enforce protection like encryption/DRM. The trap is confusing DLP with network switching controls (VLAN/STP).",
+      "tags": [
+        "appliance.dlp"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 65,
+      "options": {
+        "A": "Block or quarantine the transfer",
+        "B": "Encrypt or apply rights management to the data",
+        "C": "Change VLAN tags on the switch",
+        "D": "Disable STP"
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "DLP can block/quarantine exfiltration and can enforce protection like encryption/DRM.",
+      "misconceptionTags": [
+        "appliance.dlp_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q042",
+      "type": "multi_select",
+      "stem": "Which statements correctly compare IDS and IPS? (Choose TWO.)",
+      "explanation": "IPS is inline and can block; IDS is typically monitoring/alerting. Inline enforcement can add latency and bad rules can cause outages. The trap is thinking signatures/anomaly are exclusive to one of them—both can use multiple detection methods.",
+      "tags": [
+        "appliance.ids_ips",
+        "network.device_placement"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "options": {
+        "A": "IDS is commonly out-of-band and alerts; IPS is commonly inline and blocks",
+        "B": "IPS cannot use signatures",
+        "C": "IDS cannot use anomaly detection",
+        "D": "IPS risks introducing latency or outages if misconfigured"
+      },
+      "answers": [
+        "A",
+        "D"
+      ],
+      "objectiveIds": [
+        "4.4"
+      ],
+      "rationaleCorrect": "IPS is inline and can block; IDS is typically monitoring/alerting.",
+      "misconceptionTags": [
+        "appliance.ids_ips_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      }
+    },
+    {
+      "id": "ch12.q043",
+      "type": "mcq",
+      "stem": "A stateless (packet-filtering) firewall makes allow/deny decisions primarily based on:",
+      "explanation": "Stateless filtering evaluates each packet independently using header fields. The trap is choosing connection state (stateful) or higher-level identity/posture (more aligned with NGFW/Zero Trust controls).",
+      "tags": [
+        "firewall.types",
+        "firewall.rules"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "Connection state tables",
+        "B": "Packet headers such as IP addresses, ports, and protocol",
+        "C": "User identity and device posture",
+        "D": "DNSSEC signatures"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "Stateless filtering evaluates each packet independently using header fields.",
+      "misconceptionTags": [
+        "firewall.types_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q044",
+      "type": "mcq",
+      "stem": "A stateful firewall differs from a stateless firewall because it:",
+      "explanation": "Stateful firewalls keep a state table and understand sessions, enabling smarter filtering. The trap is mixing stateful firewalls with application-specific WAFs or VLAN-only ideas.",
+      "tags": [
+        "firewall.types",
+        "firewall.rules"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "Cannot block traffic",
+        "B": "Tracks connection state to allow related return traffic automatically",
+        "C": "Only works on VLANs",
+        "D": "Is the same as a WAF"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.3"
+      ],
+      "rationaleCorrect": "Stateful firewalls keep a state table and understand sessions, enabling smarter filtering.",
+      "misconceptionTags": [
+        "firewall.types_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q045",
+      "type": "mcq",
+      "stem": "Which technology is MOST specialized for protecting web applications from attacks like SQL injection and cross-site scripting?",
+      "explanation": "A Web Application Firewall (WAF) focuses on HTTP(S) application-layer attacks. The trap is choosing network plumbing features (DHCP/SNMP) or a VPN integrity component (AH).",
+      "tags": [
+        "firewall.types",
+        "appliance.proxy"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "options": {
+        "A": "WAF",
+        "B": "DHCP snooping",
+        "C": "IPsec AH",
+        "D": "SNMP traps"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "4.3"
+      ],
+      "rationaleCorrect": "A Web Application Firewall (WAF) focuses on HTTP(S) application-layer attacks.",
+      "misconceptionTags": [
+        "firewall.types_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q046",
+      "type": "mcq",
+      "stem": "An ACL entry \"permit tcp 10.0.0.0/24 any eq 22\" MOST likely intends to:",
+      "explanation": "It permits TCP traffic from 10.0.0.0/24 to destination port 22 (SSH). The trap is reversing source/destination meaning or mixing ACLs with DNSSEC/VPN concepts.",
+      "tags": [
+        "network.acl",
+        "firewall.rules"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "options": {
+        "A": "Allow SSH from the 10.0.0.0/24 network to any destination",
+        "B": "Block SSH from anywhere to 10.0.0.0/24",
+        "C": "Allow DNSSEC validation",
+        "D": "Force full-tunnel VPN"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "4.3"
+      ],
+      "rationaleCorrect": "It permits TCP traffic from 10.0.0.0/24 to destination port 22 (SSH).",
+      "misconceptionTags": [
+        "network.acl_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q047",
+      "type": "multi_select",
+      "stem": "Which are examples of deception technologies? (Choose TWO.)",
+      "explanation": "Honeypots and honeytokens are decoys meant to detect/slow attackers. The trap is confusing deception with email authentication (DMARC) or general monitoring (SNMP traps).",
+      "tags": [
+        "deception.honeypot_honeynet",
+        "deception.honeyfile_honeytoken"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 50,
+      "options": {
+        "A": "Honeypot",
+        "B": "Honeytoken",
+        "C": "DMARC",
+        "D": "SNMP trap"
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "objectiveIds": [
+        "4.4"
+      ],
+      "rationaleCorrect": "Honeypots and honeytokens are decoys meant to detect/slow attackers.",
+      "misconceptionTags": [
+        "deception.honeypot_honeynet_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q048",
+      "type": "mcq",
+      "stem": "DNSSEC primarily protects against which risk?",
+      "explanation": "DNSSEC adds cryptographic signatures so resolvers can validate authenticity/integrity of DNS data. The trap is thinking DNSSEC encrypts queries (it doesn’t) or that it directly prevents DDoS/email spoofing.",
+      "tags": [
+        "dns.security_dnssec",
+        "attacks.dns"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "options": {
+        "A": "Eavesdropping on DNS queries",
+        "B": "Forgery/tampering of DNS responses (integrity/authenticity)",
+        "C": "DDoS amplification using open resolvers",
+        "D": "Email spoofing"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.3"
+      ],
+      "rationaleCorrect": "DNSSEC adds cryptographic signatures so resolvers can validate authenticity/integrity of DNS data.",
+      "misconceptionTags": [
+        "dns.security_dnssec_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q049",
+      "type": "mcq",
+      "stem": "DNS filtering is MOST useful for:",
+      "explanation": "DNS filtering stops users/endpoints from resolving malicious domains, disrupting many malware/phishing kill chains early. The trap is confusing it with L2 loop control, VPN encryption, or load balancing.",
+      "tags": [
+        "dns.filtering",
+        "attacks.dns"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "options": {
+        "A": "Preventing Layer-2 switching loops",
+        "B": "Blocking known malicious domains before connections are made",
+        "C": "Encrypting traffic with ESP",
+        "D": "Balancing HTTP traffic across servers"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "DNS filtering stops users/endpoints from resolving malicious domains, disrupting many malware/phishing kill chains early.",
+      "misconceptionTags": [
+        "dns.filtering_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q050",
+      "type": "multi_select",
+      "stem": "Match the email authentication controls to their primary purpose. Choose the TWO correct pairings.",
+      "explanation": "SPF is about authorized sending servers; DKIM is about signing to verify authenticity/integrity of the message for that domain. The trap is confusing DKIM with encryption, and thinking DMARC replaces SPF/DKIM rather than building policy/reporting on them.",
+      "tags": [
+        "email.security_spf_dkim_dmarc"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 80,
+      "options": {
+        "A": "SPF: identifies which mail servers are authorized to send for a domain",
+        "B": "DKIM: encrypts email body end-to-end for recipients",
+        "C": "DKIM: provides a cryptographic signature to verify the message/domain",
+        "D": "DMARC: replaces SPF and DKIM entirely"
+      },
+      "answers": [
+        "A",
+        "C"
+      ],
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "SPF is about authorized sending servers; DKIM is about signing to verify authenticity/integrity of the message for that domain.",
+      "misconceptionTags": [
+        "email.security_spf_dkim_dmarc_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q051",
+      "type": "mcq",
+      "stem": "Perfect forward secrecy (PFS) is most directly supported by:",
+      "explanation": "PFS relies on ephemeral session keys (e.g., ephemeral Diffie-Hellman) so old traffic remains safe even if a long-term key leaks. The trap is assuming “stronger key” equals PFS—reused keys are the opposite of PFS.",
+      "tags": [
+        "tls.ephemeral_pfs"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "options": {
+        "A": "Reusing the same long-term key for every session",
+        "B": "Ephemeral key exchange so compromise of a long-term key doesn’t decrypt past sessions",
+        "C": "Using DNS filtering",
+        "D": "Using VLAN tagging"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.3"
+      ],
+      "rationaleCorrect": "PFS relies on ephemeral session keys (e.g., ephemeral Diffie-Hellman) so old traffic remains safe even if a long-term key leaks.",
+      "misconceptionTags": [
+        "tls.ephemeral_pfs_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q052",
+      "type": "mcq",
+      "stem": "SNMP traps are best described as:",
+      "explanation": "Traps are unsolicited notifications (vs polling) that report events (e.g., interface down). The trap is confusing SNMP with VPN tunneling, firewall state, or DNSSEC concepts.",
+      "tags": [
+        "monitoring.snmp_traps"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "options": {
+        "A": "Encrypted tunnels for remote admin",
+        "B": "Device-initiated alerts sent to a monitoring system when events occur",
+        "C": "A firewall inspection mode",
+        "D": "A type of DNS signature"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.4"
+      ],
+      "rationaleCorrect": "Traps are unsolicited notifications (vs polling) that report events (e.g., interface down).",
+      "misconceptionTags": [
+        "monitoring.snmp_traps_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q053",
+      "type": "mcq",
+      "stem": "File integrity monitoring (FIM) is primarily used to:",
+      "explanation": "FIM alerts when important files change unexpectedly—useful for detecting tampering and persistence. The trap is mixing it up with availability tools (load balancing) or email/network spoofing controls.",
+      "tags": [
+        "monitoring.file_integrity"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "options": {
+        "A": "Detect unauthorized changes to critical files/configs",
+        "B": "Balance traffic across servers",
+        "C": "Authenticate email domains",
+        "D": "Prevent IP spoofing at Layer 2"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "4.4"
+      ],
+      "rationaleCorrect": "FIM alerts when important files change unexpectedly—useful for detecting tampering and persistence.",
+      "misconceptionTags": [
+        "monitoring.file_integrity_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q054",
+      "type": "mcq",
+      "stem": "Which scenario is a classic example of SSL stripping?",
+      "explanation": "SSL stripping downgrades HTTPS to HTTP by interfering with redirects or links, often during first contact. The trap is confusing it with SYN floods (DDoS), DNSSEC topics, or switch port controls.",
+      "tags": [
+        "attacks.on_path_ssl_stripping"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 80,
+      "options": {
+        "A": "An attacker forces HTTP by intercepting a user’s first connection and removing HTTPS redirects",
+        "B": "An attacker floods a server with SYN packets",
+        "C": "An attacker signs DNS responses with forged keys",
+        "D": "An attacker limits MAC addresses on a switchport"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "SSL stripping downgrades HTTPS to HTTP by interfering with redirects or links, often during first contact.",
+      "misconceptionTags": [
+        "attacks.on_path_ssl_stripping_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q055",
+      "type": "mcq",
+      "stem": "Which defensive mechanism MOST directly reduces the effectiveness of SSL stripping for repeat visits to a site?",
+      "explanation": "HSTS tells browsers to only use HTTPS for a domain, helping prevent downgrade on subsequent connections. The trap is choosing unrelated network reliability/monitoring features.",
+      "tags": [
+        "attacks.on_path_ssl_stripping"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 55,
+      "options": {
+        "A": "HSTS",
+        "B": "STP",
+        "C": "SNMP traps",
+        "D": "Split tunneling"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "4.4"
+      ],
+      "rationaleCorrect": "HSTS tells browsers to only use HTTPS for a domain, helping prevent downgrade on subsequent connections.",
+      "misconceptionTags": [
+        "attacks.on_path_ssl_stripping_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q056",
+      "type": "mcq",
+      "stem": "A workstation is modified so a legitimate domain resolves to a malicious IP without changing public DNS records. This is MOST consistent with:",
+      "explanation": "Editing the local hosts file overrides DNS resolution on that host. The trap is mixing local redirection with domain-wide DNS or email controls, or with VPN/failure modes.",
+      "tags": [
+        "attacks.dns"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 65,
+      "options": {
+        "A": "Hosts file modification",
+        "B": "DMARC enforcement",
+        "C": "IPsec transport mode",
+        "D": "Fail-closed"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Editing the local hosts file overrides DNS resolution on that host.",
+      "misconceptionTags": [
+        "attacks.dns_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q057",
+      "type": "mcq",
+      "stem": "Credential replay attacks are BEST mitigated by:",
+      "explanation": "Replay works when captured auth material remains valid; MFA and replay-resistant auth (short-lived tokens, nonces) reduce impact. The trap is “port hiding” or unrelated network settings.",
+      "tags": [
+        "attacks.credential_replay",
+        "zero_trust.overview"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 85,
+      "options": {
+        "A": "Using nonstandard ports",
+        "B": "Multi-factor authentication and replay-resistant mechanisms (e.g., short-lived tokens, nonce/challenge)",
+        "C": "Disabling STP",
+        "D": "Allowing split tunneling"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.3"
+      ],
+      "rationaleCorrect": "Replay works when captured auth material remains valid; MFA and replay-resistant auth (short-lived tokens, nonces) reduce impact.",
+      "misconceptionTags": [
+        "attacks.credential_replay_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q058",
+      "type": "mcq",
+      "stem": "A DDoS attack that abuses third-party servers to send amplified responses to a victim is best described as:",
+      "explanation": "Reflection sends responses to the victim by spoofing the victim’s IP; amplification increases traffic volume (e.g., via UDP-based services). The trap options mix in unrelated attacks/controls.",
+      "tags": [
+        "attacks.ddos"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "options": {
+        "A": "Reflected amplification",
+        "B": "SSL stripping",
+        "C": "CAM overflow",
+        "D": "DKIM spoofing"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "Reflection sends responses to the victim by spoofing the victim’s IP; amplification increases traffic volume (e.g., via UDP-based services).",
+      "misconceptionTags": [
+        "attacks.ddos_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q059",
+      "type": "multi_select",
+      "stem": "Which are common DDoS categories? (Choose TWO.)",
+      "explanation": "DDoS is often categorized as volumetric or protocol/state exhaustion (and sometimes app-layer). The trap choices are legitimate security topics but not DDoS categories.",
+      "tags": [
+        "attacks.ddos"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "options": {
+        "A": "Volumetric (bandwidth exhaustion)",
+        "B": "Protocol (state exhaustion, e.g., SYN flood)",
+        "C": "DKIM signing failures",
+        "D": "DNSSEC key rollover"
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "objectiveIds": [
+        "4.3"
+      ],
+      "rationaleCorrect": "DDoS is often categorized as volumetric or protocol/state exhaustion (and sometimes app-layer).",
+      "misconceptionTags": [
+        "attacks.ddos_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch12.q060",
+      "type": "mcq",
+      "stem": "Which control is MOST likely to help reduce user exposure to malicious domains used in phishing and malware campaigns?",
+      "explanation": "DNS filtering blocks resolution of known-bad domains early in the connection chain. The trap is selecting controls that don’t address domain resolution or user click behavior.",
+      "tags": [
+        "dns.filtering",
+        "attacks.dns"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 50,
+      "options": {
+        "A": "DNS filtering",
+        "B": "STP",
+        "C": "IPsec AH",
+        "D": "Fail-open"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "DNS filtering blocks resolution of known-bad domains early in the connection chain.",
+      "misconceptionTags": [
+        "dns.filtering_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "type": "scenario_mcq",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "A correlation rule captures the suspicious pattern and supports timely investigation and containment.",
+      "rationaleIncorrect": {
+        "A": "Blind suppression removes meaningful detection signals.",
+        "C": "Deleting evidence breaks auditability and response workflows.",
+        "D": "Delayed review increases attacker dwell time risk.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "alert_fatigue_overcorrection",
+        "delayed_triage"
+      ],
+      "id": "ch12_obj44_scn01",
+      "stem": "An analyst sees repeated failed logins from one source followed by a successful privileged login. What is the best immediate monitoring action?",
+      "explanation": "Correlating suspicious authentication events and raising a high-priority alert enables rapid triage before persistence expands.",
+      "tags": [
+        "monitoring",
+        "alerting",
+        "authentication_anomaly"
+      ],
+      "objectiveIds": [
+        "4.4"
+      ],
+      "options": {
+        "A": "Suppress all failed-login alerts to reduce noise",
+        "B": "Create a correlation alert for brute-force-then-success patterns on privileged accounts",
+        "C": "Delete the log entries after noting them in chat",
+        "D": "Wait for weekly log review before responding"
+      },
+      "answer": "B"
+    },
+    {
+      "type": "scenario_mcq",
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "rationaleCorrect": "Structured tuning and risk-based prioritization improve actionable detection without blinding coverage.",
+      "rationaleIncorrect": {
+        "A": "Permanent blanket suppression creates blind spots.",
+        "C": "Unfiltered escalation overwhelms stakeholders and slows operations.",
+        "D": "Single telemetry source focus reduces detection depth.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      },
+      "misconceptionTags": [
+        "all_or_nothing_alert_tuning",
+        "noise_vs_coverage_confusion"
+      ],
+      "id": "ch12_obj44_scn02",
+      "stem": "Your SIEM receives too many medium alerts, and critical incidents are missed. Which change best improves monitoring effectiveness?",
+      "explanation": "Risk-based tuning with severity thresholds and validated use cases improves signal-to-noise while preserving high-value detection coverage.",
+      "tags": [
+        "siem_tuning",
+        "alert_prioritization",
+        "monitoring_operations"
+      ],
+      "objectiveIds": [
+        "4.4"
+      ],
+      "options": {
+        "A": "Disable all medium and low alerts permanently",
+        "B": "Tune detection rules with risk scoring and documented escalation thresholds",
+        "C": "Route every alert to executives immediately",
+        "D": "Ignore false positives and focus only on endpoint logs"
+      },
+      "answer": "B"
+    }
+  ]
+}

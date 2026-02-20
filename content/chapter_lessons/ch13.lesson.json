@@ -1,0 +1,2841 @@
+{
+  "pack_id": "ch13",
+  "version": "1.0.0",
+  "modules": [
+    {
+      "id": "ch13.mod01",
+      "title": "Why Wireless Security Feels Like Herding Invisible Cats",
+      "tag_ids": [
+        "wireless.connectivity.cellular",
+        "wireless.connectivity.wifi",
+        "wireless.connectivity.bluetooth",
+        "wireless.connectivity.nfc",
+        "wireless.connectivity.rfid",
+        "wireless.connectivity.gps"
+      ],
+      "pages": [
+        {
+          "id": "ch13.mod01.p1",
+          "title": "Wireless threat model: signals don’t respect walls",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Wireless networks broadcast.\n- Coverage extends beyond the physical space you control.\n- Anyone in range can try to observe, interfere, or impersonate.\n- Many commercial wireless paths (especially cellular) are operated by third parties, so treat them like an external/untrusted network path."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: “We’re inside the building, so it’s safe.”\nRadio laughs at your building boundaries. Assume attackers can sit outside and still reach your SSID or Bluetooth devices."
+            },
+            {
+              "type": "example",
+              "text": "Example: A corporate SSID is reachable from the parking lot. Even with strong encryption, attackers can still attempt deauth attacks, evil twin lures, and brute-force attempts (depending on your WPA mode)."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Why should most cellular traffic be treated as if it traverses an untrusted path?",
+              "options": [
+                "Cellular cannot be encrypted",
+                "The carrier operates the infrastructure outside your control",
+                "Cellular always uses private IPs",
+                "Cellular uses only IPv6"
+              ],
+              "correct_index": 1,
+              "explanation": "The security boundary is control: carriers run the network, so treat it like external transit.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            },
+            {
+              "type": "multi_select",
+              "prompt": "Which factors make wireless networks harder to secure than wired? (Choose TWO.)",
+              "options": [
+                "Signals extend beyond controlled spaces",
+                "Radio can be monitored without physical access to a cable",
+                "Wireless cannot use authentication",
+                "Wireless always blocks attackers with distance"
+              ],
+              "correct_indices": [
+                0,
+                1
+              ],
+              "explanation": "The hard part is exposure: anyone in range can listen/attack, and coverage reaches beyond your walls.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.2",
+            "4.5",
+            "4.6",
+            "5.2",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch13.mod01.p2",
+          "title": "Connection methods you’ll see on the exam",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Common wireless connectivity types and what to remember:\n- Wi‑Fi (802.11): local networking, multiple bands/channels, needs strong auth+encryption.\n- Cellular: WAN-like path operated by a carrier.\n- Bluetooth: short-range, low power; pairing and profile security matter.\n- RFID/NFC: tags/badges/payments; cloning/spoofing risks.\n- GPS: broadcast navigation signals; jamming/spoofing risks.\n- Infrared: line-of-sight; niche but still shows up."
+            },
+            {
+              "type": "diagram",
+              "text": "Quick mental map (range vs typical use):\nInfrared: very short + line-of-sight (remotes)\nNFC: centimeters (tap-to-pay)\nBluetooth: meters (peripherals)\nWi‑Fi: tens of meters+ (LAN)\nCellular: kilometers (WAN)\nRFID: varies (cm to many meters, depending on tag/reader)\nGPS: global receive (satellite broadcast)"
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "NFC is MOST associated with:",
+              "options": [
+                "Long-range high-bandwidth links",
+                "Very short-range tap interactions",
+                "Line-of-sight networking across a room",
+                "Satellite broadcast positioning"
+              ],
+              "correct_index": 1,
+              "explanation": "NFC is built for very short range (tap-to-pay, badges).",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            },
+            {
+              "type": "matching",
+              "prompt": "Match the technology to the best description.",
+              "left": [
+                "Bluetooth",
+                "Wi‑Fi",
+                "Cellular",
+                "Infrared"
+              ],
+              "right": [
+                "Short-range peripherals",
+                "Local wireless LAN",
+                "Carrier-operated WAN path",
+                "Line-of-sight niche link"
+              ],
+              "correct_map": {
+                "Bluetooth": "Short-range peripherals",
+                "Wi‑Fi": "Local wireless LAN",
+                "Cellular": "Carrier-operated WAN path",
+                "Infrared": "Line-of-sight niche link"
+              },
+              "explanation": "These pairings are the exam-friendly defaults.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.2",
+            "4.5",
+            "4.6",
+            "5.2",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.3",
+        "1.5",
+        "2.2",
+        "2.4",
+        "3.2",
+        "3.3",
+        "3.4",
+        "4.2",
+        "4.5",
+        "4.6",
+        "5.2",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch13.mod02",
+      "title": "Wi‑Fi Fundamentals: Bands, Modes, SSIDs",
+      "tag_ids": [
+        "wifi.bands.2_4ghz",
+        "wifi.identifiers.ssid",
+        "wireless.connectivity.wifi"
+      ],
+      "pages": [
+        {
+          "id": "ch13.mod02.p1",
+          "title": "Bands and standards: the exam-safe highlights",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Wi‑Fi runs mainly in 2.4 GHz and 5 GHz bands, with 6 GHz added for Wi‑Fi 6E/7.\nStandards you should recognize:\n- 802.11b/g: 2.4 GHz legacy.\n- 802.11a/ac: 5 GHz legacy/modern.\n- 802.11n (Wi‑Fi 4): 2.4 + 5.\n- 802.11ax (Wi‑Fi 6/6E): 2.4 + 5 + 6.\n- 802.11be (Wi‑Fi 7): 2.4 + 5 + 6 (very high throughput)."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: “Higher frequency always means longer range.”\nHigher frequencies generally suffer more attenuation (walls/obstacles), so 2.4 GHz often reaches farther than 5/6 GHz."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which band is MOST associated with Wi‑Fi 6E expansion?",
+              "options": [
+                "2.4 GHz",
+                "5 GHz",
+                "6 GHz",
+                "900 MHz"
+              ],
+              "correct_index": 2,
+              "explanation": "Wi‑Fi 6E is the 6 GHz addition to Wi‑Fi 6 (802.11ax).",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which is a true statement about 2.4 GHz vs 5/6 GHz?",
+              "options": [
+                "2.4 GHz usually has more range but more interference",
+                "5 GHz always travels farther than 2.4 GHz",
+                "6 GHz penetrates walls best",
+                "2.4 GHz cannot carry secure Wi‑Fi"
+              ],
+              "correct_index": 0,
+              "explanation": "2.4 GHz often reaches farther but is crowded; 5/6 GHz tends to be faster with more channels but shorter range.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.2",
+            "4.5",
+            "4.6",
+            "5.2",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch13.mod02.p2",
+          "title": "Infrastructure vs ad hoc, and why it matters",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Wi‑Fi deployment modes:\n- Infrastructure mode: clients talk through an access point (AP). This is the enterprise norm.\n- Ad hoc mode: devices talk directly to each other (peer-to-peer). This can bypass enterprise controls if unmanaged.\nSSID basics:\n- SSID is the Wi‑Fi network name.\n- SSIDs can be broadcast or “hidden,” but hiding is not strong security."
+            },
+            {
+              "type": "example",
+              "text": "Example: A laptop creates an ad hoc network (or phone hotspot). That can become a bridge between a secured corporate segment and an insecure network if the device also has wired access."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: “Hidden SSID = secure.”\nHidden SSIDs can still be discovered. Real security comes from WPA2/WPA3, strong authentication, and good monitoring."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "In infrastructure mode, client devices communicate primarily:",
+              "options": [
+                "Directly with each other",
+                "Through an access point (AP)",
+                "Only over Bluetooth",
+                "Only by broadcasting without receiving"
+              ],
+              "correct_index": 1,
+              "explanation": "Infrastructure mode is AP-centric.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "What is the best description of an SSID?",
+              "options": [
+                "A Wi‑Fi encryption algorithm",
+                "A Wi‑Fi network identifier (name)",
+                "A type of antenna",
+                "A RADIUS attribute"
+              ],
+              "correct_index": 1,
+              "explanation": "SSID is the network identifier/name.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.2",
+            "4.5",
+            "4.6",
+            "5.2",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.3",
+        "1.5",
+        "2.2",
+        "2.4",
+        "3.2",
+        "3.3",
+        "3.4",
+        "4.2",
+        "4.5",
+        "4.6",
+        "5.2",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch13.mod03",
+      "title": "Rogue APs and Evil Twins",
+      "tag_ids": [
+        "wifi.threats.rogue_ap",
+        "wifi.threats.evil_twin",
+        "wireless.tools.wids_wips",
+        "wifi.ap_security"
+      ],
+      "pages": [
+        {
+          "id": "ch13.mod03.p1",
+          "title": "Rogue AP vs evil twin",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Two look-alike threats:\n- Rogue AP: an unauthorized access point connected to or near your environment (may be accidental or malicious).\n- Evil twin: a malicious AP that *imitates* a trusted SSID to lure clients.\nBoth are solved with detection + response, but the intent differs."
+            },
+            {
+              "type": "diagram",
+              "text": "Mental picture:\nRogue AP = “an extra door you didn’t approve.”\nEvil twin = “a fake door with your company logo painted on it.”"
+            },
+            {
+              "type": "trap",
+              "text": "Trap: “Any unknown AP is an evil twin.”\nEvil twins specifically imitate your SSID/brand to capture clients; rogue APs are simply unauthorized."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which best describes an evil twin?",
+              "options": [
+                "Unauthorized AP on your wired network",
+                "Malicious AP imitating a trusted SSID to lure clients",
+                "AP using WPA3",
+                "AP on channel 11"
+              ],
+              "correct_index": 1,
+              "explanation": "Evil twins are impersonators built to trick clients.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which best describes a rogue access point?",
+              "options": [
+                "Any AP that uses 2.4 GHz",
+                "Any unauthorized AP (accidental or malicious)",
+                "Only an AP that spoofs your SSID",
+                "An AP that requires EAP-TLS"
+              ],
+              "correct_index": 1,
+              "explanation": "Rogue APs are unauthorized, regardless of whether they imitate an SSID.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.2",
+            "4.5",
+            "4.6",
+            "5.2",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch13.mod03.p2",
+          "title": "Detection and response tools",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Common enterprise approach:\n- Perform wireless scans to discover SSIDs/BSSIDs and signal strength patterns.\n- Correlate with wired network data to see whether an AP is actually connected to your infrastructure.\n- Use containment carefully (legal/policy constraints) and remove unauthorized devices physically when possible."
+            },
+            {
+              "type": "example",
+              "text": "Example: You see a suspicious SSID near the office. If it’s not plugged into your switches, it might be a neighbor’s Wi‑Fi or a personal hotspot. If it is plugged in, it’s a true rogue AP risk to your network."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "What is a practical way to determine whether a discovered AP is truly on your corporate network?",
+              "options": [
+                "Only check its SSID name",
+                "Correlate wireless discovery with wired network logs/traffic",
+                "Disable WPA3 on all APs",
+                "Increase transmit power on all APs"
+              ],
+              "correct_index": 1,
+              "explanation": "You need to prove it has a wired uplink into your environment.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill in the blank: An evil twin’s main goal is to ______ clients into connecting to a malicious access point.",
+              "answers": [
+                "trick",
+                "lure"
+              ],
+              "explanation": "Evil twins impersonate trusted networks to lure clients.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.2",
+            "4.5",
+            "4.6",
+            "5.2",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.3",
+        "1.5",
+        "2.2",
+        "2.4",
+        "3.2",
+        "3.3",
+        "3.4",
+        "4.2",
+        "4.5",
+        "4.6",
+        "5.2",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch13.mod04",
+      "title": "Kicking Clients Off Wi‑Fi: Deauth vs Jamming",
+      "tag_ids": [
+        "wifi.threats.deauth_disassoc",
+        "wifi.threats.jamming",
+        "wifi.controls.protected_mgmt_frames",
+        "wifi.security.wpa3_personal_sae"
+      ],
+      "pages": [
+        {
+          "id": "ch13.mod04.p1",
+          "title": "Deauth/disassociation attacks",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Deauthentication/disassociation attacks send spoofed management frames that tell clients to disconnect.\nWhy attackers do it:\n- Create a reconnection window to lure users to an evil twin.\n- Cause disruption (availability impact)."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: “If users disconnect, it must be RF interference.”\nA deauth attack can look like ‘random drops’ but it’s protocol-level, not spectrum noise."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A deauthentication attack primarily uses:",
+              "options": [
+                "RF noise to drown signals",
+                "Spoofed Wi‑Fi management frames to disconnect clients",
+                "IP spoofing to hijack TCP sessions",
+                "Bluetooth pairing requests"
+              ],
+              "correct_index": 1,
+              "explanation": "Deauth is a management-frame attack.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Why do deauth attacks often pair well with an evil twin?",
+              "options": [
+                "They force clients to choose a new SSID",
+                "They encourage clients to reconnect, allowing the attacker to present a stronger fake AP",
+                "They disable encryption",
+                "They require EAP-TLS certificates"
+              ],
+              "correct_index": 1,
+              "explanation": "Deauth creates a reconnection moment the attacker can exploit.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.2",
+            "4.5",
+            "4.6",
+            "5.2",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch13.mod04.p2",
+          "title": "Jamming attacks",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Jamming is RF interference: overwhelming a frequency band so devices can’t communicate.\nKey properties:\n- Can be malicious or accidental (crowded spectrum).\n- Encryption doesn’t help—if the radio can’t talk, security features are irrelevant."
+            },
+            {
+              "type": "example",
+              "text": "Example: A warehouse adds new 2.4 GHz devices, causing intermittent Wi‑Fi drops. That can look like ‘jamming’ but may be accidental interference."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: “WPA3 stops jamming.”\nWPA3 strengthens authentication and protects some frames, but it can’t stop RF interference."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Jamming is best described as:",
+              "options": [
+                "Using spoofed deauth frames",
+                "RF interference that prevents communication",
+                "Stealing Bluetooth contacts",
+                "DNS spoofing"
+              ],
+              "correct_index": 1,
+              "explanation": "Jamming is spectrum-level interference.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which control MOST directly helps against deauth attacks (not jamming)?",
+              "options": [
+                "Protected management frames (PMF)",
+                "Full-device encryption",
+                "Channel hopping by clients",
+                "Remote wipe"
+              ],
+              "correct_index": 0,
+              "explanation": "PMF protects management frames against spoofing.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.2",
+            "4.5",
+            "4.6",
+            "5.2",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.3",
+        "1.5",
+        "2.2",
+        "2.4",
+        "3.2",
+        "3.3",
+        "3.4",
+        "4.2",
+        "4.5",
+        "4.6",
+        "5.2",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch13.mod05",
+      "title": "Bluetooth: Pairing, Modes, and ‘Blue-’ Attacks",
+      "tag_ids": [
+        "wireless.connectivity.bluetooth",
+        "bluetooth.security_modes",
+        "bluetooth.attacks.bluejacking",
+        "bluetooth.attacks.bluesnarfing",
+        "bluetooth.attacks.impersonation_bia"
+      ],
+      "pages": [
+        {
+          "id": "ch13.mod05.p1",
+          "title": "Pairing and security basics",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Bluetooth is short-range and low-power, but it’s still a network.\nExam-level focus:\n- Pairing establishes trust between devices.\n- Security modes and profiles determine what access is allowed.\n- Leaving Bluetooth on when not needed increases attack surface."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: “Bluetooth range is tiny so it’s safe.”\nRange depends on class and environment. Also, attackers can get close in public spaces."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Bluetooth is MOST commonly used for:",
+              "options": [
+                "Long-range WAN links",
+                "Short-range device-to-device connections",
+                "Satellite navigation",
+                "Inventory tags readable from hundreds of meters"
+              ],
+              "correct_index": 1,
+              "explanation": "Bluetooth is built for short-range peripherals and device links.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "A basic hardening step for Bluetooth on mobile devices is to:",
+              "options": [
+                "Enable WEP",
+                "Disable Bluetooth when not in use",
+                "Broadcast SSIDs openly",
+                "Use channel 11 only"
+              ],
+              "correct_index": 1,
+              "explanation": "Reducing exposure lowers attack surface.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.2",
+            "4.5",
+            "4.6",
+            "5.2",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch13.mod05.p2",
+          "title": "Bluejacking vs bluesnarfing vs impersonation",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Bluetooth attacks you should differentiate:\n- Bluejacking: unsolicited messages (spam/annoyance).\n- Bluesnarfing: unauthorized access to device data (contacts/files).\n- Impersonation/BIAs: protocol weaknesses used to impersonate devices or bypass authentication assumptions."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: “They’re all just Bluetooth spam.”\nBluesnarfing is the data-theft one—treat it like a confidentiality breach."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which Bluetooth attack is most associated with unauthorized access to device data?",
+              "options": [
+                "Bluejacking",
+                "Bluesnarfing",
+                "Wardriving",
+                "Evil twin"
+              ],
+              "correct_index": 1,
+              "explanation": "Bluesnarfing targets data theft.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Bluetooth impersonation attacks are primarily about:",
+              "options": [
+                "RF jamming",
+                "Protocol/authentication weaknesses allowing device impersonation",
+                "Wi‑Fi channel overlap",
+                "RADIUS federation"
+              ],
+              "correct_index": 1,
+              "explanation": "Impersonation attacks exploit protocol and auth design weaknesses.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.2",
+            "4.5",
+            "4.6",
+            "5.2",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.3",
+        "1.5",
+        "2.2",
+        "2.4",
+        "3.2",
+        "3.3",
+        "3.4",
+        "4.2",
+        "4.5",
+        "4.6",
+        "5.2",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch13.mod06",
+      "title": "Designing Wi‑Fi That Doesn’t Hate You: Surveys, Heat Maps, Channels",
+      "tag_ids": [
+        "wifi.site_survey",
+        "wifi.heatmap",
+        "wifi.channel_planning",
+        "wireless.tools.wifi_analyzer",
+        "wifi.bands.2_4ghz"
+      ],
+      "pages": [
+        {
+          "id": "ch13.mod06.p1",
+          "title": "Site surveys and heat maps",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Wireless design starts with knowing your RF environment.\n- Site surveys identify existing signals, obstacles, and coverage needs.\n- Heat maps visualize where signal is strong/weak.\n- Tools: Wi‑Fi analyzers help capture channel use, signal strength, and noise."
+            },
+            {
+              "type": "example",
+              "text": "Example: A call center has dead zones near elevators (metal + interference). A survey/heat map guides AP placement and power tuning."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "The primary purpose of a wireless site survey is to:",
+              "options": [
+                "Generate TLS certificates",
+                "Plan AP placement and channel use based on the RF environment",
+                "Apply mobile device policies",
+                "Prevent Bluetooth pairing"
+              ],
+              "correct_index": 1,
+              "explanation": "Surveys provide the data needed to design coverage/performance.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "A wireless heat map is mainly used to visualize:",
+              "options": [
+                "Account lockout rates",
+                "Signal strength and coverage across a space",
+                "EAP methods in use",
+                "Bluetooth contact lists"
+              ],
+              "correct_index": 1,
+              "explanation": "Heat maps show RF coverage patterns.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.2",
+            "4.5",
+            "4.6",
+            "5.2",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch13.mod06.p2",
+          "title": "Channel planning basics",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Channel planning reduces interference.\n2.4 GHz is crowded and channels overlap, so the classic non-overlapping set is 1 / 6 / 11.\n5/6 GHz usually has more channels and less overlap pressure, but shorter range and more attenuation through walls."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: “Pick any channels; the controller will fix it.”\nControllers can help, but bad physical placement and poor initial design still hurt availability and user experience."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "In many regions, the commonly used non-overlapping 2.4 GHz channel set is:",
+              "options": [
+                "1, 2, 3",
+                "4, 8, 12",
+                "1, 6, 11",
+                "5, 10, 15"
+              ],
+              "correct_index": 2,
+              "explanation": "1/6/11 is the classic channel plan to reduce overlap.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            },
+            {
+              "type": "multi_select",
+              "prompt": "Which statements are generally true? (Choose TWO.)",
+              "options": [
+                "2.4 GHz tends to have more interference",
+                "5/6 GHz generally offers more channels",
+                "6 GHz always has longer range than 2.4 GHz",
+                "Channel planning is irrelevant if you use WPA3"
+              ],
+              "correct_indices": [
+                0,
+                1
+              ],
+              "explanation": "Bands affect interference and channel availability; WPA mode doesn’t solve RF engineering problems.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.2",
+            "4.5",
+            "4.6",
+            "5.2",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.3",
+        "1.5",
+        "2.2",
+        "2.4",
+        "3.2",
+        "3.3",
+        "3.4",
+        "4.2",
+        "4.5",
+        "4.6",
+        "5.2",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch13.mod07",
+      "title": "Hardening Wireless Infrastructure: Controllers and APs",
+      "tag_ids": [
+        "wifi.controller_security",
+        "wifi.ap_security",
+        "wireless.tools.wids_wips"
+      ],
+      "pages": [
+        {
+          "id": "ch13.mod07.p1",
+          "title": "Controller/AP hardening checklist",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Treat controllers/APs like critical network infrastructure:\n- Change default credentials; enforce strong admin auth.\n- Patch firmware and disable unnecessary services.\n- Isolate management interfaces (dedicated management network/VLAN).\n- Enable logging/monitoring; protect configuration backups."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: “APs are just radios.”\nModern APs are computers: OS, services, management interfaces—so they get attacked like computers."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which is a best practice for securing a WLAN controller?",
+              "options": [
+                "Leave defaults for convenience",
+                "Place admin interfaces on isolated management networks and patch regularly",
+                "Disable logging to save space",
+                "Enable legacy insecure protocols for compatibility"
+              ],
+              "correct_index": 1,
+              "explanation": "Segmentation + patching + hardening are key.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            },
+            {
+              "type": "multi_select",
+              "prompt": "Which actions improve AP security? (Choose TWO.)",
+              "options": [
+                "Disable insecure/unneeded services",
+                "Protect admin access on a management VLAN",
+                "Hide SSID as the primary control",
+                "Use 2.4 GHz only"
+              ],
+              "correct_indices": [
+                0,
+                1
+              ],
+              "explanation": "Hardening and management isolation matter; SSID hiding is not a strong security control.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.2",
+            "4.5",
+            "4.6",
+            "5.2",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.3",
+        "1.5",
+        "2.2",
+        "2.4",
+        "3.2",
+        "3.3",
+        "3.4",
+        "4.2",
+        "4.5",
+        "4.6",
+        "5.2",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch13.mod08",
+      "title": "WPA2: Personal vs Enterprise, and Why CCMP Matters",
+      "tag_ids": [
+        "wifi.security.wpa2_personal",
+        "wifi.security.wpa2_enterprise",
+        "wifi.security.ccmp_aes",
+        "wireless.auth.psk",
+        "wireless.auth.8021x",
+        "wireless.auth.radius",
+        "wireless.auth.eap"
+      ],
+      "pages": [
+        {
+          "id": "ch13.mod08.p1",
+          "title": "WPA2-Personal (PSK) vs WPA2-Enterprise",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "WPA2 security models:\n- WPA2‑Personal: PSK (shared passphrase). Simple, but weak accountability.\n- WPA2‑Enterprise: 802.1X + RADIUS + EAP. Stronger identity, per-user control, better auditability.\nRule of thumb: if you care about *who* did what, Enterprise beats PSK."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: “PSK gives per-user accountability.”\nA shared secret is shared blame. Enterprise auth is the per-user/per-device model."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "WPA2‑Personal is MOST accurately described as:",
+              "options": [
+                "Per-user credentials via RADIUS",
+                "A preshared key model without an auth server",
+                "Client certificates required for every device",
+                "An open network with OWE"
+              ],
+              "correct_index": 1,
+              "explanation": "WPA2‑Personal uses a shared PSK.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "WPA2‑Enterprise relies on:",
+              "options": [
+                "PSK + SAE",
+                "802.1X + RADIUS + EAP",
+                "OWE + captive portal",
+                "WEP + TKIP"
+              ],
+              "correct_index": 1,
+              "explanation": "Enterprise mode is 802.1X with RADIUS and EAP methods.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.2",
+            "4.5",
+            "4.6",
+            "5.2",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch13.mod08.p2",
+          "title": "CCMP and AES: encryption basics",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "WPA2 commonly uses CCMP with AES for strong Wi‑Fi frame protection.\nExam-level takeaway:\n- CCMP/AES is the stronger modern choice.\n- Legacy mechanisms (like TKIP/WEP-era crypto) are not acceptable for modern security needs."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: “Captive portal = encryption.”\nPortals are access control; CCMP/AES is link-layer encryption."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "CCMP in WPA2 primarily provides:",
+              "options": [
+                "AES-based encryption for confidentiality",
+                "A web login portal",
+                "RF interference mitigation",
+                "Device geolocation"
+              ],
+              "correct_index": 0,
+              "explanation": "CCMP is the AES-based protection mechanism for Wi‑Fi frames.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill in the blank: WPA2 commonly uses ______ with AES for encryption and frame protection.",
+              "answers": [
+                "CCMP"
+              ],
+              "explanation": "CCMP (Counter Mode with CBC-MAC Protocol) is the classic WPA2 choice.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.2",
+            "4.5",
+            "4.6",
+            "5.2",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.3",
+        "1.5",
+        "2.2",
+        "2.4",
+        "3.2",
+        "3.3",
+        "3.4",
+        "4.2",
+        "4.5",
+        "4.6",
+        "5.2",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch13.mod09",
+      "title": "WPA3 and Enhanced Open: What Actually Improved",
+      "tag_ids": [
+        "wifi.security.wpa3_personal_sae",
+        "wifi.security.wpa3_personal_pfs",
+        "wifi.security.wpa3_enterprise_192bit",
+        "wifi.controls.protected_mgmt_frames",
+        "wifi.security.owe_enhanced_open"
+      ],
+      "pages": [
+        {
+          "id": "ch13.mod09.p1",
+          "title": "WPA3-Personal: SAE + PFS + PMF",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "WPA3‑Personal upgrades WPA2‑PSK by using SAE (Simultaneous Authentication of Equals).\nKey benefits:\n- Harder offline guessing vs classic PSK captures.\n- Can support perfect forward secrecy (PFS) so past sessions stay safe even if the password leaks later.\n- Requires protected management frames (PMF) to reduce spoofed deauth attacks."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: “WPA3 is just ‘bigger AES’.”\nThe real win is improved authentication (SAE) and management frame protection, not just ‘stronger encryption.’"
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "WPA3‑Personal replaces WPA2‑PSK authentication with:",
+              "options": [
+                "SAE",
+                "CCMP",
+                "WPS",
+                "TKIP"
+              ],
+              "correct_index": 0,
+              "explanation": "SAE is the WPA3‑Personal authentication mechanism.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which WPA3 feature most directly helps prevent spoofed deauthentication attacks?",
+              "options": [
+                "CCMP",
+                "Protected management frames (PMF)",
+                "SSID hiding",
+                "Captive portal"
+              ],
+              "correct_index": 1,
+              "explanation": "PMF protects management frames like deauth/disassoc.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.2",
+            "4.5",
+            "4.6",
+            "5.2",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch13.mod09.p2",
+          "title": "WPA3-Enterprise and Enhanced Open (OWE)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "WPA3‑Enterprise can operate in a higher security mode (often described as 192‑bit security) and improves key management/frame protection.\nEnhanced Open uses OWE (Opportunistic Wireless Encryption):\n- It adds encryption to ‘open’ networks when possible.\n- It does not provide user authentication by itself (so it’s not the same as Enterprise auth)."
+            },
+            {
+              "type": "example",
+              "text": "Example: A coffee shop wants privacy against passive sniffing but doesn’t want user accounts. Enhanced Open (OWE) can encrypt sessions without passwords."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: “OWE = secure identity.”\nOWE provides encryption, not identity. For user identity and accountability, you need 802.1X/RADIUS/EAP."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Enhanced Open primarily uses which technique?",
+              "options": [
+                "OWE",
+                "SAE",
+                "WPS",
+                "TKIP"
+              ],
+              "correct_index": 0,
+              "explanation": "Enhanced Open is OWE-based.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which statement is most accurate about OWE?",
+              "options": [
+                "It provides per-user identity",
+                "It provides encryption on otherwise open networks",
+                "It prevents RF jamming",
+                "It replaces RADIUS"
+              ],
+              "correct_index": 1,
+              "explanation": "OWE adds encryption but not user identity.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.2",
+            "4.5",
+            "4.6",
+            "5.2",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.3",
+        "1.5",
+        "2.2",
+        "2.4",
+        "3.2",
+        "3.3",
+        "3.4",
+        "4.2",
+        "4.5",
+        "4.6",
+        "5.2",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch13.mod10",
+      "title": "Wireless Authentication Choices: Open, Captive Portal, PSK, 802.1X",
+      "tag_ids": [
+        "wireless.auth.open_captive_portal",
+        "wireless.auth.psk",
+        "wireless.auth.8021x",
+        "wireless.auth.radius",
+        "wireless.auth.eap"
+      ],
+      "pages": [
+        {
+          "id": "ch13.mod10.p1",
+          "title": "Captive portals: access control, not encryption",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Captive portals redirect users to a web page (terms, login, voucher) before granting access.\nImportant: portals do not automatically encrypt Wi‑Fi traffic. Without WPA2/WPA3 (or OWE), the link layer remains exposed."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: “Captive portal = secure Wi‑Fi.”\nA portal is a gate, not armor. Use WPA2/WPA3 (or OWE for open) for encryption."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A captive portal is most commonly used to:",
+              "options": [
+                "Encrypt Wi‑Fi frames with AES",
+                "Redirect users to a registration/terms page before granting access",
+                "Replace RADIUS in enterprise Wi‑Fi",
+                "Prevent deauth attacks"
+              ],
+              "correct_index": 1,
+              "explanation": "Portals gate access via web-based interaction.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "The biggest weakness of a truly open network with a captive portal is:",
+              "options": [
+                "Users cannot connect",
+                "Traffic is not encrypted at the Wi‑Fi layer",
+                "It forces EAP-TLS",
+                "It blocks HTTPS"
+              ],
+              "correct_index": 1,
+              "explanation": "Captive portals don't encrypt the Wi‑Fi link.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.2",
+            "4.5",
+            "4.6",
+            "5.2",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch13.mod10.p2",
+          "title": "Enterprise Wi‑Fi authentication flow",
+          "content_blocks": [
+            {
+              "type": "diagram",
+              "text": "802.1X high-level flow:\nClient (supplicant) ⇄ AP (authenticator) ⇄ RADIUS (authentication server)\nEAP is carried between client and RADIUS (often inside a TLS tunnel depending on method)."
+            },
+            {
+              "type": "explain",
+              "text": "Why this is strong:\n- Per-user or per-device credentials.\n- Policy decisions (who can join which VLAN/role).\n- Central logging and revocation (disable one user without changing a shared PSK)."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "802.1X is best described as:",
+              "options": [
+                "A Wi‑Fi encryption algorithm",
+                "Port-based access control standard used on wired and wireless networks",
+                "A Bluetooth security mode",
+                "A GPS hardening technique"
+              ],
+              "correct_index": 1,
+              "explanation": "802.1X is access control, not an encryption algorithm.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill in the blank: In enterprise Wi‑Fi, EAP is commonly used inside ______ authentication.",
+              "answers": [
+                "802.1X",
+                "802.1x"
+              ],
+              "explanation": "EAP methods operate within 802.1X access control.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.2",
+            "4.5",
+            "4.6",
+            "5.2",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.3",
+        "1.5",
+        "2.2",
+        "2.4",
+        "3.2",
+        "3.3",
+        "3.4",
+        "4.2",
+        "4.5",
+        "4.6",
+        "5.2",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch13.mod11",
+      "title": "EAP Method Matrix: PEAP vs EAP‑TLS vs TTLS vs FAST",
+      "tag_ids": [
+        "wireless.auth.eap",
+        "wireless.auth.eap_peap",
+        "wireless.auth.eap_tls",
+        "wireless.auth.eap_ttls",
+        "wireless.auth.eap_fast",
+        "wireless.auth.radius_federation",
+        "wireless.auth.radius"
+      ],
+      "pages": [
+        {
+          "id": "ch13.mod11.p1",
+          "title": "Certificate reality check",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "EAP methods differ a lot in certificate requirements:\n- EAP‑TLS: mutual cert auth (client + server certificates). Strong but certificate-heavy.\n- PEAP: server certificate + TLS tunnel; inner authentication happens inside the tunnel.\n- EAP‑TTLS: TLS tunnel and can often avoid client certs.\n- EAP‑FAST: designed to speed (re)authentication, useful for roaming scenarios."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: “All EAP methods require client certificates.”\nOnly EAP‑TLS *requires* client certs as a core feature."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which EAP method requires client certificates as a standard expectation?",
+              "options": [
+                "PEAP",
+                "EAP‑TLS",
+                "EAP‑TTLS",
+                "EAP‑FAST"
+              ],
+              "correct_index": 1,
+              "explanation": "EAP‑TLS is the mutual certificate method.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            },
+            {
+              "type": "matching",
+              "prompt": "Match each EAP method to its hallmark.",
+              "left": [
+                "PEAP",
+                "EAP‑TLS",
+                "EAP‑TTLS",
+                "EAP‑FAST"
+              ],
+              "right": [
+                "Server cert + TLS tunnel",
+                "Mutual client+server certs",
+                "TLS tunnel often without client certs",
+                "Faster (re)auth/roaming support"
+              ],
+              "correct_map": {
+                "PEAP": "Server cert + TLS tunnel",
+                "EAP‑TLS": "Mutual client+server certs",
+                "EAP‑TTLS": "TLS tunnel often without client certs",
+                "EAP‑FAST": "Faster (re)auth/roaming support"
+              },
+              "explanation": "This is a common exam matching set.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.2",
+            "4.5",
+            "4.6",
+            "5.2",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch13.mod11.p2",
+          "title": "RADIUS federation",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "RADIUS federation extends trust across organizations.\nUse-case:\n- A university, vendor, or partner user authenticates using their home credentials, and your network accepts it through a federated trust path.\nSecurity angle:\n- Still gives identity + centralized policy, without sharing one PSK across orgs."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: “Federation means we share passwords.”\nFederation is about trust and validation between authentication systems—not copying secrets around."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "RADIUS federation primarily enables:",
+              "options": [
+                "Anonymous access to Wi‑Fi",
+                "Partner users to authenticate using their home credentials through a trust relationship",
+                "One PSK for all organizations",
+                "Captive portal encryption"
+              ],
+              "correct_index": 1,
+              "explanation": "Federation allows cross-organization authentication with trust.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill in the blank: WPA2/WPA3 Enterprise typically uses 802.1X with an authentication server such as ______.",
+              "answers": [
+                "RADIUS",
+                "radius"
+              ],
+              "explanation": "RADIUS is the classic backend for enterprise Wi‑Fi authentication.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.2",
+            "4.5",
+            "4.6",
+            "5.2",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.3",
+        "1.5",
+        "2.2",
+        "2.4",
+        "3.2",
+        "3.3",
+        "3.4",
+        "4.2",
+        "4.5",
+        "4.6",
+        "5.2",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch13.mod12",
+      "title": "Mobile Deployment Models: BYOD, CYOD, COPE, COBO",
+      "tag_ids": [
+        "mobile.deployment.byod",
+        "mobile.deployment.cyod",
+        "mobile.deployment.cope",
+        "mobile.deployment.cobo"
+      ],
+      "pages": [
+        {
+          "id": "ch13.mod12.p1",
+          "title": "Ownership vs control (the whole story)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Mobile deployment models (think: who owns it, who controls it?):\n- BYOD: user-owned; org has limited control; highest risk.\n- CYOD: org-owned but user picks from approved options; better standardization.\n- COPE: corporate-owned, personally enabled; org-managed with allowed personal use.\n- COBO: corporate-owned, business-only; maximum control, minimal personal flexibility."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: “BYOD is fine because users care about their phones.”\nUsers optimize for convenience, not your risk appetite. BYOD needs strong policy + technical controls."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "In BYOD, which statement is most accurate?",
+              "options": [
+                "Org owns and maintains the device",
+                "User owns and controls the device, reducing org oversight",
+                "Device is business-only",
+                "BYOD guarantees stronger security than corporate-owned"
+              ],
+              "correct_index": 1,
+              "explanation": "BYOD reduces organizational control and increases risk.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "COPE is best described as:",
+              "options": [
+                "User-owned with no corporate controls",
+                "Org-owned and managed device that allows personal use",
+                "Org-owned business-only device",
+                "A Wi‑Fi authentication protocol"
+              ],
+              "correct_index": 1,
+              "explanation": "COPE = corporate-owned, personally enabled.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.2",
+            "4.5",
+            "4.6",
+            "5.2",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch13.mod12.p2",
+          "title": "Picking the right model in real life",
+          "content_blocks": [
+            {
+              "type": "example",
+              "text": "Examples:\n- BYOD: contractors accessing email/SSO on personal phones.\n- CYOD: corporate program where employees choose from a short list (easier patching/support).\n- COBO: warehouse scanners, kiosks, clinical devices with strict requirements."
+            },
+            {
+              "type": "explain",
+              "text": "Exam heuristic:\nMore corporate ownership → more enforceable security.\nMore personal ownership → more policy/MDM compromise and legal/privacy constraints."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "CYOD most commonly means:",
+              "options": [
+                "User buys any device and org manages it fully",
+                "Org owns device but user chooses from approved options",
+                "Org forbids personal use on all devices",
+                "Devices are unmanaged and used only for Wi‑Fi"
+              ],
+              "correct_index": 1,
+              "explanation": "CYOD is organization-owned with user choice among approved models.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "COBO deployments are most appropriate when:",
+              "options": [
+                "Maximum personal flexibility is required",
+                "The device is for a single business purpose and personal use is not allowed",
+                "Users must pick among many personal brands",
+                "Device must join open Wi‑Fi only"
+              ],
+              "correct_index": 1,
+              "explanation": "COBO = business-only, high control.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.2",
+            "4.5",
+            "4.6",
+            "5.2",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.3",
+        "1.5",
+        "2.2",
+        "2.4",
+        "3.2",
+        "3.3",
+        "3.4",
+        "4.2",
+        "4.5",
+        "4.6",
+        "5.2",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch13.mod13",
+      "title": "MDM/UEM: Controls That Still Work When Users (and Thieves) Try Weird Stuff",
+      "tag_ids": [
+        "mobile.mdm.mdm_uem",
+        "mobile.mdm.app_management",
+        "mobile.mdm.content_management",
+        "mobile.mdm.remote_wipe",
+        "mobile.mdm.full_device_encryption",
+        "mobile.mdm.containerization",
+        "mobile.mdm.geolocation",
+        "mobile.mdm.geofencing",
+        "mobile.hardening.basic_controls",
+        "mobile.privacy.geotagging"
+      ],
+      "pages": [
+        {
+          "id": "ch13.mod13.p1",
+          "title": "What MDM/UEM actually does",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "MDM (Mobile Device Management) and UEM (Unified Endpoint Management) enforce security policy on endpoints.\nCommon capabilities:\n- App management (install/remove/allow/block)\n- Content management (protect corporate documents/media)\n- Configuration enforcement (screen lock, biometrics, encryption)\n- Remote wipe (full wipe) vs ‘wipe only org data’ (selective/corporate wipe)\n- OTA updates/patch enforcement and compliance reporting"
+            },
+            {
+              "type": "example",
+              "text": "Example: BYOD email access where the org can wipe corporate email/app data without deleting personal photos."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: “Remote wipe always saves you.”\nWipe requires connectivity. Attackers often isolate stolen devices immediately."
+            }
+          ],
+          "checks": [
+            {
+              "type": "multi_select",
+              "prompt": "Which are common MDM/UEM capabilities? (Choose THREE.)",
+              "options": [
+                "Application management",
+                "Content management",
+                "Geofencing/location-based rules",
+                "Eliminate RF interference automatically"
+              ],
+              "correct_indices": [
+                0,
+                1,
+                2
+              ],
+              "explanation": "MDM/UEM manages endpoint policy; RF channel overlap is Wi‑Fi engineering, not endpoint management.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Why can remote wipe fail in a theft scenario?",
+              "options": [
+                "It only works over Bluetooth",
+                "It requires connectivity and attackers can isolate devices",
+                "It is blocked by WPA3",
+                "It disables encryption automatically"
+              ],
+              "correct_index": 1,
+              "explanation": "Remote wipe depends on reaching the device.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.2",
+            "4.5",
+            "4.6",
+            "5.2",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch13.mod13.p2",
+          "title": "Hardening controls: the boring stuff that wins",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Hardening techniques commonly highlighted:\n- Keep OS and apps patched (use OTA updates).\n- Require passcodes, strong screen locks, and wipe-after-failure policies.\n- Enable full-device encryption (FDE) to protect data at rest.\n- Turn off radios (Bluetooth/NFC) when not needed.\n- Use CIS Benchmarks as a hardening baseline for iOS/Android."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: “Biometrics replace passcodes.”\nBiometrics are great, but still backstop with a strong passcode policy and lock settings."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which control provides the strongest baseline protection for data at rest if a phone is stolen?",
+              "options": [
+                "Push notifications",
+                "Full-device encryption (FDE)",
+                "Captive portal",
+                "SSID hiding"
+              ],
+              "correct_index": 1,
+              "explanation": "Encryption protects offline data even if the device is isolated.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "CIS Benchmarks are primarily used to:",
+              "options": [
+                "Pick Wi‑Fi channels",
+                "Provide secure configuration baselines for systems like iOS and Android",
+                "Federate RADIUS across organizations",
+                "Prevent RF jamming"
+              ],
+              "correct_index": 1,
+              "explanation": "They are hardening baselines.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.2",
+            "4.5",
+            "4.6",
+            "5.2",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch13.mod13.p3",
+          "title": "Location controls and privacy",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Location features show up twice: security and privacy.\n- Geolocation: determining where a device is.\n- Geofencing: applying policy when inside/outside a boundary.\n- GPS tagging for photos/documents can leak sensitive location info; MDM/UEM may restrict it.\nAlso common mobile risks:\n- Sideloading and jailbreaking increase risk by bypassing platform controls."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: “Geolocation and geofencing are the same.”\nGeolocation answers ‘where is it?’; geofencing answers ‘what policy triggers because of where it is?’"
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Geofencing is best described as:",
+              "options": [
+                "Determining device location",
+                "Applying rules based on device being inside/outside a defined boundary",
+                "A Wi‑Fi encryption mode",
+                "A Bluetooth pairing method"
+              ],
+              "correct_index": 1,
+              "explanation": "Geofencing is location-based policy enforcement.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Why do organizations sometimes disable GPS tagging for photos/documents?",
+              "options": [
+                "To increase Wi‑Fi throughput",
+                "To reduce location privacy leakage",
+                "To ensure WPA3 works",
+                "To speed up remote wipe"
+              ],
+              "correct_index": 1,
+              "explanation": "GPS metadata can expose sensitive locations.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.2",
+            "4.5",
+            "4.6",
+            "5.2",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.3",
+        "1.5",
+        "2.2",
+        "2.4",
+        "3.2",
+        "3.3",
+        "3.4",
+        "4.2",
+        "4.5",
+        "4.6",
+        "5.2",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch13.mod14",
+      "title": "Mobile Platform Risks: Sideloading and Jailbreaking",
+      "tag_ids": [
+        "mobile.vuln.sideloading",
+        "mobile.vuln.jailbreaking",
+        "mobile.mdm.app_management"
+      ],
+      "pages": [
+        {
+          "id": "ch13.mod14.p1",
+          "title": "Sideloading vs jailbreaking",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Sideloading: installing apps from outside the official app store.\n- Risk: bypasses vetting and can violate org policy.\nJailbreaking/rooting: privilege escalation to gain elevated OS control.\n- Risk: breaks security model, enables deeper tampering and persistence."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: “Sideloading = jailbreaking.”\nSideloading is a distribution path; jailbreaking is privilege escalation. They overlap, but they’re not identical."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Sideloading means:",
+              "options": [
+                "Installing only from the official store",
+                "Installing apps from outside the official store",
+                "Factory resetting the device",
+                "Authenticating to Wi‑Fi via 802.1X"
+              ],
+              "correct_index": 1,
+              "explanation": "Sideloading is installing outside official channels.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Jailbreaking most closely resembles:",
+              "options": [
+                "Privilege escalation to gain root/admin control",
+                "DDoS attack",
+                "Phishing attack",
+                "Wi‑Fi channel overlap"
+              ],
+              "correct_index": 0,
+              "explanation": "Jailbreaking is privilege escalation.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.2",
+            "4.5",
+            "4.6",
+            "5.2",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch13.mod14.p2",
+          "title": "MDM controls that help",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Controls commonly used to reduce these risks:\n- Allow/deny lists for apps; restrict unknown sources.\n- Compliance checks: detect rooted/jailbroken devices and quarantine access.\n- Patch enforcement (OTA updates) to reduce exploitability.\n- Containerization to limit blast radius if personal side is compromised."
+            },
+            {
+              "type": "example",
+              "text": "Example: If a phone is detected as jailbroken, MDM can block corporate email, revoke certificates, and require remediation before re-enabling access."
+            }
+          ],
+          "checks": [
+            {
+              "type": "multi_select",
+              "prompt": "Which controls help reduce sideloading/jailbreaking risk? (Choose TWO.)",
+              "options": [
+                "App allow/deny lists",
+                "Patch/OTA update enforcement",
+                "Increase Wi‑Fi transmit power",
+                "Use 2.4 GHz channels only"
+              ],
+              "correct_indices": [
+                0,
+                1
+              ],
+              "explanation": "Endpoint policy and patching reduce risk; RF choices don’t fix OS privilege problems.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill in the blank: Jailbreaking typically weakens the mobile OS security model by granting ______ privileges.",
+              "answers": [
+                "root",
+                "administrator",
+                "admin"
+              ],
+              "explanation": "Root/admin privileges allow bypassing many built-in security controls.",
+              "objectiveIds": [
+                "1.1",
+                "1.3",
+                "1.5",
+                "2.2",
+                "2.4",
+                "3.2",
+                "3.3",
+                "3.4",
+                "4.2",
+                "4.5",
+                "4.6",
+                "5.2",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "1.3",
+            "1.5",
+            "2.2",
+            "2.4",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.2",
+            "4.5",
+            "4.6",
+            "5.2",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "1.3",
+        "1.5",
+        "2.2",
+        "2.4",
+        "3.2",
+        "3.3",
+        "3.4",
+        "4.2",
+        "4.5",
+        "4.6",
+        "5.2",
+        "5.7"
+      ]
+    }
+  ],
+  "objectiveIds": [
+    "1.1",
+    "1.3",
+    "1.5",
+    "2.2",
+    "2.4",
+    "3.2",
+    "3.3",
+    "3.4",
+    "4.2",
+    "4.5",
+    "4.6",
+    "5.2",
+    "5.7"
+  ]
+}

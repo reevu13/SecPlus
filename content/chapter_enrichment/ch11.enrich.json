@@ -1,0 +1,558 @@
+{
+  "pack_id": "ch11",
+  "version": "1.0.0",
+  "confusion_pairs": [
+    {
+      "id": "cp_allow_block_list",
+      "title": "Allowlisting vs Blocklisting",
+      "a": {
+        "term": "Allowlisting",
+        "definition": "Only approved apps/processes are allowed to run (default deny)."
+      },
+      "b": {
+        "term": "Blocklisting",
+        "definition": "Known bad apps/processes are blocked (default allow)."
+      },
+      "bullets": [
+        "Allowlisting is stronger but needs ongoing maintenance and exception handling.",
+        "Blocklisting is easier but fails against new/unknown malware.",
+        "Exam cue: high-security endpoints often prefer allowlisting."
+      ]
+    },
+    {
+      "id": "cp_sig_vs_heuristic",
+      "title": "Signature vs Heuristic/Behavior Detection",
+      "a": {
+        "term": "Signature detection",
+        "definition": "Matches known patterns/hashes/strings of known malware."
+      },
+      "b": {
+        "term": "Heuristic/behavior detection",
+        "definition": "Flags suspicious behavior or characteristics, including unknown variants."
+      },
+      "bullets": [
+        "Signature is accurate for known threats; heuristics catch novel variants but can false-positive.",
+        "Heuristics often pair with sandboxing to observe behavior safely.",
+        "Exam cue: polymorphic malware tends to evade pure signatures."
+      ]
+    },
+    {
+      "id": "cp_edr_xdr_av",
+      "title": "Antimalware vs EDR vs XDR",
+      "a": {
+        "term": "Antimalware/AV",
+        "definition": "Primarily detects/prevents malware on endpoints (signatures + heuristics)."
+      },
+      "b": {
+        "term": "EDR/XDR",
+        "definition": "EDR: endpoint detection & response; XDR: correlates across endpoint + network + cloud + email."
+      },
+      "bullets": [
+        "AV focuses on prevention; EDR adds deep telemetry, hunting, and response actions.",
+        "XDR correlates signals across multiple domains to reduce blind spots.",
+        "Exam cue: when asked about cross-platform correlation, pick XDR."
+      ]
+    },
+    {
+      "id": "cp_hids_hips",
+      "title": "HIDS vs HIPS",
+      "a": {
+        "term": "HIDS",
+        "definition": "Host-based intrusion detection system: detects and alerts."
+      },
+      "b": {
+        "term": "HIPS",
+        "definition": "Host-based intrusion prevention system: blocks/mitigates in real time."
+      },
+      "bullets": [
+        "Detection alerts; prevention enforces blocks (may impact operations).",
+        "HIPS is closer to 'active defense' on the host.",
+        "Both need tuning to reduce false positives."
+      ]
+    },
+    {
+      "id": "cp_secure_measured_trusted_boot",
+      "title": "Secure Boot vs Measured Boot vs Trusted Boot",
+      "a": {
+        "term": "Secure Boot",
+        "definition": "Prevents untrusted bootloaders/drivers by verifying signatures before execution."
+      },
+      "b": {
+        "term": "Measured/Trusted Boot",
+        "definition": "Measured boot records measurements to TPM; trusted boot validates each stage and can report health."
+      },
+      "bullets": [
+        "Secure boot blocks bad components; measured boot logs what actually loaded.",
+        "Measured boot enables remote attestation (prove boot integrity later).",
+        "Trusted boot focuses on chain validation and integrity assurance through boot stages."
+      ]
+    },
+    {
+      "id": "cp_tpm_hsm_kms",
+      "title": "TPM vs HSM vs KMS",
+      "a": {
+        "term": "TPM",
+        "definition": "Hardware chip for platform integrity and key storage tied to a device (boot measurements, sealing)."
+      },
+      "b": {
+        "term": "HSM/KMS",
+        "definition": "HSM: tamper-resistant key operations hardware; KMS: managed service to create/rotate/use keys."
+      },
+      "bullets": [
+        "TPM is per-device and great for boot integrity + disk key protection.",
+        "HSM is for high-assurance centralized key operations (e.g., CA keys).",
+        "KMS is often cloud-managed; still requires IAM and policy controls."
+      ]
+    },
+    {
+      "id": "cp_sanitization_clear_purge_destroy",
+      "title": "Clear vs Purge vs Destroy (Media Sanitization)",
+      "a": {
+        "term": "Clear",
+        "definition": "Logical techniques that prevent simple recovery (overwrite, reset)."
+      },
+      "b": {
+        "term": "Purge/Destroy",
+        "definition": "Purge: more robust (degauss/crypto erase); Destroy: physically render unusable (shred/incinerate)."
+      },
+      "bullets": [
+        "Clear is for reuse in same security domain; purge/destroy for higher sensitivity.",
+        "Crypto erase can be a purge method when keys are truly destroyed.",
+        "Destroy is final and often requires a certificate of destruction."
+      ]
+    },
+    {
+      "id": "cp_crypto_erase_secure_delete",
+      "title": "Crypto Erase vs Secure Erase/Overwrite",
+      "a": {
+        "term": "Crypto erase",
+        "definition": "Make data unreadable by destroying encryption keys."
+      },
+      "b": {
+        "term": "Secure erase/overwrite",
+        "definition": "Actively overwrite or use firmware secure erase to remove data."
+      },
+      "bullets": [
+        "Crypto erase is fast for encrypted media, but only works if encryption was properly used.",
+        "Overwrite may be less reliable on SSDs due to wear leveling.",
+        "Exam cue: for SSDs, prefer crypto erase or vendor secure erase when available."
+      ]
+    },
+    {
+      "id": "cp_baseline_hardening_patch",
+      "title": "Secure Baseline vs Hardening vs Patching",
+      "a": {
+        "term": "Secure baseline",
+        "definition": "Known-good configuration standard to compare against (gold image)."
+      },
+      "b": {
+        "term": "Hardening/Patching",
+        "definition": "Hardening reduces attack surface; patching fixes known vulnerabilities."
+      },
+      "bullets": [
+        "Baseline is the target state; hardening is what you do to reach/keep it.",
+        "Patching is time-based and vulnerability-driven; baseline is configuration-driven.",
+        "Config enforcement keeps systems from drifting away from baseline."
+      ]
+    },
+    {
+      "id": "cp_misconfig_insecure_defaults",
+      "title": "Misconfiguration vs Insecure Defaults",
+      "a": {
+        "term": "Insecure defaults",
+        "definition": "Vendor ships unsafe settings (e.g., default passwords)."
+      },
+      "b": {
+        "term": "Misconfiguration",
+        "definition": "You set or leave settings incorrectly, exposing systems."
+      },
+      "bullets": [
+        "Insecure defaults are the starting risk; misconfiguration is the operational risk.",
+        "Configuration enforcement + baselines reduce both over time.",
+        "Exam cue: 'left open' or 'forgot to disable' points to misconfiguration."
+      ]
+    }
+  ],
+  "tag_rules": {
+    "1.4": {
+      "rule": "Exam objective tag for this chapter. Use it to map questions to SY0-701 domains.",
+      "micro_example": "Questions tagged with this objective contribute to your mastery stats for that objective.",
+      "confusion_pair_id": "none"
+    },
+    "2.3": {
+      "rule": "Exam objective tag for this chapter. Use it to map questions to SY0-701 domains.",
+      "micro_example": "Questions tagged with this objective contribute to your mastery stats for that objective.",
+      "confusion_pair_id": "none"
+    },
+    "3.1": {
+      "rule": "Exam objective tag for this chapter. Use it to map questions to SY0-701 domains.",
+      "micro_example": "Questions tagged with this objective contribute to your mastery stats for that objective.",
+      "confusion_pair_id": "none"
+    },
+    "4.1": {
+      "rule": "Exam objective tag for this chapter. Use it to map questions to SY0-701 domains.",
+      "micro_example": "Questions tagged with this objective contribute to your mastery stats for that objective.",
+      "confusion_pair_id": "none"
+    },
+    "4.2": {
+      "rule": "Exam objective tag for this chapter. Use it to map questions to SY0-701 domains.",
+      "micro_example": "Questions tagged with this objective contribute to your mastery stats for that objective.",
+      "confusion_pair_id": "none"
+    },
+    "4.4": {
+      "rule": "Exam objective tag for this chapter. Use it to map questions to SY0-701 domains.",
+      "micro_example": "Questions tagged with this objective contribute to your mastery stats for that objective.",
+      "confusion_pair_id": "none"
+    },
+    "4.5": {
+      "rule": "Exam objective tag for this chapter. Use it to map questions to SY0-701 domains.",
+      "micro_example": "Questions tagged with this objective contribute to your mastery stats for that objective.",
+      "confusion_pair_id": "none"
+    },
+    "antimalware": {
+      "rule": "Antimalware aims to prevent/detect malware on endpoints (signatures + heuristics).",
+      "micro_example": "A workstation blocks a known trojan hash during download.",
+      "confusion_pair_id": "cp_edr_xdr_av"
+    },
+    "signature_detection": {
+      "rule": "Signature detection matches known malware patterns; great for known threats, weak for novel variants.",
+      "micro_example": "AV flags a file because its hash matches a known ransomware sample.",
+      "confusion_pair_id": "cp_sig_vs_heuristic"
+    },
+    "heuristic_detection": {
+      "rule": "Heuristic/behavior detection flags suspicious traits/behavior, helping catch new variants.",
+      "micro_example": "A process injects into another process and starts encrypting many files—flagged as suspicious.",
+      "confusion_pair_id": "cp_sig_vs_heuristic"
+    },
+    "anomaly_detection": {
+      "rule": "Anomaly detection looks for deviations from normal behavior; needs baselines and tuning.",
+      "micro_example": "A server starts sending large outbound data at 3 a.m., triggering an alert.",
+      "confusion_pair_id": "none"
+    },
+    "sandboxing": {
+      "rule": "Sandboxing runs code in an isolated environment to observe behavior safely.",
+      "micro_example": "Email attachment runs in a sandbox; it tries to contact a C2 domain and gets blocked.",
+      "confusion_pair_id": "none"
+    },
+    "edr": {
+      "rule": "EDR provides endpoint telemetry, hunting, and response actions (isolate host, kill process, rollback).",
+      "micro_example": "SOC isolates a laptop after EDR detects credential dumping.",
+      "confusion_pair_id": "cp_edr_xdr_av"
+    },
+    "xdr": {
+      "rule": "XDR correlates detections across endpoint/network/cloud/email to improve visibility and response.",
+      "micro_example": "XDR ties a phish email to a token abuse event and endpoint malware execution.",
+      "confusion_pair_id": "cp_edr_xdr_av"
+    },
+    "ioc": {
+      "rule": "Indicators of compromise (IoCs) are artifacts like hashes, IPs, domains, and registry keys used for detection.",
+      "micro_example": "A known malicious domain is added to detection rules across tools.",
+      "confusion_pair_id": "none"
+    },
+    "hids": {
+      "rule": "HIDS detects suspicious activity on a host and alerts, but doesn't necessarily block.",
+      "micro_example": "A HIDS detects unexpected changes to system files and alerts the admin.",
+      "confusion_pair_id": "cp_hids_hips"
+    },
+    "hips": {
+      "rule": "HIPS actively blocks malicious behavior on the host, preventing exploitation.",
+      "micro_example": "HIPS blocks a process from modifying protected registry keys.",
+      "confusion_pair_id": "cp_hids_hips"
+    },
+    "host_firewall": {
+      "rule": "Host firewalls restrict inbound/outbound traffic at the endpoint level to reduce exposure.",
+      "micro_example": "Block inbound SMB from public networks on laptops.",
+      "confusion_pair_id": "none"
+    },
+    "network_defense": {
+      "rule": "Network defenses complement endpoint tools: segmentation, monitoring, and policy reduce blast radius.",
+      "micro_example": "Endpoint is compromised, but network segmentation prevents lateral movement.",
+      "confusion_pair_id": "none"
+    },
+    "allow_list": {
+      "rule": "Allowlisting permits only approved software to run (default deny).",
+      "micro_example": "Only signed corporate apps can execute on kiosks.",
+      "confusion_pair_id": "cp_allow_block_list"
+    },
+    "block_list": {
+      "rule": "Blocklisting blocks known-bad software (default allow). Easier but less robust against unknown threats.",
+      "micro_example": "Known PUP executable hashes are blocked by policy.",
+      "confusion_pair_id": "cp_allow_block_list"
+    },
+    "packing_obfuscation": {
+      "rule": "Packing/obfuscation hides malware to evade signatures; behavior detection and sandboxing help.",
+      "micro_example": "A packed executable looks different each time, so hash-based signatures fail.",
+      "confusion_pair_id": "cp_sig_vs_heuristic"
+    },
+    "polymorphism": {
+      "rule": "Polymorphic malware changes its code/signature while keeping behavior, evading basic signatures.",
+      "micro_example": "A worm re-encrypts its payload each infection to change its hash.",
+      "confusion_pair_id": "cp_sig_vs_heuristic"
+    },
+    "configuration": {
+      "rule": "Configuration is the system settings state. Secure configurations reduce attack surface.",
+      "micro_example": "Disable unused services and enforce strong TLS settings.",
+      "confusion_pair_id": "none"
+    },
+    "secure_baseline": {
+      "rule": "Secure baseline is a standard 'known-good' configuration used for comparison and drift detection.",
+      "micro_example": "Golden image for workstations includes firewall on, no local admin by default.",
+      "confusion_pair_id": "cp_baseline_hardening_patch"
+    },
+    "hardening": {
+      "rule": "Hardening removes/locks down unnecessary features, accounts, ports, and services.",
+      "micro_example": "Uninstall unused software, disable legacy protocols, close unused ports.",
+      "confusion_pair_id": "cp_baseline_hardening_patch"
+    },
+    "misconfiguration": {
+      "rule": "Misconfiguration is a wrong setting you applied or left open; it’s a top cause of incidents.",
+      "micro_example": "An admin leaves RDP open to the internet without MFA.",
+      "confusion_pair_id": "cp_misconfig_insecure_defaults"
+    },
+    "insecure_defaults": {
+      "rule": "Insecure defaults are vendor-shipped unsafe settings; change them immediately.",
+      "micro_example": "Default password on an IoT camera remains unchanged.",
+      "confusion_pair_id": "cp_misconfig_insecure_defaults"
+    },
+    "configuration_enforcement": {
+      "rule": "Configuration enforcement tools keep devices compliant with the baseline and prevent drift.",
+      "micro_example": "If a user disables firewall, the tool re-enables it and logs the event.",
+      "confusion_pair_id": "none"
+    },
+    "cis_benchmarks": {
+      "rule": "CIS Benchmarks provide prescriptive hardening guidance (baseline templates) for systems.",
+      "micro_example": "Apply CIS Windows benchmark settings via GPO and validate compliance.",
+      "confusion_pair_id": "none"
+    },
+    "security_compliance_toolkit": {
+      "rule": "Security compliance toolkits automate checking against baselines/policies and generate reports.",
+      "micro_example": "Scan endpoints weekly and report which controls are failing.",
+      "confusion_pair_id": "none"
+    },
+    "compensating_controls": {
+      "rule": "Compensating controls reduce risk when a primary control isn’t possible (temporary or constrained).",
+      "micro_example": "Legacy system can't be patched; isolate it in a VLAN and restrict access tightly.",
+      "confusion_pair_id": "none"
+    },
+    "patch_management": {
+      "rule": "Patch management is the process: evaluate, test, deploy, verify, and document patches.",
+      "micro_example": "Monthly patch cycle tests updates in staging, then deploys to production with rollback plan.",
+      "confusion_pair_id": "cp_baseline_hardening_patch"
+    },
+    "patching": {
+      "rule": "Patching applies fixes to remove known vulnerabilities. Verification matters.",
+      "micro_example": "After patching, verify the vulnerable CVE no longer triggers a scan finding.",
+      "confusion_pair_id": "cp_baseline_hardening_patch"
+    },
+    "hardware_vulnerabilities": {
+      "rule": "Hardware vulnerabilities (e.g., CPU flaws) may need microcode/firmware updates and mitigations.",
+      "micro_example": "Apply BIOS/microcode update to mitigate a processor side-channel issue.",
+      "confusion_pair_id": "none"
+    },
+    "os_vulnerabilities": {
+      "rule": "OS vulnerabilities require timely patching and mitigation (config changes, disabling features).",
+      "micro_example": "Disable legacy SMBv1 and patch the OS to fix remote code execution bugs.",
+      "confusion_pair_id": "none"
+    },
+    "firmware": {
+      "rule": "Firmware is low-level code on hardware; it can be a major attack surface and must be patched.",
+      "micro_example": "Update UEFI firmware to fix a secure boot bypass.",
+      "confusion_pair_id": "none"
+    },
+    "uefi": {
+      "rule": "UEFI is modern firmware interface; supports features like Secure Boot.",
+      "micro_example": "Secure Boot verifies signed bootloaders via UEFI policy.",
+      "confusion_pair_id": "cp_secure_measured_trusted_boot"
+    },
+    "hardware_root_of_trust": {
+      "rule": "Hardware root of trust is the physical trust anchor (TPM/secure enclave/PUF) used to verify integrity.",
+      "micro_example": "TPM stores boot measurements and protects disk keys.",
+      "confusion_pair_id": "cp_tpm_hsm_kms"
+    },
+    "secure_boot": {
+      "rule": "Secure Boot verifies signed boot components before running to block bootkits.",
+      "micro_example": "A modified bootloader fails signature check and won’t load.",
+      "confusion_pair_id": "cp_secure_measured_trusted_boot"
+    },
+    "measured_boot": {
+      "rule": "Measured boot records what loaded (hash measurements) to TPM for later proof (attestation).",
+      "micro_example": "System measures boot stages and can prove integrity to a management server.",
+      "confusion_pair_id": "cp_secure_measured_trusted_boot"
+    },
+    "trusted_boot": {
+      "rule": "Trusted boot validates each stage of the boot chain and can enforce integrity expectations.",
+      "micro_example": "Each boot component validates the next component before handing off control.",
+      "confusion_pair_id": "cp_secure_measured_trusted_boot"
+    },
+    "tpm": {
+      "rule": "TPM is a device hardware chip for secure key storage, sealing, and boot measurements/attestation.",
+      "micro_example": "BitLocker disk key is sealed to TPM so disk unlock depends on expected boot state.",
+      "confusion_pair_id": "cp_tpm_hsm_kms"
+    },
+    "remote_attestation": {
+      "rule": "Remote attestation proves a device boot/config state to a remote verifier (often using TPM measurements).",
+      "micro_example": "A server proves it booted a trusted image before joining a cluster.",
+      "confusion_pair_id": "cp_secure_measured_trusted_boot"
+    },
+    "sealing": {
+      "rule": "Sealing ties a secret to specific platform state (TPM PCR values). If boot state changes, secret stays locked.",
+      "micro_example": "Disk key is released only if boot measurements match expected values.",
+      "confusion_pair_id": "none"
+    },
+    "binding": {
+      "rule": "Binding ties a key to a device/TPM so it can’t be used elsewhere.",
+      "micro_example": "A key generated inside TPM can’t be exported and used on another host.",
+      "confusion_pair_id": "none"
+    },
+    "secure_enclave": {
+      "rule": "Secure enclaves isolate sensitive computations/keys from the main OS, reducing exposure to malware.",
+      "micro_example": "A private key operation happens inside an enclave even if the OS is compromised.",
+      "confusion_pair_id": "cp_tpm_hsm_kms"
+    },
+    "secure_erase": {
+      "rule": "Secure erase uses hardware/firmware features or controlled overwrite to remove data safely.",
+      "micro_example": "Vendor secure erase command resets a drive to a clean state.",
+      "confusion_pair_id": "cp_crypto_erase_secure_delete"
+    },
+    "puf": {
+      "rule": "PUF (physically unclonable function) derives unique secrets from hardware characteristics (anti-cloning).",
+      "micro_example": "IoT device uses PUF-derived key instead of storing a static secret in flash.",
+      "confusion_pair_id": "none"
+    },
+    "hsm": {
+      "rule": "HSM is tamper-resistant hardware for key storage and cryptographic operations (high assurance).",
+      "micro_example": "A CA private key is stored and used inside an HSM to sign certificates.",
+      "confusion_pair_id": "cp_tpm_hsm_kms"
+    },
+    "kms": {
+      "rule": "KMS is a managed key service for creating/rotating/using keys with IAM policies and audit logs.",
+      "micro_example": "Cloud apps use KMS to encrypt storage with customer-managed keys.",
+      "confusion_pair_id": "cp_tpm_hsm_kms"
+    },
+    "key_management": {
+      "rule": "Key management covers generation, storage, rotation, access control, backup, and revocation.",
+      "micro_example": "Rotate service keys quarterly and restrict who can decrypt production data.",
+      "confusion_pair_id": "none"
+    },
+    "full_disk_encryption": {
+      "rule": "Full disk encryption protects data at rest; pairing with TPM improves usability and security.",
+      "micro_example": "Laptop disk is encrypted; it unlocks only after TPM confirms trusted boot state.",
+      "confusion_pair_id": "none"
+    },
+    "dlp": {
+      "rule": "DLP prevents sensitive data exfiltration using content inspection and policy enforcement.",
+      "micro_example": "Block sending credit card numbers via email attachment.",
+      "confusion_pair_id": "none"
+    },
+    "asset_inventory": {
+      "rule": "Asset inventory is knowing what you have: hardware, software, versions, owners. You can’t secure what you don’t know.",
+      "micro_example": "Inventory reveals an unpatched legacy server still running on the network.",
+      "confusion_pair_id": "none"
+    },
+    "decommissioning": {
+      "rule": "Decommissioning is safely retiring systems: revoke access, archive data, sanitize media, update inventory.",
+      "micro_example": "Before disposal, disable accounts, back up required data, then sanitize drives.",
+      "confusion_pair_id": "none"
+    },
+    "sanitization": {
+      "rule": "Sanitization is making data unrecoverable before reuse/disposal (clear/purge/destroy).",
+      "micro_example": "For sensitive data, purge with crypto erase or destroy media.",
+      "confusion_pair_id": "cp_sanitization_clear_purge_destroy"
+    },
+    "crypto_erase": {
+      "rule": "Crypto erase destroys encryption keys so encrypted data becomes unreadable quickly.",
+      "micro_example": "Delete the disk encryption key in KMS to render snapshots unreadable.",
+      "confusion_pair_id": "cp_crypto_erase_secure_delete"
+    },
+    "data_remanence": {
+      "rule": "Data remanence is leftover data that remains after deletion; requires sanitization to prevent recovery.",
+      "micro_example": "Deleted files still exist in unallocated space until overwritten or sanitized.",
+      "confusion_pair_id": "none"
+    },
+    "degaussing": {
+      "rule": "Degaussing uses a strong magnetic field to erase magnetic media (not SSDs).",
+      "micro_example": "Degauss an old tape drive cartridge before disposal.",
+      "confusion_pair_id": "cp_sanitization_clear_purge_destroy"
+    },
+    "physical_destruction": {
+      "rule": "Physical destruction renders media unusable (shredding, pulverizing, incineration).",
+      "micro_example": "Shred hard drives containing highly sensitive data.",
+      "confusion_pair_id": "cp_sanitization_clear_purge_destroy"
+    },
+    "certificate_of_destruction": {
+      "rule": "A certificate of destruction documents secure disposal for audit/compliance.",
+      "micro_example": "Vendor provides certificate after shredding encrypted backup tapes.",
+      "confusion_pair_id": "cp_sanitization_clear_purge_destroy"
+    },
+    "eol": {
+      "rule": "End-of-life means vendor no longer provides security patches; risk increases sharply.",
+      "micro_example": "An EOL OS must be replaced or isolated with compensating controls.",
+      "confusion_pair_id": "none"
+    },
+    "legacy_hardware": {
+      "rule": "Legacy hardware may lack security features and patch support; it often needs isolation and tight controls.",
+      "micro_example": "An old PLC can't be patched; put it behind a firewall and restrict access.",
+      "confusion_pair_id": "none"
+    },
+    "embedded_systems": {
+      "rule": "Embedded systems have constrained resources; security relies on strong defaults, secure updates, and isolation.",
+      "micro_example": "A smart sensor uses signed firmware updates and minimal open ports.",
+      "confusion_pair_id": "none"
+    },
+    "rtos": {
+      "rule": "RTOS prioritizes real-time responses; patching and monitoring must be planned carefully.",
+      "micro_example": "Apply updates during maintenance windows to avoid disrupting timing constraints.",
+      "confusion_pair_id": "none"
+    },
+    "iot_security": {
+      "rule": "IoT security focuses on secure defaults, firmware updates, segmentation, and identity/keys.",
+      "micro_example": "Change default passwords and isolate IoT devices on a separate VLAN.",
+      "confusion_pair_id": "none"
+    },
+    "ics_scada": {
+      "rule": "ICS/SCADA systems control industrial processes; availability and safety are critical. Use segmentation and strict access.",
+      "micro_example": "SCADA network is isolated; remote access requires VPN + MFA + jump host.",
+      "confusion_pair_id": "none"
+    },
+    "plc": {
+      "rule": "PLCs are industrial controllers; they often run legacy protocols and need strong network isolation.",
+      "micro_example": "PLC programming port is restricted to an engineering workstation subnet.",
+      "confusion_pair_id": "none"
+    },
+    "rtu": {
+      "rule": "RTUs are remote telemetry devices; secure comms and authentication are key.",
+      "micro_example": "RTU sends sensor data over encrypted channel with device certs.",
+      "confusion_pair_id": "none"
+    },
+    "wear_leveling": {
+      "rule": "Wear leveling in SSD/flash can make overwriting unreliable; sanitize with crypto erase or vendor secure erase.",
+      "micro_example": "SSD overwrite may miss remapped blocks; crypto erase is safer.",
+      "confusion_pair_id": "cp_crypto_erase_secure_delete"
+    },
+    "mac": {
+      "rule": "MAC (Mandatory Access Control) enforces policy centrally; users can’t override permissions.",
+      "micro_example": "Even root is constrained by MAC policy in hardened environments.",
+      "confusion_pair_id": "none"
+    },
+    "selinux": {
+      "rule": "SELinux is a MAC system for Linux that enforces policy rules on processes/resources.",
+      "micro_example": "A web server process is denied access to user home directories by SELinux policy.",
+      "confusion_pair_id": "none"
+    },
+    "enumeration": {
+      "rule": "Enumeration collects detailed system info (users, shares, services) and increases attacker knowledge—monitor and limit it.",
+      "micro_example": "Exposed SMB shares reveal user lists and file structures to attackers.",
+      "confusion_pair_id": "none"
+    },
+    "attack_footprint": {
+      "rule": "Attack footprint is the exposed surface area of a system (services, ports, configs). Reduce it to lower risk.",
+      "micro_example": "Disable unused ports and remove legacy services to shrink footprint.",
+      "confusion_pair_id": "none"
+    },
+    "group_policy": {
+      "rule": "Group Policy (GPO) centrally enforces Windows configuration and security settings across domain-joined systems.",
+      "micro_example": "Enforce screen lock timeout and disable SMBv1 via GPO for all workstations.",
+      "confusion_pair_id": "none"
+    }
+  }
+}

@@ -1,0 +1,3107 @@
+{
+  "pack_id": "ch17",
+  "version": "1.0.0",
+  "modules": [
+    {
+      "id": "ch17.m01",
+      "title": "Risk basics: threat, vulnerability, impact",
+      "tag_ids": [
+        "risk.basics.risk_definition",
+        "risk.basics.threat",
+        "risk.basics.vulnerability",
+        "risk.basics.risk_intersection",
+        "risk.basics.cia_impact"
+      ],
+      "pages": [
+        {
+          "id": "ch17.m01.p1",
+          "title": "What 'risk' actually means",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Risk is the chance that a threat will exploit a vulnerability and cause harm. In security terms, it’s not ‘bad stuff’—it’s uncertainty with impact."
+            },
+            {
+              "type": "diagram",
+              "text": "Mental model: Risk = Threat × Vulnerability × Impact. If any factor is ~0, the risk collapses."
+            },
+            {
+              "type": "example",
+              "text": "Example: Unpatched VPN (vulnerability) + active exploit campaign (threat) + remote access to core systems (impact) = high risk."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: confusing a threat with a vulnerability. Threat = the ‘who/what’ that can cause harm. Vulnerability = the weakness that makes harm possible."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which statement best defines security risk?",
+              "options": [
+                "A specific vulnerability in software",
+                "The uncertainty of loss when a threat can exploit a vulnerability",
+                "Any malicious actor on the internet",
+                "Any control used to reduce impact"
+              ],
+              "correct_index": 1,
+              "explanation": "Risk is the possibility of loss when a threat meets a vulnerability and causes impact; it’s not just the weakness or the attacker.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch17.m01.p2",
+          "title": "Threats vs vulnerabilities vs impact",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Threats are potential causes of harm (attackers, disasters, failures). Vulnerabilities are weaknesses (bugs, misconfigs, process gaps). Impact is the damage if it happens (CIA: confidentiality, integrity, availability)."
+            },
+            {
+              "type": "example",
+              "text": "Threat: ransomware group. Vulnerability: exposed RDP with weak auth. Impact: downtime + data loss (availability + integrity)."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: assuming ‘high severity vuln’ automatically means ‘high risk.’ If the system is isolated, monitored, and not reachable, risk may be lower."
+            }
+          ],
+          "checks": [
+            {
+              "type": "matching",
+              "prompt": "Match the term to the description.",
+              "left": [
+                "Threat",
+                "Vulnerability",
+                "Impact"
+              ],
+              "right": [
+                "A weakness that can be exploited",
+                "Potential cause of harm",
+                "The damage if the event occurs"
+              ],
+              "correct_map": {
+                "Threat": "Potential cause of harm",
+                "Vulnerability": "A weakness that can be exploited",
+                "Impact": "The damage if the event occurs"
+              },
+              "explanation": "Keep the nouns clean: threat causes, vulnerability enables, impact measures harm.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "CIA impact refers to harm to which three properties?",
+              "options": [
+                "Confidentiality, Integrity, Availability",
+                "Controls, Incidents, Alerts",
+                "Compliance, Identity, Authorization",
+                "Confidentiality, Identification, Auditing"
+              ],
+              "correct_index": 0,
+              "explanation": "CIA is the classic triad used for describing the type of impact.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch17.m01.p3",
+          "title": "Where risk lives: internal vs external",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Risk sources can be internal (process failures, insider misuse, legacy systems) or external (attackers, natural disasters, supply chain issues)."
+            },
+            {
+              "type": "example",
+              "text": "Internal: expired TLS cert causes outage. External: DDoS campaign targets your login service."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: treating external threats as the only ‘real’ risks. Internal misconfigurations cause plenty of incidents—and they’re often easier to prevent."
+            }
+          ],
+          "checks": [
+            {
+              "type": "multi_select",
+              "prompt": "Which are examples of internal risk sources? (Choose TWO)",
+              "options": [
+                "Legacy systems that can’t be patched",
+                "A hurricane flooding a data center",
+                "Process gaps in access reviews",
+                "A competitor’s marketing campaign"
+              ],
+              "correct_indices": [
+                0,
+                2
+              ],
+              "explanation": "Internal risks include legacy tech debt and broken processes; disasters are external.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "2.1",
+        "2.2",
+        "4.2",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.5",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch17.m02",
+      "title": "Risk assessment inputs and cadence",
+      "tag_ids": [
+        "risk.assessment.likelihood",
+        "risk.assessment.probability",
+        "risk.assessment.impact_magnitude",
+        "risk.assessment.one_time",
+        "risk.assessment.recurring",
+        "risk.assessment.ad_hoc",
+        "risk.assessment.continuous"
+      ],
+      "pages": [
+        {
+          "id": "ch17.m02.p1",
+          "title": "Likelihood vs probability vs impact magnitude",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Likelihood/probability estimates how often an event might happen. Impact magnitude estimates how bad it would be. Both matter; ‘rare but catastrophic’ is still a big deal."
+            },
+            {
+              "type": "diagram",
+              "text": "Classic axis chart: Likelihood on one axis, Impact on the other. High-high = priority."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: using ‘likelihood’ as a feeling. Use evidence: incident history, exposure, threat intel, and control strength."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "In a basic risk model, which two dimensions are most commonly combined?",
+              "options": [
+                "Speed and cost",
+                "Likelihood and impact",
+                "Encryption and authentication",
+                "Users and devices"
+              ],
+              "correct_index": 1,
+              "explanation": "Most risk scoring combines likelihood (probability) with impact (magnitude).",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch17.m02.p2",
+          "title": "One-time vs recurring assessments",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "One-time risk assessments happen for a specific decision (new app launch, vendor onboarding). Recurring assessments are scheduled (quarterly review) to catch drift and new threats."
+            },
+            {
+              "type": "example",
+              "text": "One-time: decide whether to accept risk for a legacy system for 60 days. Recurring: monthly review of privileged access risks."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: doing one-time assessments and calling it a program. Risk changes constantly—your assessment cadence should match your environment."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A recurring risk assessment is MOST useful for detecting:",
+              "options": [
+                "Static code vulnerabilities from 10 years ago",
+                "New threats and control drift over time",
+                "Whether an SSID is hidden",
+                "The size of a hard drive"
+              ],
+              "correct_index": 1,
+              "explanation": "Recurring assessments catch changes: new exposure, new threats, and weakening controls.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch17.m02.p3",
+          "title": "Ad hoc vs continuous risk assessment",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Ad hoc is triggered by events (incident, acquisition, new regulation). Continuous assessment is ongoing measurement (KRIs, monitoring, automated signals)."
+            },
+            {
+              "type": "example",
+              "text": "Continuous: KRI dashboard shows patch latency increasing. Ad hoc: breach triggers a focused assessment of data handling."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: calling ad hoc ‘continuous’ because you run it ‘sometimes.’ Continuous means ongoing signals + regular review."
+            }
+          ],
+          "checks": [
+            {
+              "type": "matching",
+              "prompt": "Match the approach to the description.",
+              "left": [
+                "Ad hoc assessment",
+                "Continuous assessment"
+              ],
+              "right": [
+                "Triggered by events or special needs",
+                "Ongoing measurements and monitoring-driven updates"
+              ],
+              "correct_map": {
+                "Ad hoc assessment": "Triggered by events or special needs",
+                "Continuous assessment": "Ongoing measurements and monitoring-driven updates"
+              },
+              "explanation": "Ad hoc = event-driven; continuous = always-on signals + review.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "2.1",
+        "2.2",
+        "4.2",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.5",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch17.m03",
+      "title": "Qualitative analysis: matrices and severity",
+      "tag_ids": [
+        "risk.analysis.qualitative",
+        "risk.matrix.heat_map",
+        "risk.analysis.overview",
+        "risk.assessment.severity_formula"
+      ],
+      "pages": [
+        {
+          "id": "ch17.m03.p1",
+          "title": "Qualitative risk analysis",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Qualitative analysis uses categories (low/medium/high) for likelihood and impact. It’s fast, great for communication, but less precise."
+            },
+            {
+              "type": "example",
+              "text": "Likelihood: 'Medium' based on recent attacks. Impact: 'High' because system supports customer auth."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: thinking qualitative is ‘fake.’ It’s valid when numbers are unavailable—just be consistent and document assumptions."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Qualitative risk analysis typically expresses results as:",
+              "options": [
+                "Exact dollar values",
+                "Categories like low/medium/high",
+                "CPU utilization percentages",
+                "TLS cipher suite lists"
+              ],
+              "correct_index": 1,
+              "explanation": "Qualitative = categories/scales, not exact financials.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch17.m03.p2",
+          "title": "Risk matrices and heat maps",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "A risk matrix maps likelihood vs impact into a heat map so teams can quickly see priorities."
+            },
+            {
+              "type": "diagram",
+              "text": "Heat map: low-low (green), high-high (red). Use it to prioritize mitigation work."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: treating the heat map as a truth machine. It’s a decision aid; garbage inputs still produce confident colors."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "What is the main purpose of a risk heat map?",
+              "options": [
+                "Encrypt data at rest",
+                "Visualize prioritization by combining likelihood and impact",
+                "Replace incident response playbooks",
+                "Detect malware in memory"
+              ],
+              "correct_index": 1,
+              "explanation": "Heat maps help communicate and prioritize risk based on likelihood/impact.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch17.m03.p3",
+          "title": "Severity scoring (keep it consistent)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "If your org uses a formula (like likelihood × impact), consistency matters more than the specific math. The goal is comparable ranking."
+            },
+            {
+              "type": "example",
+              "text": "Two teams using the same rubric can compare risks across projects without arguing about adjectives."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: mixing scales (1–5 likelihood but 1–3 impact) without normalizing; it skews results."
+            }
+          ],
+          "checks": [
+            {
+              "type": "cloze",
+              "prompt": "Fill in the blank: In many simple models, risk severity is estimated as likelihood ___ impact.",
+              "answers": [
+                "times",
+                "multiplied by",
+                "x"
+              ],
+              "explanation": "A common simple approach multiplies likelihood and impact to rank risks.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "2.1",
+        "2.2",
+        "4.2",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.5",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch17.m04",
+      "title": "Quantitative analysis: SLE/ARO/ALE",
+      "tag_ids": [
+        "risk.analysis.quantitative",
+        "risk.quant.av",
+        "risk.quant.ef",
+        "risk.quant.sle",
+        "risk.quant.aro",
+        "risk.quant.ale",
+        "risk.quant.probability_vs_aro",
+        "risk.quant.example.dos_email"
+      ],
+      "pages": [
+        {
+          "id": "ch17.m04.p1",
+          "title": "Quantitative analysis: the core variables",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Quantitative analysis uses numbers—often dollars—to estimate expected loss."
+            },
+            {
+              "type": "diagram",
+              "text": "AV (asset value) × EF (exposure factor) = SLE (single loss expectancy). SLE × ARO (annual rate of occurrence) = ALE (annual loss expectancy)."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: treating the numbers as precise. They’re estimates; the value is in disciplined assumptions and comparison."
+            }
+          ],
+          "checks": [
+            {
+              "type": "matching",
+              "prompt": "Match the variable to its meaning.",
+              "left": [
+                "AV",
+                "EF",
+                "SLE",
+                "ARO",
+                "ALE"
+              ],
+              "right": [
+                "Annualized expected loss",
+                "Value of the asset",
+                "Fraction of loss per event",
+                "Expected loss from one event",
+                "Expected frequency per year"
+              ],
+              "correct_map": {
+                "AV": "Value of the asset",
+                "EF": "Fraction of loss per event",
+                "SLE": "Expected loss from one event",
+                "ARO": "Expected frequency per year",
+                "ALE": "Annualized expected loss"
+              },
+              "explanation": "Quantitative risk boils down to AV/EF/SLE and ARO/ALE. Learn the chain.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch17.m04.p2",
+          "title": "Compute SLE and ALE quickly",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "SLE = AV × EF. EF is often expressed as a percentage of the asset value that’s lost in a single event."
+            },
+            {
+              "type": "example",
+              "text": "AV = $200,000, EF = 0.25 → SLE = $50,000. If ARO = 0.5/year → ALE = $25,000/year."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: using ARO as 'probability' without time context. ARO is frequency per year; probability is a different framing."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "If AV=$100,000 and EF=0.1, what is SLE?",
+              "options": [
+                "$10,000",
+                "$100,000",
+                "$1,000",
+                "$90,000"
+              ],
+              "correct_index": 0,
+              "explanation": "SLE = AV × EF = 100,000 × 0.1 = 10,000.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "If SLE=$10,000 and ARO=2, what is ALE?",
+              "options": [
+                "$20,000",
+                "$10,000",
+                "$5,000",
+                "$2,000"
+              ],
+              "correct_index": 0,
+              "explanation": "ALE = SLE × ARO = 10,000 × 2 = 20,000 per year.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch17.m04.p3",
+          "title": "Probability vs ARO (don’t mix them)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Probability is the chance of an event in a given period. ARO is an expected frequency per year. They can relate, but they’re not the same unit."
+            },
+            {
+              "type": "example",
+              "text": "ARO=0.25 means ‘once every 4 years’ on average. That’s not the same as ‘25% chance today.’"
+            },
+            {
+              "type": "trap",
+              "text": "Trap: presenting ARO as a percentage without explaining the time window—leads to wrong decisions."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "ARO most directly represents:",
+              "options": [
+                "A one-time dollar loss",
+                "Expected frequency of occurrence per year",
+                "The % of a file that is encrypted",
+                "The time to restore a backup"
+              ],
+              "correct_index": 1,
+              "explanation": "ARO is an annualized frequency estimate.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "2.1",
+        "2.2",
+        "4.2",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.5",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch17.m05",
+      "title": "Risk management: avoid/mitigate/transfer/accept",
+      "tag_ids": [
+        "risk.management.overview",
+        "risk.management.avoidance",
+        "risk.management.mitigation",
+        "risk.management.transference",
+        "risk.management.acceptance",
+        "risk.management.tradeoffs"
+      ],
+      "pages": [
+        {
+          "id": "ch17.m05.p1",
+          "title": "Four classic risk responses",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Risk management is deciding what to do about risk. Classic options: avoid, mitigate, transfer, accept."
+            },
+            {
+              "type": "example",
+              "text": "Avoid: don’t deploy the feature. Mitigate: add controls. Transfer: insurance/contract. Accept: document and live with it."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: thinking you can ‘eliminate’ risk. You can only reduce it, move it, or decide it’s worth it."
+            }
+          ],
+          "checks": [
+            {
+              "type": "matching",
+              "prompt": "Match each response to the example.",
+              "left": [
+                "Avoid",
+                "Mitigate",
+                "Transfer",
+                "Accept"
+              ],
+              "right": [
+                "Buy cyber insurance for breach costs",
+                "Add MFA and reduce exposure",
+                "Cancel the risky deployment",
+                "Document residual risk and proceed"
+              ],
+              "correct_map": {
+                "Avoid": "Cancel the risky deployment",
+                "Mitigate": "Add MFA and reduce exposure",
+                "Transfer": "Buy cyber insurance for breach costs",
+                "Accept": "Document residual risk and proceed"
+              },
+              "explanation": "Avoid/mitigate/transfer/accept are the four default levers.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch17.m05.p2",
+          "title": "Risk acceptance: exceptions vs exemptions",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Acceptance is a conscious decision to live with risk. Often documented as an exception (temporary deviation) or exemption (formal allowance)."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: using exceptions as permanent loopholes. They should be time-bound, owned, and reviewed."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A key best practice for risk exceptions is that they should be:",
+              "options": [
+                "Permanent to reduce paperwork",
+                "Time-bound with an owner and review date",
+                "Hidden from reporting dashboards",
+                "Used only for encryption keys"
+              ],
+              "correct_index": 1,
+              "explanation": "Exceptions should be controlled: owner, scope, expiration, and review.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch17.m05.p3",
+          "title": "Tradeoffs: security vs cost vs usability",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Every mitigation has tradeoffs: cost, performance, usability, and operational complexity. Risk management is decision-making under constraints."
+            },
+            {
+              "type": "example",
+              "text": "Adding strict MFA reduces account takeover but increases helpdesk load; mitigate with better UX and recovery processes."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: selecting controls that look good on paper but won’t be adopted; bypasses create new risks."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which statement best reflects risk management tradeoffs?",
+              "options": [
+                "The strongest control is always the best choice",
+                "Controls must balance risk reduction with cost and usability",
+                "Risk is eliminated by policies alone",
+                "Insurance is a substitute for controls"
+              ],
+              "correct_index": 1,
+              "explanation": "Good security is effective and usable; impractical controls get bypassed.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "2.1",
+        "2.2",
+        "4.2",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.5",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch17.m06",
+      "title": "Tracking risk: inherent/residual + appetite/tolerance",
+      "tag_ids": [
+        "risk.tracking.inherent",
+        "risk.tracking.residual",
+        "risk.tracking.risk_appetite",
+        "risk.tracking.risk_tolerance",
+        "risk.tracking.risk_threshold",
+        "risk.tracking.risk_owner",
+        "risk.register.elements.risk_owner",
+        "risk.register.elements.risk_threshold"
+      ],
+      "pages": [
+        {
+          "id": "ch17.m06.p1",
+          "title": "Inherent vs residual risk",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Inherent risk is the risk before controls. Residual risk is what remains after controls are applied."
+            },
+            {
+              "type": "example",
+              "text": "Inherent: internet-facing admin portal. Residual: portal behind VPN + MFA + monitoring."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: claiming residual risk is ‘zero.’ If it’s connected to reality, it has residual risk."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Residual risk is BEST described as:",
+              "options": [
+                "Risk before controls",
+                "Risk remaining after controls",
+                "A vulnerability score",
+                "A compliance requirement"
+              ],
+              "correct_index": 1,
+              "explanation": "Residual risk is what’s left after mitigation.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch17.m06.p2",
+          "title": "Risk appetite vs tolerance vs threshold",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Risk appetite is the overall amount of risk an organization is willing to pursue/accept to achieve objectives. Tolerance is the acceptable variation around objectives. Threshold is a specific trigger point that demands action/escalation."
+            },
+            {
+              "type": "example",
+              "text": "Appetite: 'low tolerance for customer-data risk.' Threshold: 'Any system with ALE > $50k requires mitigation plan.'"
+            },
+            {
+              "type": "trap",
+              "text": "Trap: using appetite/tolerance as vague vibes. Make them measurable through thresholds and KRIs."
+            }
+          ],
+          "checks": [
+            {
+              "type": "matching",
+              "prompt": "Match the term to the description.",
+              "left": [
+                "Risk appetite",
+                "Risk tolerance",
+                "Risk threshold"
+              ],
+              "right": [
+                "Specific trigger that prompts action/escalation",
+                "Overall willingness to accept risk to meet goals",
+                "Acceptable variation around objectives"
+              ],
+              "correct_map": {
+                "Risk appetite": "Overall willingness to accept risk to meet goals",
+                "Risk tolerance": "Acceptable variation around objectives",
+                "Risk threshold": "Specific trigger that prompts action/escalation"
+              },
+              "explanation": "Appetite = big-picture; tolerance = wiggle room; threshold = numeric trigger.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch17.m06.p3",
+          "title": "Risk owner and accountability",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Every major risk needs a risk owner: the person accountable for decisions, mitigation, and acceptance—not just the person who found it."
+            },
+            {
+              "type": "example",
+              "text": "Security identifies a risk; product owner decides priorities and signs acceptance (with leadership oversight)."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: ‘security owns the risk.’ Security advises; business owns the risk decision."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Why assign a risk owner?",
+              "options": [
+                "To hide the risk from audits",
+                "To ensure accountability for mitigation or acceptance decisions",
+                "To generate encryption keys",
+                "To avoid documenting residual risk"
+              ],
+              "correct_index": 1,
+              "explanation": "Risk owners make sure risks are acted on and decisions are explicit.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "2.1",
+        "2.2",
+        "4.2",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.5",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch17.m07",
+      "title": "Risk register, KRIs, and reporting",
+      "tag_ids": [
+        "risk.register.definition",
+        "risk.reporting.overview",
+        "risk.reporting.dashboard",
+        "risk.reporting.event_reports",
+        "risk.reporting.regular_updates",
+        "risk.reporting.ad_hoc",
+        "risk.reporting.trend_analysis",
+        "risk.reporting.audience_tailoring",
+        "risk.register.elements.kri",
+        "risk.tracking.kri"
+      ],
+      "pages": [
+        {
+          "id": "ch17.m07.p1",
+          "title": "Risk register: the single source of truth",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "A risk register is a structured list of identified risks with owners, scores, status, and decisions (mitigation/acceptance)."
+            },
+            {
+              "type": "example",
+              "text": "Register entry: Risk ID, description, likelihood, impact, controls, residual score, owner, due date, status."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: treating the register as a graveyard. It should drive action and review, not collect dust."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A risk register is primarily used to:",
+              "options": [
+                "Encrypt sensitive data",
+                "Track and manage identified risks with ownership and status",
+                "Detect Wi‑Fi jamming",
+                "Perform malware reverse engineering"
+              ],
+              "correct_index": 1,
+              "explanation": "Risk registers provide visibility and accountability for risk decisions.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch17.m07.p2",
+          "title": "KRIs and dashboards",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Key Risk Indicators (KRIs) are measurable signals that risk is rising or falling. Dashboards summarize KRIs and risk status for stakeholders."
+            },
+            {
+              "type": "example",
+              "text": "KRI: % of critical systems unpatched > 30 days. Trend rising → escalate."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: using KPIs instead of KRIs. KPI measures performance; KRI measures risk exposure."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A KRI is BEST described as:",
+              "options": [
+                "A performance metric",
+                "A risk signal metric that indicates increasing or decreasing exposure",
+                "A password policy",
+                "A firewall rule"
+              ],
+              "correct_index": 1,
+              "explanation": "KRIs signal risk changes; they’re used for monitoring and escalation.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch17.m07.p3",
+          "title": "Reporting: audience tailoring and trends",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Risk reporting should match the audience: executives want high-level risk posture and trends; engineers need actionable details."
+            },
+            {
+              "type": "example",
+              "text": "Executive report: top 10 risks, trend lines, thresholds exceeded. Technical report: affected systems, controls, remediation steps."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: dumping raw vulnerability scans on leadership. They need decisions, not noise."
+            }
+          ],
+          "checks": [
+            {
+              "type": "multi_select",
+              "prompt": "Which are good practices for risk reporting? (Choose TWO)",
+              "options": [
+                "Tailor detail level to the audience",
+                "Include trend analysis over time",
+                "Use only ad hoc reporting with no schedule",
+                "Avoid dashboards to prevent scrutiny"
+              ],
+              "correct_indices": [
+                0,
+                1
+              ],
+              "explanation": "Good reporting is audience-appropriate and shows trends; regular cadence builds governance.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "2.1",
+        "2.2",
+        "4.2",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.5",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch17.m08",
+      "title": "BIA and resilience metrics (RTO/RPO/MTTR/MTBF)",
+      "tag_ids": [
+        "bia.definition",
+        "bia.single_point_of_failure",
+        "bia.redundancy",
+        "bia.metrics.mtbf",
+        "bia.metrics.mttr",
+        "bia.metrics.rto",
+        "bia.metrics.rpo"
+      ],
+      "pages": [
+        {
+          "id": "ch17.m08.p1",
+          "title": "BIA: what it is and why you do it",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "A Business Impact Analysis identifies critical business functions and the impact of downtime. It drives continuity priorities."
+            },
+            {
+              "type": "example",
+              "text": "BIA answers: What must be restored first? What’s the maximum acceptable downtime?"
+            },
+            {
+              "type": "trap",
+              "text": "Trap: treating BIA as purely IT. It’s business-first: revenue, legal obligations, safety, and reputation."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A BIA primarily focuses on:",
+              "options": [
+                "Choosing encryption algorithms",
+                "Business functions and the impact of disruptions",
+                "Building Wi‑Fi heat maps",
+                "Tuning IDS signatures"
+              ],
+              "correct_index": 1,
+              "explanation": "BIA is about business impact and recovery priorities.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch17.m08.p2",
+          "title": "RTO vs RPO (the most-tested pair)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "RTO (Recovery Time Objective) is how quickly you must restore service after disruption. RPO (Recovery Point Objective) is the maximum acceptable data loss measured in time."
+            },
+            {
+              "type": "example",
+              "text": "RTO=4 hours means service must be back in 4h. RPO=15 minutes means you can lose at most 15 minutes of data."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: mixing them up. RTO = time to restore service. RPO = how far back you can roll data."
+            }
+          ],
+          "checks": [
+            {
+              "type": "matching",
+              "prompt": "Match the objective to what it measures.",
+              "left": [
+                "RTO",
+                "RPO"
+              ],
+              "right": [
+                "Maximum acceptable data loss window",
+                "Maximum acceptable downtime before service restoration"
+              ],
+              "correct_map": {
+                "RTO": "Maximum acceptable downtime before service restoration",
+                "RPO": "Maximum acceptable data loss window"
+              },
+              "explanation": "RTO = restore time; RPO = data loss window.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch17.m08.p3",
+          "title": "MTBF, MTTR, redundancy, and SPOFs",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "MTBF (Mean Time Between Failures) estimates reliability. MTTR (Mean Time To Repair/Recover) estimates how fast you can fix. Redundancy reduces outages; single points of failure (SPOFs) increase them."
+            },
+            {
+              "type": "example",
+              "text": "Add redundant power supplies and dual network paths to eliminate SPOFs."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: assuming redundancy always improves availability. Badly designed redundancy can add complexity and new failure modes—test failover."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "MTTR most directly measures:",
+              "options": [
+                "Expected time between failures",
+                "Expected time to repair/recover from a failure",
+                "Maximum data loss window",
+                "Likelihood of attack"
+              ],
+              "correct_index": 1,
+              "explanation": "MTTR is about repair/recovery time.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "A single point of failure is:",
+              "options": [
+                "A control that blocks phishing",
+                "A component that, if it fails, causes a complete outage",
+                "A metric of impact magnitude",
+                "A privacy notice statement"
+              ],
+              "correct_index": 1,
+              "explanation": "SPOF = one component whose failure takes down the system.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "2.1",
+        "2.2",
+        "4.2",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.5",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch17.m09",
+      "title": "Disaster recovery planning (DRP)",
+      "tag_ids": [
+        "drp.definition",
+        "drp.activation_trigger",
+        "drp.disaster_types",
+        "drp.site_risk_assessment"
+      ],
+      "pages": [
+        {
+          "id": "ch17.m09.p1",
+          "title": "DRP: definition and scope",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "A Disaster Recovery Plan focuses on restoring IT systems and data after a disruptive event. It’s a subset of broader business continuity."
+            },
+            {
+              "type": "example",
+              "text": "DRP includes restore steps, contacts, backups, alternate sites, and testing schedule."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: assuming DRP = backups. Backups are just one ingredient; restoration steps, people, and communications matter."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A DRP is MOST focused on:",
+              "options": [
+                "Marketing communications",
+                "Restoring IT systems and data after a disaster",
+                "Writing privacy notices",
+                "Building Wi‑Fi policies"
+              ],
+              "correct_index": 1,
+              "explanation": "DRP is about IT recovery after disruptions.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch17.m09.p2",
+          "title": "Activation triggers and disaster types",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "DRP activation triggers define when to declare a disaster and shift into recovery mode (e.g., site loss, extended outage, ransomware)."
+            },
+            {
+              "type": "example",
+              "text": "Trigger: 'Primary data center offline > 60 minutes with no ETA' → activate DRP and failover."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: waiting too long because you don’t want to ‘declare a disaster.’ Delay increases impact; define triggers ahead of time."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Why define DRP activation triggers?",
+              "options": [
+                "To avoid documentation",
+                "To ensure timely and consistent decision-making under pressure",
+                "To increase EF values",
+                "To prevent rainbow tables"
+              ],
+              "correct_index": 1,
+              "explanation": "Triggers avoid hesitation and ambiguity during incidents.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch17.m09.p3",
+          "title": "Site risk assessment",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Site risk assessment evaluates physical and environmental risks to facilities: flood zones, power stability, seismic risk, nearby hazards."
+            },
+            {
+              "type": "example",
+              "text": "Avoid placing a primary data center and backup site in the same flood plain."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: two sites in the same region can share the same disaster. Geographic diversity is part of resilience."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A site risk assessment is MOST concerned with:",
+              "options": [
+                "Password complexity rules",
+                "Environmental and location-based threats to facilities",
+                "TLS certificate validation",
+                "Bluetooth pairing risks"
+              ],
+              "correct_index": 1,
+              "explanation": "Site risk assessment focuses on environmental/location hazards.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "2.1",
+        "2.2",
+        "4.2",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.5",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch17.m10",
+      "title": "Data classification and handling",
+      "tag_ids": [
+        "classification.business.public",
+        "classification.business.private",
+        "classification.business.confidential",
+        "classification.business.sensitive",
+        "classification.business.restricted",
+        "classification.business.critical",
+        "classification.govt.unclassified",
+        "classification.govt.confidential",
+        "classification.govt.secret",
+        "classification.govt.top_secret"
+      ],
+      "pages": [
+        {
+          "id": "ch17.m10.p1",
+          "title": "Why classify data?",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Classification groups data by sensitivity/impact so you can apply the right controls (encryption, access, retention)."
+            },
+            {
+              "type": "example",
+              "text": "Public brochure ≠ customer PII ≠ trade secrets. One policy shouldn’t treat them equally."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: overclassifying everything as ‘restricted.’ It makes the system unusable and people will ignore it."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "The main purpose of data classification is to:",
+              "options": [
+                "Make all data secret",
+                "Apply controls based on sensitivity and impact",
+                "Replace backups",
+                "Guarantee compliance automatically"
+              ],
+              "correct_index": 1,
+              "explanation": "Classification guides which protections and handling rules apply.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch17.m10.p2",
+          "title": "Business classification (typical tiers)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Common business labels: public, private, confidential, sensitive, restricted, critical. Exact names vary, but the idea is consistent."
+            },
+            {
+              "type": "example",
+              "text": "Restricted/critical data may require encryption + limited access + auditing + strong retention controls."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: mixing labels without definitions. Every label must map to handling rules."
+            }
+          ],
+          "checks": [
+            {
+              "type": "matching",
+              "prompt": "Match the business label to a typical example.",
+              "left": [
+                "Public",
+                "Private",
+                "Confidential",
+                "Restricted"
+              ],
+              "right": [
+                "Press release",
+                "Employee HR records",
+                "Customer contract terms",
+                "Encryption keys / trade secrets"
+              ],
+              "correct_map": {
+                "Public": "Press release",
+                "Private": "Employee HR records",
+                "Confidential": "Customer contract terms",
+                "Restricted": "Encryption keys / trade secrets"
+              },
+              "explanation": "The higher the sensitivity, the stricter the handling and access requirements.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch17.m10.p3",
+          "title": "Government classification (classic model)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "A common government model: unclassified < confidential < secret < top secret. The label usually has legal implications and strict handling requirements."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: assuming business and government labels map 1:1. They’re different systems; use the correct policy for your environment."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which ordering is correct for the classic government classification levels?",
+              "options": [
+                "Top Secret < Secret < Confidential < Unclassified",
+                "Unclassified < Confidential < Secret < Top Secret",
+                "Secret < Unclassified < Confidential < Top Secret",
+                "Confidential < Unclassified < Secret < Top Secret"
+              ],
+              "correct_index": 1,
+              "explanation": "Classic order: Unclassified, Confidential, Secret, Top Secret.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "2.1",
+        "2.2",
+        "4.2",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.5",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch17.m11",
+      "title": "Privacy basics and key data types",
+      "tag_ids": [
+        "privacy.overview",
+        "privacy.data_types.pii",
+        "privacy.data_types.phi",
+        "privacy.data_types.financial",
+        "privacy.data_types.regulated_info",
+        "privacy.data_types.intellectual_property",
+        "privacy.data_types.legal_info",
+        "privacy.data_readability.human",
+        "privacy.data_readability.nonhuman",
+        "privacy.notice",
+        "privacy.terms_statements"
+      ],
+      "pages": [
+        {
+          "id": "ch17.m11.p1",
+          "title": "Privacy vs security (related, not identical)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Security protects data and systems from unauthorized access/change/downtime. Privacy focuses on how personal data is collected, used, shared, and retained—often with legal rights involved."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: ‘If it’s secure, it’s private.’ You can secure data and still violate privacy by collecting too much or using it for the wrong purpose."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Privacy is MOST concerned with:",
+              "options": [
+                "Only encryption strength",
+                "How personal data is collected/used/shared/retained and the rights around it",
+                "Wi‑Fi channel selection",
+                "Disk imaging tools"
+              ],
+              "correct_index": 1,
+              "explanation": "Privacy is governance and rights around personal data lifecycle, not just technical protection.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch17.m11.p2",
+          "title": "Data types that matter (PII/PHI/financial/IP)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "PII identifies a person (directly or indirectly). PHI is health information (often regulated). Financial, legal, and regulated info have special obligations. IP (trade secrets) is business-critical too."
+            },
+            {
+              "type": "example",
+              "text": "PII: name+email+ID. PHI: diagnosis, treatment, insurance details. Financial: card/bank details. IP: designs/source code."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: assuming PII must be ‘obvious.’ A combination of attributes can identify someone (quasi-identifiers)."
+            }
+          ],
+          "checks": [
+            {
+              "type": "multi_select",
+              "prompt": "Which are commonly treated as regulated or high-impact data types? (Choose THREE)",
+              "options": [
+                "PHI",
+                "Public marketing text",
+                "Financial account details",
+                "PII",
+                "Game high scores"
+              ],
+              "correct_indices": [
+                0,
+                2,
+                3
+              ],
+              "explanation": "PHI, financial info, and PII usually trigger higher protection and legal obligations.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch17.m11.p3",
+          "title": "Notice, terms, and readability",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Privacy notice/terms explain what data is collected and why. Readability matters: humans should understand it, and systems should process it for compliance workflows."
+            },
+            {
+              "type": "example",
+              "text": "Notice includes purpose, sharing, retention, and user rights. Machine-readable policies help automate enforcement."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: burying privacy practices in unreadable legalese. If users can’t understand it, trust collapses and regulators may care."
+            }
+          ],
+          "checks": [
+            {
+              "type": "matching",
+              "prompt": "Match the concept to what it targets.",
+              "left": [
+                "Human-readable privacy notice",
+                "Nonhuman-readable policy"
+              ],
+              "right": [
+                "Plain-language explanation for users",
+                "Structured format for automation/compliance tooling"
+              ],
+              "correct_map": {
+                "Human-readable privacy notice": "Plain-language explanation for users",
+                "Nonhuman-readable policy": "Structured format for automation/compliance tooling"
+              },
+              "explanation": "Both forms matter: humans for trust/consent; machines for enforcement and auditability.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "2.1",
+        "2.2",
+        "4.2",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.5",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch17.m12",
+      "title": "Privacy lifecycle: minimize, limit, retain, destroy",
+      "tag_ids": [
+        "privacy.lifecycle.overview",
+        "privacy.lifecycle.data_minimization",
+        "privacy.lifecycle.purpose_limitation",
+        "privacy.lifecycle.retention",
+        "privacy.lifecycle.secure_destruction",
+        "privacy.data_inventory"
+      ],
+      "pages": [
+        {
+          "id": "ch17.m12.p1",
+          "title": "Privacy lifecycle: start-to-finish thinking",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Privacy lifecycle covers collection → use → storage → sharing → retention → destruction. Controls should exist at every stage."
+            },
+            {
+              "type": "diagram",
+              "text": "Lifecycle: collect (minimize) → use (purpose limit) → store (secure) → share (controlled) → retain (as needed) → destroy (securely)."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: doing privacy only at collection time. Retention and destruction are where many orgs bleed risk."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which step is part of the privacy lifecycle?",
+              "options": [
+                "Channel hopping",
+                "Purpose limitation",
+                "WEP re-keying",
+                "ARP poisoning"
+              ],
+              "correct_index": 1,
+              "explanation": "Purpose limitation is a privacy lifecycle principle.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch17.m12.p2",
+          "title": "Data minimization and purpose limitation",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Data minimization: collect only what you need. Purpose limitation: use it only for the declared purpose (or get new lawful basis/consent)."
+            },
+            {
+              "type": "example",
+              "text": "If you only need email for account recovery, don’t collect home address ‘just in case.’"
+            },
+            {
+              "type": "trap",
+              "text": "Trap: ‘We might need it someday.’ That’s how data lakes become liability lakes."
+            }
+          ],
+          "checks": [
+            {
+              "type": "matching",
+              "prompt": "Match the principle to the meaning.",
+              "left": [
+                "Data minimization",
+                "Purpose limitation"
+              ],
+              "right": [
+                "Collect only necessary data",
+                "Use data only for stated/approved reasons"
+              ],
+              "correct_map": {
+                "Data minimization": "Collect only necessary data",
+                "Purpose limitation": "Use data only for stated/approved reasons"
+              },
+              "explanation": "Minimize what you collect; limit how you use.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch17.m12.p3",
+          "title": "Retention and secure destruction",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Retention: keep data only as long as needed for business/legal reasons. Secure destruction: delete/sanitize so it can’t be recovered."
+            },
+            {
+              "type": "example",
+              "text": "Define retention schedules by data type; automate deletion and verify it."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: keeping everything forever. Old data increases breach impact, discovery exposure, and costs."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Why is secure destruction important?",
+              "options": [
+                "It increases MTBF",
+                "It reduces the future impact of breaches and unnecessary legal exposure",
+                "It makes Wi‑Fi faster",
+                "It prevents deauth attacks"
+              ],
+              "correct_index": 1,
+              "explanation": "Less retained data means less to lose; destruction must be secure to prevent recovery.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "2.1",
+        "2.2",
+        "4.2",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.5",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch17.m13",
+      "title": "Privacy legal obligations: jurisdiction, breach notice, DPO",
+      "tag_ids": [
+        "privacy.jurisdiction.local",
+        "privacy.jurisdiction.regional",
+        "privacy.jurisdiction.national",
+        "privacy.jurisdiction.global",
+        "privacy.breach_notification",
+        "privacy.breach_notification.jurisdiction_variance",
+        "privacy.breach_notification.legal_counsel",
+        "privacy.dpo",
+        "privacy.legal_implications",
+        "privacy.right_to_be_forgotten",
+        "privacy.right_to_be_forgotten.conditions",
+        "privacy.right_to_be_forgotten.implementation_challenges"
+      ],
+      "pages": [
+        {
+          "id": "ch17.m13.p1",
+          "title": "Jurisdiction: privacy rules depend on where",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Privacy obligations vary by jurisdiction: local, regional, national, and global rules can overlap. Your data flow matters as much as your office location."
+            },
+            {
+              "type": "example",
+              "text": "You may be subject to EU-style rules because you process EU residents’ data, even if your servers are elsewhere."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: assuming ‘we’re not in that country, so the law doesn’t apply.’ Data subjects and business presence can still create obligations."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Why does jurisdiction matter for privacy programs?",
+              "options": [
+                "Because it changes encryption algorithms",
+                "Because legal obligations and notification requirements vary by location and data subject",
+                "Because it changes Wi‑Fi frequencies",
+                "Because it disables tokenization"
+              ],
+              "correct_index": 1,
+              "explanation": "Different jurisdictions impose different rules; global operations must plan for overlap.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch17.m13.p2",
+          "title": "Breach notification: do it right (and lawyer up early)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Breach notification requirements vary; involve legal counsel so timelines, scope, and messaging are correct. Notifications may be to regulators and/or affected individuals."
+            },
+            {
+              "type": "example",
+              "text": "A breach involving PII may require rapid notification; deadlines can be strict."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: delaying notification because you don’t have every detail. Many rules require notifying within a timeline even while investigation continues."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Why involve legal counsel during breach notification planning?",
+              "options": [
+                "To increase RPO values",
+                "To ensure notifications meet legal timing/content requirements and reduce liability",
+                "To run site surveys",
+                "To generate risk heat maps"
+              ],
+              "correct_index": 1,
+              "explanation": "Legal counsel helps navigate timelines, wording, jurisdiction differences, and privilege.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch17.m13.p3",
+          "title": "DPO and the right to be forgotten",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "A Data Protection Officer (DPO) is a privacy leadership role in some regimes. The right to be forgotten allows deletion requests under certain conditions—but implementation can be tricky (backups, legal retention)."
+            },
+            {
+              "type": "example",
+              "text": "If a user requests deletion, you may need to delete from primary systems but retain some records for legal obligations."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: thinking ‘delete everywhere instantly’ is always possible. Backups, logs, and regulatory retention create constraints—document your approach."
+            }
+          ],
+          "checks": [
+            {
+              "type": "matching",
+              "prompt": "Match the concept to the description.",
+              "left": [
+                "DPO",
+                "Right to be forgotten"
+              ],
+              "right": [
+                "Privacy leadership/oversight role (in some regimes)",
+                "Data subject can request deletion under conditions"
+              ],
+              "correct_map": {
+                "DPO": "Privacy leadership/oversight role (in some regimes)",
+                "Right to be forgotten": "Data subject can request deletion under conditions"
+              },
+              "explanation": "DPO is a role; RTBF is a right with conditions and constraints.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "2.1",
+        "2.2",
+        "4.2",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.5",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch17.m14",
+      "title": "PETs: anonymize, pseudonymize, tokenize, mask",
+      "tag_ids": [
+        "pet.overview",
+        "pet.anonymization",
+        "pet.deidentification",
+        "pet.pseudonymization",
+        "pet.tokenization",
+        "pet.data_masking",
+        "pet.obfuscation",
+        "pet.hashing",
+        "pet.rainbow_table_attack"
+      ],
+      "pages": [
+        {
+          "id": "ch17.m14.p1",
+          "title": "PETs: why they exist",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Privacy-Enhancing Technologies (PETs) reduce exposure by changing how data is stored or shared: minimizing linkability, identifiability, and sensitivity."
+            },
+            {
+              "type": "example",
+              "text": "Use tokenization to let analytics run without storing raw card numbers."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: assuming PETs are a substitute for access control. They reduce impact; they don’t replace authorization and monitoring."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "The main goal of PETs is to:",
+              "options": [
+                "Increase data collection",
+                "Reduce privacy risk by limiting how data can identify individuals or be misused",
+                "Make phishing emails harder to write",
+                "Prevent hardware failures"
+              ],
+              "correct_index": 1,
+              "explanation": "PETs reduce privacy exposure by transforming/limiting data.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch17.m14.p2",
+          "title": "Anonymization vs pseudonymization vs tokenization",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Anonymization aims to remove identity linkage (hard to reverse if done well). Pseudonymization replaces identifiers but keeps a link via a key. Tokenization replaces sensitive values with tokens mapped in a secure vault."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: calling pseudonymization ‘anonymous.’ If you can re-link with a key, it’s not anonymous—treat it as still sensitive."
+            }
+          ],
+          "checks": [
+            {
+              "type": "matching",
+              "prompt": "Match the method to its best description.",
+              "left": [
+                "Anonymization",
+                "Pseudonymization",
+                "Tokenization"
+              ],
+              "right": [
+                "Replace value with token mapped in vault",
+                "Remove identity linkage so re-identification is impractical",
+                "Replace identifiers but keep re-link capability via key"
+              ],
+              "correct_map": {
+                "Anonymization": "Remove identity linkage so re-identification is impractical",
+                "Pseudonymization": "Replace identifiers but keep re-link capability via key",
+                "Tokenization": "Replace value with token mapped in vault"
+              },
+              "explanation": "Anonymize = no link; pseudo = link with key; tokenize = token/vault mapping.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch17.m14.p3",
+          "title": "Hashing, masking, obfuscation—and the rainbow table problem",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Hashing is one-way digesting; useful for integrity and sometimes password storage (with salt). Masking/obfuscation hide parts of data for display/logs. Rainbow tables are precomputed hash lookups that crack unsalted/weak hashes."
+            },
+            {
+              "type": "example",
+              "text": "Mask credit card display to last 4 digits; hash passwords with salt + slow hashing to resist rainbow tables."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: hashing PII and assuming it’s ‘safe.’ Without salt/pepper and proper threat model, hashes can be reversed via lookups or inference."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Rainbow table attacks are MOST effective against:",
+              "options": [
+                "Salted, slow password hashes",
+                "Unsalted hashes of common passwords",
+                "Tokenized card numbers",
+                "Encrypted disks"
+              ],
+              "correct_index": 1,
+              "explanation": "Rainbow tables exploit precomputed hashes; salting and slow hashing reduce that advantage.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "2.1",
+        "2.2",
+        "4.2",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.5",
+        "5.7"
+      ]
+    },
+    {
+      "id": "ch17.m15",
+      "title": "Supply chain risk: vendors, hardware, cloud",
+      "tag_ids": [
+        "supply_chain.vendor_due_diligence",
+        "supply_chain.hardware_authenticity",
+        "supply_chain.cloud_providers",
+        "risk.identification.multiparty",
+        "risk.identification.external"
+      ],
+      "pages": [
+        {
+          "id": "ch17.m15.p1",
+          "title": "Why supply chain risk matters",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Supply chain risk is risk introduced by third parties: vendors, hardware, software libraries, and cloud providers. It’s ‘multiparty’ risk—your security depends on theirs."
+            },
+            {
+              "type": "example",
+              "text": "A compromised upstream dependency ships malware into your build pipeline."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: assuming contracts alone solve it. Contracts help, but you still need validation, monitoring, and contingency plans."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Supply chain risk is primarily about:",
+              "options": [
+                "Physical fitness of employees",
+                "Third parties and dependencies affecting your security posture",
+                "Wi‑Fi channel planning",
+                "Hashing algorithms only"
+              ],
+              "correct_index": 1,
+              "explanation": "Supply chain risk comes from vendors, providers, and dependencies outside your direct control.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch17.m15.p2",
+          "title": "Vendor due diligence",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Vendor due diligence checks a vendor’s security before onboarding: controls, audits, breach history, data handling, and incident response commitments."
+            },
+            {
+              "type": "example",
+              "text": "Ask for security reports, validate encryption and logging, require breach notification timelines."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: onboarding a vendor because they’re 'big.' Size is not a control."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Vendor due diligence should happen:",
+              "options": [
+                "Only after a breach",
+                "Before signing/onboarding and periodically afterward",
+                "Only for free software",
+                "Only for on-prem hardware"
+              ],
+              "correct_index": 1,
+              "explanation": "Do it before onboarding and reassess periodically.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        },
+        {
+          "id": "ch17.m15.p3",
+          "title": "Hardware authenticity and cloud providers",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Hardware authenticity ensures devices are genuine and untampered. Cloud providers add shared-responsibility boundaries: you must still manage your configurations, identities, and data handling."
+            },
+            {
+              "type": "example",
+              "text": "Validate hardware supply chain and use trusted procurement; in cloud, enforce strong identity controls and logging."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: 'The cloud provider handles security.' They handle security OF the cloud; you handle security IN the cloud."
+            }
+          ],
+          "checks": [
+            {
+              "type": "multi_select",
+              "prompt": "Which controls help reduce supply chain risk? (Choose TWO)",
+              "options": [
+                "Validate hardware authenticity from trusted suppliers",
+                "Do vendor security due diligence and monitor changes",
+                "Disable retention policies",
+                "Use open Wi‑Fi for admin access"
+              ],
+              "correct_indices": [
+                0,
+                1
+              ],
+              "explanation": "Use trusted procurement and vendor due diligence; the other options increase risk.",
+              "objectiveIds": [
+                "1.1",
+                "2.1",
+                "2.2",
+                "4.2",
+                "4.8",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.5",
+                "5.7"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.2",
+            "4.8",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.5",
+            "5.7"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "1.1",
+        "2.1",
+        "2.2",
+        "4.2",
+        "4.8",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.5",
+        "5.7"
+      ]
+    }
+  ],
+  "objectiveIds": [
+    "1.1",
+    "2.1",
+    "2.2",
+    "4.2",
+    "4.8",
+    "5.1",
+    "5.2",
+    "5.3",
+    "5.5",
+    "5.7"
+  ]
+}

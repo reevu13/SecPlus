@@ -1,0 +1,2316 @@
+{
+  "schema_version": "secplus_game_pack_v1",
+  "pack_id": "sec701_ch6_pack_v1",
+  "exam": {
+    "vendor": "CompTIA",
+    "name": "Security+",
+    "code": "SY0-701",
+    "max_exam_minutes": 90
+  },
+  "chapter": {
+    "number": 6,
+    "title": "Application Security",
+    "page_range_in_user_pdf": "232-295"
+  },
+  "design_intent": {
+    "mode": [
+      "campaign",
+      "roguelike_practice"
+    ],
+    "pvp_optional": true,
+    "default_pvp_enabled": false,
+    "player_goal": "Covers application security fundamentals: secure SDLC/DevSecOps, testing (SAST/DAST, fuzzing, regression), injection flaws (SQL/command/LDAP/XML/DLL), web attacks (XSS, CSRF, SSRF, clickjacking), session risks (hijacking/replay, secure cookie flags), access control weaknesses (IDOR, privilege escalation), and hardening controls (input validation, output encoding, WAF, sandboxing, code signing, package monitoring/SCA). Objectives: 2.3 Explain various types of vulnerabilities; 2.4 Summarize mitigation strategies; 4.1 Explain security concepts in an enterprise environment (secure coding + SDLC); 4.3 Explain activities associated with vulnerability management; 4.7 Explain automation and orchestration concepts.\nGlossary: Injection - Untrusted input becomes part of an interpreter's command/query. XSS - Attacker-controlled script executes in a victim's browser under a trusted origin. CSRF - Victim's browser is tricked into sending authenticated requests. SSRF - Server is tricked into making requests to attacker-chosen targets. IDOR - Object IDs exposed without per-request authorization checks. TOCTOU - Race condition between check and use. Code signing - Digital signature verifying publisher + integrity of software."
+  },
+  "progression": {
+    "xp_rules": {
+      "base_xp_per_correct": 10,
+      "streak_bonus_per_5": 15,
+      "time_bonus_threshold_seconds": 30,
+      "time_bonus_xp": 5,
+      "mistake_penalty_xp": 0
+    },
+    "mastery_model": {
+      "scale": "0-100",
+      "update": "Mastery += 8 on first correct; +4 on repeat correct; -6 on wrong (floor 0).",
+      "tags_drive_mastery": true
+    },
+    "unlock_rules": [
+      {
+        "unlock": "ch6-m2",
+        "when": "complete ch6-m1"
+      },
+      {
+        "unlock": "ch6-m3",
+        "when": "complete ch6-m2"
+      },
+      {
+        "unlock": "ch6-m4",
+        "when": "complete ch6-m3"
+      },
+      {
+        "unlock": "boss_6",
+        "when": "complete ch6-m4"
+      }
+    ]
+  },
+  "tags": {
+    "concepts": [
+      "sdlc",
+      "devsecops",
+      "cicd",
+      "secure_coding",
+      "code_review",
+      "sast",
+      "static_analysis",
+      "dast",
+      "dynamic_analysis",
+      "fuzzing",
+      "regression_testing",
+      "automation_orchestration",
+      "guard_rails",
+      "api_security",
+      "input_validation",
+      "allowlist",
+      "encode_escape",
+      "error_handling",
+      "injection",
+      "sql_injection",
+      "parameterized_queries",
+      "blind_sqli",
+      "timing_based_sqli",
+      "command_injection",
+      "ldap_injection",
+      "xml_injection",
+      "dll_injection",
+      "waf",
+      "secure_database_access",
+      "least_privilege",
+      "cookies",
+      "cookie_secure",
+      "cookie_httponly",
+      "cookie_samesite",
+      "session_hijacking",
+      "session_replay",
+      "on_path_attack",
+      "unvalidated_redirect",
+      "phishing",
+      "authorization",
+      "idor",
+      "privilege_escalation",
+      "directory_traversal",
+      "path_traversal",
+      "file_inclusion",
+      "remote_file_inclusion",
+      "web_shell",
+      "xss",
+      "xss_reflected",
+      "xss_stored",
+      "xss_dom",
+      "same_origin_policy",
+      "SOP",
+      "csrf",
+      "secure_tokens",
+      "ssrf",
+      "clickjacking",
+      "buffer_overflow",
+      "memory_injection",
+      "race_condition",
+      "toctou",
+      "malicious_update",
+      "code_signing",
+      "supply_chain",
+      "sandboxing",
+      "isolation",
+      "package_monitoring",
+      "software_composition_analysis",
+      "supply_chain",
+      "trap_client_side_validation",
+      "trap_xss_vs_csrf",
+      "trap_sqli_vs_xss",
+      "trap_secure_vs_httponly",
+      "trap_idor_vs_authn",
+      "trap_ssrf_vs_csrf",
+      "2.3",
+      "2.4",
+      "4.1",
+      "4.3",
+      "4.7"
+    ],
+    "difficulty_scale": {
+      "1": "easy recall",
+      "2": "basic apply",
+      "3": "scenario apply",
+      "4": "mixed concept trap",
+      "5": "boss-level synthesis"
+    }
+  },
+  "trap_list": [
+    {
+      "id": "trap_client_side_validation",
+      "name": "The Browser Is Not Your Security Boundary",
+      "misconception": "Client-side validation (JavaScript) can enforce security rules by itself.",
+      "fix": "Treat client-side validation as UX only; enforce validation and authorization server-side.",
+      "drill_question_ids": [
+        "ch6-q22",
+        "ch6-q48",
+        "ch6-q12"
+      ]
+    },
+    {
+      "id": "trap_xss_vs_csrf",
+      "name": "XSS vs CSRF Mix-up",
+      "misconception": "CSRF and XSS are the same type of ‘web injection’.",
+      "fix": "XSS = code runs in victim browser; CSRF = victim browser sends authenticated request without intent.",
+      "drill_question_ids": [
+        "ch6-q35",
+        "ch6-q40",
+        "ch6-q41"
+      ]
+    },
+    {
+      "id": "trap_sqli_vs_xss",
+      "name": "SQLi vs XSS Mix-up",
+      "misconception": "Both are just ‘injection’ so defenses are identical.",
+      "fix": "SQLi targets the database interpreter; XSS targets the browser interpreter. Use parameters for SQL; encode output for HTML/JS.",
+      "drill_question_ids": [
+        "ch6-q11",
+        "ch6-q12",
+        "ch6-q36",
+        "ch6-q38"
+      ]
+    },
+    {
+      "id": "trap_secure_vs_httponly",
+      "name": "SECURE vs HttpOnly Confusion",
+      "misconception": "SECURE stops JavaScript and HttpOnly forces HTTPS.",
+      "fix": "SECURE = HTTPS-only transport; HttpOnly = JS can’t read the cookie. Use both for session cookies.",
+      "drill_question_ids": [
+        "ch6-q26",
+        "ch6-q27",
+        "ch6-q47"
+      ]
+    },
+    {
+      "id": "trap_idor_vs_authn",
+      "name": "Authn vs Authz Blind Spot",
+      "misconception": "Once a user logs in, object access is safe by default.",
+      "fix": "Authenticate once, authorize every request. Prevent IDOR by enforcing server-side authorization checks per object.",
+      "drill_question_ids": [
+        "ch6-q31",
+        "ch6-q43"
+      ]
+    },
+    {
+      "id": "trap_ssrf_vs_csrf",
+      "name": "SSRF vs CSRF Mix-up",
+      "misconception": "Both are ‘request forgery’ so they’re the same attack.",
+      "fix": "CSRF forces the victim browser to send a request; SSRF forces the server to send a request.",
+      "drill_question_ids": [
+        "ch6-q40",
+        "ch6-q42"
+      ]
+    }
+  ],
+  "missions": [
+    {
+      "id": "ch6-m1",
+      "name": "Ship Secure, Not Sorry",
+      "goal": "Secure SDLC + DevSecOps + testing tools (SAST/DAST/fuzzing/regression).",
+      "mechanics": {
+        "minigame": "learn_quiz",
+        "mode": "campaign",
+        "recommended_time_min": 20,
+        "coaching_tips": [
+          "Security early beats security later: requirements/design decisions are hard to undo.",
+          "SAST reads code; DAST runs the app. Use both.",
+          "Fuzzing finds the weird edge cases humans won’t think of.",
+          "Regression testing is your ‘did we break it?’ insurance."
+        ],
+        "rules": {
+          "hints_per_question": 1,
+          "show_explanations": true
+        }
+      },
+      "question_ids": [
+        "ch6-q1",
+        "ch6-q2",
+        "ch6-q3",
+        "ch6-q4",
+        "ch6-q5",
+        "ch6-q6",
+        "ch6-q7",
+        "ch6-q9",
+        "ch6-q10",
+        "ch6-q51",
+        "ch6-q52"
+      ],
+      "rewards": {
+        "xp": 180,
+        "loot": [
+          "badge_ch6-m1"
+        ],
+        "unlock": "ch6-m2"
+      }
+    },
+    {
+      "id": "ch6-m2",
+      "name": "Injection Containment Unit",
+      "goal": "Injection families (SQL/command/LDAP/XML/DLL) + defenses (parameters, allowlists, WAF, least privilege).",
+      "mechanics": {
+        "minigame": "learn_quiz",
+        "mode": "campaign",
+        "recommended_time_min": 22,
+        "coaching_tips": [
+          "If input changes how a query/command behaves, it’s injection.",
+          "Parameters/prepared statements are the clean SQLi fix.",
+          "Allowlist input + encode output = the safest default pair.",
+          "Least privilege turns catastrophic bugs into contained bugs."
+        ],
+        "rules": {
+          "hints_per_question": 1,
+          "show_explanations": true
+        }
+      },
+      "question_ids": [
+        "ch6-q11",
+        "ch6-q12",
+        "ch6-q13",
+        "ch6-q14",
+        "ch6-q15",
+        "ch6-q16",
+        "ch6-q17",
+        "ch6-q18",
+        "ch6-q19",
+        "ch6-q20",
+        "ch6-q21",
+        "ch6-q22",
+        "ch6-q23",
+        "ch6-q24"
+      ],
+      "rewards": {
+        "xp": 220,
+        "loot": [
+          "badge_ch6-m2"
+        ],
+        "unlock": "ch6-m3"
+      }
+    },
+    {
+      "id": "ch6-m3",
+      "name": "Sessions, Objects, and Bad Ideas",
+      "goal": "Session hijacking/replay + secure cookie flags + redirects + IDOR + traversal + file inclusion.",
+      "mechanics": {
+        "minigame": "learn_quiz",
+        "mode": "campaign",
+        "recommended_time_min": 24,
+        "coaching_tips": [
+          "Steal the session cookie = steal the session.",
+          "SECURE is about transport; HttpOnly is about JavaScript access.",
+          "IDOR happens when the app trusts IDs more than authorization checks.",
+          "Traversal and file inclusion are ‘filesystem is now an API’ accidents."
+        ],
+        "rules": {
+          "hints_per_question": 1,
+          "show_explanations": true
+        }
+      },
+      "question_ids": [
+        "ch6-q25",
+        "ch6-q26",
+        "ch6-q27",
+        "ch6-q28",
+        "ch6-q29",
+        "ch6-q30",
+        "ch6-q31",
+        "ch6-q32",
+        "ch6-q33",
+        "ch6-q34",
+        "ch6-q47"
+      ],
+      "rewards": {
+        "xp": 240,
+        "loot": [
+          "badge_ch6-m3"
+        ],
+        "unlock": "ch6-m4"
+      }
+    },
+    {
+      "id": "ch6-m4",
+      "name": "Browser Sorcery Defense",
+      "goal": "XSS types + clickjacking + CSRF vs SSRF + defenses (encoding, tokens, frame-busting).",
+      "mechanics": {
+        "minigame": "learn_quiz",
+        "mode": "campaign",
+        "recommended_time_min": 24,
+        "coaching_tips": [
+          "XSS: attacker code runs in the victim browser under your origin.",
+          "CSRF: victim browser sends a request; SSRF: server sends the request.",
+          "Tokens beat CSRF; encoding beats XSS; headers beat clickjacking.",
+          "Security flags on cookies reduce session theft but don’t replace fixing XSS."
+        ],
+        "rules": {
+          "hints_per_question": 1,
+          "show_explanations": true
+        }
+      },
+      "question_ids": [
+        "ch6-q35",
+        "ch6-q36",
+        "ch6-q37",
+        "ch6-q38",
+        "ch6-q39",
+        "ch6-q40",
+        "ch6-q41",
+        "ch6-q42",
+        "ch6-q48",
+        "ch6-q49",
+        "ch6-q50"
+      ],
+      "rewards": {
+        "xp": 260,
+        "loot": [
+          "badge_ch6-m4"
+        ],
+        "unlock": "boss_6"
+      }
+    }
+  ],
+  "boss": {
+    "id": "boss_6",
+    "name": "Boss Fight: Exploit Gauntlet",
+    "premise": "Mixed scenarios across testing, injection, browser attacks, and update/supply-chain tricks. Pick the best mitigation under pressure.",
+    "mechanics": {
+      "format": "timed_synthesis",
+      "total_questions": 15,
+      "time_limit_seconds_total": 1200,
+      "lives": 2
+    },
+    "question_ids": [
+      "ch6-q14",
+      "ch6-q16",
+      "ch6-q31",
+      "ch6-q36",
+      "ch6-q40",
+      "ch6-q42",
+      "ch6-q44",
+      "ch6-q45",
+      "ch6-q46",
+      "ch6-q47",
+      "ch6-q51",
+      "ch6-q52",
+      "ch6-q43",
+      "ch6-q34",
+      "ch6-q49"
+    ],
+    "rewards": {
+      "xp": 420,
+      "loot": [
+        "title_ch6_cleared",
+        "unlock_roguelike_runset_ch6"
+      ]
+    }
+  },
+  "roguelike": {
+    "runset_id": "roguelike_runset_ch6",
+    "run_minutes_target": 20,
+    "structure": {
+      "acts": 3,
+      "encounters_per_act": 4,
+      "rest_sites_per_act": 1,
+      "boss_per_run": "boss_6_variant"
+    },
+    "cards": {
+      "threat_cards": [
+        {
+          "id": "threat_injection",
+          "name": "Injection Barrage",
+          "tags": [
+            "injection",
+            "sql_injection",
+            "command_injection"
+          ]
+        },
+        {
+          "id": "threat_web",
+          "name": "Browser Chaos",
+          "tags": [
+            "xss",
+            "csrf",
+            "clickjacking"
+          ]
+        },
+        {
+          "id": "threat_sessions",
+          "name": "Session Thief",
+          "tags": [
+            "session_hijacking",
+            "session_replay",
+            "cookies"
+          ]
+        },
+        {
+          "id": "threat_supply_chain",
+          "name": "Poisoned Update",
+          "tags": [
+            "malicious_update",
+            "code_signing",
+            "supply_chain"
+          ]
+        }
+      ],
+      "constraint_cards": [
+        {
+          "id": "constraint_no_hints",
+          "name": "No Hints",
+          "effect": "Hints disabled for the next 4 encounters."
+        },
+        {
+          "id": "constraint_fast_clock",
+          "name": "Fast Clock",
+          "effect": "Reduce per-question timer by 10s this act."
+        },
+        {
+          "id": "constraint_mixed_traps",
+          "name": "Trap Mix",
+          "effect": "Inject two high-trap questions (difficulty 4+) this act."
+        }
+      ],
+      "control_cards": [
+        {
+          "id": "control_secure_cookies",
+          "name": "Harden Cookies",
+          "tags": [
+            "cookie_secure",
+            "cookie_httponly",
+            "cookie_samesite"
+          ]
+        },
+        {
+          "id": "control_sast_dast",
+          "name": "Pipeline Scanners",
+          "tags": [
+            "sast",
+            "dast",
+            "cicd"
+          ]
+        },
+        {
+          "id": "control_waf",
+          "name": "WAF Shield",
+          "tags": [
+            "waf",
+            "injection",
+            "xss"
+          ]
+        },
+        {
+          "id": "control_sca",
+          "name": "Dependency Watch",
+          "tags": [
+            "package_monitoring",
+            "software_composition_analysis",
+            "supply_chain"
+          ]
+        }
+      ]
+    },
+    "question_pool_ids": "use_all_questions_in_pack"
+  },
+  "pvp": {
+    "enabled": false,
+    "modes": [
+      {
+        "id": "duel_quickfire",
+        "name": "Quickfire Duel",
+        "description": "Both players answer the same 10 questions. Faster correct answers generate a 5s time tax on the opponent's next question.",
+        "rules": {
+          "questions": 10,
+          "time_per_question_seconds": 35,
+          "attack_on_correct_under_seconds": 20,
+          "time_tax_seconds": 5
+        }
+      }
+    ],
+    "fairness": {
+      "matchmaking": "match by mastery band (+/- 10 mastery points)",
+      "anti_cheat": "server timestamps + random question order"
+    }
+  },
+  "question_bank": [
+    {
+      "id": "ch6-q1",
+      "type": "mcq",
+      "stem": "In a secure SDLC, when is it cheapest and easiest to fix security requirements and design flaws?",
+      "explanation": "Fixing security early avoids rework and prevents insecure architecture from being built in.\n\nHint: Earlier phases = lower cost of change.\n\nRule of thumb: Bake security into requirements and design; don’t bolt it on later.\n\nSource pages ~pages 9-10.",
+      "tags": [
+        "sdlc",
+        "secure_coding",
+        "4.1"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "After deployment, during maintenance",
+        "B": "During requirements and design",
+        "C": "After a breach, during incident response",
+        "D": "At decommissioning"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "Fixing security early avoids rework and prevents insecure architecture from being built in.",
+      "misconceptionTags": [
+        "sdlc_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q2",
+      "type": "scenario_mcq",
+      "stem": "Your team deploys multiple times a day via CI/CD. You want security checks that run automatically without slowing releases too much. What approach fits best?",
+      "explanation": "DevSecOps integrates security into CI/CD with automated testing and guardrails.\n\nHint: Think: security as part of the pipeline, not a once-a-year event.\n\nRule of thumb: Continuous delivery needs continuous security—automate repeatable checks.\n\nSource pages ~pages 7-9.",
+      "tags": [
+        "devsecops",
+        "cicd",
+        "automation_orchestration",
+        "4.7"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 75,
+      "options": {
+        "A": "DevSecOps with automated tests in the pipeline",
+        "B": "Annual penetration test only",
+        "C": "Disable logging to reduce overhead",
+        "D": "Rely on user bug reports"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "4.7"
+      ],
+      "rationaleCorrect": "DevSecOps integrates security into CI/CD with automated testing and guardrails.",
+      "misconceptionTags": [
+        "devsecops_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q3",
+      "type": "mcq",
+      "stem": "Which statement BEST describes static code analysis?",
+      "explanation": "Static analysis examines code without running it, often pointing directly to vulnerable lines/patterns.\n\nHint: Static = ‘still’ code, not running.\n\nRule of thumb: SAST = read the code; DAST = run the app.\n\nSource pages ~pages 12-14.",
+      "tags": [
+        "sast",
+        "static_analysis",
+        "4.3"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "It executes the app and watches runtime behavior",
+        "B": "It analyzes source/bytecode without executing it",
+        "C": "It is only useful after deployment",
+        "D": "It is the same as fuzzing"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.3"
+      ],
+      "rationaleCorrect": "Static analysis examines code without running it, often pointing directly to vulnerable lines/patterns.",
+      "misconceptionTags": [
+        "sast_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q4",
+      "type": "mcq",
+      "stem": "Dynamic analysis is MOST associated with which activity?",
+      "explanation": "Dynamic testing runs the app and probes it through exposed interfaces with many inputs to find vulnerabilities.\n\nHint: Dynamic = running/behavior.\n\nRule of thumb: DAST is black/gray-box testing against a running target.\n\nSource pages ~pages 13-14.",
+      "tags": [
+        "dast",
+        "dynamic_analysis",
+        "4.3"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Reviewing code for insecure functions without running it",
+        "B": "Executing the application and testing interfaces with varied input",
+        "C": "Digitally signing build artifacts",
+        "D": "Creating network firewall rules"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.3"
+      ],
+      "rationaleCorrect": "Dynamic testing runs the app and probes it through exposed interfaces with many inputs to find vulnerabilities.",
+      "misconceptionTags": [
+        "dast_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q5",
+      "type": "scenario_mcq",
+      "stem": "A tester feeds an API thousands of malformed and random inputs to trigger crashes and unexpected behavior. What technique is this?",
+      "explanation": "Fuzzing bombards interfaces with invalid/unexpected input to uncover bugs like crashes, memory issues, and input handling flaws.\n\nHint: Think: ‘fuzzy’ random input barrage.\n\nRule of thumb: If you’re throwing weird input to make it break, you’re fuzzing.\n\nSource pages ~pages 14-15.",
+      "tags": [
+        "fuzzing",
+        "dynamic_analysis",
+        "4.3"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "Fuzzing",
+        "B": "Code signing",
+        "C": "Tokenization",
+        "D": "Normalization"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "4.3"
+      ],
+      "rationaleCorrect": "Fuzzing bombards interfaces with invalid/unexpected input to uncover bugs like crashes, memory issues, and input handling flaws.",
+      "misconceptionTags": [
+        "fuzzing_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q6",
+      "type": "mcq",
+      "stem": "After fixing a security bug, what testing is MOST important to ensure existing features still work as intended?",
+      "explanation": "Regression testing verifies that changes didn’t break previously working functionality.\n\nHint: ‘Re-’ test what used to work.\n\nRule of thumb: Fix the bug, then make sure you didn’t create three new ones.\n\nSource pages ~pages 12-13.",
+      "tags": [
+        "regression_testing",
+        "sdlc",
+        "4.1"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Regression testing",
+        "B": "Blue-team tabletop",
+        "C": "Hashing",
+        "D": "Threat hunting"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "Regression testing verifies that changes didn’t break previously working functionality.",
+      "misconceptionTags": [
+        "regression_testing_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q7",
+      "type": "multi_select",
+      "stem": "Which controls are MOST relevant to API security? (Choose two.)",
+      "explanation": "APIs need strong authn/authz, input filtering, and rate limiting to reduce abuse and data leakage.\n\nHint: Think: who can call the API, and how often.\n\nRule of thumb: APIs are just exposed doors—lock them and throttle them.\n\nSource pages ~pages 11-12.",
+      "tags": [
+        "api_security",
+        "secure_coding",
+        "input_validation",
+        "4.1"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "Strong authentication and authorization",
+        "B": "Rate limiting",
+        "C": "RFID shielding",
+        "D": "Faraday cage",
+        "E": "Disk defragmentation"
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "APIs need strong authn/authz, input filtering, and rate limiting to reduce abuse and data leakage.",
+      "misconceptionTags": [
+        "api_security_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "E": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q8",
+      "type": "mcq",
+      "stem": "What is the PRIMARY security value of code signing?",
+      "explanation": "A digital signature lets systems verify software came from the expected publisher and wasn’t modified in transit.\n\nHint: Signature = authenticity + integrity.\n\nRule of thumb: Code signing doesn’t make code safe; it makes tampering obvious.\n\nSource pages ~pages 43-45.",
+      "tags": [
+        "code_signing",
+        "malicious_update",
+        "4.1"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Makes code run faster",
+        "B": "Proves integrity and publisher identity of software updates",
+        "C": "Encrypts data stored by the app",
+        "D": "Prevents all vulnerabilities"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "A digital signature lets systems verify software came from the expected publisher and wasn’t modified in transit.",
+      "misconceptionTags": [
+        "code_signing_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q9",
+      "type": "scenario_mcq",
+      "stem": "Your app relies on many open-source libraries. You want alerts when a dependency has a known CVE or a risky license. What practice helps most?",
+      "explanation": "SCA/package monitoring tracks third-party components for vulnerabilities and policy issues.\n\nHint: Dependencies are part of your attack surface.\n\nRule of thumb: You ship your dependencies, so you inherit their bugs.\n\nSource pages ~pages 49-50, 60.",
+      "tags": [
+        "package_monitoring",
+        "software_composition_analysis",
+        "supply_chain",
+        "4.3"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 75,
+      "options": {
+        "A": "Package monitoring / software composition analysis (SCA)",
+        "B": "Full-disk encryption",
+        "C": "Geofencing",
+        "D": "Port knocking"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "4.3"
+      ],
+      "rationaleCorrect": "SCA/package monitoring tracks third-party components for vulnerabilities and policy issues.",
+      "misconceptionTags": [
+        "package_monitoring_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q10",
+      "type": "mcq",
+      "stem": "Sandboxing is BEST described as:",
+      "explanation": "Sandboxing limits what code can touch (files, network, OS resources), reducing damage if it’s malicious or compromised.\n\nHint: Sandbox = ‘play area with walls.’\n\nRule of thumb: Assume code might misbehave; contain it.\n\nSource pages ~pages 42-43.",
+      "tags": [
+        "sandboxing",
+        "isolation",
+        "4.1"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Routing traffic through an encrypted tunnel",
+        "B": "Executing code in an isolated, restricted environment",
+        "C": "Storing credentials in plaintext for easy recovery",
+        "D": "Disabling access control checks to reduce latency"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "Sandboxing limits what code can touch (files, network, OS resources), reducing damage if it’s malicious or compromised.",
+      "misconceptionTags": [
+        "sandboxing_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q11",
+      "type": "mcq",
+      "stem": "Which vulnerability allows an attacker to manipulate a database query by injecting SQL into user input?",
+      "explanation": "SQL injection occurs when untrusted input is concatenated into SQL statements and changes query logic.\n\nHint: If the database ‘obeys’ user input, it’s SQLi.\n\nRule of thumb: Never build SQL with string concatenation of untrusted input.\n\nSource pages ~pages 14-21.",
+      "tags": [
+        "sql_injection",
+        "injection",
+        "2.3",
+        "2.4"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "SQL injection",
+        "B": "Cross-site scripting",
+        "C": "Clickjacking",
+        "D": "Directory traversal"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "SQL injection occurs when untrusted input is concatenated into SQL statements and changes query logic.",
+      "misconceptionTags": [
+        "sql_injection_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q12",
+      "type": "scenario_mcq",
+      "stem": "A login form takes a username and password and directly appends them into a SQL query string. Which fix is MOST effective?",
+      "explanation": "Parameterized queries separate code from data, preventing input from changing query structure.\n\nHint: Stop input from becoming SQL code.\n\nRule of thumb: Prepared statements/parameters are the default SQLi defense.\n\nSource pages ~pages 40-42.",
+      "tags": [
+        "sql_injection",
+        "parameterized_queries",
+        "secure_database_access",
+        "trap_client_side_validation",
+        "2.3",
+        "4.1"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 75,
+      "options": {
+        "A": "Use parameterized queries (prepared statements)",
+        "B": "Use longer error messages",
+        "C": "Move the database to a different subnet",
+        "D": "Turn on client-side input checks only"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Parameterized queries separate code from data, preventing input from changing query structure.",
+      "misconceptionTags": [
+        "sql_injection_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q13",
+      "type": "mcq",
+      "stem": "In blind SQL injection, the attacker usually cannot:",
+      "explanation": "Blind SQLi means results aren’t directly displayed, so attackers infer outcomes via behavior, errors, or timing.\n\nHint: ‘Blind’ = you don’t see results.\n\nRule of thumb: No output channel ≠ no attack; it just becomes inference-based.\n\nSource pages ~pages 18-20.",
+      "tags": [
+        "blind_sqli",
+        "sql_injection",
+        "2.3",
+        "2.4"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "Send input to the application",
+        "B": "Change query logic",
+        "C": "Directly see query results in the response",
+        "D": "Cause database errors"
+      },
+      "answer": "C",
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Blind SQLi means results aren’t directly displayed, so attackers infer outcomes via behavior, errors, or timing.",
+      "misconceptionTags": [
+        "blind_sqli_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q14",
+      "type": "scenario_mcq",
+      "stem": "A tester injects input that causes a consistent 10–15 second response delay only when a condition is true. What technique is this most consistent with?",
+      "explanation": "Timing-based attacks use deliberate delays to leak information through response time differences.\n\nHint: Delay = timing channel.\n\nRule of thumb: If the response time becomes the ‘data,’ it’s timing-based inference.\n\nSource pages ~pages 18-21.",
+      "tags": [
+        "timing_based_sqli",
+        "blind_sqli",
+        "sql_injection",
+        "2.3",
+        "2.4"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 75,
+      "options": {
+        "A": "Timing-based blind SQL injection",
+        "B": "Stored XSS",
+        "C": "Session fixation",
+        "D": "Clickjacking"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Timing-based attacks use deliberate delays to leak information through response time differences.",
+      "misconceptionTags": [
+        "timing_based_sqli_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q15",
+      "type": "multi_select",
+      "stem": "Which TWO practices most directly reduce SQL injection risk? (Choose two.)",
+      "explanation": "Parameters prevent query manipulation; least privilege limits blast radius if a query is abused.\n\nHint: Prevent the injection, and limit damage if it happens.\n\nRule of thumb: Defense in depth: safe query construction + minimal DB rights.\n\nSource pages ~pages 40-42.",
+      "tags": [
+        "sql_injection",
+        "parameterized_queries",
+        "least_privilege",
+        "secure_database_access",
+        "2.3",
+        "4.1"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "Parameterized queries",
+        "B": "Least-privilege database accounts",
+        "C": "Disabling TLS",
+        "D": "Allowing database error stack traces to users",
+        "E": "Running the DB as local admin"
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Parameters prevent query manipulation; least privilege limits blast radius if a query is abused.",
+      "misconceptionTags": [
+        "sql_injection_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "E": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q16",
+      "type": "scenario_mcq",
+      "stem": "A web form passes user input into a system shell command, and an attacker adds `; cat /etc/passwd` to the input. What attack is this?",
+      "explanation": "Command injection occurs when untrusted input is interpreted by a command processor (shell), allowing extra commands.\n\nHint: If the OS shell runs attacker-supplied commands, it’s command injection.\n\nRule of thumb: Never pass raw user input into shell commands.\n\nSource pages ~pages 20, 61-62.",
+      "tags": [
+        "command_injection",
+        "injection",
+        "2.4"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "options": {
+        "A": "Command injection",
+        "B": "Directory traversal",
+        "C": "CSRF",
+        "D": "Buffer overflow"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "Command injection occurs when untrusted input is interpreted by a command processor (shell), allowing extra commands.",
+      "misconceptionTags": [
+        "command_injection_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q17",
+      "type": "mcq",
+      "stem": "An attacker injects special characters into input that is used to build an LDAP query. This is an example of:",
+      "explanation": "LDAP injection targets directory service queries the same way SQLi targets databases—by turning input into query logic.\n\nHint: Query injection, but for directories.\n\nRule of thumb: Any string-built query language is a candidate for injection.\n\nSource pages ~pages 20.",
+      "tags": [
+        "ldap_injection",
+        "injection",
+        "2.3"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "LDAP injection",
+        "B": "Replay attack",
+        "C": "SQL injection",
+        "D": "Path traversal"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "LDAP injection targets directory service queries the same way SQLi targets databases—by turning input into query logic.",
+      "misconceptionTags": [
+        "ldap_injection_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q18",
+      "type": "mcq",
+      "stem": "Which attack attempts to embed malicious content in XML documents that an application processes?",
+      "explanation": "XML injection abuses XML parsing/processing by inserting crafted content into XML input.\n\nHint: If the input format is XML, attackers can poison it.\n\nRule of thumb: Treat structured input (XML/JSON) as untrusted too.\n\nSource pages ~pages 20.",
+      "tags": [
+        "xml_injection",
+        "injection",
+        "2.3"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "XML injection",
+        "B": "Clickjacking",
+        "C": "Buffer overflow",
+        "D": "Credential stuffing"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "XML injection abuses XML parsing/processing by inserting crafted content into XML input.",
+      "misconceptionTags": [
+        "xml_injection_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q19",
+      "type": "mcq",
+      "stem": "Loading a malicious dynamically linked library to run attacker-controlled code is best described as:",
+      "explanation": "DLL injection abuses dynamic library loading so the process runs attacker code.\n\nHint: If a process loads the attacker’s library, game over.\n\nRule of thumb: Protect library search paths and signing; avoid unsafe loading.\n\nSource pages ~pages 20.",
+      "tags": [
+        "dll_injection",
+        "injection",
+        "2.3"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "DLL injection",
+        "B": "XSS",
+        "C": "CSRF",
+        "D": "Directory traversal"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "DLL injection abuses dynamic library loading so the process runs attacker code.",
+      "misconceptionTags": [
+        "dll_injection_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q20",
+      "type": "mcq",
+      "stem": "Which technique MOST directly reduces the risk of user input being interpreted as HTML/JavaScript in a web page?",
+      "explanation": "Encoding/escaping converts special characters into safe representations so the browser treats them as data, not code.\n\nHint: Make the browser display it, not execute it.\n\nRule of thumb: Validate input, encode output—both matter.\n\nSource pages ~pages 10, 33-36.",
+      "tags": [
+        "encode_escape",
+        "xss",
+        "secure_coding",
+        "4.1"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "Output encoding/escaping",
+        "B": "Disabling cookies",
+        "C": "Turning off server-side validation",
+        "D": "Using default admin accounts"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "Encoding/escaping converts special characters into safe representations so the browser treats them as data, not code.",
+      "misconceptionTags": [
+        "encode_escape_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q21",
+      "type": "mcq",
+      "stem": "Which input-validation approach is generally MOST secure?",
+      "explanation": "Allowlisting defines what ‘good’ looks like and rejects everything else; blocklists are easy to bypass.\n\nHint: Describe exactly what you want, not what you fear.\n\nRule of thumb: Allowlist > blocklist for security validation.\n\nSource pages ~pages 38-40.",
+      "tags": [
+        "input_validation",
+        "allowlist",
+        "trap_client_side_validation",
+        "4.1"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Blocklisting bad characters",
+        "B": "Allowlisting expected input patterns",
+        "C": "No validation, only user training",
+        "D": "Client-side validation only"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "Allowlisting defines what ‘good’ looks like and rejects everything else; blocklists are easy to bypass.",
+      "misconceptionTags": [
+        "input_validation_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q22",
+      "type": "scenario_mcq",
+      "stem": "A developer says, “We already validate inputs in JavaScript in the browser, so we’re safe.” What is the best response?",
+      "explanation": "Attackers can bypass or modify client-side checks. Server-side validation is required for security.\n\nHint: The attacker controls their browser.\n\nRule of thumb: Client-side checks are UX; server-side checks are security.\n\nSource pages ~pages 38-40.",
+      "tags": [
+        "input_validation",
+        "trap_client_side_validation",
+        "secure_coding",
+        "4.1"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 75,
+      "options": {
+        "A": "Correct—client-side validation is sufficient",
+        "B": "Incorrect—validation must also occur server-side",
+        "C": "Only TLS matters",
+        "D": "Only MFA matters"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "Attackers can bypass or modify client-side checks.",
+      "misconceptionTags": [
+        "input_validation_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q23",
+      "type": "mcq",
+      "stem": "Why should applications avoid showing detailed stack traces and database errors to end users?",
+      "explanation": "Verbose errors can reveal table names, paths, versions, and logic—great clues for exploitation.\n\nHint: Errors are free recon.\n\nRule of thumb: Log details internally; show generic errors externally.\n\nSource pages ~pages 10, 40.",
+      "tags": [
+        "error_handling",
+        "secure_coding",
+        "4.1"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "It increases CPU usage",
+        "B": "It can leak sensitive implementation details useful to attackers",
+        "C": "It breaks encryption",
+        "D": "It prevents logging"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "Verbose errors can reveal table names, paths, versions, and logic—great clues for exploitation.",
+      "misconceptionTags": [
+        "error_handling_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q24",
+      "type": "scenario_mcq",
+      "stem": "Your org can’t quickly rewrite a legacy web app, but you need immediate protection against common injection patterns. What is a reasonable compensating control?",
+      "explanation": "A WAF can filter/block many common web attack patterns and buy time while fixes are developed.\n\nHint: Compensating control in front of the app.\n\nRule of thumb: A WAF helps, but it’s not a substitute for fixing the code.\n\nSource pages ~page 40.",
+      "tags": [
+        "waf",
+        "compensating_control",
+        "injection",
+        "4.1"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "options": {
+        "A": "Web application firewall (WAF)",
+        "B": "Disable authentication",
+        "C": "Remove TLS",
+        "D": "Publish source code publicly"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "A WAF can filter/block many common web attack patterns and buy time while fixes are developed.",
+      "misconceptionTags": [
+        "waf_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q25",
+      "type": "mcq",
+      "stem": "Session hijacking primarily involves:",
+      "explanation": "Session hijacking targets session tokens/cookies so the attacker becomes ‘already logged in’ without the password.\n\nHint: It’s about the session token, not the credentials.\n\nRule of thumb: If you steal the session cookie, you steal the session.\n\nSource pages ~pages 24-26.",
+      "tags": [
+        "session_hijacking",
+        "cookies",
+        "2.4"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "Guessing a user’s password through brute force",
+        "B": "Stealing or taking over an existing authenticated session",
+        "C": "Injecting SQL into a login form",
+        "D": "Redirecting users to a fake website"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "Session hijacking targets session tokens/cookies so the attacker becomes ‘already logged in’ without the password.",
+      "misconceptionTags": [
+        "session_hijacking_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q26",
+      "type": "mcq",
+      "stem": "Which cookie attribute helps prevent the browser from sending the cookie over unencrypted HTTP?",
+      "explanation": "SECURE cookies are only sent over HTTPS, reducing exposure to sniffing/on-path attacks.\n\nHint: Secure => HTTPS only.\n\nRule of thumb: Set SECURE on session cookies whenever possible.\n\nSource pages ~page 26.",
+      "tags": [
+        "cookie_secure",
+        "cookies",
+        "session_hijacking",
+        "2.4"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "SECURE",
+        "B": "HttpOnly",
+        "C": "SameSite",
+        "D": "Domain"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "SECURE cookies are only sent over HTTPS, reducing exposure to sniffing/on-path attacks.",
+      "misconceptionTags": [
+        "cookie_secure_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q27",
+      "type": "mcq",
+      "stem": "Which cookie attribute most directly reduces the risk of client-side scripts reading the cookie?",
+      "explanation": "HttpOnly blocks JavaScript access to the cookie, making some XSS cookie theft harder.\n\nHint: JavaScript can’t read HttpOnly cookies.\n\nRule of thumb: HttpOnly helps against cookie theft via XSS, but doesn’t fix XSS itself.\n\nSource pages ~pages 26-27.",
+      "tags": [
+        "cookie_httponly",
+        "cookies",
+        "xss",
+        "trap_secure_vs_httponly",
+        "2.4"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "HttpOnly",
+        "B": "SECURE",
+        "C": "Path",
+        "D": "Max-Age"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "HttpOnly blocks JavaScript access to the cookie, making some XSS cookie theft harder.",
+      "misconceptionTags": [
+        "cookie_httponly_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q28",
+      "type": "scenario_mcq",
+      "stem": "An attacker captures a valid session cookie and reuses it to impersonate the victim. What is this called?",
+      "explanation": "Session replay is reusing stolen session tokens/cookies to take over authenticated sessions.\n\nHint: Replay = reuse what was captured.\n\nRule of thumb: Protect session tokens like passwords: encrypt transport, restrict cookies, rotate tokens.\n\nSource pages ~pages 26-27.",
+      "tags": [
+        "session_replay",
+        "cookies",
+        "session_hijacking",
+        "2.4"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "Session replay",
+        "B": "Clickjacking",
+        "C": "Blind SQL injection",
+        "D": "Buffer overflow"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "Session replay is reusing stolen session tokens/cookies to take over authenticated sessions.",
+      "misconceptionTags": [
+        "session_replay_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q29",
+      "type": "scenario_mcq",
+      "stem": "A user is tricked into logging into a fake site that forwards credentials to the real site and captures the resulting session cookie. This is MOST associated with which technique?",
+      "explanation": "An on-path attacker can intercept or proxy traffic and steal session tokens/cookies.\n\nHint: If the attacker sits between user and site, it’s on-path.\n\nRule of thumb: Use HTTPS everywhere and secure cookies to reduce session theft.\n\nSource pages ~pages 26-27.",
+      "tags": [
+        "on_path_attack",
+        "session_hijacking",
+        "cookie_secure",
+        "2.4"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "options": {
+        "A": "On-path (MITM) assisted session hijacking",
+        "B": "Buffer overflow",
+        "C": "CSRF",
+        "D": "Data masking"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "An on-path attacker can intercept or proxy traffic and steal session tokens/cookies.",
+      "misconceptionTags": [
+        "on_path_attack_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q30",
+      "type": "mcq",
+      "stem": "In an unvalidated redirect vulnerability, an attacker’s MAIN goal is often to:",
+      "explanation": "Open redirects can be used for phishing—trusted domain in the URL, but it bounces users to an attacker site.\n\nHint: Looks trusted, ends malicious.\n\nRule of thumb: Validate/allowlist redirect targets; avoid user-controlled redirects.\n\nSource pages ~page 27.",
+      "tags": [
+        "unvalidated_redirect",
+        "phishing",
+        "2.3",
+        "2.4"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "Force a buffer overflow",
+        "B": "Send users to a malicious destination while appearing to be a trusted link",
+        "C": "Decrypt database backups",
+        "D": "Disable MFA"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "Open redirects can be used for phishing—trusted domain in the URL, but it bounces users to an attacker site.",
+      "misconceptionTags": [
+        "unvalidated_redirect_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q31",
+      "type": "scenario_mcq",
+      "stem": "A URL contains `documentID=1842`. A user changes it to `documentID=1843` and can view another customer’s file because the app doesn’t re-check authorization. What vulnerability is this?",
+      "explanation": "IDOR occurs when direct references (IDs) are exposed and the app fails to enforce authorization checks on each request.\n\nHint: Changing an ID gives you someone else’s object.\n\nRule of thumb: Authenticate once, authorize every request.\n\nSource pages ~pages 28-29.",
+      "tags": [
+        "idor",
+        "authorization",
+        "2.3",
+        "2.4"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "options": {
+        "A": "Insecure Direct Object Reference (IDOR)",
+        "B": "SQL injection",
+        "C": "Clickjacking",
+        "D": "Race condition"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "IDOR occurs when direct references (IDs) are exposed and the app fails to enforce authorization checks on each request.",
+      "misconceptionTags": [
+        "idor_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q32",
+      "type": "mcq",
+      "stem": "Directory traversal attacks typically abuse which path operator to move up directories on Unix-like systems?",
+      "explanation": "The `..` operator refers to the parent directory and can be abused to escape the intended web root.\n\nHint: Two dots = go up.\n\nRule of thumb: Normalize paths and restrict access to only intended directories.\n\nSource pages ~pages 29-31.",
+      "tags": [
+        "directory_traversal",
+        "path_traversal",
+        "2.3",
+        "2.4"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "..",
+        "B": "//",
+        "C": "**",
+        "D": "~"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "The `..` operator refers to the parent directory and can be abused to escape the intended web root.",
+      "misconceptionTags": [
+        "directory_traversal_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q33",
+      "type": "scenario_mcq",
+      "stem": "A web server allows a request like `/../../../etc/shadow` and returns the file contents. Which weakness is MOST directly exploited?",
+      "explanation": "The attacker escapes the web root and accesses sensitive OS files.\n\nHint: If you’re reading files outside the web directory, it’s traversal.\n\nRule of thumb: Keep web process least-privileged; enforce strict file access controls.\n\nSource pages ~pages 30-31.",
+      "tags": [
+        "directory_traversal",
+        "2.3",
+        "2.4"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "Directory traversal",
+        "B": "CSRF",
+        "C": "Stored XSS",
+        "D": "SQL injection"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "The attacker escapes the web root and accesses sensitive OS files.",
+      "misconceptionTags": [
+        "directory_traversal_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q34",
+      "type": "scenario_mcq",
+      "stem": "An app includes a file specified by a URL parameter. An attacker points it to a remote payload like `http://evil.example/payload`. What risk is MOST likely?",
+      "explanation": "File inclusion vulnerabilities may allow attackers to load/execute remote content, often resulting in web shells.\n\nHint: If you can include remote code, you can run remote code.\n\nRule of thumb: Never include files based on user-controlled paths/URLs.\n\nSource pages ~page 32.",
+      "tags": [
+        "file_inclusion",
+        "web_shell",
+        "remote_file_inclusion",
+        "2.3",
+        "2.4"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 75,
+      "options": {
+        "A": "Remote file inclusion leading to web shell/execution",
+        "B": "Hash collision",
+        "C": "Data masking failure",
+        "D": "DLP bypass"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "File inclusion vulnerabilities may allow attackers to load/execute remote content, often resulting in web shells.",
+      "misconceptionTags": [
+        "file_inclusion_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q35",
+      "type": "mcq",
+      "stem": "Cross-site scripting (XSS) occurs when an application allows an attacker to:",
+      "explanation": "XSS is HTML/JS injection that executes in the victim’s browser under the site’s origin.\n\nHint: Browser-side code injection.\n\nRule of thumb: XSS is about what the browser executes, not what the database returns.\n\nSource pages ~pages 33-36.",
+      "tags": [
+        "xss",
+        "2.3",
+        "2.4"
+      ],
+      "difficulty": 1,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Run SQL statements on the database",
+        "B": "Inject HTML/JavaScript into pages viewed by other users",
+        "C": "Encrypt traffic end-to-end",
+        "D": "Steal disks from a data center"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "XSS is HTML/JS injection that executes in the victim’s browser under the site’s origin.",
+      "misconceptionTags": [
+        "xss_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q36",
+      "type": "scenario_mcq",
+      "stem": "An app reflects a search term back onto the page without encoding. An attacker sends a crafted link that triggers a script when clicked. Which XSS type is this?",
+      "explanation": "Reflected XSS is immediately reflected in the response and often delivered via crafted links.\n\nHint: One request, one response—no persistence.\n\nRule of thumb: Reflected XSS often rides in URLs and forms.\n\nSource pages ~pages 33-34.",
+      "tags": [
+        "xss_reflected",
+        "xss",
+        "trap_sqli_vs_xss",
+        "2.3"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "options": {
+        "A": "Reflected XSS",
+        "B": "Stored XSS",
+        "C": "DOM-based XSS",
+        "D": "SQL injection"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Reflected XSS is immediately reflected in the response and often delivered via crafted links.",
+      "misconceptionTags": [
+        "xss_reflected_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q37",
+      "type": "scenario_mcq",
+      "stem": "A forum stores a user’s post, and every future visitor’s browser executes the injected script. Which XSS type is this?",
+      "explanation": "Stored XSS persists on the server and affects many users over time.\n\nHint: If it stays on the server, it’s stored/persistent.\n\nRule of thumb: Stored XSS is more dangerous because it scales to many victims.\n\nSource pages ~pages 35-36.",
+      "tags": [
+        "xss_stored",
+        "xss",
+        "2.3"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "Stored (persistent) XSS",
+        "B": "Reflected XSS",
+        "C": "Timing-based SQL injection",
+        "D": "Directory traversal"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Stored XSS persists on the server and affects many users over time.",
+      "misconceptionTags": [
+        "xss_stored_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q38",
+      "type": "mcq",
+      "stem": "Which defense MOST directly mitigates XSS in output rendering?",
+      "explanation": "Encoding ensures user-controlled text is treated as text, not executable code.\n\nHint: Make it data, not code.\n\nRule of thumb: Encode output for the context (HTML, attribute, JS, URL).\n\nSource pages ~pages 33-36.",
+      "tags": [
+        "xss",
+        "encode_escape",
+        "4.1"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "options": {
+        "A": "Output encoding/escaping",
+        "B": "Turning off HTTPS",
+        "C": "Using default credentials",
+        "D": "Allowing raw HTML from users without filtering"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "Encoding ensures user-controlled text is treated as text, not executable code.",
+      "misconceptionTags": [
+        "xss_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q39",
+      "type": "scenario_mcq",
+      "stem": "A user thinks they are clicking a ‘Play’ button, but an invisible frame causes them to click ‘Transfer Funds’ on a banking site underneath. What is this?",
+      "explanation": "Clickjacking tricks users into clicking something different than they perceive, often via hidden iframes/overlays.\n\nHint: You click what you don’t see.\n\nRule of thumb: Use frame-busting headers (e.g., X-Frame-Options / CSP frame-ancestors).\n\nSource pages ~pages 33-34.",
+      "tags": [
+        "clickjacking",
+        "2.4"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "options": {
+        "A": "Clickjacking",
+        "B": "CSRF",
+        "C": "Stored XSS",
+        "D": "SQL injection"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "Clickjacking tricks users into clicking something different than they perceive, often via hidden iframes/overlays.",
+      "misconceptionTags": [
+        "clickjacking_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q40",
+      "type": "mcq",
+      "stem": "CSRF attacks primarily exploit which trust relationship?",
+      "explanation": "CSRF leverages the fact that a user’s browser will automatically include cookies/session tokens when making requests.\n\nHint: The browser ‘helpfully’ includes your auth token.\n\nRule of thumb: CSRF is about forcing an authenticated action; XSS is about running code in the browser.\n\nSource pages ~pages 37-38.",
+      "tags": [
+        "csrf",
+        "trap_xss_vs_csrf",
+        "2.3",
+        "2.4"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "A site trusts the user’s browser/session to send authenticated requests",
+        "B": "A browser trusts scripts from the same site",
+        "C": "A database trusts SQL keywords",
+        "D": "A user trusts HTTPS certificates"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "CSRF leverages the fact that a user’s browser will automatically include cookies/session tokens when making requests.",
+      "misconceptionTags": [
+        "csrf_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q41",
+      "type": "scenario_mcq",
+      "stem": "Which defense is MOST commonly used to mitigate CSRF for state-changing actions?",
+      "explanation": "CSRF tokens ensure the request came from the legitimate site/app flow and not a forged cross-site request.\n\nHint: Secret token the attacker can’t guess.\n\nRule of thumb: Use tokens + verify origin/referrer for sensitive actions.\n\nSource pages ~pages 38-39.",
+      "tags": [
+        "csrf",
+        "secure_tokens",
+        "4.1"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 75,
+      "options": {
+        "A": "Anti-CSRF tokens (unpredictable per session/request)",
+        "B": "Allowing GET requests for money transfer",
+        "C": "Disabling authentication cookies",
+        "D": "Publishing redirect targets"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "CSRF tokens ensure the request came from the legitimate site/app flow and not a forged cross-site request.",
+      "misconceptionTags": [
+        "csrf_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q42",
+      "type": "mcq",
+      "stem": "Server-side request forgery (SSRF) differs from CSRF because SSRF usually:",
+      "explanation": "SSRF abuses server-side functionality that fetches URLs/resources, turning the server into a proxy to internal or restricted targets.\n\nHint: SSRF = server becomes the requester.\n\nRule of thumb: If the app server fetches URLs, validate/allowlist destinations.\n\nSource pages ~pages 37-39.",
+      "tags": [
+        "ssrf",
+        "csrf",
+        "trap_ssrf_vs_csrf",
+        "2.3",
+        "2.4"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 75,
+      "options": {
+        "A": "Forces the victim’s browser to send requests",
+        "B": "Makes the server send requests to attacker-chosen destinations",
+        "C": "Requires SQL injection",
+        "D": "Only affects desktop apps"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "SSRF abuses server-side functionality that fetches URLs/resources, turning the server into a proxy to internal or restricted targets.",
+      "misconceptionTags": [
+        "ssrf_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q43",
+      "type": "scenario_mcq",
+      "stem": "A user with a basic account finds an endpoint that lets them call admin-only functions because the app checks roles only in the UI, not on the API. What issue is this?",
+      "explanation": "If authorization checks aren’t enforced server-side on each request, users can access higher-privilege actions.\n\nHint: UI checks don’t count—server rules do.\n\nRule of thumb: Enforce least privilege and role checks at the server/API layer.\n\nSource pages ~pages 28-29, 11-12.",
+      "tags": [
+        "privilege_escalation",
+        "authorization",
+        "api_security",
+        "trap_idor_vs_authn",
+        "2.4"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 75,
+      "options": {
+        "A": "Authorization bypass leading to privilege escalation",
+        "B": "Directory traversal",
+        "C": "Buffer overflow",
+        "D": "Fuzzing"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "If authorization checks aren’t enforced server-side on each request, users can access higher-privilege actions.",
+      "misconceptionTags": [
+        "privilege_escalation_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q44",
+      "type": "scenario_mcq",
+      "stem": "An attacker enters an extremely long string into an input field and the application crashes or begins executing unexpected instructions. What vulnerability is MOST likely?",
+      "explanation": "Buffer overflows occur when data exceeds allocated memory boundaries, potentially leading to crashes or code execution.\n\nHint: Too-long input → memory boundary problem.\n\nRule of thumb: Bounds checking + safe languages + compiler protections reduce overflow risk.\n\nSource pages ~pages 50-52.",
+      "tags": [
+        "buffer_overflow",
+        "memory_injection",
+        "2.3",
+        "2.4"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "options": {
+        "A": "Buffer overflow",
+        "B": "CSRF",
+        "C": "Stored XSS",
+        "D": "On-path attack"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "Buffer overflows occur when data exceeds allocated memory boundaries, potentially leading to crashes or code execution.",
+      "misconceptionTags": [
+        "buffer_overflow_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q45",
+      "type": "mcq",
+      "stem": "A time-of-check/time-of-use (TOCTOU) bug is a type of:",
+      "explanation": "TOCTOU happens when something is checked, then later used, and an attacker changes it in between.\n\nHint: Check vs use gap.\n\nRule of thumb: Make check-and-use atomic, or lock resources to prevent changes in between.\n\nSource pages ~pages 51-52.",
+      "tags": [
+        "race_condition",
+        "toctou",
+        "2.3",
+        "2.4"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "Race condition",
+        "B": "SQL injection",
+        "C": "Clickjacking",
+        "D": "Directory traversal"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "2.3"
+      ],
+      "rationaleCorrect": "TOCTOU happens when something is checked, then later used, and an attacker changes it in between.",
+      "misconceptionTags": [
+        "race_condition_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q46",
+      "type": "scenario_mcq",
+      "stem": "A vendor update server is compromised and attackers publish a trojanized update. Which control helps endpoints detect this tampering?",
+      "explanation": "If endpoints verify signatures, tampered updates without valid signatures can be blocked.\n\nHint: Verify publisher + integrity.\n\nRule of thumb: Trust updates only when signatures validate and the signing chain is trusted.\n\nSource pages ~pages 43-45.",
+      "tags": [
+        "malicious_update",
+        "code_signing",
+        "supply_chain",
+        "4.1"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "options": {
+        "A": "Code signing verification on updates",
+        "B": "Disabling patching",
+        "C": "Using HTTP instead of HTTPS",
+        "D": "Allowing unsigned drivers"
+      },
+      "answer": "A",
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "If endpoints verify signatures, tampered updates without valid signatures can be blocked.",
+      "misconceptionTags": [
+        "malicious_update_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q47",
+      "type": "mcq",
+      "stem": "Which pairing is CORRECT?",
+      "explanation": "SECURE = send only over HTTPS; HttpOnly = scripts can’t read it.\n\nHint: SECURE = transport. HttpOnly = JS access.\n\nRule of thumb: Set both on session cookies when possible.\n\nSource pages ~pages 26-27.",
+      "tags": [
+        "cookie_secure",
+        "cookie_httponly",
+        "trap_secure_vs_httponly",
+        "2.4"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "SECURE prevents JavaScript from reading cookies; HttpOnly forces HTTPS-only cookies",
+        "B": "SECURE forces HTTPS-only cookies; HttpOnly blocks JavaScript access to cookies",
+        "C": "SECURE enables redirects; HttpOnly disables MFA",
+        "D": "SECURE prevents CSRF; HttpOnly prevents SQLi"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "SECURE = send only over HTTPS; HttpOnly = scripts can’t read it.",
+      "misconceptionTags": [
+        "cookie_secure_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q48",
+      "type": "scenario_mcq",
+      "stem": "A developer uses a regex in the browser to block `<script>` tags but does no server-side filtering. An attacker sends a crafted HTTP request directly to the server and succeeds. What was the core mistake?",
+      "explanation": "Client-side controls can be bypassed; server must enforce validation/authorization.\n\nHint: Attackers can craft requests without your UI.\n\nRule of thumb: Server is the final authority—always validate/authorize there.\n\nSource pages ~pages 38-40.",
+      "tags": [
+        "input_validation",
+        "trap_client_side_validation",
+        "xss",
+        "sql_injection",
+        "4.1"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 75,
+      "options": {
+        "A": "Using allowlisting instead of blocklisting",
+        "B": "Relying on client-side validation for security",
+        "C": "Using HTTPS",
+        "D": "Using parameterized queries"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "Client-side controls can be bypassed; server must enforce validation/authorization.",
+      "misconceptionTags": [
+        "input_validation_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q49",
+      "type": "mcq",
+      "stem": "Why is XSS often so powerful?",
+      "explanation": "Because of the same-origin model, scripts running under a site’s origin can access that site’s data and actions.\n\nHint: Same origin = borrowed trust.\n\nRule of thumb: XSS turns your site into the attacker’s code delivery platform.\n\nSource pages ~pages 33-36.",
+      "tags": [
+        "xss",
+        "same_origin_policy",
+        "SOP",
+        "2.4"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "It gives attackers direct physical access to servers",
+        "B": "Injected scripts run in the victim’s browser under the site’s origin, inheriting its trust",
+        "C": "It always decrypts TLS",
+        "D": "It only affects databases"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "Because of the same-origin model, scripts running under a site’s origin can access that site’s data and actions.",
+      "misconceptionTags": [
+        "xss_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q50",
+      "type": "multi_select",
+      "stem": "Which TWO controls are best matched to preventing forged requests and protecting sessions? (Choose two.)",
+      "explanation": "Tokens defend against CSRF, while secure cookie settings reduce session theft and some XSS cookie exfil paths.\n\nHint: One is for forged actions, one is for session protection.\n\nRule of thumb: Protect both the action (CSRF) and the credential (session cookie).\n\nSource pages ~pages 26-27, 37-39.",
+      "tags": [
+        "csrf",
+        "secure_tokens",
+        "cookie_secure",
+        "cookie_httponly",
+        "4.1"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "options": {
+        "A": "Anti-CSRF tokens",
+        "B": "SECURE + HttpOnly cookies",
+        "C": "ARP spoofing",
+        "D": "Default passwords",
+        "E": "Disabling logs"
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "Tokens defend against CSRF, while secure cookie settings reduce session theft and some XSS cookie exfil paths.",
+      "misconceptionTags": [
+        "csrf_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "E": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q51",
+      "type": "scenario_mcq",
+      "stem": "Your pipeline runs a tool that scans code for risky functions and insecure patterns without running the app. Then it runs a web scanner against a staging deployment. Which pairing is correct?",
+      "explanation": "Code scanning without execution is SAST; scanning a running deployment is DAST.\n\nHint: Read vs run.\n\nRule of thumb: Use both: SAST catches issues earlier, DAST catches runtime/logic issues.\n\nSource pages ~pages 12-14.",
+      "tags": [
+        "sast",
+        "dast",
+        "cicd",
+        "4.3"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "options": {
+        "A": "First is DAST; second is SAST",
+        "B": "First is SAST; second is DAST",
+        "C": "Both are SAST",
+        "D": "Both are code signing"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.3"
+      ],
+      "rationaleCorrect": "Code scanning without execution is SAST; scanning a running deployment is DAST.",
+      "misconceptionTags": [
+        "sast_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch6-q52",
+      "type": "mcq",
+      "stem": "In automation for security operations, “guard rails” most closely refer to:",
+      "explanation": "Guard rails are automated constraints in tooling/pipelines that block or flag unsafe actions (e.g., misconfig, insecure security groups).\n\nHint: Automation that stops you from doing dumb stuff.\n\nRule of thumb: Make the secure path the easy path—and block the unsafe path.\n\nSource pages ~pages 1-2, 7-9.",
+      "tags": [
+        "automation_orchestration",
+        "guard_rails",
+        "devsecops",
+        "4.7"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "options": {
+        "A": "Physical fences around a data center",
+        "B": "Automated policy constraints that prevent risky deployments/changes",
+        "C": "A type of ransomware",
+        "D": "Password complexity rules only"
+      },
+      "answer": "B",
+      "objectiveIds": [
+        "4.7"
+      ],
+      "rationaleCorrect": "Guard rails are automated constraints in tooling/pipelines that block or flag unsafe actions (e.g., misconfig, insecure security groups).",
+      "misconceptionTags": [
+        "automation_orchestration_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    }
+  ]
+}

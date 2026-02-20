@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Outline to App Content Mapping",
+  "type": "object",
+  "required": ["version", "source_outline", "entries"],
+  "properties": {
+    "version": { "type": "string", "minLength": 1 },
+    "source_outline": { "type": "string", "minLength": 1 },
+    "updated_at": { "type": "string" },
+    "entries": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/mapping_entry" }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "mapping_entry": {
+      "type": "object",
+      "required": ["outlineId", "title", "href", "objectiveIds"],
+      "properties": {
+        "outlineId": { "type": "string", "minLength": 1 },
+        "title": { "type": "string", "minLength": 1 },
+        "href": { "type": "string", "minLength": 1 },
+        "objectiveIds": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^\\d+\\.\\d+$" },
+          "uniqueItems": true
+        },
+        "packId": { "type": "string", "minLength": 1 },
+        "lessonIds": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        },
+        "status": {
+          "type": "string",
+          "enum": ["unmapped", "draft", "done"]
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

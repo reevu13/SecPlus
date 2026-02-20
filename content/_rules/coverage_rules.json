@@ -1,0 +1,6 @@
+{
+  "minQuestionsPerObjective": 10,
+  "minScenarioPerObjective": 3,
+  "minInteractivePerObjective": 1,
+  "allowZeroCoverage": false
+}

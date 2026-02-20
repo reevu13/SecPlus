@@ -1,0 +1,4026 @@
+{
+  "pack_id": "ch14",
+  "version": "1.0.0",
+  "modules": [
+    {
+      "id": "ch14.m01",
+      "title": "Events, Incidents, and Policy",
+      "tag_ids": [
+        "incident_response.basics.incident_vs_event",
+        "incident_response.policy.purpose",
+        "incident_response.policy.policy_vs_standard_vs_procedure"
+      ],
+      "pages": [
+        {
+          "id": "ch14.m01.p01",
+          "title": "Event vs Incident: the escalation trigger",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "An event is something that happens (log entry, alert, user report). An incident is an event (or set of events) that causes or clearly indicates real impact (CIA) or a policy violation."
+            },
+            {
+              "type": "example",
+              "text": "Examples: (1) a few failed logins = event; (2) mass failures + lockouts + suspicious MFA prompts = likely incident; (3) IDS port-scan alert is an event until tied to exploitation/lateral movement."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: treating every alert as an incident. That burns time and causes alert fatigue. Triage on impact + confidence + scope."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which best distinguishes an event from an incident?",
+              "options": [
+                "An event is always malicious; an incident is always accidental.",
+                "An incident is a subset of events that cause or indicate real impact/policy violation.",
+                "An incident is any log entry in a SIEM.",
+                "Events happen only on endpoints; incidents happen only on servers."
+              ],
+              "correct_index": 1,
+              "explanation": "Incidents are events with meaningful impact or clear policy violation; events are everything that happens.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill the blanks: An ____ is something that happens; an ____ is an event that results in or clearly indicates impact.",
+              "answers": [
+                "event",
+                "incident"
+              ],
+              "explanation": "This distinction drives triage and escalation.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        },
+        {
+          "id": "ch14.m01.p02",
+          "title": "Policy vs Standard vs Procedure",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Policy = high-level intent/rules. Standard = mandatory specifics that satisfy policy. Procedure = step-by-step instructions (often tool-specific)."
+            },
+            {
+              "type": "example",
+              "text": "Policy: 'Sensitive data must be protected in transit.' Standard: 'TLS 1.2+ only.' Procedure: 'How to configure TLS on NGINX and verify.'"
+            },
+            {
+              "type": "trap",
+              "text": "Trap: writing a huge 'policy' that is really a procedure. Policies should be stable; procedures change with tooling."
+            }
+          ],
+          "checks": [
+            {
+              "type": "matching",
+              "prompt": "Match the document type to the best description.",
+              "left": [
+                "Policy",
+                "Standard",
+                "Procedure"
+              ],
+              "right": [
+                "High-level intent/rules",
+                "Specific mandatory requirements",
+                "Step-by-step instructions"
+              ],
+              "correct_map": {
+                "Policy": "High-level intent/rules",
+                "Standard": "Specific mandatory requirements",
+                "Procedure": "Step-by-step instructions"
+              },
+              "explanation": "Policy sets direction, standards define required specifics, procedures are the how-to.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "You updated a runbook because the SIEM UI changed. Which document type did you edit?",
+              "options": [
+                "Policy",
+                "Standard",
+                "Procedure",
+                "Charter"
+              ],
+              "correct_index": 2,
+              "explanation": "Runbooks are procedures: tool-specific steps that change often.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        },
+        {
+          "id": "ch14.m01.p03",
+          "title": "Practical triage lens",
+          "content_blocks": [
+            {
+              "type": "diagram",
+              "text": "Triage lens: 1) Impact (CIA affected/imminent) 2) Confidence (real vs noise) 3) Scope (one host vs many) 4) Urgency (active exploitation/exfil?)."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: jumping straight to eradication. Containment and evidence/telemetry come first, or you may destroy the trail and miss persistence."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "During triage, which question most directly drives urgency?",
+              "options": [
+                "Which framework is best (MITRE vs Kill Chain)?",
+                "Is there confirmed or imminent impact to CIA?",
+                "Which dashboard looks best?",
+                "Can we write the postmortem now?"
+              ],
+              "correct_index": 1,
+              "explanation": "Impact/urgency determines the response tempo.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "multi_select",
+              "prompt": "Which are core triage dimensions? (Choose TWO.)",
+              "options": [
+                "Impact",
+                "Scope",
+                "Brand color of SOC dashboard",
+                "Urgency"
+              ],
+              "correct_indices": [
+                0,
+                1
+              ],
+              "explanation": "Impact and scope are foundational (urgency is also key, but this question asks for two).",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "2.1",
+        "2.2",
+        "2.3",
+        "3.1",
+        "3.3",
+        "4.1",
+        "4.2",
+        "4.3",
+        "4.4",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1"
+      ]
+    },
+    {
+      "id": "ch14.m02",
+      "title": "Incident Response Lifecycle",
+      "tag_ids": [
+        "incident_response.cycle.preparation",
+        "incident_response.cycle.detection",
+        "incident_response.cycle.analysis",
+        "incident_response.cycle.containment",
+        "incident_response.cycle.eradication",
+        "incident_response.cycle.recovery",
+        "incident_response.cycle.lessons_learned"
+      ],
+      "pages": [
+        {
+          "id": "ch14.m02.p01",
+          "title": "IR lifecycle overview",
+          "content_blocks": [
+            {
+              "type": "diagram",
+              "text": "Lifecycle (exam-safe): Preparation → Detection → Analysis → Containment → Eradication → Recovery → Lessons learned."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: treating detection as the finish line. Detection is the start; analysis/containment/eradication is where you actually stop harm."
+            }
+          ],
+          "checks": [
+            {
+              "type": "matching",
+              "prompt": "Match the phase to its primary goal.",
+              "left": [
+                "Preparation",
+                "Containment",
+                "Eradication",
+                "Recovery"
+              ],
+              "right": [
+                "Build capability before incidents",
+                "Reduce damage/spread quickly",
+                "Remove malware/root cause",
+                "Restore services safely"
+              ],
+              "correct_map": {
+                "Preparation": "Build capability before incidents",
+                "Containment": "Reduce damage/spread quickly",
+                "Eradication": "Remove malware/root cause",
+                "Recovery": "Restore services safely"
+              },
+              "explanation": "Each phase has a distinct objective even if they overlap in practice.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which phase focuses on building playbooks, tooling, and training before incidents?",
+              "options": [
+                "Preparation",
+                "Detection",
+                "Containment",
+                "Recovery"
+              ],
+              "correct_index": 0,
+              "explanation": "Preparation is the 'do the boring work now' phase.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        },
+        {
+          "id": "ch14.m02.p02",
+          "title": "Preparation: what 'ready' looks like",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Preparation includes defined roles/on-call, reliable telemetry/logging, escalation paths, and pre-approved response actions."
+            },
+            {
+              "type": "example",
+              "text": "Prep checklist: centralized logs from endpoints/firewalls, consistent time sync, contact tree (legal/HR/PR), and baselines for normal activity."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: 'We'll figure it out during the incident.' That's how you end up with missing logs, no access, and arguments instead of containment."
+            }
+          ],
+          "checks": [
+            {
+              "type": "multi_select",
+              "prompt": "Which belong in Preparation? (Choose TWO.)",
+              "options": [
+                "Define an incident communications plan",
+                "Delete logs to reduce storage",
+                "Validate centralized logging is working",
+                "Announce the breach publicly before confirming scope"
+              ],
+              "correct_indices": [
+                0,
+                2
+              ],
+              "explanation": "Preparation includes comms planning and ensuring telemetry exists.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill the blanks: Preparation that makes analysis possible often starts with good ____ and consistent ____.",
+              "answers": [
+                "logging",
+                "time"
+              ],
+              "explanation": "Without logs and consistent timestamps, correlation becomes guesswork.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        },
+        {
+          "id": "ch14.m02.p03",
+          "title": "Detection vs Analysis",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Detection = noticing something wrong (alerts, anomalies, reports). Analysis = building the story: what happened, how, scope, and whether it's ongoing."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: using a single data source. Strong analysis triangulates across endpoint + identity + network + application logs."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "An IDS alert fires for outbound connections to a suspicious domain. Best next step to move from detection to analysis?",
+              "options": [
+                "Disable all Wi‑Fi",
+                "Correlate with endpoint process logs and DNS logs to identify the host/process",
+                "Write lessons learned now",
+                "Assume false positive and close the ticket"
+              ],
+              "correct_index": 1,
+              "explanation": "Correlation turns a noisy alert into an actionable incident picture.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "multi_select",
+              "prompt": "Which are typical analysis outputs? (Choose TWO.)",
+              "options": [
+                "Impact/scope assessment",
+                "Timeline of activity",
+                "Channel plan for Wi‑Fi",
+                "New SOC logo"
+              ],
+              "correct_indices": [
+                0,
+                1
+              ],
+              "explanation": "Analysis is about understanding what happened and how far it reached.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "2.1",
+        "2.2",
+        "2.3",
+        "3.1",
+        "3.3",
+        "4.1",
+        "4.2",
+        "4.3",
+        "4.4",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1"
+      ]
+    },
+    {
+      "id": "ch14.m03",
+      "title": "Containment, Eradication, Recovery, Postmortem",
+      "tag_ids": [
+        "incident_response.cycle.containment",
+        "incident_response.cycle.eradication",
+        "incident_response.cycle.recovery",
+        "incident_response.cycle.lessons_learned",
+        "mitigation.containment_vs_isolation",
+        "mitigation.isolation",
+        "mitigation.quarantine",
+        "mitigation.monitoring_validation",
+        "rca.five_whys"
+      ],
+      "pages": [
+        {
+          "id": "ch14.m03.p01",
+          "title": "Containment: stop spread without going blind",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Containment reduces damage and limits lateral movement while preserving enough telemetry to understand root cause."
+            },
+            {
+              "type": "explain",
+              "text": "Isolation = cut a host/system off (or nearly off) from the network. Quarantine = restricted access that still allows remediation traffic."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: yanking the cable instantly. Sometimes necessary, but it can destroy volatile evidence and tip off the attacker. Prefer controlled containment when possible."
+            }
+          ],
+          "checks": [
+            {
+              "type": "matching",
+              "prompt": "Match the term to the best description.",
+              "left": [
+                "Isolation",
+                "Quarantine"
+              ],
+              "right": [
+                "Cut off from the network (or nearly so)",
+                "Restricted access allowing remediation"
+              ],
+              "correct_map": {
+                "Isolation": "Cut off from the network (or nearly so)",
+                "Quarantine": "Restricted access allowing remediation"
+              },
+              "explanation": "Isolation is more extreme; quarantine is controlled restriction.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which is most aligned with containment (not eradication)?",
+              "options": [
+                "Reimage compromised hosts",
+                "Disable compromised accounts and block known C2 domains",
+                "Write a fishbone diagram",
+                "Perform a vulnerability scan next quarter"
+              ],
+              "correct_index": 1,
+              "explanation": "Containment stops ongoing harm; eradication removes the cause.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        },
+        {
+          "id": "ch14.m03.p02",
+          "title": "Eradication and Recovery",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Eradication removes the foothold: delete persistence, patch exploited vulnerabilities, rotate secrets, revoke compromised certs."
+            },
+            {
+              "type": "explain",
+              "text": "Recovery restores services safely: staged restore + monitoring to detect re-compromise and confirm business function."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: restoring from backup without eradicating. If the attacker still has credentials/persistence, you just gave them a clean environment to abuse again."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Stolen API keys were used in an intrusion. Which action is part of eradication?",
+              "options": [
+                "Rotate/revoke the keys and update secrets",
+                "Change the SOC wallpaper",
+                "Create a new printer VLAN",
+                "Disable logging"
+              ],
+              "correct_index": 0,
+              "explanation": "Eradication removes attacker access paths (stolen keys, backdoors, vulnerabilities).",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill the blank: Recovery should include staged restore plus ongoing ____ to verify the attacker isn’t still present.",
+              "answers": [
+                "monitoring"
+              ],
+              "explanation": "Recovery without monitoring invites re-compromise.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        },
+        {
+          "id": "ch14.m03.p03",
+          "title": "Lessons learned",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Lessons learned converts the incident into better defenses: update playbooks/controls/training, fix telemetry gaps, and measure improvements."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: scapegoating people. Use RCA to find process/tool/control gaps, not to hunt for a villain."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which activity best fits lessons learned?",
+              "options": [
+                "Block a malicious IP",
+                "Update playbooks and monitoring based on what the incident revealed",
+                "Isolate an endpoint",
+                "Restore service from backup"
+              ],
+              "correct_index": 1,
+              "explanation": "Lessons learned is where you harden process and controls so the next incident is harder and faster to stop.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill the blank: The Five Whys RCA technique asks '____?' repeatedly until you reach a root cause.",
+              "answers": [
+                "why"
+              ],
+              "explanation": "Five Whys is a simple, exam-friendly root cause analysis method.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "2.1",
+        "2.2",
+        "2.3",
+        "3.1",
+        "3.3",
+        "4.1",
+        "4.2",
+        "4.3",
+        "4.4",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1"
+      ]
+    },
+    {
+      "id": "ch14.m04",
+      "title": "Plans, Stakeholders, and Exercises",
+      "tag_ids": [
+        "incident_response.plans.communication",
+        "incident_response.plans.disaster_recovery",
+        "incident_response.plans.business_continuity",
+        "incident_response.exercises.tabletop",
+        "incident_response.exercises.simulation",
+        "incident_response.plans.stakeholder_management"
+      ],
+      "pages": [
+        {
+          "id": "ch14.m04.p01",
+          "title": "IR plan vs DR vs BCP",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "IR plan = detect/respond to security incidents. DR plan = restore IT services after major outage/disaster. BCP = keep business operations running (workarounds, alternate processes/sites)."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: calling every outage a DR event. Security incidents can trigger DR/BCP, but they’re not the same thing."
+            }
+          ],
+          "checks": [
+            {
+              "type": "matching",
+              "prompt": "Match the plan to its focus.",
+              "left": [
+                "IR plan",
+                "DR plan",
+                "BCP"
+              ],
+              "right": [
+                "Respond to security incidents",
+                "Restore IT systems/services",
+                "Keep business operations running"
+              ],
+              "correct_map": {
+                "IR plan": "Respond to security incidents",
+                "DR plan": "Restore IT systems/services",
+                "BCP": "Keep business operations running"
+              },
+              "explanation": "IR manages incidents; DR restores IT; BCP keeps business functioning.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "A datacenter flood destroys hardware. Which plan is most directly invoked to restore IT services?",
+              "options": [
+                "IR plan",
+                "DR plan",
+                "Acceptable Use Policy",
+                "Secure coding standard"
+              ],
+              "correct_index": 1,
+              "explanation": "DR is about restoring IT after a disaster/outage.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        },
+        {
+          "id": "ch14.m04.p02",
+          "title": "Communication and stakeholders",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "A comms plan defines internal escalation, external notifications, what can/can’t be said, and an approved spokesperson."
+            },
+            {
+              "type": "example",
+              "text": "Pattern: triage confirms incident → notify IR lead + legal → PR prepares holding statement → stakeholders get updates on a schedule."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: ad-hoc chat updates. You’ll contradict yourself, leak details, and increase legal/regulatory risk."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Why is an approved spokesperson valuable during an incident?",
+              "options": [
+                "Increases Wi‑Fi throughput",
+                "Reduces contradictory messaging and legal/regulatory risk",
+                "Replaces containment",
+                "Decrypts TLS traffic"
+              ],
+              "correct_index": 1,
+              "explanation": "Centralized messaging prevents confusion and reduces legal/regulatory damage.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "multi_select",
+              "prompt": "Which are typical stakeholders for incident communications? (Choose TWO.)",
+              "options": [
+                "Legal",
+                "PR/Comms",
+                "Wi‑Fi site survey team",
+                "Printer vendor (always)"
+              ],
+              "correct_indices": [
+                0,
+                1
+              ],
+              "explanation": "Legal and PR are commonly involved in incident communications.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        },
+        {
+          "id": "ch14.m04.p03",
+          "title": "Tabletop vs Simulation",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Tabletop = discussion-based walk-through (great for decision/comms testing). Simulation = hands-on technical exercise (tests tools and playbooks)."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: doing one tabletop per year and calling it training. Skills decay; repeat drills build reliable response behavior."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which exercise most tests whether SOC tooling/playbooks work end-to-end?",
+              "options": [
+                "Tabletop",
+                "Simulation",
+                "Policy review",
+                "Risk acceptance workshop"
+              ],
+              "correct_index": 1,
+              "explanation": "Simulations exercise the technical stack and operational muscle memory.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "matching",
+              "prompt": "Match the exercise type to the description.",
+              "left": [
+                "Tabletop",
+                "Simulation"
+              ],
+              "right": [
+                "Discussion-based scenario walk-through",
+                "Hands-on technical exercise"
+              ],
+              "correct_map": {
+                "Tabletop": "Discussion-based scenario walk-through",
+                "Simulation": "Hands-on technical exercise"
+              },
+              "explanation": "They test different failure modes; both are valuable.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "2.1",
+        "2.2",
+        "2.3",
+        "3.1",
+        "3.3",
+        "4.1",
+        "4.2",
+        "4.3",
+        "4.4",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1"
+      ]
+    },
+    {
+      "id": "ch14.m05",
+      "title": "IR Roles and Training",
+      "tag_ids": [
+        "incident_response.team.infosec",
+        "incident_response.team.legal",
+        "incident_response.team.hr",
+        "incident_response.team.comms_pr",
+        "incident_response.team.management_lead",
+        "incident_response.team.law_enforcement",
+        "incident_response.team.technical_experts",
+        "incident_response.training.programs"
+      ],
+      "pages": [
+        {
+          "id": "ch14.m05.p01",
+          "title": "IR is cross-functional",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Typical IR participants: Infosec/SOC, technical experts (systems/network/cloud/app owners), management lead, legal, HR (insiders/employee actions), PR/Comms, and law enforcement (when appropriate)."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: treating IR as purely technical. Many incident failures are communication/authority/legal failures, not tooling."
+            }
+          ],
+          "checks": [
+            {
+              "type": "multi_select",
+              "prompt": "Which roles commonly participate in IR? (Choose THREE.)",
+              "options": [
+                "Legal",
+                "HR",
+                "PR/Comms",
+                "Wi‑Fi channel planner"
+              ],
+              "correct_indices": [
+                0,
+                1,
+                2
+              ],
+              "explanation": "Legal/HR/PR are common IR stakeholders; others depend on incident scope.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which role most influences what can be disclosed externally during an incident?",
+              "options": [
+                "Legal (coordinating with PR)",
+                "Help desk",
+                "Wireless controller",
+                "Database indexer"
+              ],
+              "correct_index": 0,
+              "explanation": "Legal guidance + PR execution keeps messaging accurate and compliant.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        },
+        {
+          "id": "ch14.m05.p02",
+          "title": "Training programs",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Effective IR training includes regular tabletop/simulation exercises, tool drills (SIEM/EDR), on-call handoffs, and updating runbooks after incidents."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: training only new hires. Threats and tooling change; everyone needs refreshers."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which fits an effective IR training program?",
+              "options": [
+                "One annual slide deck and nothing else",
+                "Regular tabletop + simulations + tool drills",
+                "Disabling logs to reduce noise",
+                "Avoiding documentation"
+              ],
+              "correct_index": 1,
+              "explanation": "Frequent practice keeps response consistent and fast.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill the blank: Exercises build ____ memory so response is consistent under pressure.",
+              "answers": [
+                "muscle"
+              ],
+              "explanation": "You want reliable execution when stress is high.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "2.1",
+        "2.2",
+        "2.3",
+        "3.1",
+        "3.3",
+        "4.1",
+        "4.2",
+        "4.3",
+        "4.4",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1"
+      ]
+    },
+    {
+      "id": "ch14.m06",
+      "title": "Threat Hunting and Indicators of Compromise",
+      "tag_ids": [
+        "threat_hunting.ioc.impossible_travel",
+        "threat_hunting.ioc.concurrent_sessions",
+        "threat_hunting.ioc.account_lockout",
+        "threat_hunting.ioc.resource_consumption",
+        "threat_hunting.ioc.resource_inaccessibility",
+        "threat_hunting.ioc.blocked_content",
+        "threat_hunting.ioc.missing_logs",
+        "threat_hunting.ioc.out_of_cycle_logging",
+        "threat_hunting.ioc.published_documented"
+      ],
+      "pages": [
+        {
+          "id": "ch14.m06.p01",
+          "title": "IOCs: clues that drive hunting",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Indicators of compromise (IOCs) are signals that something may be wrong. Treat them as hypotheses and validate via correlation."
+            },
+            {
+              "type": "example",
+              "text": "Examples: impossible travel, concurrent sessions, account lockouts, blocked malicious content, missing logs, out-of-cycle logging, unusual resource consumption or inaccessibility."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: assuming an IOC is definitive proof. VPNs/proxies and benign misconfigs can mimic attacks—correlate before escalating."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which best describes an IOC?",
+              "options": [
+                "Definitive proof of compromise",
+                "A clue that warrants investigation and correlation",
+                "A type of encryption key",
+                "A log retention policy"
+              ],
+              "correct_index": 1,
+              "explanation": "IOCs are leads; you confirm them with additional evidence.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "multi_select",
+              "prompt": "Which are identity-focused IOC patterns? (Choose TWO.)",
+              "options": [
+                "Impossible travel",
+                "Concurrent sessions",
+                "Wi‑Fi channel overlap",
+                "Fishbone diagram"
+              ],
+              "correct_indices": [
+                0,
+                1
+              ],
+              "explanation": "Impossible travel and concurrent sessions are classic identity IOC signals.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        },
+        {
+          "id": "ch14.m06.p02",
+          "title": "Identity signals: impossible travel, concurrent sessions, lockouts",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Identity anomalies often include repeated lockouts, logins from impossible locations, concurrent sessions, or sudden privilege changes."
+            },
+            {
+              "type": "example",
+              "text": "Fast triage: check sign-in logs + MFA prompts → validate device posture → check IP reputation/geo → rotate creds/revoke tokens if needed."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A user is logged in from two distant countries within minutes. Best interpretation?",
+              "options": [
+                "Definite compromise",
+                "Strong IOC that needs validation via MFA/device/session evidence",
+                "Normal for all accounts",
+                "By definition a firewall issue"
+              ],
+              "correct_index": 1,
+              "explanation": "Impossible travel is a high-value IOC but still needs validation.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill the blank: Repeated failed logins leading to an account ____ is a common IOC.",
+              "answers": [
+                "lockout"
+              ],
+              "explanation": "Lockouts can indicate spraying/stuffing or user mistakes; correlate with other signals.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        },
+        {
+          "id": "ch14.m06.p03",
+          "title": "Telemetry signals: missing logs and weird logging patterns",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Attackers often try to reduce visibility. Telemetry IOCs include missing logs (a source stops reporting) and out-of-cycle logging (unexpected bursts or silence)."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: assuming missing logs means nothing happened. Missing logs can be the incident."
+            }
+          ],
+          "checks": [
+            {
+              "type": "multi_select",
+              "prompt": "Which are telemetry-focused IOC patterns? (Choose TWO.)",
+              "options": [
+                "Missing logs",
+                "Out-of-cycle logging",
+                "Sticky sessions",
+                "BCP invocation"
+              ],
+              "correct_indices": [
+                0,
+                1
+              ],
+              "explanation": "Abnormal telemetry is itself a high-value signal.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "A critical endpoint stops sending logs during a suspected intrusion. Best response?",
+              "options": [
+                "Ignore it to reduce noise",
+                "Treat it as an IOC and investigate agent health/connectivity and possible tampering",
+                "Disable SIEM correlation",
+                "Switch to open Wi‑Fi"
+              ],
+              "correct_index": 1,
+              "explanation": "Loss of telemetry during suspicious activity should be investigated immediately.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "2.1",
+        "2.2",
+        "2.3",
+        "3.1",
+        "3.3",
+        "4.1",
+        "4.2",
+        "4.3",
+        "4.4",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1"
+      ]
+    },
+    {
+      "id": "ch14.m07",
+      "title": "Attack Frameworks for Analysis",
+      "tag_ids": [
+        "attack_frameworks.kill_chain",
+        "attack_frameworks.mitre_attack",
+        "attack_frameworks.diamond_model"
+      ],
+      "pages": [
+        {
+          "id": "ch14.m07.p01",
+          "title": "Three frameworks, three lenses",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Kill Chain: staged model (recon → actions on objectives). MITRE ATT&CK: catalog of attacker tactics/techniques. Diamond Model: adversary–capability–infrastructure–victim relationship."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: treating frameworks as magic. They’re lenses to organize thinking, hunts, and coverage gaps."
+            }
+          ],
+          "checks": [
+            {
+              "type": "matching",
+              "prompt": "Match the framework to the best description.",
+              "left": [
+                "Kill Chain",
+                "MITRE ATT&CK",
+                "Diamond Model"
+              ],
+              "right": [
+                "Stages from recon to objectives",
+                "Catalog of tactics/techniques",
+                "Adversary-capability-infrastructure-victim relationship"
+              ],
+              "correct_map": {
+                "Kill Chain": "Stages from recon to objectives",
+                "MITRE ATT&CK": "Catalog of tactics/techniques",
+                "Diamond Model": "Adversary-capability-infrastructure-victim relationship"
+              },
+              "explanation": "Each framework organizes attacker behavior differently.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which framework is most used to map detections to specific techniques (e.g., T1059)?",
+              "options": [
+                "Kill Chain",
+                "Diamond Model",
+                "MITRE ATT&CK",
+                "BCP"
+              ],
+              "correct_index": 2,
+              "explanation": "ATT&CK is technique-focused and widely used for detection mapping.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        },
+        {
+          "id": "ch14.m07.p02",
+          "title": "How SOCs use frameworks",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Frameworks help create hypothesis-driven hunts, communicate where detection happened (e.g., kill chain phase), and link indicators via a shared model."
+            },
+            {
+              "type": "example",
+              "text": "Example: suspect script execution (ATT&CK technique) → query endpoint logs for process + network → correlate DNS to new domains → check persistence after execution."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: confusing kill chain phases with ATT&CK tactics. Kill Chain is a linear stage model; ATT&CK is a matrix of tactics/techniques."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A SOC wants to identify detection gaps by phase (recon vs exfil). Best framework?",
+              "options": [
+                "Kill Chain",
+                "sFlow",
+                "DNSSEC",
+                "IR policy"
+              ],
+              "correct_index": 0,
+              "explanation": "Kill Chain is explicitly phase/stage oriented.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill the blank: The Diamond Model includes adversary, capability, infrastructure, and ____.",
+              "answers": [
+                "victim"
+              ],
+              "explanation": "The four nodes structure intrusion analysis.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "2.1",
+        "2.2",
+        "2.3",
+        "3.1",
+        "3.3",
+        "4.1",
+        "4.2",
+        "4.3",
+        "4.4",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1"
+      ]
+    },
+    {
+      "id": "ch14.m08",
+      "title": "Monitoring Scope and Baselines",
+      "tag_ids": [
+        "monitoring.resources.systems",
+        "monitoring.resources.infrastructure",
+        "monitoring.resources.applications",
+        "benchmarks.logging_baselines"
+      ],
+      "pages": [
+        {
+          "id": "ch14.m08.p01",
+          "title": "Monitoring targets: systems, infrastructure, apps",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Systems: endpoints/servers (auth, process, integrity). Infrastructure: network/identity/cloud control planes. Applications: app logs, transactions, errors, abnormal behavior."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: monitoring only endpoints. Attackers pivot through identity, cloud, and network layers—coverage must span the stack."
+            }
+          ],
+          "checks": [
+            {
+              "type": "matching",
+              "prompt": "Match the target to an example source.",
+              "left": [
+                "Systems",
+                "Infrastructure",
+                "Applications"
+              ],
+              "right": [
+                "Windows security logs and endpoint detections",
+                "Firewall/router telemetry and identity logs",
+                "Application error logs and transaction traces"
+              ],
+              "correct_map": {
+                "Systems": "Windows security logs and endpoint detections",
+                "Infrastructure": "Firewall/router telemetry and identity logs",
+                "Applications": "Application error logs and transaction traces"
+              },
+              "explanation": "Different layers reveal different parts of an incident.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Authentication logs from an identity provider (IdP) best fit which monitoring bucket?",
+              "options": [
+                "Systems",
+                "Infrastructure",
+                "Applications",
+                "None"
+              ],
+              "correct_index": 1,
+              "explanation": "Identity platforms are a core part of infrastructure telemetry.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        },
+        {
+          "id": "ch14.m08.p02",
+          "title": "Baselines: the definition of 'normal'",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Baselines are profiles of normal behavior per system/app/time window. They let you detect anomalies like spikes in failures, unusual outbound traffic, and sudden resource changes."
+            },
+            {
+              "type": "example",
+              "text": "Baseline tips: include business cycles (weekday/weekend), baseline by role/asset criticality, and revisit after major changes."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: one global baseline. You’ll either drown in false positives or miss real anomalies."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Why are baselines valuable?",
+              "options": [
+                "They eliminate the need for logs",
+                "They provide a reference to identify anomalies",
+                "They prevent phishing",
+                "They enforce WPA3"
+              ],
+              "correct_index": 1,
+              "explanation": "Anomalies are only meaningful relative to expected normal patterns.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill the blank: A baseline should reflect business ____ like weekday vs weekend behavior.",
+              "answers": [
+                "cycles"
+              ],
+              "explanation": "Normal is patterned, not constant.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "2.1",
+        "2.2",
+        "2.3",
+        "3.1",
+        "3.3",
+        "4.1",
+        "4.2",
+        "4.3",
+        "4.4",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1"
+      ]
+    },
+    {
+      "id": "ch14.m09",
+      "title": "Log Sources and Local Tools",
+      "tag_ids": [
+        "logging.sources.endpoint",
+        "logging.sources.network",
+        "logging.sources.firewall",
+        "logging.sources.ids_ips",
+        "logging.sources.application",
+        "logging.sources.windows_security_log",
+        "logging.tools.event_viewer",
+        "logging.sources.linux_auth_logs",
+        "logging.tools.grep_tail"
+      ],
+      "pages": [
+        {
+          "id": "ch14.m09.p01",
+          "title": "Core log sources for investigations",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "You want multiple viewpoints: endpoint logs (process/auth), network logs (DNS/proxy/flows), firewall hits, IDS/IPS alerts, and application logs (business logic)."
+            },
+            {
+              "type": "example",
+              "text": "Correlation example: firewall sees outbound to suspicious IP → endpoint shows process opened connection → app logs show abnormal API calls."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: relying on a single source. Attackers exploit blind spots; correlation shrinks them."
+            }
+          ],
+          "checks": [
+            {
+              "type": "multi_select",
+              "prompt": "Which are common investigation log sources? (Choose TWO.)",
+              "options": [
+                "Firewall logs",
+                "Application logs",
+                "Wi‑Fi heatmaps",
+                "Channel plans"
+              ],
+              "correct_indices": [
+                0,
+                1
+              ],
+              "explanation": "Firewall and application logs are frequently used in incident investigations.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "An IDS alert triggers. Which source most helps confirm host-level execution?",
+              "options": [
+                "Endpoint logs",
+                "BCP plan",
+                "PR statement",
+                "Fishbone diagram"
+              ],
+              "correct_index": 0,
+              "explanation": "Endpoint telemetry ties network alerts to real process activity.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        },
+        {
+          "id": "ch14.m09.p02",
+          "title": "Windows Security log & Event Viewer; Linux auth logs & grep/tail",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Windows: the Security log contains logon/privilege events; Event Viewer is a common tool to browse/query. Linux: auth/system logs vary by distro; grep/tail are classic for quick triage."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: searching only for 'error'. Many security-relevant events are 'successful' actions (e.g., a successful login from a weird place)."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "On Windows, which tool is commonly used to view Security log events?",
+              "options": [
+                "Event Viewer",
+                "journalctl",
+                "tcpdump",
+                "NetFlow exporter"
+              ],
+              "correct_index": 0,
+              "explanation": "Event Viewer is a standard Windows event log viewer.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill the blanks: On Linux, fast ad-hoc triage often uses ____ and ____ to filter and follow logs.",
+              "answers": [
+                "grep",
+                "tail"
+              ],
+              "explanation": "These tools are common for quick command-line investigation.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "2.1",
+        "2.2",
+        "2.3",
+        "3.1",
+        "3.3",
+        "4.1",
+        "4.2",
+        "4.3",
+        "4.4",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1"
+      ]
+    },
+    {
+      "id": "ch14.m10",
+      "title": "Centralized Logging and journald",
+      "tag_ids": [
+        "logging.protocols.syslog",
+        "logging.protocols.rsyslog",
+        "logging.protocols.syslog_ng",
+        "logging.protocols.nxlog",
+        "logging.linux.journald_journalctl",
+        "siem.basics.log_aggregation"
+      ],
+      "pages": [
+        {
+          "id": "ch14.m10.p01",
+          "title": "Centralized logging: aggregation and forwarding",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Centralized logging improves searchability (correlation) and retention (collectors can archive). Traditional Linux log transport is syslog; common tools include rsyslog and syslog-ng. NXLog is commonly used to forward Windows logs into centralized collectors/SIEMs."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: collecting logs without normalization and consistent timestamps. Correlation becomes painful and inaccurate."
+            }
+          ],
+          "checks": [
+            {
+              "type": "multi_select",
+              "prompt": "Which are examples of centralized logging tools? (Choose TWO.)",
+              "options": [
+                "syslog-ng",
+                "rsyslog",
+                "Wi‑Fi analyzer",
+                "HSTS"
+              ],
+              "correct_indices": [
+                0,
+                1
+              ],
+              "explanation": "syslog-ng and rsyslog are common centralized logging tools.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which tool is often used to forward Windows logs into centralized collectors in mixed environments?",
+              "options": [
+                "NXLog",
+                "STP",
+                "OWE",
+                "sFlow"
+              ],
+              "correct_index": 0,
+              "explanation": "NXLog is a common Windows log forwarder.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        },
+        {
+          "id": "ch14.m10.p02",
+          "title": "systemd journal and journalctl",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "On systemd-based Linux, logs are stored in the systemd journal. journalctl queries and filters entries (time ranges, services, etc.)."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: assuming 'no /var/log/messages' means 'no logs'. You may be using journald instead."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which command is used to view the systemd journal?",
+              "options": [
+                "journalctl",
+                "eventvwr",
+                "netstat",
+                "ipconfig"
+              ],
+              "correct_index": 0,
+              "explanation": "journalctl queries and displays the systemd journal.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill the blanks: systemd stores logs in the ____ and you view them with ____.",
+              "answers": [
+                "journal",
+                "journalctl"
+              ],
+              "explanation": "Knowing where logs live speeds up investigation.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "2.1",
+        "2.2",
+        "2.3",
+        "3.1",
+        "3.3",
+        "4.1",
+        "4.2",
+        "4.3",
+        "4.4",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1"
+      ]
+    },
+    {
+      "id": "ch14.m11",
+      "title": "Log Retention and Archiving",
+      "tag_ids": [
+        "logging.retention.lifecycle",
+        "siem.basics.archiving"
+      ],
+      "pages": [
+        {
+          "id": "ch14.m11.p01",
+          "title": "Retention lifecycle and archiving",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Retention decisions balance investigation needs, compliance/legal requirements, and storage cost. A common pattern: keep recent data 'hot' for fast search, then archive older data for long-term retention."
+            },
+            {
+              "type": "example",
+              "text": "Retention factors: criticality of assets, log volume, typical investigation window, and special holds for major incidents."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: keeping everything forever without a lifecycle plan. Costs explode and search becomes useless without curation/indexing."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Why do organizations archive logs?",
+              "options": [
+                "To improve Wi‑Fi coverage",
+                "To preserve older data for investigation/compliance while managing cost",
+                "To prevent deauth attacks",
+                "To enable Bluetooth pairing"
+              ],
+              "correct_index": 1,
+              "explanation": "Archiving supports long-term retention without keeping all data in expensive hot storage.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "multi_select",
+              "prompt": "Which factors influence log retention? (Choose TWO.)",
+              "options": [
+                "Compliance requirements",
+                "Storage cost",
+                "SSID naming convention",
+                "Bluetooth range"
+              ],
+              "correct_indices": [
+                0,
+                1
+              ],
+              "explanation": "Retention is largely driven by risk/compliance and practical constraints.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "2.1",
+        "2.2",
+        "2.3",
+        "3.1",
+        "3.3",
+        "4.1",
+        "4.2",
+        "4.3",
+        "4.4",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1"
+      ]
+    },
+    {
+      "id": "ch14.m12",
+      "title": "Flow Monitoring and Packet Capture",
+      "tag_ids": [
+        "network_flows.netflow",
+        "network_flows.sflow",
+        "network_flows.ipfix",
+        "network_flows.sampling_limitations",
+        "siem.basics.packet_capture_input",
+        "investigation.packet_capture"
+      ],
+      "pages": [
+        {
+          "id": "ch14.m12.p01",
+          "title": "Flow data vs packet capture",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Flow data (NetFlow/sFlow/IPFIX) summarizes connections: who talked to whom, when, ports/protocols, and how much data. Packet capture provides deeper protocol/payload detail (when captured, and often limited by encryption)."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: expecting flow data to show payload contents. Flows are summaries; payload requires packet capture."
+            }
+          ],
+          "checks": [
+            {
+              "type": "matching",
+              "prompt": "Match the telemetry type to what it usually provides.",
+              "left": [
+                "Flow data",
+                "Packet capture"
+              ],
+              "right": [
+                "Summary of connection metadata",
+                "Full packet/payload detail (when captured)"
+              ],
+              "correct_map": {
+                "Flow data": "Summary of connection metadata",
+                "Packet capture": "Full packet/payload detail (when captured)"
+              },
+              "explanation": "Flows scale; packet capture provides depth.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "You need to know which hosts talked to which destinations, when, and how much data transferred. Best telemetry type?",
+              "options": [
+                "Flow data (NetFlow/sFlow/IPFIX)",
+                "PR statement",
+                "Fishbone diagram",
+                "BCP plan"
+              ],
+              "correct_index": 0,
+              "explanation": "Flow data is designed for conversation metadata at scale.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        },
+        {
+          "id": "ch14.m12.p02",
+          "title": "NetFlow, sFlow, IPFIX",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "NetFlow: common vendor flow export concept. IPFIX: IETF standard inspired by NetFlow and more extensible. sFlow: sampled flow/traffic, common in high-speed networks. Sampling improves performance but reduces completeness."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: treating sampled flow data as complete truth. Sampling can miss short bursts and low-volume beaconing."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "IPFIX is best described as:",
+              "options": [
+                "A Wi‑Fi encryption method",
+                "A standardized flow export format based on NetFlow concepts",
+                "A DNS integrity system",
+                "An endpoint EDR feature"
+              ],
+              "correct_index": 1,
+              "explanation": "IPFIX is the standards-based flow export format.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "What is a primary concern with flow data in very busy networks?",
+              "options": [
+                "They always decrypt TLS traffic",
+                "Sampling/aggregation may miss short-lived activity",
+                "They require WPA3",
+                "They prevent DDoS by default"
+              ],
+              "correct_index": 1,
+              "explanation": "Sampling and summarization improve scalability but can reduce fidelity.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        },
+        {
+          "id": "ch14.m12.p03",
+          "title": "Packet capture: when you need depth",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Packet capture is best when you need protocol-level troubleshooting or evidence (when not encrypted). It's expensive at scale; use targeted or triggered capture."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: capturing everywhere forever. Prefer chokepoints, short windows, and clear objectives."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "When is packet capture most useful compared to flow data?",
+              "options": [
+                "When you only need totals by destination country",
+                "When you need protocol/payload detail (when available)",
+                "When you want to enforce MFA",
+                "When you want to hide SSIDs"
+              ],
+              "correct_index": 1,
+              "explanation": "Packet capture provides deep detail; flow data provides summaries.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill the blank: Packet capture visibility is often limited by ____ because payloads can’t be inspected.",
+              "answers": [
+                "encryption"
+              ],
+              "explanation": "Encryption reduces payload visibility in captures.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "2.1",
+        "2.2",
+        "2.3",
+        "3.1",
+        "3.3",
+        "4.1",
+        "4.2",
+        "4.3",
+        "4.4",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1"
+      ]
+    },
+    {
+      "id": "ch14.m13",
+      "title": "SIEM Fundamentals",
+      "tag_ids": [
+        "siem.basics.definition",
+        "siem.terms.sim_sem",
+        "siem.basics.log_aggregation",
+        "siem.basics.correlation",
+        "siem.basics.alerting",
+        "siem.basics.reporting",
+        "siem.basics.archiving"
+      ],
+      "pages": [
+        {
+          "id": "ch14.m13.p01",
+          "title": "SIEM: aggregate, correlate, alert, report",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "A SIEM centralizes security telemetry to aggregate logs, correlate signals, alert on suspicious patterns, and produce reports for investigations and compliance."
+            },
+            {
+              "type": "explain",
+              "text": "Classic terms: SIM (storage/reporting) and SEM (real-time monitoring/alerting). Modern SIEMs typically do both."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: buying a SIEM and expecting security to 'turn on'. A SIEM needs good data sources and continuous tuning."
+            }
+          ],
+          "checks": [
+            {
+              "type": "matching",
+              "prompt": "Match the term to the closest meaning.",
+              "left": [
+                "SIM",
+                "SEM"
+              ],
+              "right": [
+                "Storage/reporting and longer-term management",
+                "Real-time monitoring/alerting"
+              ],
+              "correct_map": {
+                "SIM": "Storage/reporting and longer-term management",
+                "SEM": "Real-time monitoring/alerting"
+              },
+              "explanation": "The exam often tests the historical distinction.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which SIEM capability most directly turns multiple weak signals into one stronger alert?",
+              "options": [
+                "Correlation",
+                "Wi‑Fi heatmap",
+                "Geofencing",
+                "Bluetooth pairing"
+              ],
+              "correct_index": 0,
+              "explanation": "Correlation connects related events across sources.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        },
+        {
+          "id": "ch14.m13.p02",
+          "title": "Correlation and alerting: reducing noise without going blind",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Correlation examples: failures + success + privilege change; endpoint detection + DNS to known-bad; new admin user + unusual outbound traffic. Alerting should reflect confidence and impact."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: alerting on every raw log event. That’s not detection; that’s a denial-of-service attack against your SOC."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which rule is an example of correlation (not simple thresholding)?",
+              "options": [
+                "Alert if CPU > 90%",
+                "Alert if firewall blocks any packet",
+                "Alert if many failures then success from new geo plus privilege change",
+                "Alert if SSID is hidden"
+              ],
+              "correct_index": 2,
+              "explanation": "Correlation combines related signals into higher-confidence detections.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill the blank: A good SIEM requires ongoing ____ to reduce false positives.",
+              "answers": [
+                "tuning"
+              ],
+              "explanation": "Tuning is the long-term work of making alerts meaningful.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        },
+        {
+          "id": "ch14.m13.p03",
+          "title": "Reporting and archiving: security needs memory",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Reporting supports audits, incident timelines, trend analysis, and executive summaries. Archiving supports long-term retention without keeping everything hot."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: dashboards without reporting. Dashboards show 'now'; reports show patterns and accountability over time."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which SIEM feature is most associated with compliance and executive visibility over time?",
+              "options": [
+                "Reporting",
+                "Deauth protection",
+                "NFC",
+                "Bluetooth pairing"
+              ],
+              "correct_index": 0,
+              "explanation": "Reports provide structured evidence and trend summaries.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "multi_select",
+              "prompt": "Which are reasons to archive SIEM data? (Choose TWO.)",
+              "options": [
+                "Long-term investigations",
+                "Compliance retention",
+                "Improving Wi‑Fi channel plans",
+                "Making passwords weaker"
+              ],
+              "correct_indices": [
+                0,
+                1
+              ],
+              "explanation": "Archiving supports retention and investigations.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "2.1",
+        "2.2",
+        "2.3",
+        "3.1",
+        "3.3",
+        "4.1",
+        "4.2",
+        "4.3",
+        "4.4",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1"
+      ]
+    },
+    {
+      "id": "ch14.m14",
+      "title": "Dashboards, Tuning, and Cloud Integration",
+      "tag_ids": [
+        "siem.dashboard.sensors",
+        "siem.dashboard.thresholds_sensitivity",
+        "siem.dashboard.trends",
+        "siem.dashboard.alert_tuning",
+        "siem.integration.cloud_saas"
+      ],
+      "pages": [
+        {
+          "id": "ch14.m14.p01",
+          "title": "Dashboards: sensors, thresholds, trends",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Dashboards depend on sensors/data sources, thresholds (when to alert), and trends (how metrics change over time). They should answer specific questions rather than showing everything."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: tuning thresholds until alerts stop. Silence isn’t success; tune for meaningful alerts, not quiet."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "In SIEM dashboards, thresholds/sensitivity primarily control:",
+              "options": [
+                "How quickly logs are deleted",
+                "When an alert triggers based on defined conditions",
+                "How to disable encryption",
+                "Which Wi‑Fi channel to use"
+              ],
+              "correct_index": 1,
+              "explanation": "Thresholds define alert triggering conditions.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "multi_select",
+              "prompt": "Which are dashboard building blocks? (Choose TWO.)",
+              "options": [
+                "Sensors/data sources",
+                "Trends over time",
+                "Bluetooth pairing",
+                "RFID tag types"
+              ],
+              "correct_indices": [
+                0,
+                1
+              ],
+              "explanation": "Dashboards are driven by data sources and how metrics evolve.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        },
+        {
+          "id": "ch14.m14.p02",
+          "title": "Alert tuning",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Tuning includes adjusting thresholds, adding context (asset criticality/time-of-day), suppressing known-benign patterns, and enriching alerts with threat intel/asset inventory."
+            },
+            {
+              "type": "example",
+              "text": "Instead of alerting on every admin login, alert on admin login from unmanaged device OR from a new geo OR outside normal hours."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: tuning only after major incidents. Routine tuning prevents permanent alert fatigue."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Which change is alert tuning?",
+              "options": [
+                "Alert only when an event occurs on a critical server",
+                "Rename the SSID",
+                "Disable centralized logging",
+                "Replace NetFlow with GPS"
+              ],
+              "correct_index": 0,
+              "explanation": "Adding context conditions is a common tuning method.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill the blank: Too many low-value alerts cause alert ____.",
+              "answers": [
+                "fatigue"
+              ],
+              "explanation": "Fatigue leads to missed real incidents.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        },
+        {
+          "id": "ch14.m14.p03",
+          "title": "Cloud/SaaS integration",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Modern SIEMs ingest cloud and SaaS telemetry (identity, email, collaboration, cloud control-plane events) so incidents can be correlated across hybrid environments."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: assuming cloud is 'someone else’s problem'. You still own identity, configuration, and monitoring responsibilities."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "Why is SIEM integration with cloud/SaaS services important?",
+              "options": [
+                "To reduce need for authentication",
+                "To centralize events for correlation across hybrid environments",
+                "To prevent RF jamming",
+                "To make devices immune to jailbreaking"
+              ],
+              "correct_index": 1,
+              "explanation": "You need cloud/SaaS telemetry for modern detection and correlation.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "multi_select",
+              "prompt": "Which are typical cloud/SaaS telemetry sources a SIEM might ingest? (Choose TWO.)",
+              "options": [
+                "Identity provider sign-in logs",
+                "Email security logs",
+                "Channel overlap heatmaps",
+                "RFID power models"
+              ],
+              "correct_indices": [
+                0,
+                1
+              ],
+              "explanation": "Identity and email logs are core telemetry sources in modern environments.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "2.1",
+        "2.2",
+        "2.3",
+        "3.1",
+        "3.3",
+        "4.1",
+        "4.2",
+        "4.3",
+        "4.4",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1"
+      ]
+    },
+    {
+      "id": "ch14.m15",
+      "title": "SOAR, Mitigation, Validation, and RCA",
+      "tag_ids": [
+        "soar.platforms",
+        "investigation.automated_reports_dashboards",
+        "mitigation.isolation",
+        "mitigation.segmentation",
+        "mitigation.firewall_rules",
+        "mitigation.allow_list",
+        "mitigation.deny_list",
+        "mitigation.content_url_filtering",
+        "mitigation.cert_update_revoke",
+        "mitigation.configuration_changes",
+        "mitigation.dlp_changes",
+        "mitigation.mdm_actions",
+        "mitigation.monitoring_validation",
+        "rca.event_analysis",
+        "rca.fishbone_diagram",
+        "rca.five_whys"
+      ],
+      "pages": [
+        {
+          "id": "ch14.m15.p01",
+          "title": "SOAR: automate the boring parts (carefully)",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "SOAR orchestrates response workflows: enrichment, ticketing/routing, automated playbooks, and (sometimes) containment actions with approvals."
+            },
+            {
+              "type": "example",
+              "text": "SOAR flow: SIEM alert → enrich (reputation/geo/asset criticality) → create incident → recommend action → isolate host after approval."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: fully-automated destructive actions. Stage automation: alert → enrich → recommend → act (with approval) for high-impact steps."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "A typical SOAR use case is:",
+              "options": [
+                "Automate response playbooks like enrichment and containment with approvals",
+                "Replace WPA3 on Wi‑Fi",
+                "Provide packet payload capture by default",
+                "Create NetFlow records"
+              ],
+              "correct_index": 0,
+              "explanation": "SOAR focuses on orchestrating response actions.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill the blank: SOAR operationalizes response steps into automated ____ triggered by alerts.",
+              "answers": [
+                "playbooks"
+              ],
+              "explanation": "SOAR turns repeated response patterns into repeatable workflows.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        },
+        {
+          "id": "ch14.m15.p02",
+          "title": "Mitigation actions: the SOC toolbox",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Common mitigation: isolate/quarantine endpoints; segmentation to limit lateral movement; firewall rules; allow/deny lists; URL/content filtering; cert revoke/update; config changes; DLP changes; MDM actions."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: emergency changes without tracking/rollback. Fast changes still need documentation and validation."
+            }
+          ],
+          "checks": [
+            {
+              "type": "multi_select",
+              "prompt": "Which are valid mitigation actions? (Choose THREE.)",
+              "options": [
+                "Endpoint isolation",
+                "Firewall rule changes",
+                "Certificate revoke/update",
+                "Wi‑Fi heatmap generation"
+              ],
+              "correct_indices": [
+                0,
+                1,
+                2
+              ],
+              "explanation": "Isolation, firewall rules, and cert rotation are classic mitigation steps.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which mitigation best limits lateral movement during an active incident?",
+              "options": [
+                "Segmentation changes",
+                "Changing the SOC wallpaper",
+                "Enabling open Wi‑Fi",
+                "Disabling logging"
+              ],
+              "correct_index": 0,
+              "explanation": "Segmentation reduces blast radius and slows attacker movement.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        },
+        {
+          "id": "ch14.m15.p03",
+          "title": "Validation and Root Cause Analysis",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "After mitigation, validate effectiveness and visibility: confirm suspicious activity stopped, logs still flow, and business functions still work."
+            },
+            {
+              "type": "explain",
+              "text": "RCA tools: Five Whys (drill-down), Fishbone diagram (categorize causes), Event analysis (timeline + contributing factors)."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: declaring victory without validation. If you break logging, you may ‘win’ by going blind."
+            }
+          ],
+          "checks": [
+            {
+              "type": "matching",
+              "prompt": "Match the RCA method to its best description.",
+              "left": [
+                "Five Whys",
+                "Fishbone diagram",
+                "Event analysis"
+              ],
+              "right": [
+                "Repeatedly ask why to reach root cause",
+                "Categorize possible contributing causes",
+                "Timeline-based analysis of what happened"
+              ],
+              "correct_map": {
+                "Five Whys": "Repeatedly ask why to reach root cause",
+                "Fishbone diagram": "Categorize possible contributing causes",
+                "Event analysis": "Timeline-based analysis of what happened"
+              },
+              "explanation": "Different RCA tools help avoid shallow explanations.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which activity best represents monitoring validation after a containment change?",
+              "options": [
+                "Confirm alerts/logs still arrive and malicious traffic stopped",
+                "Rename the SSID",
+                "Delete historical logs",
+                "Disable endpoint agents to reduce CPU usage"
+              ],
+              "correct_index": 0,
+              "explanation": "Validation confirms effectiveness and preserves visibility.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "2.1",
+        "2.2",
+        "2.3",
+        "3.1",
+        "3.3",
+        "4.1",
+        "4.2",
+        "4.3",
+        "4.4",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1"
+      ]
+    },
+    {
+      "id": "ch14.m16",
+      "title": "Investigation Techniques and Metadata",
+      "tag_ids": [
+        "investigation.metadata.email",
+        "investigation.metadata.file_exif",
+        "investigation.metadata.mobile",
+        "investigation.metadata.web",
+        "investigation.vulnerability_scans",
+        "investigation.automated_reports_dashboards"
+      ],
+      "pages": [
+        {
+          "id": "ch14.m16.p01",
+          "title": "Metadata: the hidden fields that tell stories",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Metadata is 'data about data' and can be gold during investigations: email headers, web logs, file properties (EXIF), and mobile artifacts."
+            },
+            {
+              "type": "example",
+              "text": "Quick wins: email headers can reveal sending IP/relay path; EXIF can reveal device/time/location; web metadata can show user agents and session IDs."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: trusting metadata blindly. Attackers can spoof some fields; corroborate across sources and timelines."
+            }
+          ],
+          "checks": [
+            {
+              "type": "matching",
+              "prompt": "Match the artifact to the likely metadata source.",
+              "left": [
+                "Email message",
+                "Photo/file",
+                "Web session"
+              ],
+              "right": [
+                "Email headers",
+                "EXIF/file properties",
+                "Web logs/cookies/user agent"
+              ],
+              "correct_map": {
+                "Email message": "Email headers",
+                "Photo/file": "EXIF/file properties",
+                "Web session": "Web logs/cookies/user agent"
+              },
+              "explanation": "Metadata sources vary by artifact type.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "single_choice",
+              "prompt": "Which investigation artifact most directly provides routing details like Received: lines?",
+              "options": [
+                "Email metadata",
+                "NetFlow",
+                "BCP document",
+                "Fishbone diagram"
+              ],
+              "correct_index": 0,
+              "explanation": "Email headers often include routing/relay details.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        },
+        {
+          "id": "ch14.m16.p02",
+          "title": "Vulnerability scans and automated reporting",
+          "content_blocks": [
+            {
+              "type": "explain",
+              "text": "Vulnerability scans can help validate exposure (e.g., unpatched services) and confirm remediation. Automated reports/dashboards help track recurring issues, response metrics, and control effectiveness."
+            },
+            {
+              "type": "trap",
+              "text": "Trap: using a vulnerability scan as the only investigation tool. Scans show exposure, not necessarily what happened. Pair scans with logs/telemetry."
+            }
+          ],
+          "checks": [
+            {
+              "type": "single_choice",
+              "prompt": "What does a vulnerability scan MOST directly help you determine during/after an incident?",
+              "options": [
+                "Whether a specific weakness is present/exploitable and whether remediation reduced exposure",
+                "Exactly what commands the attacker typed",
+                "Which Wi‑Fi channel is optimal",
+                "Whether syslog exists"
+              ],
+              "correct_index": 0,
+              "explanation": "Scans identify exposure and validate remediation, but don’t replace telemetry.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Fill the blank: Automated reports and dashboards help track trends and incident response ____ over time.",
+              "answers": [
+                "metrics"
+              ],
+              "explanation": "Metrics and trends help prove improvement and spot recurring problems.",
+              "objectiveIds": [
+                "2.1",
+                "2.2",
+                "2.3",
+                "3.1",
+                "3.3",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "4.6",
+                "4.7",
+                "4.8",
+                "5.1"
+              ]
+            }
+          ],
+          "objectiveIds": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4",
+            "4.6",
+            "4.7",
+            "4.8",
+            "5.1"
+          ]
+        }
+      ],
+      "objectiveIds": [
+        "2.1",
+        "2.2",
+        "2.3",
+        "3.1",
+        "3.3",
+        "4.1",
+        "4.2",
+        "4.3",
+        "4.4",
+        "4.6",
+        "4.7",
+        "4.8",
+        "5.1"
+      ]
+    }
+  ],
+  "objectiveIds": [
+    "2.1",
+    "2.2",
+    "2.3",
+    "3.1",
+    "3.3",
+    "4.1",
+    "4.2",
+    "4.3",
+    "4.4",
+    "4.6",
+    "4.7",
+    "4.8",
+    "5.1"
+  ]
+}

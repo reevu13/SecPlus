@@ -1,0 +1,2618 @@
+{
+  "schema_version": "1.0.0",
+  "pack_id": "ch16",
+  "exam": {
+    "name": "Security+",
+    "code": "SY0-701",
+    "vendor": "CompTIA",
+    "max_exam_minutes": 90
+  },
+  "chapter": {
+    "number": 16,
+    "title": "Security Governance and Compliance",
+    "page_range_in_user_pdf": "753-814"
+  },
+  "design_intent": {
+    "player_goal": "Design and enforce security governance: policies, people controls, vendors, frameworks, and compliance proof.",
+    "mode": [
+      "campaign",
+      "roguelike",
+      "drill"
+    ],
+    "pvp_optional": true,
+    "default_pvp_enabled": false
+  },
+  "progression": {
+    "xp_rules": {
+      "base_xp_per_correct": 10,
+      "mistake_penalty_xp": 2,
+      "streak_bonus_per_5": 5,
+      "time_bonus_threshold_seconds": 60,
+      "time_bonus_xp": 3
+    },
+    "unlock_rules": [
+      {
+        "unlock": "boss",
+        "when": "complete_all_missions"
+      },
+      {
+        "unlock": "roguelike",
+        "when": "defeat_boss_once"
+      },
+      {
+        "unlock": "pvp",
+        "when": "reach_mastery_3_on_7_tags"
+      }
+    ],
+    "mastery_model": {
+      "scale": "0-5",
+      "tags_drive_mastery": true,
+      "update": "tag_mastery_decay_resistant"
+    }
+  },
+  "tags": {
+    "concepts": [
+      "access.account_lifecycle.deprovisioning",
+      "awareness.anomalous_behavior",
+      "awareness.insider_threat",
+      "awareness.metrics.trends",
+      "awareness.phishing.campaigns",
+      "awareness.phishing.simulations",
+      "awareness.programs.definition",
+      "awareness.reporting_monitoring",
+      "awareness.role_based_training",
+      "awareness.training.design",
+      "awareness.training.vs_awareness",
+      "awareness.user_training.password_management",
+      "awareness.user_training.removable_media",
+      "change_mgmt.approval_controls",
+      "change_mgmt.backout_plan",
+      "change_mgmt.documentation",
+      "change_mgmt.documentation.update",
+      "change_mgmt.documentation.update_diagrams",
+      "change_mgmt.documentation.update_policies",
+      "change_mgmt.emergency_changes",
+      "change_mgmt.goal.availability",
+      "change_mgmt.impact_analysis.dependencies",
+      "change_mgmt.maintenance_windows",
+      "change_mgmt.overview",
+      "change_mgmt.schedule_implement",
+      "change_mgmt.security_vs_usability_tradeoff",
+      "change_mgmt.sop.steps",
+      "change_mgmt.technical_implications.allow_deny",
+      "change_mgmt.technical_implications.dependencies",
+      "change_mgmt.technical_implications.service_restart",
+      "change_mgmt.version_control",
+      "compliance.consequences.fines_sanctions",
+      "compliance.consequences.reputation",
+      "compliance.gdpr",
+      "compliance.monitoring.acknowledgment",
+      "compliance.monitoring.attestation",
+      "compliance.monitoring.due_care",
+      "compliance.monitoring.due_diligence",
+      "compliance.pci_dss",
+      "compliance.reporting.external",
+      "compliance.reporting.internal",
+      "compliance.requirements",
+      "frameworks.benchmarks.cis",
+      "frameworks.iso.27001",
+      "frameworks.iso.27002",
+      "frameworks.iso.27701",
+      "frameworks.iso.31000",
+      "frameworks.nist.csf.communication",
+      "frameworks.nist.csf.core_functions",
+      "frameworks.nist.csf.functions",
+      "frameworks.nist.csf.purpose",
+      "frameworks.nist.csf.tiers.tier1",
+      "frameworks.nist.csf.tiers.tier2",
+      "frameworks.nist.csf.tiers.tier3",
+      "frameworks.nist.csf.tiers.tier4",
+      "frameworks.nist.csf.vs_rmf",
+      "frameworks.nist.rmf.definition",
+      "frameworks.secure_config_guides",
+      "governance.corporate.board_authority",
+      "governance.grc.definition",
+      "governance.infosec.alignment",
+      "governance.infosec.enforcement.policies",
+      "governance.infosec.extension",
+      "governance.models.centralized",
+      "governance.models.decentralized",
+      "governance.policies",
+      "governance.structures.committees",
+      "governance.structures.regulators",
+      "mitigation.least_privilege",
+      "personnel.clean_desk",
+      "personnel.fraud_controls",
+      "personnel.job_rotation",
+      "personnel.least_privilege",
+      "personnel.mandatory_vacations",
+      "personnel.nda",
+      "personnel.offboarding",
+      "personnel.offboarding.exit_interview",
+      "personnel.privilege_creep",
+      "personnel.separation_of_duties",
+      "personnel.social_media_policy",
+      "personnel.two_person_control",
+      "physical.security.policies",
+      "policy.documents.guideline",
+      "policy.documents.policy",
+      "policy.documents.policy.approval_level",
+      "policy.documents.procedure",
+      "policy.documents.standard",
+      "policy.encryption_standard",
+      "policy.examples.aup",
+      "policy.exceptions.compensating_controls",
+      "policy.exceptions.exception_process",
+      "policy.exceptions.legacy_exception",
+      "policy.exceptions.remediation_plan",
+      "policy.exceptions.risk_assessment",
+      "policy.exceptions.scope_duration",
+      "policy.external_considerations.industry",
+      "policy.external_considerations.regulatory",
+      "policy.framework.mandatory_vs_optional",
+      "policy.framework.overview",
+      "tprm.agreements.bpa",
+      "tprm.agreements.moa",
+      "tprm.agreements.mou",
+      "tprm.agreements.msa",
+      "tprm.agreements.nda",
+      "tprm.agreements.sla",
+      "tprm.agreements.sow_wo",
+      "tprm.vendor_assessment.pen_test",
+      "tprm.vendor_assessment.right_to_audit",
+      "tprm.vendor_assessment.sensitive_info_access",
+      "tprm.vendor_monitoring.rules_of_engagement",
+      "tprm.vendor_monitoring.transition_planning",
+      "tprm.vendor_selection.conflict_of_interest",
+      "tprm.vendor_selection.due_diligence",
+      "tprm.winding_down.eol_eosl"
+    ],
+    "difficulty_scale": {
+      "1": "Recall",
+      "2": "Basic application",
+      "3": "Scenario reasoning",
+      "4": "Trap-heavy / multi-concept",
+      "5": "Boss-level synthesis"
+    }
+  },
+  "trap_list": [
+    {
+      "id": "ch16.trap.policy_vs_standard_vs_procedure",
+      "name": "Policy vs Standard vs Procedure vs Guideline",
+      "misconception": "Policies, standards, procedures, and guidelines are interchangeable documents.",
+      "fix": "Policy = high-level mandatory intent; Standard = mandatory requirements; Procedure = mandatory steps; Guideline = optional advice.",
+      "drill_question_ids": [
+        "ch16.q007",
+        "ch16.q008",
+        "ch16.q010",
+        "ch16.q057"
+      ]
+    },
+    {
+      "id": "ch16.trap.centralized_vs_decentralized",
+      "name": "Centralized vs Decentralized governance",
+      "misconception": "Centralized and decentralized governance produce the same outcomes.",
+      "fix": "Centralized is top-down consistency/enforcement; decentralized is business-unit autonomy (often with uneven security).",
+      "drill_question_ids": [
+        "ch16.q003",
+        "ch16.q004"
+      ]
+    },
+    {
+      "id": "ch16.trap.exception_equals_ignore",
+      "name": "Exceptions aren’t permission to ignore risk",
+      "misconception": "If you can’t comply, you just note it and move on.",
+      "fix": "Exceptions should be scoped/time-bound, risk-assessed, include compensating controls, and have a remediation plan back to compliance.",
+      "drill_question_ids": [
+        "ch16.q011",
+        "ch16.q012"
+      ]
+    },
+    {
+      "id": "ch16.trap_change_mgmt_is_bureaucracy",
+      "name": "Change management is anti-outage engineering",
+      "misconception": "Change management is paperwork that slows engineers and can be skipped.",
+      "fix": "Change management prevents unplanned outages by enforcing impact analysis, testing, approval, rollback planning, and documentation.",
+      "drill_question_ids": [
+        "ch16.q013",
+        "ch16.q014",
+        "ch16.q015",
+        "ch16.q018",
+        "ch16.q020"
+      ]
+    },
+    {
+      "id": "ch16.trap_least_privilege_convenience",
+      "name": "Admin-for-everyone is incident fuel",
+      "misconception": "Granting broad admin access reduces risk because work gets done faster.",
+      "fix": "Least privilege reduces blast radius; broad access + privilege creep increases attack surface and insider impact.",
+      "drill_question_ids": [
+        "ch16.q021",
+        "ch16.q022",
+        "ch16.q056"
+      ]
+    },
+    {
+      "id": "ch16.trap_sod_vs_dual_control",
+      "name": "Separation of duties vs Two-person control",
+      "misconception": "SoD and two-person control are the same thing.",
+      "fix": "SoD splits risky privilege combinations across roles; two-person control requires two people for one sensitive action.",
+      "drill_question_ids": [
+        "ch16.q023",
+        "ch16.q024"
+      ]
+    },
+    {
+      "id": "ch16.trap_due_diligence_vs_due_care",
+      "name": "Due diligence vs Due care",
+      "misconception": "Due diligence and due care mean ‘being careful’ and can be used interchangeably.",
+      "fix": "Due diligence = learn/assess requirements/risks; Due care = implement and maintain effective controls that address them.",
+      "drill_question_ids": [
+        "ch16.q041"
+      ]
+    },
+    {
+      "id": "ch16.trap_ack_vs_attest",
+      "name": "Acknowledgment vs Attestation",
+      "misconception": "Acknowledging a policy proves compliance.",
+      "fix": "Acknowledgment proves awareness; attestation asserts compliant behavior/practice (stronger, higher accountability).",
+      "drill_question_ids": [
+        "ch16.q042",
+        "ch16.q058"
+      ]
+    },
+    {
+      "id": "ch16.trap_vendor_contract_soup",
+      "name": "Vendor agreement soup (MSA/SLA/SOW/MOU/MOA)",
+      "misconception": "All contract documents do the same thing; only the SLA matters.",
+      "fix": "MSA sets umbrella terms; SLA defines service metrics/remedies; SOW/WO defines project work; MOU informal; MOA formal responsibilities; NDA confidentiality.",
+      "drill_question_ids": [
+        "ch16.q033",
+        "ch16.q034"
+      ]
+    },
+    {
+      "id": "ch16.trap_csf_vs_rmf",
+      "name": "CSF vs RMF",
+      "misconception": "CSF and RMF are the same framework.",
+      "fix": "CSF organizes risk into functions/categories for communication and posture; RMF is a step process for selecting/assessing controls and authorizing systems.",
+      "drill_question_ids": [
+        "ch16.q044",
+        "ch16.q046",
+        "ch16.q059"
+      ]
+    }
+  ],
+  "missions": [
+    {
+      "id": "ch16.m1",
+      "name": "Governance Foundations",
+      "goal": "Understand governance structures, authority, and how security aligns to business goals.",
+      "mechanics": {
+        "minigame": "org_chart_logic",
+        "twist": "Spot who can mandate what."
+      },
+      "question_ids": [
+        "ch16.q001",
+        "ch16.q002",
+        "ch16.q003",
+        "ch16.q004",
+        "ch16.q005",
+        "ch16.q006"
+      ],
+      "rewards": {
+        "xp": 240,
+        "loot": [
+          "Card: ‘Board Mandate’",
+          "Sticker: ‘GRC Glue’"
+        ]
+      }
+    },
+    {
+      "id": "ch16.m2",
+      "name": "Policy Stack & Exceptions",
+      "goal": "Build the policy ladder and handle exceptions without blowing up risk.",
+      "mechanics": {
+        "minigame": "policy_ladder",
+        "twist": "Confuse standards vs procedures and you lose streaks."
+      },
+      "question_ids": [
+        "ch16.q007",
+        "ch16.q008",
+        "ch16.q009",
+        "ch16.q010",
+        "ch16.q011",
+        "ch16.q012",
+        "ch16.q055",
+        "ch16.q057"
+      ],
+      "rewards": {
+        "xp": 320,
+        "loot": [
+          "Card: ‘Policy Ladder’",
+          "Relic: ‘Exception Packet’"
+        ]
+      }
+    },
+    {
+      "id": "ch16.m3",
+      "name": "Change Management Without Outages",
+      "goal": "Run change management like a reliability engineer: impact, test, implement, document.",
+      "mechanics": {
+        "minigame": "cab_gauntlet",
+        "twist": "Hidden dependencies and legacy surprises."
+      },
+      "question_ids": [
+        "ch16.q013",
+        "ch16.q014",
+        "ch16.q015",
+        "ch16.q016",
+        "ch16.q017",
+        "ch16.q018",
+        "ch16.q019",
+        "ch16.q020",
+        "ch16.q060"
+      ],
+      "rewards": {
+        "xp": 360,
+        "loot": [
+          "Card: ‘CAB Gate’",
+          "Sticker: ‘Rollback Ready’"
+        ]
+      }
+    },
+    {
+      "id": "ch16.m4",
+      "name": "People Controls",
+      "goal": "Stop privilege creep, prevent fraud, and manage onboarding/offboarding cleanly.",
+      "mechanics": {
+        "minigame": "privilege_tetris",
+        "twist": "Risky privilege combos appear like Tetris blocks."
+      },
+      "question_ids": [
+        "ch16.q021",
+        "ch16.q022",
+        "ch16.q023",
+        "ch16.q024",
+        "ch16.q025",
+        "ch16.q026",
+        "ch16.q027",
+        "ch16.q028",
+        "ch16.q029",
+        "ch16.q056"
+      ],
+      "rewards": {
+        "xp": 400,
+        "loot": [
+          "Card: ‘Least Privilege’",
+          "Card: ‘SoD Shield’"
+        ]
+      }
+    },
+    {
+      "id": "ch16.m5",
+      "name": "Third-Party Risk",
+      "goal": "Vet vendors, write the right agreements, monitor performance, and plan exits.",
+      "mechanics": {
+        "minigame": "vendor_vetting",
+        "twist": "Contract soup + audit evidence hunting."
+      },
+      "question_ids": [
+        "ch16.q030",
+        "ch16.q031",
+        "ch16.q032",
+        "ch16.q033",
+        "ch16.q034",
+        "ch16.q035",
+        "ch16.q036",
+        "ch16.q037"
+      ],
+      "rewards": {
+        "xp": 320,
+        "loot": [
+          "Card: ‘Right to Audit’",
+          "Relic: ‘MSA Binder’"
+        ]
+      }
+    },
+    {
+      "id": "ch16.m6",
+      "name": "Compliance & Frameworks",
+      "goal": "Know why compliance exists, how to prove it, and how frameworks guide the program.",
+      "mechanics": {
+        "minigame": "framework_forge",
+        "twist": "Swap CSF/RMF and the ‘auditor’ gets cranky."
+      },
+      "question_ids": [
+        "ch16.q038",
+        "ch16.q039",
+        "ch16.q040",
+        "ch16.q041",
+        "ch16.q042",
+        "ch16.q043",
+        "ch16.q044",
+        "ch16.q045",
+        "ch16.q046",
+        "ch16.q047",
+        "ch16.q048",
+        "ch16.q058",
+        "ch16.q059"
+      ],
+      "rewards": {
+        "xp": 520,
+        "loot": [
+          "Card: ‘CSF Core’",
+          "Trophy: ‘Compliance Proof’"
+        ]
+      }
+    },
+    {
+      "id": "ch16.m7",
+      "name": "Awareness & Culture",
+      "goal": "Turn humans from attack surface into sensor network—training, awareness, and phishing drills.",
+      "mechanics": {
+        "minigame": "phish_dojo",
+        "twist": "Reward reporting, not shame."
+      },
+      "question_ids": [
+        "ch16.q049",
+        "ch16.q050",
+        "ch16.q051",
+        "ch16.q052",
+        "ch16.q053",
+        "ch16.q054"
+      ],
+      "rewards": {
+        "xp": 300,
+        "loot": [
+          "Card: ‘Phish Reflex’",
+          "Sticker: ‘Report First’"
+        ]
+      }
+    }
+  ],
+  "boss": {
+    "id": "ch16.boss",
+    "name": "Boss: The Audit That Bites",
+    "premise": "A merger, a new cloud vendor, and a board that wants proof. Build governance fast: approve an exception, ship a risky change safely, lock down privileges, and survive an external audit.",
+    "mechanics": {
+      "phase_1": "Create/align policy ladder + handle exception packet with compensating controls.",
+      "phase_2": "Run CAB: impact analysis, test, maintenance window, rollback plan, documentation updates.",
+      "phase_3": "Prove compliance: vendor contracts/audit rights, due diligence vs due care, CSF communication, and phishing readiness."
+    },
+    "question_ids": [
+      "ch16.q005",
+      "ch16.q012",
+      "ch16.q015",
+      "ch16.q018",
+      "ch16.q023",
+      "ch16.q033",
+      "ch16.q041",
+      "ch16.q044"
+    ],
+    "rewards": {
+      "xp": 720,
+      "loot": [
+        "Trophy: ‘Governance Architect’",
+        "Relic: ‘Audit Pass’"
+      ]
+    }
+  },
+  "roguelike": {
+    "runset_id": "ch16.runset",
+    "run_minutes_target": 19,
+    "structure": {
+      "acts": 3,
+      "encounters_per_act": 4,
+      "rest_sites_per_act": 1,
+      "boss_per_run": "ch16.boss"
+    },
+    "cards": {
+      "threat_cards": [
+        {
+          "id": "ch16.t1",
+          "name": "Privilege Creep Explosion",
+          "tags": [
+            "personnel.privilege_creep",
+            "personnel.least_privilege"
+          ]
+        },
+        {
+          "id": "ch16.t2",
+          "name": "Regulator Knock",
+          "tags": [
+            "compliance.reporting.external",
+            "compliance.consequences.fines_sanctions"
+          ]
+        },
+        {
+          "id": "ch16.t3",
+          "name": "Vendor Breach",
+          "tags": [
+            "tprm.vendor_assessment.right_to_audit",
+            "tprm.vendor_monitoring.rules_of_engagement"
+          ]
+        },
+        {
+          "id": "ch16.t4",
+          "name": "Shadow Change",
+          "tags": [
+            "change_mgmt.overview",
+            "change_mgmt.impact_analysis.dependencies"
+          ]
+        },
+        {
+          "id": "ch16.t5",
+          "name": "Phish Storm",
+          "tags": [
+            "awareness.phishing.simulations",
+            "awareness.reporting_monitoring"
+          ]
+        }
+      ],
+      "constraint_cards": [
+        {
+          "id": "ch16.c1",
+          "name": "Board Wants Metrics",
+          "effect": "Every encounter includes at least one question about evidence, reporting, or accountability."
+        },
+        {
+          "id": "ch16.c2",
+          "name": "Legacy Anchor",
+          "effect": "Exception/compensating control questions become more common; scope/time-boxing matters."
+        },
+        {
+          "id": "ch16.c3",
+          "name": "Remote-First Workforce",
+          "effect": "Awareness + access lifecycle questions are weighted; onboarding/offboarding gets tricky."
+        }
+      ],
+      "control_cards": [
+        {
+          "id": "ch16.k1",
+          "name": "Policy Ladder",
+          "tags": [
+            "policy.framework.overview",
+            "policy.documents.standard"
+          ]
+        },
+        {
+          "id": "ch16.k2",
+          "name": "CAB Gate",
+          "tags": [
+            "change_mgmt.sop.steps",
+            "change_mgmt.approval_controls"
+          ]
+        },
+        {
+          "id": "ch16.k3",
+          "name": "Right to Audit",
+          "tags": [
+            "tprm.vendor_assessment.right_to_audit"
+          ]
+        },
+        {
+          "id": "ch16.k4",
+          "name": "Least Privilege",
+          "tags": [
+            "personnel.least_privilege",
+            "access.account_lifecycle.deprovisioning"
+          ]
+        },
+        {
+          "id": "ch16.k5",
+          "name": "CSF Core",
+          "tags": [
+            "frameworks.nist.csf.core_functions",
+            "frameworks.nist.csf.communication"
+          ]
+        }
+      ]
+    },
+    "question_pool_ids": "ch16.pool.core"
+  },
+  "pvp": {
+    "enabled": false,
+    "modes": [
+      {
+        "id": "ch16.pvp1",
+        "name": "Policy Duel",
+        "description": "Fast-paced identification of the right governance document or control for a situation.",
+        "rules": {
+          "rounds": 8,
+          "time_per_round_seconds": 25,
+          "scoring": "Correct + speed bonus; wrong triggers a trap card."
+        }
+      }
+    ],
+    "fairness": {
+      "matchmaking": "Tag-mastery weighted matchmaking (avoid stomps).",
+      "anti_cheat": "Server-side timing and randomized option order; replay detection for identical patterns."
+    }
+  },
+  "question_bank": [
+    {
+      "id": "ch16.q001",
+      "type": "mcq",
+      "stem": "In a typical publicly traded corporate governance model, who has ultimate authority over the organization as the owners’ representatives?",
+      "options": {
+        "A": "Chief Executive Officer (CEO)",
+        "B": "Board of directors",
+        "C": "Chief Information Security Officer (CISO)",
+        "D": "Chief Financial Officer (CFO)"
+      },
+      "answer": "B",
+      "explanation": "Shareholders delegate authority to a board of directors that directs the corporation on their behalf. The trap is A—CEOs run operations but answer to the board.",
+      "tags": [
+        "governance.corporate.board_authority"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "4.7"
+      ],
+      "rationaleCorrect": "Shareholders delegate authority to a board of directors that directs the corporation on their behalf.",
+      "misconceptionTags": [
+        "governance.corporate.board_authority_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q002",
+      "type": "mcq",
+      "stem": "Which statement best describes information security governance?",
+      "options": {
+        "A": "A purely technical function owned by IT administrators",
+        "B": "A natural extension of corporate governance that aligns security with organizational goals",
+        "C": "A set of optional recommendations that teams may ignore",
+        "D": "A process used only during incident response"
+      },
+      "answer": "B",
+      "explanation": "InfoSec governance flows from corporate governance: executives delegate security responsibility (often to a CISO) and enforce it via structures and policies. The trap is A—security is organizational, not just technical.",
+      "tags": [
+        "governance.infosec.extension",
+        "governance.infosec.alignment"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "4.8"
+      ],
+      "rationaleCorrect": "InfoSec governance flows from corporate governance: executives delegate security responsibility (often to a CISO) and enforce it via structures and policies.",
+      "misconceptionTags": [
+        "governance.infosec.extension_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q003",
+      "type": "mcq",
+      "stem": "A centralized security governance model primarily uses which approach?",
+      "options": {
+        "A": "Business units choose their own controls as they see fit",
+        "B": "A top-down authority creates policies/standards enforced across the organization",
+        "C": "No formal policies; reliance on individual judgment",
+        "D": "Only external regulators define controls"
+      },
+      "answer": "B",
+      "explanation": "Centralized models push standards from a central authority down to units. The trap is A—that’s decentralized governance.",
+      "tags": [
+        "governance.models.centralized",
+        "governance.models.decentralized"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "Centralized models push standards from a central authority down to units.",
+      "misconceptionTags": [
+        "governance.models.centralized_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q004",
+      "type": "mcq",
+      "stem": "Which item is a core component of a Governance, Risk, and Compliance (GRC) program?",
+      "options": {
+        "A": "Only vulnerability scanning",
+        "B": "Integrating governance, risk management, and compliance activities",
+        "C": "Replacing the board of directors with a security committee",
+        "D": "Eliminating all third-party vendors"
+      },
+      "answer": "B",
+      "explanation": "GRC integrates governance, risk management, and compliance so strategy, risk decisions, and obligations line up. The trap is A—scanning is a tool, not the program.",
+      "tags": [
+        "governance.grc.definition"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "GRC integrates governance, risk management, and compliance so strategy, risk decisions, and obligations line up.",
+      "misconceptionTags": [
+        "governance.grc.definition_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q005",
+      "type": "scenario_mcq",
+      "stem": "Your CISO needs leverage to enforce security requirements across business units where they have no direct operational control. What is the MOST common mechanism to achieve this?",
+      "options": {
+        "A": "Purchase new security tools and deploy them silently",
+        "B": "Create organization-wide policies (with supporting standards/procedures)",
+        "C": "Ask each business unit to write its own rules with no oversight",
+        "D": "Rely on verbal instructions from the help desk"
+      },
+      "answer": "B",
+      "explanation": "Policies (and their supporting standards/procedures) provide enforceable, org-wide expectations that management can back. The trap is A—tools don’t create authority or consistency by themselves.",
+      "tags": [
+        "policy.framework.overview",
+        "governance.infosec.enforcement.policies"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 85,
+      "objectiveIds": [
+        "5.4"
+      ],
+      "rationaleCorrect": "Policies (and their supporting standards/procedures) provide enforceable, org-wide expectations that management can back.",
+      "misconceptionTags": [
+        "policy.framework.overview_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q006",
+      "type": "multi_select",
+      "stem": "Which groups can participate in governance structures besides a formal board of directors? (Choose TWO.)",
+      "options": {
+        "A": "Internal committees of SMEs and managers",
+        "B": "Government entities (regulators)",
+        "C": "Unvetted external attackers",
+        "D": "Only individual contributors with no management role"
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "Governance may include internal committees and government regulators depending on the industry. The trap is D—individual contributors matter, but governance structures are formal and accountable.",
+      "tags": [
+        "governance.structures.committees",
+        "governance.structures.regulators"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "5.1"
+      ],
+      "rationaleCorrect": "Governance may include internal committees and government regulators depending on the industry.",
+      "misconceptionTags": [
+        "governance.structures.committees_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q007",
+      "type": "matching",
+      "stem": "Match each document type to its best description.",
+      "left": [
+        "Policy",
+        "Standard",
+        "Procedure",
+        "Guideline"
+      ],
+      "right": [
+        "High-level mandatory management intent",
+        "Mandatory detailed requirements for implementing policy",
+        "Step-by-step mandatory instructions",
+        "Optional recommendations/best practices"
+      ],
+      "pairs": {
+        "Policy": "High-level mandatory management intent",
+        "Standard": "Mandatory detailed requirements for implementing policy",
+        "Procedure": "Step-by-step mandatory instructions",
+        "Guideline": "Optional recommendations/best practices"
+      },
+      "explanation": "Policy sets intent, standards specify mandatory requirements, procedures are mandatory steps, and guidelines are optional advice. The trap is mixing standards and procedures—standards say ‘what’ requirements; procedures say ‘how’ steps.",
+      "tags": [
+        "policy.documents.policy",
+        "policy.documents.standard",
+        "policy.documents.procedure",
+        "policy.documents.guideline"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 100,
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "Policy sets intent, standards specify mandatory requirements, procedures are mandatory steps, and guidelines are optional advice.",
+      "misconceptionTags": [
+        "policy.documents.policy_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch16.q008",
+      "type": "mcq",
+      "stem": "Which statement is TRUE about policies in many organizations?",
+      "options": {
+        "A": "Policies are usually approved at a lower level than standards",
+        "B": "Policies are high-level and often require very high-level approval (e.g., CEO)",
+        "C": "Policies are optional advice and do not require compliance",
+        "D": "Policies should contain detailed encryption algorithm settings"
+      },
+      "answer": "B",
+      "explanation": "Policies are high-level statements of management intent and often require senior approval; details usually live in standards/procedures. The trap is D—algorithm specifics are typically in standards.",
+      "tags": [
+        "policy.documents.policy.approval_level",
+        "policy.documents.standard"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "Policies are high-level statements of management intent and often require senior approval; details usually live in standards/procedures.",
+      "misconceptionTags": [
+        "policy.documents.policy.approval_level_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q009",
+      "type": "multi_select",
+      "stem": "Which are examples of external considerations that should influence an organization’s security policies? (Choose TWO.)",
+      "options": {
+        "A": "Regulatory and legal requirements",
+        "B": "Industry-specific considerations and best practices",
+        "C": "An individual admin’s personal preferences",
+        "D": "Random changes made without stakeholder input"
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "External considerations include legal/regulatory requirements and industry/jurisdiction factors. The trap is C—policy should not be shaped by one person’s preferences.",
+      "tags": [
+        "policy.external_considerations.regulatory",
+        "policy.external_considerations.industry"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "3.4"
+      ],
+      "rationaleCorrect": "External considerations include legal/regulatory requirements and industry/jurisdiction factors.",
+      "misconceptionTags": [
+        "policy.external_considerations.regulatory_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q010",
+      "type": "mcq",
+      "stem": "Which component of a policy framework is NOT normally mandatory to follow?",
+      "options": {
+        "A": "Policy",
+        "B": "Standard",
+        "C": "Procedure",
+        "D": "Guideline"
+      },
+      "answer": "D",
+      "explanation": "Guidelines are generally optional recommendations; policies, standards, and procedures are mandatory. The trap is thinking guidelines ‘don’t matter’—they often drive better compliance, but aren’t usually enforceable mandates.",
+      "tags": [
+        "policy.documents.guideline",
+        "policy.framework.mandatory_vs_optional"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 50,
+      "objectiveIds": [
+        "5.4"
+      ],
+      "rationaleCorrect": "Guidelines are generally optional recommendations; policies, standards, and procedures are mandatory.",
+      "misconceptionTags": [
+        "policy.documents.guideline_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario."
+      }
+    },
+    {
+      "id": "ch16.q011",
+      "type": "scenario_mcq",
+      "stem": "A team cannot meet a security standard because a legacy application only runs on an old OS. They isolate the system on a restricted network and document the risk. What is this isolation MOST accurately called?",
+      "options": {
+        "A": "A compensating control",
+        "B": "A backout plan",
+        "C": "A maintenance window",
+        "D": "A change advisory board"
+      },
+      "answer": "A",
+      "explanation": "A compensating control is an alternative measure that achieves the intent of the requirement when you can’t meet it directly. The trap is B—backout plans are for reversing changes, not offsetting policy exceptions.",
+      "tags": [
+        "policy.exceptions.compensating_controls",
+        "policy.exceptions.legacy_exception"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "1.1"
+      ],
+      "rationaleCorrect": "A compensating control is an alternative measure that achieves the intent of the requirement when you can’t meet it directly.",
+      "misconceptionTags": [
+        "policy.exceptions.compensating_controls_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q012",
+      "type": "ordering",
+      "stem": "Place these exception-request elements in a sensible order for a strong exception packet (start → finish).",
+      "items": [
+        "Identify the requirement needing an exception",
+        "Explain why noncompliance is necessary",
+        "Describe compensating/supplemental controls",
+        "Document risks and unmitigated risks",
+        "Provide a plan to achieve compliance (remediation)",
+        "Define scope and duration"
+      ],
+      "correct_order": [
+        "Identify the requirement needing an exception",
+        "Explain why noncompliance is necessary",
+        "Define scope and duration",
+        "Document risks and unmitigated risks",
+        "Describe compensating/supplemental controls",
+        "Provide a plan to achieve compliance (remediation)"
+      ],
+      "explanation": "Good exception requests start with what rule is being broken and why, define scope/time, assess risk, propose compensating controls, and end with a plan to return to compliance. The trap is leading with controls before you’ve scoped the exception and risks.",
+      "tags": [
+        "policy.exceptions.exception_process",
+        "policy.exceptions.scope_duration",
+        "policy.exceptions.risk_assessment",
+        "policy.exceptions.remediation_plan"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 110,
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "Good exception requests start with what rule is being broken and why, define scope/time, assess risk, propose compensating controls, and end with a plan to return to compliance.",
+      "misconceptionTags": [
+        "policy.exceptions.exception_process_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch16.q013",
+      "type": "mcq",
+      "stem": "What is the primary goal of change management?",
+      "options": {
+        "A": "Increase confidentiality by blocking all changes",
+        "B": "Ensure changes do not cause unanticipated outages",
+        "C": "Eliminate the need for documentation",
+        "D": "Allow admins to bypass approvals for speed"
+      },
+      "answer": "B",
+      "explanation": "Change management reduces outages by requiring review, testing, and documentation before production changes. The trap is A—change management is about controlled change, not freezing systems forever.",
+      "tags": [
+        "change_mgmt.goal.availability",
+        "change_mgmt.overview"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "1.3"
+      ],
+      "rationaleCorrect": "Change management reduces outages by requiring review, testing, and documentation before production changes.",
+      "misconceptionTags": [
+        "change_mgmt.goal.availability_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q014",
+      "type": "scenario_mcq",
+      "stem": "A firewall admin closes an 'unknown' port to improve security, but it breaks an application dependency between a web server and database. Which change management concept would have MOST likely prevented this?",
+      "options": {
+        "A": "Impact analysis with stakeholder review",
+        "B": "A clean desk policy",
+        "C": "Role-based security awareness training",
+        "D": "A nondisclosure agreement"
+      },
+      "answer": "A",
+      "explanation": "Impact analysis forces you to identify dependencies and stakeholders before implementing a change. The trap is C—training helps, but the control here is the change process.",
+      "tags": [
+        "change_mgmt.impact_analysis.dependencies",
+        "change_mgmt.technical_implications.dependencies"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 85,
+      "objectiveIds": [
+        "5.6"
+      ],
+      "rationaleCorrect": "Impact analysis forces you to identify dependencies and stakeholders before implementing a change.",
+      "misconceptionTags": [
+        "change_mgmt.impact_analysis.dependencies_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q015",
+      "type": "ordering",
+      "stem": "Order these standard operating procedure steps for change management (earliest → latest).",
+      "items": [
+        "Request",
+        "Review",
+        "Approve/Reject",
+        "Test",
+        "Schedule & Implement",
+        "Document"
+      ],
+      "correct_order": [
+        "Request",
+        "Review",
+        "Approve/Reject",
+        "Test",
+        "Schedule & Implement",
+        "Document"
+      ],
+      "explanation": "A disciplined change flow is request → review → approve → test → schedule/implement → document. The trap is skipping test/documentation—those are where outages and rebuild pain come from.",
+      "tags": [
+        "change_mgmt.sop.steps"
+      ],
+      "difficulty": 4,
+      "estimated_seconds": 95,
+      "objectiveIds": [
+        "1.3"
+      ],
+      "rationaleCorrect": "A disciplined change flow is request → review → approve → test → schedule/implement → document.",
+      "misconceptionTags": [
+        "change_mgmt.sop.steps_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch16.q016",
+      "type": "multi_select",
+      "stem": "Which items are commonly considered during the technical impact analysis of a change? (Choose TWO.)",
+      "options": {
+        "A": "Firewall allow/deny list modifications",
+        "B": "Service or application restart requirements",
+        "C": "Employee vacation schedules only",
+        "D": "Ignoring legacy application dependencies"
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "Technical impact analysis includes security control changes (allow/deny lists) and operational effects (service/app restarts, downtime, dependencies). The trap is D—legacy apps and dependencies are exactly what you must surface.",
+      "tags": [
+        "change_mgmt.technical_implications.allow_deny",
+        "change_mgmt.technical_implications.service_restart"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "4.2"
+      ],
+      "rationaleCorrect": "Technical impact analysis includes security control changes (allow/deny lists) and operational effects (service/app restarts, downtime, dependencies).",
+      "misconceptionTags": [
+        "change_mgmt.technical_implications.allow_deny_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q017",
+      "type": "mcq",
+      "stem": "Why are maintenance windows commonly used in change management?",
+      "options": {
+        "A": "To allow emergency changes to occur without documentation",
+        "B": "To coordinate non-emergency changes at preplanned times with minimal business impact",
+        "C": "To disable monitoring tools so changes are not detected",
+        "D": "To guarantee changes never fail"
+      },
+      "answer": "B",
+      "explanation": "Maintenance windows reduce disruption by scheduling changes during low-impact periods. The trap is D—windows reduce risk; they don’t magically remove it.",
+      "tags": [
+        "change_mgmt.maintenance_windows",
+        "change_mgmt.schedule_implement"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "1.3"
+      ],
+      "rationaleCorrect": "Maintenance windows reduce disruption by scheduling changes during low-impact periods.",
+      "misconceptionTags": [
+        "change_mgmt.maintenance_windows_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q018",
+      "type": "scenario_mcq",
+      "stem": "A change review board requires a rollback plan before approving a risky update. What is the MOST accurate reason?",
+      "options": {
+        "A": "So the team can ignore testing",
+        "B": "So the system can be returned to its original state if the change fails",
+        "C": "So the change becomes permanent even if it causes outages",
+        "D": "So the vendor can avoid contractual responsibility"
+      },
+      "answer": "B",
+      "explanation": "Backout/rollback plans are safety valves: if the change breaks production, you can restore the prior known-good state. The trap is A—testing is still required.",
+      "tags": [
+        "change_mgmt.backout_plan",
+        "change_mgmt.approval_controls"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "1.3"
+      ],
+      "rationaleCorrect": "Backout/rollback plans are safety valves: if the change breaks production, you can restore the prior known-good state.",
+      "misconceptionTags": [
+        "change_mgmt.backout_plan_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q019",
+      "type": "mcq",
+      "stem": "Which practice most directly supports tracking changes across software releases using version numbers like 1.0 → 1.1 → 2.0?",
+      "options": {
+        "A": "Least privilege",
+        "B": "Version control",
+        "C": "Separation of duties",
+        "D": "AUP"
+      },
+      "answer": "B",
+      "explanation": "Version control and versioning track and manage code/config changes over time. The trap is A—least privilege is an access principle, not a change tracking system.",
+      "tags": [
+        "change_mgmt.version_control",
+        "change_mgmt.documentation"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "1.3"
+      ],
+      "rationaleCorrect": "Version control and versioning track and manage code/config changes over time.",
+      "misconceptionTags": [
+        "change_mgmt.version_control_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q020",
+      "type": "scenario_mcq",
+      "stem": "An emergency change is made to contain malware. What is still REQUIRED after the incident is stabilized?",
+      "options": {
+        "A": "Skip documentation because it was urgent",
+        "B": "Document the emergency change so it can be reviewed and recreated if needed",
+        "C": "Avoid informing the change board under any circumstances",
+        "D": "Delete all logs to reduce confusion"
+      },
+      "answer": "B",
+      "explanation": "Even emergency changes must be documented so they can be reviewed for issues and rebuilt consistently later. The trap is A—‘urgent’ is the fastest path to future outages without records.",
+      "tags": [
+        "change_mgmt.emergency_changes",
+        "change_mgmt.documentation.update"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "1.3"
+      ],
+      "rationaleCorrect": "Even emergency changes must be documented so they can be reviewed for issues and rebuilt consistently later.",
+      "misconceptionTags": [
+        "change_mgmt.emergency_changes_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q021",
+      "type": "mcq",
+      "stem": "What does the principle of least privilege require?",
+      "options": {
+        "A": "Users should be granted admin rights to reduce help-desk tickets",
+        "B": "Users should have only the minimum permissions needed to do their job",
+        "C": "Privileges should never change once assigned",
+        "D": "All employees should share accounts for accountability"
+      },
+      "answer": "B",
+      "explanation": "Least privilege limits access to the minimum required, reducing blast radius. The trap is A—convenience-driven admin rights usually becomes an incident report later.",
+      "tags": [
+        "personnel.least_privilege",
+        "mitigation.least_privilege"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "1.3"
+      ],
+      "rationaleCorrect": "Least privilege limits access to the minimum required, reducing blast radius.",
+      "misconceptionTags": [
+        "personnel.least_privilege_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q022",
+      "type": "mcq",
+      "stem": "Privilege creep is BEST described as:",
+      "options": {
+        "A": "A vendor raising prices unexpectedly",
+        "B": "Accumulating permissions over time as roles change without revoking old access",
+        "C": "A phishing campaign targeting executives",
+        "D": "A formal exception process for policy"
+      },
+      "answer": "B",
+      "explanation": "Privilege creep happens when people move roles and keep old access, gradually becoming over-privileged. The trap is D—exceptions are approved deviations, not accidental accumulation.",
+      "tags": [
+        "personnel.privilege_creep",
+        "personnel.least_privilege"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "Privilege creep happens when people move roles and keep old access, gradually becoming over-privileged.",
+      "misconceptionTags": [
+        "personnel.privilege_creep_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q023",
+      "type": "scenario_mcq",
+      "stem": "An accountant could both create a new vendor and issue checks to that vendor. Which control BEST reduces this risk?",
+      "options": {
+        "A": "Job rotation",
+        "B": "Separation of duties",
+        "C": "Security awareness posters",
+        "D": "Encryption at rest"
+      },
+      "answer": "B",
+      "explanation": "Separation of duties prevents a single person from holding a dangerous combination of privileges. The trap is A—rotation may detect fraud later; SoD prevents it up front.",
+      "tags": [
+        "personnel.separation_of_duties",
+        "personnel.fraud_controls"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "5.6"
+      ],
+      "rationaleCorrect": "Separation of duties prevents a single person from holding a dangerous combination of privileges.",
+      "misconceptionTags": [
+        "personnel.separation_of_duties_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q024",
+      "type": "mcq",
+      "stem": "Two-person control differs from separation of duties because it:",
+      "options": {
+        "A": "Prevents one person from having two privileges that are risky in combination",
+        "B": "Requires two people to perform a single sensitive action",
+        "C": "Is only used for password resets",
+        "D": "Eliminates the need for auditing"
+      },
+      "answer": "B",
+      "explanation": "Two-person control (dual control) requires two participants for one sensitive act; separation of duties splits privileges across tasks. The trap is A—that’s separation of duties, not two-person control.",
+      "tags": [
+        "personnel.two_person_control",
+        "personnel.separation_of_duties"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "5.7"
+      ],
+      "rationaleCorrect": "Two-person control (dual control) requires two participants for one sensitive act; separation of duties splits privileges across tasks.",
+      "misconceptionTags": [
+        "personnel.two_person_control_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q025",
+      "type": "multi_select",
+      "stem": "Which practices are commonly intended to uncover fraud by exposing concealed activity after the fact? (Choose TWO.)",
+      "options": {
+        "A": "Job rotation",
+        "B": "Mandatory vacations with access revoked",
+        "C": "Granting everyone admin rights",
+        "D": "Disabling audit logs"
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "Rotation and mandatory vacations disrupt ongoing concealment and can reveal fraud. The trap is D—disabling logs makes fraud easier, not easier to detect.",
+      "tags": [
+        "personnel.job_rotation",
+        "personnel.mandatory_vacations"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "Rotation and mandatory vacations disrupt ongoing concealment and can reveal fraud.",
+      "misconceptionTags": [
+        "personnel.job_rotation_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q026",
+      "type": "mcq",
+      "stem": "What is the primary objective of a clean desk policy?",
+      "options": {
+        "A": "Increase availability by keeping computers running",
+        "B": "Protect confidentiality by limiting sensitive papers left exposed",
+        "C": "Ensure integrity by preventing hash collisions",
+        "D": "Reduce phishing by blocking email"
+      },
+      "answer": "B",
+      "explanation": "Clean desk reduces accidental disclosure of sensitive info in physical form. The trap is A—availability is not the main goal here.",
+      "tags": [
+        "personnel.clean_desk",
+        "physical.security.policies"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "1.5"
+      ],
+      "rationaleCorrect": "Clean desk reduces accidental disclosure of sensitive info in physical form.",
+      "misconceptionTags": [
+        "personnel.clean_desk_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q027",
+      "type": "scenario_mcq",
+      "stem": "A contractor leaves a project early. What should an effective offboarding procedure MOST directly ensure?",
+      "options": {
+        "A": "Their social media accounts are deleted",
+        "B": "Credentials and privileges are revoked in an orderly, documented way",
+        "C": "They receive advanced role-based security training",
+        "D": "They are added to all admin groups to maintain access"
+      },
+      "answer": "B",
+      "explanation": "Offboarding is about controlling assets and revoking access cleanly (accounts, tokens, keys, badges, devices). The trap is A—social media policy may apply, but access revocation is the critical control.",
+      "tags": [
+        "personnel.offboarding",
+        "access.account_lifecycle.deprovisioning"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "Offboarding is about controlling assets and revoking access cleanly (accounts, tokens, keys, badges, devices).",
+      "misconceptionTags": [
+        "personnel.offboarding_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q028",
+      "type": "mcq",
+      "stem": "Nondisclosure agreements (NDAs) primarily require employees to:",
+      "options": {
+        "A": "Share company secrets only with friends",
+        "B": "Protect confidential information gained through employment, even after leaving",
+        "C": "Refuse to use version control",
+        "D": "Ignore acceptable use policies"
+      },
+      "answer": "B",
+      "explanation": "NDAs bind people to protect confidential info during and after employment. The trap is thinking it ends when the job ends—it often doesn’t.",
+      "tags": [
+        "personnel.nda",
+        "personnel.offboarding.exit_interview"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "NDAs bind people to protect confidential info during and after employment.",
+      "misconceptionTags": [
+        "personnel.nda_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q029",
+      "type": "scenario_mcq",
+      "stem": "Your organization performs analysis of employee social media activity that may reflect on the company. What document should make these expectations and practices clear?",
+      "options": {
+        "A": "A social media policy",
+        "B": "An encryption standard",
+        "C": "A penetration testing rules-of-engagement",
+        "D": "A backout plan"
+      },
+      "answer": "A",
+      "explanation": "If you’re constraining or monitoring employee behavior on social platforms, document it in a social media policy. The trap is C—ROE is for authorized testing, not employee conduct.",
+      "tags": [
+        "personnel.social_media_policy",
+        "governance.policies"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "2.4"
+      ],
+      "rationaleCorrect": "If you’re constraining or monitoring employee behavior on social platforms, document it in a social media policy.",
+      "misconceptionTags": [
+        "personnel.social_media_policy_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q030",
+      "type": "mcq",
+      "stem": "In third-party risk management, 'due diligence' during vendor selection MOST directly means:",
+      "options": {
+        "A": "Signing the contract quickly to meet deadlines",
+        "B": "Thoroughly vetting the vendor’s stability, reputation, and security practices",
+        "C": "Only checking whether the vendor has a logo and website",
+        "D": "Assuming compliance because the vendor is popular"
+      },
+      "answer": "B",
+      "explanation": "Due diligence is the up-front vetting of vendors (financial, reputational, security, compliance). The trap is A—speed is not a control.",
+      "tags": [
+        "tprm.vendor_selection.due_diligence"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "Due diligence is the up-front vetting of vendors (financial, reputational, security, compliance).",
+      "misconceptionTags": [
+        "tprm.vendor_selection.due_diligence_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q031",
+      "type": "mcq",
+      "stem": "Which situation is an example of a vendor conflict of interest?",
+      "options": {
+        "A": "A vendor offers a discount for longer contracts",
+        "B": "A vendor has financial ties with a competitor that could influence their behavior",
+        "C": "A vendor provides a SOC report",
+        "D": "A vendor accepts an NDA clause"
+      },
+      "answer": "B",
+      "explanation": "Conflicts arise when a vendor’s competing interest could pull them away from your best interest (e.g., competitor ties). The trap is C—that’s a positive control signal, not a conflict.",
+      "tags": [
+        "tprm.vendor_selection.conflict_of_interest"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "Conflicts arise when a vendor’s competing interest could pull them away from your best interest (e.g., competitor ties).",
+      "misconceptionTags": [
+        "tprm.vendor_selection.conflict_of_interest_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q032",
+      "type": "multi_select",
+      "stem": "Which are common vendor assessment techniques? (Choose TWO.)",
+      "options": {
+        "A": "Penetration testing (authorized) of vendor systems/services",
+        "B": "Right-to-audit clause and commissioned audits",
+        "C": "Ignoring the vendor’s supply chain",
+        "D": "Relying only on marketing brochures"
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "Vendor assessment often uses authorized testing and audit rights to validate controls. The trap is D—brochures are not evidence.",
+      "tags": [
+        "tprm.vendor_assessment.pen_test",
+        "tprm.vendor_assessment.right_to_audit"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 85,
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "Vendor assessment often uses authorized testing and audit rights to validate controls.",
+      "misconceptionTags": [
+        "tprm.vendor_assessment.pen_test_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q033",
+      "type": "mcq",
+      "stem": "Which agreement type is typically an umbrella contract governing an ongoing vendor relationship, with project-specific SOW/WO documents created later?",
+      "options": {
+        "A": "Service-level agreement (SLA)",
+        "B": "Master service agreement (MSA)",
+        "C": "Memorandum of understanding (MOU)",
+        "D": "Business partners agreement (BPA)"
+      },
+      "answer": "B",
+      "explanation": "An MSA is the umbrella contract; project-specific details usually live in SOW/WO documents. The trap is A—SLAs focus on service metrics/remedies, not the entire master relationship.",
+      "tags": [
+        "tprm.agreements.msa",
+        "tprm.agreements.sow_wo",
+        "tprm.agreements.sla"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "An MSA is the umbrella contract; project-specific details usually live in SOW/WO documents.",
+      "misconceptionTags": [
+        "tprm.agreements.msa_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q034",
+      "type": "matching",
+      "stem": "Match each agreement type to what it is MOST associated with.",
+      "left": [
+        "SLA",
+        "MOU",
+        "MOA",
+        "NDA",
+        "SOW/WO",
+        "BPA"
+      ],
+      "right": [
+        "Service conditions and remedies",
+        "Informal relationship document to avoid misunderstandings",
+        "Formal agreement detailing roles/responsibilities for objectives",
+        "Confidentiality terms",
+        "Project-specific work details",
+        "Partnership terms between businesses"
+      ],
+      "pairs": {
+        "SLA": "Service conditions and remedies",
+        "MOU": "Informal relationship document to avoid misunderstandings",
+        "MOA": "Formal agreement detailing roles/responsibilities for objectives",
+        "NDA": "Confidentiality terms",
+        "SOW/WO": "Project-specific work details",
+        "BPA": "Partnership terms between businesses"
+      },
+      "explanation": "Different agreement types exist for different relationship goals: SLAs for metrics/remedies, MOUs informal, MOAs formal, NDAs confidentiality, SOW/WO project specifics, BPAs partnerships. The trap is mixing MOU and MOA—MOAs are typically more formal/detailed.",
+      "tags": [
+        "tprm.agreements.sla",
+        "tprm.agreements.mou",
+        "tprm.agreements.moa",
+        "tprm.agreements.nda",
+        "tprm.agreements.sow_wo",
+        "tprm.agreements.bpa"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 110,
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "Different agreement types exist for different relationship goals: SLAs for metrics/remedies, MOUs informal, MOAs formal, NDAs confidentiality, SOW/WO project specifics, BPAs partnerships.",
+      "misconceptionTags": [
+        "tprm.agreements.sla_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch16.q035",
+      "type": "scenario_mcq",
+      "stem": "A vendor will have access to your sensitive information through support staff. What contract element is MOST directly needed to address this?",
+      "options": {
+        "A": "NDA terms requiring confidentiality and ensuring vendor employees are bound",
+        "B": "A clean desk policy",
+        "C": "A maintenance window",
+        "D": "A password reuse exception"
+      },
+      "answer": "A",
+      "explanation": "Vendor access to sensitive info requires contractual confidentiality (NDA) and often proof their staff are also bound. The trap is B—clean desk is internal physical practice, not vendor legal obligation.",
+      "tags": [
+        "tprm.agreements.nda",
+        "tprm.vendor_assessment.sensitive_info_access"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "Vendor access to sensitive info requires contractual confidentiality (NDA) and often proof their staff are also bound.",
+      "misconceptionTags": [
+        "tprm.agreements.nda_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q036",
+      "type": "mcq",
+      "stem": "What is the main purpose of establishing rules of engagement (ROE) for vendor monitoring/activities?",
+      "options": {
+        "A": "To define boundaries, responsibilities, communications, and issue resolution processes",
+        "B": "To hide monitoring results from management",
+        "C": "To prevent using KPIs",
+        "D": "To eliminate the need for contracts"
+      },
+      "answer": "A",
+      "explanation": "ROE sets expectations: who does what, how you communicate, and how issues are handled. The trap is D—ROE complements contracts; it doesn’t replace them.",
+      "tags": [
+        "tprm.vendor_monitoring.rules_of_engagement"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "4.4"
+      ],
+      "rationaleCorrect": "ROE sets expectations: who does what, how you communicate, and how issues are handled.",
+      "misconceptionTags": [
+        "tprm.vendor_monitoring.rules_of_engagement_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q037",
+      "type": "mcq",
+      "stem": "When winding down a vendor relationship, planning for EOL/EOSL is MOST important because it:",
+      "options": {
+        "A": "Ensures an orderly transition when a product/service is discontinued",
+        "B": "Guarantees the vendor will lower prices",
+        "C": "Removes the need for backups",
+        "D": "Automatically fulfills GDPR reporting requirements"
+      },
+      "answer": "A",
+      "explanation": "EOL/EOSL planning prevents operational chaos by ensuring a transition path when the vendor ends a product/service. The trap is B—price is not the primary risk here.",
+      "tags": [
+        "tprm.winding_down.eol_eosl",
+        "tprm.vendor_monitoring.transition_planning"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "EOL/EOSL planning prevents operational chaos by ensuring a transition path when the vendor ends a product/service.",
+      "misconceptionTags": [
+        "tprm.winding_down.eol_eosl_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q038",
+      "type": "mcq",
+      "stem": "Which compliance obligation applies to merchants and service providers handling credit/debit card information?",
+      "options": {
+        "A": "HIPAA",
+        "B": "FERPA",
+        "C": "PCI DSS",
+        "D": "SOX"
+      },
+      "answer": "C",
+      "explanation": "PCI DSS is the contractual standard for payment card data handling. The trap is A—HIPAA is for health info, not card data.",
+      "tags": [
+        "compliance.pci_dss",
+        "compliance.requirements"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "5.4"
+      ],
+      "rationaleCorrect": "PCI DSS is the contractual standard for payment card data handling.",
+      "misconceptionTags": [
+        "compliance.pci_dss_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q039",
+      "type": "mcq",
+      "stem": "Which regulation creates privacy obligations for personal information of European Union residents?",
+      "options": {
+        "A": "GLBA",
+        "B": "GDPR",
+        "C": "SOX",
+        "D": "PCI DSS"
+      },
+      "answer": "B",
+      "explanation": "GDPR governs EU residents’ personal data and includes security/privacy requirements. The trap is A—GLBA is U.S. financial institutions.",
+      "tags": [
+        "compliance.gdpr",
+        "compliance.requirements"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 45,
+      "objectiveIds": [
+        "5.4"
+      ],
+      "rationaleCorrect": "GDPR governs EU residents’ personal data and includes security/privacy requirements.",
+      "misconceptionTags": [
+        "compliance.gdpr_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q040",
+      "type": "multi_select",
+      "stem": "Which are examples of consequences of security noncompliance? (Choose TWO.)",
+      "options": {
+        "A": "Fines and sanctions",
+        "B": "Reputational damage",
+        "C": "Guaranteed profit increase",
+        "D": "Automatic license renewal"
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "Noncompliance can trigger fines/sanctions and reputational damage (and more: lost licenses/contracts). The trap is C—noncompliance isn’t a growth strategy; it’s a future headline.",
+      "tags": [
+        "compliance.consequences.fines_sanctions",
+        "compliance.consequences.reputation"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "5.4"
+      ],
+      "rationaleCorrect": "Noncompliance can trigger fines/sanctions and reputational damage (and more: lost licenses/contracts).",
+      "misconceptionTags": [
+        "compliance.consequences.fines_sanctions_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q041",
+      "type": "mcq",
+      "stem": "In compliance monitoring, 'due diligence' and 'due care' are best summarized as:",
+      "options": {
+        "A": "Research requirements (diligence) and ensure controls are maintained/effective (care)",
+        "B": "Ignore laws (diligence) and write policies (care)",
+        "C": "Deploy tools (diligence) and stop auditing (care)",
+        "D": "Sign contracts (diligence) and delete logs (care)"
+      },
+      "answer": "A",
+      "explanation": "Due diligence is learning and staying current on requirements; due care is implementing and maintaining effective controls. The trap is confusing them as interchangeable buzzwords.",
+      "tags": [
+        "compliance.monitoring.due_diligence",
+        "compliance.monitoring.due_care"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "5.4"
+      ],
+      "rationaleCorrect": "Due diligence is learning and staying current on requirements; due care is implementing and maintaining effective controls.",
+      "misconceptionTags": [
+        "compliance.monitoring.due_diligence_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q042",
+      "type": "mcq",
+      "stem": "What is the difference between acknowledgment and attestation in compliance programs?",
+      "options": {
+        "A": "Acknowledgment confirms awareness; attestation confirms awareness AND that practices comply",
+        "B": "Attestation confirms awareness; acknowledgment confirms compliance",
+        "C": "They are identical terms",
+        "D": "Acknowledgment is only for vendors, not employees"
+      },
+      "answer": "A",
+      "explanation": "Acknowledgment = “I know the rule.” Attestation = “I know the rule and I’m following it.” The trap is swapping them.",
+      "tags": [
+        "compliance.monitoring.acknowledgment",
+        "compliance.monitoring.attestation"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "5.6"
+      ],
+      "rationaleCorrect": "Acknowledgment = “I know the rule.” Attestation = “I know the rule and I’m following it.” The trap is swapping them.",
+      "misconceptionTags": [
+        "compliance.monitoring.acknowledgment_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q043",
+      "type": "scenario_mcq",
+      "stem": "A credit card processor must provide evidence to an external body that it meets PCI DSS obligations. What type of activity is this?",
+      "options": {
+        "A": "Internal compliance reporting",
+        "B": "External compliance reporting",
+        "C": "Security awareness training",
+        "D": "Exception management"
+      },
+      "answer": "B",
+      "explanation": "Providing evidence to regulators/contractual bodies is external compliance reporting. The trap is A—internal reports are for management/board decision making.",
+      "tags": [
+        "compliance.reporting.external",
+        "compliance.reporting.internal"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "5.4"
+      ],
+      "rationaleCorrect": "Providing evidence to regulators/contractual bodies is external compliance reporting.",
+      "misconceptionTags": [
+        "compliance.reporting.external_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q044",
+      "type": "mcq",
+      "stem": "Which set correctly lists the five core functions of the NIST Cybersecurity Framework (CSF)?",
+      "options": {
+        "A": "Plan, Build, Run, Monitor, Improve",
+        "B": "Identify, Protect, Detect, Respond, Recover",
+        "C": "Secure, Encrypt, Audit, Report, Train",
+        "D": "Categorize, Select, Implement, Authorize, Monitor"
+      },
+      "answer": "B",
+      "explanation": "NIST CSF core functions are Identify/Protect/Detect/Respond/Recover. The trap is D—that’s RMF-ish wording (categorize/select/implement/authorize/monitor).",
+      "tags": [
+        "frameworks.nist.csf.core_functions",
+        "frameworks.nist.csf.functions"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 60,
+      "objectiveIds": [
+        "3.3"
+      ],
+      "rationaleCorrect": "NIST CSF core functions are Identify/Protect/Detect/Respond/Recover.",
+      "misconceptionTags": [
+        "frameworks.nist.csf.core_functions_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q045",
+      "type": "matching",
+      "stem": "Match each NIST CSF Implementation Tier to its description.",
+      "left": [
+        "Tier 1: Partial",
+        "Tier 2: Risk Informed",
+        "Tier 3: Repeatable",
+        "Tier 4: Adaptive"
+      ],
+      "right": [
+        "Ad hoc/reactive risk practices",
+        "Approved by management but not org-wide policy",
+        "Formally approved and expressed as policy",
+        "Adapts based on lessons learned/predictive indicators"
+      ],
+      "pairs": {
+        "Tier 1: Partial": "Ad hoc/reactive risk practices",
+        "Tier 2: Risk Informed": "Approved by management but not org-wide policy",
+        "Tier 3: Repeatable": "Formally approved and expressed as policy",
+        "Tier 4: Adaptive": "Adapts based on lessons learned/predictive indicators"
+      },
+      "explanation": "The tiers describe maturity from ad hoc (Tier 1) to adaptive (Tier 4). The trap is equating Tier 2 with org-wide repeatability—Tier 2 is aware/approved but not fully institutionalized.",
+      "tags": [
+        "frameworks.nist.csf.tiers.tier1",
+        "frameworks.nist.csf.tiers.tier2",
+        "frameworks.nist.csf.tiers.tier3",
+        "frameworks.nist.csf.tiers.tier4"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 115,
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "The tiers describe maturity from ad hoc (Tier 1) to adaptive (Tier 4).",
+      "misconceptionTags": [
+        "frameworks.nist.csf.tiers.tier1_confusion"
+      ],
+      "rationaleIncorrect": {}
+    },
+    {
+      "id": "ch16.q046",
+      "type": "mcq",
+      "stem": "Which statement BEST distinguishes the NIST Risk Management Framework (RMF) from the NIST CSF?",
+      "options": {
+        "A": "RMF is a formal process for selecting/implementing/assessing controls and authorizing system use; CSF is a broad structure of functions/categories for managing cybersecurity risk",
+        "B": "CSF is only for government agencies; RMF is only for private industry",
+        "C": "RMF defines the five core functions; CSF defines authorization to operate",
+        "D": "They are the same framework with different names"
+      },
+      "answer": "A",
+      "explanation": "RMF is the step-based federal process used for control selection/assessment/authorization; CSF is a broader structure (Identify→Recover) used widely, including private industry. The trap is B—private industry often uses CSF; RMF is common in federal contexts.",
+      "tags": [
+        "frameworks.nist.rmf.definition",
+        "frameworks.nist.csf.vs_rmf"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 90,
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "RMF is the step-based federal process used for control selection/assessment/authorization; CSF is a broader structure (Identify→Recover) used widely, including private industry.",
+      "misconceptionTags": [
+        "frameworks.nist.rmf.definition_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q047",
+      "type": "mcq",
+      "stem": "Which ISO standard focuses on privacy controls (as an extension to ISO 27001/27002)?",
+      "options": {
+        "A": "ISO 27001",
+        "B": "ISO 27002",
+        "C": "ISO 27701",
+        "D": "ISO 31000"
+      },
+      "answer": "C",
+      "explanation": "ISO 27701 covers privacy controls; ISO 27001/27002 focus on security and ISO 31000 on risk management. The trap is A—27001 is security management systems, not privacy.",
+      "tags": [
+        "frameworks.iso.27701",
+        "frameworks.iso.27001",
+        "frameworks.iso.27002",
+        "frameworks.iso.31000"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "5.2"
+      ],
+      "rationaleCorrect": "ISO 27701 covers privacy controls; ISO 27001/27002 focus on security and ISO 31000 on risk management.",
+      "misconceptionTags": [
+        "frameworks.iso.27701_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q048",
+      "type": "mcq",
+      "stem": "Benchmarks that provide detailed secure configuration guidance for common platforms (e.g., Windows Server) are commonly published by:",
+      "options": {
+        "A": "Center for Internet Security (CIS)",
+        "B": "The local help desk",
+        "C": "Random social media accounts",
+        "D": "Only the company’s marketing team"
+      },
+      "answer": "A",
+      "explanation": "CIS publishes widely used benchmarks and secure configuration guides. The trap is B—help desks may apply guides, but they aren’t the primary publisher.",
+      "tags": [
+        "frameworks.benchmarks.cis",
+        "frameworks.secure_config_guides"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "3.1"
+      ],
+      "rationaleCorrect": "CIS publishes widely used benchmarks and secure configuration guides.",
+      "misconceptionTags": [
+        "frameworks.benchmarks.cis_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q049",
+      "type": "mcq",
+      "stem": "Which statement best captures the difference between security training and security awareness?",
+      "options": {
+        "A": "Training teaches new material; awareness reinforces lessons with reminders like posters/emails",
+        "B": "Awareness is only for executives; training is only for interns",
+        "C": "They are interchangeable terms with no difference",
+        "D": "Training is optional while awareness is mandatory"
+      },
+      "answer": "A",
+      "explanation": "Training imparts new knowledge; awareness keeps it top-of-mind via lightweight reminders. The trap is C—exam loves this distinction.",
+      "tags": [
+        "awareness.training.vs_awareness",
+        "awareness.programs.definition"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "5.6"
+      ],
+      "rationaleCorrect": "Training imparts new knowledge; awareness keeps it top-of-mind via lightweight reminders.",
+      "misconceptionTags": [
+        "awareness.training.vs_awareness_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q050",
+      "type": "scenario_mcq",
+      "stem": "You run phishing simulations that send fake phishing emails. Users who click are redirected to a short training module. What is the primary purpose?",
+      "options": {
+        "A": "Punish users who clicked",
+        "B": "Test recognition and improve skills through targeted training",
+        "C": "Collect passwords for later analysis",
+        "D": "Disable email temporarily"
+      },
+      "answer": "B",
+      "explanation": "Simulations measure behavior and provide immediate corrective training. The trap is A—punishment reduces reporting and creates a hostile culture.",
+      "tags": [
+        "awareness.phishing.simulations",
+        "awareness.phishing.campaigns"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "5.6"
+      ],
+      "rationaleCorrect": "Simulations measure behavior and provide immediate corrective training.",
+      "misconceptionTags": [
+        "awareness.phishing.simulations_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q051",
+      "type": "multi_select",
+      "stem": "Which topics commonly belong in end-user security training? (Choose TWO.)",
+      "options": {
+        "A": "Password management and password standards",
+        "B": "Removable media and cable risks",
+        "C": "How to bypass the AUP safely",
+        "D": "How to hide suspicious behavior from monitoring"
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "Core user training covers passwords, removable media risks, social engineering, operational security, remote work, etc. The trap is C/D—those are exactly what training is designed to prevent.",
+      "tags": [
+        "awareness.user_training.password_management",
+        "awareness.user_training.removable_media"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "5.6"
+      ],
+      "rationaleCorrect": "Core user training covers passwords, removable media risks, social engineering, operational security, remote work, etc.",
+      "misconceptionTags": [
+        "awareness.user_training.password_management_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q052",
+      "type": "mcq",
+      "stem": "Role-based training is MOST important because:",
+      "options": {
+        "A": "Everyone needs identical training to be fair",
+        "B": "Different roles face different risks and need different depth (e.g., admins vs customer service)",
+        "C": "Only IT staff ever get phished",
+        "D": "It removes the need for policies"
+      },
+      "answer": "B",
+      "explanation": "Admins need technical depth; front-line staff need social-engineering/pretexting focus—training should match job risk. The trap is A—identical training is easy but ineffective.",
+      "tags": [
+        "awareness.role_based_training",
+        "awareness.training.design"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "5.6"
+      ],
+      "rationaleCorrect": "Admins need technical depth; front-line staff need social-engineering/pretexting focus—training should match job risk.",
+      "misconceptionTags": [
+        "awareness.role_based_training_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q053",
+      "type": "mcq",
+      "stem": "Anomalous behavior recognition training is especially valuable because:",
+      "options": {
+        "A": "Employees are often first to notice risky/unexpected insider behavior",
+        "B": "It replaces all monitoring tools",
+        "C": "It is only useful for physical security",
+        "D": "It guarantees no insider threat exists"
+      },
+      "answer": "A",
+      "explanation": "Insider threats are real; coworkers often see early signs of risky/unintentional behavior before systems do. The trap is D—training reduces risk; it doesn’t erase human weirdness.",
+      "tags": [
+        "awareness.anomalous_behavior",
+        "awareness.insider_threat"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "1.5"
+      ],
+      "rationaleCorrect": "Insider threats are real; coworkers often see early signs of risky/unintentional behavior before systems do.",
+      "misconceptionTags": [
+        "awareness.anomalous_behavior_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q054",
+      "type": "scenario_mcq",
+      "stem": "Management asks for security training metrics that include technical detail for engineers and high-level trends for executives. Which program component best addresses this?",
+      "options": {
+        "A": "Reporting and monitoring of training participation and quiz results",
+        "B": "Switching all training to posters only",
+        "C": "Eliminating feedback collection",
+        "D": "Ignoring trend analysis over time"
+      },
+      "answer": "A",
+      "explanation": "Reporting/monitoring tracks participation and knowledge, and trend analysis informs leadership. The trap is B—posters are awareness, not deep training or metrics.",
+      "tags": [
+        "awareness.reporting_monitoring",
+        "awareness.metrics.trends"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 85,
+      "objectiveIds": [
+        "5.6"
+      ],
+      "rationaleCorrect": "Reporting/monitoring tracks participation and knowledge, and trend analysis informs leadership.",
+      "misconceptionTags": [
+        "awareness.reporting_monitoring_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q055",
+      "type": "mcq",
+      "stem": "Which policy is MOST likely to define permissible uses of organizational systems and networks?",
+      "options": {
+        "A": "Acceptable Use Policy (AUP)",
+        "B": "Encryption standard",
+        "C": "SOW",
+        "D": "CIS benchmark"
+      },
+      "answer": "A",
+      "explanation": "AUP tells users what they may and may not do with organizational resources. The trap is B—encryption standards are technical requirements, not behavior rules.",
+      "tags": [
+        "policy.examples.aup",
+        "policy.documents.policy"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 55,
+      "objectiveIds": [
+        "4.1"
+      ],
+      "rationaleCorrect": "AUP tells users what they may and may not do with organizational resources.",
+      "misconceptionTags": [
+        "policy.examples.aup_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q056",
+      "type": "scenario_mcq",
+      "stem": "A team wants to add a large group of users to the Administrators group to stop access requests. Which principle does this MOST directly violate?",
+      "options": {
+        "A": "Least privilege",
+        "B": "Job rotation",
+        "C": "Right-to-audit",
+        "D": "MOU"
+      },
+      "answer": "A",
+      "explanation": "Blanket admin access violates least privilege and expands blast radius. The trap is B—rotation is unrelated to access scope.",
+      "tags": [
+        "personnel.least_privilege",
+        "change_mgmt.security_vs_usability_tradeoff"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 70,
+      "objectiveIds": [
+        "4.6"
+      ],
+      "rationaleCorrect": "Blanket admin access violates least privilege and expands blast radius.",
+      "misconceptionTags": [
+        "personnel.least_privilege_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q057",
+      "type": "mcq",
+      "stem": "Which document type would MOST likely specify that laptops must use full-disk encryption and define the approved encryption solutions?",
+      "options": {
+        "A": "Policy",
+        "B": "Standard",
+        "C": "Guideline",
+        "D": "MOU"
+      },
+      "answer": "B",
+      "explanation": "Standards translate policy intent into specific mandatory requirements (what must be used/configured). The trap is A—policy usually stays high-level.",
+      "tags": [
+        "policy.documents.standard",
+        "policy.encryption_standard"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "1.4"
+      ],
+      "rationaleCorrect": "Standards translate policy intent into specific mandatory requirements (what must be used/configured).",
+      "misconceptionTags": [
+        "policy.documents.standard_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q058",
+      "type": "scenario_mcq",
+      "stem": "A security team needs to verify that employees are aware of compliance requirements and explicitly confirm their practices adhere to them. What should they collect?",
+      "options": {
+        "A": "Only acknowledgment statements",
+        "B": "Attestations",
+        "C": "MOUs",
+        "D": "Backout plans"
+      },
+      "answer": "B",
+      "explanation": "Attestation includes awareness plus confirmation of compliant practice. The trap is A—acknowledgment alone doesn’t confirm behavior.",
+      "tags": [
+        "compliance.monitoring.attestation",
+        "compliance.monitoring.acknowledgment"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 75,
+      "objectiveIds": [
+        "5.4"
+      ],
+      "rationaleCorrect": "Attestation includes awareness plus confirmation of compliant practice.",
+      "misconceptionTags": [
+        "compliance.monitoring.attestation_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q059",
+      "type": "multi_select",
+      "stem": "Which are common uses of the NIST CSF? (Choose TWO.)",
+      "options": {
+        "A": "Describe current cybersecurity posture",
+        "B": "Communicate cybersecurity risk to internal/external stakeholders",
+        "C": "Define specific firewall port numbers for an organization",
+        "D": "Replace all other frameworks automatically"
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "CSF helps describe current/target posture and communicate risk; it’s not a prescriptive “set these exact ports” document. The trap is C—CSF is higher-level.",
+      "tags": [
+        "frameworks.nist.csf.purpose",
+        "frameworks.nist.csf.communication"
+      ],
+      "difficulty": 3,
+      "estimated_seconds": 80,
+      "objectiveIds": [
+        "5.3"
+      ],
+      "rationaleCorrect": "CSF helps describe current/target posture and communicate risk; it’s not a prescriptive “set these exact ports” document.",
+      "misconceptionTags": [
+        "frameworks.nist.csf.purpose_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    },
+    {
+      "id": "ch16.q060",
+      "type": "mcq",
+      "stem": "Which option is MOST likely to be included in documentation updates after a change is implemented?",
+      "options": {
+        "A": "Updating network diagrams and policies/procedures as needed",
+        "B": "Deleting configuration records to avoid clutter",
+        "C": "Replacing standards with verbal instructions",
+        "D": "Ignoring dependencies to keep docs simple"
+      },
+      "answer": "A",
+      "explanation": "Change management includes updating diagrams/policies/procedures so rebuilds and audits reflect reality. The trap is B—deleting records kills institutional memory.",
+      "tags": [
+        "change_mgmt.documentation.update_diagrams",
+        "change_mgmt.documentation.update_policies"
+      ],
+      "difficulty": 2,
+      "estimated_seconds": 65,
+      "objectiveIds": [
+        "1.3"
+      ],
+      "rationaleCorrect": "Change management includes updating diagrams/policies/procedures so rebuilds and audits reflect reality.",
+      "misconceptionTags": [
+        "change_mgmt.documentation.update_diagrams_confusion"
+      ],
+      "rationaleIncorrect": {
+        "A": "This option is correct because it directly aligns with the objective requirements and the key details in the scenario.",
+        "B": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "C": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem.",
+        "D": "This option is not the best answer because it misses important objective requirements or scenario constraints described in the stem."
+      }
+    }
+  ]
+}

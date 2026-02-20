@@ -1,0 +1,808 @@
+{
+  "pack_id": "ch17",
+  "version": "1.0.0",
+  "confusion_pairs": [
+    {
+      "id": "cp17.qualitative_vs_quantitative",
+      "title": "Qualitative vs Quantitative risk analysis",
+      "a": {
+        "term": "Qualitative analysis",
+        "definition": "Uses categories (low/medium/high) to compare likelihood and impact for prioritization."
+      },
+      "b": {
+        "term": "Quantitative analysis",
+        "definition": "Uses numeric estimates (often dollars) like SLE/ALE to compare expected loss and justify spending."
+      },
+      "bullets": [
+        "Qualitative is faster and communication-friendly; quantitative is more numeric but still estimate-driven.",
+        "Qualitative output is a ranked list/heat map; quantitative output is expected loss (e.g., $/year).",
+        "Both are only as good as their assumptions—document inputs either way."
+      ]
+    },
+    {
+      "id": "cp17.likelihood_vs_impact",
+      "title": "Likelihood vs Impact",
+      "a": {
+        "term": "Likelihood",
+        "definition": "How probable/frequent an event is within a time window (or expected frequency like ARO)."
+      },
+      "b": {
+        "term": "Impact",
+        "definition": "How much damage happens if the event occurs (CIA, cost, safety, legal, reputation)."
+      },
+      "bullets": [
+        "Likelihood answers 'How often?'; impact answers 'How bad?'.",
+        "Rare-but-catastrophic can outrank frequent-but-low-impact.",
+        "Treat likelihood as evidence-based, not vibes (history, exposure, intel, controls)."
+      ]
+    },
+    {
+      "id": "cp17.inherent_vs_residual",
+      "title": "Inherent vs Residual risk",
+      "a": {
+        "term": "Inherent risk",
+        "definition": "Risk level before controls are applied (baseline exposure)."
+      },
+      "b": {
+        "term": "Residual risk",
+        "definition": "Risk that remains after controls/mitigations are in place."
+      },
+      "bullets": [
+        "Inherent = before controls; residual = after controls.",
+        "Residual is never zero in real systems; it’s what you accept, transfer, or continue to reduce.",
+        "Risk exceptions should describe residual risk, owner, scope, and expiry."
+      ]
+    },
+    {
+      "id": "cp17.appetite_tolerance_threshold",
+      "title": "Risk appetite vs Tolerance vs Threshold",
+      "a": {
+        "term": "Appetite / Tolerance",
+        "definition": "Appetite is overall willingness to accept risk; tolerance is acceptable variation within objectives."
+      },
+      "b": {
+        "term": "Threshold",
+        "definition": "A specific trigger point that forces action or escalation."
+      },
+      "bullets": [
+        "Appetite is strategic; thresholds are operational triggers.",
+        "Tolerance is the 'wiggle room' around goals; thresholds convert that into measurable rules.",
+        "Without thresholds, appetite statements become untestable slogans."
+      ]
+    },
+    {
+      "id": "cp17.rto_vs_rpo",
+      "title": "RTO vs RPO",
+      "a": {
+        "term": "RTO",
+        "definition": "Maximum acceptable downtime; how quickly service must be restored."
+      },
+      "b": {
+        "term": "RPO",
+        "definition": "Maximum acceptable data loss window measured in time; how far back you can roll data."
+      },
+      "bullets": [
+        "RTO = restore time; RPO = data loss window.",
+        "Low RPO usually requires frequent replication/backups; low RTO requires fast failover.",
+        "BIA defines these targets; DRP implements how you meet them."
+      ]
+    },
+    {
+      "id": "cp17.mtbf_vs_mttr",
+      "title": "MTBF vs MTTR",
+      "a": {
+        "term": "MTBF",
+        "definition": "Mean Time Between Failures—rough measure of reliability (time between outages)."
+      },
+      "b": {
+        "term": "MTTR",
+        "definition": "Mean Time To Repair/Recover—rough measure of how quickly you restore after failure."
+      },
+      "bullets": [
+        "MTBF = reliability; MTTR = recoverability.",
+        "Reducing MTTR often boosts availability even if MTBF is unchanged.",
+        "Redundancy can improve MTBF-like behavior, but only if failover is tested."
+      ]
+    },
+    {
+      "id": "cp17.bia_vs_drp",
+      "title": "BIA vs DRP",
+      "a": {
+        "term": "BIA (Business Impact Analysis)",
+        "definition": "Identifies critical functions and impact of disruption; sets recovery priorities and targets (RTO/RPO)."
+      },
+      "b": {
+        "term": "DRP (Disaster Recovery Plan)",
+        "definition": "The operational plan to restore IT systems/data after a disaster; executes recovery objectives."
+      },
+      "bullets": [
+        "BIA defines what matters and targets; DRP defines how to restore.",
+        "BIA is business-first; DRP is recovery execution (people + process + tech).",
+        "If DRP isn’t tested, your BIA targets are wishful thinking."
+      ]
+    },
+    {
+      "id": "cp17.anonymization_pseudonymization_tokenization",
+      "title": "Anonymization vs Pseudonymization vs Tokenization",
+      "a": {
+        "term": "Anonymization",
+        "definition": "Transforms data so re-identification is impractical (no usable link back to individuals)."
+      },
+      "b": {
+        "term": "Pseudonymization / Tokenization",
+        "definition": "Replaces identifiers (pseudonyms) or values (tokens) but keeps a re-link path via a key or vault mapping."
+      },
+      "bullets": [
+        "Anonymization aims for no re-link; pseudo/token keep a re-link mechanism.",
+        "Pseudo/token data is still sensitive because re-identification is possible with the key/vault.",
+        "Use tokenization when you need reversibility for operations; anonymize when you don’t."
+      ]
+    },
+    {
+      "id": "cp17.hashing_vs_encryption",
+      "title": "Hashing vs Encryption (privacy context)",
+      "a": {
+        "term": "Hashing",
+        "definition": "One-way transformation; useful for integrity and sometimes for protecting secrets with salts/slow hashes."
+      },
+      "b": {
+        "term": "Encryption",
+        "definition": "Reversible transformation using a key; protects confidentiality for data at rest/in transit."
+      },
+      "bullets": [
+        "Hashing is one-way; encryption is reversible with a key.",
+        "Hashing PII doesn’t automatically make it safe—lookups/inference can still re-identify.",
+        "Use encryption for confidentiality; use hashing for integrity and safe secret storage (with salt/slow hashing)."
+      ]
+    },
+    {
+      "id": "cp17.classification_business_vs_government",
+      "title": "Business vs Government data classification",
+      "a": {
+        "term": "Business classification",
+        "definition": "Org-defined labels (public/private/confidential/restricted/etc.) mapped to handling rules."
+      },
+      "b": {
+        "term": "Government classification",
+        "definition": "Legal/regulatory classification levels (unclassified/confidential/secret/top secret) with strict handling requirements."
+      },
+      "bullets": [
+        "Business labels vary by org; government labels are typically standardized and legally enforced.",
+        "Don’t assume a 1:1 mapping between the two systems.",
+        "Whatever the label, it must map to concrete controls (access, encryption, retention)."
+      ]
+    }
+  ],
+  "tag_rules": {
+    "bia.definition": {
+      "rule": "BIA identifies critical functions and impact of downtime; it sets recovery priorities.",
+      "micro_example": "Decide which service must be restored first and why.",
+      "confusion_pair_id": "cp17.bia_vs_drp"
+    },
+    "bia.metrics.mtbf": {
+      "rule": "MTBF approximates reliability (time between failures).",
+      "micro_example": "If failures happen monthly on average, MTBF ≈ 30 days.",
+      "confusion_pair_id": "cp17.mtbf_vs_mttr"
+    },
+    "bia.metrics.mttr": {
+      "rule": "MTTR is recovery speed—lower it to reduce downtime impact.",
+      "micro_example": "Automated recovery reduces MTTR from hours to minutes.",
+      "confusion_pair_id": "cp17.mtbf_vs_mttr"
+    },
+    "bia.metrics.rpo": {
+      "rule": "RPO is the maximum acceptable data loss window measured in time.",
+      "micro_example": "RPO=15 minutes means backups/replication must be at least every 15 minutes.",
+      "confusion_pair_id": "cp17.rto_vs_rpo"
+    },
+    "bia.metrics.rto": {
+      "rule": "RTO is the maximum acceptable downtime for a service.",
+      "micro_example": "RTO=4 hours means service must be restored within 4 hours.",
+      "confusion_pair_id": "cp17.rto_vs_rpo"
+    },
+    "bia.redundancy": {
+      "rule": "Redundancy improves resilience only if failover is tested and monitored.",
+      "micro_example": "Dual power + dual network paths + verified failover drills.",
+      "confusion_pair_id": "none"
+    },
+    "bia.single_point_of_failure": {
+      "rule": "Eliminate single points of failure (SPOFs) or accept downtime risk explicitly.",
+      "micro_example": "One core switch taking down everything is an avoidable SPOF.",
+      "confusion_pair_id": "none"
+    },
+    "classification.business.confidential": {
+      "rule": "Business classifications must map to concrete handling rules (access, encryption, retention).",
+      "micro_example": "Label 'confidential' data and enforce rules for storage, sharing, and logging.",
+      "confusion_pair_id": "cp17.classification_business_vs_government"
+    },
+    "classification.business.critical": {
+      "rule": "Business classifications must map to concrete handling rules (access, encryption, retention).",
+      "micro_example": "Label 'critical' data and enforce rules for storage, sharing, and logging.",
+      "confusion_pair_id": "cp17.classification_business_vs_government"
+    },
+    "classification.business.private": {
+      "rule": "Business classifications must map to concrete handling rules (access, encryption, retention).",
+      "micro_example": "Label 'private' data and enforce rules for storage, sharing, and logging.",
+      "confusion_pair_id": "cp17.classification_business_vs_government"
+    },
+    "classification.business.public": {
+      "rule": "Business classifications must map to concrete handling rules (access, encryption, retention).",
+      "micro_example": "Label 'public' data and enforce rules for storage, sharing, and logging.",
+      "confusion_pair_id": "cp17.classification_business_vs_government"
+    },
+    "classification.business.restricted": {
+      "rule": "Business classifications must map to concrete handling rules (access, encryption, retention).",
+      "micro_example": "Label 'restricted' data and enforce rules for storage, sharing, and logging.",
+      "confusion_pair_id": "cp17.classification_business_vs_government"
+    },
+    "classification.business.sensitive": {
+      "rule": "Business classifications must map to concrete handling rules (access, encryption, retention).",
+      "micro_example": "Label 'sensitive' data and enforce rules for storage, sharing, and logging.",
+      "confusion_pair_id": "cp17.classification_business_vs_government"
+    },
+    "classification.govt.confidential": {
+      "rule": "Government classification levels have strict handling requirements; follow the correct policy regime.",
+      "micro_example": "Treat 'secret' data with the mandated access controls and procedures.",
+      "confusion_pair_id": "cp17.classification_business_vs_government"
+    },
+    "classification.govt.secret": {
+      "rule": "Government classification levels have strict handling requirements; follow the correct policy regime.",
+      "micro_example": "Treat 'secret' data with the mandated access controls and procedures.",
+      "confusion_pair_id": "cp17.classification_business_vs_government"
+    },
+    "classification.govt.top_secret": {
+      "rule": "Government classification levels have strict handling requirements; follow the correct policy regime.",
+      "micro_example": "Treat 'secret' data with the mandated access controls and procedures.",
+      "confusion_pair_id": "cp17.classification_business_vs_government"
+    },
+    "classification.govt.unclassified": {
+      "rule": "Government classification levels have strict handling requirements; follow the correct policy regime.",
+      "micro_example": "Treat 'secret' data with the mandated access controls and procedures.",
+      "confusion_pair_id": "cp17.classification_business_vs_government"
+    },
+    "data_roles.data_controller": {
+      "rule": "Know and apply: data_roles data_controller.",
+      "micro_example": "Translate it into a control, a metric, or a documented decision.",
+      "confusion_pair_id": "none"
+    },
+    "data_roles.data_custodian": {
+      "rule": "Know and apply: data_roles data_custodian.",
+      "micro_example": "Translate it into a control, a metric, or a documented decision.",
+      "confusion_pair_id": "none"
+    },
+    "data_roles.data_owner": {
+      "rule": "Know and apply: data_roles data_owner.",
+      "micro_example": "Translate it into a control, a metric, or a documented decision.",
+      "confusion_pair_id": "none"
+    },
+    "data_roles.data_processor": {
+      "rule": "Know and apply: data_roles data_processor.",
+      "micro_example": "Translate it into a control, a metric, or a documented decision.",
+      "confusion_pair_id": "none"
+    },
+    "data_roles.data_steward": {
+      "rule": "Know and apply: data_roles data_steward.",
+      "micro_example": "Translate it into a control, a metric, or a documented decision.",
+      "confusion_pair_id": "none"
+    },
+    "data_roles.data_subject": {
+      "rule": "Know and apply: data_roles data_subject.",
+      "micro_example": "Translate it into a control, a metric, or a documented decision.",
+      "confusion_pair_id": "none"
+    },
+    "drp.activation_trigger": {
+      "rule": "Define activation triggers to avoid hesitation under pressure.",
+      "micro_example": "Primary site down > 60 minutes with no ETA → activate DRP.",
+      "confusion_pair_id": "none"
+    },
+    "drp.definition": {
+      "rule": "DRP is the operational plan for restoring IT systems/data after disruption.",
+      "micro_example": "Restore order, contacts, backups, alternate sites, and validation steps.",
+      "confusion_pair_id": "cp17.bia_vs_drp"
+    },
+    "drp.disaster_types": {
+      "rule": "Plan for multiple disaster types: tech failures, ransomware, natural hazards, and human error.",
+      "micro_example": "Ransomware DR differs from flood DR; have playbooks for both.",
+      "confusion_pair_id": "none"
+    },
+    "drp.site_risk_assessment": {
+      "rule": "Site risk assessment evaluates environmental/location risks (flood, power, seismic).",
+      "micro_example": "Don’t put primary and backup sites in the same flood plain.",
+      "confusion_pair_id": "none"
+    },
+    "pet.anonymization": {
+      "rule": "Anonymization aims to prevent re-identification; do it carefully or it fails.",
+      "micro_example": "Aggregate data and remove linkable identifiers; test re-identification risk.",
+      "confusion_pair_id": "cp17.anonymization_pseudonymization_tokenization"
+    },
+    "pet.data_masking": {
+      "rule": "Masking/obfuscation reduce exposure in UI/logs but don’t equal encryption.",
+      "micro_example": "Mask to last 4 digits in logs; encrypt the full value in storage.",
+      "confusion_pair_id": "none"
+    },
+    "pet.deidentification": {
+      "rule": "Pseudonymization/de-identification reduces direct identifiers but can still be re-linked.",
+      "micro_example": "Replace customer IDs with pseudonyms; protect the re-link key strongly.",
+      "confusion_pair_id": "cp17.anonymization_pseudonymization_tokenization"
+    },
+    "pet.hashing": {
+      "rule": "Hashing is one-way; salt/slow hashing is needed to resist lookup attacks.",
+      "micro_example": "Salt passwords to defeat rainbow tables; don’t treat hashed PII as 'anonymous' by default.",
+      "confusion_pair_id": "cp17.hashing_vs_encryption"
+    },
+    "pet.obfuscation": {
+      "rule": "Masking/obfuscation reduce exposure in UI/logs but don’t equal encryption.",
+      "micro_example": "Mask to last 4 digits in logs; encrypt the full value in storage.",
+      "confusion_pair_id": "none"
+    },
+    "pet.overview": {
+      "rule": "PETs reduce exposure by transforming data (minimize identifiability/linkability).",
+      "micro_example": "Tokenize sensitive values so analytics doesn’t need raw data.",
+      "confusion_pair_id": "none"
+    },
+    "pet.pseudonymization": {
+      "rule": "Pseudonymization/de-identification reduces direct identifiers but can still be re-linked.",
+      "micro_example": "Replace customer IDs with pseudonyms; protect the re-link key strongly.",
+      "confusion_pair_id": "cp17.anonymization_pseudonymization_tokenization"
+    },
+    "pet.rainbow_table_attack": {
+      "rule": "Rainbow tables crack unsalted/weak hashes using precomputed lookups.",
+      "micro_example": "Salting + slow hashing makes rainbow tables far less effective.",
+      "confusion_pair_id": "cp17.hashing_vs_encryption"
+    },
+    "pet.tokenization": {
+      "rule": "Tokenization replaces sensitive values with tokens stored via secure vault mapping.",
+      "micro_example": "Store card numbers in a vault; applications use tokens.",
+      "confusion_pair_id": "cp17.anonymization_pseudonymization_tokenization"
+    },
+    "privacy.breach_notification": {
+      "rule": "Breach notification is time-sensitive and jurisdiction-dependent; involve legal counsel early.",
+      "micro_example": "Meet deadlines for notifying regulators/affected individuals while investigation continues.",
+      "confusion_pair_id": "none"
+    },
+    "privacy.breach_notification.jurisdiction_variance": {
+      "rule": "Breach notification is time-sensitive and jurisdiction-dependent; involve legal counsel early.",
+      "micro_example": "Meet deadlines for notifying regulators/affected individuals while investigation continues.",
+      "confusion_pair_id": "none"
+    },
+    "privacy.breach_notification.legal_counsel": {
+      "rule": "Breach notification is time-sensitive and jurisdiction-dependent; involve legal counsel early.",
+      "micro_example": "Meet deadlines for notifying regulators/affected individuals while investigation continues.",
+      "confusion_pair_id": "none"
+    },
+    "privacy.data_inventory": {
+      "rule": "You can’t protect what you can’t find—maintain a data inventory and flows.",
+      "micro_example": "Track where PII lives: apps, backups, logs, SaaS, and analytics.",
+      "confusion_pair_id": "none"
+    },
+    "privacy.data_readability.human": {
+      "rule": "Privacy notices should be human-readable; policies may also be machine-readable for automation.",
+      "micro_example": "Plain-language notice + structured retention rules enforced by tooling.",
+      "confusion_pair_id": "none"
+    },
+    "privacy.data_readability.nonhuman": {
+      "rule": "Privacy notices should be human-readable; policies may also be machine-readable for automation.",
+      "micro_example": "Plain-language notice + structured retention rules enforced by tooling.",
+      "confusion_pair_id": "none"
+    },
+    "privacy.data_types.financial": {
+      "rule": "Know your sensitive data types and their obligations (PII/PHI/financial/legal/IP).",
+      "micro_example": "Inventory FINANCIAL data, restrict access, and apply retention rules.",
+      "confusion_pair_id": "none"
+    },
+    "privacy.data_types.intellectual_property": {
+      "rule": "Know your sensitive data types and their obligations (PII/PHI/financial/legal/IP).",
+      "micro_example": "Inventory INTELLECTUAL_PROPERTY data, restrict access, and apply retention rules.",
+      "confusion_pair_id": "none"
+    },
+    "privacy.data_types.legal_info": {
+      "rule": "Know your sensitive data types and their obligations (PII/PHI/financial/legal/IP).",
+      "micro_example": "Inventory LEGAL_INFO data, restrict access, and apply retention rules.",
+      "confusion_pair_id": "none"
+    },
+    "privacy.data_types.phi": {
+      "rule": "Know your sensitive data types and their obligations (PII/PHI/financial/legal/IP).",
+      "micro_example": "Inventory PHI data, restrict access, and apply retention rules.",
+      "confusion_pair_id": "none"
+    },
+    "privacy.data_types.pii": {
+      "rule": "Know your sensitive data types and their obligations (PII/PHI/financial/legal/IP).",
+      "micro_example": "Inventory PII data, restrict access, and apply retention rules.",
+      "confusion_pair_id": "none"
+    },
+    "privacy.data_types.regulated_info": {
+      "rule": "Know your sensitive data types and their obligations (PII/PHI/financial/legal/IP).",
+      "micro_example": "Inventory REGULATED_INFO data, restrict access, and apply retention rules.",
+      "confusion_pair_id": "none"
+    },
+    "privacy.dpo": {
+      "rule": "A DPO is a privacy leadership/oversight role required in some regimes.",
+      "micro_example": "Define DPO responsibilities, escalation paths, and reporting.",
+      "confusion_pair_id": "none"
+    },
+    "privacy.jurisdiction.global": {
+      "rule": "Jurisdiction changes obligations; overlapping regions can apply simultaneously.",
+      "micro_example": "Processing EU residents’ data can create EU obligations even if servers are elsewhere.",
+      "confusion_pair_id": "none"
+    },
+    "privacy.jurisdiction.local": {
+      "rule": "Jurisdiction changes obligations; overlapping regions can apply simultaneously.",
+      "micro_example": "Processing EU residents’ data can create EU obligations even if servers are elsewhere.",
+      "confusion_pair_id": "none"
+    },
+    "privacy.jurisdiction.national": {
+      "rule": "Jurisdiction changes obligations; overlapping regions can apply simultaneously.",
+      "micro_example": "Processing EU residents’ data can create EU obligations even if servers are elsewhere.",
+      "confusion_pair_id": "none"
+    },
+    "privacy.jurisdiction.regional": {
+      "rule": "Jurisdiction changes obligations; overlapping regions can apply simultaneously.",
+      "micro_example": "Processing EU residents’ data can create EU obligations even if servers are elsewhere.",
+      "confusion_pair_id": "none"
+    },
+    "privacy.legal_implications": {
+      "rule": "Treat privacy as governance + engineering: purpose, minimization, retention, and rights.",
+      "micro_example": "Make privacy controls testable and auditable.",
+      "confusion_pair_id": "none"
+    },
+    "privacy.lifecycle.data_minimization": {
+      "rule": "Design privacy across the lifecycle: collect → use → store → share → retain → destroy.",
+      "micro_example": "Implement data minimization controls with evidence (automation helps).",
+      "confusion_pair_id": "none"
+    },
+    "privacy.lifecycle.overview": {
+      "rule": "Privacy is about how personal data is collected, used, shared, retained, and deleted—plus rights and laws.",
+      "micro_example": "Secure data and also minimize it; don’t collect 'just in case'.",
+      "confusion_pair_id": "none"
+    },
+    "privacy.lifecycle.purpose_limitation": {
+      "rule": "Design privacy across the lifecycle: collect → use → store → share → retain → destroy.",
+      "micro_example": "Implement purpose limitation controls with evidence (automation helps).",
+      "confusion_pair_id": "none"
+    },
+    "privacy.lifecycle.retention": {
+      "rule": "Design privacy across the lifecycle: collect → use → store → share → retain → destroy.",
+      "micro_example": "Implement retention controls with evidence (automation helps).",
+      "confusion_pair_id": "none"
+    },
+    "privacy.lifecycle.secure_destruction": {
+      "rule": "Design privacy across the lifecycle: collect → use → store → share → retain → destroy.",
+      "micro_example": "Implement secure destruction controls with evidence (automation helps).",
+      "confusion_pair_id": "none"
+    },
+    "privacy.notice": {
+      "rule": "Notices/terms must reflect actual practices: purpose, sharing, retention, and rights.",
+      "micro_example": "Tell users what data you collect and why; don’t hide the ball.",
+      "confusion_pair_id": "none"
+    },
+    "privacy.overview": {
+      "rule": "Privacy is about how personal data is collected, used, shared, retained, and deleted—plus rights and laws.",
+      "micro_example": "Secure data and also minimize it; don’t collect 'just in case'.",
+      "confusion_pair_id": "none"
+    },
+    "privacy.right_to_be_forgotten": {
+      "rule": "Right-to-be-forgotten requests require processes that balance deletion with legal retention.",
+      "micro_example": "Delete from primary stores, document constraints for backups/retention, and confirm completion.",
+      "confusion_pair_id": "none"
+    },
+    "privacy.right_to_be_forgotten.conditions": {
+      "rule": "Right-to-be-forgotten requests require processes that balance deletion with legal retention.",
+      "micro_example": "Delete from primary stores, document constraints for backups/retention, and confirm completion.",
+      "confusion_pair_id": "none"
+    },
+    "privacy.right_to_be_forgotten.implementation_challenges": {
+      "rule": "Right-to-be-forgotten requests require processes that balance deletion with legal retention.",
+      "micro_example": "Delete from primary stores, document constraints for backups/retention, and confirm completion.",
+      "confusion_pair_id": "none"
+    },
+    "privacy.terms_statements": {
+      "rule": "Notices/terms must reflect actual practices: purpose, sharing, retention, and rights.",
+      "micro_example": "Tell users what data you collect and why; don’t hide the ball.",
+      "confusion_pair_id": "none"
+    },
+    "risk.analysis.overview": {
+      "rule": "Pick a model (qualitative/quantitative) and apply it consistently.",
+      "micro_example": "Document likelihood and impact assumptions so rankings are defensible.",
+      "confusion_pair_id": "none"
+    },
+    "risk.analysis.qualitative": {
+      "rule": "Qualitative analysis ranks risk using low/medium/high scales; great for communication.",
+      "micro_example": "Heat map shows high-likelihood/high-impact items first.",
+      "confusion_pair_id": "cp17.qualitative_vs_quantitative"
+    },
+    "risk.analysis.quantitative": {
+      "rule": "Quantitative analysis estimates expected loss (often $/year) to compare and justify controls.",
+      "micro_example": "Compute ALE and compare it to mitigation cost.",
+      "confusion_pair_id": "cp17.qualitative_vs_quantitative"
+    },
+    "risk.assessment.ad_hoc": {
+      "rule": "Ad hoc assessments are event-triggered (incident, regulation change, acquisition).",
+      "micro_example": "Post-breach, assess data retention and logging gaps.",
+      "confusion_pair_id": "none"
+    },
+    "risk.assessment.continuous": {
+      "rule": "Continuous assessment uses always-on signals (KRIs/monitoring) plus regular review.",
+      "micro_example": "Dashboard tracks unpatched critical assets; threshold triggers escalation.",
+      "confusion_pair_id": "none"
+    },
+    "risk.assessment.impact_magnitude": {
+      "rule": "Impact magnitude is the size of damage if the event occurs.",
+      "micro_example": "PII breach impact includes legal, reputation, and response costs.",
+      "confusion_pair_id": "cp17.likelihood_vs_impact"
+    },
+    "risk.assessment.likelihood": {
+      "rule": "Likelihood/probability is how often the event might occur in the chosen time window.",
+      "micro_example": "Based on exposure + history, estimate a monthly phishing incident likelihood.",
+      "confusion_pair_id": "cp17.likelihood_vs_impact"
+    },
+    "risk.assessment.one_time": {
+      "rule": "One-time risk assessments support a specific decision (launch, vendor, major change).",
+      "micro_example": "Assess risk before onboarding a new SaaS handling customer data.",
+      "confusion_pair_id": "none"
+    },
+    "risk.assessment.probability": {
+      "rule": "Likelihood/probability is how often the event might occur in the chosen time window.",
+      "micro_example": "Based on exposure + history, estimate a monthly phishing incident likelihood.",
+      "confusion_pair_id": "cp17.likelihood_vs_impact"
+    },
+    "risk.assessment.recurring": {
+      "rule": "Recurring assessments catch drift and new threats; set a cadence.",
+      "micro_example": "Quarterly risk review of privileged access and patch latency.",
+      "confusion_pair_id": "none"
+    },
+    "risk.assessment.severity_formula": {
+      "rule": "Define what you measure and how often; risk changes over time.",
+      "micro_example": "Use evidence (intel, exposure, history) and document assumptions.",
+      "confusion_pair_id": "none"
+    },
+    "risk.basics.cia_impact": {
+      "rule": "Describe impact using CIA: confidentiality, integrity, availability.",
+      "micro_example": "Ransomware primarily hits availability and integrity; breaches hit confidentiality.",
+      "confusion_pair_id": "none"
+    },
+    "risk.basics.risk_definition": {
+      "rule": "Risk is the chance that a threat exploits a vulnerability and causes impact.",
+      "micro_example": "Unpatched VPN + active exploit campaign + core access = high risk.",
+      "confusion_pair_id": "none"
+    },
+    "risk.basics.risk_intersection": {
+      "rule": "Risk appears where threat, vulnerability, and impact intersect.",
+      "micro_example": "No exposure (isolated system) can reduce practical risk even for a severe vuln.",
+      "confusion_pair_id": "none"
+    },
+    "risk.basics.threat": {
+      "rule": "Threat = potential cause of harm (actor/event) that can exploit weaknesses.",
+      "micro_example": "Ransomware group targeting exposed services.",
+      "confusion_pair_id": "none"
+    },
+    "risk.basics.vulnerability": {
+      "rule": "Vulnerability = weakness that can be exploited (tech or process).",
+      "micro_example": "Exposed RDP with weak authentication.",
+      "confusion_pair_id": "none"
+    },
+    "risk.erm.overview": {
+      "rule": "Know and apply: risk erm overview.",
+      "micro_example": "Translate it into a control, a metric, or a documented decision.",
+      "confusion_pair_id": "none"
+    },
+    "risk.identification.external": {
+      "rule": "External/multiparty risk is risk that depends on other orgs; monitor and plan exits.",
+      "micro_example": "Have transition plans for critical vendors and dependencies.",
+      "confusion_pair_id": "none"
+    },
+    "risk.identification.internal": {
+      "rule": "Supply chain risk = dependencies can fail or be compromised; manage it like first-class risk.",
+      "micro_example": "Assess, monitor, and plan contingency for vendors and components.",
+      "confusion_pair_id": "none"
+    },
+    "risk.identification.ip_theft": {
+      "rule": "Supply chain risk = dependencies can fail or be compromised; manage it like first-class risk.",
+      "micro_example": "Assess, monitor, and plan contingency for vendors and components.",
+      "confusion_pair_id": "none"
+    },
+    "risk.identification.legacy_systems": {
+      "rule": "Supply chain risk = dependencies can fail or be compromised; manage it like first-class risk.",
+      "micro_example": "Assess, monitor, and plan contingency for vendors and components.",
+      "confusion_pair_id": "none"
+    },
+    "risk.identification.multiparty": {
+      "rule": "External/multiparty risk is risk that depends on other orgs; monitor and plan exits.",
+      "micro_example": "Have transition plans for critical vendors and dependencies.",
+      "confusion_pair_id": "none"
+    },
+    "risk.identification.process": {
+      "rule": "Supply chain risk = dependencies can fail or be compromised; manage it like first-class risk.",
+      "micro_example": "Assess, monitor, and plan contingency for vendors and components.",
+      "confusion_pair_id": "none"
+    },
+    "risk.identification.software_licensing": {
+      "rule": "Supply chain risk = dependencies can fail or be compromised; manage it like first-class risk.",
+      "micro_example": "Assess, monitor, and plan contingency for vendors and components.",
+      "confusion_pair_id": "none"
+    },
+    "risk.management.acceptance": {
+      "rule": "Accept risk only with documented ownership, scope, and review date.",
+      "micro_example": "Approve a 60-day exception for a legacy system with compensating controls.",
+      "confusion_pair_id": "none"
+    },
+    "risk.management.acceptance.exception": {
+      "rule": "Risk treatment = decide: avoid, mitigate, transfer, or accept—then track.",
+      "micro_example": "Attach every risk to an owner and a plan.",
+      "confusion_pair_id": "none"
+    },
+    "risk.management.acceptance.exemption": {
+      "rule": "Risk treatment = decide: avoid, mitigate, transfer, or accept—then track.",
+      "micro_example": "Attach every risk to an owner and a plan.",
+      "confusion_pair_id": "none"
+    },
+    "risk.management.avoidance": {
+      "rule": "Avoid risk by not doing the risky thing (change the plan).",
+      "micro_example": "Cancel a deployment that exposes sensitive data publicly.",
+      "confusion_pair_id": "none"
+    },
+    "risk.management.mitigation": {
+      "rule": "Mitigate risk by reducing likelihood and/or impact with controls.",
+      "micro_example": "Add MFA and restrict exposure to reduce account takeover risk.",
+      "confusion_pair_id": "none"
+    },
+    "risk.management.overview": {
+      "rule": "Risk treatment = decide: avoid, mitigate, transfer, or accept—then track.",
+      "micro_example": "Attach every risk to an owner and a plan.",
+      "confusion_pair_id": "none"
+    },
+    "risk.management.tradeoffs": {
+      "rule": "Controls have tradeoffs (cost/usability/ops). Choose usable security or people will bypass it.",
+      "micro_example": "Strong MFA with sane UX beats harsh controls that break workflows.",
+      "confusion_pair_id": "none"
+    },
+    "risk.management.transference": {
+      "rule": "Transfer risk by shifting financial impact (insurance/contract), not the event itself.",
+      "micro_example": "Cyber insurance covers costs, but you still need controls.",
+      "confusion_pair_id": "none"
+    },
+    "risk.matrix.heat_map": {
+      "rule": "Heat maps visualize likelihood vs impact to prioritize mitigation.",
+      "micro_example": "Red quadrant risks get attention first; validate inputs so colors mean something.",
+      "confusion_pair_id": "none"
+    },
+    "risk.quant.ale": {
+      "rule": "ALE = SLE × ARO (expected loss per year).",
+      "micro_example": "SLE=$50k and ARO=0.5 → ALE=$25k/year.",
+      "confusion_pair_id": "cp17.qualitative_vs_quantitative"
+    },
+    "risk.quant.aro": {
+      "rule": "ARO is expected frequency per year.",
+      "micro_example": "ARO=0.5 means once every ~2 years on average.",
+      "confusion_pair_id": "cp17.qualitative_vs_quantitative"
+    },
+    "risk.quant.av": {
+      "rule": "AV (Asset Value) is what you stand to lose (often in dollars).",
+      "micro_example": "A critical service worth $200k/year in revenue impact.",
+      "confusion_pair_id": "cp17.qualitative_vs_quantitative"
+    },
+    "risk.quant.ef": {
+      "rule": "EF (Exposure Factor) is the % of loss per event.",
+      "micro_example": "If an incident destroys ~25% of value, EF=0.25.",
+      "confusion_pair_id": "cp17.qualitative_vs_quantitative"
+    },
+    "risk.quant.example.dos_email": {
+      "rule": "Quant risk = estimate loss (SLE) and annualize it (ALE) for decisions.",
+      "micro_example": "Compare ALE to mitigation cost to prioritize.",
+      "confusion_pair_id": "cp17.qualitative_vs_quantitative"
+    },
+    "risk.quant.probability_vs_aro": {
+      "rule": "ARO is expected frequency per year.",
+      "micro_example": "ARO=0.5 means once every ~2 years on average.",
+      "confusion_pair_id": "cp17.qualitative_vs_quantitative"
+    },
+    "risk.quant.sle": {
+      "rule": "SLE = AV × EF (loss from one event).",
+      "micro_example": "AV=$200k, EF=0.25 → SLE=$50k.",
+      "confusion_pair_id": "cp17.qualitative_vs_quantitative"
+    },
+    "risk.register.definition": {
+      "rule": "A risk register is the structured list of risks with owners, scores, and status.",
+      "micro_example": "Include risk ID, description, likelihood, impact, controls, residual, owner, due date.",
+      "confusion_pair_id": "none"
+    },
+    "risk.register.elements.kri": {
+      "rule": "KRIs are measurable risk signals; track trends and threshold breaches.",
+      "micro_example": "KRI: % critical systems unpatched > 30 days rising month-over-month.",
+      "confusion_pair_id": "none"
+    },
+    "risk.register.elements.risk_owner": {
+      "rule": "Every risk needs an owner accountable for mitigation or acceptance decisions.",
+      "micro_example": "Security identifies risk; product/ops owns decision and timeline.",
+      "confusion_pair_id": "none"
+    },
+    "risk.register.elements.risk_threshold": {
+      "rule": "Thresholds are measurable triggers that force action or escalation.",
+      "micro_example": "If unpatched critical assets > 10 for > 14 days, escalate to leadership.",
+      "confusion_pair_id": "cp17.appetite_tolerance_threshold"
+    },
+    "risk.reporting.ad_hoc": {
+      "rule": "Good reporting matches the audience: execs want trends and top risks; engineers want actions.",
+      "micro_example": "Executive: top 10 risks + trend lines. Technical: affected assets + remediation steps.",
+      "confusion_pair_id": "none"
+    },
+    "risk.reporting.audience_tailoring": {
+      "rule": "Good reporting matches the audience: execs want trends and top risks; engineers want actions.",
+      "micro_example": "Executive: top 10 risks + trend lines. Technical: affected assets + remediation steps.",
+      "confusion_pair_id": "none"
+    },
+    "risk.reporting.dashboard": {
+      "rule": "Good reporting matches the audience: execs want trends and top risks; engineers want actions.",
+      "micro_example": "Executive: top 10 risks + trend lines. Technical: affected assets + remediation steps.",
+      "confusion_pair_id": "none"
+    },
+    "risk.reporting.event_reports": {
+      "rule": "Good reporting matches the audience: execs want trends and top risks; engineers want actions.",
+      "micro_example": "Executive: top 10 risks + trend lines. Technical: affected assets + remediation steps.",
+      "confusion_pair_id": "none"
+    },
+    "risk.reporting.overview": {
+      "rule": "Good reporting matches the audience: execs want trends and top risks; engineers want actions.",
+      "micro_example": "Executive: top 10 risks + trend lines. Technical: affected assets + remediation steps.",
+      "confusion_pair_id": "none"
+    },
+    "risk.reporting.regular_updates": {
+      "rule": "Good reporting matches the audience: execs want trends and top risks; engineers want actions.",
+      "micro_example": "Executive: top 10 risks + trend lines. Technical: affected assets + remediation steps.",
+      "confusion_pair_id": "none"
+    },
+    "risk.reporting.trend_analysis": {
+      "rule": "Good reporting matches the audience: execs want trends and top risks; engineers want actions.",
+      "micro_example": "Executive: top 10 risks + trend lines. Technical: affected assets + remediation steps.",
+      "confusion_pair_id": "none"
+    },
+    "risk.tracking.inherent": {
+      "rule": "Inherent risk is before controls; use it as the baseline.",
+      "micro_example": "Internet-exposed admin portal is high inherent risk.",
+      "confusion_pair_id": "cp17.inherent_vs_residual"
+    },
+    "risk.tracking.kri": {
+      "rule": "KRIs are measurable risk signals; track trends and threshold breaches.",
+      "micro_example": "KRI: % critical systems unpatched > 30 days rising month-over-month.",
+      "confusion_pair_id": "none"
+    },
+    "risk.tracking.residual": {
+      "rule": "Residual risk is what remains after controls; it drives acceptance decisions.",
+      "micro_example": "Portal behind VPN+MFA still has residual risk—monitor and review.",
+      "confusion_pair_id": "cp17.inherent_vs_residual"
+    },
+    "risk.tracking.risk_appetite": {
+      "rule": "Risk appetite is the organization’s overall willingness to accept risk to meet goals.",
+      "micro_example": "Org has low appetite for customer data exposure—prioritize privacy controls.",
+      "confusion_pair_id": "cp17.appetite_tolerance_threshold"
+    },
+    "risk.tracking.risk_owner": {
+      "rule": "Every risk needs an owner accountable for mitigation or acceptance decisions.",
+      "micro_example": "Security identifies risk; product/ops owns decision and timeline.",
+      "confusion_pair_id": "none"
+    },
+    "risk.tracking.risk_threshold": {
+      "rule": "Thresholds are measurable triggers that force action or escalation.",
+      "micro_example": "If unpatched critical assets > 10 for > 14 days, escalate to leadership.",
+      "confusion_pair_id": "cp17.appetite_tolerance_threshold"
+    },
+    "risk.tracking.risk_tolerance": {
+      "rule": "Risk tolerance is the acceptable variation within objectives—how much deviation is allowed.",
+      "micro_example": "Tolerance: patching may slip up to 7 days, not 30.",
+      "confusion_pair_id": "cp17.appetite_tolerance_threshold"
+    },
+    "supply_chain.cloud_providers": {
+      "rule": "Cloud providers are part of your supply chain; shared responsibility still leaves you accountable.",
+      "micro_example": "Enforce strong identity, logging, and configuration controls in cloud.",
+      "confusion_pair_id": "none"
+    },
+    "supply_chain.hardware_authenticity": {
+      "rule": "Hardware authenticity prevents tampered/counterfeit gear from entering your environment.",
+      "micro_example": "Use trusted procurement and verify firmware/serials where possible.",
+      "confusion_pair_id": "none"
+    },
+    "supply_chain.vendor_due_diligence": {
+      "rule": "Vendor due diligence reduces supply chain risk before onboarding—and must continue after.",
+      "micro_example": "Review audits, breach history, data handling, and incident response commitments.",
+      "confusion_pair_id": "none"
+    }
+  }
+}
