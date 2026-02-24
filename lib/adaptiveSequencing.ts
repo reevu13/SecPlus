@@ -1028,7 +1028,7 @@ export function pickNextBestActivity(
   packs: ChapterPack[]
 ): NextBestActivity | null {
   const dummyState: LocalState = {
-    version: 1,
+    version: 2,
     masteryByTag: {},
     streak: { days: 0, lastActive: null },
     runHistory: [],
@@ -1037,7 +1037,8 @@ export function pickNextBestActivity(
     activeSessions: {},
     lessonProgress: {},
     lessonRecall: {},
-    xpTotal: 0
+    xpTotal: 0,
+    cardProgress: {}
   };
   const plan = buildNextBestActivityPlan({
     weakestObjectives,

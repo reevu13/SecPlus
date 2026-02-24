@@ -6,7 +6,7 @@ import { ChapterLesson } from './types';
 import { normalizeLessonObjectives } from './objectiveIds';
 import { LESSON_DIR } from './paths';
 
-const SCHEMA_FILES = ['chapter_lessons.v2.schema.json', 'chapter_lessons.schema.json'];
+const SCHEMA_FILES = ['chapter_lessons.v3.schema.json', 'chapter_lessons.v2.schema.json', 'chapter_lessons.schema.json'];
 let cache: ChapterLesson[] | null = null;
 let validators: ValidateFunction[] | null = null;
 

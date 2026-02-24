@@ -1,0 +1,321 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "chapter_lessons.v3.schema.json",
+  "title": "Chapter Lessons Schema v3 (Micro-Interaction Cards)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["pack_id", "version", "modules"],
+  "properties": {
+    "pack_id": { "type": "string" },
+    "version": { "type": "string" },
+    "objectiveIds": { "type": "array", "items": { "type": "string" } },
+    "modules": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/module" }
+    }
+  },
+  "$defs": {
+    "module": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "tag_ids", "pages"],
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "tag_ids": { "type": "array", "items": { "type": "string" } },
+        "objectiveIds": { "type": "array", "items": { "type": "string" } },
+        "pages": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/page" }
+        }
+      }
+    },
+
+    "page": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title"],
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "objectiveIds": { "type": "array", "items": { "type": "string" } },
+        "content_blocks": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/content_block" }
+        },
+        "checks": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/check" }
+        },
+        "cards": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/lesson_card" }
+        }
+      }
+    },
+
+    "content_block": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "text"],
+      "properties": {
+        "type": { "type": "string", "enum": ["explain", "diagram", "example", "trap"] },
+        "text": { "type": "string" }
+      }
+    },
+
+    "check": {
+      "oneOf": [
+        { "$ref": "#/$defs/check_single_choice" },
+        { "$ref": "#/$defs/check_multi_select" },
+        { "$ref": "#/$defs/check_matching" },
+        { "$ref": "#/$defs/check_cloze" }
+      ]
+    },
+    "check_single_choice": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "prompt", "options", "correct_index", "explanation"],
+      "properties": {
+        "type": { "type": "string", "const": "single_choice" },
+        "prompt": { "type": "string" },
+        "options": { "type": "array", "minItems": 2, "items": { "type": "string" } },
+        "correct_index": { "type": "integer", "minimum": 0 },
+        "explanation": { "type": "string" },
+        "objectiveIds": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "check_multi_select": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "prompt", "options", "correct_indices", "explanation"],
+      "properties": {
+        "type": { "type": "string", "const": "multi_select" },
+        "prompt": { "type": "string" },
+        "options": { "type": "array", "minItems": 2, "items": { "type": "string" } },
+        "correct_indices": { "type": "array", "minItems": 1, "items": { "type": "integer", "minimum": 0 } },
+        "explanation": { "type": "string" },
+        "objectiveIds": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "check_matching": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "prompt", "left", "right", "correct_map", "explanation"],
+      "properties": {
+        "type": { "type": "string", "const": "matching" },
+        "prompt": { "type": "string" },
+        "left": { "type": "array", "minItems": 2, "items": { "type": "string" } },
+        "right": { "type": "array", "minItems": 2, "items": { "type": "string" } },
+        "correct_map": { "type": "object", "additionalProperties": { "type": "string" } },
+        "explanation": { "type": "string" },
+        "objectiveIds": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "check_cloze": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "prompt", "answers", "explanation"],
+      "properties": {
+        "type": { "type": "string", "const": "cloze" },
+        "prompt": { "type": "string" },
+        "answers": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "explanation": { "type": "string" },
+        "objectiveIds": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "lesson_card": {
+      "oneOf": [
+        { "$ref": "#/$defs/card_mcq" },
+        { "$ref": "#/$defs/card_terminal_sim" },
+        { "$ref": "#/$defs/card_log_analyzer" },
+        { "$ref": "#/$defs/card_drag_and_drop" },
+        { "$ref": "#/$defs/card_tap_to_highlight" }
+      ]
+    },
+
+    "card_base": {
+      "type": "object",
+      "required": ["id", "text", "interaction_type", "interaction_payload"],
+      "properties": {
+        "id": { "type": "string" },
+        "text": { "type": "string", "maxLength": 250 },
+        "remediation_id": { "type": "string" },
+        "objectiveIds": { "type": "array", "items": { "type": "string" } },
+        "interaction_type": { "type": "string" },
+        "interaction_payload": { "type": "object" }
+      }
+    },
+
+    "card_mcq": {
+      "allOf": [
+        { "$ref": "#/$defs/card_base" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": true,
+            "text": true,
+            "remediation_id": true,
+            "objectiveIds": true,
+            "interaction_type": { "type": "string", "const": "mcq" },
+            "interaction_payload": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["prompt", "options", "correct_index", "explanation"],
+              "properties": {
+                "prompt": { "type": "string" },
+                "options": { "type": "array", "minItems": 2, "items": { "type": "string" } },
+                "correct_index": { "type": "integer", "minimum": 0 },
+                "explanation": { "type": "string" }
+              }
+            }
+          }
+        }
+      ]
+    },
+
+    "card_terminal_sim": {
+      "allOf": [
+        { "$ref": "#/$defs/card_base" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": true,
+            "text": true,
+            "remediation_id": true,
+            "objectiveIds": true,
+            "interaction_type": { "type": "string", "const": "terminal_sim" },
+            "interaction_payload": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["scenario", "commands"],
+              "properties": {
+                "scenario": { "type": "string" },
+                "expected_output": { "type": "string" },
+                "commands": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": ["pattern", "success_message"],
+                    "properties": {
+                      "pattern": { "type": "string" },
+                      "success_message": { "type": "string" },
+                      "hint": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+
+    "card_log_analyzer": {
+      "allOf": [
+        { "$ref": "#/$defs/card_base" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": true,
+            "text": true,
+            "remediation_id": true,
+            "objectiveIds": true,
+            "interaction_type": { "type": "string", "const": "log_analyzer" },
+            "interaction_payload": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["log_lines", "vulnerable_line_indices", "explanation"],
+              "properties": {
+                "log_lines": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+                "vulnerable_line_indices": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": { "type": "integer", "minimum": 0 }
+                },
+                "explanation": { "type": "string" }
+              }
+            }
+          }
+        }
+      ]
+    },
+
+    "card_drag_and_drop": {
+      "allOf": [
+        { "$ref": "#/$defs/card_base" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": true,
+            "text": true,
+            "remediation_id": true,
+            "objectiveIds": true,
+            "interaction_type": { "type": "string", "const": "drag_and_drop_zone" },
+            "interaction_payload": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["items", "zones", "correct_pairs", "explanation"],
+              "properties": {
+                "items": { "type": "array", "minItems": 2, "items": { "type": "string" } },
+                "zones": { "type": "array", "minItems": 2, "items": { "type": "string" } },
+                "correct_pairs": { "type": "object", "additionalProperties": { "type": "string" } },
+                "explanation": { "type": "string" }
+              }
+            }
+          }
+        }
+      ]
+    },
+
+    "card_tap_to_highlight": {
+      "allOf": [
+        { "$ref": "#/$defs/card_base" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": true,
+            "text": true,
+            "remediation_id": true,
+            "objectiveIds": true,
+            "interaction_type": { "type": "string", "const": "tap_to_highlight" },
+            "interaction_payload": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["text", "spans", "target_span_labels", "explanation"],
+              "properties": {
+                "text": { "type": "string" },
+                "spans": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": ["start", "end", "label"],
+                    "properties": {
+                      "start": { "type": "integer", "minimum": 0 },
+                      "end": { "type": "integer", "minimum": 0 },
+                      "label": { "type": "string" }
+                    }
+                  }
+                },
+                "target_span_labels": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+                "explanation": { "type": "string" }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

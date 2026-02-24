@@ -60,23 +60,23 @@ export default function ObjectiveDrillPage() {
 
   const rawObjectiveId = Array.isArray(params?.objectiveId) ? params.objectiveId[0] : (params?.objectiveId ?? '');
   const objectiveId = decodeURIComponent(rawObjectiveId).trim();
-  const packIdFilter = searchParams.get('packId')?.trim() ?? '';
-  const outlineId = searchParams.get('outlineId')?.trim() ?? '';
-  const sectionTitle = searchParams.get('sectionTitle')?.trim() ?? '';
-  const sectionHref = searchParams.get('sectionHref')?.trim() ?? '';
-  const tagFilter = normalizeTags(searchParams.get('tags'));
-  const activity = searchParams.get('activity')?.trim() ?? '';
-  const selectedTypes = normalizeTypes(searchParams.get('types'));
-  const parsedLimit = Number.parseInt(searchParams.get('limit') ?? '', 10);
+  const packIdFilter = searchParams?.get('packId')?.trim() ?? '';
+  const outlineId = searchParams?.get('outlineId')?.trim() ?? '';
+  const sectionTitle = searchParams?.get('sectionTitle')?.trim() ?? '';
+  const sectionHref = searchParams?.get('sectionHref')?.trim() ?? '';
+  const tagFilter = normalizeTags(searchParams?.get('tags') ?? null);
+  const activity = searchParams?.get('activity')?.trim() ?? '';
+  const selectedTypes = normalizeTypes(searchParams?.get('types') ?? null);
+  const parsedLimit = Number.parseInt(searchParams?.get('limit') ?? '', 10);
   const limit = Number.isFinite(parsedLimit) && parsedLimit > 0
     ? Math.min(MAX_DRILL_QUESTIONS, parsedLimit)
     : MAX_DRILL_QUESTIONS;
-  const parsedMaxDifficulty = Number.parseInt(searchParams.get('maxDifficulty') ?? '', 10);
+  const parsedMaxDifficulty = Number.parseInt(searchParams?.get('maxDifficulty') ?? '', 10);
   const maxDifficulty = Number.isFinite(parsedMaxDifficulty) && parsedMaxDifficulty >= 1 && parsedMaxDifficulty <= 5
     ? parsedMaxDifficulty
     : null;
-  const preferScenario = searchParams.get('preferScenario') === '1';
-  const planId = searchParams.get('planId')?.trim() ?? '';
+  const preferScenario = searchParams?.get('preferScenario') === '1';
+  const planId = searchParams?.get('planId')?.trim() ?? '';
 
   const filteredPacks = useMemo(() => {
     if (!packIdFilter) return packs;

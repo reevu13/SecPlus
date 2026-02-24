@@ -3,7 +3,7 @@ import { LocalState } from './types';
 const DB_NAME = 'secplus-quest-db';
 const STORE_NAME = 'app_state';
 const STATE_KEY = 'main';
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 
 function normalizeRemediation(remediation: unknown) {
   if (!Array.isArray(remediation)) return [];
@@ -25,7 +25,7 @@ function normalizeRemediation(remediation: unknown) {
 
 export function defaultLocalState(): LocalState {
   return {
-    version: 1,
+    version: 2,
     masteryByTag: {},
     streak: { days: 0, lastActive: null },
     runHistory: [],
@@ -34,7 +34,8 @@ export function defaultLocalState(): LocalState {
     activeSessions: {},
     lessonProgress: {},
     lessonRecall: {},
-    xpTotal: 0
+    xpTotal: 0,
+    cardProgress: {}
   };
 }
 
@@ -55,6 +56,7 @@ function normalizeLocalState(state: LocalState | null | undefined): LocalState {
   return {
     ...base,
     ...state,
+    version: 2,                           // migrate v1 → v2
     masteryByTag: state.masteryByTag ?? base.masteryByTag,
     streak: { ...base.streak, ...(state.streak ?? {}) },
     runHistory: state.runHistory ?? base.runHistory,
@@ -63,7 +65,8 @@ function normalizeLocalState(state: LocalState | null | undefined): LocalState {
     activeSessions: state.activeSessions ?? base.activeSessions,
     lessonProgress: state.lessonProgress ?? base.lessonProgress,
     lessonRecall: state.lessonRecall ?? base.lessonRecall,
-    xpTotal: typeof state.xpTotal === 'number' ? state.xpTotal : base.xpTotal
+    xpTotal: typeof state.xpTotal === 'number' ? state.xpTotal : base.xpTotal,
+    cardProgress: state.cardProgress ?? base.cardProgress
   };
 }
 

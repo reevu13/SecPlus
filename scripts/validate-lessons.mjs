@@ -12,8 +12,8 @@ const strictSchemaMode = ['1', 'true'].includes(String(process.env.CI ?? '').toL
 const cwd = process.cwd();
 const lessonsDir = path.join(cwd, 'content', 'chapter_lessons');
 const schemaFiles = strictSchemaMode
-  ? ['chapter_lessons.v2.schema.json']
-  : ['chapter_lessons.v2.schema.json', 'chapter_lessons.schema.json'];
+  ? ['chapter_lessons.v3.schema.json']
+  : ['chapter_lessons.v3.schema.json', 'chapter_lessons.v2.schema.json', 'chapter_lessons.schema.json'];
 
 function formatAjvError(error) {
   let pathPart = error.instancePath || '';

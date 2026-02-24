@@ -173,12 +173,124 @@ export type LessonCheckCloze = {
 
 export type LessonCheck = LessonCheckSingleChoice | LessonCheckMultiSelect | LessonCheckMatching | LessonCheckCloze;
 
+// ─── Micro-Interaction System ──────────────────────────────────────────────────
+
+/** Discriminant for LessonCard interaction types. */
+export type InteractionType =
+  | 'mcq'
+  | 'terminal_sim'
+  | 'log_analyzer'
+  | 'drag_and_drop_zone'
+  | 'tap_to_highlight';
+
+/** Multiple-choice question payload (mirrors QuestionBank MCQ but lightweight). */
+export type McqPayload = {
+  prompt: string;
+  options: string[];
+  correct_index: number;
+  explanation: string;
+};
+
+/**
+ * Terminal Simulator payload.
+ * The user types commands into a fake shell; each command is validated
+ * against a regex `pattern`. The first matching command wins.
+ */
+export type TerminalSimPayload = {
+  /** Short scenario description shown above the terminal prompt. */
+  scenario: string;
+  commands: {
+    /** JS-compatible regex string tested against the full user input line. */
+    pattern: string;
+    success_message: string;
+    hint?: string;
+  }[];
+  /** Optional text rendered as fake terminal output after success. */
+  expected_output?: string;
+};
+
+/**
+ * Log / code-block Analyzer payload.
+ * Renders `log_lines` as a numbered list; the user taps the lines
+ * identified by `vulnerable_line_indices`.
+ */
+export type LogAnalyzerPayload = {
+  log_lines: string[];
+  /** 0-based indices of lines the user must select to succeed. */
+  vulnerable_line_indices: number[];
+  explanation: string;
+};
+
+/**
+ * Drag-and-Drop Zone payload.
+ * Draggable `items` must be dropped on correct `zones`.
+ */
+export type DragAndDropPayload = {
+  items: string[];
+  zones: string[];
+  /** Maps item label → correct zone label. */
+  correct_pairs: Record<string, string>;
+  explanation: string;
+};
+
+/**
+ * Tap-to-Highlight payload.
+ * Renders a paragraph or code block as plain text; the user taps
+ * character spans identified by `target_span_labels` to succeed.
+ */
+export type TapToHighlightPayload = {
+  /** Full text rendered in the widget. */
+  text: string;
+  spans: {
+    start: number; // char offset, inclusive
+    end: number;   // char offset, exclusive
+    label: string;
+  }[];
+  /** Labels that must be selected for success. */
+  target_span_labels: string[];
+  explanation: string;
+};
+
+/** Base fields shared by every LessonCard. */
+export type LessonCardBase = {
+  id: string;
+  /**
+   * Contextual framing text shown above the interaction widget.
+   * Hard maximum: 250 characters.
+   */
+  text: string;
+  /** Card ID to surface as a remediation slide-up when this card is failed. */
+  remediation_id?: string;
+  objectiveIds?: string[];
+};
+
+/**
+ * Discriminated union over all interaction types.
+ * TypeScript narrows `interaction_payload` automatically via `interaction_type`.
+ */
+export type LessonCard =
+  | (LessonCardBase & { interaction_type: 'mcq';                interaction_payload: McqPayload })
+  | (LessonCardBase & { interaction_type: 'terminal_sim';       interaction_payload: TerminalSimPayload })
+  | (LessonCardBase & { interaction_type: 'log_analyzer';       interaction_payload: LogAnalyzerPayload })
+  | (LessonCardBase & { interaction_type: 'drag_and_drop_zone'; interaction_payload: DragAndDropPayload })
+  | (LessonCardBase & { interaction_type: 'tap_to_highlight';   interaction_payload: TapToHighlightPayload });
+
+// ─── Lesson Structure ──────────────────────────────────────────────────────────
+
 export type LessonPage = {
   id: string;
   title: string;
   objectiveIds: string[];
+  /** Legacy long-form content blocks (v1/v2 lessons). Retained for backward compat. */
   content_blocks: LessonContentBlock[];
+  /** Legacy inline checks (v1/v2 lessons). Retained for backward compat. */
   checks: LessonCheck[];
+  /**
+   * Micro-interaction cards (v3+).
+   * When present, the UI renders card-by-card instead of the scroll reader.
+   * Each card must be completed before the user can advance.
+   */
+  cards?: LessonCard[];
 };
 
 export type LessonModule = {
@@ -244,8 +356,20 @@ export type OrderingQuestion = QuestionBase & {
 
 export type Question = McqQuestion | MultiSelectQuestion | MatchingQuestion | OrderingQuestion;
 
+/**
+ * Per-card completion tracking stored in IndexedDB.
+ * Key: `LessonCard.id`
+ */
+export type CardProgress = {
+  attempts: number;
+  successes: number;
+  lastAnswered?: string; // ISO string
+  /** True once the card has been completed correctly at least once. */
+  mastered: boolean;
+};
+
 export type LocalState = {
-  version: 1;
+  version: 2;
   masteryByTag: Record<string, number>;
   streak: {
     days: number;
@@ -258,6 +382,8 @@ export type LocalState = {
   lessonProgress: Record<string, LessonProgress>;
   lessonRecall: Record<string, LessonRecallState>;
   xpTotal: number;
+  /** Per-card interaction progress. Key: LessonCard.id */
+  cardProgress: Record<string, CardProgress>;
 };
 
 export type QuestionStat = {
@@ -273,7 +399,7 @@ export type MistakeCard = {
   id: string;
   pack_id: string;
   question_id: string;
-  question_type: 'mcq' | 'multi_select' | 'matching' | 'ordering' | 'lesson';
+  question_type: 'mcq' | 'multi_select' | 'matching' | 'ordering' | 'lesson' | 'lesson_card';
   hints_used: boolean;
   objectiveIds: string[];
   misconceptionTags: string[];

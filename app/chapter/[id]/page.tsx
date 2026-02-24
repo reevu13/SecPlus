@@ -50,9 +50,9 @@ export default function ChapterLessonPage() {
   const searchParams = useSearchParams();
   const rawId = Array.isArray(params?.id) ? params?.id[0] : (params?.id ?? '');
   const packId = decodeURIComponent(rawId).trim();
-  const moduleFromQuery = searchParams.get('module')?.trim() ?? '';
-  const pageFromQuery = searchParams.get('page')?.trim() ?? '';
-  const modeFromQuery = searchParams.get('mode')?.trim() ?? '';
+  const moduleFromQuery = searchParams?.get('module')?.trim() ?? '';
+  const pageFromQuery = searchParams?.get('page')?.trim() ?? '';
+  const modeFromQuery = searchParams?.get('mode')?.trim() ?? '';
   const { packs, loaded: packsLoaded } = usePacks();
   const { lessons, loaded: lessonsLoaded } = useLessons();
   const { state, updateState, loaded: stateLoaded } = useLocalState();

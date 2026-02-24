@@ -12,3 +12,10 @@ content/tmp/
 content/_tmp/
 node_modules
 .next
+
+# TypeScript incremental build cache (auto-generated)
+*.tsbuildinfo
+
+# Custom Next.js package tarball + extracted directory (local dev only)
+next-*.tgz
+package/
