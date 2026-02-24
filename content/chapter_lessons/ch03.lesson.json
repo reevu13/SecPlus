@@ -1,0 +1,3447 @@
+{
+  "pack_id": "ch03",
+  "version": "3.0.0-generated",
+  "objectiveIds": [
+    "2.3"
+  ],
+  "modules": [
+    {
+      "id": "ch03-ch003",
+      "title": "f04",
+      "tag_ids": [],
+      "objectiveIds": [
+        "2.3"
+      ],
+      "pages": [
+        {
+          "id": "ch03-ch003-s000",
+          "title": "f04",
+          "objectiveIds": [
+            "2.3"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch03-c003-s000-k000",
+              "text": "f04: To my mother, Grace. Thank you for encouraging my love of writing since I first learned to pick up a pencil.",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"f04\": which statement is most accurate?",
+                "options": [
+                  "It is a legacy mechanism no longer supported by modern frameworks.",
+                  "To my mother, Grace. Thank you for encouraging my love of writing since I first learned to pick up a pencil.",
+                  "It depends entirely on open-source community support for patching.",
+                  "It is only applicable to on-premises deployments, not the cloud."
+                ],
+                "correct_index": 1,
+                "explanation": "Key fact: \"To my mother, Grace. Thank you for encouraging my love of writing since I first learned to pick up a pencil.\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c003-s000-k001",
+              "text": "f04: To my niece, Selah, whose imagination and joy in discovery inspires me every time I hear a new Hop Cheep story, and to my sister Susan and brother-in-law Ben, who encourage her to bravely explore the world around them.",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"f04\": which statement is most accurate?",
+                "options": [
+                  "It requires manual intervention from a systems administrator.",
+                  "It depends entirely on open-source community support for patching.",
+                  "To my niece, Selah, whose imagination and joy in discovery inspires me every time I hear a new Hop Cheep story, and to my sister Susan and brother-in-law Ben, who encourage her to bravely explore the…",
+                  "It encrypts the payload but leaves the headers in plaintext."
+                ],
+                "correct_index": 2,
+                "explanation": "Key fact: \"To my niece, Selah, whose imagination and joy in discovery inspires me every time I hear a new Hop Cheep story, and to my sister Susan and brother-in-law Ben, who encourage her to bravely explore the…\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ch03-ch011",
+      "title": "Chapter 3 Malicious Code",
+      "tag_ids": [],
+      "objectiveIds": [
+        "2.3"
+      ],
+      "pages": [
+        {
+          "id": "ch03-ch011-s000",
+          "title": "Chapter 3 Malicious Code",
+          "objectiveIds": [
+            "2.3"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch03-c011-s000-k000",
+              "text": "Chapter 3 Malicious Code: THE COMPTIA SECURITY+ EXAM OBJECTIVES COVERED IN THIS CHAPTER INCLUDE:",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Chapter 3 Malicious Code\": which statement is most accurate?",
+                "options": [
+                  "It encrypts the payload but leaves the headers in plaintext.",
+                  "THE COMPTIA SECURITY+ EXAM OBJECTIVES COVERED IN THIS CHAPTER INCLUDE:",
+                  "It is functionally identical to role-based access control.",
+                  "It operates primarily at the physical layer of the OSI model."
+                ],
+                "correct_index": 1,
+                "explanation": "Key fact: \"THE COMPTIA SECURITY+ EXAM OBJECTIVES COVERED IN THIS CHAPTER INCLUDE:\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s000-k001",
+              "text": "Chapter 3 Malicious Code: Domain 2.0: Threats, Vulnerabilities, and Mitigations 2.4. Given a scenario, analyze indicators of malicious activity. Malware attacks (Ransomware, Trojan, Worm, Spyware, Bloatware, Virus, Keylogger, Logic bomb, Rootkit)",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Domain 2.0: Threats, Vulnerabilities, and Mitigations 2.4. Given a scenario, analyze indicators of malicious activity. Malware attacks (Ransomware, Trojan, Worm, Spyware, Bloatware, Virus, Keylogger, Logic bomb, Rootkit)",
+                "spans": [
+                  {
+                    "start": 119,
+                    "end": 126,
+                    "label": "Malware"
+                  },
+                  {
+                    "start": 136,
+                    "end": 146,
+                    "label": "Ransomware"
+                  }
+                ],
+                "target_span_labels": [
+                  "Malware",
+                  "Ransomware"
+                ],
+                "explanation": "Key concepts in this Chapter 3 Malicious Code."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s000-k002",
+              "text": "Chapter 3 Malicious Code: Malware comes in many forms, from ransomware and worms to spyware, viruses, keyloggers, and rootkits that help ensure that attackers can retain access to systems once they've gained a foothold.",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Malware comes in many forms, from ransomware and worms to spyware, viruses, keyloggers, and rootkits that help ensure that attackers can retain access to systems once they've gained a foothold.",
+                "spans": [
+                  {
+                    "start": 0,
+                    "end": 7,
+                    "label": "Malware"
+                  },
+                  {
+                    "start": 34,
+                    "end": 44,
+                    "label": "ransomware"
+                  }
+                ],
+                "target_span_labels": [
+                  "Malware",
+                  "ransomware"
+                ],
+                "explanation": "Key concepts in this Chapter 3 Malicious Code."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s000-k003",
+              "text": "Chapter 3 Malicious Code: In this chapter, you will explore the various types of malware, as well as the distinguishing elements, behaviors, and traits of each malware type. You will learn about the indicators that you should look for, and the…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "In this chapter, you will explore the various types of malware, as well as the distinguishing elements, behaviors, and traits of each malware type. You will learn about the indicators that you should look for, and the response methods that organizations use to deal with each type of malware, as well as controls that can help protect against them.",
+                "spans": [
+                  {
+                    "start": 55,
+                    "end": 62,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Chapter 3 Malicious Code."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch03-ch011-s001",
+          "title": "Malware",
+          "objectiveIds": [
+            "2.3"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch03-c011-s001-k000",
+              "text": "Malware: The term malware describes a wide range of software that is intentionally designed to cause harm to systems and devices, networks, or users. Malware can also gather information, provide illicit access, and take a broad range of actions that…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "The term malware describes a wide range of software that is intentionally designed to cause harm to systems and devices, networks, or users. Malware can also gather information, provide illicit access, and take a broad range of actions that the legitimate owner of a system or network may not want to occur. The SY0-701 Security+ exam objectives include a number of the most common types of malware, and you will need to be familiar with each of them, how to tell them apart, how you can identify them, and common techniques used in combatting them.",
+                "spans": [
+                  {
+                    "start": 9,
+                    "end": 16,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Malware."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch03-ch011-s002",
+          "title": "Exam Note",
+          "objectiveIds": [
+            "2.3"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch03-c011-s002-k000",
+              "text": "Exam Note: This objective introduces many types of malware and asks you to analyze potential indicators to determine the type of attack. When you tackle malware-based questions, you will need to know the distinctive characteristics of each type of…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "This objective introduces many types of malware and asks you to analyze potential indicators to determine the type of attack. When you tackle malware-based questions, you will need to know the distinctive characteristics of each type of malware, and what might help you tell them apart. For example, a Trojan is disguised as legitimate software, whereas ransomware is aimed at getting payment from a victim. As you read this section, remember to pay attention to the differences between each type of malware, what common indicators of compromise are associated with them, and how you would answer…",
+                "spans": [
+                  {
+                    "start": 40,
+                    "end": 47,
+                    "label": "malware"
+                  },
+                  {
+                    "start": 354,
+                    "end": 364,
+                    "label": "ransomware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware",
+                  "ransomware"
+                ],
+                "explanation": "Key concepts in this Exam Note."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch03-ch011-s003-01",
+          "title": "Ransomware (1/2)",
+          "objectiveIds": [
+            "2.3"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch03-c011-s003-k000",
+              "text": "Ransomware: Ransomware is malware that takes over a computer and then demands a ransom. There are many types of ransomware, including crypto malware, which encrypts files and then holds them hostage until a ransom is paid. Other ransomware…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Ransomware is malware that takes over a computer and then demands a ransom. There are many types of ransomware, including crypto malware, which encrypts files and then holds them hostage until a ransom is paid. Other ransomware techniques include threatening to report the user to law enforcement due to pirated software or pornography, or threatening to expose sensitive information or pictures from the victim's hard drive or device.",
+                "spans": [
+                  {
+                    "start": 0,
+                    "end": 10,
+                    "label": "Ransomware"
+                  },
+                  {
+                    "start": 14,
+                    "end": 21,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "Ransomware",
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Ransomware."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s003-k001",
+              "text": "Ransomware: A significant portion of ransomware attacks are driven by phishing campaigns, with unsuspecting victims installing malware delivered via phishing emails or links in the email. That's not the only way that ransomware is delivered as…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "A significant portion of ransomware attacks are driven by phishing campaigns, with unsuspecting victims installing malware delivered via phishing emails or links in the email. That's not the only way that ransomware is delivered as malicious actors continue to use direct attack methods like Remote Desktop Protocol, vulnerable services, or front-facing applications that they can compromise.",
+                "spans": [
+                  {
+                    "start": 25,
+                    "end": 35,
+                    "label": "ransomware"
+                  },
+                  {
+                    "start": 58,
+                    "end": 66,
+                    "label": "phishing"
+                  },
+                  {
+                    "start": 115,
+                    "end": 122,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "ransomware",
+                  "phishing",
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Ransomware."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s003-k002",
+              "text": "Ransomware: Indicators of compromise (IoCs) for ransomware include, but are not limited to:",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Indicators of compromise (IoCs) for ransomware include, but are not limited to:",
+                "spans": [
+                  {
+                    "start": 36,
+                    "end": 46,
+                    "label": "ransomware"
+                  }
+                ],
+                "target_span_labels": [
+                  "ransomware"
+                ],
+                "explanation": "Key concepts in this Ransomware."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s003-k003",
+              "text": "Ransomware: Command and control (C&C) traffic and/or contact to known malicious IP addresses",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Command and control (C&C) traffic and/or contact to known malicious IP addresses",
+                "spans": [
+                  {
+                    "start": 0,
+                    "end": 20,
+                    "label": "Command and control "
+                  }
+                ],
+                "target_span_labels": [
+                  "Command and control "
+                ],
+                "explanation": "Key concepts in this Ransomware."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s003-k004",
+              "text": "Ransomware: Use of legitimate tools in abnormal ways to retain control of the compromised system",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Use of legitimate tools in abnormal ways to retain control of the compromised system",
+                "spans": [
+                  {
+                    "start": 0,
+                    "end": 20,
+                    "label": "Use of legitimate to"
+                  }
+                ],
+                "target_span_labels": [
+                  "Use of legitimate to"
+                ],
+                "explanation": "Key concepts in this Ransomware."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s003-k005",
+              "text": "Ransomware: Lateral movement processes that seek to attack or gain information about other systems or devices inside the same trust boundaries",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Lateral movement processes that seek to attack or gain information about other systems or devices inside the same trust boundaries",
+                "spans": [
+                  {
+                    "start": 0,
+                    "end": 20,
+                    "label": "Lateral movement pro"
+                  }
+                ],
+                "target_span_labels": [
+                  "Lateral movement pro"
+                ],
+                "explanation": "Key concepts in this Ransomware."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s003-k006",
+              "text": "Ransomware: Notices to end users of the encryption process with demands for ransom",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Notices to end users of the encryption process with demands for ransom",
+                "spans": [
+                  {
+                    "start": 0,
+                    "end": 20,
+                    "label": "Notices to end users"
+                  }
+                ],
+                "target_span_labels": [
+                  "Notices to end users"
+                ],
+                "explanation": "Key concepts in this Ransomware."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s003-k007",
+              "text": "Ransomware: Data exfiltration behaviors, including large file transfers",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Data exfiltration behaviors, including large file transfers",
+                "spans": [
+                  {
+                    "start": 0,
+                    "end": 20,
+                    "label": "Data exfiltration be"
+                  }
+                ],
+                "target_span_labels": [
+                  "Data exfiltration be"
+                ],
+                "explanation": "Key concepts in this Ransomware."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch03-ch011-s003-02",
+          "title": "Ransomware (2/2)",
+          "objectiveIds": [
+            "2.3"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch03-c011-s003-k008",
+              "text": "Ransomware: You can read an example of a ransomware advisory provided by the U.S. Cybersecurity & Infrastructure Security Agency (CISA) about the Royal Ransomware variant, including a detailed list of specific IoCs, at…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "You can read an example of a ransomware advisory provided by the U.S. Cybersecurity & Infrastructure Security Agency (CISA) about the Royal Ransomware variant, including a detailed list of specific IoCs, at www.cisa.gov/news-events/cybersecurity-advisories/aa23-061a.",
+                "spans": [
+                  {
+                    "start": 29,
+                    "end": 39,
+                    "label": "ransomware"
+                  }
+                ],
+                "target_span_labels": [
+                  "ransomware"
+                ],
+                "explanation": "Key concepts in this Ransomware."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s003-k009",
+              "text": "Ransomware: One of the most important defenses against ransomware is an effective backup system that stores files in a separate location that will not be impacted if the system or device it backs up is infected and encrypted by ransomware.…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "One of the most important defenses against ransomware is an effective backup system that stores files in a separate location that will not be impacted if the system or device it backs up is infected and encrypted by ransomware. Organizations that are preparing to deal with ransomware need to determine what their response will be; in some cases, paying ransoms has resulted in files being returned, and in others attackers merely demanded more money.",
+                "spans": [
+                  {
+                    "start": 43,
+                    "end": 53,
+                    "label": "ransomware"
+                  }
+                ],
+                "target_span_labels": [
+                  "ransomware"
+                ],
+                "explanation": "Key concepts in this Ransomware."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s003-k010",
+              "text": "Ransomware: Some ransomware has been defeated, and defenders may be able to use a preexisting decryption tool to restore files. Antivirus and antimalware providers as well as others in the security community provide anti-ransomware tools.",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Some ransomware has been defeated, and defenders may be able to use a preexisting decryption tool to restore files. Antivirus and antimalware providers as well as others in the security community provide anti-ransomware tools.",
+                "spans": [
+                  {
+                    "start": 5,
+                    "end": 15,
+                    "label": "ransomware"
+                  }
+                ],
+                "target_span_labels": [
+                  "ransomware"
+                ],
+                "explanation": "Key concepts in this Ransomware."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch03-ch011-s004-01",
+          "title": "Trojans (1/2)",
+          "objectiveIds": [
+            "2.3"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch03-c011-s004-k000",
+              "text": "Trojans: Trojans, or Trojan horses, are a type of malware that is typically disguised as legitimate software. They are called Trojan horses because they rely on unsuspecting individuals running them, thus providing attackers with a path into a…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Trojans, or Trojan horses, are a type of malware that is typically disguised as legitimate software. They are called Trojan horses because they rely on unsuspecting individuals running them, thus providing attackers with a path into a system or device. Figure 3.1 shows an example of a Trojan infection path starting with a user downloading an application from the Android app store that appears to be legitimate through automated download of malicious add-ons and remote control of the device.",
+                "spans": [
+                  {
+                    "start": 41,
+                    "end": 48,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Trojans."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s004-k001",
+              "text": "Trojans: FIGURE 3.1 Trojan application download and infection process",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Trojans\": which statement is most accurate?",
+                "options": [
+                  "It requires manual intervention from a systems administrator.",
+                  "It is functionally identical to role-based access control.",
+                  "It is a preventative control designed to block traffic implicitly.",
+                  "FIGURE 3.1 Trojan application download and infection process"
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"FIGURE 3.1 Trojan application download and infection process\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s004-k002",
+              "text": "Trojans: An example of this type of malware is the Triada Trojan, which is often distributed in the guise of a modified, feature-enhanced WhatsApp version. When the application is launched, the Trojan gathers information about the host device…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "An example of this type of malware is the Triada Trojan, which is often distributed in the guise of a modified, feature-enhanced WhatsApp version. When the application is launched, the Trojan gathers information about the host device including device IDs, subscriber IDs, and the device's hardware address. This information is used to register the device with a remote server. With that information ready, the Trojan is downloaded, decrypted, and run, allowing further actions to take place depending on what the malicious actor wants to occur. Those activities include everything from displaying…",
+                "spans": [
+                  {
+                    "start": 27,
+                    "end": 34,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Trojans."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s004-k003",
+              "text": "Trojans: Indicators of compromise for Trojans often include:",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Trojans\": which statement is most accurate?",
+                "options": [
+                  "It operates primarily at the physical layer of the OSI model.",
+                  "It depends entirely on open-source community support for patching.",
+                  "Indicators of compromise for Trojans often include:",
+                  "It decreases overall security but improves network latency."
+                ],
+                "correct_index": 2,
+                "explanation": "Key fact: \"Indicators of compromise for Trojans often include:\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s004-k004",
+              "text": "Trojans: Signatures for the specific malware applications or downloadable files",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Signatures for the specific malware applications or downloadable files",
+                "spans": [
+                  {
+                    "start": 28,
+                    "end": 35,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Trojans."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s004-k005",
+              "text": "Trojans: Command and control system hostnames and IP addresses",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Trojans\": which statement is most accurate?",
+                "options": [
+                  "It uses UDP to ensure guaranteed delivery of all packets.",
+                  "It is a legacy mechanism no longer supported by modern frameworks.",
+                  "It requires manual intervention from a systems administrator.",
+                  "Command and control system hostnames and IP addresses"
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"Command and control system hostnames and IP addresses\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s004-k006",
+              "text": "Trojans: Folders or files created on target devices",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Trojans\": which statement is most accurate?",
+                "options": [
+                  "It requires installing a dedicated agent on every endpoint.",
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "Folders or files created on target devices",
+                  "It is a legacy mechanism no longer supported by modern frameworks."
+                ],
+                "correct_index": 2,
+                "explanation": "Key fact: \"Folders or files created on target devices\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s004-k007",
+              "text": "Trojans: A full writeup about the Triada Trojan that was deployed via modified WhatsApp versions can be found at:",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Trojans\": which statement is most accurate?",
+                "options": [
+                  "A full writeup about the Triada Trojan that was deployed via modified WhatsApp versions can be found at:",
+                  "It is a legacy mechanism no longer supported by modern frameworks.",
+                  "It is a legacy mechanism no longer supported by modern frameworks.",
+                  "It operates primarily at the physical layer of the OSI model."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"A full writeup about the Triada Trojan that was deployed via modified WhatsApp versions can be found at:\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch03-ch011-s004-02",
+          "title": "Trojans (2/2)",
+          "objectiveIds": [
+            "2.3"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch03-c011-s004-k008",
+              "text": "Trojans: And additional detail can be found here:",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Trojans\": which statement is most accurate?",
+                "options": [
+                  "It is functionally identical to role-based access control.",
+                  "It requires installing a dedicated agent on every endpoint.",
+                  "And additional detail can be found here:",
+                  "It is a preventative control designed to block traffic implicitly."
+                ],
+                "correct_index": 2,
+                "explanation": "Key fact: \"And additional detail can be found here:\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s004-k009",
+              "text": "Trojans: In addition to traditional Trojans, remote access Trojans (RATs) provide attackers with remote access to systems. Some legitimate remote access tools are used as RATs, which can make it difficult to identify whether a tool is a legitimate…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Trojans\": which statement is most accurate?",
+                "options": [
+                  "In addition to traditional Trojans, remote access Trojans (RATs) provide attackers with remote access to systems. Some legitimate remote access tools are used as RATs, which can make it difficult to…",
+                  "It is functionally identical to role-based access control.",
+                  "It is a preventative control designed to block traffic implicitly.",
+                  "It relies solely on symmetric encryption for all its transactions."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"In addition to traditional Trojans, remote access Trojans (RATs) provide attackers with remote access to systems. Some legitimate remote access tools are used as RATs, which can make it difficult to…\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s004-k010",
+              "text": "Trojans: Mitigation practices for Trojans typically starts with awareness practices that help ensure that downloading and running Trojans are less likely. Controlling the software and applications that users can acquire can be a helpful option in…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Mitigation practices for Trojans typically starts with awareness practices that help ensure that downloading and running Trojans are less likely. Controlling the software and applications that users can acquire can be a helpful option in many cases, but is often balanced with the need to allow for flexibility for users. Anti-malware, EDR, and other tools used to identify and stop malicious software from running or which can discover it based on behavior and stop it are also commonly used as a final line of defense.",
+                "spans": [
+                  {
+                    "start": 327,
+                    "end": 334,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Trojans."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch03-ch011-s005",
+          "title": "Bots, Botnets, and Command and Control",
+          "objectiveIds": [
+            "2.3"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch03-c011-s005-k000",
+              "text": "Bots, Botnets, and Command and Control: Many types of malware use command and control (C&C) techniques and systems to allow attackers to tell them what to do. These groups of systems that are under central command are called botnets, and individual…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Many types of malware use command and control (C&C) techniques and systems to allow attackers to tell them what to do. These groups of systems that are under central command are called botnets, and individual systems are called bots.",
+                "spans": [
+                  {
+                    "start": 14,
+                    "end": 21,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Bots, Botnets, and Command and Control."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s005-k001",
+              "text": "Bots, Botnets, and Command and Control: C&C increasingly uses encrypted HTTP connections, which are then used to connect to a frequently changing set of remote hosts to attempt to avoid observation, but use of Internet Relay Chat (IRC) via port 6667…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Bots, Botnets, and Command and Control\": which statement is most accurate?",
+                "options": [
+                  "It depends entirely on open-source community support for patching.",
+                  "It encrypts the payload but leaves the headers in plaintext.",
+                  "It is a preventative control designed to block traffic implicitly.",
+                  "C&C increasingly uses encrypted HTTP connections, which are then used to connect to a frequently changing set of remote hosts to attempt to avoid observation, but use of Internet Relay Chat (IRC) via…"
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"C&C increasingly uses encrypted HTTP connections, which are then used to connect to a frequently changing set of remote hosts to attempt to avoid observation, but use of Internet Relay Chat (IRC) via…\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch03-ch011-s006",
+          "title": "Worms",
+          "objectiveIds": [
+            "2.3"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch03-c011-s006-k000",
+              "text": "Worms: Unlike Trojans that require user interaction, worms spread themselves. While worms are often associated with spreading via attacks on vulnerable services, any type of spread via automated means is possible, meaning that worms can spread via…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Worms\": which statement is most accurate?",
+                "options": [
+                  "It decreases overall security but improves network latency.",
+                  "It is a legacy mechanism no longer supported by modern frameworks.",
+                  "It requires manual intervention from a systems administrator.",
+                  "Unlike Trojans that require user interaction, worms spread themselves. While worms are often associated with spreading via attacks on vulnerable services, any type of spread via automated means is…"
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"Unlike Trojans that require user interaction, worms spread themselves. While worms are often associated with spreading via attacks on vulnerable services, any type of spread via automated means is…\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch03-ch011-s007-01",
+          "title": "Stuxnet: Nation-State-Level Worm Attacks (1/2)",
+          "objectiveIds": [
+            "2.3"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch03-c011-s007-k000",
+              "text": "Stuxnet: Nation-State-Level Worm Attacks: The 2010 Stuxnet attack is generally recognized as the first implementation of a worm as a cyber weapon. The worm was aimed at the Iranian nuclear program, and copied itself to thumb drives to bypass…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Stuxnet: Nation-State-Level Worm Attacks\": which statement is most accurate?",
+                "options": [
+                  "The 2010 Stuxnet attack is generally recognized as the first implementation of a worm as a cyber weapon. The worm was aimed at the Iranian nuclear program, and copied itself to thumb drives to bypass…",
+                  "It encrypts the payload but leaves the headers in plaintext.",
+                  "It decreases overall security but improves network latency.",
+                  "It is a preventative control designed to block traffic implicitly."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"The 2010 Stuxnet attack is generally recognized as the first implementation of a worm as a cyber weapon. The worm was aimed at the Iranian nuclear program, and copied itself to thumb drives to bypass…\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s007-k001",
+              "text": "Stuxnet: Nation-State-Level Worm Attacks: While Stuxnet was specifically designed to bypass physically separated networks, firewalls and network-level controls remain one of the best ways to mitigate worm attacks. If compromised devices cannot…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Stuxnet: Nation-State-Level Worm Attacks\": which statement is most accurate?",
+                "options": [
+                  "While Stuxnet was specifically designed to bypass physically separated networks, firewalls and network-level controls remain one of the best ways to mitigate worm attacks. If compromised devices…",
+                  "It decreases overall security but improves network latency.",
+                  "It relies on MAC addresses for wide-area network pathing.",
+                  "It encrypts the payload but leaves the headers in plaintext."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"While Stuxnet was specifically designed to bypass physically separated networks, firewalls and network-level controls remain one of the best ways to mitigate worm attacks. If compromised devices…\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s007-k002",
+              "text": "Stuxnet: Nation-State-Level Worm Attacks: You can read about Stuxnet in more depth at",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Stuxnet: Nation-State-Level Worm Attacks\": which statement is most accurate?",
+                "options": [
+                  "It is a preventative control designed to block traffic implicitly.",
+                  "It depends entirely on open-source community support for patching.",
+                  "It decreases overall security but improves network latency.",
+                  "You can read about Stuxnet in more depth at"
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"You can read about Stuxnet in more depth at\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s007-k003",
+              "text": "Stuxnet: Nation-State-Level Worm Attacks: An example of a modern worm is Raspberry Robin, a worm that is used as part of pre-ransomware activity. Raspberry Robin's spread was initially through infected USB drives using a LNK file. Once running, it…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "An example of a modern worm is Raspberry Robin, a worm that is used as part of pre-ransomware activity. Raspberry Robin's spread was initially through infected USB drives using a LNK file. Once running, it uses built-in Windows tools to accomplish further tasks and to obtain persistency, ensuring it will survive past reboots.",
+                "spans": [
+                  {
+                    "start": 83,
+                    "end": 93,
+                    "label": "ransomware"
+                  }
+                ],
+                "target_span_labels": [
+                  "ransomware"
+                ],
+                "explanation": "Key concepts in this Stuxnet: Nation-State-Level Worm Attacks."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s007-k004",
+              "text": "Stuxnet: Nation-State-Level Worm Attacks: Common IoCs for worms like Raspberry Robin include:",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Stuxnet: Nation-State-Level Worm Attacks\": which statement is most accurate?",
+                "options": [
+                  "It is a legacy mechanism no longer supported by modern frameworks.",
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "It encrypts the payload but leaves the headers in plaintext.",
+                  "Common IoCs for worms like Raspberry Robin include:"
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"Common IoCs for worms like Raspberry Robin include:\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s007-k005",
+              "text": "Stuxnet: Nation-State-Level Worm Attacks: Downloads of additional components from remote systems",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Stuxnet: Nation-State-Level Worm Attacks\": which statement is most accurate?",
+                "options": [
+                  "Downloads of additional components from remote systems",
+                  "It operates primarily at the physical layer of the OSI model.",
+                  "It is functionally identical to role-based access control.",
+                  "It is a preventative control designed to block traffic implicitly."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"Downloads of additional components from remote systems\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s007-k006",
+              "text": "Stuxnet: Nation-State-Level Worm Attacks: Command and control contact to remote systems",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Stuxnet: Nation-State-Level Worm Attacks\": which statement is most accurate?",
+                "options": [
+                  "It encrypts the payload but leaves the headers in plaintext.",
+                  "It decreases overall security but improves network latency.",
+                  "Command and control contact to remote systems",
+                  "It encrypts the payload but leaves the headers in plaintext."
+                ],
+                "correct_index": 2,
+                "explanation": "Key fact: \"Command and control contact to remote systems\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s007-k007",
+              "text": "Stuxnet: Nation-State-Level Worm Attacks: Malicious behaviors using system commands for injection and other activities, including use of cmd.exe, msiexec.exe, and others",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Stuxnet: Nation-State-Level Worm Attacks\": which statement is most accurate?",
+                "options": [
+                  "Malicious behaviors using system commands for injection and other activities, including use of cmd.exe, msiexec.exe, and others",
+                  "It operates primarily at the physical layer of the OSI model.",
+                  "It depends entirely on open-source community support for patching.",
+                  "It is a preventative control designed to block traffic implicitly."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"Malicious behaviors using system commands for injection and other activities, including use of cmd.exe, msiexec.exe, and others\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch03-ch011-s007-02",
+          "title": "Stuxnet: Nation-State-Level Worm Attacks (2/2)",
+          "objectiveIds": [
+            "2.3"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch03-c011-s007-k008",
+              "text": "Stuxnet: Nation-State-Level Worm Attacks: Microsoft provides a detailed write-up of the Raspberry Robin worm, including recommendations for defensive actions to be taken, at",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Stuxnet: Nation-State-Level Worm Attacks\": which statement is most accurate?",
+                "options": [
+                  "Microsoft provides a detailed write-up of the Raspberry Robin worm, including recommendations for defensive actions to be taken, at",
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "It decreases overall security but improves network latency.",
+                  "It depends entirely on open-source community support for patching."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"Microsoft provides a detailed write-up of the Raspberry Robin worm, including recommendations for defensive actions to be taken, at\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s007-k009",
+              "text": "Stuxnet: Nation-State-Level Worm Attacks: Mitigating worm infections frequently starts with effective network-level controls focused on preventing infection traffic. Firewalls, IPS devices, network segmentation, and similar controls are the first…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Mitigating worm infections frequently starts with effective network-level controls focused on preventing infection traffic. Firewalls, IPS devices, network segmentation, and similar controls are the first layer of defense. Patching and configuring services to limit attack surfaces is also a best practice for preventing worms. After an infection responses may include use of antimalware, EDR, and similar tools to stop and potentially remove infections. Depending on the complexity of the malware, removal may be nearly impossible, and as with many types of malware reinstallation or resetting to…",
+                "spans": [
+                  {
+                    "start": 490,
+                    "end": 497,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Stuxnet: Nation-State-Level Worm Attacks."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch03-ch011-s008-01",
+          "title": "Spyware (1/2)",
+          "objectiveIds": [
+            "2.3"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch03-c011-s008-k000",
+              "text": "Spyware: Spyware is malware that is designed to obtain information about an individual, organization, or system. Various types of spyware exist, with different types of information targeted by each. Many spyware packages track users' browsing…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Spyware is malware that is designed to obtain information about an individual, organization, or system. Various types of spyware exist, with different types of information targeted by each. Many spyware packages track users' browsing habits, installed software, or similar information and report it back to central servers. Some spyware is relatively innocuous, but malicious spyware exists that targets sensitive data, allows remote access to web cameras, or otherwise provides illicit or undesirable access to the systems it is installed on. Spyware is associated with identity theft and fraud,…",
+                "spans": [
+                  {
+                    "start": 11,
+                    "end": 18,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Spyware."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s008-k001",
+              "text": "Spyware: Spyware is most frequently combated using antimalware tools, although user awareness can help prevent the installation of spyware that is included in installers for software (thus acting as a form of Trojan), or through other means where…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Spyware\": which statement is most accurate?",
+                "options": [
+                  "Spyware is most frequently combated using antimalware tools, although user awareness can help prevent the installation of spyware that is included in installers for software (thus acting as a form of…",
+                  "It depends entirely on open-source community support for patching.",
+                  "It relies solely on symmetric encryption for all its transactions.",
+                  "It requires manual intervention from a systems administrator."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"Spyware is most frequently combated using antimalware tools, although user awareness can help prevent the installation of spyware that is included in installers for software (thus acting as a form of…\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s008-k002",
+              "text": "Spyware: Spyware comes in many forms, which means that its IoCs can be very similar to other malicious software types. Common examples of spyware IoCs include:",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Spyware\": which statement is most accurate?",
+                "options": [
+                  "It is a legacy mechanism no longer supported by modern frameworks.",
+                  "It is functionally identical to role-based access control.",
+                  "It requires manual intervention from a systems administrator.",
+                  "Spyware comes in many forms, which means that its IoCs can be very similar to other malicious software types. Common examples of spyware IoCs include:"
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"Spyware comes in many forms, which means that its IoCs can be very similar to other malicious software types. Common examples of spyware IoCs include:\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s008-k003",
+              "text": "Spyware: Remote-access and remote-control-related indicators",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Spyware\": which statement is most accurate?",
+                "options": [
+                  "It decreases overall security but improves network latency.",
+                  "It requires installing a dedicated agent on every endpoint.",
+                  "Remote-access and remote-control-related indicators",
+                  "It encrypts the payload but leaves the headers in plaintext."
+                ],
+                "correct_index": 2,
+                "explanation": "Key fact: \"Remote-access and remote-control-related indicators\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s008-k004",
+              "text": "Spyware: Known software file fingerprints",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Spyware\": which statement is most accurate?",
+                "options": [
+                  "Known software file fingerprints",
+                  "It operates primarily at the physical layer of the OSI model.",
+                  "It is a legacy mechanism no longer supported by modern frameworks.",
+                  "It is functionally identical to role-based access control."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"Known software file fingerprints\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s008-k005",
+              "text": "Spyware: Malicious processes, often disguised as system processes",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Spyware\": which statement is most accurate?",
+                "options": [
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "It is functionally identical to role-based access control.",
+                  "It encrypts the payload but leaves the headers in plaintext.",
+                  "Malicious processes, often disguised as system processes"
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"Malicious processes, often disguised as system processes\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s008-k006",
+              "text": "Spyware: Injection attacks against browsers",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Spyware\": which statement is most accurate?",
+                "options": [
+                  "It is functionally identical to role-based access control.",
+                  "Injection attacks against browsers",
+                  "It decreases overall security but improves network latency.",
+                  "It encrypts the payload but leaves the headers in plaintext."
+                ],
+                "correct_index": 1,
+                "explanation": "Key fact: \"Injection attacks against browsers\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s008-k007",
+              "text": "Spyware: Since spyware uses techniques from other types of malware, defining software as spyware typically requires understanding its use and motivations rather than just its behavior. Thus, spyware may use Trojan, worm, or virus-style propagation…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Since spyware uses techniques from other types of malware, defining software as spyware typically requires understanding its use and motivations rather than just its behavior. Thus, spyware may use Trojan, worm, or virus-style propagation methods in some cases, but the intent is to gather information about a user or system, with the methods used being less important than the goal.",
+                "spans": [
+                  {
+                    "start": 50,
+                    "end": 57,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Spyware."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch03-ch011-s008-02",
+          "title": "Spyware (2/2)",
+          "objectiveIds": [
+            "2.3"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch03-c011-s008-k008",
+              "text": "Spyware: Mitigation practices for spyware focus on awareness, control of the software that is allowed on devices and systems, and antispyware capabilities built into antimalware tools. Since spyware is generally perceived as less of a threat than…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Mitigation practices for spyware focus on awareness, control of the software that is allowed on devices and systems, and antispyware capabilities built into antimalware tools. Since spyware is generally perceived as less of a threat than many types of malware, it is commonly categorized separately and may require specific configuration to identify and remove it.",
+                "spans": [
+                  {
+                    "start": 252,
+                    "end": 259,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Spyware."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s008-k009",
+              "text": "Spyware: An example of a commercialized spyware tool is NSO Group's Pegasus spyware tool. Amnesty International provides a thorough write-up of indicators and actions taken by Pegasus here:",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Spyware\": which statement is most accurate?",
+                "options": [
+                  "It is functionally identical to role-based access control.",
+                  "An example of a commercialized spyware tool is NSO Group's Pegasus spyware tool. Amnesty International provides a thorough write-up of indicators and actions taken by Pegasus here:",
+                  "It requires installing a dedicated agent on every endpoint.",
+                  "It relies solely on symmetric encryption for all its transactions."
+                ],
+                "correct_index": 1,
+                "explanation": "Key fact: \"An example of a commercialized spyware tool is NSO Group's Pegasus spyware tool. Amnesty International provides a thorough write-up of indicators and actions taken by Pegasus here:\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch03-ch011-s009",
+          "title": "Bloatware",
+          "objectiveIds": [
+            "2.3"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch03-c011-s009-k000",
+              "text": "Bloatware: If you have ever purchased a new computer and discovered preinstalled applications that you didn't want on it, you've encountered bloatware. The term bloatware is an all-encompassing term used to describe unwanted applications installed…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Bloatware\": which statement is most accurate?",
+                "options": [
+                  "It is a legacy mechanism no longer supported by modern frameworks.",
+                  "If you have ever purchased a new computer and discovered preinstalled applications that you didn't want on it, you've encountered bloatware. The term bloatware is an all-encompassing term used to…",
+                  "It requires manual intervention from a systems administrator.",
+                  "It depends entirely on open-source community support for patching."
+                ],
+                "correct_index": 1,
+                "explanation": "Key fact: \"If you have ever purchased a new computer and discovered preinstalled applications that you didn't want on it, you've encountered bloatware. The term bloatware is an all-encompassing term used to…\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s009-k001",
+              "text": "Bloatware: Unlike the other malicious software categories listed in this chapter, bloatware isn't usually intentionally malicious. It may, however, be poorly written, may call home with information about your system or usage, or may prove to be…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Bloatware\": which statement is most accurate?",
+                "options": [
+                  "Unlike the other malicious software categories listed in this chapter, bloatware isn't usually intentionally malicious. It may, however, be poorly written, may call home with information about your…",
+                  "It is functionally identical to role-based access control.",
+                  "It relies solely on symmetric encryption for all its transactions.",
+                  "It operates primarily at the physical layer of the OSI model."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"Unlike the other malicious software categories listed in this chapter, bloatware isn't usually intentionally malicious. It may, however, be poorly written, may call home with information about your…\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s009-k002",
+              "text": "Bloatware: Since bloatware isn't really malicious software, it isn't typically associated with IoCs. Instead it should simply be removed to prevent issues—including simply taking up disk space, memory, and CPU cycles without providing any benefit.…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Bloatware\": which statement is most accurate?",
+                "options": [
+                  "Since bloatware isn't really malicious software, it isn't typically associated with IoCs. Instead it should simply be removed to prevent issues—including simply taking up disk space, memory, and CPU…",
+                  "It encrypts the payload but leaves the headers in plaintext.",
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "It operates primarily at the physical layer of the OSI model."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"Since bloatware isn't really malicious software, it isn't typically associated with IoCs. Instead it should simply be removed to prevent issues—including simply taking up disk space, memory, and CPU…\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch03-ch011-s010",
+          "title": "Exam Note",
+          "objectiveIds": [
+            "2.3"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch03-c011-s010-k000",
+              "text": "Exam Note: The Security+ exam outline calls out spyware and bloatware, but they can sometimes be difficult to tell apart since manufacturers who install bloatware often have call-home functionality built into the bloatware. The key differentiator is…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Exam Note\": which statement is most accurate?",
+                "options": [
+                  "It relies solely on symmetric encryption for all its transactions.",
+                  "It is a hashing algorithm vulnerable to collision attacks.",
+                  "The Security+ exam outline calls out spyware and bloatware, but they can sometimes be difficult to tell apart since manufacturers who install bloatware often have call-home functionality built into…",
+                  "It is a legacy mechanism no longer supported by modern frameworks."
+                ],
+                "correct_index": 2,
+                "explanation": "Key fact: \"The Security+ exam outline calls out spyware and bloatware, but they can sometimes be difficult to tell apart since manufacturers who install bloatware often have call-home functionality built into…\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch03-ch011-s011-01",
+          "title": "Viruses (1/2)",
+          "objectiveIds": [
+            "2.3"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch03-c011-s011-k000",
+              "text": "Viruses: Computer viruses are malicious programs that self-copy and self-replicate once they are activated. Unlike worms, they don't spread themselves via vulnerable services and networks. Viruses require one or more infection mechanisms that they…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Computer viruses are malicious programs that self-copy and self-replicate once they are activated. Unlike worms, they don't spread themselves via vulnerable services and networks. Viruses require one or more infection mechanisms that they use to spread themselves, like copying to a thumb drive or network share, and that mechanism is typically paired with some form of search capability to find new places to spread to once they are run. Viruses also typically have both a trigger, which sets the conditions for when the virus will execute, and a payload, which is what the virus does, delivers, or…",
+                "spans": [
+                  {
+                    "start": 180,
+                    "end": 187,
+                    "label": "Viruses"
+                  }
+                ],
+                "target_span_labels": [
+                  "Viruses"
+                ],
+                "explanation": "Key concepts in this Viruses."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s011-k001",
+              "text": "Viruses: Memory-resident viruses, which remain in memory while the system of the device is running",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Viruses\": which statement is most accurate?",
+                "options": [
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "Memory-resident viruses, which remain in memory while the system of the device is running",
+                  "It operates primarily at the physical layer of the OSI model.",
+                  "It requires manual intervention from a systems administrator."
+                ],
+                "correct_index": 1,
+                "explanation": "Key fact: \"Memory-resident viruses, which remain in memory while the system of the device is running\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s011-k002",
+              "text": "Viruses: Non-memory-resident viruses, which execute, spread, and then shut down",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Viruses\": which statement is most accurate?",
+                "options": [
+                  "It encrypts the payload but leaves the headers in plaintext.",
+                  "It requires installing a dedicated agent on every endpoint.",
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "Non-memory-resident viruses, which execute, spread, and then shut down"
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"Non-memory-resident viruses, which execute, spread, and then shut down\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s011-k003",
+              "text": "Viruses: Boot sector viruses, which reside inside the boot sector of a drive or storage media",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Viruses\": which statement is most accurate?",
+                "options": [
+                  "Boot sector viruses, which reside inside the boot sector of a drive or storage media",
+                  "It requires manual intervention from a systems administrator.",
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "It depends entirely on open-source community support for patching."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"Boot sector viruses, which reside inside the boot sector of a drive or storage media\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s011-k004",
+              "text": "Viruses: Macro viruses, which use macros or code inside word processing software or other tools to spread",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Viruses\": which statement is most accurate?",
+                "options": [
+                  "It requires manual intervention from a systems administrator.",
+                  "It decreases overall security but improves network latency.",
+                  "Macro viruses, which use macros or code inside word processing software or other tools to spread",
+                  "It is a preventative control designed to block traffic implicitly."
+                ],
+                "correct_index": 2,
+                "explanation": "Key fact: \"Macro viruses, which use macros or code inside word processing software or other tools to spread\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s011-k005",
+              "text": "Viruses: Email viruses that spread via email either as email attachments or as part of the email itself using flaws inside email clients",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Viruses\": which statement is most accurate?",
+                "options": [
+                  "It is a preventative control designed to block traffic implicitly.",
+                  "It relies solely on symmetric encryption for all its transactions.",
+                  "Email viruses that spread via email either as email attachments or as part of the email itself using flaws inside email clients",
+                  "It is functionally identical to role-based access control."
+                ],
+                "correct_index": 2,
+                "explanation": "Key fact: \"Email viruses that spread via email either as email attachments or as part of the email itself using flaws inside email clients\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s011-k006",
+              "text": "Viruses: Fileless virus attacks are similar to traditional viruses in a number of critical ways. They spread via methods like spam email and malicious websites and exploit flaws in browser plug-ins and web browsers themselves. Once they successfully…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Fileless virus attacks are similar to traditional viruses in a number of critical ways. They spread via methods like spam email and malicious websites and exploit flaws in browser plug-ins and web browsers themselves. Once they successfully find a way into a system, they inject themselves into memory and conduct further malicious activity, including adding the ability to reinfect the system via the same process at reboot through a Registry entry or other technique. At no point do they require local file storage, as they remain memory resident throughout their entire active life—in fact, the…",
+                "spans": [
+                  {
+                    "start": 155,
+                    "end": 162,
+                    "label": "exploit"
+                  }
+                ],
+                "target_span_labels": [
+                  "exploit"
+                ],
+                "explanation": "Key concepts in this Viruses."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s011-k007",
+              "text": "Viruses: FIGURE 3.2 Fileless virus attack chain",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Viruses\": which statement is most accurate?",
+                "options": [
+                  "FIGURE 3.2 Fileless virus attack chain",
+                  "It requires manual intervention from a systems administrator.",
+                  "It operates primarily at the physical layer of the OSI model.",
+                  "It requires installing a dedicated agent on every endpoint."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"FIGURE 3.2 Fileless virus attack chain\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch03-ch011-s011-02",
+          "title": "Viruses (2/2)",
+          "objectiveIds": [
+            "2.3"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch03-c011-s011-k008",
+              "text": "Viruses: As you might expect from the infection flow diagram in Figure 3.2, fileless attacks require a vulnerability to succeed, so ensuring that browsers, plug-ins, and other software that might be exploited by attackers are up to date and…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Viruses\": which statement is most accurate?",
+                "options": [
+                  "As you might expect from the infection flow diagram in Figure 3.2, fileless attacks require a vulnerability to succeed, so ensuring that browsers, plug-ins, and other software that might be exploited…",
+                  "It is functionally identical to role-based access control.",
+                  "It is functionally identical to role-based access control.",
+                  "It operates primarily at the physical layer of the OSI model."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"As you might expect from the infection flow diagram in Figure 3.2, fileless attacks require a vulnerability to succeed, so ensuring that browsers, plug-ins, and other software that might be exploited…\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s011-k009",
+              "text": "Viruses: IoCs related to viruses are often available in threat feeds from organizations like VirusTotal, where recently discovered viruses and their behaviors are analyzed and indexed to create IoC feeds. You can find examples of VirusTotal's…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Viruses\": which statement is most accurate?",
+                "options": [
+                  "It is a preventative control designed to block traffic implicitly.",
+                  "It is functionally identical to role-based access control.",
+                  "IoCs related to viruses are often available in threat feeds from organizations like VirusTotal, where recently discovered viruses and their behaviors are analyzed and indexed to create IoC feeds. You…",
+                  "It requires installing a dedicated agent on every endpoint."
+                ],
+                "correct_index": 2,
+                "explanation": "Key fact: \"IoCs related to viruses are often available in threat feeds from organizations like VirusTotal, where recently discovered viruses and their behaviors are analyzed and indexed to create IoC feeds. You…\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s011-k010",
+              "text": "Viruses: Mitigation for viruses includes both awareness that helps to prevent users from clicking on and activating viruses as well as antimalware tools that can detect them and prevent them both on-disk and in-memory or as they are being executed.…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Viruses\": which statement is most accurate?",
+                "options": [
+                  "Mitigation for viruses includes both awareness that helps to prevent users from clicking on and activating viruses as well as antimalware tools that can detect them and prevent them both on-disk and…",
+                  "It relies solely on symmetric encryption for all its transactions.",
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "It requires manual intervention from a systems administrator."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"Mitigation for viruses includes both awareness that helps to prevent users from clicking on and activating viruses as well as antimalware tools that can detect them and prevent them both on-disk and…\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s011-k011",
+              "text": "Viruses: Removing malware can be a challenging task. It can be nearly impossible to determine if every part of a complex infection has been removed. Although it may be tempting to rely on your antivirus or other security tools to remove the…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Removing malware can be a challenging task. It can be nearly impossible to determine if every part of a complex infection has been removed. Although it may be tempting to rely on your antivirus or other security tools to remove the infection, that often isn't sufficient.",
+                "spans": [
+                  {
+                    "start": 9,
+                    "end": 16,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Viruses."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s011-k012",
+              "text": "Viruses: Due to this, many organizations have a standard practice of wiping the drive of an infected machine and restoring it from a known good backup or reinstalling/reimaging it. While there are some scenarios where even that won't be enough, such…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Due to this, many organizations have a standard practice of wiping the drive of an infected machine and restoring it from a known good backup or reinstalling/reimaging it. While there are some scenarios where even that won't be enough, such as with BIOS/UEFI resident malware, in most common scenarios a complete wipe and reinstallation or reimaging will ensure the malware is gone.",
+                "spans": [
+                  {
+                    "start": 268,
+                    "end": 275,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Viruses."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch03-ch011-s012",
+          "title": "Keyloggers",
+          "objectiveIds": [
+            "2.3"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch03-c011-s012-k000",
+              "text": "Keyloggers: Keyloggers are programs that capture keystrokes from a keyboard, although keylogger applications may also capture other input such as mouse movement, touchscreen inputs, or credit card swipes from attached devices. Keyloggers work in a…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Keyloggers\": which statement is most accurate?",
+                "options": [
+                  "It operates primarily at the physical layer of the OSI model.",
+                  "It requires manual intervention from a systems administrator.",
+                  "It is a hashing algorithm vulnerable to collision attacks.",
+                  "Keyloggers are programs that capture keystrokes from a keyboard, although keylogger applications may also capture other input such as mouse movement, touchscreen inputs, or credit card swipes from…"
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"Keyloggers are programs that capture keystrokes from a keyboard, although keylogger applications may also capture other input such as mouse movement, touchscreen inputs, or credit card swipes from…\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s012-k001",
+              "text": "Keyloggers: Preventing software keylogging typically focuses on normal security best practices to ensure that malware containing a keylogger is not installed, including patching and systems management, as well as use of antimalware tools. Since many…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Preventing software keylogging typically focuses on normal security best practices to ensure that malware containing a keylogger is not installed, including patching and systems management, as well as use of antimalware tools. Since many keyloggers are aimed at acquiring passwords, use of multifactor authentication can help limit the impact of a keylogger, even if it cannot defeat the keylogger itself.",
+                "spans": [
+                  {
+                    "start": 98,
+                    "end": 105,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Keyloggers."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s012-k002",
+              "text": "Keyloggers: In more complex security environments where underlying systems cannot be trusted, use of bootable USB drives can prevent use of a potentially compromised underlying operating system.",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Keyloggers\": which statement is most accurate?",
+                "options": [
+                  "In more complex security environments where underlying systems cannot be trusted, use of bootable USB drives can prevent use of a potentially compromised underlying operating system.",
+                  "It is functionally identical to role-based access control.",
+                  "It is a hashing algorithm vulnerable to collision attacks.",
+                  "It uses a public key to encrypt and decrypt the same data stream."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"In more complex security environments where underlying systems cannot be trusted, use of bootable USB drives can prevent use of a potentially compromised underlying operating system.\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s012-k003",
+              "text": "Keyloggers: Much like other malicious software intended to gather information, IoCs related to keyloggers are commonly:",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Keyloggers\": which statement is most accurate?",
+                "options": [
+                  "Much like other malicious software intended to gather information, IoCs related to keyloggers are commonly:",
+                  "It operates primarily at the physical layer of the OSI model.",
+                  "It is functionally identical to role-based access control.",
+                  "It is a hashing algorithm vulnerable to collision attacks."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"Much like other malicious software intended to gather information, IoCs related to keyloggers are commonly:\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s012-k004",
+              "text": "Keyloggers: Exfiltration activity to command and control systems",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Keyloggers\": which statement is most accurate?",
+                "options": [
+                  "It is a hashing algorithm vulnerable to collision attacks.",
+                  "Exfiltration activity to command and control systems",
+                  "It is a preventative control designed to block traffic implicitly.",
+                  "It operates primarily at the physical layer of the OSI model."
+                ],
+                "correct_index": 1,
+                "explanation": "Key fact: \"Exfiltration activity to command and control systems\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s012-k005",
+              "text": "Keyloggers: An example of an analysis of keylogger delivery campaign via PDFs can be found at www.socinvestigation.com/pdf-campaign-delivering-snake-keylogger.",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Keyloggers\": which statement is most accurate?",
+                "options": [
+                  "It encrypts the payload but leaves the headers in plaintext.",
+                  "An example of an analysis of keylogger delivery campaign via PDFs can be found at www.socinvestigation.com/pdf-campaign-delivering-snake-keylogger.",
+                  "It decreases overall security but improves network latency.",
+                  "It relies solely on symmetric encryption for all its transactions."
+                ],
+                "correct_index": 1,
+                "explanation": "Key fact: \"An example of an analysis of keylogger delivery campaign via PDFs can be found at www.socinvestigation.com/pdf-campaign-delivering-snake-keylogger.\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s012-k006",
+              "text": "Keyloggers: In addition to the software-based keyloggers we discussed here, hardware keyloggers are also available and inexpensive. The authors of this book have encountered them on college campuses where students tried to acquire (and in some cases…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Keyloggers\": which statement is most accurate?",
+                "options": [
+                  "It is a preventative control designed to block traffic implicitly.",
+                  "It depends entirely on open-source community support for patching.",
+                  "In addition to the software-based keyloggers we discussed here, hardware keyloggers are also available and inexpensive. The authors of this book have encountered them on college campuses where…",
+                  "It is a hashing algorithm vulnerable to collision attacks."
+                ],
+                "correct_index": 2,
+                "explanation": "Key fact: \"In addition to the software-based keyloggers we discussed here, hardware keyloggers are also available and inexpensive. The authors of this book have encountered them on college campuses where…\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch03-ch011-s013",
+          "title": "Logic Bombs",
+          "objectiveIds": [
+            "2.3"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch03-c011-s013-k000",
+              "text": "Logic Bombs: Logic bombs, unlike the other types of malware described here, are not independent malicious programs. Instead, they are functions or code placed inside other programs that will activate when set conditions are met. Some other types of…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Logic bombs, unlike the other types of malware described here, are not independent malicious programs. Instead, they are functions or code placed inside other programs that will activate when set conditions are met. Some other types of malware may use this type of code as part of their function as well. While relatively rare compared to other types of malware, logic bombs are a consideration in software development and systems management, and can have a significant impact if they successfully activate.",
+                "spans": [
+                  {
+                    "start": 39,
+                    "end": 46,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Logic Bombs."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s013-k001",
+              "text": "Logic Bombs: Since logic bombs are found in code, IoCs for logic bombs are less common—they require analysis of the code or logic in the application, meaning that mitigation processes are also primarily focused on code review.",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Logic Bombs\": which statement is most accurate?",
+                "options": [
+                  "Since logic bombs are found in code, IoCs for logic bombs are less common—they require analysis of the code or logic in the application, meaning that mitigation processes are also primarily focused…",
+                  "It decreases overall security but improves network latency.",
+                  "It operates primarily at the physical layer of the OSI model.",
+                  "It depends entirely on open-source community support for patching."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"Since logic bombs are found in code, IoCs for logic bombs are less common—they require analysis of the code or logic in the application, meaning that mitigation processes are also primarily focused…\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch03-ch011-s014",
+          "title": "Analyzing Malware",
+          "objectiveIds": [
+            "2.3"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch03-c011-s014-k000",
+              "text": "Analyzing Malware: A number of techniques are commonly used to analyze malware:",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "A number of techniques are commonly used to analyze malware:",
+                "spans": [
+                  {
+                    "start": 52,
+                    "end": 59,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Analyzing Malware."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s014-k001",
+              "text": "Analyzing Malware: Online analysis tools like VirusTotal can be used to check whether the malware is a known tool and to see what it is identified as by multiple AV tools.",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Online analysis tools like VirusTotal can be used to check whether the malware is a known tool and to see what it is identified as by multiple AV tools.",
+                "spans": [
+                  {
+                    "start": 71,
+                    "end": 78,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Analyzing Malware."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s014-k002",
+              "text": "Analyzing Malware: Sandbox tools can be used to analyze malware behavior in a protected environment.",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Sandbox tools can be used to analyze malware behavior in a protected environment.",
+                "spans": [
+                  {
+                    "start": 37,
+                    "end": 44,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Analyzing Malware."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s014-k003",
+              "text": "Analyzing Malware: Manual code analysis is common, particularly with scripts and interpreted code like Python and Perl.",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Manual code analysis is common, particularly with scripts and interpreted code like Python and Perl.",
+                "spans": [
+                  {
+                    "start": 0,
+                    "end": 20,
+                    "label": "Manual code analysis"
+                  }
+                ],
+                "target_span_labels": [
+                  "Manual code analysis"
+                ],
+                "explanation": "Key concepts in this Analyzing Malware."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s014-k004",
+              "text": "Analyzing Malware: Malware can be analyzed using tools like strings to look for recoverable artifacts that may be useful for the analysis",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Malware can be analyzed using tools like strings to look for recoverable artifacts that may be useful for the analysis",
+                "spans": [
+                  {
+                    "start": 0,
+                    "end": 7,
+                    "label": "Malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "Malware"
+                ],
+                "explanation": "Key concepts in this Analyzing Malware."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s014-k005",
+              "text": "Analyzing Malware: Many other tools and techniques are used to analyze malicious code and software, but these are a good starting point for security analysts who need to determine whether a given executable or block of code might be malicious.",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Many other tools and techniques are used to analyze malicious code and software, but these are a good starting point for security analysts who need to determine whether a given executable or block of code might be malicious.",
+                "spans": [
+                  {
+                    "start": 0,
+                    "end": 20,
+                    "label": "Many other tools and"
+                  }
+                ],
+                "target_span_labels": [
+                  "Many other tools and"
+                ],
+                "explanation": "Key concepts in this Analyzing Malware."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch03-ch011-s015-01",
+          "title": "Rootkits (1/2)",
+          "objectiveIds": [
+            "2.3"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch03-c011-s015-k000",
+              "text": "Rootkits: Rootkits are malware that is specifically designed to allow attackers to access a system through a backdoor. Many modern rootkits also include capabilities that work to conceal the rootkit from detection through any of a variety of…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Rootkits are malware that is specifically designed to allow attackers to access a system through a backdoor. Many modern rootkits also include capabilities that work to conceal the rootkit from detection through any of a variety of techniques, ranging from hooking filesystem drivers to ensure that users cannot see the rootkit files to infecting startup code in the Master Boot Record (MBR) of a disk, allowing attacks against full-disk encryption systems.",
+                "spans": [
+                  {
+                    "start": 13,
+                    "end": 20,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Rootkits."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s015-k001",
+              "text": "Rootkits: Rootkit detection can be challenging, because a system infected with malware like this cannot be trusted. That means that the best way to detect a rootkit is to test the suspected system from a trusted system or device. In cases where that…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Rootkit detection can be challenging, because a system infected with malware like this cannot be trusted. That means that the best way to detect a rootkit is to test the suspected system from a trusted system or device. In cases where that isn't possible, rootkit detection tools look for behaviors and signatures that are typical of rootkits. Techniques like integrity checking and data validation against expected responses can also be useful for rootkit detection, and anti-rootkit tools often use a combination of these techniques to detect complex rootkits.",
+                "spans": [
+                  {
+                    "start": 69,
+                    "end": 76,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Rootkits."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s015-k002",
+              "text": "Rootkits: Once a rootkit is discovered, removal can be challenging. While some antimalware and anti-rootkit tools are able to remove specific rootkits, the most common recommendation whenever possible is to rebuild the system or to restore it from a…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Rootkits\": which statement is most accurate?",
+                "options": [
+                  "It is a legacy mechanism no longer supported by modern frameworks.",
+                  "It operates primarily at the physical layer of the OSI model.",
+                  "Once a rootkit is discovered, removal can be challenging. While some antimalware and anti-rootkit tools are able to remove specific rootkits, the most common recommendation whenever possible is to…",
+                  "It requires installing a dedicated agent on every endpoint."
+                ],
+                "correct_index": 2,
+                "explanation": "Key fact: \"Once a rootkit is discovered, removal can be challenging. While some antimalware and anti-rootkit tools are able to remove specific rootkits, the most common recommendation whenever possible is to…\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s015-k003",
+              "text": "Rootkits: Some rootkits are intentionally installed, either as part of DRM systems or as part of anti-cheating toolkits for games, or because they are part of a tool used to defeat copy protection mechanisms. While these tools are technically…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Rootkits\": which statement is most accurate?",
+                "options": [
+                  "It requires manual intervention from a systems administrator.",
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "Some rootkits are intentionally installed, either as part of DRM systems or as part of anti-cheating toolkits for games, or because they are part of a tool used to defeat copy protection mechanisms.…",
+                  "It is a preventative control designed to block traffic implicitly."
+                ],
+                "correct_index": 2,
+                "explanation": "Key fact: \"Some rootkits are intentionally installed, either as part of DRM systems or as part of anti-cheating toolkits for games, or because they are part of a tool used to defeat copy protection mechanisms.…\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s015-k004",
+              "text": "Rootkits: Like many of the other malware types, the best way to prevent rootkits is to use normal security practices, including patching, use of secure configurations, and ensuring that privilege management is used. Tools like Secure Boot and…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Like many of the other malware types, the best way to prevent rootkits is to use normal security practices, including patching, use of secure configurations, and ensuring that privilege management is used. Tools like Secure Boot and techniques that can validate live systems and files can also be used to help prevent rootkits from being successfully installed or remaining resident.",
+                "spans": [
+                  {
+                    "start": 23,
+                    "end": 30,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Rootkits."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s015-k005",
+              "text": "Rootkits: Common IoCs for rootkits include:",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Rootkits\": which statement is most accurate?",
+                "options": [
+                  "It encrypts the payload but leaves the headers in plaintext.",
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "Common IoCs for rootkits include:",
+                  "It is a legacy mechanism no longer supported by modern frameworks."
+                ],
+                "correct_index": 2,
+                "explanation": "Key fact: \"Common IoCs for rootkits include:\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s015-k006",
+              "text": "Rootkits: Command and control domains, IP addresses, and systems",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Rootkits\": which statement is most accurate?",
+                "options": [
+                  "It relies solely on symmetric encryption for all its transactions.",
+                  "It encrypts the payload but leaves the headers in plaintext.",
+                  "Command and control domains, IP addresses, and systems",
+                  "It is a routing protocol used primarily in personal area networks (PANs)."
+                ],
+                "correct_index": 2,
+                "explanation": "Key fact: \"Command and control domains, IP addresses, and systems\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s015-k007",
+              "text": "Rootkits: Behavior-based identification like the creation of services, executables, configuration changes, file access, and command invocation",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Rootkits\": which statement is most accurate?",
+                "options": [
+                  "It is a preventative control designed to block traffic implicitly.",
+                  "It requires manual intervention from a systems administrator.",
+                  "It relies solely on symmetric encryption for all its transactions.",
+                  "Behavior-based identification like the creation of services, executables, configuration changes, file access, and command invocation"
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"Behavior-based identification like the creation of services, executables, configuration changes, file access, and command invocation\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch03-ch011-s015-02",
+          "title": "Rootkits (2/2)",
+          "objectiveIds": [
+            "2.3"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch03-c011-s015-k008",
+              "text": "Rootkits: Opening ports or creation of reverse proxy tunnels",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Rootkits\": which statement is most accurate?",
+                "options": [
+                  "It requires manual intervention from a systems administrator.",
+                  "Opening ports or creation of reverse proxy tunnels",
+                  "It requires installing a dedicated agent on every endpoint.",
+                  "It depends entirely on open-source community support for patching."
+                ],
+                "correct_index": 1,
+                "explanation": "Key fact: \"Opening ports or creation of reverse proxy tunnels\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s015-k009",
+              "text": "Rootkits: An example of a rootkit used on automatic teller machines (ATMs) with example indicators can be found here:",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Rootkits\": which statement is most accurate?",
+                "options": [
+                  "It relies solely on symmetric encryption for all its transactions.",
+                  "It is a preventative control designed to block traffic implicitly.",
+                  "An example of a rootkit used on automatic teller machines (ATMs) with example indicators can be found here:",
+                  "It is only applicable to on-premises deployments, not the cloud."
+                ],
+                "correct_index": 2,
+                "explanation": "Key fact: \"An example of a rootkit used on automatic teller machines (ATMs) with example indicators can be found here:\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s015-k010",
+              "text": "Rootkits: Since rootkits are specifically designed to avoid detection, mitigation can be particularly challenging. While antimalware and similar tools can sometimes gain an edge in detecting rootkits, detection and removal can be difficult to…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Rootkits\": which statement is most accurate?",
+                "options": [
+                  "Since rootkits are specifically designed to avoid detection, mitigation can be particularly challenging. While antimalware and similar tools can sometimes gain an edge in detecting rootkits,…",
+                  "It decreases overall security but improves network latency.",
+                  "It requires manual intervention from a systems administrator.",
+                  "It requires installing a dedicated agent on every endpoint."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"Since rootkits are specifically designed to avoid detection, mitigation can be particularly challenging. While antimalware and similar tools can sometimes gain an edge in detecting rootkits,…\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s015-k011",
+              "text": "Rootkits: Since rootkits often invade operating systems and use hooks to make the operating system help hide them, one technique that can help to find them is to remove the drive and connect it to another system. This means that the infected…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Rootkits\": which statement is most accurate?",
+                "options": [
+                  "It operates primarily at the physical layer of the OSI model.",
+                  "It requires manual intervention from a systems administrator.",
+                  "It relies solely on symmetric encryption for all its transactions.",
+                  "Since rootkits often invade operating systems and use hooks to make the operating system help hide them, one technique that can help to find them is to remove the drive and connect it to another…"
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"Since rootkits often invade operating systems and use hooks to make the operating system help hide them, one technique that can help to find them is to remove the drive and connect it to another…\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch03-ch011-s016",
+          "title": "Summary",
+          "objectiveIds": [
+            "2.3"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch03-c011-s016-k000",
+              "text": "Summary: Security professionals need to be aware of the most common forms of malware. This includes understanding how to identify common indicators of malicious activity related to malware attacks and malware itself.",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Security professionals need to be aware of the most common forms of malware. This includes understanding how to identify common indicators of malicious activity related to malware attacks and malware itself.",
+                "spans": [
+                  {
+                    "start": 68,
+                    "end": 75,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Summary."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s016-k001",
+              "text": "Summary: The Security+ exam objectives focus on a few different types of malware. These include ransomware, which most frequently targets victims by encrypting files and holding them for ransoms paid via cryptocurrency. Trojans are malware that is…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "The Security+ exam objectives focus on a few different types of malware. These include ransomware, which most frequently targets victims by encrypting files and holding them for ransoms paid via cryptocurrency. Trojans are malware that is disguised to look like legitimate software but that takes malicious action once downloaded and run.",
+                "spans": [
+                  {
+                    "start": 64,
+                    "end": 71,
+                    "label": "malware"
+                  },
+                  {
+                    "start": 87,
+                    "end": 97,
+                    "label": "ransomware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware",
+                  "ransomware"
+                ],
+                "explanation": "Key concepts in this Summary."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s016-k002",
+              "text": "Summary: Worms are malware that spread themselves on networks via vulnerable services, email, or file shares. Viruses are similar but only infect local systems and often require user action like running an application to infect a system.",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Worms are malware that spread themselves on networks via vulnerable services, email, or file shares. Viruses are similar but only infect local systems and often require user action like running an application to infect a system.",
+                "spans": [
+                  {
+                    "start": 10,
+                    "end": 17,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Summary."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s016-k003",
+              "text": "Summary: Spyware is malicious software that is intended to gather information about users, systems, and networks. It then sends that information back to remote systems or command and control servers. Keyloggers are a specialized type of spyware that…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Spyware is malicious software that is intended to gather information about users, systems, and networks. It then sends that information back to remote systems or command and control servers. Keyloggers are a specialized type of spyware that capture keystrokes, allowing malicious actors to know what you've typed. Keyloggers exist in both software and hardware form, although the Security+ exam focuses on them as malware.",
+                "spans": [
+                  {
+                    "start": 414,
+                    "end": 421,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Summary."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s016-k004",
+              "text": "Summary: Rootkits are used to retain access to a system and are commonly part of an attacker's toolkits as well as being used together with other malware to help keep a foothold on a compromised system. Rootkits are designed to conceal malicious…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Rootkits are used to retain access to a system and are commonly part of an attacker's toolkits as well as being used together with other malware to help keep a foothold on a compromised system. Rootkits are designed to conceal malicious action and to counter protective measures like antivirus, antimalware, and endpoint detection and response tools.",
+                "spans": [
+                  {
+                    "start": 137,
+                    "end": 144,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Summary."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s016-k005",
+              "text": "Summary: Logic bombs are code that executes under a specific condition or conditions, taking unwanted action. Unlike the other malware on this list, logic bombs typically need to be identified by reviewing source code or scripts.",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Logic bombs are code that executes under a specific condition or conditions, taking unwanted action. Unlike the other malware on this list, logic bombs typically need to be identified by reviewing source code or scripts.",
+                "spans": [
+                  {
+                    "start": 118,
+                    "end": 125,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Summary."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s016-k006",
+              "text": "Summary: Bloatware is simply unwanted software installed on systems by vendors or as part of software packages. Bloatware takes up resources like disk space, memory, and CPU cycles. It isn't truly malicious software but is often vulnerable to attack…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Summary\": which statement is most accurate?",
+                "options": [
+                  "It is functionally identical to role-based access control.",
+                  "Bloatware is simply unwanted software installed on systems by vendors or as part of software packages. Bloatware takes up resources like disk space, memory, and CPU cycles. It isn't truly malicious…",
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "It is only applicable to on-premises deployments, not the cloud."
+                ],
+                "correct_index": 1,
+                "explanation": "Key fact: \"Bloatware is simply unwanted software installed on systems by vendors or as part of software packages. Bloatware takes up resources like disk space, memory, and CPU cycles. It isn't truly malicious…\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s016-k007",
+              "text": "Summary: Finally, there are many ways to fight malware, from antivirus and endpoint detection and response tools to configuration and patching. Awareness is often the most effective tool in an organization's arsenal as it can help prevent attacks,…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Finally, there are many ways to fight malware, from antivirus and endpoint detection and response tools to configuration and patching. Awareness is often the most effective tool in an organization's arsenal as it can help prevent attacks, can allow responses to occur more quickly, and can help limit the impact of human mistakes throughout malware life cycles and attacks.",
+                "spans": [
+                  {
+                    "start": 38,
+                    "end": 45,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Summary."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch03-ch011-s017",
+          "title": "Exam Essentials",
+          "objectiveIds": [
+            "2.3"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch03-c011-s017-k000",
+              "text": "Exam Essentials: Understand and explain the different types of malware. Malware includes ransomware, Trojans, worms, spyware, bloatware, viruses, keyloggers, logic bombs, and rootkits. Each type of malware has distinctive elements, and security…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Understand and explain the different types of malware. Malware includes ransomware, Trojans, worms, spyware, bloatware, viruses, keyloggers, logic bombs, and rootkits. Each type of malware has distinctive elements, and security analysts need to know what identifies each type of malware, how to identify it, what controls are commonly deployed against it, and what to do if you encounter it.",
+                "spans": [
+                  {
+                    "start": 46,
+                    "end": 53,
+                    "label": "malware"
+                  },
+                  {
+                    "start": 72,
+                    "end": 82,
+                    "label": "ransomware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware",
+                  "ransomware"
+                ],
+                "explanation": "Key concepts in this Exam Essentials."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s017-k001",
+              "text": "Exam Essentials: Explain common indicators of malicious activity associated with malware types. Indicators of compromise associated with malware vary based on the type of malware and how it is designed and used. Common examples of IoCs associated…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Explain common indicators of malicious activity associated with malware types. Indicators of compromise associated with malware vary based on the type of malware and how it is designed and used. Common examples of IoCs associated with malware include command and control (C&C) traffic patterns, IP addresses, hostnames, and domains. Use of system utilities in unexpected ways, lateral movement between systems, creation of files and directories, encryption of files, and data exfiltration are also commonly seen, particularly with Trojans and rootkits. Signatures for malware are commonly used to…",
+                "spans": [
+                  {
+                    "start": 64,
+                    "end": 71,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Exam Essentials."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s017-k002",
+              "text": "Exam Essentials: Understand the methods to mitigate malware. Malware may require specialized techniques and processes to remove it or to deal with the impact of the malware. Techniques range from manual removal to the use of tools to identify and…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Understand the methods to mitigate malware. Malware may require specialized techniques and processes to remove it or to deal with the impact of the malware. Techniques range from manual removal to the use of tools to identify and remove malicious files, and often rely on reinstallation of a system or restoration from a known good backup to ensure all malware is removed.",
+                "spans": [
+                  {
+                    "start": 35,
+                    "end": 42,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Exam Essentials."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch03-ch011-s018-01",
+          "title": "Review Questions (1/6)",
+          "objectiveIds": [
+            "2.3"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch03-c011-s018-k000",
+              "text": "Review Questions: Ryan wants to prevent logic bombs created by insider threats from impacting his organization. What technique will most effectively limit the likelihood of logic bombs being put in place? Deploying antivirus software",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It encrypts the payload but leaves the headers in plaintext.",
+                  "It requires manual intervention from a systems administrator.",
+                  "It depends entirely on open-source community support for patching.",
+                  "Ryan wants to prevent logic bombs created by insider threats from impacting his organization. What technique will most effectively limit the likelihood of logic bombs being put in place? Deploying…"
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"Ryan wants to prevent logic bombs created by insider threats from impacting his organization. What technique will most effectively limit the likelihood of logic bombs being put in place? Deploying…\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k001",
+              "text": "Review Questions: Deploying endpoint detection and response (EDR) software",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It is a preventative control designed to block traffic implicitly.",
+                  "It requires installing a dedicated agent on every endpoint.",
+                  "Deploying endpoint detection and response (EDR) software",
+                  "It encrypts the payload but leaves the headers in plaintext."
+                ],
+                "correct_index": 2,
+                "explanation": "Key fact: \"Deploying endpoint detection and response (EDR) software\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k002",
+              "text": "Review Questions: Disabling autorun for USB drives",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "Disabling autorun for USB drives",
+                  "It is functionally identical to role-based access control.",
+                  "It encrypts the payload but leaves the headers in plaintext.",
+                  "It is only applicable to on-premises deployments, not the cloud."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"Disabling autorun for USB drives\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k003",
+              "text": "Review Questions: Yasmine believes that her organization may be dealing with an advanced rootkit and wants to write IoC definitions for it. Which of the following is not likely to be a useful IoC for a rootkit? File hashes",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "It relies on the RC4 cipher for bulk data encryption.",
+                  "Yasmine believes that her organization may be dealing with an advanced rootkit and wants to write IoC definitions for it. Which of the following is not likely to be a useful IoC for a rootkit? File…",
+                  "It is a preventative control designed to block traffic implicitly."
+                ],
+                "correct_index": 2,
+                "explanation": "Key fact: \"Yasmine believes that her organization may be dealing with an advanced rootkit and wants to write IoC definitions for it. Which of the following is not likely to be a useful IoC for a rootkit? File…\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k004",
+              "text": "Review Questions: Nathan works at a school and notices that one of his staff appears to have logged in and changed grades for a single student to higher grades, even in classes that staff member is not responsible for. When asked, the staff member…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "It depends entirely on open-source community support for patching.",
+                  "Nathan works at a school and notices that one of his staff appears to have logged in and changed grades for a single student to higher grades, even in classes that staff member is not responsible…",
+                  "It requires manual intervention from a systems administrator."
+                ],
+                "correct_index": 2,
+                "explanation": "Key fact: \"Nathan works at a school and notices that one of his staff appears to have logged in and changed grades for a single student to higher grades, even in classes that staff member is not responsible…\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k005",
+              "text": "Review Questions: Amanda notices traffic between her systems and a known malicious host on TCP port 6667. What type of traffic is she most likely detecting? Command and control",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "It requires installing a dedicated agent on every endpoint.",
+                  "Amanda notices traffic between her systems and a known malicious host on TCP port 6667. What type of traffic is she most likely detecting? Command and control",
+                  "It decreases overall security but improves network latency."
+                ],
+                "correct_index": 2,
+                "explanation": "Key fact: \"Amanda notices traffic between her systems and a known malicious host on TCP port 6667. What type of traffic is she most likely detecting? Command and control\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k006",
+              "text": "Review Questions: Mike discovers that attackers have left software that allows them to have remote access to systems on a computer in his company's network. How should he describe or classify this malware? A worm",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Mike discovers that attackers have left software that allows them to have remote access to systems on a computer in his company's network. How should he describe or classify this malware? A worm",
+                "spans": [
+                  {
+                    "start": 179,
+                    "end": 186,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Review Questions."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k007",
+              "text": "Review Questions: What is the primary impact of bloatware? Consuming resources",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It requires installing a dedicated agent on every endpoint.",
+                  "It is functionally identical to role-based access control.",
+                  "What is the primary impact of bloatware? Consuming resources",
+                  "It requires manual intervention from a systems administrator."
+                ],
+                "correct_index": 2,
+                "explanation": "Key fact: \"What is the primary impact of bloatware? Consuming resources\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch03-ch011-s018-02",
+          "title": "Review Questions (2/6)",
+          "objectiveIds": [
+            "2.3"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch03-c011-s018-k008",
+              "text": "Review Questions: Providing information about users and devices to third parties",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It is a legacy mechanism no longer supported by modern frameworks.",
+                  "Providing information about users and devices to third parties",
+                  "It relies solely on symmetric encryption for all its transactions.",
+                  "It is functionally identical to role-based access control."
+                ],
+                "correct_index": 1,
+                "explanation": "Key fact: \"Providing information about users and devices to third parties\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k009",
+              "text": "Review Questions: Allowing unauthorized remote access",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It requires installing a dedicated agent on every endpoint.",
+                  "It decreases overall security but improves network latency.",
+                  "It relies solely on symmetric encryption for all its transactions.",
+                  "Allowing unauthorized remote access"
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"Allowing unauthorized remote access\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k010",
+              "text": "Review Questions: What type of malware is used to gather information about a user's browsing habits and system? A Trojan",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "What type of malware is used to gather information about a user's browsing habits and system? A Trojan",
+                "spans": [
+                  {
+                    "start": 13,
+                    "end": 20,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Review Questions."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k011",
+              "text": "Review Questions: Matt uploads a malware sample to a third-party malware scanning site that uses multiple antimalware and antivirus engines to scan the sample. He receives multiple different answers for what the malware package is. What has…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Matt uploads a malware sample to a third-party malware scanning site that uses multiple antimalware and antivirus engines to scan the sample. He receives multiple different answers for what the malware package is. What has occurred? The package contains more than one piece of malware.",
+                "spans": [
+                  {
+                    "start": 15,
+                    "end": 22,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Review Questions."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k012",
+              "text": "Review Questions: The malware is polymorphic and changed while being tested.",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "The malware is polymorphic and changed while being tested.",
+                "spans": [
+                  {
+                    "start": 4,
+                    "end": 11,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Review Questions."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k013",
+              "text": "Review Questions: Different vendors use different names for malware packages.",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Different vendors use different names for malware packages.",
+                "spans": [
+                  {
+                    "start": 42,
+                    "end": 49,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Review Questions."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k014",
+              "text": "Review Questions: Nancy is concerned that there is a software keylogger on the system she's investigating. What best describes data that may have been stolen? All files on the system",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It generates a digital signature using symmetric key cryptography.",
+                  "Nancy is concerned that there is a software keylogger on the system she's investigating. What best describes data that may have been stolen? All files on the system",
+                  "It is a hashing algorithm vulnerable to collision attacks.",
+                  "It relies solely on symmetric encryption for all its transactions."
+                ],
+                "correct_index": 1,
+                "explanation": "Key fact: \"Nancy is concerned that there is a software keylogger on the system she's investigating. What best describes data that may have been stolen? All files on the system\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k015",
+              "text": "Review Questions: All files the user accessed while the keylogger was active",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It relies on the RC4 cipher for bulk data encryption.",
+                  "All files the user accessed while the keylogger was active",
+                  "It requires manual intervention from a systems administrator.",
+                  "It encrypts the payload but leaves the headers in plaintext."
+                ],
+                "correct_index": 1,
+                "explanation": "Key fact: \"All files the user accessed while the keylogger was active\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch03-ch011-s018-03",
+          "title": "Review Questions (3/6)",
+          "objectiveIds": [
+            "2.3"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch03-c011-s018-k016",
+              "text": "Review Questions: Keyboard and other input from the user",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It relies on the RC4 cipher for bulk data encryption.",
+                  "It depends entirely on open-source community support for patching.",
+                  "It operates primarily at the physical layer of the OSI model.",
+                  "Keyboard and other input from the user"
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"Keyboard and other input from the user\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k017",
+              "text": "Review Questions: A system in Elaine's company has suddenly displayed a message demanding payment in Bitcoin and claiming that the data from the system has been encrypted. What type of malware has Elaine likely encountered? Worms",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "A system in Elaine's company has suddenly displayed a message demanding payment in Bitcoin and claiming that the data from the system has been encrypted. What type of malware has Elaine likely encountered? Worms",
+                "spans": [
+                  {
+                    "start": 167,
+                    "end": 174,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Review Questions."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k018",
+              "text": "Review Questions: Rick believes that a system he is responsible for has been compromised with malware that uses a rootkit to obtain and retain access to the system. When he runs an antimalware tool's scanner, the system doesn't show any malware. If…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Rick believes that a system he is responsible for has been compromised with malware that uses a rootkit to obtain and retain access to the system. When he runs an antimalware tool's scanner, the system doesn't show any malware. If he has other data that indicates the system is infected, what should his next step be if he wants to determine what malware may be on the system? Rerun the antimalware scan.",
+                "spans": [
+                  {
+                    "start": 76,
+                    "end": 83,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Review Questions."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k019",
+              "text": "Review Questions: Mount the drive on another system and scan it that way.",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "Mount the drive on another system and scan it that way.",
+                  "It is a legacy mechanism no longer supported by modern frameworks.",
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "It operates primarily at the physical layer of the OSI model."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"Mount the drive on another system and scan it that way.\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k020",
+              "text": "Review Questions: Disable the systems antivirus because it may be causing a false negative.",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It is a preventative control designed to block traffic implicitly.",
+                  "Disable the systems antivirus because it may be causing a false negative.",
+                  "It operates primarily at the physical layer of the OSI model.",
+                  "It is functionally identical to role-based access control."
+                ],
+                "correct_index": 1,
+                "explanation": "Key fact: \"Disable the systems antivirus because it may be causing a false negative.\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k021",
+              "text": "Review Questions: The system is not infected and he should move on.",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It encrypts the payload but leaves the headers in plaintext.",
+                  "The system is not infected and he should move on.",
+                  "It is functionally identical to role-based access control.",
+                  "It relies solely on symmetric encryption for all its transactions."
+                ],
+                "correct_index": 1,
+                "explanation": "Key fact: \"The system is not infected and he should move on.\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k022",
+              "text": "Review Questions: A recently terminated developer from Jaya's organization has contacted the organization claiming that they left code in an application that they wrote that will delete files and bring the application down if they are not employed…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "A recently terminated developer from Jaya's organization has contacted the organization claiming that they left code in an application that they wrote that will delete files and bring the application down if they are not employed by the company. What type of malware is this? Ransomware",
+                "spans": [
+                  {
+                    "start": 259,
+                    "end": 266,
+                    "label": "malware"
+                  },
+                  {
+                    "start": 276,
+                    "end": 286,
+                    "label": "Ransomware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware",
+                  "Ransomware"
+                ],
+                "explanation": "Key concepts in this Review Questions."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k023",
+              "text": "Review Questions: Selah wants to ensure that malware is completely removed from a system. What should she do to ensure this? Run multiple antimalware tools and use them to remove all detections.",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Selah wants to ensure that malware is completely removed from a system. What should she do to ensure this? Run multiple antimalware tools and use them to remove all detections.",
+                "spans": [
+                  {
+                    "start": 27,
+                    "end": 34,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Review Questions."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch03-ch011-s018-04",
+          "title": "Review Questions (4/6)",
+          "objectiveIds": [
+            "2.3"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch03-c011-s018-k024",
+              "text": "Review Questions: Wipe the drive and reinstall from known good media.",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It is a preventative control designed to block traffic implicitly.",
+                  "It is a legacy mechanism no longer supported by modern frameworks.",
+                  "It operates primarily at the physical layer of the OSI model.",
+                  "Wipe the drive and reinstall from known good media."
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"Wipe the drive and reinstall from known good media.\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k025",
+              "text": "Review Questions: Use the delete setting in her antimalware software rather than the quarantine setting.",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It relies solely on symmetric encryption for all its transactions.",
+                  "It is a preventative control designed to block traffic implicitly.",
+                  "Use the delete setting in her antimalware software rather than the quarantine setting.",
+                  "It operates primarily at the physical layer of the OSI model."
+                ],
+                "correct_index": 2,
+                "explanation": "Key fact: \"Use the delete setting in her antimalware software rather than the quarantine setting.\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k026",
+              "text": "Review Questions: There is no way to ensure the system is safe and it should be destroyed.",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It depends entirely on open-source community support for patching.",
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "There is no way to ensure the system is safe and it should be destroyed."
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"There is no way to ensure the system is safe and it should be destroyed.\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k027",
+              "text": "Review Questions: What is the key difference between a worm and a virus? What operating system they run on",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It encrypts the payload but leaves the headers in plaintext.",
+                  "It uses a public key to encrypt and decrypt the same data stream.",
+                  "It operates primarily at the physical layer of the OSI model.",
+                  "What is the key difference between a worm and a virus? What operating system they run on"
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"What is the key difference between a worm and a virus? What operating system they run on\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k028",
+              "text": "Review Questions: What their potential impact is",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It is a legacy mechanism no longer supported by modern frameworks.",
+                  "What their potential impact is",
+                  "It relies solely on symmetric encryption for all its transactions.",
+                  "It encrypts the payload but leaves the headers in plaintext."
+                ],
+                "correct_index": 1,
+                "explanation": "Key fact: \"What their potential impact is\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k029",
+              "text": "Review Questions: Ben wants to analyze Python code that he believes may be malicious code written by an employee of his organization. What can he do to determine if the code is malicious? Run a decompiler against it to allow him to read the code",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "Ben wants to analyze Python code that he believes may be malicious code written by an employee of his organization. What can he do to determine if the code is malicious? Run a decompiler against it…",
+                  "It relies solely on symmetric encryption for all its transactions.",
+                  "It is functionally identical to role-based access control.",
+                  "It operates primarily at the physical layer of the OSI model."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"Ben wants to analyze Python code that he believes may be malicious code written by an employee of his organization. What can he do to determine if the code is malicious? Run a decompiler against it…\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k030",
+              "text": "Review Questions: Open the file using a text editor to review the code",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It decreases overall security but improves network latency.",
+                  "Open the file using a text editor to review the code",
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "It decreases overall security but improves network latency."
+                ],
+                "correct_index": 1,
+                "explanation": "Key fact: \"Open the file using a text editor to review the code\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k031",
+              "text": "Review Questions: Test the code using an antivirus tool",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It is a legacy mechanism no longer supported by modern frameworks.",
+                  "It is a preventative control designed to block traffic implicitly.",
+                  "Test the code using an antivirus tool",
+                  "It is functionally identical to role-based access control."
+                ],
+                "correct_index": 2,
+                "explanation": "Key fact: \"Test the code using an antivirus tool\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch03-ch011-s018-05",
+          "title": "Review Questions (5/6)",
+          "objectiveIds": [
+            "2.3"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch03-c011-s018-k032",
+              "text": "Review Questions: Submit the Python code to a malware testing website",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Submit the Python code to a malware testing website",
+                "spans": [
+                  {
+                    "start": 28,
+                    "end": 35,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Review Questions."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k033",
+              "text": "Review Questions: Which of the following defenses is most likely to prevent Trojan installation? Installing patches for known vulnerabilities",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It encrypts the payload but leaves the headers in plaintext.",
+                  "It operates primarily at the physical layer of the OSI model.",
+                  "Which of the following defenses is most likely to prevent Trojan installation? Installing patches for known vulnerabilities",
+                  "It encrypts the payload but leaves the headers in plaintext."
+                ],
+                "correct_index": 2,
+                "explanation": "Key fact: \"Which of the following defenses is most likely to prevent Trojan installation? Installing patches for known vulnerabilities\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k034",
+              "text": "Review Questions: Preventing downloads from application stores",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "Preventing downloads from application stores",
+                  "It decreases overall security but improves network latency.",
+                  "It relies solely on symmetric encryption for all its transactions.",
+                  "It depends entirely on open-source community support for patching."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"Preventing downloads from application stores\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k035",
+              "text": "Review Questions: Preventing the use of USB drives",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "Preventing the use of USB drives",
+                  "It is functionally identical to role-based access control.",
+                  "It requires manual intervention from a systems administrator.",
+                  "It is a preventative control designed to block traffic implicitly."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"Preventing the use of USB drives\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k036",
+              "text": "Review Questions: Disabling autorun from USB drives",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "Disabling autorun from USB drives",
+                  "It encrypts the payload but leaves the headers in plaintext.",
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "It is a legacy mechanism no longer supported by modern frameworks."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"Disabling autorun from USB drives\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k037",
+              "text": "Review Questions: Jason's security team reports that a recent WordPress vulnerability seems to have been exploited by malware and that their organization's entire WordPress service cluster has been infected. What type of malware is most likely…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Jason's security team reports that a recent WordPress vulnerability seems to have been exploited by malware and that their organization's entire WordPress service cluster has been infected. What type of malware is most likely involved if a vulnerability in the software was exploited over the network? A logic bomb",
+                "spans": [
+                  {
+                    "start": 100,
+                    "end": 107,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Review Questions."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k038",
+              "text": "Review Questions: Hui's organization recently purchased new Windows computers from an office supply store. The systems have a number of unwanted programs on them that load at startup that were installed by the manufacturer. What type of software is…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "Hui's organization recently purchased new Windows computers from an office supply store. The systems have a number of unwanted programs on them that load at startup that were installed by the…",
+                  "It operates primarily at the physical layer of the OSI model.",
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "It is functionally identical to role-based access control."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"Hui's organization recently purchased new Windows computers from an office supply store. The systems have a number of unwanted programs on them that load at startup that were installed by the…\""
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            },
+            {
+              "id": "ch03-c011-s018-k039",
+              "text": "Review Questions: What type of malware connects to a command and control system, allowing attackers to manage, control, and update it remotely? A bot",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "What type of malware connects to a command and control system, allowing attackers to manage, control, and update it remotely? A bot",
+                "spans": [
+                  {
+                    "start": 13,
+                    "end": 20,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Review Questions."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch03-ch011-s018-06",
+          "title": "Review Questions (6/6)",
+          "objectiveIds": [
+            "2.3"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch03-c011-s018-k040",
+              "text": "Review Questions: Randy believes that a system that he is responsible for was infected after a user picked up a USB drive and plugged it in. The user claims that they only opened one file on the drive to see who might own it. What type of malware is…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Randy believes that a system that he is responsible for was infected after a user picked up a USB drive and plugged it in. The user claims that they only opened one file on the drive to see who might own it. What type of malware is most likely involved? A virus",
+                "spans": [
+                  {
+                    "start": 221,
+                    "end": 228,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Review Questions."
+              },
+              "objectiveIds": [
+                "2.3"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

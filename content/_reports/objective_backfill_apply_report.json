@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-15T02:43:48.448Z",
+  "generated_at": "2026-02-24T06:36:29.622Z",
   "dry_run": false,
   "patch_file": "content/_reports/objective_backfill_patch.json",
   "totals": {
@@ -8,27 +8,23 @@
     "duplicates": 0,
     "invalidEntries": 0,
     "missingTargets": 0,
-    "questionObjectiveIdsUpdated": 1,
-    "packsTouched": 1,
-    "lessonsTouched": 1
+    "questionObjectiveIdsUpdated": 0,
+    "packsTouched": 0,
+    "lessonsTouched": 0
   },
   "lessonUpdates": {
-    "lessonObjectiveIdsUpdated": 1,
-    "moduleObjectiveIdsUpdated": 11,
-    "pageObjectiveIdsUpdated": 25,
-    "checkObjectiveIdsUpdated": 25
+    "lessonObjectiveIdsUpdated": 0,
+    "moduleObjectiveIdsUpdated": 0,
+    "pageObjectiveIdsUpdated": 0,
+    "checkObjectiveIdsUpdated": 0
   },
   "duplicates": [],
   "invalidEntries": [],
   "missingTargets": [],
-  "touchedPackFiles": [
-    "ch4.json"
-  ],
-  "touchedLessonFiles": [
-    "ch4.lesson.json"
-  ],
+  "touchedPackFiles": [],
+  "touchedLessonFiles": [],
   "explicitCoverage": {
-    "totalQuestions": 813,
+    "totalQuestions": 874,
     "untaggedQuestions": 0,
     "missingObjectiveIds": []
   }

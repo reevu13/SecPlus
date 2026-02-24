@@ -1,0 +1,2503 @@
+{
+  "pack_id": "ch04",
+  "version": "3.0.0-generated",
+  "objectiveIds": [
+    "1.1",
+    "1.2"
+  ],
+  "modules": [
+    {
+      "id": "ch04-ch004",
+      "title": "Acknowledgments",
+      "tag_ids": [],
+      "objectiveIds": [
+        "1.1",
+        "1.2"
+      ],
+      "pages": [
+        {
+          "id": "ch04-ch004-s000",
+          "title": "Acknowledgments",
+          "objectiveIds": [
+            "1.1",
+            "1.2"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch04-c004-s000-k000",
+              "text": "Acknowledgments: Books like this involve work from many people, and as authors, we truly appreciate the hard work and dedication that the team at Wiley shows. We would especially like to thank Senior Acquisitions Editor Kenyon Brown. We have…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Acknowledgments\": which statement is most accurate?",
+                "options": [
+                  "Books like this involve work from many people, and as authors, we truly appreciate the hard work and dedication that the team at Wiley shows. We would especially like to thank Senior Acquisitions…",
+                  "It is functionally identical to role-based access control.",
+                  "It operates primarily at the physical layer of the OSI model.",
+                  "It encrypts the payload but leaves the headers in plaintext."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"Books like this involve work from many people, and as authors, we truly appreciate the hard work and dedication that the team at Wiley shows. We would especially like to thank Senior Acquisitions…\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c004-s000-k001",
+              "text": "Acknowledgments: We owe a great debt of gratitude to Runzhi “Tom” Song, Mike's research assistant at Notre Dame. Tom's assistance with the instructional materials that accompany this book was invaluable.",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Acknowledgments\": which statement is most accurate?",
+                "options": [
+                  "It requires manual intervention from a systems administrator.",
+                  "We owe a great debt of gratitude to Runzhi “Tom” Song, Mike's research assistant at Notre Dame. Tom's assistance with the instructional materials that accompany this book was invaluable.",
+                  "It decreases overall security but improves network latency.",
+                  "It is a preventative control designed to block traffic implicitly."
+                ],
+                "correct_index": 1,
+                "explanation": "Key fact: \"We owe a great debt of gratitude to Runzhi “Tom” Song, Mike's research assistant at Notre Dame. Tom's assistance with the instructional materials that accompany this book was invaluable.\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c004-s000-k002",
+              "text": "Acknowledgments: We also greatly appreciate the editing and production team for this book, including Lily Miller, our project editor, who brought years of experience and great talent to the project; Chris Crayton, our technical editor, and Shahla…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Acknowledgments\": which statement is most accurate?",
+                "options": [
+                  "It encrypts the payload but leaves the headers in plaintext.",
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "It is functionally identical to role-based access control.",
+                  "We also greatly appreciate the editing and production team for this book, including Lily Miller, our project editor, who brought years of experience and great talent to the project; Chris Crayton,…"
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"We also greatly appreciate the editing and production team for this book, including Lily Miller, our project editor, who brought years of experience and great talent to the project; Chris Crayton,…\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c004-s000-k003",
+              "text": "Acknowledgments: Our agent, Carole Jelen of Waterside Productions, continues to provide us with wonderful opportunities, advice, and assistance throughout our writing careers.",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Acknowledgments\": which statement is most accurate?",
+                "options": [
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "It operates primarily at the physical layer of the OSI model.",
+                  "Our agent, Carole Jelen of Waterside Productions, continues to provide us with wonderful opportunities, advice, and assistance throughout our writing careers.",
+                  "It is a preventative control designed to block traffic implicitly."
+                ],
+                "correct_index": 2,
+                "explanation": "Key fact: \"Our agent, Carole Jelen of Waterside Productions, continues to provide us with wonderful opportunities, advice, and assistance throughout our writing careers.\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c004-s000-k004",
+              "text": "Acknowledgments: Finally, we would like to thank our families and significant others who support us through the late evenings, busy weekends, and long hours that a book like this requires to write, edit, and get to press.",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Acknowledgments\": which statement is most accurate?",
+                "options": [
+                  "It is a preventative control designed to block traffic implicitly.",
+                  "It operates primarily at the physical layer of the OSI model.",
+                  "It relies solely on symmetric encryption for all its transactions.",
+                  "Finally, we would like to thank our families and significant others who support us through the late evenings, busy weekends, and long hours that a book like this requires to write, edit, and get to…"
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"Finally, we would like to thank our families and significant others who support us through the late evenings, busy weekends, and long hours that a book like this requires to write, edit, and get to…\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ch04-ch012",
+      "title": "Chapter 4 Social Engineering and Password Attacks",
+      "tag_ids": [],
+      "objectiveIds": [
+        "1.1",
+        "1.2"
+      ],
+      "pages": [
+        {
+          "id": "ch04-ch012-s000",
+          "title": "Chapter 4 Social Engineering and Password Attacks",
+          "objectiveIds": [
+            "1.1",
+            "1.2"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch04-c012-s000-k000",
+              "text": "Chapter 4 Social Engineering and Password Attacks: THE COMPTIA SECURITY+ EXAM OBJECTIVES COVERED IN THIS CHAPTER INCLUDE:",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "THE COMPTIA SECURITY+ EXAM OBJECTIVES COVERED IN THIS CHAPTER INCLUDE:",
+                "spans": [
+                  {
+                    "start": 0,
+                    "end": 20,
+                    "label": "THE COMPTIA SECURITY"
+                  }
+                ],
+                "target_span_labels": [
+                  "THE COMPTIA SECURITY"
+                ],
+                "explanation": "Key concepts in this Chapter 4 Social Engineering and Password Attacks."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s000-k001",
+              "text": "Chapter 4 Social Engineering and Password Attacks: Domain 2.0: Threats, Vulnerabilities, and Mitigations 2.2. Explain common threat vectors and attack surfaces. Human vectors/social engineering (Phishing, Vishing, Smishing,…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Domain 2.0: Threats, Vulnerabilities, and Mitigations 2.2. Explain common threat vectors and attack surfaces. Human vectors/social engineering (Phishing, Vishing, Smishing, Misinformation/disinformation, Impersonation, Business email compromise, Pretexting, Watering hole, Brand impersonation, Typosquatting).",
+                "spans": [
+                  {
+                    "start": 124,
+                    "end": 142,
+                    "label": "social engineering"
+                  },
+                  {
+                    "start": 144,
+                    "end": 152,
+                    "label": "Phishing"
+                  }
+                ],
+                "target_span_labels": [
+                  "social engineering",
+                  "Phishing"
+                ],
+                "explanation": "Key concepts in this Chapter 4 Social Engineering and Password Attacks."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s000-k002",
+              "text": "Chapter 4 Social Engineering and Password Attacks: 2.4. Given a scenario, analyze indicators of malicious activity. Password attacks (Spraying, Brute force)",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "2.4. Given a scenario, analyze indicators of malicious activity. Password attacks (Spraying, Brute force)",
+                "spans": [
+                  {
+                    "start": 0,
+                    "end": 20,
+                    "label": "2.4. Given a scenari"
+                  }
+                ],
+                "target_span_labels": [
+                  "2.4. Given a scenari"
+                ],
+                "explanation": "Key concepts in this Chapter 4 Social Engineering and Password Attacks."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s000-k003",
+              "text": "Chapter 4 Social Engineering and Password Attacks: Social engineering techniques focus on the human side of information security. Using social engineering techniques, security professionals and attackers can accomplish a variety of tasks ranging…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Social engineering techniques focus on the human side of information security. Using social engineering techniques, security professionals and attackers can accomplish a variety of tasks ranging from acquiring information to gaining access to buildings, systems, and networks.",
+                "spans": [
+                  {
+                    "start": 0,
+                    "end": 18,
+                    "label": "Social engineering"
+                  }
+                ],
+                "target_span_labels": [
+                  "Social engineering"
+                ],
+                "explanation": "Key concepts in this Chapter 4 Social Engineering and Password Attacks."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s000-k004",
+              "text": "Chapter 4 Social Engineering and Password Attacks: This chapter explores social engineering techniques and related practices, from phishing to typosquatting. We discuss the principles that underlie social engineering attacks, as well as how modern…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "This chapter explores social engineering techniques and related practices, from phishing to typosquatting. We discuss the principles that underlie social engineering attacks, as well as how modern influence campaigns use social engineering concepts and social media to sway opinions and reactions. Social engineering and phishing attacks often precede password attacks, and later in this chapter you will review password attack methods like brute-force attacks and password spraying.",
+                "spans": [
+                  {
+                    "start": 22,
+                    "end": 40,
+                    "label": "social engineering"
+                  },
+                  {
+                    "start": 80,
+                    "end": 88,
+                    "label": "phishing"
+                  }
+                ],
+                "target_span_labels": [
+                  "social engineering",
+                  "phishing"
+                ],
+                "explanation": "Key concepts in this Chapter 4 Social Engineering and Password Attacks."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch04-ch012-s001-01",
+          "title": "Social Engineering and Human Vectors (1/2)",
+          "objectiveIds": [
+            "1.1",
+            "1.2"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch04-c012-s001-k000",
+              "text": "Social Engineering and Human Vectors: Social engineering is the practice of manipulating people through a variety of strategies to accomplish desired actions. Social engineers work to influence their targets to take actions that they might not…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Social engineering is the practice of manipulating people through a variety of strategies to accomplish desired actions. Social engineers work to influence their targets to take actions that they might not otherwise have taken.",
+                "spans": [
+                  {
+                    "start": 0,
+                    "end": 18,
+                    "label": "Social engineering"
+                  }
+                ],
+                "target_span_labels": [
+                  "Social engineering"
+                ],
+                "explanation": "Key concepts in this Social Engineering and Human Vectors."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s001-k001",
+              "text": "Social Engineering and Human Vectors: A number of key principles are leveraged to successfully social engineer an individual. Although the list of principles and their names vary depending on the source you read, a few of the most common are:",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "A number of key principles are leveraged to successfully social engineer an individual. Although the list of principles and their names vary depending on the source you read, a few of the most common are:",
+                "spans": [
+                  {
+                    "start": 0,
+                    "end": 20,
+                    "label": "A number of key prin"
+                  }
+                ],
+                "target_span_labels": [
+                  "A number of key prin"
+                ],
+                "explanation": "Key concepts in this Social Engineering and Human Vectors."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s001-k002",
+              "text": "Social Engineering and Human Vectors: Authority, which relies on the fact that most people will obey someone who appears to be in charge or knowledgeable, regardless of whether or not they actually are. A social engineer using the principle of…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Authority, which relies on the fact that most people will obey someone who appears to be in charge or knowledgeable, regardless of whether or not they actually are. A social engineer using the principle of authority may claim to be a manager, a government official, or some other person who would have authority in the situation they are operating in.",
+                "spans": [
+                  {
+                    "start": 0,
+                    "end": 20,
+                    "label": "Authority, which rel"
+                  }
+                ],
+                "target_span_labels": [
+                  "Authority, which rel"
+                ],
+                "explanation": "Key concepts in this Social Engineering and Human Vectors."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s001-k003",
+              "text": "Social Engineering and Human Vectors: Intimidation relies on scaring or bullying an individual into taking a desired action. The individual who is targeted will feel threatened and respond by doing what the social engineer wants them to do.",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Intimidation relies on scaring or bullying an individual into taking a desired action. The individual who is targeted will feel threatened and respond by doing what the social engineer wants them to do.",
+                "spans": [
+                  {
+                    "start": 0,
+                    "end": 20,
+                    "label": "Intimidation relies "
+                  }
+                ],
+                "target_span_labels": [
+                  "Intimidation relies "
+                ],
+                "explanation": "Key concepts in this Social Engineering and Human Vectors."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s001-k004",
+              "text": "Social Engineering and Human Vectors: Consensus-based social engineering uses the fact that people tend to want to do what others are doing to persuade them to take an action. A consensus-based social engineering attack might point out that everyone…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Consensus-based social engineering uses the fact that people tend to want to do what others are doing to persuade them to take an action. A consensus-based social engineering attack might point out that everyone else in a department had already clicked on a link, or might provide fake testimonials about a product making it look safe. Consensus is called “social proof” in some categorization schemes.",
+                "spans": [
+                  {
+                    "start": 16,
+                    "end": 34,
+                    "label": "social engineering"
+                  }
+                ],
+                "target_span_labels": [
+                  "social engineering"
+                ],
+                "explanation": "Key concepts in this Social Engineering and Human Vectors."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s001-k005",
+              "text": "Social Engineering and Human Vectors: Scarcity is used for social engineering in scenarios that make something look more desirable because it may be the last one available.",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Scarcity is used for social engineering in scenarios that make something look more desirable because it may be the last one available.",
+                "spans": [
+                  {
+                    "start": 21,
+                    "end": 39,
+                    "label": "social engineering"
+                  }
+                ],
+                "target_span_labels": [
+                  "social engineering"
+                ],
+                "explanation": "Key concepts in this Social Engineering and Human Vectors."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s001-k006",
+              "text": "Social Engineering and Human Vectors: Familiarity-based attacks rely on you liking the individual or even the organization the individual is claiming to represent.",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Familiarity-based attacks rely on you liking the individual or even the organization the individual is claiming to represent.",
+                "spans": [
+                  {
+                    "start": 0,
+                    "end": 20,
+                    "label": "Familiarity-based at"
+                  }
+                ],
+                "target_span_labels": [
+                  "Familiarity-based at"
+                ],
+                "explanation": "Key concepts in this Social Engineering and Human Vectors."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s001-k007",
+              "text": "Social Engineering and Human Vectors: Trust, much like familiarity, relies on a connection with the individual they are targeting. Unlike with familiarity, which relies on targets thinking that something is normal and thus familiar, social engineers…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Trust, much like familiarity, relies on a connection with the individual they are targeting. Unlike with familiarity, which relies on targets thinking that something is normal and thus familiar, social engineers who use this technique work to build a connection with their targets so that they will take the actions that they want them to take.",
+                "spans": [
+                  {
+                    "start": 0,
+                    "end": 20,
+                    "label": "Trust, much like fam"
+                  }
+                ],
+                "target_span_labels": [
+                  "Trust, much like fam"
+                ],
+                "explanation": "Key concepts in this Social Engineering and Human Vectors."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch04-ch012-s001-02",
+          "title": "Social Engineering and Human Vectors (2/2)",
+          "objectiveIds": [
+            "1.1",
+            "1.2"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch04-c012-s001-k008",
+              "text": "Social Engineering and Human Vectors: Urgency relies on creating a feeling that the action must be taken quickly due to some reason or reasons.",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Urgency relies on creating a feeling that the action must be taken quickly due to some reason or reasons.",
+                "spans": [
+                  {
+                    "start": 0,
+                    "end": 20,
+                    "label": "Urgency relies on cr"
+                  }
+                ],
+                "target_span_labels": [
+                  "Urgency relies on cr"
+                ],
+                "explanation": "Key concepts in this Social Engineering and Human Vectors."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s001-k009",
+              "text": "Social Engineering and Human Vectors: You may have noticed that each of these social engineering principles works because it causes the target to react to a situation and that many make the target nervous or worried about a result or scenario.…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "You may have noticed that each of these social engineering principles works because it causes the target to react to a situation and that many make the target nervous or worried about a result or scenario. Social engineering relies on human reactions, and we are most vulnerable when we are responding instead of thinking clearly.",
+                "spans": [
+                  {
+                    "start": 40,
+                    "end": 58,
+                    "label": "social engineering"
+                  }
+                ],
+                "target_span_labels": [
+                  "social engineering"
+                ],
+                "explanation": "Key concepts in this Social Engineering and Human Vectors."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s001-k010",
+              "text": "Social Engineering and Human Vectors: Many, if not most, social engineering efforts in the real world combine multiple principles into a single attack. If a penetration tester calls, claiming to be a senior leader's assistant in another part of your…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Many, if not most, social engineering efforts in the real world combine multiple principles into a single attack. If a penetration tester calls, claiming to be a senior leader's assistant in another part of your company (thus leading authority and possibly familiarity responses), and then insists that that senior leader has an urgent need (urgency) and informs their target that they could lose their job if they don't do something immediately (intimidation), they are more likely to be successful in many cases than if they only used one principle. A key part of social engineering is…",
+                "spans": [
+                  {
+                    "start": 19,
+                    "end": 37,
+                    "label": "social engineering"
+                  }
+                ],
+                "target_span_labels": [
+                  "social engineering"
+                ],
+                "explanation": "Key concepts in this Social Engineering and Human Vectors."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch04-ch012-s002",
+          "title": "Exam Note",
+          "objectiveIds": [
+            "1.1",
+            "1.2"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch04-c012-s002-k000",
+              "text": "Exam Note: The Security+ exam doesn't expect you to be able to categorize attacks based on the principles they rely on, but those principles are extremely helpful as a tool to think about why an attack might succeed and how it can be prevented or…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Exam Note\": which statement is most accurate?",
+                "options": [
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "It is functionally identical to role-based access control.",
+                  "It operates primarily at the physical layer of the OSI model.",
+                  "The Security+ exam doesn't expect you to be able to categorize attacks based on the principles they rely on, but those principles are extremely helpful as a tool to think about why an attack might…"
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"The Security+ exam doesn't expect you to be able to categorize attacks based on the principles they rely on, but those principles are extremely helpful as a tool to think about why an attack might…\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch04-ch012-s003",
+          "title": "Social Engineering Techniques",
+          "objectiveIds": [
+            "1.1",
+            "1.2"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch04-c012-s003-k000",
+              "text": "Social Engineering Techniques: Social engineering involves more than the principles you just read. There are both technical and nontechnical attacks that leverage those principles to get results that are desired by both attackers and penetration…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Social engineering involves more than the principles you just read. There are both technical and nontechnical attacks that leverage those principles to get results that are desired by both attackers and penetration testers. As a security professional, you need to be aware of these techniques, what they involve, and what makes each of them different from the others.",
+                "spans": [
+                  {
+                    "start": 0,
+                    "end": 18,
+                    "label": "Social engineering"
+                  }
+                ],
+                "target_span_labels": [
+                  "Social engineering"
+                ],
+                "explanation": "Key concepts in this Social Engineering Techniques."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch04-ch012-s004",
+          "title": "Phishing",
+          "objectiveIds": [
+            "1.1",
+            "1.2"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch04-c012-s004-k000",
+              "text": "Phishing: Phishing is a broad term used to describe the fraudulent acquisition of information, often focused on credentials like usernames and passwords, as well as sensitive personal information like credit card numbers and related data. Phishing…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Phishing is a broad term used to describe the fraudulent acquisition of information, often focused on credentials like usernames and passwords, as well as sensitive personal information like credit card numbers and related data. Phishing is most often done via email, but a wide range of phishing techniques exist, including things like smishing, which is phishing via SMS (text) messages, and vishing, or phishing via telephone.",
+                "spans": [
+                  {
+                    "start": 0,
+                    "end": 8,
+                    "label": "Phishing"
+                  }
+                ],
+                "target_span_labels": [
+                  "Phishing"
+                ],
+                "explanation": "Key concepts in this Phishing."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s004-k001",
+              "text": "Phishing: Specific terms are also used for specific targeting of phishing attempts. Spear phishing targets specific individuals or groups in an organization in an attempt to gather desired information or access. Whaling, much like spear phishing,…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Specific terms are also used for specific targeting of phishing attempts. Spear phishing targets specific individuals or groups in an organization in an attempt to gather desired information or access. Whaling, much like spear phishing, targets specific people, but whaling is aimed at senior employees like CEOs and CFOs—“big fish” in the company, thus the term whaling.",
+                "spans": [
+                  {
+                    "start": 55,
+                    "end": 63,
+                    "label": "phishing"
+                  }
+                ],
+                "target_span_labels": [
+                  "phishing"
+                ],
+                "explanation": "Key concepts in this Phishing."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s004-k002",
+              "text": "Phishing: Like most social engineering techniques, one of the most common defenses against phishing of all types is awareness. Teaching staff members about phishing and how to recognize and respond to phishing attacks, and even staging periodic…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Like most social engineering techniques, one of the most common defenses against phishing of all types is awareness. Teaching staff members about phishing and how to recognize and respond to phishing attacks, and even staging periodic exercises, are all common means of decreasing the risk of successful phishing attacks. Technical means also exist, including filtering that helps prevent phishing using reputation tools, keyword and text pattern matching, and other technical methods of detecting likely phishing emails, calls, or texts.",
+                "spans": [
+                  {
+                    "start": 10,
+                    "end": 28,
+                    "label": "social engineering"
+                  },
+                  {
+                    "start": 81,
+                    "end": 89,
+                    "label": "phishing"
+                  }
+                ],
+                "target_span_labels": [
+                  "social engineering",
+                  "phishing"
+                ],
+                "explanation": "Key concepts in this Phishing."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch04-ch012-s005",
+          "title": "Vishing",
+          "objectiveIds": [
+            "1.1",
+            "1.2"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch04-c012-s005-k000",
+              "text": "Vishing: Vishing is phishing accomplished via voice or voicemail messages. Vishing attacks rely on phone calls to social-engineer targets into disclosing personal, financial, or other useful information, or to send funds. Common vishing scams…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Vishing is phishing accomplished via voice or voicemail messages. Vishing attacks rely on phone calls to social-engineer targets into disclosing personal, financial, or other useful information, or to send funds. Common vishing scams include requests to help a relative or friend in another country, leading to wire fraud; various tax scams, particularly during tax season in the United States; threats of law enforcement action; and requests for a staff member to perform a task for a senior executive.",
+                "spans": [
+                  {
+                    "start": 11,
+                    "end": 19,
+                    "label": "phishing"
+                  }
+                ],
+                "target_span_labels": [
+                  "phishing"
+                ],
+                "explanation": "Key concepts in this Vishing."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s005-k001",
+              "text": "Vishing: Like many social engineering efforts, vishing often relies on a sense of urgency, with an imminent threat or issue that needs to be resolved. Vishers may attempt to acquire personal information, and frequently present themselves as…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Like many social engineering efforts, vishing often relies on a sense of urgency, with an imminent threat or issue that needs to be resolved. Vishers may attempt to acquire personal information, and frequently present themselves as authorities.",
+                "spans": [
+                  {
+                    "start": 10,
+                    "end": 28,
+                    "label": "social engineering"
+                  }
+                ],
+                "target_span_labels": [
+                  "social engineering"
+                ],
+                "explanation": "Key concepts in this Vishing."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch04-ch012-s006",
+          "title": "Smishing",
+          "objectiveIds": [
+            "1.1",
+            "1.2"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch04-c012-s006-k000",
+              "text": "Smishing: Smishing relies on text messages as part of the phishing scam. Whereas other scams often rely on targets disclosing information via social engineering, smishing scams frequently attempt to get users to click on a link in a text message.…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Smishing relies on text messages as part of the phishing scam. Whereas other scams often rely on targets disclosing information via social engineering, smishing scams frequently attempt to get users to click on a link in a text message. The link may take them to a fake site to capture credentials, may attempt to infect the recipient's phone with malware, may request multifactor authentication (MFA) information like an SMS code, or could target some other information or action.",
+                "spans": [
+                  {
+                    "start": 48,
+                    "end": 56,
+                    "label": "phishing"
+                  },
+                  {
+                    "start": 132,
+                    "end": 150,
+                    "label": "social engineering"
+                  },
+                  {
+                    "start": 348,
+                    "end": 355,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "phishing",
+                  "social engineering",
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Smishing."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s006-k001",
+              "text": "Smishing: Smishing attacks rely on similar pretexts to many other phishing attacks with attempts to build trust or urgency, or to establish authority often included as part of the messages.",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Smishing attacks rely on similar pretexts to many other phishing attacks with attempts to build trust or urgency, or to establish authority often included as part of the messages.",
+                "spans": [
+                  {
+                    "start": 56,
+                    "end": 64,
+                    "label": "phishing"
+                  }
+                ],
+                "target_span_labels": [
+                  "phishing"
+                ],
+                "explanation": "Key concepts in this Smishing."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch04-ch012-s007",
+          "title": "Misinformation and Disinformation",
+          "objectiveIds": [
+            "1.1",
+            "1.2"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch04-c012-s007-k000",
+              "text": "Misinformation and Disinformation: As cyberwarfare and traditional warfare have continued to cross over in deeper and more meaningful ways, online influence campaigns—which have traditionally focused on social media, email, and other online-centric…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Misinformation and Disinformation\": which statement is most accurate?",
+                "options": [
+                  "As cyberwarfare and traditional warfare have continued to cross over in deeper and more meaningful ways, online influence campaigns—which have traditionally focused on social media, email, and other…",
+                  "It operates primarily at the physical layer of the OSI model.",
+                  "It encrypts the payload but leaves the headers in plaintext.",
+                  "It is a preventative control designed to block traffic implicitly."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"As cyberwarfare and traditional warfare have continued to cross over in deeper and more meaningful ways, online influence campaigns—which have traditionally focused on social media, email, and other…\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s007-k001",
+              "text": "Misinformation and Disinformation: It can be a bit confusing distinguishing between misinformation and disinformation. Remember that misinformation is incorrect information, often resulting from getting facts wrong. Disinformation is incorrect,…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Misinformation and Disinformation\": which statement is most accurate?",
+                "options": [
+                  "It can be a bit confusing distinguishing between misinformation and disinformation. Remember that misinformation is incorrect information, often resulting from getting facts wrong. Disinformation is…",
+                  "It requires manual intervention from a systems administrator.",
+                  "It is a preventative control designed to block traffic implicitly.",
+                  "It is only applicable to on-premises deployments, not the cloud."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"It can be a bit confusing distinguishing between misinformation and disinformation. Remember that misinformation is incorrect information, often resulting from getting facts wrong. Disinformation is…\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s007-k002",
+              "text": "Misinformation and Disinformation: Individuals and organizations conduct influence campaigns to turn public opinion in directions of their choosing. Even advertising campaigns can be considered a form of influence campaign, but in general, most…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Misinformation and Disinformation\": which statement is most accurate?",
+                "options": [
+                  "It relies solely on symmetric encryption for all its transactions.",
+                  "It decreases overall security but improves network latency.",
+                  "Individuals and organizations conduct influence campaigns to turn public opinion in directions of their choosing. Even advertising campaigns can be considered a form of influence campaign, but in…",
+                  "It depends entirely on open-source community support for patching."
+                ],
+                "correct_index": 2,
+                "explanation": "Key fact: \"Individuals and organizations conduct influence campaigns to turn public opinion in directions of their choosing. Even advertising campaigns can be considered a form of influence campaign, but in…\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s007-k003",
+              "text": "Misinformation and Disinformation: Another term you may encounter in this context is “malinformation.” These three types of information are sometimes abbreviated as “MDM” or misinformation, disinformation, and malinformation. CISA provides a guide…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Misinformation and Disinformation\": which statement is most accurate?",
+                "options": [
+                  "Another term you may encounter in this context is “malinformation.” These three types of information are sometimes abbreviated as “MDM” or misinformation, disinformation, and malinformation. CISA…",
+                  "It operates primarily at the physical layer of the OSI model.",
+                  "It decreases overall security but improves network latency.",
+                  "It is functionally identical to role-based access control."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"Another term you may encounter in this context is “malinformation.” These three types of information are sometimes abbreviated as “MDM” or misinformation, disinformation, and malinformation. CISA…\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s007-k004",
+              "text": "Misinformation and Disinformation: The CISA recommends a five-step “TRUST” process to counter misinformation and disinformation campaigns:",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Misinformation and Disinformation\": which statement is most accurate?",
+                "options": [
+                  "It is functionally identical to role-based access control.",
+                  "It is a legacy mechanism no longer supported by modern frameworks.",
+                  "The CISA recommends a five-step “TRUST” process to counter misinformation and disinformation campaigns:",
+                  "It is only applicable to on-premises deployments, not the cloud."
+                ],
+                "correct_index": 2,
+                "explanation": "Key fact: \"The CISA recommends a five-step “TRUST” process to counter misinformation and disinformation campaigns:\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s007-k005",
+              "text": "Misinformation and Disinformation: Misinformation campaigns can appear quickly, and their source can be hard to identify. That means that organizations must monitor for misinformation and be ready to counter them using actions like those described…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Misinformation and Disinformation\": which statement is most accurate?",
+                "options": [
+                  "It is a legacy mechanism no longer supported by modern frameworks.",
+                  "It decreases overall security but improves network latency.",
+                  "It is functionally identical to role-based access control.",
+                  "Misinformation campaigns can appear quickly, and their source can be hard to identify. That means that organizations must monitor for misinformation and be ready to counter them using actions like…"
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"Misinformation campaigns can appear quickly, and their source can be hard to identify. That means that organizations must monitor for misinformation and be ready to counter them using actions like…\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch04-ch012-s008",
+          "title": "Impersonation",
+          "objectiveIds": [
+            "1.1",
+            "1.2"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch04-c012-s008-k000",
+              "text": "Impersonation: Pretending to be someone else, or impersonation, is a key tool in a social engineer's toolkit, and like all of the other social engineering techniques we have discussed, it can be used for malicious purposes. Each of these techniques…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Pretending to be someone else, or impersonation, is a key tool in a social engineer's toolkit, and like all of the other social engineering techniques we have discussed, it can be used for malicious purposes. Each of these techniques combines the willingness of the target or targets to believe the impersonator with the principles of social engineering to create a scenario where the social engineer will get the access, data, or other results they desire.",
+                "spans": [
+                  {
+                    "start": 121,
+                    "end": 139,
+                    "label": "social engineering"
+                  }
+                ],
+                "target_span_labels": [
+                  "social engineering"
+                ],
+                "explanation": "Key concepts in this Impersonation."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s008-k001",
+              "text": "Impersonation: Identity fraud, or identity theft, is the use of someone else's identity. Although identity fraud is typically used for financial gain by malicious actors, identity fraud may be used as part of penetration tests or other security…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Impersonation\": which statement is most accurate?",
+                "options": [
+                  "It is a legacy mechanism no longer supported by modern frameworks.",
+                  "It requires installing a dedicated agent on every endpoint.",
+                  "It encrypts the payload but leaves the headers in plaintext.",
+                  "Identity fraud, or identity theft, is the use of someone else's identity. Although identity fraud is typically used for financial gain by malicious actors, identity fraud may be used as part of…"
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"Identity fraud, or identity theft, is the use of someone else's identity. Although identity fraud is typically used for financial gain by malicious actors, identity fraud may be used as part of…\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch04-ch012-s009",
+          "title": "Business Email Compromises",
+          "objectiveIds": [
+            "1.1",
+            "1.2"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch04-c012-s009-k000",
+              "text": "Business Email Compromises: Business email compromise, often called BEC, relies on using apparently legitimate email addresses to conduct scams and other attacks. Common examples of this include invoice scams, gift card scams, data theft, and…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Business Email Compromises\": which statement is most accurate?",
+                "options": [
+                  "It is functionally identical to role-based access control.",
+                  "It depends entirely on open-source community support for patching.",
+                  "It is a preventative control designed to block traffic implicitly.",
+                  "Business email compromise, often called BEC, relies on using apparently legitimate email addresses to conduct scams and other attacks. Common examples of this include invoice scams, gift card scams,…"
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"Business email compromise, often called BEC, relies on using apparently legitimate email addresses to conduct scams and other attacks. Common examples of this include invoice scams, gift card scams,…\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s009-k001",
+              "text": "Business Email Compromises: Using common fake but similar domain techniques",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Business Email Compromises\": which statement is most accurate?",
+                "options": [
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "It encrypts the payload but leaves the headers in plaintext.",
+                  "It is a legacy mechanism no longer supported by modern frameworks.",
+                  "Using common fake but similar domain techniques"
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"Using common fake but similar domain techniques\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s009-k002",
+              "text": "Business Email Compromises: Microsoft provides a detailed writeup on BEC as part of their Security 101 at www.microsoft.com/en-us/security/business/security-101/what-is-business-email-compromise-bec.",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Business Email Compromises\": which statement is most accurate?",
+                "options": [
+                  "It is a preventative control designed to block traffic implicitly.",
+                  "It is functionally identical to role-based access control.",
+                  "It decreases overall security but improves network latency.",
+                  "Microsoft provides a detailed writeup on BEC as part of their Security 101 at www.microsoft.com/en-us/security/business/security-101/what-is-business-email-compromise-bec."
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"Microsoft provides a detailed writeup on BEC as part of their Security 101 at www.microsoft.com/en-us/security/business/security-101/what-is-business-email-compromise-bec.\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s009-k003",
+              "text": "Business Email Compromises: You may sometimes find BEC called EAC, or email account compromise, a less specific term than business email compromise.",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Business Email Compromises\": which statement is most accurate?",
+                "options": [
+                  "It operates primarily at the physical layer of the OSI model.",
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "It encrypts the payload but leaves the headers in plaintext.",
+                  "You may sometimes find BEC called EAC, or email account compromise, a less specific term than business email compromise."
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"You may sometimes find BEC called EAC, or email account compromise, a less specific term than business email compromise.\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s009-k004",
+              "text": "Business Email Compromises: Mitigation methods for business email compromise commonly involve multifactor authentication, awareness training, and policies that help to support appropriate use and behaviors.",
+              "interaction_type": "drag_and_drop_zone",
+              "interaction_payload": {
+                "items": [
+                  "Authentication",
+                  "Authorization",
+                  "Accounting"
+                ],
+                "zones": [
+                  "AAA Components",
+                  "Category 1",
+                  "Category 2"
+                ],
+                "correct_pairs": {
+                  "Authentication": "AAA Components",
+                  "Authorization": "Category 1",
+                  "Accounting": "Category 2"
+                },
+                "explanation": "Authentication, Authorization, Accounting — core concepts in Business Email Compromises."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch04-ch012-s010",
+          "title": "Pretexting",
+          "objectiveIds": [
+            "1.1",
+            "1.2"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch04-c012-s010-k000",
+              "text": "Pretexting: Pretexting is the process of using a made-up scenario to justify why you are approaching an individual. Pretexting is often used as part of impersonation efforts to make the impersonator more believable. An aware target can ask questions…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Pretexting\": which statement is most accurate?",
+                "options": [
+                  "It requires installing a dedicated agent on every endpoint.",
+                  "It decreases overall security but improves network latency.",
+                  "It requires installing a dedicated agent on every endpoint.",
+                  "Pretexting is the process of using a made-up scenario to justify why you are approaching an individual. Pretexting is often used as part of impersonation efforts to make the impersonator more…"
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"Pretexting is the process of using a made-up scenario to justify why you are approaching an individual. Pretexting is often used as part of impersonation efforts to make the impersonator more…\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch04-ch012-s011",
+          "title": "Watering Hole Attacks",
+          "objectiveIds": [
+            "1.1",
+            "1.2"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch04-c012-s011-k000",
+              "text": "Watering Hole Attacks: Watering hole attacks use websites that targets frequent to attack them. These frequently visited sites act like a watering hole for animals and allow the attackers to stage an attack, knowing that the victims will visit the…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Watering hole attacks use websites that targets frequent to attack them. These frequently visited sites act like a watering hole for animals and allow the attackers to stage an attack, knowing that the victims will visit the site. Once they know what site their targets will use, attackers can focus on compromising it, either by targeting the site or deploying malware through other means such as an advertising network.",
+                "spans": [
+                  {
+                    "start": 362,
+                    "end": 369,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Watering Hole Attacks."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch04-ch012-s012",
+          "title": "Brand Impersonation",
+          "objectiveIds": [
+            "1.1",
+            "1.2"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch04-c012-s012-k000",
+              "text": "Brand Impersonation: Another type of phishing attack is brand impersonation or brand spoofing. This common form of attack uses emails that are intended to appear to be from a legitimate brand, relying on name recognition and even using email…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Another type of phishing attack is brand impersonation or brand spoofing. This common form of attack uses emails that are intended to appear to be from a legitimate brand, relying on name recognition and even using email templates used by the brand itself.",
+                "spans": [
+                  {
+                    "start": 16,
+                    "end": 24,
+                    "label": "phishing"
+                  }
+                ],
+                "target_span_labels": [
+                  "phishing"
+                ],
+                "explanation": "Key concepts in this Brand Impersonation."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s012-k001",
+              "text": "Brand Impersonation: Brand impersonation is often used in attempts to get users to log into their existing accounts, particularly for stores and banks. They may also request payment, gather passwords or other sensitive information, or may simply…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Brand impersonation is often used in attempts to get users to log into their existing accounts, particularly for stores and banks. They may also request payment, gather passwords or other sensitive information, or may simply have malware attached with instructions to access a file or run an executable.",
+                "spans": [
+                  {
+                    "start": 230,
+                    "end": 237,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Brand Impersonation."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s012-k002",
+              "text": "Brand Impersonation: As with scam email of all sorts the quality of brand impersonation email varies from email that is indistinguishable from legitimate messages to poorly constructed scams like the PayPal scam shown in Figure 4.1.",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Brand Impersonation\": which statement is most accurate?",
+                "options": [
+                  "As with scam email of all sorts the quality of brand impersonation email varies from email that is indistinguishable from legitimate messages to poorly constructed scams like the PayPal scam shown in…",
+                  "It is functionally identical to role-based access control.",
+                  "It operates primarily at the physical layer of the OSI model.",
+                  "It requires installing a dedicated agent on every endpoint."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"As with scam email of all sorts the quality of brand impersonation email varies from email that is indistinguishable from legitimate messages to poorly constructed scams like the PayPal scam shown in…\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s012-k003",
+              "text": "Brand Impersonation: FIGURE 4.1 Brand impersonation email",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Brand Impersonation\": which statement is most accurate?",
+                "options": [
+                  "FIGURE 4.1 Brand impersonation email",
+                  "It requires manual intervention from a systems administrator.",
+                  "It requires installing a dedicated agent on every endpoint.",
+                  "It relies solely on symmetric encryption for all its transactions."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"FIGURE 4.1 Brand impersonation email\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch04-ch012-s013",
+          "title": "Typosquatting",
+          "objectiveIds": [
+            "1.1",
+            "1.2"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch04-c012-s013-k000",
+              "text": "Typosquatting: Typosquatters use misspelled and slightly off but similar to the legitimate site URLs to conduct typosquatting attacks. Typosquatters rely on the fact that people will mistype URLs and end up on their sites, thus driving ad traffic or…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Typosquatting\": which statement is most accurate?",
+                "options": [
+                  "It requires installing a dedicated agent on every endpoint.",
+                  "It requires manual intervention from a systems administrator.",
+                  "Typosquatters use misspelled and slightly off but similar to the legitimate site URLs to conduct typosquatting attacks. Typosquatters rely on the fact that people will mistype URLs and end up on…",
+                  "It depends entirely on open-source community support for patching."
+                ],
+                "correct_index": 2,
+                "explanation": "Key fact: \"Typosquatters use misspelled and slightly off but similar to the legitimate site URLs to conduct typosquatting attacks. Typosquatters rely on the fact that people will mistype URLs and end up on…\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s013-k001",
+              "text": "Typosquatting: Typosquatting is hard to prevent, but organizations often register the most common typos for their domains if they're concerned about it. You can see an example of this by visiting amason.com, which redirects to Amazon.com!",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Typosquatting\": which statement is most accurate?",
+                "options": [
+                  "Typosquatting is hard to prevent, but organizations often register the most common typos for their domains if they're concerned about it. You can see an example of this by visiting amason.com, which…",
+                  "It requires manual intervention from a systems administrator.",
+                  "It decreases overall security but improves network latency.",
+                  "It encrypts the payload but leaves the headers in plaintext."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"Typosquatting is hard to prevent, but organizations often register the most common typos for their domains if they're concerned about it. You can see an example of this by visiting amason.com, which…\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s013-k002",
+              "text": "Typosquatting: A related form of attack is known as pharming. Unlike typosquatting, pharming relies either on changing a system's hosts file (which is the first reference a system checks when looking up DNS entries), or on active malware on the…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "A related form of attack is known as pharming. Unlike typosquatting, pharming relies either on changing a system's hosts file (which is the first reference a system checks when looking up DNS entries), or on active malware on the system that changes the system's DNS servers. A successful pharming attack using a hosts-file-based technique will modify a host’s file and redirect unsuspecting victims to a lookalike site.",
+                "spans": [
+                  {
+                    "start": 215,
+                    "end": 222,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Typosquatting."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch04-ch012-s014",
+          "title": "Password Attacks",
+          "objectiveIds": [
+            "1.1",
+            "1.2"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch04-c012-s014-k000",
+              "text": "Password Attacks: Although social engineering is often used to acquire passwords or access, there are other ways to attack passwords as well. Everything from trying password after password in a brute-force attack, to technical attacks that leverage…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Although social engineering is often used to acquire passwords or access, there are other ways to attack passwords as well. Everything from trying password after password in a brute-force attack, to technical attacks that leverage precomputed password hashes in lookup systems to check acquired password hashes against a known database, can help attackers and penetration testers attack passwords.",
+                "spans": [
+                  {
+                    "start": 9,
+                    "end": 27,
+                    "label": "social engineering"
+                  }
+                ],
+                "target_span_labels": [
+                  "social engineering"
+                ],
+                "explanation": "Key concepts in this Password Attacks."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s014-k001",
+              "text": "Password Attacks: The Security+ exam focuses on two password-related attacks:",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Password Attacks\": which statement is most accurate?",
+                "options": [
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "The Security+ exam focuses on two password-related attacks:",
+                  "It operates primarily at the physical layer of the OSI model.",
+                  "It relies solely on symmetric encryption for all its transactions."
+                ],
+                "correct_index": 1,
+                "explanation": "Key fact: \"The Security+ exam focuses on two password-related attacks:\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s014-k002",
+              "text": "Password Attacks: Brute-force attacks, which iterate through passwords until they find one that works. Actual brute-force methods can be more complex than just using a list of passwords and often involve word lists that use common passwords, words…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Password Attacks\": which statement is most accurate?",
+                "options": [
+                  "It requires installing a dedicated agent on every endpoint.",
+                  "Brute-force attacks, which iterate through passwords until they find one that works. Actual brute-force methods can be more complex than just using a list of passwords and often involve word lists…",
+                  "It decreases overall security but improves network latency.",
+                  "It is only applicable to on-premises deployments, not the cloud."
+                ],
+                "correct_index": 1,
+                "explanation": "Key fact: \"Brute-force attacks, which iterate through passwords until they find one that works. Actual brute-force methods can be more complex than just using a list of passwords and often involve word lists…\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s014-k003",
+              "text": "Password Attacks: Password spraying attacks are a form of brute-force attack that attempts to use a single password or small set of passwords against many accounts. This approach can be particularly effective if you know that a target uses a…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Password Attacks\": which statement is most accurate?",
+                "options": [
+                  "It decreases overall security but improves network latency.",
+                  "It requires installing a dedicated agent on every endpoint.",
+                  "It depends entirely on open-source community support for patching.",
+                  "Password spraying attacks are a form of brute-force attack that attempts to use a single password or small set of passwords against many accounts. This approach can be particularly effective if you…"
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"Password spraying attacks are a form of brute-force attack that attempts to use a single password or small set of passwords against many accounts. This approach can be particularly effective if you…\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s014-k004",
+              "text": "Password Attacks: Dictionary attacks are yet another form of brute-force attack that uses a list of words for their attempts. Commonly available brute-force dictionaries exist, and tools like John the Ripper, a popular open source password cracking…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Password Attacks\": which statement is most accurate?",
+                "options": [
+                  "It requires installing a dedicated agent on every endpoint.",
+                  "Dictionary attacks are yet another form of brute-force attack that uses a list of words for their attempts. Commonly available brute-force dictionaries exist, and tools like John the Ripper, a…",
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "It requires manual intervention from a systems administrator."
+                ],
+                "correct_index": 1,
+                "explanation": "Key fact: \"Dictionary attacks are yet another form of brute-force attack that uses a list of words for their attempts. Commonly available brute-force dictionaries exist, and tools like John the Ripper, a…\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch04-ch012-s015",
+          "title": "Exam Note",
+          "objectiveIds": [
+            "1.1",
+            "1.2"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch04-c012-s015-k000",
+              "text": "Exam Note: The SY0-701 Exam Outline focuses on just two types of password attacks: spraying and brute force. Dictionary attacks and the use of rainbow tables remain common as well, and help provide context for password attacks in general. We've…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Exam Note\": which statement is most accurate?",
+                "options": [
+                  "It decreases overall security but improves network latency.",
+                  "It requires installing a dedicated agent on every endpoint.",
+                  "It is functionally identical to role-based access control.",
+                  "The SY0-701 Exam Outline focuses on just two types of password attacks: spraying and brute force. Dictionary attacks and the use of rainbow tables remain common as well, and help provide context for…"
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"The SY0-701 Exam Outline focuses on just two types of password attacks: spraying and brute force. Dictionary attacks and the use of rainbow tables remain common as well, and help provide context for…\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s015-k001",
+              "text": "Exam Note: Regardless of the password attack mechanism, an important differentiator between attack methods is whether they occur online, and thus against a live system that may have defenses in place, or if they are offline against a compromised or…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Exam Note\": which statement is most accurate?",
+                "options": [
+                  "Regardless of the password attack mechanism, an important differentiator between attack methods is whether they occur online, and thus against a live system that may have defenses in place, or if…",
+                  "It encrypts the payload but leaves the headers in plaintext.",
+                  "It decreases overall security but improves network latency.",
+                  "It requires installing a dedicated agent on every endpoint."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"Regardless of the password attack mechanism, an important differentiator between attack methods is whether they occur online, and thus against a live system that may have defenses in place, or if…\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s015-k002",
+              "text": "Exam Note: If you're not familiar with the concept of hashing, now is a good time to review it. A hash is a one-way cryptographic function that takes an input and generates a unique and repeatable output from that input. No two inputs should ever…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Exam Note\": which statement is most accurate?",
+                "options": [
+                  "It generates a digital signature using symmetric key cryptography.",
+                  "It operates primarily at the physical layer of the OSI model.",
+                  "It depends entirely on open-source community support for patching.",
+                  "If you're not familiar with the concept of hashing, now is a good time to review it. A hash is a one-way cryptographic function that takes an input and generates a unique and repeatable output from…"
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"If you're not familiar with the concept of hashing, now is a good time to review it. A hash is a one-way cryptographic function that takes an input and generates a unique and repeatable output from…\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s015-k003",
+              "text": "Exam Note: If you have captured a password file, you can also use a password cracker against it. Password crackers like John the Ripper, shown in Figure 4.2, attempt to crack passwords by trying brute-force and dictionary attacks against a variety…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Exam Note\": which statement is most accurate?",
+                "options": [
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "If you have captured a password file, you can also use a password cracker against it. Password crackers like John the Ripper, shown in Figure 4.2, attempt to crack passwords by trying brute-force and…",
+                  "It relies solely on symmetric encryption for all its transactions.",
+                  "It decreases overall security but improves network latency."
+                ],
+                "correct_index": 1,
+                "explanation": "Key fact: \"If you have captured a password file, you can also use a password cracker against it. Password crackers like John the Ripper, shown in Figure 4.2, attempt to crack passwords by trying brute-force and…\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s015-k004",
+              "text": "Exam Note: Learning how to use tools like John the Ripper can help you understand both password cracking and how passwords are stored. You can find a variety of exercises at https://openwall.info/wiki/john/tutorials that will get you started.",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Exam Note\": which statement is most accurate?",
+                "options": [
+                  "It relies solely on symmetric encryption for all its transactions.",
+                  "It requires manual intervention from a systems administrator.",
+                  "Learning how to use tools like John the Ripper can help you understand both password cracking and how passwords are stored. You can find a variety of exercises at…",
+                  "It is a legacy mechanism no longer supported by modern frameworks."
+                ],
+                "correct_index": 2,
+                "explanation": "Key fact: \"Learning how to use tools like John the Ripper can help you understand both password cracking and how passwords are stored. You can find a variety of exercises at…\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s015-k005",
+              "text": "Exam Note: Password cracking tools like John the Ripper can also be used as password assessment tools. Some organizations continue to periodically test for weak and easily cracked passwords by using a password cracker on their password stores. In…",
+              "interaction_type": "drag_and_drop_zone",
+              "interaction_payload": {
+                "items": [
+                  "Confidentiality",
+                  "Integrity",
+                  "Availability"
+                ],
+                "zones": [
+                  "CIA Triad Components",
+                  "Category 1",
+                  "Category 2"
+                ],
+                "correct_pairs": {
+                  "Confidentiality": "CIA Triad Components",
+                  "Integrity": "Category 1",
+                  "Availability": "Category 2"
+                },
+                "explanation": "Confidentiality, Integrity, Availability — core concepts in Exam Note."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s015-k006",
+              "text": "Exam Note: Of course, not every system is well maintained, and a penetration tester or attacker's favorite opportunity is finding plain-text or unencrypted passwords to acquire. Without some form of protection, passwords that are just maintained in…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Exam Note\": which statement is most accurate?",
+                "options": [
+                  "It is a preventative control designed to block traffic implicitly.",
+                  "Of course, not every system is well maintained, and a penetration tester or attacker's favorite opportunity is finding plain-text or unencrypted passwords to acquire. Without some form of protection,…",
+                  "It requires manual intervention from a systems administrator.",
+                  "It depends entirely on open-source community support for patching."
+                ],
+                "correct_index": 1,
+                "explanation": "Key fact: \"Of course, not every system is well maintained, and a penetration tester or attacker's favorite opportunity is finding plain-text or unencrypted passwords to acquire. Without some form of protection,…\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s015-k007",
+              "text": "Exam Note: If you want to learn more about secure password storage, OWASP maintains a great cheat sheet at https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html.",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Exam Note\": which statement is most accurate?",
+                "options": [
+                  "It depends entirely on open-source community support for patching.",
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "It requires installing a dedicated agent on every endpoint.",
+                  "If you want to learn more about secure password storage, OWASP maintains a great cheat sheet at https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html."
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"If you want to learn more about secure password storage, OWASP maintains a great cheat sheet at https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html.\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch04-ch012-s016",
+          "title": "Summary",
+          "objectiveIds": [
+            "1.1",
+            "1.2"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch04-c012-s016-k000",
+              "text": "Summary: Social engineering techniques focus on human reactions and psychology to gather information and to perform attacks against individuals and organizations. A broad range of human vectors are used to accomplish attackers' goals.",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Social engineering techniques focus on human reactions and psychology to gather information and to perform attacks against individuals and organizations. A broad range of human vectors are used to accomplish attackers' goals.",
+                "spans": [
+                  {
+                    "start": 0,
+                    "end": 18,
+                    "label": "Social engineering"
+                  }
+                ],
+                "target_span_labels": [
+                  "Social engineering"
+                ],
+                "explanation": "Key concepts in this Summary."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s016-k001",
+              "text": "Summary: Security professionals need to be aware of how social engineering is leveraged in attacks like phishing, impersonation, misinformation and disinformation, and other efforts. Each technique has its own distinctive set of social engineering…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Security professionals need to be aware of how social engineering is leveraged in attacks like phishing, impersonation, misinformation and disinformation, and other efforts. Each technique has its own distinctive set of social engineering techniques and impacts that help make it unique. Test takers need to be familiar with phishing, vishing, business email compromise, pretexting, watering hole, brand impersonation, and typosquatting attacks as well as the broad categories of phishing and impersonation, and misinformation.",
+                "spans": [
+                  {
+                    "start": 47,
+                    "end": 65,
+                    "label": "social engineering"
+                  },
+                  {
+                    "start": 95,
+                    "end": 103,
+                    "label": "phishing"
+                  }
+                ],
+                "target_span_labels": [
+                  "social engineering",
+                  "phishing"
+                ],
+                "explanation": "Key concepts in this Summary."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s016-k002",
+              "text": "Summary: Test takers need to be aware of brute-force password attacks that try repeatedly using a variety of usernames and passwords until they succeed. You'll also need to know about spraying, a type of brute-force attack that uses a list of…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Summary\": which statement is most accurate?",
+                "options": [
+                  "It is a legacy mechanism no longer supported by modern frameworks.",
+                  "It requires manual intervention from a systems administrator.",
+                  "It is functionally identical to role-based access control.",
+                  "Test takers need to be aware of brute-force password attacks that try repeatedly using a variety of usernames and passwords until they succeed. You'll also need to know about spraying, a type of…"
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"Test takers need to be aware of brute-force password attacks that try repeatedly using a variety of usernames and passwords until they succeed. You'll also need to know about spraying, a type of…\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch04-ch012-s017",
+          "title": "Exam Essentials",
+          "objectiveIds": [
+            "1.1",
+            "1.2"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch04-c012-s017-k000",
+              "text": "Exam Essentials: Many techniques are used for social engineering. Many adversarial and security techniques rely on social engineering. Phishing and its related techniques of smishing and vishing seek to gain information using social engineering…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Many techniques are used for social engineering. Many adversarial and security techniques rely on social engineering. Phishing and its related techniques of smishing and vishing seek to gain information using social engineering techniques. Misinformation and disinformation campaigns are used to change opinions and to shift narratives. Malicious actors will impersonate whomever they need to acquire information, to gain access or credentials, or to persuade individuals to take action. Pretexting is often used with impersonation to provide a believable reason for the action or request. Business…",
+                "spans": [
+                  {
+                    "start": 29,
+                    "end": 47,
+                    "label": "social engineering"
+                  },
+                  {
+                    "start": 118,
+                    "end": 126,
+                    "label": "Phishing"
+                  }
+                ],
+                "target_span_labels": [
+                  "social engineering",
+                  "Phishing"
+                ],
+                "explanation": "Key concepts in this Exam Essentials."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s017-k001",
+              "text": "Exam Essentials: Passwords can be acquired and cracked in many ways. Password attacks can be conducted both online against live systems and offline using captured password stores. Brute-force attacks like spraying and dictionary attacks as well as…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Exam Essentials\": which statement is most accurate?",
+                "options": [
+                  "It depends entirely on open-source community support for patching.",
+                  "It depends entirely on open-source community support for patching.",
+                  "It encrypts the payload but leaves the headers in plaintext.",
+                  "Passwords can be acquired and cracked in many ways. Password attacks can be conducted both online against live systems and offline using captured password stores. Brute-force attacks like spraying…"
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"Passwords can be acquired and cracked in many ways. Password attacks can be conducted both online against live systems and offline using captured password stores. Brute-force attacks like spraying…\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch04-ch012-s018-01",
+          "title": "Review Questions (1/4)",
+          "objectiveIds": [
+            "1.1",
+            "1.2"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch04-c012-s018-k000",
+              "text": "Review Questions: Joseph receives an email notifying him that he needs to change his password due to a recent account issue. He notices that the email links him to a website using the domain amaz0n.com. What type of attack should he describe this…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It depends entirely on open-source community support for patching.",
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "It relies solely on symmetric encryption for all its transactions.",
+                  "Joseph receives an email notifying him that he needs to change his password due to a recent account issue. He notices that the email links him to a website using the domain amaz0n.com. What type of…"
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"Joseph receives an email notifying him that he needs to change his password due to a recent account issue. He notices that the email links him to a website using the domain amaz0n.com. What type of…\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s018-k001",
+              "text": "Review Questions: When you combine phishing with voicemail, it is known as: Whaling",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "When you combine phishing with voicemail, it is known as: Whaling",
+                "spans": [
+                  {
+                    "start": 17,
+                    "end": 25,
+                    "label": "phishing"
+                  }
+                ],
+                "target_span_labels": [
+                  "phishing"
+                ],
+                "explanation": "Key concepts in this Review Questions."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s018-k002",
+              "text": "Review Questions: While reviewing her logs, Michele notices that a remote system has attempted to log into her server via SSH using the username admin and a variety of passwords like “password” and “ninja.” What type of attack has Michele noticed? A…",
+              "interaction_type": "terminal_sim",
+              "interaction_payload": {
+                "scenario": "You need to complete a task related to \"Review Questions\". Run the appropriate command.",
+                "commands": [
+                  {
+                    "pattern": "^SSH using\\s*.*$",
+                    "success_message": "✓ Correct: `SSH using`",
+                    "hint": "Try: `SSH using`"
+                  }
+                ]
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s018-k003",
+              "text": "Review Questions: Joanna wants to detect password spraying attacks. What type of rule should she deploy through her security systems? Match attempts to log into many systems with the same username and password.",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It relies solely on symmetric encryption for all its transactions.",
+                  "It depends entirely on open-source community support for patching.",
+                  "Joanna wants to detect password spraying attacks. What type of rule should she deploy through her security systems? Match attempts to log into many systems with the same username and password.",
+                  "It is a preventative control designed to block traffic implicitly."
+                ],
+                "correct_index": 2,
+                "explanation": "Key fact: \"Joanna wants to detect password spraying attacks. What type of rule should she deploy through her security systems? Match attempts to log into many systems with the same username and password.\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s018-k004",
+              "text": "Review Questions: Match multiple attempts to log into the same user account using different passwords.",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It encrypts the payload but leaves the headers in plaintext.",
+                  "Match multiple attempts to log into the same user account using different passwords.",
+                  "It operates primarily at the physical layer of the OSI model.",
+                  "It is a preventative control designed to block traffic implicitly."
+                ],
+                "correct_index": 1,
+                "explanation": "Key fact: \"Match multiple attempts to log into the same user account using different passwords.\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s018-k005",
+              "text": "Review Questions: Match repeated use of the same password during failed login attempts for multiple usernames.",
+              "interaction_type": "log_analyzer",
+              "interaction_payload": {
+                "log_lines": [
+                  "Match repeated use of the same password during failed login attempts for multiple usernames."
+                ],
+                "vulnerable_line_indices": [
+                  0
+                ],
+                "explanation": "Lines  indicate potential security events."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s018-k006",
+              "text": "Review Questions: Match all attempts to use passwords with slight changes for the same account.",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It encrypts the payload but leaves the headers in plaintext.",
+                  "It requires installing a dedicated agent on every endpoint.",
+                  "It is a preventative control designed to block traffic implicitly.",
+                  "Match all attempts to use passwords with slight changes for the same account."
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"Match all attempts to use passwords with slight changes for the same account.\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s018-k007",
+              "text": "Review Questions: One of the staff at Susan's organization has reported that a critical vendor has contacted them about an unpaid invoice. After Susan investigates, she discovers that the invoice was sent from an email account that was not typically…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "One of the staff at Susan's organization has reported that a critical vendor has contacted them about an unpaid invoice. After Susan investigates, she discovers that the invoice was sent from an email account that was not typically a contact and that the invoice requested payment to a PayPal account. What type of social engineering attack has Susan most likely discovered? Smishing",
+                "spans": [
+                  {
+                    "start": 315,
+                    "end": 333,
+                    "label": "social engineering"
+                  }
+                ],
+                "target_span_labels": [
+                  "social engineering"
+                ],
+                "explanation": "Key concepts in this Review Questions."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch04-ch012-s018-02",
+          "title": "Review Questions (2/4)",
+          "objectiveIds": [
+            "1.1",
+            "1.2"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch04-c012-s018-k008",
+              "text": "Review Questions: Selah infects the ads on a website that users from her target company frequently visit with malware as part of her penetration test. What technique has she used? A watering hole attack",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Selah infects the ads on a website that users from her target company frequently visit with malware as part of her penetration test. What technique has she used? A watering hole attack",
+                "spans": [
+                  {
+                    "start": 92,
+                    "end": 99,
+                    "label": "malware"
+                  }
+                ],
+                "target_span_labels": [
+                  "malware"
+                ],
+                "explanation": "Key concepts in this Review Questions."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s018-k009",
+              "text": "Review Questions: Ben wants to determine if brute-force password attacks are being used against his company. What log information is least likely to be useful when working to detect brute-force attacks? Source IP address or hostname",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "Ben wants to determine if brute-force password attacks are being used against his company. What log information is least likely to be useful when working to detect brute-force attacks? Source IP…",
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "It is a preventative control designed to block traffic implicitly.",
+                  "It requires manual intervention from a systems administrator."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"Ben wants to determine if brute-force password attacks are being used against his company. What log information is least likely to be useful when working to detect brute-force attacks? Source IP…\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s018-k010",
+              "text": "Review Questions: The password that was used for each attempt",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It decreases overall security but improves network latency.",
+                  "The password that was used for each attempt",
+                  "It is functionally identical to role-based access control.",
+                  "It is a legacy mechanism no longer supported by modern frameworks."
+                ],
+                "correct_index": 1,
+                "explanation": "Key fact: \"The password that was used for each attempt\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s018-k011",
+              "text": "Review Questions: The geographic location of system being logged into",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "It depends entirely on open-source community support for patching.",
+                  "The geographic location of system being logged into"
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"The geographic location of system being logged into\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s018-k012",
+              "text": "Review Questions: Melissa receives a call and the caller informs her a senior manager in her organization needs her to buy gift cards for an event that starts in an hour. The caller says that the senior leader forgot to get the cards, and that the…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Melissa receives a call and the caller informs her a senior manager in her organization needs her to buy gift cards for an event that starts in an hour. The caller says that the senior leader forgot to get the cards, and that the event is critical to her organization. Melissa buys the cards and sends them to the Gmail address the caller says that the senior leader needs them sent to. What type of attack has Melissa fallen for? Phishing",
+                "spans": [
+                  {
+                    "start": 431,
+                    "end": 439,
+                    "label": "Phishing"
+                  }
+                ],
+                "target_span_labels": [
+                  "Phishing"
+                ],
+                "explanation": "Key concepts in this Review Questions."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s018-k013",
+              "text": "Review Questions: Alaina wants to determine if a password spraying attack was used against her organization. Which of the following indicators would be most useful as part of her investigation? The time the login attempts happened",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "Alaina wants to determine if a password spraying attack was used against her organization. Which of the following indicators would be most useful as part of her investigation? The time the login…",
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "It is a preventative control designed to block traffic implicitly."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"Alaina wants to determine if a password spraying attack was used against her organization. Which of the following indicators would be most useful as part of her investigation? The time the login…\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s018-k014",
+              "text": "Review Questions: The passwords used for failed attempts",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "The passwords used for failed attempts",
+                  "It is functionally identical to role-based access control.",
+                  "It encrypts the payload but leaves the headers in plaintext."
+                ],
+                "correct_index": 1,
+                "explanation": "Key fact: \"The passwords used for failed attempts\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s018-k015",
+              "text": "Review Questions: The source IP address of the attempts",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It is functionally identical to role-based access control.",
+                  "It is a legacy mechanism no longer supported by modern frameworks.",
+                  "It encrypts the payload but leaves the headers in plaintext.",
+                  "The source IP address of the attempts"
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"The source IP address of the attempts\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch04-ch012-s018-03",
+          "title": "Review Questions (3/4)",
+          "objectiveIds": [
+            "1.1",
+            "1.2"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch04-c012-s018-k016",
+              "text": "Review Questions: The number of failed attempts for each user",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It relies solely on symmetric encryption for all its transactions.",
+                  "The number of failed attempts for each user",
+                  "It encrypts the payload but leaves the headers in plaintext.",
+                  "It operates primarily at the physical layer of the OSI model."
+                ],
+                "correct_index": 1,
+                "explanation": "Key fact: \"The number of failed attempts for each user\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s018-k017",
+              "text": "Review Questions: Which of the following human vectors is primarily associated with nation-state actors? Misinformation campaigns",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It depends entirely on open-source community support for patching.",
+                  "It encrypts the payload but leaves the headers in plaintext.",
+                  "Which of the following human vectors is primarily associated with nation-state actors? Misinformation campaigns",
+                  "It is functionally identical to role-based access control."
+                ],
+                "correct_index": 2,
+                "explanation": "Key fact: \"Which of the following human vectors is primarily associated with nation-state actors? Misinformation campaigns\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s018-k018",
+              "text": "Review Questions: Nicole accidentally types www.smazon.com into her browser and discovers that she is directed to a different site loaded with ads and pop-ups. Which of the following is the most accurate description of the attack she has…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "It requires installing a dedicated agent on every endpoint.",
+                  "Nicole accidentally types www.smazon.com into her browser and discovers that she is directed to a different site loaded with ads and pop-ups. Which of the following is the most accurate description…",
+                  "It operates primarily at the physical layer of the OSI model."
+                ],
+                "correct_index": 2,
+                "explanation": "Key fact: \"Nicole accidentally types www.smazon.com into her browser and discovers that she is directed to a different site loaded with ads and pop-ups. Which of the following is the most accurate description…\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s018-k019",
+              "text": "Review Questions: Devon is a penetration tester and sets up malicious tools on his target organization's primary internal website. What type of attack is he conducting? A misinformation campaign",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It requires installing a dedicated agent on every endpoint.",
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "It is functionally identical to role-based access control.",
+                  "Devon is a penetration tester and sets up malicious tools on his target organization's primary internal website. What type of attack is he conducting? A misinformation campaign"
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"Devon is a penetration tester and sets up malicious tools on his target organization's primary internal website. What type of attack is he conducting? A misinformation campaign\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s018-k020",
+              "text": "Review Questions: Phishing emails sent pretending to be from a company that recipients are familiar with and likely to respond to is what type of attack? Phishing",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Phishing emails sent pretending to be from a company that recipients are familiar with and likely to respond to is what type of attack? Phishing",
+                "spans": [
+                  {
+                    "start": 0,
+                    "end": 8,
+                    "label": "Phishing"
+                  }
+                ],
+                "target_span_labels": [
+                  "Phishing"
+                ],
+                "explanation": "Key concepts in this Review Questions."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s018-k021",
+              "text": "Review Questions: When a caller was recently directed to Amanda, who is a junior IT employee at her company, the caller informed her that they were the head of IT for her organization and that she needed to immediately disable the organization's…",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "When a caller was recently directed to Amanda, who is a junior IT employee at her company, the caller informed her that they were the head of IT for her organization and that she needed to immediately disable the organization's firewall. After Amanda made the change, she discovered that the caller was not the head of IT, and that they were actually a penetration tester hired by her company. What social engineering attack best describes this? Smishing",
+                "spans": [
+                  {
+                    "start": 399,
+                    "end": 417,
+                    "label": "social engineering"
+                  }
+                ],
+                "target_span_labels": [
+                  "social engineering"
+                ],
+                "explanation": "Key concepts in this Review Questions."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s018-k022",
+              "text": "Review Questions: Fred is concerned about text message–based attacks. Which of the following attacks relies on text messages as its primary focus? Impersonation",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It is a preventative control designed to block traffic implicitly.",
+                  "Fred is concerned about text message–based attacks. Which of the following attacks relies on text messages as its primary focus? Impersonation",
+                  "It is a legacy mechanism no longer supported by modern frameworks.",
+                  "It is a preventative control designed to block traffic implicitly."
+                ],
+                "correct_index": 1,
+                "explanation": "Key fact: \"Fred is concerned about text message–based attacks. Which of the following attacks relies on text messages as its primary focus? Impersonation\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s018-k023",
+              "text": "Review Questions: Sharif notices that his authentication logs have many different usernames showing failed logins with the same password. What type of attack has he discovered? Credential harvesting",
+              "interaction_type": "drag_and_drop_zone",
+              "interaction_payload": {
+                "items": [
+                  "Authentication",
+                  "Authorization",
+                  "Accounting"
+                ],
+                "zones": [
+                  "AAA Components",
+                  "Category 1",
+                  "Category 2"
+                ],
+                "correct_pairs": {
+                  "Authentication": "AAA Components",
+                  "Authorization": "Category 1",
+                  "Accounting": "Category 2"
+                },
+                "explanation": "Authentication, Authorization, Accounting — core concepts in Review Questions."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch04-ch012-s018-04",
+          "title": "Review Questions (4/4)",
+          "objectiveIds": [
+            "1.1",
+            "1.2"
+          ],
+          "content_blocks": [],
+          "checks": [],
+          "cards": [
+            {
+              "id": "ch04-c012-s018-k024",
+              "text": "Review Questions: Naomi receives a report of smishing. What type of attack should she be looking for? Compressed files in phishing",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Naomi receives a report of smishing. What type of attack should she be looking for? Compressed files in phishing",
+                "spans": [
+                  {
+                    "start": 104,
+                    "end": 112,
+                    "label": "phishing"
+                  }
+                ],
+                "target_span_labels": [
+                  "phishing"
+                ],
+                "explanation": "Key concepts in this Review Questions."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s018-k025",
+              "text": "Review Questions: Jack's organization wants to prevent typosquatting. What option should he select to address this issue? Copyright the domain name",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "Jack's organization wants to prevent typosquatting. What option should he select to address this issue? Copyright the domain name",
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "It relies solely on symmetric encryption for all its transactions.",
+                  "It is only applicable to on-premises deployments, not the cloud."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"Jack's organization wants to prevent typosquatting. What option should he select to address this issue? Copyright the domain name\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s018-k026",
+              "text": "Review Questions: Purchase the most common typos for his organization's domain",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "Purchase the most common typos for his organization's domain",
+                  "It is only applicable to on-premises deployments, not the cloud.",
+                  "It depends entirely on open-source community support for patching.",
+                  "It is a legacy mechanism no longer supported by modern frameworks."
+                ],
+                "correct_index": 0,
+                "explanation": "Key fact: \"Purchase the most common typos for his organization's domain\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s018-k027",
+              "text": "Review Questions: Disable typo resolution for the domain",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It relies solely on symmetric encryption for all its transactions.",
+                  "It is a preventative control designed to block traffic implicitly.",
+                  "It requires installing a dedicated agent on every endpoint.",
+                  "Disable typo resolution for the domain"
+                ],
+                "correct_index": 3,
+                "explanation": "Key fact: \"Disable typo resolution for the domain\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s018-k028",
+              "text": "Review Questions: Gwyne's company has been contacted by customers asking about a new social media account operating under the company's brand. The social media account is advertising cryptocurrency, which Gwyne's organization does not sell or work…",
+              "interaction_type": "mcq",
+              "interaction_payload": {
+                "prompt": "Regarding \"Review Questions\": which statement is most accurate?",
+                "options": [
+                  "It generates a digital signature using symmetric key cryptography.",
+                  "It is a preventative control designed to block traffic implicitly.",
+                  "Gwyne's company has been contacted by customers asking about a new social media account operating under the company's brand. The social media account is advertising cryptocurrency, which Gwyne's…",
+                  "It depends entirely on open-source community support for patching."
+                ],
+                "correct_index": 2,
+                "explanation": "Key fact: \"Gwyne's company has been contacted by customers asking about a new social media account operating under the company's brand. The social media account is advertising cryptocurrency, which Gwyne's…\""
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            },
+            {
+              "id": "ch04-c012-s018-k029",
+              "text": "Review Questions: Nation-state-driven social media campaigns about the trustworthiness of the U.S. election in 2016 are an example of what type of social engineering? Smishing",
+              "interaction_type": "tap_to_highlight",
+              "interaction_payload": {
+                "text": "Nation-state-driven social media campaigns about the trustworthiness of the U.S. election in 2016 are an example of what type of social engineering? Smishing",
+                "spans": [
+                  {
+                    "start": 129,
+                    "end": 147,
+                    "label": "social engineering"
+                  }
+                ],
+                "target_span_labels": [
+                  "social engineering"
+                ],
+                "explanation": "Key concepts in this Review Questions."
+              },
+              "objectiveIds": [
+                "1.1",
+                "1.2"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
